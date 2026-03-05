@@ -1,0 +1,301 @@
+{
+  "demos": [
+    {
+      "url": "standalone",
+      "title": "Standalone Component",
+      "teaches": "Create standalone components without NgModule. Declare dependencies directly in the component decorator with imports, providers, and styles.",
+      "sortOrder": 1,
+      "topic": "Component Fundamentals",
+      "id": 1,
+      "md": "standalone"
+    },
+    {
+      "url": "lazy-standalone",
+      "title": "Lazy Standalone Comp.",
+      "teaches": "Load standalone components on-demand via routes. Reduce initial bundle size by lazy loading features that aren't immediately needed.",
+      "sortOrder": 2,
+      "topic": "Component Fundamentals",
+      "id": 11,
+      "md": "lazy-standalone"
+    },
+    {
+      "url": "standalone-bootstrap",
+      "title": "Load Standalone Apps",
+      "teaches": "Bootstrap standalone applications with bootstrapApplication(). Set up providers, routes, and configuration without NgModule.",
+      "sortOrder": 3,
+      "topic": "Component Fundamentals",
+      "id": 12,
+      "md": "bootstrap"
+    },
+    {
+      "url": "control-flow",
+      "title": "Control Flow",
+      "teaches": "Use modern Angular control flow syntax with @if, @for, @switch, and @let. Replace ngIf, ngFor, and ngSwitch with cleaner, more performant alternatives.",
+      "sortOrder": 4,
+      "topic": "Component Fundamentals",
+      "id": 2,
+      "md": "control-flow"
+    },
+    {
+      "url": "content-projection",
+      "title": "Content Projection",
+      "teaches": "Design flexible components with <ng-content> slots. Pass template content to child components using named projections and default content.",
+      "sortOrder": 5,
+      "topic": "Component Composition",
+      "id": 3,
+      "md": "content-projection"
+    },
+    {
+      "url": "directives-composition",
+      "title": "Directives Composition",
+      "teaches": "Combine multiple directives on a single element to compose behaviors. Use hostDirectives to attach directives as component dependencies.",
+      "sortOrder": 6,
+      "topic": "Component Composition",
+      "id": 4,
+      "md": "directive-composition"
+    },
+    {
+      "url": "content-child",
+      "title": "Content Child",
+      "teaches": "Query projected content with @ContentChild and @ContentChildren. Access and interact with elements passed via content projection.",
+      "sortOrder": 7,
+      "topic": "Component Composition",
+      "id": 5,
+      "md": "content-child"
+    },
+    {
+      "url": "modern-template-features",
+      "title": "Modern Template Features",
+      "teaches": "Write arrow functions and spread syntax directly in templates (v21.1+). Use signal.update(n => n + 1) and spread operators without wrapper methods.",
+      "sortOrder": 8,
+      "topic": "Template Syntax",
+      "id": 15,
+      "md": "modern-template-features"
+    },
+    {
+      "url": "view-queries",
+      "title": "View Queries",
+      "teaches": "Query template elements with @ViewChild and @ViewChildren. Obtain references to child components or DOM elements in the component view.",
+      "sortOrder": 9,
+      "topic": "Component Advanced Patterns",
+      "id": 6,
+      "md": "view-queries"
+    },
+    {
+      "url": "template-vs-container",
+      "title": "Template vs Container",
+      "teaches": "Understand the difference between ng-template and ng-container. Control when and where template content is rendered in the DOM.",
+      "sortOrder": 10,
+      "topic": "Component Advanced Patterns",
+      "id": 7,
+      "md": "templ-content"
+    },
+    {
+      "url": "host-binding",
+      "title": "Host Binding & Listener",
+      "teaches": "Manage component host properties and events with @HostBinding and @HostListener. Style the component element and respond to user interactions.",
+      "sortOrder": 11,
+      "topic": "Component Advanced Patterns",
+      "id": 8,
+      "md": "host-binding"
+    },
+    {
+      "url": "container-presenter",
+      "title": "Container Presenter",
+      "teaches": "Separate data logic (container) from presentation (presenter) components. Use this pattern for cleaner, more reusable component architecture.",
+      "sortOrder": 12,
+      "topic": "Component Advanced Patterns",
+      "id": 9,
+      "md": "container-presenter"
+    },
+    {
+      "url": "dynamic-components",
+      "title": "Dynamic Components",
+      "teaches": "Create and insert components dynamically at runtime using ViewContainerRef. Pass data to dynamic components and handle their lifecycle.",
+      "sortOrder": 13,
+      "topic": "Component Advanced Patterns",
+      "id": 10,
+      "md": "dynamic-components"
+    },
+    {
+      "url": "resource-api",
+      "title": "Resource API",
+      "teaches": "Use resource() for declarative, reactive HTTP data loading with automatic loading states and error handling. Replace manual Observable + subscribe() patterns with signal-based data fetching.",
+      "sortOrder": 14,
+      "topic": "Data Loading",
+      "id": 13,
+      "md": "resource-api"
+    },
+    {
+      "url": "antipatterns",
+      "title": "Antipatterns",
+      "teaches": "Learn what NOT to do in modern Angular. Understand outdated patterns like Observable subscriptions, manual state management, and legacy decorators. See why resource() and signals are better.",
+      "sortOrder": 15,
+      "topic": "Component Antipatterns",
+      "id": 14,
+      "md": "antipatterns"
+    }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "name": "Soi",
+      "age": 9,
+      "type": "dog",
+      "breed": "Whippet",
+      "owner": "Alex"
+    },
+    {
+      "id": 2,
+      "name": "Luna",
+      "age": 3,
+      "type": "cat",
+      "breed": "Siamese",
+      "owner": "Andreas"
+    },
+    {
+      "id": 3,
+      "name": "Giro",
+      "age": 11,
+      "type": "dog",
+      "breed": "Galgo Espanol",
+      "owner": "Alex"
+    },
+    {
+      "id": 4,
+      "name": "Milo",
+      "age": 2,
+      "type": "cat",
+      "breed": "Maine Coon",
+      "owner": "Andreas"
+    },
+    {
+      "id": 5,
+      "name": "Flora",
+      "age": 14,
+      "type": "dog",
+      "breed": "Greyhound",
+      "owner": "Alex"
+    },
+    {
+      "id": 6,
+      "name": "Simba",
+      "age": 1,
+      "type": "cat",
+      "breed": "Bengal",
+      "owner": "Andreas"
+    },
+    {
+      "id": 7,
+      "name": "Cleo",
+      "age": 15,
+      "type": "dog",
+      "breed": "Saluki",
+      "owner": "Alex"
+    },
+    {
+      "id": 8,
+      "name": "Nala",
+      "age": 6,
+      "type": "cat",
+      "breed": "Persian",
+      "owner": "Andreas"
+    }
+  ],
+  "skills": [
+    {
+      "id": "123",
+      "name": "rxjs from api",
+      "completed": true
+    },
+    {
+      "id": "456",
+      "name": "ngrx from api",
+      "completed": false
+    }
+  ],
+  "persons": [
+    {
+      "id": "1",
+      "name": "Cleo",
+      "lastname": "Whippet",
+      "age": 15,
+      "gender": "female",
+      "married": true,
+      "imgUrl": "/assets/images/cleo.png",
+      "email": "cleothewhippet@integrations.at",
+      "wealth": "rich",
+      "address": {
+        "street": "Stairway to heaven",
+        "city": "Better place",
+        "postalCode": "1000"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Soi",
+      "age": 9,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/soi.png"
+    },
+    {
+      "id": "3",
+      "name": "Giro",
+      "age": 11,
+      "gender": "male",
+      "married": false,
+      "imgUrl": "/assets/images/giro.png"
+    },
+    {
+      "id": "4",
+      "name": "Flora",
+      "age": 14,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/flora.png"
+    }
+  ],
+  "tasks": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "delectus aut autem",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "quis ut nam facilis et officia qui",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "fugiat veniam minus",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 4,
+      "title": "et porro tempora",
+      "completed": true
+    },
+    {
+      "userId": 1,
+      "id": 5,
+      "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+      "completed": false
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "label": "Demos",
+      "url": "demos"
+    }
+  ]
+}

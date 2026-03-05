@@ -1,0 +1,49 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content centered>
+    <div class="showcase" >
+      <img src="assets/images/{{ img }}" alt="" />
+    </div>
+    <div class="instructions">
+      <ng-content select=".instructions"></ng-content>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    @if (authEnabled | async) {
+      <div class="actions" centered>
+        <button mat-raised-button (click)="goToDemos()" color="primary">
+          Proceed
+        </button>
+      </div>
+    }
+    @if ((authEnabled | async)==false) {
+      <div class="actions cmdItems">
+        <button
+          mat-raised-button
+          (click)="logIn()"
+          color="primary"
+          >
+          Log In
+        </button>
+        <button
+          mat-raised-button
+          (click)="registerUser()"
+          color="primary"
+          >
+          Register
+        </button>
+      </div>
+    }
+  </mat-card-actions>
+</mat-card>
+
+<ng-template #register>
+  <app-register></app-register>
+</ng-template>
+
+<ng-template #login>
+  <app-login></app-login>
+</ng-template>

@@ -1,0 +1,27 @@
+<div class="deep-signal-demo">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>User Profile — Deep Signals</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="profile-info">
+        <p><strong>Name:</strong> {{ store.user.name() }}</p>
+        <p><strong>Email:</strong> {{ store.user.email() }}</p>
+        <p><strong>Street:</strong> {{ store.user.address.street() }}</p>
+        <p><strong>City:</strong> {{ store.user.address.city() }}</p>
+        <p><strong>Zip:</strong> {{ store.user.address.zip() }}</p>
+        <p><strong>Full Address (computed):</strong> {{ store.fullAddress() }}</p>
+      </div>
+      <div class="profile-edit">
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput [ngModel]="store.user.address.city()" (ngModelChange)="store.updateCity($event)" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Zip</mat-label>
+          <input matInput [ngModel]="store.user.address.zip()" (ngModelChange)="store.updateZip($event)" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

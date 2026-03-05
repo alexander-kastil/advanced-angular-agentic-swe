@@ -1,0 +1,67 @@
+<app-markdown-renderer [md]="'sf-validate'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Cross-Field Validation (validate)</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form autocomplete="off" column>
+      <mat-form-field>
+        <mat-label>Pet Name</mat-label>
+        <input matInput type="text" [formField]="adoptionForm.petName" placeholder="Pet name" />
+      </mat-form-field>
+      @if (adoptionForm.petName().invalid() && adoptionForm.petName().touched()) {
+        @for (err of adoptionForm.petName().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" [formField]="adoptionForm.age" placeholder="Age" />
+      </mat-form-field>
+      @if (adoptionForm.age().invalid() && adoptionForm.age().touched()) {
+        @for (err of adoptionForm.age().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="check-group">
+        <strong>Services (at least one required):</strong>
+        <mat-checkbox [formField]="adoptionForm.wantsInsurance">Pet Insurance</mat-checkbox>
+        @if (adoptionForm.wantsInsurance().invalid()) {
+          @for (err of adoptionForm.wantsInsurance().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+        <mat-checkbox [formField]="adoptionForm.wantsTraining">Obedience Training</mat-checkbox>
+      </div>
+
+      <div class="check-group">
+        <strong>Contact (email or phone required):</strong>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [formField]="adoptionForm.contactEmail" placeholder="Email" />
+        </mat-form-field>
+        @if (adoptionForm.contactEmail().invalid() && adoptionForm.contactEmail().touched()) {
+          @for (err of adoptionForm.contactEmail().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input matInput type="tel" [formField]="adoptionForm.contactPhone" placeholder="Phone" />
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Form valid: {{ adoptionForm().valid() }}<br />
+    Model: <pre>{{ adoptionModel() | json }}</pre>
+  </mat-card-content>
+</mat-card>

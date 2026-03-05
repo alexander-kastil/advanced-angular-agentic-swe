@@ -1,0 +1,133 @@
+.demo-container {
+  padding: 16px;
+}
+
+.demo-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+
+  h3 {
+    margin-top: 0;
+    color: #1976d2;
+    font-size: 1.2rem;
+  }
+
+  h4 {
+    margin-top: 12px;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+.example {
+  background: white;
+  padding: 16px;
+  border-radius: 4px;
+  margin: 12px 0;
+  border-left: 4px solid #2196f3;
+
+  button {
+    margin: 4px 4px 4px 0;
+    padding: 6px 12px;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #1976d2;
+    }
+
+    &.apply-discount {
+      background: #4caf50;
+
+      &:hover {
+        background: #45a049;
+      }
+    }
+
+    &.clear {
+      background: #f44336;
+
+      &:hover {
+        background: #da190b;
+      }
+    }
+  }
+}
+
+.code-example {
+  background: #f0f0f0;
+  padding: 8px 12px;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  font-family: "Courier New", monospace;
+  color: #d32f2f;
+  margin-top: 8px;
+
+  code {
+    background: #e8e8e8;
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+}
+
+.product-list {
+  margin: 12px 0;
+
+  h4 {
+    margin-top: 0;
+  }
+}
+
+.product-item {
+  padding: 8px;
+  margin: 4px 0;
+  background: #fff9c4;
+  border-left: 2px solid #fbc02d;
+  border-radius: 2px;
+  font-size: 0.9rem;
+
+  &.discounted {
+    background: #c8e6c9;
+    border-left-color: #4caf50;
+  }
+}
+
+.info {
+  background-color: #e3f2fd;
+  border-left-color: #1976d2;
+
+  ul {
+    margin: 12px 0;
+    padding-left: 20px;
+
+    li {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    strong {
+      color: #1976d2;
+    }
+
+    code {
+      background: #ffffff;
+      padding: 2px 6px;
+      border-radius: 2px;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+    }
+  }
+}

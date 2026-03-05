@@ -1,0 +1,19 @@
+<div class="heading">
+  <h2>Semantic Kernel</h2>
+  <div class="icon" (click)="toggle()">
+    <mat-icon aria-label="Toggle expand" fontIcon="radio_button_unchecked" />
+  </div>
+</div>
+@if (expanded()) {
+<div class="content">
+  Semantic Kernel is an open-source framework that allows developers to
+  integrate AI models into their applications seamlessly. It provides tools and
+  libraries to manage and orchestrate various AI services, making it easier to
+  build intelligent applications. With Semantic Kernel, developers can focus on
+  creating value through AI without worrying about the underlying complexities
+  of model integration.
+</div>
+<button mat-raised-button color="primary" (click)="toggle()">
+  Toggle Expand
+</button>
+}

@@ -1,0 +1,45 @@
+<form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm)">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content column>
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="E-Mail"
+          id="username"
+          formControlName="email"
+          />
+          @if (loginForm.get('email')?.errors != undefined) {
+            <mat-error
+              >Invalid E-Mail
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            id="password"
+            autocomplete="true"
+            placeholder="Password"
+            formControlName="password"
+            />
+            @if (loginForm.get('password')?.errors != undefined) {
+              <mat-error
+                >Min length 6
+              </mat-error>
+            }
+          </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions class="cmdItems">
+          <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+          <button mat-raised-button mat-dialog-close type="submit" [disabled]="loginForm.invalid" color="primary">
+            LOGIN
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>

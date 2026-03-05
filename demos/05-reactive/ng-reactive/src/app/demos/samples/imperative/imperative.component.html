@@ -1,0 +1,25 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title> {{ title() }} </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Type a skill to filter for</mat-label>
+      <input matInput type="text" [formControl]="filter$" />
+    </mat-form-field>
+
+    <div boxed>
+      <h2>Skills</h2>
+      <ul>
+        @for (skill of view(); track skill) {
+          <li>
+            <div>
+              <span>{{ skill.name }}</span>
+              <span>completed: {{ skill.completed }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </mat-card-content>
+</mat-card>

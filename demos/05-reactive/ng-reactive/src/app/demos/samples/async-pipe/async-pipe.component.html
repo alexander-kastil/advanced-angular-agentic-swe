@@ -1,0 +1,52 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title> Classic imperative subscribe pattern </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @for (t of tasks(); track t) {
+      <div>{{ t.id }} - {{ t.title }}</div>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title> Using async pipe </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @for (t of tasks$ | async; track t) {
+      <div>{{ t.id }} - {{ t.title }}</div>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title> Completed task with ngModel & async pipe </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <pre>{{ completed$ | async | json }}</pre>
+  </mat-card-content>
+</mat-card>
+
+@if (tasks$ | async; as arrTasks) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title> Aliasing </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @for (t of arrTasks; track t) {
+        <div>
+          <div>Title: {{ t.title }}</div>
+          <div>Completed: {{ t.completed }}</div>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+} @else {
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <mat-progress-bar mode="indeterminate" />
+    </mat-card-content>
+  </mat-card>
+}

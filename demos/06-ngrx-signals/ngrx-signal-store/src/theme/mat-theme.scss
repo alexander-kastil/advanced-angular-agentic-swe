@@ -1,0 +1,46 @@
+//Provides theme functionality
+@use '@angular/material' as mat;
+@include mat.elevation-classes();
+@include mat.app-background();
+@import '@angular/material/theming';
+
+//Pick colors here: https://material.io/resources/color/
+$primary: mat.m2-define-palette(mat.$m2-blue-palette, 400);
+$accent: mat.m2-define-palette(mat.$m2-grey-palette, 400);
+$warn: mat.m2-define-palette(mat.$m2-red-palette);
+$fg: mat.m2-define-palette(mat.$m2-grey-palette, 100);
+$bg: mat.m2-define-palette(mat.$m2-blue-grey-palette, 100);
+
+//Build theme
+$theme: mat.m2-define-light-theme((
+ color: (
+   primary: $primary,
+   accent: $accent,
+   warn: $warn,
+ ),
+ typography: mat.m2-define-typography-config(),
+ density: 0,
+));
+
+//Include theme
+@include angular-material-theme($theme);
+
+//Export global vars from design system for easy use
+:root {
+  --color-primary: #{mat-color($primary)};
+  --color-accent: #{mat-color($accent)};
+  --color-warn: #{mat-color($warn)};
+  --color-fg: #{mat-color($fg)};
+  --color-bg: #{mat-color($bg)};
+
+  --gap-small: 0.5rem;
+  --gap-medium: 0.8rem;
+  --gap-big: 1.1rem;
+  --toolbar-xl: 85px;
+  --toolbar-big: 70px;
+  --toolbar-medium: 40px;
+  --toolbar-small: 35px;
+  --font-small: 0.9rem;
+  --font-medium: 1.2rem;
+  --font-big: 1.4rem;
+}

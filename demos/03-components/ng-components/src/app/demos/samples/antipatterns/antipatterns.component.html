@@ -1,0 +1,94 @@
+<div boxed>
+  <h3>❌ ANTIPATTERN DEMO - Why NOT to Use This</h3>
+  <p
+    style="
+      background: #fff3cd;
+      padding: 12px;
+      border-radius: 4px;
+      border-left: 4px solid #ff6b6b;
+    "
+  >
+    <strong>⚠️ WARNING:</strong> This component demonstrates outdated patterns.
+    See the markdown guide for detailed explanations of what NOT to do.
+  </p>
+</div>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title
+      >Pet Details (ID: {{ petId() }}) - Manual State Management</mat-card-title
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (isLoading()) {
+      <div style="text-align: center; padding: 20px">
+        <mat-progress-spinner mode="indeterminate" diameter="40" />
+        <p>Loading with manual state...</p>
+      </div>
+    }
+
+    @if (error(); as errorMsg) {
+      <div
+        style="
+          background: #ffebee;
+          border-left: 4px solid #c62828;
+          padding: 16px;
+          margin: 16px 0;
+          border-radius: 4px;
+        "
+      >
+        <strong>Error:</strong> {{ errorMsg }}
+      </div>
+    }
+
+    @if (pet(); as petData) {
+      <div style="padding: 16px; background: #f5f5f5; border-radius: 4px">
+        <h4>{{ petData.name }}</h4>
+        <p><strong>Type:</strong> {{ petData.type }}</p>
+        <p><strong>Breed:</strong> {{ petData.breed }}</p>
+        <p><strong>Age:</strong> {{ petData.age }} years</p>
+        <p><strong>Owner:</strong> {{ petData.owner }}</p>
+        <pre
+          style="
+            background: white;
+            padding: 12px;
+            border-radius: 4px;
+            overflow: auto;
+          "
+          >{{ petData | json }}</pre
+        >
+      </div>
+    }
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button
+      mat-stroked-button
+      [disabled]="petId() === 1"
+      (click)="loadPrevious()"
+    >
+      ← Previous
+    </button>
+    <button mat-stroked-button (click)="loadNext()">Next →</button>
+    <button mat-raised-button color="accent" (click)="reload()">Reload</button>
+  </mat-card-actions>
+</mat-card>
+
+<div boxed style="margin-top: 24px; background: #fff3cd">
+  <h4>Why This Pattern is Problematic:</h4>
+  <ul style="margin: 0; padding-left: 20px">
+    <li>❌ Manual subscription management = memory leak risk</li>
+    <li>
+      ❌ Must manually coordinate 3 signals (petId, pet, isLoading, error)
+    </li>
+    <li>❌ No automatic reactivity when signals change</li>
+    <li>❌ Verbose .subscribe() syntax and error handling</li>
+    <li>❌ Hard to test - lots of manual state coordination</li>
+    <li>❌ Requires lifecycle hooks (OnInit, OnDestroy)</li>
+  </ul>
+  <p>
+    <strong>✅ Use resource() instead!</strong> It handles all of this
+    automatically with reactive updates.
+  </p>
+</div>

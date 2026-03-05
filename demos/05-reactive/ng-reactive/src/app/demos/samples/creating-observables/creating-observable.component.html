@@ -1,0 +1,21 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Creating & Subscribing Observable</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <button mat-raised-button color="accent" (click)="useOf()">of()</button>
+    <button mat-raised-button color="accent" (click)="useObsFrom()">
+      from()
+    </button>
+    <button mat-raised-button color="accent" (click)="usePromiseToObs()">
+      Casting Promises
+    </button>
+    <button mat-raised-button color="accent" (click)="useNewObs()">
+      new Observabl()
+    </button>
+    <button mat-raised-button color="accent" (click)="wrappingCallbacks()">
+      Wrapping Callbacks
+    </button>
+  </mat-card-content>
+</mat-card>

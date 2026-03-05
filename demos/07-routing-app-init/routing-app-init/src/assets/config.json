@@ -1,0 +1,6 @@
+{
+  "authEnabled": true,
+  "title": "Routing and App init App",
+  "markdownPath": "/assets/markdown/",
+  "apiUrl": "http://localhost:3000/api"
+}

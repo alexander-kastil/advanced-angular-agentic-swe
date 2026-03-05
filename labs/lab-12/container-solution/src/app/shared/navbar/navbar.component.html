@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div class="hamburgerMenu" (click)="toggleMenu()" >
+      <mat-icon color="accent">menu</mat-icon>
+    </div>
+    <div
+      class="navItem"
+      *ngFor="let item of navItems"
+      [routerLink]="[item.url]"
+      routerLinkActive="navLinkActive"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ item.title }}
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

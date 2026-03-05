@@ -1,0 +1,31 @@
+{
+    "food": [
+        {
+          "id": 1,
+          "name": "Butter Chicken",
+          "price": 12,
+          "inStock": 9,
+          "pictureUrl": "assets/images/falaffel.jpg",
+          "code": "btc",
+          "description": "Butter Chicken is a dish of chicken in a spiced curry sauce. It is a dish of the Indian subcontinent originating in the Punjab region. It is popular in India, Pakistan, the United Kingdom, Canada, the United States, and Australia."
+        },
+        {
+          "id": 2,
+          "name": "Blini with Salmon",
+          "price": 9,
+          "inStock": 12,
+          "pictureUrl": "assets/images/falaffel.jpg",
+          "code": "bls",
+          "description": "Blinis are mini pancakes that make perfect finger food for passing around at a party. Top with dill crème fraîche and smoked salmon for a timeless, elegant canapé that never fails to impress"
+        },
+        {
+          "id": 3,
+          "name": "Wiener Schnitzel",
+          "price": 18,
+          "inStock": 23,
+          "pictureUrl": "assets/images/falaffel.jpg",
+          "code": "ws",
+          "description": "Wiener schnitzel is a veal cutlet that has been pounded thin, breaded, and pan-fried. It is a traditional Austrian dish that is popular throughout Central Europe and is often served with a lemon wedge and a side of French fries."
+        }
+      ]      
+}

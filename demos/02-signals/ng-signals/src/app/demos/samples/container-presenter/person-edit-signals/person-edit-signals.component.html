@@ -1,0 +1,48 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title> Edit </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="personForm" (ngSubmit)="savePerson()">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="Id"
+          formControlName="id"
+        />
+      </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter name"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="Enter age"
+        formControlName="age"
+      />
+    </mat-form-field>
+    <div>
+      <label>Gender:</label>
+      <mat-radio-group
+        aria-label="Select an gender"
+        formControlName="gender"
+      >
+        <mat-radio-button value="male" color="primary">Male</mat-radio-button>
+        <mat-radio-button value="female" color="primary"
+          >Female</mat-radio-button
+        >
+      </mat-radio-group>
+    </div>
+  </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="savePerson()" color="primary">Save</button>
+  </mat-card-actions>
+</mat-card>

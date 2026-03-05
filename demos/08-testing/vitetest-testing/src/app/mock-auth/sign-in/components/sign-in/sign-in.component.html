@@ -1,0 +1,22 @@
+<ng-template #dialog>
+  <div mat-dialog-title class="title">Please sign-in to continue </div>
+
+  <div mat-dialog-content>
+    <div>
+      <mat-form-field appearance="outline">
+        <input type="email" placeholder="Email" matInput />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <input type="password" placeholder="Password" matInput />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="actions">
+    <button mat-flat-button (click)="signIn()" color="primary">Sign In</button>
+    <button mat-flat-button [routerLink]="['../sign-up']" color="primary">Register</button>
+  </div>
+</ng-template>

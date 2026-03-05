@@ -1,0 +1,63 @@
+<div class="demo-container-wrapper">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav [opened]="sidenavVisible()" [mode]="sidenavMode()">
+      <mat-toolbar color="accent">
+        <mat-toolbar-row>
+          {{ title }}
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-nav-list>
+        <mat-toolbar class="sidenav-menu">
+          <span>Please select:</span>
+        </mat-toolbar>
+        @for (item of demos(); track item) {
+          <mat-list-item
+            role="listitem"
+            [routerLink]="['./' + item.url]"
+            (mouseenter)="showPopup(item, $event)"
+            (mouseleave)="hidePopup()"
+          >
+            {{ item.title }}
+          </mat-list-item>
+        }
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div
+        class="gdSidenavContent"
+        [style.margin-left]="sidenavVisible() ? '5px' : '0'"
+      >
+        <div class="gdToolbar">
+          <mat-toolbar color="accent">
+            <mat-toolbar-row>
+              <h4>{{ header() }}</h4>
+            </mat-toolbar-row>
+          </mat-toolbar>
+        </div>
+        <!-- <div class="gdLoading">
+        <app-loading *ngIf="isLoading()"></app-loading>
+      </div> -->
+        <div class="gdWorkbench">
+          <router-outlet />
+        </div>
+        @if (showMdEditor()) {
+          <div class="gdEditor">
+            <app-markdown-editor />
+          </div>
+        }
+        <div class="gdSidebar">
+          <app-side-panel />
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  @if (hoveredItem()) {
+    <div class="demo-popup" [style.top.px]="popupTop()">
+      <strong>{{ hoveredItem()!.title }}</strong>
+      <p>{{ hoveredItem()!.teaches }}</p>
+      <hr />
+      <small>{{ hoveredItem()!.topic }}</small>
+    </div>
+  }
+</div>

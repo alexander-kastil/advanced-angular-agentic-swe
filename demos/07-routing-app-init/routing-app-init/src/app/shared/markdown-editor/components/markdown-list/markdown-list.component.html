@@ -1,0 +1,11 @@
+@for (c of Comments(); track c) {
+  <div class="row">
+    <div class="title">{{ c.title }}</div>
+    <button mat-flat-button (click)="deleteComment(c)" color="primary">
+      Delete
+    </button>
+    <button mat-flat-button (click)="editComment(c)" color="primary">
+      Edit
+    </button>
+  </div>
+}

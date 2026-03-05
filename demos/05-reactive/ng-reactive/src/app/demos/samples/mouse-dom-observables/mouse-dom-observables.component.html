@@ -1,0 +1,13 @@
+<div
+  boxed
+  style="display: flex; flex-direction: column; align-items: center; gap: 1rem"
+>
+  <canvas #signPad class="canvasStyle"></canvas>
+  <button mat-raised-button color="accent" (click)="subscribeMouse()">
+    Capture Mouse Events
+  </button>
+
+  @if (result(); as pos) {
+    <div>signPad - Mouse Moved at X: {{ pos.X }} Y: {{ pos.Y }}</div>
+  }
+</div>

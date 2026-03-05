@@ -1,0 +1,38 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <button
+      mat-mini-fab
+      matTooltip="Toggle the SideNav"
+      (click)="toggleSideNav()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    @if (isDemosRoute() && layout.hasMarkdownContent()) {
+      <button
+        mat-mini-fab
+        matTooltip="Toggle Markdown Guide"
+        (click)="showGuide()"
+      >
+        <mat-icon>help_clinic</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        [matTooltip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+        [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+        (click)="toggleEditor()"
+      >
+        <mat-icon>{{ isEditorActive() ? "cancel" : "edit_square" }}</mat-icon>
+      </button>
+      @if (isEditorActive()) {
+        <button
+          mat-mini-fab
+          matTooltip="Add Comment"
+          aria-label="Add Comment"
+          (click)="addMarkdownItem()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      }
+    }
+  </mat-toolbar-row>
+</mat-toolbar>

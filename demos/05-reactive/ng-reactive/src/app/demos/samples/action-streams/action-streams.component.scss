@@ -1,0 +1,15 @@
+mat-card {
+  margin-top: var(--small-gap);
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: var(--gap-big);
+}
+
+.row {
+  margin: 0.2rem;
+  padding: 0.4rem;
+  background-color: var(--color-accent);
+  min-height: 2rem;
+}

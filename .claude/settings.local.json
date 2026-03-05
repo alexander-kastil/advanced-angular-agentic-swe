@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(ts\\)$\")",
+      "Bash(grep -l \"FormControl\\\\|FormGroup\" \"d:/git-classes/angular-advanced/demos/08-testing/vitetest-testing/src/app/demos/samples/\"*)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}

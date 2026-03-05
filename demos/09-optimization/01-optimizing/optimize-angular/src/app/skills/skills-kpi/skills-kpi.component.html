@@ -1,0 +1,6 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <div>Skills Total: {{ ct | async }}</div>
+    <div>Not Completed: {{ (completed | async)?.length }}</div>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,50 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Title</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" [formControl]="name" />
+        @if (!name.valid) {
+          <mat-error>
+            Name is required
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Postal</mat-label>
+        <input matInput type="text" placeholder="Plz" [formControl]="postal" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput type="text" placeholder="City" [formControl]="city" />
+        @if (!city.valid) {
+          <mat-error>
+            Max Lenght for city is 15 characters
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="logName()" color="accent">Log Name</button>
+    <button mat-raised-button (click)="updateName()" color="accent">Update Name</button>
+    <button mat-raised-button color="accent">Save</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Control State - "Name" Field</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Name Fld is dirty: {{ name.dirty }}<br />
+    Name Fld is pristine: {{ name.pristine }}<br />
+    Name Fld is valid: {{ name.valid }}<br />
+    Name Fld is invalid: {{ name.invalid }}<br />
+    Name Fld is touched: {{ name.touched }}<br />
+    Name Fld is untouched: {{ name.untouched }}
+  </mat-card-content>
+</mat-card>

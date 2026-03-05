@@ -1,0 +1,72 @@
+.pet-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.pet-list mat-list-item.selected {
+  background: rgba(63, 81, 181, 0.12);
+}
+
+.pet-list mat-nav-list {
+  padding-top: 0;
+}
+
+form[column] {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.error {
+  color: #f44336;
+  font-size: 0.8rem;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+.success {
+  color: #4caf50;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.state-info {
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.state-info pre {
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.change-log {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.log-entry {
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+
+.log-empty {
+  color: rgba(0, 0, 0, 0.38);
+  font-style: italic;
+  font-size: 0.85rem;
+}

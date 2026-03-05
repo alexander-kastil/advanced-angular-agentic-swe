@@ -1,0 +1,58 @@
+:host-context {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+mat-card {
+  min-width: 500px;
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 3rem;
+  padding-top: 0.5rem;
+  background-color: #4757B8;
+  color: white;
+}
+
+.mat-mdc-card-subtitle {
+  background-color: #4757B8;
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.instructions {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.showcase {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.actions {
+  width: 100%;
+  text-align: center;
+}
+
+button {
+  margin: 0 3rem;
+}
+
+img{
+  margin: 2rem;
+}

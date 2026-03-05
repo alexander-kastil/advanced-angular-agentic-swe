@@ -1,0 +1,32 @@
+<app-markdown-renderer [md]="'control-value-accessor'"></app-markdown-renderer>
+
+<form
+  [formGroup]="shoppingForm"
+  (ngSubmit)="submitCart()"
+  role="form"
+  novalidate
+>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title> Control Value Accessor </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-label>Product</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Product"
+          formControlName="itemName"
+        />
+      </mat-form-field>
+      <app-number-picker
+        formControlName="quantity"
+        label="Amount"
+      ></app-number-picker>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="accent" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

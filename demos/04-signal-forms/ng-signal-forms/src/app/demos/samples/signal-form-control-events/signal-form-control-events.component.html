@@ -1,0 +1,34 @@
+<app-markdown-renderer [md]="'control-events'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Control Events</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Name"
+          [formField]="fields.name"
+        />
+      </mat-form-field>
+
+      <div boxed>
+        <div>Value: {{ fields.name().value() }}</div>
+        <div>Valid: {{ fields.name().valid() }}</div>
+        <div>Invalid: {{ fields.name().invalid() }}</div>
+        <div>Touched: {{ fields.name().touched() }}</div>
+        <div>Dirty: {{ fields.name().dirty() }}</div>
+        <div>Pending: {{ fields.name().pending() }}</div>
+        @if (fields.name().touched() && fields.name().invalid()) {
+          @for (err of fields.name().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,120 @@
+<app-markdown-renderer [md]="'validators'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Sync & Async Validation</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form role="form" novalidate column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Name"
+          [formField]="personForm.name"
+        />
+      </mat-form-field>
+      @if (personForm.name().touched() && personForm.name().invalid()) {
+        @for (err of personForm.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Age"
+          [formField]="personForm.age"
+        />
+      </mat-form-field>
+      @if (personForm.age().touched() && personForm.age().invalid()) {
+        @for (err of personForm.age().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Email"
+          [formField]="personForm.email"
+        />
+      </mat-form-field>
+      @if (personForm.email().pending()) {
+        <div>Checking email...</div>
+      }
+      @if (personForm.email().touched() && personForm.email().invalid()) {
+        @for (err of personForm.email().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select placeholder="Gender" [formField]="personForm.gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="not set">Not set</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-radio-group name="wealthValidation" [formField]="personForm.wealth">
+        <mat-label>Wealth:</mat-label>
+        @for (opt of wealthOpts; track opt) {
+          <mat-radio-button [value]="opt">{{ opt }}</mat-radio-button>
+        }
+      </mat-radio-group>
+
+      <div class="cmdItems">
+        <button
+          mat-raised-button
+          type="button"
+          color="primary"
+          [disabled]="personForm().invalid()"
+          (click)="savePerson()"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Name Field State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    dirty: {{ personForm.name().dirty() }} | valid:
+    {{ personForm.name().valid() }} | touched:
+    {{ personForm.name().touched() }} | pending:
+    {{ personForm.name().pending() }}
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Email Field State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    dirty: {{ personForm.email().dirty() }} | valid:
+    {{ personForm.email().valid() }} | touched:
+    {{ personForm.email().touched() }} | pending:
+    {{ personForm.email().pending() }}
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Form State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    valid: {{ personForm().valid() }} | touched: {{ personForm().touched() }} |
+    pending: {{ personForm().pending() }}
+  </mat-card-content>
+</mat-card>

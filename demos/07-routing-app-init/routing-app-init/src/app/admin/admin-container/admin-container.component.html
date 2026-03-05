@@ -1,0 +1,42 @@
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    [opened]="ms.visible$ | async"
+    [mode]="ms.position$ | async"
+    >
+    <mat-toolbar color="accent">
+      <mat-toolbar-row>
+        Administration
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="menu">
+      @for (item of links; track item) {
+        <button
+          mat-raised-button
+          color="accent"
+          [routerLink]="['./' + item.url]"
+          >
+          {{ item.title }}
+        </button>
+      }
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div
+      gdAreas="toolbar | content | editor"
+      gdRows="70px auto 200px"
+      class="workbench"
+      [ngStyle]="getWorbenchStyle()"
+      >
+      <mat-toolbar gdArea="toolbar" color="accent">
+        <mat-toolbar-row>
+          <h4></h4>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <div gdArea="content" class="workbench">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

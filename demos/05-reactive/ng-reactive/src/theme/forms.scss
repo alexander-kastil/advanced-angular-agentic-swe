@@ -1,0 +1,14 @@
+.result{
+  min-height: 10rem;
+}
+
+.cmdItems {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  button {
+    width: calc(50% - 3rem);
+    margin: 1em;
+  }
+}

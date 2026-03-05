@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Material Harness</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="sliderForm">
+      <div>
+        <mat-form-field>
+          <mat-label>Favorite food</mat-label>
+          <input matInput value="Sushi" name="favorite-food" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-slider min="1" max="100">
+          <input matSliderThumb formControlName="slider" />
+        </mat-slider>
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="resetSlider()"
+          type="button"
+        >
+          Reset
+        </button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" type="button">
+          Just there to have 2 buttons
+        </button>
+      </div>
+
+      <div class="info">
+        @if (sliderForm.invalid) {
+          <div>
+            slider has <b><i>invalid </i> </b> value and choose value greater
+            than 10.
+          </div>
+        }
+        @if (sliderForm.valid) {
+          <div>
+            Slider has a <b><i>valid </i> </b> value {{ value }}.
+          </div>
+        }
+        @if (sliderForm.pristine) {
+          <div>
+            Slider having state <b><i>pristine.</i></b> Slider value not yet
+            changed by user.
+          </div>
+        }
+        @if (sliderForm.dirty) {
+          <div>
+            Slider having state <b><i>dirty.</i></b> Slider value changed by
+            user.
+          </div>
+        }
+        @if (sliderForm.untouched) {
+          <div>
+            Slider having state <b><i>untouched.</i></b> Slider has not visited
+            by user.
+          </div>
+        }
+        @if (sliderForm.touched) {
+          <div>
+            Slider having state <b><i>touched.</i> </b> Slider has been visited
+            by user.
+          </div>
+        }
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

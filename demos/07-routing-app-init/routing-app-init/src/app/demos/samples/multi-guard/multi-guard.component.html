@@ -1,0 +1,32 @@
+<app-markdown-renderer [md]="'multi-guard'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="cmdItems">
+    <button mat-raised-button color="primary" (click)="toggleLoggedIn()">
+      Toggle LoggedIn
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="togglePrimeMember()"
+      [disabled]="btnTogglePrimeEnabled()"
+    >
+      Toggle Prime Member
+    </button>
+    <button mat-raised-button [routerLink]="['members']" color="primary">
+      Go to Members
+    </button>
+    <button mat-raised-button [routerLink]="['prime']" color="primary">
+      Go to Prime Members
+    </button>
+    <div>
+      <pre>
+        <p>Currently logged in: {{ user() | json  }}</p>
+      </pre>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<router-outlet />

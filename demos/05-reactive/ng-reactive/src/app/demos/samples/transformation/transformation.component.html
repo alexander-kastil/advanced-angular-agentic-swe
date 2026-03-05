@@ -1,0 +1,21 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title> Transformation </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="cmdItems">
+    <button mat-raised-button color="accent" (click)="useSwitchMap()">
+      switchMap()
+    </button>
+    <button mat-raised-button color="accent" (click)="useConcatMap()">
+      concatMap()
+    </button>
+    <button mat-raised-button color="accent" (click)="useMergeMap()">
+      mergeMap()
+    </button>
+    <button mat-raised-button color="accent" (click)="useExhaustMap()">
+      exhaustMap()
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<div boxed>See Console for output</div>

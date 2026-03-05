@@ -1,0 +1,252 @@
+{
+  "demos": [
+    {
+      "url": "signals-basics",
+      "title": "Signals Basics",
+      "teaches": "Create reactive state with signal(). Use computed() for derived state and effect() for side effects. Read values with calling the signal as function, update with .set() and .update().",
+      "sortOrder": 1,
+      "topic": "Signals Fundamentals",
+      "md": "signals-basics"
+    },
+    {
+      "url": "http-resource",
+      "title": "HTTP Resource API",
+      "teaches": "Load and display async data with httpResource(). Handle loading state, errors, and display data conditionally in templates.",
+      "sortOrder": 2,
+      "topic": "Signals Fundamentals",
+      "md": "http-resource"
+    },
+    {
+      "url": "signal-effects",
+      "title": "Signal Effects & Filtering",
+      "teaches": "Use effect() to react to signal changes for side effects. Track filter state with signals and update httpResource() parameters dynamically. Demonstrates conditional data loading.",
+      "sortOrder": 3,
+      "topic": "Signals Fundamentals",
+      "md": "signal-effects"
+    },
+    {
+      "url": "deep-signals",
+      "title": "Deep Signal Changes",
+      "teaches": "Track nested changes within signal objects using deep equality checks. Understand when signals notify dependent computations.",
+      "sortOrder": 4,
+      "topic": "Signals Fundamentals",
+      "md": "deep-signals"
+    },
+    {
+      "url": "signal-inputs",
+      "title": "Inputs Signals",
+      "teaches": "Define typed component inputs as signals using input() and input.required(). Use with two-way binding in parent components.",
+      "sortOrder": 5,
+      "topic": "Signals Fundamentals",
+      "md": "signal-inputs"
+    },
+    {
+      "url": "signal-equality",
+      "title": "Signal Equality",
+      "teaches": "Define custom equality comparisons with the equal() option. Control when computed() and dependents re-run. Avoid unnecessary notifications for deep mutations.",
+      "sortOrder": 6,
+      "topic": "Signals Fundamentals",
+      "md": "signal-equality"
+    },
+    {
+      "url": "linked-signal-reset",
+      "title": "LinkedSignal & Reset",
+      "teaches": "Create writable dependent signals with linkedSignal(). Keep signals synced while allowing independent updates. Reset derived signals to base state.",
+      "sortOrder": 7,
+      "topic": "Signal Patterns",
+      "md": "linked-signal-reset"
+    },
+    {
+      "url": "effect-cleanup",
+      "title": "Effect Cleanup",
+      "teaches": "Clean up resources in effects: timers, intervals, subscriptions, listeners. Use cleanup functions to prevent memory leaks when effects destroy.",
+      "sortOrder": 8,
+      "topic": "Signal Patterns",
+      "md": "effect-cleanup"
+    },
+    {
+      "url": "effect-once",
+      "title": "One-Shot Effects",
+      "teaches": "Run effects one time or conditionally. Use manual destroy() to disable effects. Common for initialization logic that only runs once.",
+      "sortOrder": 9,
+      "topic": "Signal Patterns",
+      "md": "effect-once"
+    },
+    {
+      "url": "model-inputs",
+      "title": "Model Two-Way Binding",
+      "teaches": "Implement two-way binding with model() signal API. Parent and child components sync data mutually without manual event handling.",
+      "sortOrder": 10,
+      "topic": "Signal Patterns",
+      "md": "model-inputs"
+    },
+    {
+      "url": "container-presenter",
+      "title": "Signals Container-Presenter",
+      "teaches": "Apply Container-Presenter pattern using signals. Container manages state and httpResource data, Presenter displays UI. Pass data and callbacks to child presenters.",
+      "sortOrder": 11,
+      "topic": "Signal Patterns",
+      "md": "container-presenter"
+    },
+    {
+      "url": "signals-event-bus",
+      "title": "Signals EventBus",
+      "teaches": "Create a lightweight event bus with signals for cross-component communication. Emit and subscribe to events without RxJS.",
+      "sortOrder": 12,
+      "topic": "Signal Patterns",
+      "md": "signals-bus"
+    },
+    {
+      "url": "rxjs-interop",
+      "title": "RxJS to Signals Bridge",
+      "teaches": "Convert RxJS Observables to signals with toSignal(). Create writeable signals from async sources. Combine signals with existing Observable code.",
+      "sortOrder": 13,
+      "topic": "Signal Patterns",
+      "md": "rxjs-interop"
+    },
+    {
+      "url": "select-signal",
+      "title": "NgRx selectSignal Integration",
+      "teaches": "Use NgRx selectSignal() to derive signals directly from store state. Type-safe store integration without subscribe patterns.",
+      "sortOrder": 20,
+      "topic": "Advanced Integration",
+      "md": "select-signal"
+    },
+    {
+      "url": "zoneless-change-detection",
+      "title": "OnPush & Zoneless CD",
+      "teaches": "Run Angular with zoneless change detection using signals. Remove NgZone dependency and improve performance with pure signal-based reactivity.",
+      "sortOrder": 21,
+      "topic": "Advanced Integration",
+      "md": "zoneless-change-detection"
+    }
+  ],
+  "skills": [
+    {
+      "id": 1,
+      "name": "RxJs",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "name": "NgRx",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "name": "Angular",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "name": "TypeScript",
+      "completed": true
+    },
+    {
+      "id": 5,
+      "name": "Material",
+      "completed": true
+    },
+    {
+      "id": 6,
+      "name": "Node",
+      "completed": true
+    },
+    {
+      "id": 7,
+      "name": "Forms",
+      "completed": true
+    },
+    {
+      "id": 8,
+      "name": "Authentication",
+      "completed": true
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "url": "",
+      "title": "Using @ngrx/store",
+      "comment": "To use @ngrx/store, we need to install it first.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": 2,
+      "url": "",
+      "title": "Optimizing change detection",
+      "comment": "In order to optimize change detection, we need to use OnPush strategy.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Cleo"
+    },
+    {
+      "id": 2,
+      "name": "Soi"
+    },
+    {
+      "id": 3,
+      "name": "Giro"
+    },
+    {
+      "id": 4,
+      "name": "Flora"
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "label": "Demos",
+      "url": "demos"
+    },
+    {
+      "label": "Skills",
+      "url": "skills"
+    },
+    {
+      "label": "Customers",
+      "url": "customers"
+    }
+  ],
+  "persons": [
+    {
+      "id": "1",
+      "name": "Cleo",
+      "age": 15,
+      "gender": "female",
+      "married": true,
+      "imgUrl": "/assets/images/cleo.png"
+    },
+    {
+      "id": "2",
+      "name": "Soi",
+      "age": 9,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/soi.png"
+    },
+    {
+      "id": "3",
+      "name": "Giro",
+      "age": 11,
+      "gender": "male",
+      "married": false,
+      "imgUrl": "/assets/images/giro.png"
+    },
+    {
+      "id": "4",
+      "name": "Flora",
+      "age": 14,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/flora.png"
+    }
+  ]
+}

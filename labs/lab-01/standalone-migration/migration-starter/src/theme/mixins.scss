@@ -1,0 +1,10 @@
+//Mixin
+@mixin link($col, $font) {
+  font-size: $font;
+  color: $col;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

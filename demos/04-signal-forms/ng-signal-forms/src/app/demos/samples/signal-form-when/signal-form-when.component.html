@@ -1,0 +1,69 @@
+<app-markdown-renderer [md]="'sf-when'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Conditional Validation (when / applyWhen)</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form autocomplete="off" column>
+      <mat-form-field>
+        <mat-label>Pet Name
+          @if (petForm.name().required()) { <span class="text-danger">*</span> }
+        </mat-label>
+        <input matInput type="text" [formField]="petForm.name" placeholder="Pet name" />
+      </mat-form-field>
+      @if (petForm.name().invalid() && petForm.name().touched()) {
+        @for (err of petForm.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select [formField]="petForm.type">
+          <mat-option value="cat">🐱 Cat</mat-option>
+          <mat-option value="dog">🐶 Dog</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-checkbox [formField]="petForm.hasAllergies">Has allergies</mat-checkbox>
+
+      @if (petForm.allergyDetails().required()) {
+        <mat-form-field>
+          <mat-label>Allergy Details <span class="text-danger">*</span></mat-label>
+          <input matInput type="text" [formField]="petForm.allergyDetails" placeholder="Describe allergies" />
+        </mat-form-field>
+        @if (petForm.allergyDetails().invalid() && petForm.allergyDetails().touched()) {
+          @for (err of petForm.allergyDetails().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+      }
+
+      <mat-checkbox [formField]="petForm.isOutdoor">Outdoor pet</mat-checkbox>
+
+      <mat-form-field>
+        <mat-label>Leash Color
+          @if (petForm.leashColor().required()) { <span class="text-danger">*</span> }
+        </mat-label>
+        <input matInput type="text" [formField]="petForm.leashColor" placeholder="Leash color" />
+      </mat-form-field>
+      @if (petForm.leashColor().invalid() && petForm.leashColor().touched()) {
+        @for (err of petForm.leashColor().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    allergyDetails required: {{ petForm.allergyDetails().required() }}<br />
+    leashColor required: {{ petForm.leashColor().required() }}<br />
+    Form valid: {{ petForm().valid() }}<br />
+    Model: <pre>{{ petModel() | json }}</pre>
+  </mat-card-content>
+</mat-card>

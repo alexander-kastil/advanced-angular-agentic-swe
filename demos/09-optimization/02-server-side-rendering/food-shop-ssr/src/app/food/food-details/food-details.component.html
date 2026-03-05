@@ -1,0 +1,7 @@
+<div class="container">
+  <h2>{{ item.value()?.name }}</h2>
+  <div class="json">
+    {{ item.value() | json }}
+  </div>
+  <button mat-raised-button [routerLink]="['']">Go back</button>
+</div>

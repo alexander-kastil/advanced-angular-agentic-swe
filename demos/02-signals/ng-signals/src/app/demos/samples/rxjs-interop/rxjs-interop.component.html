@@ -1,0 +1,8 @@
+<div border centered>
+  <div>Amount Signal {{ amount() }}</div>
+  <div>Writable Amount Signal {{ writeableAmount() }}</div>
+</div>
+
+<button mat-raised-button (click)="updateAmount()" color="accent">
+  Update amount
+</button>

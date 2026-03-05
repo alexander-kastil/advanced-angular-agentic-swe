@@ -1,0 +1,28 @@
+<app-markdown-renderer [md]="'preloading-strategy'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Preloading Strategy</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Custom preloading strategy preloads routes marked with <code>data: {{ '{' }} preload: true {{ '}' }}</code>.
+    </p>
+    <p>
+      <strong>Preloaded Modules:</strong>
+      @if (strategy.preloadedModules.length > 0) {
+        <span>{{ strategy.preloadedModules.join(', ') }}</span>
+      } @else {
+        <span>None yet</span>
+      }
+    </p>
+    <div>
+      <button mat-raised-button color="primary" (click)="navigateToCustomers()">
+        Navigate to Customers
+      </button>
+      <button mat-raised-button color="accent" (click)="navigateToSkills()">
+        Navigate to Skills
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

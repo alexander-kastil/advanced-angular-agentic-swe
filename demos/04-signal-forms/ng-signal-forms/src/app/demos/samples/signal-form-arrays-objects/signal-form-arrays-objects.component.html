@@ -1,0 +1,87 @@
+<app-markdown-renderer [md]="'sf-arrays-objects'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Arrays of Objects (Vet Visits)</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form autocomplete="off" column>
+      <mat-form-field>
+        <mat-label>Pet Name
+          @if (petForm.petName().required()) { <span class="text-danger">*</span> }
+        </mat-label>
+        <input matInput type="text" [formField]="petForm.petName" placeholder="Pet name" />
+      </mat-form-field>
+      @if (petForm.petName().invalid() && petForm.petName().touched()) {
+        @for (err of petForm.petName().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="array-section">
+        <strong>Vet Visits</strong>
+        <div class="array-items">
+          @for (visit of petModel().vetVisits; track $index) {
+            <div class="visit-row">
+              <mat-form-field>
+                <mat-label>Vet Name</mat-label>
+                <input matInput type="text"
+                       [formField]="petForm.vetVisits[$index].vetName"
+                       placeholder="Vet name" />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Reason</mat-label>
+                <input matInput type="text"
+                       [formField]="petForm.vetVisits[$index].reason"
+                       placeholder="Reason for visit" />
+              </mat-form-field>
+              <mat-form-field class="year-input">
+                <mat-label>Year</mat-label>
+                <input matInput type="number"
+                       [formField]="petForm.vetVisits[$index].year"
+                       placeholder="YYYY" />
+              </mat-form-field>
+              <button mat-stroked-button color="warn" type="button" (click)="removeVisit($index)">✕</button>
+            </div>
+            @let vetField = petForm.vetVisits[$index].vetName;
+            @if (vetField().invalid() && vetField().touched()) {
+              @for (err of vetField().errors(); track err.kind) {
+                <div class="error">{{ err.message }}</div>
+              }
+            }
+            @let reasonField = petForm.vetVisits[$index].reason;
+            @if (reasonField().invalid() && vetField().touched()) {
+              @for (err of reasonField().errors(); track err.kind) {
+                <div class="error">{{ err.message }}</div>
+              }
+            }
+            @let yearField = petForm.vetVisits[$index].year;
+            @if (yearField().invalid() && yearField().touched()) {
+              @for (err of yearField().errors(); track err.kind) {
+                <div class="error">{{ err.message }}</div>
+              }
+            }
+          } @empty {
+            <div class="empty">No vet visits recorded. Click "Add Visit" to start.</div>
+          }
+        </div>
+        <button mat-stroked-button type="button" (click)="addVisit()">+ Add Visit</button>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="button"
+                [disabled]="petForm().invalid()" (click)="onSubmit()">Save</button>
+        <button mat-stroked-button type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Form valid: {{ petForm().valid() }}<br />
+    Model: <pre>{{ petModel() | json }}</pre>
+  </mat-card-content>
+</mat-card>

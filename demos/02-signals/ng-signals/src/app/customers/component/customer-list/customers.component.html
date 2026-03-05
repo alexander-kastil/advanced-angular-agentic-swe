@@ -1,0 +1,6 @@
+
+@for (c of customers; track c) {
+  <div class="box row">
+    <div> {{c.name}}</div> <div> <button mat-raised-button color="accent" [routerLink]="['/customers', c.id]" [queryParams]="{ readonly: true }">Edit</button> </div>
+  </div>
+}

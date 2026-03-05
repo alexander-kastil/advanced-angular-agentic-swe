@@ -1,0 +1,17 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Observable → Signal via toSignal()</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Skills loaded synchronously from signal (no async pipe, no subscribe):
+    </p>
+    <mat-chip-set>
+      @for (skill of skills(); track skill.id) {
+        <mat-chip [highlighted]="skill.completed">{{ skill.name }}</mat-chip>
+      } @empty {
+        <mat-chip>Loading...</mat-chip>
+      }
+    </mat-chip-set>
+  </mat-card-content>
+</mat-card>

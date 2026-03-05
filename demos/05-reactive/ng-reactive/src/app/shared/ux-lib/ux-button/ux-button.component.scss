@@ -1,0 +1,10 @@
+button {
+  width: 100%;
+  margin-bottom: var(--gap-medium);
+}
+
+span {
+  @media only screen and (max-width: 960px) {
+    display: none;
+  }
+}

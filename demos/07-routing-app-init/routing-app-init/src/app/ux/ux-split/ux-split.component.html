@@ -1,0 +1,21 @@
+<div
+  gdGap="0.5rem"
+  gdAreas="title title | main toolbar"
+  gdColumns="800px auto"
+  gdRows="60px auto"
+  class="container"
+>
+  <div gdArea="title" class="split-title">
+    <mat-toolbar mat-dialog-title>
+      <mat-toolbar-row>
+        <ng-content select=".title"></ng-content>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+  <div gdArea="main" class="split-main">
+    <ng-content select=".main"></ng-content>
+  </div>
+  <div gdArea="toolbar" class="split-sidebar">
+    <ng-content select=".sidebar"></ng-content>
+  </div>
+</div>

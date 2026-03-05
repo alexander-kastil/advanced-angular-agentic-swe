@@ -1,0 +1,31 @@
+<app-markdown-renderer [md]="'can-match-guard'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>canMatch Guard Demo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <h3>canMatch vs canActivate</h3>
+    <ul>
+      <li>
+        <strong>canMatch:</strong> Prevents lazy module from loading at all if
+        guard fails. Ideal for role-based features to avoid downloading code
+        users can't access.
+      </li>
+      <li>
+        <strong>canActivate:</strong> Loads module but prevents route
+        activation. Module code is downloaded even if access is denied.
+      </li>
+    </ul>
+
+    <p>
+      <strong>Authentication Status:</strong>
+      {{ isAuthenticated() ? "Authenticated" : "Not Authenticated" }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="tryNavigation()">
+      Try Protected Navigation
+    </button>
+  </mat-card-actions>
+</mat-card>

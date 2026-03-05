@@ -1,0 +1,7 @@
+<div class="container">
+  <h2>{{ (item | async)?.name }}</h2>
+  <div class="json">
+    {{ item | async | json }}
+  </div>
+  <button mat-raised-button [routerLink]="['']">Go back</button>
+</div>

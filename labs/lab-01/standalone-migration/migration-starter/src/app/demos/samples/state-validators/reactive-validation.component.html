@@ -1,0 +1,126 @@
+<app-markdown-renderer [md]="'reactive-validation'"></app-markdown-renderer>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>
+      Form State & Validators
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      [formGroup]="personForm"
+      (ngSubmit)="savePerson(personForm)"
+      role="form"
+      novalidate
+      column
+      >
+      <input matInput type="text" formControlName="id"  class="hidden"/>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" formControlName="name" />
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" placeholder="Lastname" formControlName="lastname" />
+        @if (personForm.controls.lastname.hasError('required')) {
+          <mat-error>
+            Lastname is required
+          </mat-error>
+        }
+        @if (personForm.controls.lastname.hasError('nameError')) {
+          <mat-error>
+            This name is not allowed
+          </mat-error>
+        }
+        @if (personForm.controls.lastname.hasError('lengthError')) {
+          <mat-error>
+            Length must be between 4 and 15 characters
+          </mat-error>
+        }
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" placeholder="Age" formControlName="age" />
+        @if (personForm.controls.lastname.hasError('lengthError')) {
+          <mat-error>
+            Person must be between 18 and 99
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Email"
+          formControlName="email"
+          />
+          @if (
+            personForm.controls['email'].errors != undefined &&
+            personForm.controls['email'].errors['mailexists']
+            ) {
+            <mat-error
+              >Sorry this mail is already registered</mat-error
+              >
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select placeholder="Gender" formControlName="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-radio-group
+          aria-label="Select an option"
+          name="wealth"
+          formControlName="wealth"
+          >
+          <mat-label>Wealth:</mat-label>
+          @for (opt of wealthOpts; track opt) {
+            <mat-radio-button value="{{ opt }}">{{
+              opt
+            }}</mat-radio-button>
+          }
+        </mat-radio-group>
+        <button mat-raised-button color="accent" (click)="validateForm()">
+          Validate
+        </button>
+        <button mat-raised-button color="accent" type="submit" [disabled]="!this.personForm.valid">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Control State - "Name" Field</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      Name Fld is dirty: {{ personForm.controls.name.dirty }}<br />
+      Name Fld is pristine: {{ personForm.controls.name.pristine }}<br />
+      Name Fld is valid: {{ personForm.controls.name.valid }}<br />
+      Name Fld is invalid: {{ personForm.controls.name.invalid }}<br />
+      Name Fld is touched: {{ personForm.controls.name.touched }}<br />
+      Name Fld is untouched: {{ personForm.controls.name.untouched }}
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Form State</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      Form is dirty: {{ personForm.dirty }}<br />
+      Form is pristine: {{ personForm.pristine }}<br />
+      Form is valid: {{ personForm.valid }}<br />
+      Form is invalid: {{ personForm.invalid }}<br />
+      Form is touched: {{ personForm.touched }}<br />
+      Form is untouched: {{ personForm.untouched }}<br />
+    </mat-card-content>
+  </mat-card>

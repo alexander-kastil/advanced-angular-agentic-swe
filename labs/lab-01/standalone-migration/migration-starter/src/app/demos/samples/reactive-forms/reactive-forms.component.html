@@ -1,0 +1,64 @@
+<app-markdown-renderer [md]="'reactive-forms'"></app-markdown-renderer>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>
+      Reactive Form - No Builder
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form
+      [formGroup]="personForm"
+      (ngSubmit)="savePerson(personForm)"
+      novalidate
+      column
+      >
+      <input matInput type="text" formControlName="id"  class="hidden"/>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" placeholder="Last Name" formControlName="lastname" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" placeholder="Age" formControlName="age" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="email"
+          formControlName="email"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Gender</mat-label>
+          <mat-select placeholder="Gender" formControlName="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-radio-group
+          aria-label="Select an option"
+          name="wealth"
+          formControlName="wealth"
+          >
+          <mat-label>Wealth:</mat-label>
+          @for (opt of wealthOpts; track opt) {
+            <mat-radio-button value="{{ opt }}">{{
+              opt
+            }}</mat-radio-button>
+          }
+        </mat-radio-group>
+        <button mat-raised-button color="accent" type="submit">Submit</button>
+      </form>
+    </mat-card-content>
+  </mat-card>

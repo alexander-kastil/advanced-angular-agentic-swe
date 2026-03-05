@@ -1,0 +1,14 @@
+<app-markdown-renderer [md]="'route-titles'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Current Page Title</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Browser Title:</strong> {{ currentTitle() }}</p>
+    <p>
+      Navigate to different routes to see the title change. 
+      Titles are configured declaratively in route configuration.
+    </p>
+  </mat-card-content>
+</mat-card>

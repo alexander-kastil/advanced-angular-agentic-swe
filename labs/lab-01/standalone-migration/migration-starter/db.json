@@ -1,0 +1,184 @@
+{
+  "demos": [
+    {
+      "url": "control-flow",
+      "title": "Control Flow"
+    },
+    {
+      "url": "standalone",
+      "title": "Standalone Component"
+    },
+    {
+      "url": "lazy-standalone",
+      "title": "Lazy Standalone Comp."
+    },
+    {
+      "url": "standalone-bootstrap",
+      "title": "Boot Standalone Comp."
+    },
+    {
+      "url": "directives-composition",
+      "title": "Directives Composition"
+    },
+    {
+      "url": "content-projection",
+      "title": "Content Projection"
+    },
+    {
+      "url": "viewchild",
+      "title": "ViewChild / Children"
+    },
+    {
+      "url": "formcontrol",
+      "title": "FormControl"
+    },
+    {
+      "url": "reactiveforms",
+      "title": "Reactive Forms"
+    },
+    {
+      "url": "formbuilder",
+      "title": "Form Builder"
+    },
+    {
+      "url": "typedforms",
+      "title": "Typed Forms"
+    },
+    {
+      "url": "typedformsexplicit",
+      "title": "Typed Forms Explicit"
+    },
+    {
+      "url": "typednonnullable",
+      "title": "Typed NonNullable"
+    },
+    {
+      "url": "raw-value",
+      "title": "GetRawValue"
+    },
+    {
+      "url": "reactivenested",
+      "title": "Nested Objects"
+    },
+    {
+      "url": "formarray",
+      "title": "FormArray"
+    },
+    {
+      "url": "cascade",
+      "title": "Cascad Controls"
+    },
+    {
+      "url": "valuecontrol",
+      "title": "ControlValueAccessor"
+    },
+    {
+      "url": "validation-typed",
+      "title": "Validation Intro"
+    },
+    {
+      "url": "validation",
+      "title": "Form State & Validators"
+    },
+    {
+      "url": "form-errors",
+      "title": "Form Errors"
+    },
+    {
+      "url": "err-state-matcher",
+      "title": "ErrorStateMatcher"
+    },
+    {
+      "url": "container-presenter",
+      "title": "Container & Required Inputs"
+    }
+  ],
+  "skills": [
+    { "id": "123", "name": "rxjs from api", "completed": true },
+    { "id": "456", "name": "ngrx from api", "completed": false }
+  ],
+  "persons": [
+    {
+      "id": 1,
+      "name": "Cleo",
+      "lastname": "Whippet",
+      "age": 15,
+      "gender": "female",
+      "married": true,
+      "imgUrl": "/assets/images/cleo.png",
+      "email": "cleothewhippet@sighthounds.at",
+      "wealth": "rich",
+      "address": {
+        "street": "Stairway to heaven",
+        "city": "Better place",
+        "postalCode": "1000"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Soi",
+      "age": 9,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/soi.png"
+    },
+    {
+      "id": 3,
+      "name": "Giro",
+      "age": 11,
+      "gender": "male",
+      "married": false,
+      "imgUrl": "/assets/images/giro.png"
+    },
+    {
+      "id": 4,
+      "name": "Flora",
+      "age": 14,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/flora.png"
+    }
+  ],
+  "tasks": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "delectus aut autem",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "quis ut nam facilis et officia qui",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "fugiat veniam minus",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 4,
+      "title": "et porro tempora",
+      "completed": true
+    },
+    {
+      "userId": 1,
+      "id": 5,
+      "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+      "completed": false
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "label": "Demos",
+      "url": "demos"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title
+      >Request Status Pattern (RxJS BehaviorSubject)</mat-card-title
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Status: <strong>{{ status$ | async }}</strong>
+    </p>
+    <button mat-raised-button color="accent" (click)="load()">
+      Load Skills
+    </button>
+
+    @if ((status$ | async) === "loading") {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    @if ((status$ | async) === "error") {
+      <p>Error: {{ error$ | async }}</p>
+    }
+
+    @if ((status$ | async) === "success") {
+      <mat-chip-set>
+        @for (skill of data$ | async; track skill.id) {
+          <mat-chip [highlighted]="skill.completed">{{ skill.name }}</mat-chip>
+        }
+      </mat-chip-set>
+    }
+  </mat-card-content>
+</mat-card>

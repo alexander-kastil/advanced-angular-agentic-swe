@@ -1,0 +1,15 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>
+      Responsive Screen using Breakpoint Observer
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div><span>Less than 600px: </span>{{ matches | async | json }}</div>
+  </mat-card-content>
+</mat-card>
+
+<div class="divResponsive" [class]="class()">
+  The Responsive DIV that changes color on resizing
+</div>

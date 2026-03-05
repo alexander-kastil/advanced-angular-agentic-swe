@@ -1,0 +1,40 @@
+<app-markdown-renderer [md]="'signal-forms-conditional'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Conditional Fields</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form column>
+      <mat-checkbox [formField]="fields.subscribe">Subscribe to newsletter</mat-checkbox>
+
+      @if (!fields.email().hidden()) {
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="Email" [formField]="fields.email" />
+        </mat-form-field>
+      }
+
+      <mat-form-field>
+        <mat-label>Username (readonly)</mat-label>
+        <input matInput type="text" [formField]="fields.username" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Promo Code (disabled when not subscribed)</mat-label>
+        <input matInput type="text" [formField]="fields.promoCode" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Field State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    email hidden: {{ fields.email().hidden() }}<br />
+    promoCode disabled: {{ fields.promoCode().disabled() }}<br />
+    username readonly: {{ fields.username().readonly() }}<br />
+    model: {{ model() | json }}
+  </mat-card-content>
+</mat-card>

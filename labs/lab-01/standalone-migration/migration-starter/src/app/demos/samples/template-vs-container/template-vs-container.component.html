@@ -1,0 +1,24 @@
+<app-markdown-renderer [md]="'templ-content'"></app-markdown-renderer>
+
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>The current time</mat-card-title>
+    </mat-card-header>    
+    <mat-card-content>
+       {{currentTime | async}}
+    </mat-card-content>  
+</mat-card>
+
+<!-- ng-content implementation -->
+<app-expander title="expander using ng-content">    
+    <app-clock></app-clock>
+</app-expander>
+
+<!-- ng-template implementation -->
+<!-- notice local referenc #clock and it's usage as [content] in the expander -->
+<ng-template #clock>
+    <app-clock></app-clock>
+</ng-template>
+<app-expander-template title="expander using ng-template" [content]="clock">
+
+</app-expander-template>

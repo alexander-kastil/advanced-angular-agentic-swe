@@ -1,0 +1,73 @@
+<app-markdown-renderer [md]="'sf-null-values'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Null Values</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form autocomplete="off" column>
+      <mat-form-field>
+        <mat-label>Pet Name
+          @if (petForm.petName().required()) { <span class="text-danger">*</span> }
+        </mat-label>
+        <input matInput type="text" [formField]="petForm.petName" placeholder="Pet name" />
+      </mat-form-field>
+      @if (petForm.petName().invalid() && petForm.petName().touched()) {
+        @for (err of petForm.petName().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Breed
+          @if (petForm.breed().required()) { <span class="text-danger">*</span> }
+        </mat-label>
+        <input matInput type="text" [formField]="petForm.breed" placeholder="Breed" />
+      </mat-form-field>
+      @if (petForm.breed().invalid() && petForm.breed().touched()) {
+        @for (err of petForm.breed().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Notes</mat-label>
+        <input matInput type="text" [formField]="petForm.notes" placeholder="Notes about the pet" />
+      </mat-form-field>
+      @if (petForm.notes().invalid() && petForm.notes().touched()) {
+        @for (err of petForm.notes().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Weight (kg)</mat-label>
+        <input matInput type="number" [formField]="petForm.weight" placeholder="Weight" />
+      </mat-form-field>
+      @if (petForm.weight().invalid() && petForm.weight().touched()) {
+        @for (err of petForm.weight().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Adoption Date</mat-label>
+        <input matInput type="date" [formField]="petForm.adoptionDate" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Null Handling Best Practice</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li>Use strings or numbers, not nulls — except for <code>Date</code> bound to <code>&lt;input type="date"&gt;</code></li>
+      <li>If the domain model requires nullable types, define a separate domain model and form model</li>
+      <li><code>applyWhenValue</code> guards validators so they only run when the value is non-null</li>
+    </ul>
+    Form valid: {{ petForm().valid() }}<br />
+    Model: <pre>{{ petModel() | json }}</pre>
+  </mat-card-content>
+</mat-card>

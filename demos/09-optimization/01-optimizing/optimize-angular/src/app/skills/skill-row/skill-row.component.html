@@ -1,0 +1,12 @@
+<div class="skillrow">
+  <div class="name">{{ skill().name }}</div>
+  <div class="completed">completed: {{ skill().completed }}</div>
+  <div class="cmd">
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/skills', skill().id]">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+</div>

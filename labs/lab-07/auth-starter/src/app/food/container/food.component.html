@@ -1,0 +1,29 @@
+<mat-toolbar>
+  <mat-toolbar-row class="addRow">
+    <div>Items in SignalStore: {{ store.count() }}</div>
+    <div>
+      <button mat-flat-button color="primary" (click)="addFood()">
+        Add item
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="progress">
+  @if (store.loading()) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+</div>
+
+<app-food-list
+  [food]="store.food()"
+  (onFoodSelected)="selectFood($event)"
+  (onFoodDeleted)="deleteFood($event)"
+></app-food-list>
+
+@if (store.selectedFood()!=null) {
+  <app-food-edit
+    [food]="store.selectedFood()"
+    (onFoodSaved)="saveFood($event)"
+  ></app-food-edit>
+}

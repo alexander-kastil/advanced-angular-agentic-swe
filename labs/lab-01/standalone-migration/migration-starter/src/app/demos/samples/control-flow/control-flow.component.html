@@ -1,0 +1,26 @@
+<app-markdown-renderer [md]="'control-flow'"></app-markdown-renderer>
+
+<div boxed>
+  <h3>Using if</h3>
+  <div>
+    @if(fcDisplay.value){
+    <p>Display is true</p>
+    } @else {
+    <p>Display is false</p>
+    }
+  </div>
+  <div>
+    <mat-slide-toggle [formControl]="fcDisplay">Display</mat-slide-toggle>
+  </div>
+</div>
+
+@defer (when loaded) {
+<div boxed>
+  <h3>Using for</h3>
+  <div>
+    @for(dog of dogs; track $index){
+    <p>{{ dog }}</p>
+    }
+  </div>
+</div>
+}

@@ -1,0 +1,16 @@
+<app-markdown-renderer [md]="'viewchild'"></app-markdown-renderer>
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>ViewChild</mat-card-title>
+    </mat-card-header>
+    <mat-card-content >
+        <div class="row">
+            <label>Enter liters:</label>
+            <input type="number" (blur)="calculateCost()" value="10" #liters #input>
+        </div>
+        <div class="row">
+            <label>Cost:</label>
+            <input type="number" #cost #input>
+        </div>
+    </mat-card-content>
+</mat-card>

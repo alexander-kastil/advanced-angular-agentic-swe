@@ -1,0 +1,112 @@
+//mat-card
+.mat-mdc-card {
+  background-color: var(--color-fg);
+  margin-bottom: var(--gap-big);
+  padding: 0 !important;
+}
+
+.mat-mdc-card-header {
+  background-color: var(--color-primary);
+  color: var(--color-fg);
+  height: var(--toolbar-medium);
+  padding-top: 0px;
+  margin-bottom: var(--gap-medium) ;
+}
+
+.mat-mdc-card-title{
+  margin-top: var(--gap-small);
+}
+
+.mat-mdc-card-subtitle{
+  color: var(--color-fg);
+}
+
+.mat-mdc-card-content {
+  padding: var(--gap-medium);
+  margin-bottom: 0 !important;
+}
+
+.mat-mdc-card-actions {
+  padding: var(--gap-medium) !important;
+  margin-left: var(--gap-medium) !important;
+  margin-right: var(--gap-medium) !important;
+  margin-bottom: var(--gap-medium) !important;
+}
+
+//buttons
+button.mat-mdc-raised-button{
+  margin: var(--gap-small) 0;
+  :hover{
+    text-decoration: underline;
+  }
+}
+
+//mat-snackbar
+.app-snackbar{
+  background-color: var(--color-primary);
+  color: var(--color-fg);
+  position: relative;
+  top: -1rem;
+}
+
+//mat-dialog
+mat-dialog-container {
+  .form-container {
+    padding: 0 10px;
+    .mat-form-field-flex:first-child {
+      padding-top: 10px;
+    }
+  }
+}
+
+//mat-expansion-panel
+mat-expansion-panel {
+  margin-bottom: 0.5rem;
+  border-radius: 0px !important;
+}
+
+mat-expansion-panel-header:hover{
+  background-color: var(--color-primary);
+}
+
+mat-expansion-panel-header {
+  height: var(--toolbar-medium);
+  background-color: var(--color-primary) !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  height: var(--toolbar-medium);
+  margin-bottom: 0.5rem;
+}
+
+.mat-expansion-panel-header-title{
+  color: var(--color-fg);
+  font-size: 20px;
+}
+
+.mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+  color: var(--color-fg);
+}
+
+//mat-table
+mat-header-row {
+  background-color: var(--color-primary);
+  color: var(--color-fg);
+}
+
+// list
+.mat-nav-list .mat-mdc-list-item:hover,
+.mat-nav-list .mat-list-item:focus {
+  background: var(--color-bg);
+}
+
+mat-list-item {
+  border-bottom: 1px solid var(--color-bg);
+  border-top: 1px solid var(--color-bg);
+}
+
+//mat-sidenav
+.mat-drawer-container {
+  background-color: var(--color-fg);
+  color: var(--color-darkfont);
+}

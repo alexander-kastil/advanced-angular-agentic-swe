@@ -1,0 +1,38 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Mock Markdown Editor</mat-card-title>
+  </mat-card-header>
+  <mat-card-content column>
+    @if (!editorEdit) {
+      <app-comments-list
+        [Comments]="comments | async"
+        (onCommentEdit)="editComment($event)"
+        (onCommentDelete)="deleteComment($event)"
+      ></app-comments-list>
+    }
+    @if (editorEdit && current != null) {
+      <app-comment-edit [comment]="current">
+      </app-comment-edit>
+    }
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    @if (editorEdit) {
+      <button mat-raised-button (click)="saveComment()" color="primary">
+        Save
+      </button>
+      <button
+        mat-raised-button
+        (click)="editorEdit = !editorEdit"
+        color="primary"
+        >
+        Cancel
+      </button>
+    }
+    @if (!editorEdit) {
+      <button mat-raised-button (click)="addComment()" color="primary">
+        Add
+      </button>
+    }
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,47 @@
+<app-markdown-renderer [md]="'builder'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - No Builder Needed</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form role="form" novalidate column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" [formField]="personForm.name" />
+      </mat-form-field>
+      @if (personForm.name().touched() && personForm.name().invalid()) {
+        @for (err of personForm.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input matInput type="number" placeholder="Age" [formField]="personForm.age" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input matInput type="text" placeholder="Email" [formField]="personForm.email" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select placeholder="Gender" [formField]="personForm.gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="diverse">Diverse</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-radio-group aria-label="Wealth" name="wealthBuilder" [formField]="personForm.wealth">
+        <mat-label>Wealth:</mat-label>
+        @for (opt of wealthOpts; track opt) {
+          <mat-radio-button [value]="opt">{{ opt }}</mat-radio-button>
+        }
+      </mat-radio-group>
+
+      <button mat-raised-button color="accent" type="button" (click)="savePerson()">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>

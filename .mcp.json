@@ -1,0 +1,24 @@
+{
+    "mcpServers": {
+        "playwright": {
+            "command": "npx",
+            "args": ["@playwright/mcp@latest", "--vision"]
+        },
+        "chrome-devtools": {
+            "command": "npx",
+            "args": ["-y", "chrome-devtools-mcp@latest"]
+        },
+        "angular-cli": {
+            "command": "npx",
+            "args": ["-y", "@angular/cli", "mcp"]
+        },
+        "microsoft-learn": {
+            "type": "sse",
+            "url": "https://learn.microsoft.com/api/mcp"
+        },
+        "figma": {
+            "type": "sse",
+            "url": "https://mcp.figma.com/mcp"
+        }
+    }
+}

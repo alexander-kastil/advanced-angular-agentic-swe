@@ -1,0 +1,69 @@
+<app-markdown-renderer [md]="'form-control'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Form Fields</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Name"
+          [formField]="fields.name"
+        />
+      </mat-form-field>
+      @if (fields.name().touched() && fields.name().invalid()) {
+        @for (err of fields.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+      <mat-form-field>
+        <mat-label>Postal</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Postal"
+          [formField]="fields.postal"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="City"
+          [formField]="fields.city"
+        />
+      </mat-form-field>
+      @if (fields.city().touched() && fields.city().invalid()) {
+        @for (err of fields.city().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="logName()" color="accent">
+      Log Name
+    </button>
+    <button mat-raised-button (click)="updateName()" color="accent">
+      Update Name
+    </button>
+    <button mat-raised-button color="accent">Save</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Field State - "Name" Field</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Name is dirty: {{ fields.name().dirty() }}<br />
+    Name is valid: {{ fields.name().valid() }}<br />
+    Name is invalid: {{ fields.name().invalid() }}<br />
+    Name is touched: {{ fields.name().touched() }}<br />
+  </mat-card-content>
+</mat-card>

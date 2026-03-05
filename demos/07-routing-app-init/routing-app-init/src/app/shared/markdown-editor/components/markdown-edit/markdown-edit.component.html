@@ -1,0 +1,17 @@
+<div column>
+  <mat-form-field
+    ><mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="comment().title" />
+  </mat-form-field>
+  <mat-form-field
+    ><mat-label>Comment</mat-label
+    ><textarea
+      matInput
+      name=""
+      id=""
+      cols="30"
+      rows="8"
+      [(ngModel)]="comment().comment"
+    ></textarea>
+  </mat-form-field>
+</div>

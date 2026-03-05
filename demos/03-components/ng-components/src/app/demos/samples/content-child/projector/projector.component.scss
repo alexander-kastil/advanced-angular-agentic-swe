@@ -1,0 +1,14 @@
+.expander{
+    background-color: var(--color-primary);
+    color: var(--color-fg);
+    padding: var(--gap-small);
+    margin: var(--gap-small) 0;
+    cursor: pointer;
+}
+
+.projection{
+    background-color: var(--color-accent);
+    color: black;
+    padding: var(--gap-small);
+    margin: var(--gap-small) 0;
+}

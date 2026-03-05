@@ -1,0 +1,7 @@
+<div class="box">
+  Customer ID: {{ id() }} - Param readonly: {{ readonly() }}
+</div>
+
+<div class="box">
+  {{ customer | async| json}}
+</div>

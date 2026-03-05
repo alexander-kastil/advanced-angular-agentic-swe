@@ -1,0 +1,46 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title
+      >interval() — emits every second, stops after 10</mat-card-title
+    >
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="accent" (click)="startInterval()">
+      Start interval(1000)
+    </button>
+    <p>
+      Tick: <strong>{{ ticker() }}</strong>
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>timer() — fires once after delay</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="primary" (click)="startTimer()">
+      Start timer(2000)
+    </button>
+    @if (timerFired()) {
+      <p><strong>Timer fired!</strong></p>
+    } @else {
+      <p>Waiting...</p>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>delay() — postpones all emissions</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button (click)="useDelay()">Run delay(1000)</button>
+    <p>
+      Last delayed value: <strong>{{ delayedValue() ?? "none" }}</strong>
+    </p>
+    @for (entry of timerLog$ | async; track $index) {
+      <div>{{ entry }}</div>
+    }
+  </mat-card-content>
+</mat-card>

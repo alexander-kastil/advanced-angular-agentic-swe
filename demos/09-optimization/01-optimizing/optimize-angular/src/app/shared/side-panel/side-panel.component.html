@@ -1,0 +1,13 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row >
+    <button mat-mini-fab (click)="toogleSideNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="showUpload()">
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="toggleEditor()">
+      <mat-icon>{{icon}}</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

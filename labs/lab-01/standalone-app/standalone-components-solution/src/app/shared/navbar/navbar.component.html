@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    @for (item of items | async; track item) {
+      <div [routerLink]="[item.url]">
+        {{ item.title }}
+      </div>
+    }
+  </mat-toolbar-row>
+</mat-toolbar>
+

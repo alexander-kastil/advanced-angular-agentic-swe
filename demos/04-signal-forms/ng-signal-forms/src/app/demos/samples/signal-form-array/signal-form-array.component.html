@@ -1,0 +1,63 @@
+<app-markdown-renderer [md]="'signal-forms'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Skills Sheet - Signal Forms Array</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          [formField]="skillForm.name"
+          placeholder="Enter Name"
+        />
+      </mat-form-field>
+
+      @if (skillForm.name().value()) {
+        <div column>
+          <h6>Add your skills:</h6>
+          @for (item of skillForm.skills; track $index; let i = $index) {
+            <div class="skill-row">
+              <mat-form-field>
+                <mat-label>Skill</mat-label>
+                <input
+                  matInput
+                  [formField]="item.skill"
+                  placeholder="Skill Name"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Years</mat-label>
+                <input matInput [formField]="item.years" placeholder="Years" />
+              </mat-form-field>
+              <button mat-raised-button (click)="removeSkill(i)" color="warn">
+                Remove
+              </button>
+            </div>
+          }
+          <div class="skill-row actions">
+            <button
+              mat-raised-button
+              (click)="addSkill()"
+              [disabled]="checkArrayValid()"
+              color="primary"
+            >
+              Add Skill
+            </button>
+            <button
+              mat-raised-button
+              (click)="saveForm()"
+              [disabled]="checkArrayValid()"
+              color="primary"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>

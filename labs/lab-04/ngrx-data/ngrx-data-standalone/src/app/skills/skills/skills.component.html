@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="right">
+    <button (click)="addSkill()">Add</button>
+  </div>
+  @for (sk of skills$ | async; track sk) {
+  <div>
+    <div class="row">
+      <div class="label">{{ sk.name }}</div>
+      <button (click)="deleteSkill(sk)">Delete</button>
+    </div>
+  </div>
+  }
+</div>

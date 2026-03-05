@@ -1,0 +1,16 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-medium);
+  padding-top: var(--gap-medium);
+  border-bottom: 1px solid;
+}
+
+.title{
+  flex-grow: 5;
+}
+
+.cmd{
+  flex: 1;
+  text-align: right;
+}

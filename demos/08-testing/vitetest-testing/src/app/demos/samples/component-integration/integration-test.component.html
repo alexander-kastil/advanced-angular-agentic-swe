@@ -1,0 +1,12 @@
+<app-customers-table
+  [customers]="customers()"
+  [loading]="loading()"
+  (edit)="onEdit($event)"
+/>
+
+@if (selectedCustomer(); as customer) {
+  <app-customer-edit
+    [customer]="customer"
+    (cancel)="onCancel()"
+  />
+}

@@ -1,0 +1,9 @@
+@if (currentUser | async; as user) {
+  <div class="user">
+    {{ user?.email }}
+  </div>  
+} @else {
+  <div class="user">
+    Not logged in
+  </div>
+}

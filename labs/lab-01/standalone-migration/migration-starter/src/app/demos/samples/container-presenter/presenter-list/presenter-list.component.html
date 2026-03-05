@@ -1,0 +1,33 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>
+      Personlist
+    </mat-card-title>
+  </mat-card-header>
+  <table class="table table-striped table-hover">
+    <colgroup>
+    <col style="width:60%">
+    <col style="width:15%">
+    <col style="width:15%">
+    <col style="width:10%">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="align-left">Name</th>
+      <th class="align-left">Gender</th>
+      <th class="align-left">Age</th>
+      <th >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (p of persons; track p) {
+      <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.gender }}</td>
+        <td>{{ p.age }}</td>
+        <td class="align-right"><a (click)="selectPerson(p)">Select</a></td>
+      </tr>
+    }
+  </tbody>
+</table>
+</mat-card>

@@ -1,0 +1,49 @@
+<app-markdown-renderer [md]="'signal-forms-submit'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - submit()</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form column>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Email" [formField]="loginForm.email" />
+      </mat-form-field>
+      @if (loginForm.email().touched() && loginForm.email().invalid()) {
+        @for (err of loginForm.email().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput type="password" placeholder="Password" [formField]="loginForm.password" />
+      </mat-form-field>
+      @if (loginForm.password().touched() && loginForm.password().invalid()) {
+        @for (err of loginForm.password().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <button mat-raised-button color="primary" type="button" (click)="login()">Login</button>
+    </form>
+
+    @if (submitted()) {
+      <p>Submitted successfully!</p>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>How submit() works</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li>Marks all fields as <strong>touched</strong> to reveal validation errors</li>
+      <li>Calls the callback <strong>only if the form is valid</strong></li>
+      <li>No need to check <code>loginForm().valid()</code> manually</li>
+    </ul>
+    Form valid: {{ loginForm().valid() }} | Touched: {{ loginForm().touched() }}
+  </mat-card-content>
+</mat-card>

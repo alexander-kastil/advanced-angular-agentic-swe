@@ -1,0 +1,65 @@
+<div boxed>
+  <h3>Resource API Demo - Reactive Data Loading</h3>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Pet Details (ID: {{ petId() }})</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      @if (petResource.isLoading()) {
+        <div style="text-align: center; padding: 20px">
+          <mat-progress-spinner mode="indeterminate" diameter="40" />
+          <p>Loading pet data...</p>
+        </div>
+      }
+
+      @if (petResource.error(); as error) {
+        <div
+          style="
+            background: #ffebee;
+            border-left: 4px solid #c62828;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 4px;
+          "
+        >
+          <strong>Error:</strong> {{ error }}
+        </div>
+      }
+
+      @if (petResource.value(); as pet) {
+        <div style="padding: 16px; background: #f5f5f5; border-radius: 4px">
+          <h4>{{ pet.name }}</h4>
+          <p><strong>Type:</strong> {{ pet.type }}</p>
+          <p><strong>Breed:</strong> {{ pet.breed }}</p>
+          <p><strong>Age:</strong> {{ pet.age }} years</p>
+          <p><strong>Owner:</strong> {{ pet.owner }}</p>
+          <pre
+            style="
+              background: white;
+              padding: 12px;
+              border-radius: 4px;
+              overflow: auto;
+            "
+            >{{ pet | json }}</pre
+          >
+        </div>
+      }
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button
+        mat-stroked-button
+        [disabled]="petId() === 1"
+        (click)="loadPrevious()"
+      >
+        ← Previous
+      </button>
+      <button mat-stroked-button (click)="loadNext()">Next →</button>
+      <button mat-raised-button color="accent" (click)="reload()">
+        Reload
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

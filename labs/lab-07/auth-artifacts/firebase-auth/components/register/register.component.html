@@ -1,0 +1,65 @@
+<form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm)">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Register</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Email Address"
+          id="username"
+          formControlName="email"
+          />
+          @if (registerForm.get('email')?.errors != undefined) {
+            <mat-error
+              >Invalid e-mail
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <div formGroupName="passwords" fxLayout="column">
+          <mat-form-field>
+            <input
+              type="password"
+              matInput
+              id="password"
+              placeholder="Password"
+              formControlName="password"
+              />
+              @if (registerForm.get('passwords.password')?.errors != undefined) {
+                <mat-error
+                  >Min length 6
+                </mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                type="password"
+                matInput
+                placeholder="Re-Enter Password"
+                formControlName="passwordRepeat"
+                />
+              </mat-form-field>
+              @if (
+                registerForm.get(['passwords', 'passwordRepeat'])?.touched &&
+                registerForm.get(['passwords', 'password'])?.value !=
+                registerForm.get(['passwords', 'passwordRepeat'])?.value &&
+                registerForm.get(['passwords', 'passwordRepeat'])?.value != null
+                ) {
+                <mat-error
+                  >Password does not match
+                </mat-error>
+              }
+            </div>
+          </mat-card-content>
+          <mat-card-actions class="cmdItems">
+            <button mat-raised-button mat-dialog-close color="primary">CANCEL</button>
+            <button mat-raised-button mat-dialog-close type="submit" [disabled]="registerForm.invalid" color="primary">
+              Register
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </form>

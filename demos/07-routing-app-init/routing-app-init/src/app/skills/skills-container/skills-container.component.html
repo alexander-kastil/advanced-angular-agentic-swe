@@ -1,0 +1,17 @@
+<mat-toolbar color="accent">
+  <mat-toolbar-row>
+    <div class="title">SPA Skills</div>
+    <div>
+      <button mat-raised-button (click)="addItem()" color="primary">Add</button>
+      <mat-slide-toggle [formControl]="fcToggle" color="primary"
+        >ShowAll</mat-slide-toggle>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+@for (sk of skills() ; track sk) {
+  <app-skill-row [skill]="sk"
+    (itemDeleted)="deleteItem($event)"
+    (itemCompleted)="toggleItemComplete($event)"
+   />
+}
+<app-skills-kpi />

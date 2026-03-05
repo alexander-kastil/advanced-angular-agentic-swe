@@ -1,0 +1,194 @@
+{
+  "demos": [
+    {
+      "url": "app-init",
+      "title": "App Initialization",
+      "teaches": "Configure application startup behavior using APP_INITIALIZER tokens. Run setup logic before the application bootstraps.",
+      "topic": "App Initialization",
+      "sortOrder": 1,
+      "id": 1
+    },
+    {
+      "url": "inject",
+      "title": "DI: Inject & Provide",
+      "teaches": "Use the inject() function to retrieve registered dependencies in a component. Learn how to provide custom services and configure injection tokens.",
+      "topic": "App Initialization",
+      "sortOrder": 2,
+      "id": 63
+    },
+    {
+      "url": "global-errors",
+      "title": "Global Error Handler",
+      "teaches": "Implement a global error handler using ErrorHandler token. Catch and log all application errors in one place.",
+      "topic": "Error Handling",
+      "sortOrder": 3,
+      "id": 9
+    },
+    {
+      "url": "http-errors",
+      "title": "HTTP Error Handler",
+      "teaches": "Create interceptors that catch and transform HTTP errors. Implement centralized error recovery strategies.",
+      "topic": "Error Handling",
+      "sortOrder": 4,
+      "id": 13
+    },
+    {
+      "url": "multi-interceptor",
+      "title": "HTTP Interceptors",
+      "teaches": "Create multiple HTTP interceptors to add cross-cutting concerns like auth headers, logging, and error handling. Chain interceptors for request/response transformation.",
+      "topic": "Error Handling",
+      "sortOrder": 5,
+      "id": 8
+    },
+    {
+      "url": "router-bindings",
+      "title": "Component Input Bindings",
+      "teaches": "Bind route parameters directly to component inputs using bindToComponentInputs strategy. Simplify parameter handling with signal-based inputs.",
+      "topic": "Routing",
+      "sortOrder": 6,
+      "id": 44
+    },
+    {
+      "url": "ngrx-routing",
+      "title": "NgRx Router State",
+      "teaches": "Access router state through NgRx store. Manage navigation history and route parameters in application state.",
+      "topic": "Routing",
+      "sortOrder": 7,
+      "id": 2
+    },
+    {
+      "url": "route-titles",
+      "title": "Route Titles",
+      "teaches": "Set dynamic page titles for each route using the title property in route configuration. Update browser tab titles automatically.",
+      "topic": "Routing",
+      "sortOrder": 8,
+      "id": 45
+    },
+    {
+      "url": "router-animations",
+      "title": "Router Animations",
+      "teaches": "Add smooth transitions between route components using Angular animations. Enhance navigation UX with view enter/exit effects.",
+      "topic": "Routing",
+      "sortOrder": 9,
+      "id": 100
+    },
+    {
+      "url": "view-transitions",
+      "title": "View Transitions",
+      "teaches": "Leverage native View Transitions API for seamless animated navigation. Create shared element animations across route changes.",
+      "topic": "Routing",
+      "sortOrder": 10,
+      "id": 99
+    },
+    {
+      "url": "can-match-guard",
+      "title": "CanMatch Guard",
+      "teaches": "Use canMatch guards to conditionally load routes based on runtime conditions. Prevent route initialization before matching.",
+      "topic": "Routing",
+      "sortOrder": 11,
+      "id": 48
+    },
+    {
+      "url": "multi-guard",
+      "title": "Route Guards",
+      "teaches": "Stack multiple route guards to enforce authorization policies. Combine authentication and role-based access control.",
+      "topic": "Routing",
+      "sortOrder": 12,
+      "id": 7
+    },
+    {
+      "url": "preloading-strategy",
+      "title": "Preloading Strategy",
+      "teaches": "Implement custom preloading strategies to eager-load routes in the background. Optimize performance with selective preloading.",
+      "topic": "Routing",
+      "sortOrder": 13,
+      "id": 46
+    },
+    {
+      "url": "http-resource",
+      "title": "HTTP Resource",
+      "teaches": "Fetch data declaratively using the resource() function with signal-based reactive requests. Manage loading and error states automatically.",
+      "topic": "Routing",
+      "sortOrder": 14,
+      "id": 47
+    },
+    {
+      "url": "httpresource-resolver",
+      "title": "HTTP Resource Route Resolver",
+      "teaches": "Preload route data using ResolveFn with HTTP requests. Deliver type-safe data to components via signal-based inputs without managing subscriptions.",
+      "topic": "Routing",
+      "sortOrder": 15,
+      "id": 314
+    },
+    {
+      "url": "route-resolvers-signals",
+      "title": "Route Resolvers with Signals",
+      "teaches": "Preload route data using ResolveFn with signals. Bind resolved data directly to component signal inputs for type-safe, auto-unwrapped data delivery.",
+      "topic": "Routing",
+      "sortOrder": 16,
+      "id": 312
+    },
+    {
+      "url": "query-params-signals",
+      "title": "Query Parameters with Signals",
+      "teaches": "Manage query parameters reactively using signals. Synchronize component state with URL search params for bookmarkable, shareable filtered views.",
+      "topic": "Routing",
+      "sortOrder": 17,
+      "id": 313
+    }
+  ],
+  "skills": [
+    {
+      "id": 1,
+      "name": "Node.js",
+      "hours": 3,
+      "completed": false
+    },
+    {
+      "id": 2,
+      "name": "TypeScript",
+      "hours": 4,
+      "completed": false
+    },
+    {
+      "id": 3,
+      "name": "JavaScript",
+      "hours": 10,
+      "completed": false
+    },
+    {
+      "id": 4,
+      "name": "Angular",
+      "hours": 20,
+      "completed": false
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "John"
+    },
+    {
+      "id": 2,
+      "name": "Bernie"
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "label": "Demos",
+      "url": "demos"
+    },
+    {
+      "label": "Skills",
+      "url": "skills"
+    },
+    {
+      "label": "Customers",
+      "url": "customers"
+    }
+  ]
+}

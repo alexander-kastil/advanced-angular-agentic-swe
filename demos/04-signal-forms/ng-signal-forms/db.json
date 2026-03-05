@@ -1,0 +1,285 @@
+{
+  "demos": [
+    {
+      "url": "form-control",
+      "title": "Fields & Values",
+      "teaches": "Create form fields with form() and FormField. Read values with .value() and update them imperatively with .value.set().",
+      "sortOrder": 1,
+      "topic": "Signal Form Basics"
+    },
+    {
+      "url": "control-events",
+      "title": "Field State & Events",
+      "teaches": "React to field-level state signals like touched, dirty, and errors. Use these signals in the template for dynamic UI feedback.",
+      "sortOrder": 2,
+      "topic": "Signal Form Basics"
+    },
+    {
+      "url": "signal-forms-submit",
+      "title": "Form Submission",
+      "teaches": "Use submit() to mark all fields as touched and only invoke the callback when the form is valid. Ideal pattern for login forms.",
+      "sortOrder": 3,
+      "topic": "Signal Form Basics"
+    },
+    {
+      "url": "reactive-nested",
+      "title": "Nested Objects",
+      "teaches": "Bind nested model objects like address with sub-properties (street, city, postalCode). Access nested fields via dot notation in the schema.",
+      "sortOrder": 4,
+      "topic": "Signal Form Basics"
+    },
+    {
+      "url": "form-array",
+      "title": "Form Arrays",
+      "teaches": "Work with arrays of objects using applyEach to validate each item. Add and remove items dynamically from the form array.",
+      "sortOrder": 5,
+      "topic": "Signal Form Basics"
+    },
+    {
+      "url": "validation-typed",
+      "title": "Validation Basics",
+      "teaches": "Learn built-in validators (required, minLength, email) and introduce cross-field validation with validate() and valueOf(). Implement password confirmation matching.",
+      "sortOrder": 10,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "form-builder",
+      "title": "Model & Custom Rules",
+      "teaches": "Build forms with custom validation rules using validate() and regex patterns. Observe reactive model updates pushed via setTimeout.",
+      "sortOrder": 11,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "signal-form-arrays-objects",
+      "title": "Arrays with Schema",
+      "teaches": "Validate arrays of nested objects using reusable schema() definitions. Combine with conditional validation using the when option on required.",
+      "sortOrder": 12,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "signal-form-null-values",
+      "title": "Nullable Fields",
+      "teaches": "Handle nullable and NaN model properties (string | null, number | null). Use applyWhenValue() to validate only when a value is non-null.",
+      "sortOrder": 13,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "validation",
+      "title": "Async Validators",
+      "teaches": "Combine sync validators with async validation using validateAsync() and rxResource for server-side uniqueness checks.",
+      "sortOrder": 14,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "signal-form-validate",
+      "title": "Cross-Field Rules",
+      "teaches": "Write custom cross-field validation using validate() with ctx.valueOf() to read sibling fields. Enforce rules like 'provide email or phone'.",
+      "sortOrder": 15,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "signal-form-when",
+      "title": "Conditional Validators",
+      "teaches": "Activate validators conditionally using the when option on required() and applyWhen(). Validators toggle based on other field values.",
+      "sortOrder": 16,
+      "topic": "Signal Form Validation"
+    },
+    {
+      "url": "form-errors",
+      "title": "Error Display",
+      "teaches": "Aggregate and display errors across multiple fields using computed() over field.errors(). Combine minLength, maxLength, and custom validators.",
+      "sortOrder": 20,
+      "topic": "Signal Form Error Handling"
+    },
+    {
+      "url": "err-state-matcher",
+      "title": "ErrorStateMatcher",
+      "teaches": "Customize when errors appear using ErrorStateMatcher with traditional Reactive Forms. Demonstrates cross-field password validation with updateOn blur.",
+      "sortOrder": 21,
+      "topic": "Signal Form Error Handling"
+    },
+    {
+      "url": "signal-forms-conditional",
+      "title": "Conditional Fields",
+      "teaches": "Control field visibility and interactivity with hidden(), disabled(), and readonly(). Toggle field states based on other field values.",
+      "sortOrder": 30,
+      "topic": "Signal Form Advanced"
+    },
+    {
+      "url": "cascade",
+      "title": "Cascading Dropdowns",
+      "teaches": "Build dependent dropdown controls where selecting a category filters the available values in a second dropdown. Uses form arrays with applyEach.",
+      "sortOrder": 31,
+      "topic": "Signal Form Advanced"
+    },
+    {
+      "url": "signal-forms-pets",
+      "title": "Pets CRUD",
+      "teaches": "Complete CRUD workflow: list, select, edit, and create pets from a service. Tracks model changes via effect() into a change log.",
+      "sortOrder": 32,
+      "topic": "Signal Form Advanced"
+    }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "name": "Soi",
+      "age": 9,
+      "type": "dog",
+      "breed": "Whippet",
+      "owner": "Alex"
+    },
+    {
+      "id": 2,
+      "name": "Luna",
+      "age": 3,
+      "type": "cat",
+      "breed": "Siamese",
+      "owner": "Andreas"
+    },
+    {
+      "id": 3,
+      "name": "Giro",
+      "age": 11,
+      "type": "dog",
+      "breed": "Galgo Espanol",
+      "owner": "Alex"
+    },
+    {
+      "id": 4,
+      "name": "Milo",
+      "age": 2,
+      "type": "cat",
+      "breed": "Maine Coon",
+      "owner": "Andreas"
+    },
+    {
+      "id": 5,
+      "name": "Flora",
+      "age": 14,
+      "type": "dog",
+      "breed": "Greyhound",
+      "owner": "Alex"
+    },
+    {
+      "id": 6,
+      "name": "Simba",
+      "age": 1,
+      "type": "cat",
+      "breed": "Bengal",
+      "owner": "Andreas"
+    },
+    {
+      "id": 7,
+      "name": "Cleo",
+      "age": 15,
+      "type": "dog",
+      "breed": "Saluki",
+      "owner": "Alex"
+    },
+    {
+      "id": 8,
+      "name": "Nala",
+      "age": 6,
+      "type": "cat",
+      "breed": "Persian",
+      "owner": "Andreas"
+    }
+  ],
+  "skills": [
+    {
+      "id": "123",
+      "name": "rxjs from api",
+      "completed": true
+    },
+    {
+      "id": "456",
+      "name": "ngrx from api",
+      "completed": false
+    }
+  ],
+  "persons": [
+    {
+      "id": "1",
+      "name": "Cleo",
+      "lastname": "Whippet",
+      "age": 15,
+      "gender": "female",
+      "married": true,
+      "imgUrl": "/assets/images/cleo.png",
+      "email": "cleothewhippet@integrations.at",
+      "wealth": "rich",
+      "address": {
+        "street": "Stairway to heaven",
+        "city": "Better place",
+        "postalCode": "1000"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Soi",
+      "age": 9,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/soi.png"
+    },
+    {
+      "id": "3",
+      "name": "Giro",
+      "age": 11,
+      "gender": "male",
+      "married": false,
+      "imgUrl": "/assets/images/giro.png"
+    },
+    {
+      "id": "4",
+      "name": "Flora",
+      "age": 14,
+      "gender": "female",
+      "married": false,
+      "imgUrl": "/assets/images/flora.png"
+    }
+  ],
+  "tasks": [
+    {
+      "userId": 1,
+      "id": 1,
+      "title": "delectus aut autem",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 2,
+      "title": "quis ut nam facilis et officia qui",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 3,
+      "title": "fugiat veniam minus",
+      "completed": false
+    },
+    {
+      "userId": 1,
+      "id": 4,
+      "title": "et porro tempora",
+      "completed": true
+    },
+    {
+      "userId": 1,
+      "id": 5,
+      "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+      "completed": false
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "label": "Demos",
+      "url": "demos"
+    }
+  ]
+}

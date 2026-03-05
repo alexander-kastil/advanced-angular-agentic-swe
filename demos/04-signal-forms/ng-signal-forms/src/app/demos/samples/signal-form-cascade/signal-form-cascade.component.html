@@ -1,0 +1,73 @@
+<app-markdown-renderer [md]="'cascade'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Signal Forms - Cascade Controls</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <h3>Profile</h3>
+      <div>
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="First Name"
+            [formField]="profileForm.firstName"
+          />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Last Name"
+            [formField]="profileForm.lastName"
+          />
+        </mat-form-field>
+      </div>
+
+      @for (item of profileForm.skills; track $index; let i = $index) {
+        <div border>
+          <h3>Skill {{ i + 1 }}:</h3>
+          <div>
+            <mat-form-field>
+              <mat-label>Select a Criteria</mat-label>
+              <mat-select [formField]="item.techType">
+                <mat-option value="" disabled>Select a Criteria</mat-option>
+                @for (select of selectValues; track select) {
+                  <mat-option [value]="select.type">{{
+                    select.type
+                  }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Select an Option</mat-label>
+              <mat-select [formField]="item.techValues">
+                <mat-option value="" disabled>Select an Option</mat-option>
+                @for (
+                  techType of getCriteria(item.techType().value());
+                  track techType
+                ) {
+                  <mat-option [value]="techType">{{ techType }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      }
+
+      <div class="cmdItems">
+        <button mat-raised-button (click)="addSkill()" color="primary">
+          Add Skill
+        </button>
+        <button mat-raised-button (click)="saveForm()" color="primary">
+          Save
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

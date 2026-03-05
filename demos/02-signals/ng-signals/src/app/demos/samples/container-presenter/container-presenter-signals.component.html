@@ -1,0 +1,11 @@
+<app-person-list-signals
+  [persons]="personsResource.value()"
+  (personSelected)="onPersonSelected($event)"
+/>
+
+@if (current()) {
+  <app-person-edit-signals
+    [person]="current()"
+    (onSavePerson)="onPersonSaved($event)"
+  />
+}

@@ -1,0 +1,110 @@
+<div class="demo-container">
+  <div class="demo-section">
+    <h3>Arrow Functions in Template Expressions (v21.2)</h3>
+    <p>Write function logic directly in templates without wrapper methods:</p>
+
+    <div class="example">
+      <p>
+        Current count: <strong>{{ count() }}</strong>
+      </p>
+      <p>
+        Multiplier: <strong>{{ multiplier() }}</strong>
+      </p>
+      <p>
+        Doubled: <strong>{{ count() * multiplier() }}</strong>
+      </p>
+
+      <button (click)="count.update(n => n + 1)">+1</button>
+      <button (click)="count.update(n => n - 1)">-1</button>
+      <button (click)="count.update(n => n * 2)">× 2</button>
+      <button (click)="count.set(0)">Reset</button>
+
+      <p class="code-example">
+        <code>(click)="count.update(n => n + 1)"</code> - Arrow function in
+        click handler
+      </p>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h3>Spread Syntax in Templates (v21.1)</h3>
+    <p>Use spread operator with objects and arrays in template expressions:</p>
+
+    <div class="example">
+      <div class="product-list">
+        <h4>Original Products:</h4>
+        @for (product of products(); track product.id) {
+          <div class="product-item">
+            <span>{{ product.name }}</span> - ${{ product.price }} (qty:
+            {{ product.quantity }})
+          </div>
+        }
+
+        <h4>Spread Example - Apply 10% Discount:</h4>
+        @for (product of applyDiscount(products(), 10); track product.id) {
+          <div class="product-item discounted">
+            <span>{{ product.name }}</span> - ${{
+              product.price | number: "1.2-2"
+            }}
+            (qty: {{ product.quantity }})
+          </div>
+        }
+      </div>
+
+      <p class="code-example">
+        <code>applyDiscount(items, 10)</code> - Uses spread:
+        <code>...p, price: ...</code>
+      </p>
+    </div>
+  </div>
+
+  <div class="demo-section">
+    <h3>Combined: Arrow Functions + Spread</h3>
+    <p>Use arrow functions with spread operator in computed expressions:</p>
+
+    <div class="example">
+      <p>
+        Total Price: <strong>${{ totalPrice() | number: "1.2-2" }}</strong>
+      </p>
+
+      <button
+        (click)="products.update(items => applyDiscount(items, 15))"
+        class="apply-discount"
+      >
+        Apply 15% Discount
+      </button>
+
+      <button (click)="products.set([])" class="clear">Clear Products</button>
+
+      <p class="code-example">
+        <code
+          >(click)="products.update(items => applyDiscount(items, 15))"</code
+        >
+        - Combines signal.update() with arrow function and spread inside method
+      </p>
+    </div>
+  </div>
+
+  <div class="demo-section info">
+    <h4>Key Features:</h4>
+    <ul>
+      <li>
+        <strong>Arrow Functions (v21.2):</strong> Write
+        <code>count.update(n => n + 1)</code> directly - no wrapper method
+        needed
+      </li>
+      <li>
+        <strong>Spread in Templates (v21.1):</strong> Use spread operator
+        <code>...obj</code> and arrays <code>[...arr]</code> in expressions
+      </li>
+      <li>
+        <strong>Signal Updates:</strong> Use <code>signal.update(fn)</code> with
+        arrow function
+      </li>
+      <li>
+        <strong>Computed Values:</strong> Automatically recompute when
+        dependencies change
+      </li>
+    </ul>
+  </div>
+</div>

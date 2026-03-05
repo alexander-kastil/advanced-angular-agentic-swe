@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <div (click)="toggleMenu()" class="hamburgerMenu">
+      <mat-icon color="accent">menu</mat-icon>
+    </div>
+    <div><img width="50px" src="/assets/images/angular.svg" /></div>
+    <div class="menuContainer">
+      @for (mi of menuItems | async; track mi) {
+        <div
+          routerLink="{{ '/' + mi.url }}"
+          routerLinkActive="navLinkActive"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navLink"
+          >
+          {{ mi.label }}
+        </div>
+      }
+    </div>
+    <div (click)="toggleApps()" class="hamburgerMenu">
+      <mat-icon color="accent">apps</mat-icon>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

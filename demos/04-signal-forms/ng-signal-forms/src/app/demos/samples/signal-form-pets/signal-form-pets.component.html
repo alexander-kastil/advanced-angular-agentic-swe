@@ -1,0 +1,164 @@
+<app-markdown-renderer [md]="'signal-forms-pets'" />
+
+<div class="pet-shell">
+  <!-- Pet List -->
+  <mat-card appearance="outlined" class="pet-list">
+    <mat-card-header>
+      <mat-card-title>Pets</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @if (isLoading()) {
+        <mat-progress-bar mode="indeterminate" />
+      }
+      <mat-nav-list>
+        @for (pet of pets(); track pet.id) {
+          <mat-list-item
+            [class.selected]="selectedPet()?.name === pet.name"
+            (click)="onSelectPet(pet)"
+          >
+            <span matListItemIcon>{{ pet.type === "cat" ? "🐱" : "🐶" }}</span>
+            <span matListItemTitle>{{ pet.name }}</span>
+            <span matListItemLine>{{ pet.breed }} · {{ pet.owner }}</span>
+          </mat-list-item>
+        }
+      </mat-nav-list>
+      <button
+        mat-stroked-button
+        (click)="addPet()"
+        style="margin-top: 8px; width: 100%"
+      >
+        + New Pet
+      </button>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Pet Form -->
+  <mat-card appearance="outlined" class="pet-form">
+    <mat-card-header>
+      <mat-card-title>{{ pageTitle() }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form autocomplete="off" column>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            type="text"
+            [formField]="petForm.name"
+            placeholder="Pet name"
+          />
+        </mat-form-field>
+        @if (petForm.name().touched() && petForm.name().invalid()) {
+          @for (err of petForm.name().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <mat-form-field>
+          <mat-label>Age</mat-label>
+          <input
+            matInput
+            type="number"
+            [formField]="petForm.age"
+            placeholder="Age in years"
+          />
+        </mat-form-field>
+        @if (petForm.age().touched() && petForm.age().invalid()) {
+          @for (err of petForm.age().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <mat-select [formField]="petForm.type">
+            <mat-option value="cat">🐱 Cat</mat-option>
+            <mat-option value="dog">🐶 Dog</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Breed</mat-label>
+          <input
+            matInput
+            type="text"
+            [formField]="petForm.breed"
+            placeholder="Breed"
+          />
+        </mat-form-field>
+        @if (petForm.breed().touched() && petForm.breed().invalid()) {
+          @for (err of petForm.breed().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <mat-form-field>
+          <mat-label>Owner</mat-label>
+          <mat-select [formField]="petForm.owner">
+            <mat-option value="Alex">Alex</mat-option>
+            <mat-option value="Andreas">Andreas</mat-option>
+          </mat-select>
+        </mat-form-field>
+        @if (petForm.owner().touched() && petForm.owner().invalid()) {
+          @for (err of petForm.owner().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <div class="form-actions">
+          @if (selectedPet()) {
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              (click)="savePet()"
+            >
+              Save
+            </button>
+          } @else {
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              (click)="createPet()"
+            >
+              Create
+            </button>
+          }
+        </div>
+
+        @if (submitted()) {
+          <div class="success">Pet saved successfully!</div>
+        }
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- On Change Log -->
+  <mat-card appearance="outlined" class="pet-log">
+    <mat-card-header>
+      <mat-card-title>On Change Log</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="state-info">
+        <div>
+          Form valid: <strong>{{ petForm().valid() }}</strong>
+        </div>
+        <div>
+          Form touched: <strong>{{ petForm().touched() }}</strong>
+        </div>
+        <div>
+          Model:
+          <pre>{{ petModel() | json }}</pre>
+        </div>
+      </div>
+      <div class="change-log">
+        @for (entry of changeLog(); track $index) {
+          <div class="log-entry">{{ entry }}</div>
+        } @empty {
+          <div class="log-empty">Edit a field to see changes tracked here</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,196 @@
+{
+  "demos": [
+    {
+      "url": "app-state",
+      "title": "SignalStore App State",
+      "teaches": "Create and manage application state with @ngrx/signals SignalStore. Define state shape and access it reactively with signals.",
+      "sortOrder": 1,
+      "topic": "SignalStore Fundamentals",
+      "id": 1,
+      "md": "app-state"
+    },
+    {
+      "url": "store-crud",
+      "title": "SignalStore CRUD",
+      "teaches": "Implement Create, Read, Update, Delete operations in SignalStore. Manage entity mutations and side effects with effects().",
+      "sortOrder": 2,
+      "topic": "SignalStore Fundamentals",
+      "id": 2,
+      "md": "store-crud"
+    },
+    {
+      "url": "store-entities",
+      "title": "SignalStore Entities",
+      "teaches": "Efficiently manage collections of entities using withEntities() feature. Implement entity adapters for normalized state management.",
+      "sortOrder": 10,
+      "topic": "Data Management",
+      "id": 3,
+      "md": "store-entities"
+    },
+    {
+      "url": "deep-signals",
+      "title": "Deep Signals",
+      "teaches": "Create deeply nested signals for complex state structures. Access and update nested properties with automatic reactivity.",
+      "sortOrder": 11,
+      "topic": "Data Management",
+      "id": 4,
+      "md": "deep-signals"
+    },
+    {
+      "url": "custom-store-features",
+      "title": "Request Status Feature",
+      "teaches": "Build reusable store features with signalStoreFeature. Create a request status feature with state, computed properties, and pure updater functions.",
+      "sortOrder": 20,
+      "topic": "Advanced Patterns",
+      "id": 5,
+      "md": "custom-store-features"
+    },
+    {
+      "url": "ngrx-interop",
+      "title": "NgRx Classic Interop",
+      "teaches": "Integrate SignalStore with classic NgRx features. Migrate from traditional reducers and effects to signal-based store patterns.",
+      "sortOrder": 21,
+      "topic": "Advanced Patterns",
+      "id": 6,
+      "md": "ngrx-interop"
+    },
+    {
+      "url": "presenter-ngrx",
+      "title": "Container Presenter",
+      "teaches": "Implement the container-presenter pattern with SignalStore. Separate data management from presentation using smart and dumb components.",
+      "sortOrder": 22,
+      "topic": "Advanced Patterns",
+      "id": 7,
+      "md": "presenter-ngrx"
+    },
+    {
+      "url": "markdown-editor",
+      "title": "Markdown Editor",
+      "teaches": "Compose custom store features into a real-world store. Uses withMarkdownItems() for entity CRUD and withLoadingState() for loading tracking.",
+      "sortOrder": 23,
+      "topic": "Advanced Patterns",
+      "id": 8,
+      "md": "markdown-editor"
+    }
+  ],
+  "skills": [
+    {
+      "id": 1,
+      "name": "RxJs",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "name": "Material",
+      "completed": true
+    },
+    {
+      "id": 6,
+      "name": "Node",
+      "completed": true
+    },
+    {
+      "id": 7,
+      "name": "Forms",
+      "completed": true
+    },
+    {
+      "id": 8,
+      "name": "Authentication",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "name": "Angular",
+      "completed": false
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": 1,
+      "url": "",
+      "title": "Using @ngrx/store",
+      "comment": "To use @ngrx/store, we need to install it first.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": 2,
+      "url": "",
+      "title": "Optimizing change detection",
+      "comment": "In order to optimize change detection, we need to use OnPush strategy.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    }
+  ],
+  "customers": [
+    {
+      "name": "Cleo",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Soi"
+    },
+    {
+      "id": 3,
+      "name": "Giro"
+    },
+    {
+      "id": 4,
+      "name": "Flora"
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": "",
+      "id": 1
+    },
+    {
+      "label": "Demos",
+      "url": "demos",
+      "id": 2
+    },
+    {
+      "label": "Skills",
+      "url": "skills",
+      "id": 3
+    },
+    {
+      "label": "Customers",
+      "url": "customers",
+      "id": 4
+    },
+    {
+      "label": "Topics",
+      "url": "topics",
+      "id": 5
+    }
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "name": "Angular",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "name": "NgRx",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "name": "Signals",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "name": "Material",
+      "completed": true
+    },
+    {
+      "id": 5,
+      "name": "Copilot Dev",
+      "completed": false
+    }
+  ]
+}

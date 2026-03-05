@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <button mat-raised-button (click)="addFood()" color="primary">Add</button>
+</mat-toolbar>
+
+<app-food-list [food]="food()" (onFoodSelected)="selectFood($event)"></app-food-list>
+
+@if (selected) {
+<app-food-edit [food]="selected" (onFoodSaved)="saveFood($event)"></app-food-edit>
+}

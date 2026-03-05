@@ -1,0 +1,38 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Base Operators</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content class="cmdItems">
+    <button mat-raised-button color="accent" (click)="useMap()">map()</button>
+    <button mat-raised-button color="accent" (click)="useTap()">tap()</button>
+    <button mat-raised-button color="accent" (click)="useFindArr()">
+      Array.find() to return first item
+    </button>
+    <button mat-raised-button color="accent" (click)="useFind()">
+      find() to return first item
+    </button>
+    <button mat-raised-button color="accent" (click)="useFilterArr()">
+      Array.filter() to return an Array
+    </button>
+
+    <button mat-raised-button color="accent" (click)="useFilter()">
+      filter() to return an Array
+    </button>
+    <button mat-raised-button color="accent" (click)="useTake()">
+      take() to return an Array
+    </button>
+    <button mat-raised-button color="accent" (click)="useInterval()">
+      interval() to set an Interval
+    </button>
+    <button mat-raised-button color="accent" (click)="useDelay()">
+      delay() to wait for a period
+    </button>
+    <button mat-raised-button color="accent" (click)="useReduce()">
+      reduce() to sum Observables
+    </button>
+    <div></div>
+  </mat-card-content>
+</mat-card>
+
+<div boxed>See console for output</div>

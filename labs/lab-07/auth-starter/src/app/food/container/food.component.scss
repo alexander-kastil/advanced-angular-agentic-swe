@@ -1,0 +1,12 @@
+.addRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.progress{
+    height: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

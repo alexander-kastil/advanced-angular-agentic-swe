@@ -1,0 +1,17 @@
+.smallClass {
+	color: black;
+	padding: var(--gap-medium);
+	height: 40px;
+	background-color: yellow;
+}
+
+.largeClass {
+	color: white;
+	padding: var(--gap-medium);
+	height: 120px;
+	background-color: green;
+}
+
+.divResponsive{
+  margin-bottom: var(--gap-medium);
+}

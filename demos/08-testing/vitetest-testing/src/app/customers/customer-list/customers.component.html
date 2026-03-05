@@ -1,0 +1,15 @@
+<app-customers-table
+  [customers]="store.customers()"
+  [loading]="store.loading()"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+  (add)="onAdd()"
+/>
+
+@if (store.selectedCustomer(); as customer) {
+  <app-customer-edit
+    [customer]="customer"
+    (save)="onSave($event)"
+    (cancel)="onCancel()"
+  />
+}

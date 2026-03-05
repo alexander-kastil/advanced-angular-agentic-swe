@@ -1,0 +1,18 @@
+@for (c of items(); track c.id) {
+  <div class="row">
+    @if (c.id === -1) {
+      <mat-icon [class.primary]="demoSaved()" [matTooltip]="demoSaved() ? 'Page customized' : 'Page'">article</mat-icon>
+    } @else {
+      <mat-icon matTooltip="Comment">comment</mat-icon>
+    }
+    <div class="title">{{ c.title }}</div>
+    @if (demoSaved() && c.url === demoUrl()) {
+      <button mat-flat-button (click)="deleteMarkdownItem(c)" color="primary">Reset</button>
+    } @else if (c.id !== -1) {
+      <button mat-flat-button (click)="deleteMarkdownItem(c)" color="primary">Delete</button>
+    } @else {
+      <div class="no-delete"></div>
+    }
+    <button mat-flat-button (click)="editItem(c)" color="primary">Edit</button>
+  </div>
+}

@@ -1,0 +1,49 @@
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.imgContainer {
+  width: 160;
+  height: 120;
+  flex-grow: 0;
+}
+
+button{
+  margin-right: 1rem;
+  background-color: #F5DEB3;
+}
+
+img {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  max-width: 200px;
+}
+
+.textContainer {
+  padding-left: 2rem;
+  padding-top: 1rem;
+  text-align: left;
+}
+
+.mat-mdc-card{
+  margin-bottom: 1rem;
+}
+
+.mat-mdc-card-outlined {
+  background-color: wheat;
+}
+
+.mat-mdc-card-actions {
+  padding-right: 1rem;
+}
+
+.mat-mdc-card-title {
+  padding-top: 0.5rem;
+}
+
+.mat-mdc-card-image:first-child {
+  margin-top: 0px;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}

@@ -1,0 +1,33 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Content Projection</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-raised-button color="primary" (click)="openPopup()">
+      Show in Popup
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<ux-split>
+  <div class="title">The Title</div>
+  <div class="main">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae, pariatur eos
+    quaerat recusandae perferendis alias facere modi minus cupiditate similique
+    quasi at labore saepe officiis nesciunt sint? Quae, voluptate quos! Ut rem
+    sapiente dolores molestias, voluptatem hic fugiat architecto assumenda?
+    Ducimus dolorem at exercitationem corrupti illo animi. Ad, nostrum impedit,
+    odit, temporibus quidem nam nesciunt ducimus vero ratione repellat atque.
+  </div>
+  <div class="sidebar">
+    <ux-button
+      [icon]="'keyboard_arrow_right'"
+      [label]="'Go Back'">
+    </ux-button>
+    <ux-button
+      [label]="'Bearbeiten'"
+      [icon]="'edit'"
+      [disabled]="isDisabled"
+    ></ux-button>
+  </div>
+</ux-split>

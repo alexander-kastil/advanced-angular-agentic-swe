@@ -1,0 +1,12 @@
+.result{
+  min-height: 10rem;
+}
+
+.cmdItems button {
+  width: calc(50% - 3em);
+  margin: 1em;
+}
+
+.hidden{
+  visibility: hidden;
+}

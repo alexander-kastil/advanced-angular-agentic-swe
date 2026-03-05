@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>ComponentEventsComponent</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div data-testid="result">Current Count: {{ count() }}</div>
+    <button
+      data-testid="btnIncrement"
+      mat-raised-button
+      color="primary"
+      (click)="incrementCount()"
+    >
+      Click me to increment
+    </button>
+  </mat-card-content>
+</mat-card>

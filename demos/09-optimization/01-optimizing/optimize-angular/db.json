@@ -1,0 +1,154 @@
+{
+  "demos": [
+    {
+      "url": "lighthouse",
+      "title": "Instrument Web Vitals",
+      "teaches": "Measure and optimize Core Web Vitals and performance metrics using Chrome DevTools Lighthouse audits.",
+      "topic": "Performance Measurement",
+      "sortOrder": 1,
+      "md": "lighthouse",
+      "id": "5957"
+    },
+    {
+      "url": "optimize-bundles",
+      "title": "Optimize Bundles & Loading",
+      "teaches": "Analyze and reduce bundle size for faster loading by understanding esbuild and tree-shaking mechanisms.",
+      "topic": "Bundle Optimization",
+      "sortOrder": 2,
+      "md": "bundles",
+      "id": "440f"
+    },
+    {
+      "url": "optimized-controls",
+      "title": "Optimized Controls",
+      "teaches": "Combine OnPush change detection with Reactive Forms for optimal form performance and minimal re-renders.",
+      "topic": "Performance Optimization",
+      "sortOrder": 5,
+      "md": "optimized-controls",
+      "id": "4f29"
+    },
+    {
+      "url": "virtual-scroll",
+      "title": "Virtual Scroll",
+      "teaches": "Render large lists efficiently with CDK virtual scrolling by dynamically loading and unloading visible items.",
+      "topic": "Performance Optimization",
+      "sortOrder": 6,
+      "md": "virtual-scroll",
+      "id": "6aad"
+    },
+    {
+      "url": "ng-optimized-img",
+      "title": "NgOptimizedImage",
+      "teaches": "Use NgOptimizedImage directive for responsive image optimization with automatic srcset generation.",
+      "topic": "Asset Optimization",
+      "sortOrder": 7,
+      "md": "optimized-img",
+      "id": "55c9"
+    },
+    {
+      "url": "a11y",
+      "title": "A11y Optimization",
+      "teaches": "Implement WCAG AA accessibility standards using semantic HTML, ARIA attributes, and accessibility linting.",
+      "topic": "Accessibility",
+      "sortOrder": 8,
+      "md": "a11y",
+      "id": "51a2"
+    },
+    {
+      "url": "eslint",
+      "title": "Implement Linting",
+      "teaches": "Configure and enforce code quality rules with ESLint to maintain consistent coding standards.",
+      "topic": "Code Quality",
+      "sortOrder": 9,
+      "md": "eslint",
+      "id": "e03c"
+    }
+  ],
+  "food": [
+    {
+      "name": "Pad Thai",
+      "rating": 1,
+      "id": "601e"
+    },
+    {
+      "name": "Butter Chicken",
+      "rating": 2,
+      "id": "d981"
+    },
+    {
+      "name": "Cannelloni",
+      "rating": 2,
+      "id": "66fa"
+    },
+    {
+      "name": "Cordon Bleu",
+      "rating": 4,
+      "id": "63b1"
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "name": "RxJs",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "name": "NgRx",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "name": "Angular",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "name": "TypeScript",
+      "completed": true
+    },
+    {
+      "id": "5",
+      "name": "Material",
+      "completed": true
+    },
+    {
+      "id": "6",
+      "name": "Node",
+      "completed": false
+    },
+    {
+      "id": "7",
+      "name": "Forms",
+      "completed": true
+    },
+    {
+      "id": "8",
+      "name": "Authentication",
+      "completed": true
+    },
+    {
+      "id": "8",
+      "name": "Authentication",
+      "completed": true
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": "",
+      "id": "3315"
+    },
+    {
+      "label": "Demos",
+      "url": "demos",
+      "id": "4ed8"
+    },
+    {
+      "label": "Skills",
+      "url": "skills",
+      "id": "d732"
+    }
+  ],
+  "logs": []
+}

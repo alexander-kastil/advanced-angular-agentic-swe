@@ -1,0 +1,23 @@
+mat-form-field {
+  flex: 1;
+}
+
+h6 {
+  margin-bottom: var(--gap-medium);
+}
+
+.skill-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-medium);
+}
+
+.skill-row.actions {
+  justify-content: flex-end;
+  padding-top: var(--gap-small);
+}
+
+button {
+  min-width: 120px;
+}

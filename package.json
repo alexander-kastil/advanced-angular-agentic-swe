@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "release": "commit-and-tag-version"
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.10.0",
+    "commit-and-tag-version": "^12.2.0"
+  },
+  "version": "17.5.0"
+}

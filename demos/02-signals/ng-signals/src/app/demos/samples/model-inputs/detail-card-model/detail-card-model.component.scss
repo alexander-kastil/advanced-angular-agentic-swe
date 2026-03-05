@@ -1,0 +1,15 @@
+.heading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: var(--gap-small);
+}
+
+.content{
+    border: 1px solid #ccc;
+    padding: var(--gap-medium);    
+}
+
+.icon{
+    cursor: pointer;
+}

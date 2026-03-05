@@ -1,0 +1,13 @@
+<app-markdown-renderer [md]="'comtainer-presenter'"></app-markdown-renderer>
+
+<app-presenter-list
+  [persons]="persons"
+  (personSelected)="onPersonSelected($event)"
+></app-presenter-list>
+
+@if (current) {
+  <app-presenter-edit
+    [person]="current"
+    (savePerson)="onPersonSaved($event)"
+  ></app-presenter-edit>
+}

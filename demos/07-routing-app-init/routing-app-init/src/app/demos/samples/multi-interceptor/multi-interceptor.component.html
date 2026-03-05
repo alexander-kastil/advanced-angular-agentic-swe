@@ -1,0 +1,22 @@
+<app-markdown-renderer [md]="'interceptor'" />
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Interceptors</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (data.isLoading()) {
+      <p>Loading...</p>
+    } @else if (data.error()) {
+      <p style="color: red;">Error: {{ data.error() | json }}</p>
+    } @else if (data.value()) {
+      <pre>{{ data.value() | json }}</pre>
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="requestData()" color="primary">
+      JSON Request
+    </button>
+    <button mat-raised-button (click)="requestXMLData()">XML Request</button>
+    <button mat-raised-button (click)="request404Data()" color="warn">404 Request</button>
+  </mat-card-actions>
+</mat-card>

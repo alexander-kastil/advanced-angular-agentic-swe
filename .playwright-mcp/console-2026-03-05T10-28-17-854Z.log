@@ -1,0 +1,8 @@
+[  470332ms] [WARNING] as-split: Pixel mode must have exactly one * area @ http://localhost:4200/chunk-G6436AEF.js:6840
+[  470335ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/markdownItems:0
+[  566767ms] [WARNING] as-split: Pixel mode must have exactly one * area @ http://localhost:4200/chunk-L3ZFFAD7.js:6840
+[  566769ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/markdownItems:0
+[  570608ms] [WARNING] as-split: Pixel mode must have exactly one * area @ http://localhost:4200/chunk-FCCLDPD3.js:6840
+[  570612ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/markdownItems:0
+[  573057ms] [ERROR] Refused to apply style from 'http://localhost:4200/node_modules/prismjs/themes/prism-okaidia.min.css' because its MIME type ('text/html') is not a supported stylesheet MIME type, and strict MIME checking is enabled. @ http://localhost:4200/demos/playwright:0
+[  811645ms] [WARNING] as-split: Pixel mode must have exactly one * area @ http://localhost:4200/chunk-FCCLDPD3.js:6840

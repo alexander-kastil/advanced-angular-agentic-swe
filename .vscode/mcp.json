@@ -1,0 +1,62 @@
+{
+    "servers": {
+        "playwright": {
+            "command": "npx",
+            "args": [
+                "@playwright/mcp@latest",
+                "--vision"
+            ],
+            "type": "stdio"
+        },
+        "microsoft-learn": {
+            "type": "http",
+            "url": "https://learn.microsoft.com/api/mcp"
+        },
+        "figma": {
+            "url": "https://mcp.figma.com/mcp",
+            "type": "http"
+        },
+        "chrome-devtools": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "chrome-devtools-mcp@latest"
+            ],
+            "type": "stdio"
+        },
+        "angular-cli": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@angular/cli",
+                "mcp"
+            ]
+        }
+    },
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "azure_devops_org",
+            "description": "Azure DevOps organization name (e.g., contoso)",
+            "password": false
+        },
+        {
+            "id": "SSH_HOST",
+            "type": "promptString",
+            "description": "SSH host/IP of the Raspberry Pi",
+            "default": "192.168.0.143"
+        },
+        {
+            "id": "SSH_USER",
+            "type": "promptString",
+            "description": "SSH username",
+            "default": "alex"
+        },
+        {
+            "id": "SSH_PASSWORD",
+            "type": "promptString",
+            "description": "SSH password (used for sudo as well)",
+            "password": true
+        }
+    ]
+}

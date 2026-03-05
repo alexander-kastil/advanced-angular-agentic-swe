@@ -1,0 +1,11 @@
+<app-presenter-list
+  [persons]="persons()"
+  (personSelected)="onPersonSelected($event)"
+/>
+
+@if (current()) {
+  <app-presenter-edit
+    [person]="current()!"
+    (savePerson)="onPersonSaved($event)"
+  />
+}

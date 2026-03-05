@@ -1,0 +1,17 @@
+<div (click)="incrementCounter()" class="clickable" boxed clickable>
+  <h3>Simple property set in an event - click on div to increment</h3>
+  <div>Counter: {{ counter }}</div>
+</div>
+
+<div boxed>
+  <h3>Simple property set asynchronously - should update each second</h3>
+  <div>Tick: {{ tick }}</div>
+  <!-- <div>Signal Tick: {{ stick() }}</div> -->
+</div>
+
+<div boxed>
+  <h3>Data retrieved via httpResource (signal-based):</h3>
+  @for (skill of skills(); track skill.id) {
+    <div>{{ skill.name }}</div>
+  }
+</div>

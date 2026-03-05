@@ -1,0 +1,17 @@
+.sideBar {
+  background-color: lightgrey;
+  width: 180px;
+}
+
+.main {
+  min-width: 80vw;
+  flex-grow: 1;
+  margin: 0 2rem;
+}
+
+.mainRow {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 90vh;
+}

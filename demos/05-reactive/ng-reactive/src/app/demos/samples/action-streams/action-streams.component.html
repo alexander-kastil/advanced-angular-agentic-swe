@@ -1,0 +1,18 @@
+<div boxed>
+  <mat-form-field>
+    <input
+      matInput
+      type="text"
+      placeholder="Enter a demo to filter by"
+      [formControl]="filter$"
+    />
+  </mat-form-field>
+</div>
+
+<div boxed>
+  @for (d of vm$ | async; track d) {
+    <div class="row">
+      <div>{{ d.title }}</div>
+    </div>
+  }
+</div>

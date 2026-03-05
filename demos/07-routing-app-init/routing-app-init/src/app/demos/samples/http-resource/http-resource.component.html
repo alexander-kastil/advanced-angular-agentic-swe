@@ -1,0 +1,38 @@
+<app-markdown-renderer [md]="'http-resource'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>httpResource() Demo</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Current Todo ID:</strong> {{ todoId() }}</p>
+    
+    @if (todoResource.isLoading()) {
+      <mat-progress-spinner mode="indeterminate" diameter="40" />
+    }
+    
+    @if (todoResource.error(); as error) {
+      <div class="error">Error loading data: {{ error }}</div>
+    }
+    
+    @if (todoResource.value(); as todo) {
+      <div class="todo-data">
+        <h3>{{ todo.title }}</h3>
+        <p><strong>User ID:</strong> {{ todo.userId }}</p>
+        <p><strong>Completed:</strong> {{ todo.completed ? 'Yes' : 'No' }}</p>
+        <pre>{{ todo | json }}</pre>
+      </div>
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="loadPrevious()" [disabled]="todoId() === 1">
+      Previous
+    </button>
+    <button mat-raised-button color="primary" (click)="loadNext()">
+      Next
+    </button>
+    <button mat-raised-button color="accent" (click)="reload()">
+      Reload
+    </button>
+  </mat-card-actions>
+</mat-card>

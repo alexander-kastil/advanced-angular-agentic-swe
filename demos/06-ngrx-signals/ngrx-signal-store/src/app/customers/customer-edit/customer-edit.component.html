@@ -1,0 +1,13 @@
+<div class="box">
+  <form [formGroup]="customersForm" (ngSubmit)="updateCustomer()">
+    <mat-form-field>
+      <mat-label>Id</mat-label>
+      <input matInput formControlName="id" readonly />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Save</button>
+  </form>
+</div>

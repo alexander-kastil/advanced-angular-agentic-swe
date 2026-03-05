@@ -1,0 +1,21 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ isNew ? 'Add Skill' : 'Edit Skill' }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" placeholder="Name" [formField]="skillForm.name" />
+    </mat-form-field>
+    @if (skillForm.name().touched() && skillForm.name().invalid()) {
+      @for (err of skillForm.name().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+    <mat-slide-toggle [formField]="skillForm.completed">Completed</mat-slide-toggle>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="doCancel()">Cancel</button>
+    <button mat-raised-button (click)="saveSkill()" color="primary">Save</button>
+  </mat-card-actions>
+</mat-card>
