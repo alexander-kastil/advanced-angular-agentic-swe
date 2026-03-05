@@ -1,4 +1,4 @@
-# Angular Advanced Software Engineering
+# Angular Advanced Agentic Software Engineering
 
 This is a workshop for experienced Angular developers who want to deepen their knowledge and skills in Angular development. It consists of 10 modules each covering different advanced topics in Angular development. The workshop is designed to be hands-on and interactive, with a mix of lectures, demos, and exercises.
 
