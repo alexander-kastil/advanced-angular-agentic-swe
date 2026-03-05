@@ -1,65 +1,39 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpResponse,
-} from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpHandlerFn, HttpRequest, HttpResponse } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { LoadingService } from './loading.service';
 import { SnackbarService } from '../snackbar/snackbar.service';
+import { tap, catchError, finalize, throwError } from 'rxjs';
 
-@Injectable()
-export class LoadingInterceptor implements HttpInterceptor {
-  ls = inject(LoadingService);
-  sbs = inject(SnackbarService);
-  requests: HttpRequest<any>[] = [];
+const requests: HttpRequest<unknown>[] = [];
 
-  removeRequest(req: HttpRequest<any>) {
-    const i = this.requests.indexOf(req);
-    if (i >= 0) {
-      console.log('removing request from queue: ', req.url);
-      this.requests.splice(i, 1);
-    }
-    this.ls.setLoading(this.requests.length > 0);
+function removeRequest(req: HttpRequest<unknown>, ls: LoadingService) {
+  const i = requests.indexOf(req);
+  if (i >= 0) {
+    requests.splice(i, 1);
   }
+  ls.setLoading(requests.length > 0);
+}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    console.log(
-      'pushing request to queue at index: ' + this.requests.length,
-      req.url
-    );
-    this.requests.push(req);
+export function loadingInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn) {
+  const ls = inject(LoadingService);
+  const sbs = inject(SnackbarService);
 
-    this.ls.setLoading(true);
-    return Observable.create((observer: any) => {
-      const subscription = next.handle(req).subscribe(
-        (event) => {
-          if (event instanceof HttpResponse) {
-            this.removeRequest(req);
-            observer.next(event);
-          }
-        },
-        (err) => {
-          console.log('Interceptor error', err);
-          this.sbs.displayAlert('erro', 'open console for details');
-          this.removeRequest(req);
-          observer.error(err);
-        },
-        () => {
-          this.removeRequest(req);
-          observer.complete();
-        }
-      );
-      // remove request from queue when cancelled
-      return () => {
-        this.removeRequest(req);
-        subscription.unsubscribe();
-      };
-    });
-  }
+  requests.push(req);
+  ls.setLoading(true);
+
+  return next(req).pipe(
+    tap((event) => {
+      if (event instanceof HttpResponse) {
+        removeRequest(req, ls);
+      }
+    }),
+    catchError((err) => {
+      sbs.displayAlert('error', 'open console for details');
+      removeRequest(req, ls);
+      return throwError(() => err);
+    }),
+    finalize(() => {
+      removeRequest(req, ls);
+    })
+  );
 }

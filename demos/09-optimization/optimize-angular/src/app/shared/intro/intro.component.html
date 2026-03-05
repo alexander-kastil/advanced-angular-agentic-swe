@@ -5,11 +5,10 @@
   </mat-card-header>
   <mat-card-content>
     <div class="showcase" column centered>
-      <img ngSrc="assets/images/{{ img() }}" width="600" height="300"
-    fetchpriority="high" alt="Moduel Image" />
+      <img src="images/{{ img() }}" alt="" />
     </div>
     <div class="instructions">
-      <ng-content select=".instructions"></ng-content>
+      <ng-content select=".instructions" />
     </div>
   </mat-card-content>
   <mat-card-actions>

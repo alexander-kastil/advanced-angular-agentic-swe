@@ -34,4 +34,3 @@ export class ShopItemComponent {
     this.itemChanged.emit(item);
   }
 }
-}

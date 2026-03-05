@@ -1,6 +1,6 @@
-<mat-expansion-panel [expanded]="panelOpenState">
+<mat-expansion-panel [expanded]="contentVisible()" (click)="togglePanel()" >
   <mat-expansion-panel-header>
     <mat-panel-title>Instructions</mat-panel-title>
   </mat-expansion-panel-header>
-  <markdown [src]="getMarkdown()"> </markdown>
+  <markdown mermaid [src]="markdownSrc()" (load)="onMarkdownLoad()" />
 </mat-expansion-panel>

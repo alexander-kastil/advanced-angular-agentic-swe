@@ -51,3 +51,7 @@ mat-card-actions {
 .showcase {
   min-height: 300px;
 }
+
+.mat-mdc-raised-button:not(:disabled) {
+  color: var(--mat-button-protected-label-text-color) !important;
+}

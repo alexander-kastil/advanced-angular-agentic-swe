@@ -8,6 +8,6 @@ export const environment = {
   logLoading: false,
   appInsights: false,
   appInsightsKey: '',
-  markdownPath: '/assets/markdown/',
+  markdownPath: '/markdown/',
   api: 'http://localhost:3000/'
 };

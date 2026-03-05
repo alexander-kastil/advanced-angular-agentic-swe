@@ -7,6 +7,9 @@ export const skillRoutes: Routes = [
     path: '', component: SkillsContainerComponent,
   },
   {
+    path: 'new', component: SkillsEditComponent, data: { id: 'new' }
+  },
+  {
     path: ':id', component: SkillsEditComponent
   }
 ];

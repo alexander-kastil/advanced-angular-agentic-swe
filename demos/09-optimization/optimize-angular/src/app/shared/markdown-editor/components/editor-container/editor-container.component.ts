@@ -1,66 +1,59 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommentItem } from '../../comment.model';
-import { EditorFacade } from '../../state/editor.facade';
-import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { createMarkdownItem, MarkdownItem } from '../../markdown.model';
 import { MatButton } from '@angular/material/button';
-import { CommentEditComponent } from '../comment-edit/comment-edit.component';
-import { CommentsListComponent } from '../comments-list/comments-list.component';
+import { MarkdownEditComponent } from '../markdown-edit/markdown-edit.component';
+import { MarkdownListComponent } from '../markdown-list/markdown-list.component';
 import { ColumnDirective } from '../../../formatting/formatting-directives';
 import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions } from '@angular/material/card';
+import { markdownEditorStore } from '../../markdown-editor.store';
+import { mdEditorEvents } from '../../markdown-editor.events';
+import { injectDispatch } from '@ngrx/signals/events';
 
 @Component({
-    selector: 'app-editor-container',
-    templateUrl: './editor-container.component.html',
-    styleUrls: ['./editor-container.component.scss'],
-    imports: [
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
-        ColumnDirective,
-        CommentsListComponent,
-        CommentEditComponent,
-        MatCardActions,
-        MatButton,
-        AsyncPipe,
-    ]
+  selector: 'app-editor-container',
+  templateUrl: './editor-container.component.html',
+  styleUrls: ['./editor-container.component.scss'],
+  imports: [
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    ColumnDirective,
+    MarkdownListComponent,
+    MarkdownEditComponent,
+    MatCardActions,
+    MatButton,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditorContainerComponent implements OnInit {
-  ef = inject(EditorFacade)
-  comments = this.ef.getComments();
-  editorEdit = false;
-  current: CommentItem | null = null;
+export class EditorContainerComponent {
+  protected store = inject(markdownEditorStore);
+  private dispatch = injectDispatch(mdEditorEvents);
+  editorEdit = signal(false);
+  current = signal<MarkdownItem | null>(null);
 
-  ngOnInit() {
-    this.ef.hasLoaded().subscribe((hasLoaded) => {
-      if (hasLoaded == false) {
-        this.ef.init();
-      }
-    });
+  get currentItem(): MarkdownItem { return this.current()!; }
+  set currentItem(value: MarkdownItem) { this.current.set(value); }
 
-    //respond to effect completion and toggle view
-    this.ef.callCompleted$.subscribe(() => {
-      this.editorEdit = false;
-    });
+  addMarkdownItem() {
+    this.current.set(createMarkdownItem());
+    this.editorEdit.set(true);
   }
 
-  addComment() {
-    this.current = new CommentItem();
-    this.editorEdit = true;
-  }
-
-  saveComment() {
-    if (this.current) {
-      this.ef.saveComment(this.current);
+  saveMarkdownItem() {
+    const item = this.current();
+    if (item) {
+      this.dispatch.save(item);
+      this.editorEdit.set(false);
     }
   }
 
-  deleteComment(item: CommentItem) {
-    this.ef.deleteComment(item);
+  deleteMarkdownItem(item: MarkdownItem) {
+    this.dispatch.delete(item);
   }
 
-  editComment(item: CommentItem) {
-    this.current = { ...item };
-    this.editorEdit = true;
+  editMarkdownItem(item: MarkdownItem) {
+    this.current.set({ ...item });
+    this.editorEdit.set(true);
   }
 }

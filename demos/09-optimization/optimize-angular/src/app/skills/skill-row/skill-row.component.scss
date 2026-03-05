@@ -5,6 +5,11 @@
   border-bottom: 1px solid #8d6e63;
 }
 
+.id {
+  width: 50px;
+  padding-left: 2rem
+}
+
 .name {
   flex: 3;
   padding-left: 2rem
@@ -17,4 +22,7 @@
 .cmd {
   flex: 1;
   text-align: end;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
 }

@@ -3,34 +3,31 @@
     <mat-card-title>Mock Markdown Editor</mat-card-title>
   </mat-card-header>
   <mat-card-content column>
-    @if (!editorEdit) {
-      <app-comments-list
-        [Comments]="comments | async"
-        (onCommentEdit)="editComment($event)"
-        (onCommentDelete)="deleteComment($event)"
-      ></app-comments-list>
+    @if (!editorEdit()) {
+      <app-markdown-list [items]="store.entities()"
+        (itemEdit)="editMarkdownItem($event)"
+        (itemDelete)="deleteMarkdownItem($event)"
+       />
     }
-    @if (editorEdit && current != null) {
-      <app-comment-edit [comment]="current">
-      </app-comment-edit>
+    @if (editorEdit() && current() != null) {
+      <app-markdown-edit [(markdownItem)]="currentItem" />
     }
   </mat-card-content>
-
   <mat-card-actions align="end">
-    @if (editorEdit) {
-      <button mat-raised-button (click)="saveComment()" color="primary">
+    @if (editorEdit()) {
+      <button mat-flat-button (click)="saveMarkdownItem()" color="primary">
         Save
       </button>
       <button
-        mat-raised-button
-        (click)="editorEdit = !editorEdit"
+        mat-flat-button
+        (click)="editorEdit.set(false)"
         color="primary"
         >
         Cancel
       </button>
     }
-    @if (!editorEdit) {
-      <button mat-raised-button (click)="addComment()" color="primary">
+    @if (!editorEdit()) {
+      <button mat-flat-button (click)="addMarkdownItem()" color="primary">
         Add
       </button>
     }

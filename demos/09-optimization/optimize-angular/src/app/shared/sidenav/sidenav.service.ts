@@ -1,40 +1,37 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Injectable, inject } from '@angular/core';
-import { MatDrawerMode } from '@angular/material/sidenav';
-import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { LayoutStore } from '../layout/layout.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SideNavService {
-  breakpointObserver = inject(BreakpointObserver);
-
-  visible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  position$: BehaviorSubject<MatDrawerMode> = new BehaviorSubject<MatDrawerMode>('side');
+  private layoutStore = inject(LayoutStore);
+  private breakpointObserver = inject(BreakpointObserver);
 
   constructor() {
     this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
       .pipe(
-        tap((matchesBreakpoint) => {
-          console.log(matchesBreakpoint);
-          this.visible$.next(matchesBreakpoint.matches ? false : true);
-          this.position$.next(matchesBreakpoint.matches ? 'over' : 'side');
+        tap((result) => {
+          const position = result.matches ? 'over' : 'side';
+          const visible = !result.matches;
+          this.layoutStore.setSidenavVisible(visible);
+          this.layoutStore.setSidenavPosition(position);
         })
       ).subscribe();
   }
 
   getSideNavVisible() {
-    return this.visible$.asObservable();
+    return this.layoutStore.sidenavVisible;
   }
 
   getSideNavPosition() {
-    return this.position$.asObservable();
+    return this.layoutStore.sidenavPosition;
   }
 
   toggleMenuVisibility() {
-    const status = !this.visible$.getValue();
-    this.visible$.next(status);
+    this.layoutStore.toggleSidenavVisible();
   }
 }

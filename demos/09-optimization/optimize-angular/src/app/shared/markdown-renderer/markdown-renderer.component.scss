@@ -1,7 +1,17 @@
-mat-expansion-panel{
+mat-expansion-panel {
     margin-bottom: var(--gap-medium);
 }
 
-mat-panel-title{
+mat-panel-title {
   color: var(--color-font);
+}
+
+:host ::ng-deep .mermaid {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+  svg {
+    max-width: 100%;
+  }
 }

@@ -5,3 +5,30 @@
 button{
   margin-right: var(--gap-medium);
 }
+
+.skillrow.header {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  border-bottom: 2px solid #8d6e63;
+
+  .id {
+    width: 50px;
+    padding-left: 2rem;
+  }
+
+  .name {
+    flex: 3;
+    padding-left: 2rem;
+  }
+
+  .completed {
+    flex: 2;
+  }
+
+  .cmd {
+    flex: 1;
+    text-align: end;
+  }
+}

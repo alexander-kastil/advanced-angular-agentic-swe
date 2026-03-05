@@ -1,4 +1,4 @@
 export class NavItem {
-  label = '';
-  url = '';
+  label: string = '';
+  url: string = '';
 }

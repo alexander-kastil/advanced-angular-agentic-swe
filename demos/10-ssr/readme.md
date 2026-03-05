@@ -1,166 +1,438 @@
 # Server Side Rendering (SSR)
 
-- Create a new Angular project. Starting with Angular 21 SSR is enabled by default. To disable it use `--ssr=false`. So you could basically skip the `--ssr=true` option. To add it to an existing project use `ng add @angular/ssr`:
+This module demonstrates **Server-Side Rendering (SSR)** in Angular v21+ using Express.js and client hydration. The `food-shop-ssr` application showcases modern patterns: signal-based state, `httpResource()` for reactive data loading, dynamic routing with route parameters as signals, and production-ready SSR configuration.
 
-  ```
-  ng new food-shop-ssr --routing --style=scss --ssr=true
-  cd food-shop-ssr
-  ```
+## Quick Start
 
-- Examine `package.json` and note the `@angular/ssr`and `express` dependencies. Also note the `serve:ssr:food-shop-ssr` script. It starts the Node Express server and runs the Angular app in SSR mode.
+The food-shop-ssr app is ready to run. No setup needed — just start the dev server:
 
-- Examine the registration of [ClientHydration](https://angular.io/guide/hydration) in `app.config.ts`. This enables seamless hydration where the server renders the initial HTML and the client takes over without re-rendering:
+```bash
+cd demos/10-ssr/food-shop-ssr
+npm install
+ng serve --open
+```
 
-  ```typescript
-  export const appConfig: ApplicationConfig = {
-    providers: [
-      provideHttpClient(withFetch()),
-      provideRouter(foodRoutes),
-      provideClientHydration(),
-      provideAnimations()
-    ]
-  };
-  ```
+This starts `ng dev` on `localhost:4200`. Open DevTools console and note the **First Contentful Paint (FCP)** timing.
 
-- Add Angular Material:
+## Creating Angular 21 SSR Projects From Scratch
 
-  ```
-  ng add @angular/material
-  ```
+If you want to create a new SSR application from scratch, use the Angular CLI:
 
-- Add the following html to app.component.html and also add the required imports:
+```bash
+ng new myapp-ssr --ssr=true --routing --style=scss
+cd myapp-ssr
+```
 
-  ```html
-  <mat-toolbar>
-      <mat-toolbar-row>
-          Food SSR Shop
-      </mat-toolbar-row>
-  </mat-toolbar>
-  <router-outlet></router-outlet>
-  ```
+In Angular 21+, SSR is enabled by default. SSR can be added to existing projects:
 
-- Add a script to track First Contentful Paint (FCP) to the `<head>` of `index.html`:
+```bash
+ng add @angular/ssr
+```
 
-  ```javascript
-  <script>
-      // Log first contentful paint
-      // https://web.dev/fcp/#measure-fcp-in-javascript
-      const observer = new PerformanceObserver((list) => {
-      for (const entry of list.getEntriesByName("first-contentful-paint")) {
-          console.log("FCP: ", entry.startTime);
-          observer.disconnect();
-      }
-      });
-      observer.observe({ type: "paint", buffered: true });
-  </script>
-  ```
+This installs:
 
-  > Note: Reade more about [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) on MDN and on [web.dev](https://web.dev/articles/user-centric-performance-metrics).
-
-- Execute Client and note the `First Contentful Paint (FCP)` value in the console:
-
-  ```bash
-  ng s -o
-  ```
-
-- Examine the page source and note that content is rendered by the browser using JavaScript (no server-side content initially):
-
-  ![page-source](_images/page-source.png)
-
-- Execute Node Express on `http://localhost:4000` and compare:
-  - First Contentful Paint (FCP) values (should be faster with SSR)
-  - HTML source (should contain fully rendered markup)
-  - Lighthouse Audit scripting time (should be lower with pre-rendering)
-
-  ```bash
-  ng build
-  npm run serve:ssr:food-shop-ssr
-  ```
-
-  > Compare the client-side vs SSR performance metrics. With pre-rendering, FCP is significantly improved because HTML is already generated at build time.
+- **@angular/ssr** — SSR compilation and hydration
+- **express** — production Node.js server
+- **@types/node** — Node.js type definitions
+- **server.ts** — Express configuration
 
 ## Modern Component Patterns (Angular v21+)
 
-The food-shop-ssr app demonstrates modern Angular component patterns. Review these key components to understand signal-based architecture:
+The food-shop-ssr app demonstrates modern Angular v21+ component patterns using signals, httpResource, and OnPush change detection. All components follow these conventions:
 
-- **FoodListComponent** uses `httpResource()` for reactive data loading and `signal()` for cart state management with `ChangeDetectionStrategy.OnPush`
-- **ShopItemComponent** uses `input()` and `output()` signals instead of decorators, with `effect()` for synchronizing input changes
-- **NumberPickerComponent** is a pure signal-based component (no ControlValueAccessor), using `input()`, `output()`, and `signal()` for all state
-- **FoodDetailsComponent** uses `toSignal()` to convert route params to signals and `httpResource()` for dynamic data loading based on route ID
-- **FoodItem** and **FoodCartItem** are TypeScript interfaces for type safety
+### Key Components
 
-  > Note: Review each component in `src/app/food/` and `src/app/shared/` to understand how standalone components use signals for state and lifecycle management.
+**FoodListComponent** — Main product listing with cart management
 
-- Add routes to `app.routes.ts`:
+```typescript
+export class FoodListComponent {
+  food = httpResource<FoodItem[]>(() => `${environment.api}food`);
+  cart = signal<FoodCartItem[]>([]);
 
-  ```typescript
-  export const foodRoutes: Routes = [
-    {
-      path: '',
-      component: FoodListComponent,
-    },
-    {
-      path: 'food/:id',
-      component: FoodDetailsComponent,
+  updateCart(cartItem: FoodCartItem) {
+    this.cart.update(items => {
+      const idx = items.findIndex(i => i.id === cartItem.id);
+      if (idx >= 0) {
+        return items.map((i, index) => index === idx ? cartItem : i);
+      }
+      return [...items, cartItem];
+    });
+  }
+}
+```
+
+- **httpResource()** for reactive data fetching with automatic loading state
+- **signal()** for client-side state management (cart items)
+- **signal.update()** for immutable state updates
+- **ChangeDetectionStrategy.OnPush** reduces change detection cycles
+
+**ShopItemComponent** — Product card with signal-based inputs/outputs
+
+```typescript
+export class ShopItemComponent {
+  readonly food = input.required<FoodItem>();
+  readonly inCart = input<number>(0);
+  readonly itemChanged = output<FoodCartItem>();
+
+  readonly quantity = signal<number>(0);
+
+  constructor() {
+    effect(() => {
+      this.quantity.set(this.inCart());
+    });
+  }
+
+  handleAmountChange(amount: number) {
+    this.quantity.set(amount);
+    const item: FoodCartItem = { ...this.food(), quantity: amount };
+    this.itemChanged.emit(item);
+  }
+}
+```
+
+- **input()** and **input.required()** replace `@Input()` decorator
+- **output()** replaces `@Output()` decorator with signal semantics
+- **effect()** syncs prop changes to internal state (alternative to ngOnChanges)
+- **input()** values are called as functions (reactive semantics)
+
+**FoodDetailsComponent** — Dynamic detail view with route params as signals
+
+```typescript
+export class FoodDetailsComponent {
+  private route = inject(ActivatedRoute);
+  private id = toSignal(
+    this.route.paramMap.pipe(map(params => Number(params.get('id'))))
+  );
+  item = httpResource<FoodItem>(() => `${environment.api}food/${this.id()}`);
+}
+```
+
+- **inject(ActivatedRoute)** replaces constructor parameter injection
+- **toSignal()** converts Observable route params to a signal
+- **httpResource()** reactively refetches when route ID changes (called as function)
+- No manual .subscribe() needed — httpResource handles cleanup
+
+**NumberPickerComponent** — Pure signal-based reusable component
+
+```typescript
+export class NumberPickerComponent {
+  readonly increment = input<number>(1);
+  readonly initialValue = input<number>(0);
+  readonly amountChanged = output<number>();
+
+  readonly quantity = signal<number>(this.initialValue());
+  readonly disabled = signal<boolean>(false);
+  readonly touched = signal<boolean>(false);
+}
+```
+
+- All component logic uses signals — no observable subscriptions
+- Inputs are derived values (inputs are signals internally)
+- Perfect for form controls and reusable UI patterns
+
+### Architecture Principles
+
+| Feature                  | Implementation                                               |
+| ------------------------ | ------------------------------------------------------------ |
+| **Inputs/Outputs**       | `input()`, `input.required()`, `output()` signals            |
+| **State Management**     | `signal()` for local state, `httpResource()` for data        |
+| **Change Detection**     | Always `ChangeDetectionStrategy.OnPush`                      |
+| **Dependency Injection** | `inject()` function in component body                        |
+| **Side Effects**         | `effect()` for reactions to signal changes                   |
+| **Data Loading**         | `httpResource()` for HTTP with built-in loading state        |
+| **Route Parameters**     | `toSignal(route.paramMap)` to convert to signals             |
+| **Template Syntax**      | `@if`, `@for`, `@switch` (no `*ngIf`, `*ngFor`, `*ngSwitch`) |
+
+### Type Safety
+
+**FoodItem** — Product data interface
+
+```typescript
+export interface FoodItem {
+  id: number;
+  name: string;
+  price: number;
+  inStock: number;
+  code?: string;
+  pictureUrl?: string;
+  description?: string;
+}
+```
+
+**FoodCartItem** — Shopping cart item with quantity
+
+```typescript
+export interface FoodCartItem extends FoodItem {
+  quantity: number;
+}
+```
+
+## Running the Food Shop SSR App
+
+### Development Mode (Client-Side Rendering)
+
+Start the development server with full hot-module reloading:
+
+```bash
+cd demos/10-ssr/food-shop-ssr
+ng serve --open
+```
+
+This runs on `http://localhost:4200`. Open DevTools console and note the **First Contentful Paint (FCP)** timing — content is rendered by client-side JavaScript initially.
+
+### Production Mode (Server-Side Rendering)
+
+Build and serve via Express server (Node SSR):
+
+```bash
+cd demos/10-ssr/food-shop-ssr
+ng build -c production
+npm run serve:ssr:food-shop-ssr
+```
+
+This runs Express server on `http://localhost:4000`. Compare vs. development:
+
+- **FCP timing** is significantly faster (server delivers fully-rendered HTML)
+- **HTML source** contains pre-rendered markup (view page source)
+- **Lighthouse audit** shows reduced scripting time and faster Core Web Vitals
+- **Network tab** shows HTML document loaded with complete content
+
+### Key Configuration Files
+
+**app.routes.ts** — Route definitions for food list and detail views
+
+```typescript
+export const foodRoutes: Routes = [
+  { path: '', component: FoodListComponent },
+  { path: 'food/:id', component: FoodDetailsComponent }
+];
+```
+
+**server.ts** — Express SSR configuration with CommonEngine rendering
+
+```typescript
+const commonEngine = new CommonEngine();
+server.get('*', (req, res, next) => {
+  // Server renders Angular on each request
+  const { protocol, originalUrl, baseUrl, headers } = req;
+  // ...renders to HTML
+});
+```
+
+**app.config.ts** — Application configuration with providers
+
+```typescript
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(withFetch()),
+    provideRouter(foodRoutes),
+    provideClientHydration(),
+    provideAnimations()
+  ]
+};
+```
+
+- **provideClientHydration()** enables seamless server-to-client transition
+- **provideHttpClient(withFetch())** uses native Fetch API instead of XMLHttpRequest
+- **provideRouter()** registers route configuration
+- **provideAnimations()** enables Angular Material animations
+
+## Pre-rendering Static Routes for Maximum Performance
+
+Pre-rendering generates static HTML files at build time. This combines SSR benefits with static site performance and enables offline access.
+
+### routes.txt — Define Pre-rendered Routes
+
+The `routes.txt` file lists routes to pre-render during production build:
+
+```
+/
+/food/1
+/food/2
+/food/3
+```
+
+Each route generates a static HTML file at build time, eliminating the need for server computation.
+
+### angular.json Configuration
+
+The `build` target is configured for pre-rendering in `angular.json`:
+
+```json
+"build": {
+  "builder": "@angular-devkit/build-angular:browser",
+  "options": {
+    "prerender": {
+      "routesFile": "routes.txt"
     }
-  ];
-  ```
+  }
+}
+```
 
-## Pre-rendering Static Routes
+### Build & Pre-render Production
 
-Pre-rendering generates static HTML files at build time, improving performance and enabling offline access.
+Execute the production build with pre-rendering:
 
-- Create `routes.txt` in the root folder. It defines routes to pre-render:
+```bash
+ng build -c production
+```
 
-  ```
-  /food/1
-  /food/2
-  /food/3
-  ```
+This generates:
 
-- To configure pre-rendered pages, open `angular.json` and update the `architect` → `build` → `options` section:
+- `/dist/food-shop-ssr/browser/index.html` — Pre-rendered home page
+- `/dist/food-shop-ssr/browser/food/1/index.html` — Pre-rendered food detail page
+- `/dist/food-shop-ssr/browser/food/2/index.html` — Pre-rendered food detail page
+- `/dist/food-shop-ssr/browser/food/3/index.html` — Pre-rendered food detail page
 
-  ```json
-  "prerender": {
-    "routesFile": "routes.txt"
-  },
-  ```
+Inspect these `.html` files — they contain fully-rendered markup with no JavaScript placeholders.
 
-- Execute pre-rendering during production build:
+### Serve Pre-rendered App
 
-  ```bash
-  ng build -c production
-  ```
+Run the Express server with pre-rendered static files:
 
-- Examine the pre-rendered HTML files in `dist/food-shop-ssr/browser/food/1/index.html`, etc. These are static HTML files generated at build time.
+```bash
+npm run serve:ssr:food-shop-ssr
+```
+
+- Pre-rendered routes are served instantly (no server computation)
+- Non-pre-rendered routes (e.g., `/food/999`) fall back to dynamic server rendering
+- Browser hydration attaches event listeners seamlessly
+
+### Pre-rendering Performance Benefits
+
+| Metric              | Client-only (ng serve) | SSR (ng build + serve:ssr) | Pre-rendered (routes.txt)           |
+| ------------------- | ---------------------- | -------------------------- | ----------------------------------- |
+| **FCP**             | ~1-2s                  | ~300-500ms                 | ~100ms                              |
+| **TTI**             | ~3-5s                  | ~800ms                     | ~600ms                              |
+| **Server CPU**      | N/A                    | Per-request                | Only non-cached routes              |
+| **Offline Support** | ❌                     | ❌                         | ✅ Pre-rendered routes work offline |
+
+### When to Pre-render
+
+- **✅ Do pre-render:** Static product pages, home page, documentation
+- **❌ Don't pre-render:** User dashboards, real-time data, personalized content
 
 ## Key Takeaways
 
-### SSR Benefits
+### SSR vs. CSR Performance Comparison
 
-- Improved First Contentful Paint (FCP) - content visible immediately
-- Better SEO - search engines see fully rendered HTML
-- Reduced time to interactive - server handles initial payload
-- Progressive enhancement - works even with JavaScript errors
+The food-shop-ssr app demonstrates SSR benefits:
 
-### Best Practices for SSR Components (Angular v21+)
+1. **Client-Side Rendering (CSR)** — `ng serve`
+   - Browser downloads empty HTML + JavaScript bundle
+   - Browser executes Angular to render component tree
+   - Visible content requires JavaScript parsing and execution
+   - User sees blank page until JavaScript loads and runs
 
-1. **Use `ChangeDetectionStrategy.OnPush`** for all components to reduce change detection overhead
-2. **Leverage signals** (`input()`, `output()`, `signal()`) for reactive state management
-3. **Use `httpResource()`** for data loading - handles loading states and errors automatically
-4. **Avoid browser APIs in components** (use `isPlatformBrowser()` if needed)
-5. **Pre-render static routes** for maximum performance gains
-6. **Test hydration** - ensure server-rendered HTML matches client-side output
+2. **Server-Side Rendering (SSR)** — `ng build` + `npm run serve:ssr:food-shop-ssr`
+   - Server sends fully-rendered HTML on first request
+   - Browser can display content immediately (faster FCP)
+   - JavaScript enhances with interactivity via hydration
+   - Better perceived performance and SEO
 
-### Implementation Patterns in food-shop-ssr
+3. **Static Pre-rendering** — with `routes.txt`
+   - Static HTML generated at build time
+   - Served instantly — no server computation needed
+   - Best performance for static product/marketing pages
+   - Scales infinitely (served by CDN, no server)
 
-The food-shop-ssr demo demonstrates:
+### SSR Architecture
 
-- Standalone components with signal-based inputs/outputs
-- Pure signal-based state management (no `ControlValueAccessor`)
-- Dynamic route params converted to signals with `toSignal()`
-- Reactive data loading with `httpResource()`
-- Client hydration for seamless server-to-client transition
+The food-shop-ssr app uses this SSR stack:
+
+```
+Angular CLI (ng build)
+  ↓ (compiles Angular for Node.js)
+dist/food-shop-ssr/server/
+  ↓ (CommonEngine renders components)
+Express.js Server (server.ts)
+  ↓ (HTTP responses with rendered HTML)
+Browser (hydration attaches event listeners)
+```
+
+**App Configuration for SSR:**
+
+- **CommonEngine** (from `@angular/ssr`) executes Angular on server
+- **Express.js** provides HTTP server with middleware
+- **provideClientHydration()** enables seamless server-to-browser transition
+- **provideHttpClient(withFetch())** uses Fetch API (Node.js compatible)
+
+### Modern Component Patterns in food-shop-ssr
+
+1. **Signal-Based State**
+
+   ```typescript
+   cart = signal<FoodCartItem[]>([]);
+   quantity = signal<number>(0);
+   ```
+
+   - Simple, synchronous state management
+   - No async subscription complexity
+
+2. **Reactive Data Loading**
+
+   ```typescript
+   food = httpResource<FoodItem[]>(() => `${environment.api}food`);
+   ```
+
+   - Built-in loading/error states
+   - Automatic cleanup on component destroy
+   - Reactive updates when dependencies change
+
+3. **Signal Inputs & Outputs**
+
+   ```typescript
+   readonly food = input.required<FoodItem>();
+   readonly itemChanged = output<FoodCartItem>();
+   ```
+
+   - Type-safe prop bindings
+   - Simpler than `@Input()/@Output()` decorators
+   - Called as functions in component logic
+
+4. **Route Parameters as Signals**
+   ```typescript
+   private id = toSignal(this.route.paramMap.pipe(...));
+   item = httpResource<FoodItem>(() => `${environment.api}food/${this.id()}`);
+   ```
+
+   - Convert Observable params to signals
+   - Trigger dependent data loads when route changes
+
+### SSR Best Practices
+
+✅ **Do:**
+
+- Use `ChangeDetectionStrategy.OnPush` to reduce rendering overhead
+- Leverage `httpResource()` for server-compatible async data
+- Pre-render static routes in `routes.txt`
+- Use `provideClientHydration()` for seamless SSR
+- Keep components pure (no browser API dependencies)
+- Use `isPlatformBrowser()` if browser APIs are needed
+- Test SSR builds locally before deployment
+- Monitor Core Web Vitals (FCP, LCP, INP, CLS)
+
+❌ **Don't:**
+
+- Use `window`, `document`, or `localStorage` without guards
+- Subscribe to Observables directly in components (use `httpResource()` or `toSignal()`)
+- Use `ChangeDetectionStrategy.Default` (expensive on server)
+- Pre-render routes with real-time data or user-specific content
+- Assume browser APIs are available on server
+
+### Angular 21+ Features Used in food-shop-ssr
+
+| Feature                            | Benefit                                                     |
+| ---------------------------------- | ----------------------------------------------------------- |
+| **Standalone Components**          | Tree-shakeable, better bundling                             |
+| **Signal Inputs/Outputs**          | Type-safe, reactive prop binding                            |
+| **httpResource()**                 | Automatic loading state, error handling, reactivity         |
+| **toSignal()**                     | Convert Observable params/subscriptions to signals          |
+| **effect()**                       | React to signal changes without explicit subscriptions      |
+| **ChangeDetectionStrategy.OnPush** | Reduced change detection cycles — critical for SSR          |
+| **@if / @for / @switch**           | Modern control flow, better performance than `*ngIf/*ngFor` |
+| **ngOptimizedImage**               | Automatic image optimization for Core Web Vitals            |
+| **provideClientHydration()**       | Seamless SSR hydration without re-rendering                 |
 
 ## Related Topics
 
