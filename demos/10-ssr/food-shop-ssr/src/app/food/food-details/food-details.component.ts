@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
   selector: 'app-food-details',
   imports: [JsonPipe, RouterModule, MatButtonModule],
   templateUrl: './food-details.component.html',
-  styleUrls: ['./food-details.component.scss'],
+  styleUrl: './food-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoodDetailsComponent {

@@ -6,11 +6,11 @@ import { FoodItem } from '../food.model';
 import { environment } from '../../../environments/environment';
 
 @Component({
-    selector: 'app-food-list',
-    imports: [ShopItemComponent],
-    templateUrl: './food-list.component.html',
-    styleUrls: ['./food-list.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-food-list',
+  imports: [ShopItemComponent],
+  templateUrl: './food-list.component.html',
+  styleUrl: './food-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FoodListComponent {
   food = httpResource<FoodItem[]>(() => `${environment.api}food`);

@@ -1,0 +1,9 @@
+<div class="box">
+  @for (f of food.value(); track f.id) {
+    <app-shop-item
+      [food]="f"
+      [inCart]="cart().find(item => item.id === f.id)?.quantity || 0"
+      (itemChanged)="updateCart($event)"
+    ></app-shop-item>
+  }
+</div>
