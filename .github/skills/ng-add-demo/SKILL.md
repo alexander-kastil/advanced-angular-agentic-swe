@@ -1,5 +1,5 @@
 ---
-name: create-demo
+name: ng-add-demo
 description: Add a new demo to any module under demos/. Registers it in db.json, generates the component, adds the route, adds the markdown renderer, and creates an empty guide. Triggers on: add demo, create demo, new demo, register demo.
 ---
 
@@ -67,12 +67,12 @@ npx ng build --configuration development 2>&1 | Select-Object -Last 10
 
 ## Paths at a glance
 
-| Artifact | Path |
-|---|---|
-| Component | `src/app/demos/samples/<slug>/` |
-| Route | `src/app/demos/demo.routes.ts` |
-| Guide | `public/markdown/<slug>.md` |
-| Registration | `db.json → demos` |
+| Artifact     | Path                            |
+| ------------ | ------------------------------- |
+| Component    | `src/app/demos/samples/<slug>/` |
+| Route        | `src/app/demos/demo.routes.ts`  |
+| Guide        | `public/markdown/<slug>.md`     |
+| Registration | `db.json → demos`               |
 
 ## Example — `linked-signal` in `demos/03-signals/ng-signals`
 
@@ -85,10 +85,10 @@ npx ng generate component demos/samples/linked-signal --change-detection OnPush 
 `demo.routes.ts`: `{ path: 'linked-signal', component: LinkedSignalComponent }`
 
 `public/markdown/linked-signal.md`:
+
 ```markdown
 - Examine `linked-signal.component.ts` and its use of `linkedSignal` to create a writable signal that resets whenever its source changes
 ```
-
 
 ## Steps
 
@@ -114,6 +114,7 @@ npx ng generate component demos/samples/<slug> --change-detection OnPush --inlin
 ```
 
 Flags:
+
 - `--change-detection OnPush` — required by project conventions
 - `--inline-style` — styles are minimal for demo components; avoids an extra file
 - `--skip-tests` — spec files are written separately when needed
@@ -178,12 +179,12 @@ Fix any TypeScript errors before finishing.
 
 ## Path conventions
 
-| Artifact | Location |
-|---|---|
-| Component | `src/app/demos/samples/<slug>/` |
-| Route registration | `src/app/demos/demo.routes.ts` |
-| Markdown guide | `public/markdown/<slug>.md` |
-| db.json | `<module-root>/db.json` |
+| Artifact           | Location                        |
+| ------------------ | ------------------------------- |
+| Component          | `src/app/demos/samples/<slug>/` |
+| Route registration | `src/app/demos/demo.routes.ts`  |
+| Markdown guide     | `public/markdown/<slug>.md`     |
+| db.json            | `<module-root>/db.json`         |
 
 ## Example
 
@@ -195,11 +196,13 @@ npx ng generate component demos/samples/linked-signal --change-detection OnPush 
 ```
 
 `db.json` entry:
+
 ```json
 { "id": 13, "url": "linked-signal", "title": "Linked Signal" }
 ```
 
 `demo.routes.ts` addition:
+
 ```typescript
 import { LinkedSignalComponent } from './samples/linked-signal/linked-signal.component';
 // ...
@@ -207,6 +210,7 @@ import { LinkedSignalComponent } from './samples/linked-signal/linked-signal.com
 ```
 
 `public/markdown/linked-signal.md`:
+
 ```markdown
 ## Linked Signal
 

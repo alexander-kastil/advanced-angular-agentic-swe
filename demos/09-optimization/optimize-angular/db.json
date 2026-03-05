@@ -6,7 +6,7 @@
       "teaches": "Measure and optimize Core Web Vitals and performance metrics using Chrome DevTools Lighthouse audits.",
       "topic": "Performance Measurement",
       "sortOrder": 1,
-      "md": "lighthouse",
+      "md": "web-vitals",
       "id": "5957"
     },
     {
@@ -19,12 +19,12 @@
       "id": "440f"
     },
     {
-      "url": "optimized-controls",
-      "title": "Optimized Controls",
-      "teaches": "Combine OnPush change detection with Reactive Forms for optimal form performance and minimal re-renders.",
+      "url": "configure-zoneless",
+      "title": "Configure Zoneless",
+      "teaches": "Enable zoneless change detection using provideZonelessChangeDetection() for reduced overhead and signal-driven reactivity.",
       "topic": "Performance Optimization",
-      "sortOrder": 5,
-      "md": "optimized-controls",
+      "sortOrder": 3,
+      "md": "configure-zoneless",
       "id": "4f29"
     },
     {

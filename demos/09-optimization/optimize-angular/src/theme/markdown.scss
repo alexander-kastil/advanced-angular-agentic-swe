@@ -2,17 +2,78 @@ markdown p {
   line-height: 1.8rem;
 }
 
-markdown li{
+markdown h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.5rem 0;
+  color: var(--color-primary);
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 0.25rem;
+}
+
+markdown h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 1.25rem 0 0.5rem 0;
+  color: var(--color-secondary);
+  border-left: 3px solid var(--color-secondary);
+  padding-left: 0.5rem;
+}
+
+markdown h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--color-accent);
+}
+
+markdown h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0.75rem 0 0.25rem 0;
+}
+
+markdown li {
   margin-left: 1rem;
   margin-bottom: 0.5rem;
 }
 
-code:not([class])  {
+code:not([class]) {
   font-weight: 500;
   font-style: italic;
-   color: var(--color-primary);
+  color: var(--color-primary);
 }
 
-code[class*=language-], pre[class*=language-]{
-    font-size: 1rem !important;
+code[class*="language-"],
+pre[class*="language-"] {
+  font-size: 1rem !important;
+}
+
+markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  border: 1px solid #ddd;
+
+  th {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+  }
+
+  td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+  }
+
+  tbody tr:hover {
+    background-color: #fafafa;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
 }

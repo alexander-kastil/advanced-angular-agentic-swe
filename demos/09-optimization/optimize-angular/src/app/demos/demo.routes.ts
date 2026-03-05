@@ -7,7 +7,7 @@ import { LighthouseComponent } from './samples/lighthouse/lighthouse.component';
 import { NgOptimizedImageComponent } from './samples/ng-optimized-image/ng-optimized-image.component';
 import { VirtualScrollComponent } from './samples/virtual-scroll/virtual-scroll.component';
 import { BundlesComponent } from './samples/bundles/bundles.component';
-import { OptimizedControlsComponent } from './samples/optimized-controls/optimized-controls.component';
+import { ConfigureZonelessComponent } from './samples/configure-zoneless/configure-zoneless.component';
 
 export const demoRoutes: Routes = [
     {
@@ -17,7 +17,7 @@ export const demoRoutes: Routes = [
         children: [
             { path: 'esbuild', component: EsbuildComponent, title: 'Demos - ES Build' },
             { path: 'optimize-bundles', component: BundlesComponent, title: 'Demos - Optimize Bundles' },
-            { path: 'optimized-controls', component: OptimizedControlsComponent, title: 'Demos - Optimized Controls' },
+            { path: 'configure-zoneless', component: ConfigureZonelessComponent, title: 'Demos - Configure Zoneless' },
             { path: 'lighthouse', component: LighthouseComponent, title: 'Demos - Lighthouse KPIs' },
             { path: 'virtual-scroll', component: VirtualScrollComponent, title: 'Demos - Virtual Scroll' },
             { path: 'a11y', component: A11yComponent, title: 'Demos - A11y' },

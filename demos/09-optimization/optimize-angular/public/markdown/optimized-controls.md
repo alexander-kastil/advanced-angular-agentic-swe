@@ -1,8 +1,0 @@
-- Combine `OnPush` change detection with Reactive Forms for optimal performance
-- When a component uses `ChangeDetectionStrategy.OnPush`, it only re-evaluates when:
-  - Input property changes
-  - Event emissions from template
-  - Async pipe resolution
-  - Manual change detection triggered
-- Reactive Forms with OnPush prevents unnecessary component re-renders by leveraging signal-based state updates
-- Form value changes are detected through Angular's change detection mechanism, ensuring efficient UI updates

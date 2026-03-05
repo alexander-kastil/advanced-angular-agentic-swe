@@ -1,0 +1,127 @@
+.zoneless-demo {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+
+  h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.demo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.info-box {
+  background: #f0f4ff;
+  border-left: 4px solid #2563eb;
+  padding: 1rem;
+  border-radius: 4px;
+
+  h3 {
+    margin-top: 0;
+    color: #2563eb;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+
+    code {
+      background: #e0e8ff;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+  }
+}
+
+.demo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    input {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+
+      &:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      &:invalid:not(:placeholder-shown) {
+        border-color: #dc2626;
+      }
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 0.875rem;
+    }
+  }
+
+  button {
+    padding: 0.75rem 1.5rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+      background: #1d4ed8;
+    }
+
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.explanation {
+  background: #f9f3ff;
+  border-left: 4px solid #a855f7;
+  padding: 1rem;
+  border-radius: 4px;
+
+  h3 {
+    margin-top: 0;
+    color: #a855f7;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+  }
+}

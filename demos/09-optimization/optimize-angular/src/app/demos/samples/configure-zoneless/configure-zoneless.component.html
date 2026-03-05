@@ -1,0 +1,62 @@
+<div class="zoneless-demo">
+  <h2>Configure Zoneless Change Detection</h2>
+
+  <div class="demo-container">
+    <div class="info-box">
+      <h3>Zoneless Change Detection Enabled</h3>
+      <p>
+        This demo runs with <code>provideZonelessChangeDetection()</code>, which
+        removes ZoneJS overhead.
+      </p>
+      <p><strong>Form change count:</strong> {{ changeCount() }}</p>
+      <p><strong>Current email value:</strong> {{ formValueCount() }}</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="demo-form">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          (change)="onEmailChange()"
+          placeholder="Enter your email"
+        />
+        @if (form.get("email")?.invalid && submitted()) {
+          <span class="error">Valid email required</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          (change)="onEmailChange()"
+          placeholder="Enter password (min 8 chars)"
+        />
+        @if (form.get("password")?.invalid && submitted()) {
+          <span class="error">Password must be at least 8 characters</span>
+        }
+      </div>
+
+      <button type="submit" [disabled]="submitted() && form.invalid">
+        Submit Form
+      </button>
+    </form>
+
+    <div class="explanation">
+      <h3>How Zoneless Works:</h3>
+      <ul>
+        <li>No ZoneJS = No monkey-patching of browser events</li>
+        <li>
+          Change detection triggered by: signal updates, event handlers, input
+          changes
+        </li>
+        <li>OnPush strategy ensures minimal re-renders in component tree</li>
+        <li>Signals automatically schedule change detection when updated</li>
+      </ul>
+    </div>
+  </div>
+</div>
