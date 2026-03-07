@@ -1,0 +1,57 @@
+.container {
+  background-color: lavender;
+  padding: 1rem;
+}
+
+tr {
+  cursor: pointer;
+}
+
+table {
+  margin: 0 auto;
+  min-width: 50vw;
+
+  tr :hover {
+    text-decoration: underline;
+  }
+
+  th,
+  td {
+    text-align: start;
+  }
+}
+
+a {
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+input {
+  width: 60%;
+}
+
+.addRow {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem auto;
+  background: #c3002f;
+  color: white;
+  padding: 1rem;
+
+  a {
+    color: white;
+  }
+}
+
+.centered {
+  text-align: center;
+  margin: 1.5rem;
+}
+
+div {
+  margin-bottom: 1rem;
+}

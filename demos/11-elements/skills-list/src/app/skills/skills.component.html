@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="centered">Current Skills</h1>
+  <div class="addRow">
+    <label>Add a Skill:</label><input type="text" [(ngModel)]="skillToAdd" />
+    <a (click)="addSkill()">Add Skill</a>
+    <a (click)="saveSkills()">Save Skills</a>
+  </div>
+  <div class="centered">
+    @defer (when skills.length > 0) {
+    <table>
+      <colgroup>
+        <col style="width: 10%" />
+        <col style="width: 60%" />
+        <col style="width: 15%" />
+        <col style="width: 15%" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Hours</th>
+          <th>Completed</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (s of skills; track s) {
+        <tr (click)="removeSkill(s)">
+          <td>{{ s.id }}</td>
+          <td>{{ s.name }}</td>
+          <td>{{ s.hours }}</td>
+          <td>{{ s.completed }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <h3 class="centered">Hover a skill & click to remove</h3>
+    }@placeholder{
+    <div>Currently you have no skills</div>
+    <div>Click "Add Skill" to add a skill</div>
+    }
+  </div>
+</div>
