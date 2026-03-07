@@ -3,15 +3,11 @@
   padding: 1rem;
 }
 
-tr {
-  cursor: pointer;
-}
-
 table {
   margin: 0 auto;
   min-width: 50vw;
 
-  tr :hover {
+  tr:hover td {
     text-decoration: underline;
   }
 
@@ -21,29 +17,30 @@ table {
   }
 }
 
-a {
-  cursor: pointer;
-  text-decoration: underline;
-
-  &:hover {
-    text-decoration: none;
-  }
-}
-
 input {
   width: 60%;
 }
 
+button {
+  cursor: pointer;
+}
+
 .addRow {
   display: flex;
+  gap: 0.75rem;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
   margin: 1rem auto;
   background: #c3002f;
   color: white;
   padding: 1rem;
 
-  a {
+  button {
     color: white;
+    background: transparent;
+    border: 1px solid currentColor;
+    padding: 0.5rem 0.75rem;
   }
 }
 
