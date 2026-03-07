@@ -9,10 +9,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "serve:element": "bash scripts/serve-element.sh",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:element": "ng build -c production --output-hashing none"
+    "build:element": "bash scripts/build-element.sh"
   },
   "private": true,
   "dependencies": {

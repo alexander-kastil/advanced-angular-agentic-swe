@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# ng-configure-element - Convenience wrapper
+# Usage: ./ng-configure-element <project-path>
+# Or from anywhere: ng-configure-element <project-path> (if in PATH)
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+node "$SCRIPT_DIR/scripts/ng-configure-element.js" "$@"
