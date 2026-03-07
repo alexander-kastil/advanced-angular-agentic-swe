@@ -3,7 +3,19 @@
     "allow": [
       "Bash(grep -E \"\\\\.\\(ts\\)$\")",
       "Bash(grep -l \"FormControl\\\\|FormGroup\" \"d:/git-classes/angular-advanced/demos/08-testing/vitetest-testing/src/app/demos/samples/\"*)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Read(//c/Users/AlexanderKastil/.claude/**)",
+      "Bash(cp /d/git-classes/advanced-angular-agentic-swe/.github/skills/ng-update/SKILL.md ~/.claude/skills/ng-update/SKILL.md)",
+      "Bash(cp /d/git-classes/advanced-angular-agentic-swe/.github/skills/describe-module/SKILL.md ~/.claude/skills/describe-module/SKILL.md)",
+      "Bash(cp /d/git-classes/advanced-angular-agentic-swe/.github/skills/check-demos/SKILL.md ~/.claude/skills/check-demos/SKILL.md)",
+      "Bash(cp /d/git-classes/advanced-angular-agentic-swe/.github/skills/ng-migrate-md/SKILL.md ~/.claude/skills/ng-migrate-md/SKILL.md)",
+      "mcp__angular-cli__list_projects",
+      "Bash(npm run build)",
+      "mcp__angular-cli__onpush_zoneless_migration",
+      "Bash(npm run test)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\AlexanderKastil\\.claude\\skills\\ng-update"
     ]
   }
 }

@@ -12,7 +12,6 @@ import { Skill } from './skills.model';
 
 @Component({
   selector: 'app-skills',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.scss'
