@@ -17,6 +17,13 @@
 const fs = require('fs');
 const path = require('path');
 
+function upsertJsonFile(filePath, updater) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const json = JSON.parse(content);
+  const updated = updater(json);
+  fs.writeFileSync(filePath, JSON.stringify(updated, null, 2) + '\n');
+}
+
 const args = process.argv.slice(2);
 if (args.length === 0) {
   console.error('❌ Error: Project path required');
@@ -39,16 +46,11 @@ console.log(`🔧 Configuring Angular Elements for: ${projectPath}\n`);
 
 const srcPath = path.join(projectRoot, 'src');
 const appPath = path.join(srcPath, 'app');
-const scriptsPath = path.join(projectRoot, 'scripts');
 const packageJsonPath = path.join(projectRoot, 'package.json');
+const angularJsonPath = path.join(projectRoot, 'angular.json');
+const tsconfigAppPath = path.join(projectRoot, 'tsconfig.app.json');
 
-// 1. Create scripts directory if it doesn't exist
-if (!fs.existsSync(scriptsPath)) {
-  fs.mkdirSync(scriptsPath, { recursive: true });
-  console.log('✓ Created scripts directory');
-}
-
-// 2. Create app.config.element.ts
+// 1. Create app.config.element.ts
 const appConfigElementContent = `import { ApplicationConfig } from '@angular/core';
 
 export const appConfigElement: ApplicationConfig = {
@@ -59,7 +61,7 @@ export const appConfigElement: ApplicationConfig = {
 fs.writeFileSync(path.join(appPath, 'app.config.element.ts'), appConfigElementContent);
 console.log('✓ Created app.config.element.ts');
 
-// 3. Create main.element.ts
+// 2. Create main.element.ts
 const mainElementContent = `import { appConfigElement } from './app/app.config.element';
 import { SkillsComponent } from './app/skills/skills.component';
 
@@ -81,77 +83,61 @@ import { createApplication } from '@angular/platform-browser';
 fs.writeFileSync(path.join(srcPath, 'main.element.ts'), mainElementContent);
 console.log('✓ Created main.element.ts');
 
-// 4. Create serve-element.sh
-const serveElementScript = `#!/bin/bash
+// 3. Update angular.json
+upsertJsonFile(angularJsonPath, (angularJson) => {
+  const projectName = Object.keys(angularJson.projects ?? {})[0];
 
-set -e
+  if (!projectName) {
+    throw new Error('No Angular project found in angular.json');
+  }
 
-MAIN_FILE="src/main.ts"
-MAIN_BACKUP="src/main.ts.bak"
-ELEMENT_MAIN="src/main.element.ts"
+  const project = angularJson.projects[projectName];
+  const build = project.architect?.build;
+  const serve = project.architect?.serve;
 
-echo "Starting element dev server (without zoneless)..."
+  if (!build || !serve) {
+    throw new Error('Project is missing build or serve targets');
+  }
 
-# Backup original main.ts
-cp "$MAIN_FILE" "$MAIN_BACKUP"
+  build.configurations = build.configurations ?? {};
+  build.configurations.element = {
+    ...(build.configurations.element ?? {}),
+    browser: 'src/main.element.ts'
+  };
 
-# Use element main.ts
-cp "$ELEMENT_MAIN" "$MAIN_FILE"
+  serve.configurations = serve.configurations ?? {};
+  serve.configurations.element = {
+    ...(serve.configurations.element ?? {}),
+    buildTarget: `${projectName}:build:element,development`
+  };
 
-# Trap to restore on exit (Ctrl+C)
-trap "mv '$MAIN_BACKUP' '$MAIN_FILE'; echo 'Element server stopped. Restored main.ts'" EXIT
+  return angularJson;
+});
+console.log('✓ Updated angular.json with element build and serve configurations');
 
-# Run the dev server
-ng serve --open
-`;
+// 4. Update tsconfig.app.json
+upsertJsonFile(tsconfigAppPath, (tsconfig) => {
+  const files = new Set(tsconfig.files ?? []);
+  files.add('src/main.ts');
+  files.add('src/main.element.ts');
+  tsconfig.files = Array.from(files);
 
-fs.writeFileSync(path.join(scriptsPath, 'serve-element.sh'), serveElementScript);
-fs.chmodSync(path.join(scriptsPath, 'serve-element.sh'), '755');
-console.log('✓ Created scripts/serve-element.sh');
+  const include = new Set(tsconfig.include ?? []);
+  include.add('src/app/**/*.ts');
+  include.add('src/**/*.d.ts');
+  tsconfig.include = Array.from(include);
 
-// 5. Create build-element.sh
-const buildElementScript = `#!/bin/bash
+  return tsconfig;
+});
+console.log('✓ Updated tsconfig.app.json for the element entry point');
 
-set -e
-
-MAIN_FILE="src/main.ts"
-MAIN_BACKUP="src/main.ts.bak"
-ELEMENT_MAIN="src/main.element.ts"
-
-echo "Building Angular Element (without zoneless)..."
-
-# Backup original main.ts
-cp "$MAIN_FILE" "$MAIN_BACKUP"
-
-# Use element main.ts for build
-cp "$ELEMENT_MAIN" "$MAIN_FILE"
-
-# Run the build
-ng build -c production --output-hashing none
-
-# Restore original main.ts
-mv "$MAIN_BACKUP" "$MAIN_FILE"
-
-echo "Element build complete! Output is in dist/<project-name>/"
-`;
-
-fs.writeFileSync(path.join(scriptsPath, 'build-element.sh'), buildElementScript);
-fs.chmodSync(path.join(scriptsPath, 'build-element.sh'), '755');
-console.log('✓ Created scripts/build-element.sh');
-
-// 6. Update package.json
-const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf-8');
-const packageJson = JSON.parse(packageJsonContent);
-
-// Add/update scripts
-if (!packageJson.scripts) {
-  packageJson.scripts = {};
-}
-
-packageJson.scripts['serve:element'] = 'bash scripts/serve-element.sh';
-packageJson.scripts['build:element'] = 'bash scripts/build-element.sh';
-
-fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
+// 5. Update package.json
+upsertJsonFile(packageJsonPath, (packageJson) => {
+  packageJson.scripts = packageJson.scripts ?? {};
+  packageJson.scripts['serve:element'] = 'ng serve --configuration element --open';
+  packageJson.scripts['build:element'] = 'ng build --configuration element,production --output-hashing none';
+  return packageJson;
+});
 console.log('✓ Updated package.json with serve:element and build:element scripts');
 
 console.log('\n✅ Angular Elements configuration complete!\n');
@@ -164,5 +150,5 @@ console.log('  src/app/app.config.ts            → Default config (with zoneles
 console.log('  src/app/app.config.element.ts    → Element config (without zoneless)');
 console.log('  src/main.ts                      → Default entry point');
 console.log('  src/main.element.ts              → Element entry point');
-console.log('  scripts/serve-element.sh         → Element dev server');
-console.log('  scripts/build-element.sh         → Element build script\n');
+console.log('  angular.json                     → Element build and serve configurations');
+console.log('  tsconfig.app.json                → TypeScript entry-point inclusion\n');

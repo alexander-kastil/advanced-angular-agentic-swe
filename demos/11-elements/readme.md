@@ -1,274 +1,60 @@
-# Angular Elements
+# Angular Elements Demo
 
-[Angular Elements](https://angular.io/guide/elements)
+An Angular Element is an Angular component packaged as a standard browser custom element. That means it behaves like a reusable web control: you place it on a page as an HTML tag, pass data in, listen for events out, and use it inside Angular or non-Angular applications.
 
-[Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
+## Quick Start
 
-[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
+Use the configured demo project in [skills-list](d:/git-classes/advanced-angular-agentic-swe/demos/11-elements/skills-list):
 
-[Web Templates](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_templates_and_slots)
+```bash
+cd skills-list
+```
 
-## Getting started:
+## Scripts
 
-- Project Setup & Add Elements
+| Script                  | Purpose                                                                                                                     |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `npm start`             | Runs the normal Angular dev server for the app entry point. Use this while developing the component inside the Angular app. |
+| `npm run build`         | Creates a standard Angular production build of the demo application.                                                        |
+| `npm run serve:element` | Starts the dev server with the element entry point instead of the normal app entry point.                                   |
+| `npm run build:element` | Builds the distributable web component by using the element entry point in the Angular build configuration.                 |
 
-  ```
-  ng new skills-list --routing=false --style=scss --ssr=false
-  cd skills-list
-  code .
-  npm i -S @angular/elements
-  ```
+## What This Demo Shows
 
-## Implement the component that will be exported as Angular Element
+The `skills-list` demo shows how to expose a standalone Angular component as a browser custom element while keeping a normal Angular development mode. It uses modern Angular patterns such as signals, `input()`, `output()`, and native control flow.
 
-- Add the `FormsModule` to `app.module.ts` and add a Component using:
+## Key Files
 
-  ```
-  ng g c skills
-  ```
+- `src/app/skills/skills.component.ts`: The custom element component
+- `src/app/app.config.ts`: Default app configuration
+- `src/app/app.config.element.ts`: Element-specific configuration
+- `src/main.ts`: Normal application entry point
+- `src/main.element.ts`: Custom-element entry point
+- `angular.json`: Build and serve configurations for normal app mode and element mode
 
-- Add a `skills/skill.model.ts` file:
+## Output
 
-  ```typescript
-  export class Skill {
-    id = 0;
-    name = '';
-    hours = 0;
-    completed = false;
-  }
-  ```
+`npm run build:element` writes the production element bundle to `dist/skills-list/browser/`.
 
-- In `skills.component.ts` add an `Skill[]` as `@Input()` and create a Button that triggers the current `Skill[]` as `@Output()`
+To embed it in another app, load the built script and place the custom element on the page:
 
-  ```typescript
-  @Input() skills: Skill[] = [];
-  @Output() skillsSaved: EventEmitter<Skill[]> = new EventEmitter<Skill[]>();
-  skillToAdd = '';
-  ```
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <skills-list></skills-list>
+  <script src="dist/skills-list/browser/main.js"></script>
+</body>
+</html>
+```
 
-- In skills.component.html add the following html:
+## Resources
 
-  ```html
-  <div class="container">
-    <h1 class="centered">Current Skills</h1>
-    <div class="addRow">
-      <label>Add a Skill:</label><input type="text" [(ngModel)]="skillToAdd" />
-      <a (click)="addSkill()">Add Skill</a>
-      <a (click)="saveSkills()">Save Skills</a>
-    </div>
-    <div class="centered">
-      @defer (when skills.length > 0) {
-      <table>
-        <colgroup>
-          <col style="width: 10%" />
-          <col style="width: 60%" />
-          <col style="width: 15%" />
-          <col style="width: 15%" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Hours</th>
-            <th>Completed</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (s of skills; track s) {
-          <tr (click)="removeSkill(s)">
-            <td>{{ s.id }}</td>
-            <td>{{ s.name }}</td>
-            <td>{{ s.hours }}</td>
-            <td>{{ s.completed }}</td>
-          </tr>
-          }
-        </tbody>
-      </table>
-      <h3 class="centered">Hover a skill & click to remove</h3>
-      }@placeholder{
-      <div>Currently you have no skills</div>
-      <div>Click "Add Skill" to add a skill</div>
-      }
-    </div>
-  </div>
-  ```  
-
-- Add the following css to skills.component.scss:
-
-  ```css
-  .container {
-    background-color: lavender;
-    padding: 1rem;
-  }
-
-  tr {
-    cursor: pointer;
-  }
-
-  table {
-    margin: 0 auto;
-    min-width: 50vw;
-
-    tr :hover {
-      text-decoration: underline;
-    }
-
-    th,
-    td {
-      text-align: start;
-    }
-  }
-
-  a {
-    cursor: pointer;
-    text-decoration: underline;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
-
-  input {
-    width: 60%;
-  }
-
-  .addRow {
-    display: flex;
-    justify-content: space-between;
-    margin: 1rem auto;
-    background: #c3002f;
-    color: white;
-    padding: 1rem;
-
-    a {
-      color: white;
-    }
-  }
-
-  .centered {
-    text-align: center;
-    margin: 1.5rem;
-  }
-
-  div {
-    margin-bottom: 1rem;
-  }
-  ```  
-
-- Add the following events to `skills-list.component.ts`:
-
-  ```typescript
-  removeSkill(item: Skill): void {
-    this.skills = this.skills.filter((s) => s.id !== item.id);
-  }
-
-  addSkill(): void {
-    const sk: Skill = {
-      id: this.skills.length + 1,
-      name: this.skillToAdd,
-      hours: 4,
-      completed: false,
-    };
-    this.skills.push(sk);
-  }
-
-  saveSkills(): void {
-    this.skillsSaved.emit(this.skills);
-  }
-  ```
-
-- Run your component. Your result should look somehow like this after you have added some items:
-
-  ![skills](_images/skills.png)
-
-## Build & Package
-
-- Modify `main.ts` to create the CustomElement. Comment the following code - you might need it if you want to develop later on:
-
-  ```typescript
-  bootstrapApplication(SkillsComponent, appConfig)
-    .catch((err) => console.error(err));
-  ```
-
-- Add the following code to `main.ts`:
-
-  ```typescript
-  (async () => {
-    const app = await createApplication({
-      providers: [
-        /* your global providers here */
-      ],
-    });
-
-    const element = createCustomElement(SkillsComponent, {
-      injector: app.injector,
-    });
-    customElements.define('skills-list', element);
-  })();
-  ```
-
-- Add a script to `package.json` to build the Angular Element and run it:
-
-  ```json
-  "build:element": "ng build -c production --output-hashing none"
-  ```
-
-  >Note: If your want to have only one javascript file you could run the following command on a windows machine: 
-  
-  ```powershell
-  Get-Content .\dist\skills-list\browser\polyfills.js, .\dist\skills-list\browser\main.js | Set-Content .\dist\skills-list\browser\element.js
-  ```
-
-## Test your Web Component created with Angular Elements
-
-- Copy `skills.js` to the output folder. It will use the @Input() and @Output() of the Angular Element
-
-  ```javascript
-  document.addEventListener("DOMContentLoaded", function (event) {
-    const element = document.getElementsByTagName("skills-list")[0];
-    if (element) {
-      // pass data
-      const data = [
-        { id: 1, name: "node.js", hours: 2, completed: false },
-        { id: 2, name: "type script", hours: 2, completed: false },
-        { id: 3, name: "java script", hours: 1, completed: false },
-      ];
-      element.skills = data;
-      // handle event
-      element.addEventListener("skillsSaved", (data) =>
-        console.log("Data received from ng-skills:", data.detail)
-      );
-    }
-  });
-  ```
-
-  - Modify the HTML in `./dist/skills-list/browser/index.html`:
-
-  ```html
-  <!DOCTYPE html>
-  <html lang="en" data-critters-container>
-    <head>
-      <meta charset="utf-8" />
-      <title>SkillsList</title>
-      <base href="/" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="icon" type="image/x-icon" href="favicon.ico" />
-      <link rel="stylesheet" href="styles.css" />
-    </head>
-    <body>
-      <skills-list></skills-list>
-      <script src="polyfills.js" type="module"></script>
-      <script src="main.js" type="module"></script>
-      <script src="skills.js"></script>
-    </body>
-  </html>
-  ```
-
-- Install a tool that can serve static pages, ie `angular-http-server`:
-
-  ```bash
-  npm i -g angular-http-server
-  angular-http-server -p 8080
-  ```
-
-- Navigate to: `http://localhost:8080/` and test your element
+- [Angular Elements Guide](https://angular.dev/guide/elements)
+- [Web Components](https://developer.mozilla.org/en-US/docs/web/web_components)
+- [Signals in Angular](https://angular.dev/guide/signals)
+- [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
+- [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)

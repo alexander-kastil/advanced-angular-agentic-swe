@@ -41,8 +41,8 @@ npm run build:element   # Build for distribution
 For each configured project:
 - `src/main.element.ts` - Element entry point
 - `src/app/app.config.element.ts` - Element config (no zoneless)
-- `scripts/serve-element.sh` - Dev server for element
-- `scripts/build-element.sh` - Build script
+- Updated `angular.json` with `element` build and serve configurations
+- Updated `tsconfig.app.json` so the element entry point is type-checked
 - Updated `package.json` with new npm scripts
 
 ### Example
@@ -60,13 +60,13 @@ npm run build:element  # Build web component
 
 ### How It Works
 
-The bash scripts temporarily swap entry points:
-1. Backup `src/main.ts`
-2. Copy `src/main.element.ts` → `src/main.ts`
-3. Run ng serve/build
-4. Restore original `src/main.ts`
+The skill adds an Angular CLI `element` configuration:
+1. Keep `src/main.ts` as the normal app entry point
+2. Add `src/main.element.ts` as the element entry point
+3. Configure `angular.json` so `serve:element` and `build:element` use the element entry point
+4. Keep both entry points in `tsconfig.app.json` so Angular can type-check both modes
 
-This avoids modifying `angular.json` while supporting different configurations.
+This avoids file swapping and works cleanly across Windows, PowerShell, bash, and CI environments.
 
 ### Configuration Comparison
 
@@ -74,7 +74,7 @@ This avoids modifying `angular.json` while supporting different configurations.
 |--------|-------------|---------|
 | Entry | `src/main.ts` | `src/main.element.ts` |
 | Config | `app.config.ts` (zoneless) | `app.config.element.ts` (no zoneless) |
-| Command | `npm start` | `npm run serve/build:element` |
+| Command | `npm start` | `npm run serve:element` / `npm run build:element` |
 
 ### Keywords
 
