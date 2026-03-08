@@ -18,6 +18,7 @@ import { Skill } from './skills.model';
 })
 export class SkillsComponent {
   readonly initialSkills = input<Skill[]>([], { alias: 'skills' });
+  readonly width = input(300);
   readonly skillsSaved = output<Skill[]>();
   readonly skillName = signal('');
   readonly skills = linkedSignal(() => this.initialSkills().map((skill) => ({ ...skill })));
