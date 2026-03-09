@@ -1,4 +1,4 @@
-# Mastering Reactive Programming using Signals & RxJS
+# Mastering Reactive Programming with RxJS
 
 [RxJS Api Reference](https://rxjs-dev.firebaseapp.com/api)
 
@@ -12,47 +12,31 @@
 
 [Testing RxJS Code with Marble Diagrams](https://rxjs.dev/guide/testing/marble-testing)
 
+RxJS remains essential for professional Angular development, especially for library integration, complex async orchestration, and working with existing codebases. This module covers the full reactive programming model: Observables, operators, marble testing, custom operators, and signal interop via `toSignal()` and `httpResource()`. You will learn the foundational patterns that NgRx effects build on and understand when to reach for observables versus signals.
+
 ## Demos
 
-- Imperative vs Functional Programming
-- Immutability & Pure Functions
-- Introduction to RxJS
-- Observables, Observers & Use Cases
-- Data- vs Action-Streams
-- Mouse & DOM Events as Observables
-- Implementing Side Effects using tap
-- Base Operators: Mapping, Filtering, Merging, Scanning, ...
-- Unsubscribing (takeUntil, DestroyRef, takeUntilDestroyed)
-- Introduction to Signals
-- Imperative vs Declarative Reactive Programming
-- Signals vs Observables: Synchronous & Asynchronous Reactive Programming
-- Understanding Marble Diagrams & Debugging Observables
-- Marble-testing RxJS
-- Combination & Transformation Operators
-- Retry & Error Handling Strategies
-- Implementing & Testing Custom Observable Operators
-- Communication between using Event Bus Pattern
-
-## 2026 Context
-
-RxJS remains essential knowledge for professional Angular development, but is now used primarily for **library integration and interop**:
-
-✅ **Learn RxJS for:**
-
-- Working with Material components (Observable-based APIs)
-- Integrating third-party Observable libraries
-- Understanding reactive programming fundamentals
-- Professional code maintenance (existing codebases)
-
-✅ **Use this with Module 03 (Signals):**
-
-- Module 03 teaches signals as the primary state pattern
-- Module 05 teaches SignalStore for complex state
-- This module provides reactive foundations and library interop knowledge
-
-**Suggested Learning Path:**
-
-1. Module 03: Signals (primary state management)
-2. Module 02: Reactive (library interop & fundamentals)
-3. Module 05: NGRx Signals (complex state)
-4. Module 02b: Observable-Signal Bridge (coming 2026)
+| #   | Route                | Title                      | Topic             | Teaches                                                                                                                                                                       |
+| --- | -------------------- | -------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | imperative           | Imperative Reactivity      | Foundations       | Understand the limitations of imperative programming with callbacks and mutable state. See how manual subscription management leads to memory leaks and complex control flow. |
+| 2   | reactive             | Declarative Reactivity     | Foundations       | Transition to declarative reactive programming with Observables. Let RxJS handle data flow and subscriptions automatically for cleaner, more maintainable code.               |
+| 3   | async-pipe           | Async Pipe                 | Foundations       | Use the async pipe to subscribe to Observables directly in templates. Mark components as OnPush for performance and let Angular handle subscription cleanup.                  |
+| 4   | unsubscribe          | Unsubscribing              | Foundations       | Prevent memory leaks by properly unsubscribing from Observables. Explore patterns like takeUntil() and subscription management in component lifecycle.                        |
+| 5   | subjects             | Subjects                   | Foundations       | Learn about Subjects, a special type of Observable that acts as both observer and observable. Use Subjects to multicast values to multiple subscribers.                       |
+| 6   | creating             | Creating Observables       | Foundations       | Create Observables from scratch using of(), from(), interval(), and custom Observable constructors. Understand cold vs hot Observables.                                       |
+| 7   | operators            | Base Operators             | Operators         | Master fundamental operators like map(), filter(), reduce(), and forEach(). Transform and filter Observable streams with common operations.                                   |
+| 8   | transformation       | Transformation             | Operators         | Use advanced transformation operators like flatMap(), switchMap(), and mergeMap(). Control how nested Observables are flattened into result streams.                          |
+| 9   | combining            | Combining Observables      | Operators         | Combine multiple Observable streams using operators like merge(), concat(), combineLatest(), and zip(). Coordinate data from multiple sources efficiently.                    |
+| 10  | err-handling         | Error Handling             | Operators         | Handle errors in Observable streams with catchError() and retry(). Recover from failures gracefully and log errors appropriately.                                             |
+| 11  | custom-operators     | Custom Operators           | Operators         | Build reusable custom operators with the pipe() pattern. Encapsulate complex transformation logic into composable, shareable utilities.                                       |
+| 12  | timer-interval       | Timer & Interval Operators | Operators         | Create time-based streams with interval(), timer(), and delay(). Understand cold observable creation and takeUntilDestroyed for cleanup.                                      |
+| 13  | marble-testing       | Marble Testing             | Testing           | Test Observable sequences using marble diagrams and TestScheduler. Verify complex async behavior predictably with visual test notation.                                       |
+| 14  | action-streams       | Action Streams             | Patterns for NgRx | Build reactive data flows from user actions using Subjects and operators. Combine multiple action streams for event-driven applications. Foundation pattern for NgRx effects. |
+| 15  | debounced            | Debounced Search           | Patterns for NgRx | Implement efficient search with debounceTime() and switchMap() to reduce API calls. Essential pattern for NgRx effects handling user input.                                   |
+| 16  | mouse-dom            | Mouse & DOM Events         | Patterns for NgRx | Convert DOM events into Observable streams using fromEvent(). Handle mouse movements, clicks, and other browser events reactively.                                            |
+| 17  | responsive-screen    | Responsive Screen          | Patterns for NgRx | React to screen size changes and media queries using Observables. Build responsive layouts that adapt dynamically to viewport dimensions.                                     |
+| 18  | event-bus            | Event Bus                  | Patterns for NgRx | Implement a publish-subscribe pattern with Observables. Use an event bus to decouple component communication. Compare with NgRx event-driven patterns.                        |
+| 19  | http-with-rxjs       | HTTP + RxJS Integration    | Patterns for NgRx | Use HttpClient with switchMap(), shareReplay(), and distinctUntilChanged(). Write efficient, cancelable HTTP streams. Foundation for NgRx effects.                            |
+| 20  | observable-to-signal | Observable to Signal       | Signal Interop    | Convert Observables to signals using toSignal(). Access reactive data synchronously in templates without async pipe. Modern interop pattern.                                  |
+| 21  | httpresource-pattern | HttpResource Pattern       | Signal Interop    | Use httpResource() for declarative HTTP data fetching with built-in loading, error, and value states. Modern alternative to Observable-based patterns.                        |
+| 22  | subject-to-output    | Subject vs output()        | Signal Interop    | Compare Subject-based event multicasting with Angular output() signals. Understand modern vs legacy patterns for component communication.                                     |

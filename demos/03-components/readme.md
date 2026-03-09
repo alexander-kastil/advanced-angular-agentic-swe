@@ -1,24 +1,23 @@
-# Components & Forms Deep Dive
+# Components & Composition
+
+Modern Angular components are standalone by default and use signal-based inputs and outputs instead of decorator-based APIs. This module covers control flow syntax, content projection, view queries, directives composition, and dynamic components, along with the Resource API for declarative data loading. You will also see which patterns to avoid in modern Angular and why signal-based resource loading is the right approach.
 
 ## Demos
 
-- Using & Migrating to Control Flow Syntax
-- Deferred Loading
-- Standalone Directives & Directives Composition Api
-- Components and Required Inputs
-- Content Projection 
-- Templates TemplateRef, *ngTemplateOutlet
-- Comparison: ng-template vs ng-content - pro / cons
-- ng-content default-content
-- ViewChild, -Children, ContentChild, -Children
-- HostBinding & HostListener
-- Recap Reactive Forms Revisited (FormGroup, Form Builder, FormControl, FormArray)
-- Dynamic Component Loading & DataBinding
-- Untyped Forms vs Typed Forms 
-- Typed Forms Nullability, NonNullableFormBuilder, GetRawValue
-- Unified Control State Change Events
-- Partial Values, Optional Controls, Dynamic Groups and FormRecord
-- Cascading Form Controls
-- Implementing Custom Controls using ControlValueAccessor
-- Typed Forms Validation & Custom Validators
-- Handling FormErrors & ErrorStateMatcher
+| #   | Route                    | Title                    | Teaches                                                                                                                                                                                        | Topic                       |
+| --- | ------------------------ | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| 1   | standalone               | Standalone Component     | Create standalone components without NgModule. Declare dependencies directly in the component decorator with imports, providers, and styles.                                                   | Component Fundamentals      |
+| 2   | lazy-standalone          | Lazy Standalone Comp.    | Load standalone components on-demand via routes. Reduce initial bundle size by lazy loading features that aren't immediately needed.                                                           | Component Fundamentals      |
+| 3   | standalone-bootstrap     | Load Standalone Apps     | Bootstrap standalone applications with bootstrapApplication(). Set up providers, routes, and configuration without NgModule.                                                                   | Component Fundamentals      |
+| 4   | control-flow             | Control Flow             | Use modern Angular control flow syntax with @if, @for, @switch, and @let. Replace ngIf, ngFor, and ngSwitch with cleaner, more performant alternatives.                                        | Component Fundamentals      |
+| 5   | content-projection       | Content Projection       | Design flexible components with <ng-content> slots. Pass template content to child components using named projections and default content.                                                     | Component Composition       |
+| 6   | directives-composition   | Directives Composition   | Combine multiple directives on a single element to compose behaviors. Use hostDirectives to attach directives as component dependencies.                                                       | Component Composition       |
+| 7   | content-child            | Content Child            | Query projected content with @ContentChild and @ContentChildren. Access and interact with elements passed via content projection.                                                              | Component Composition       |
+| 8   | modern-template-features | Modern Template Features | Write arrow functions and spread syntax directly in templates (v21.1+). Use signal.update(n => n + 1) and spread operators without wrapper methods.                                            | Template Syntax             |
+| 9   | view-queries             | View Queries             | Query template elements with @ViewChild and @ViewChildren. Obtain references to child components or DOM elements in the component view.                                                        | Component Advanced Patterns |
+| 10  | template-vs-container    | Template vs Container    | Understand the difference between ng-template and ng-container. Control when and where template content is rendered in the DOM.                                                                | Component Advanced Patterns |
+| 11  | host-binding             | Host Binding & Listener  | Manage component host properties and events with @HostBinding and @HostListener. Style the component element and respond to user interactions.                                                 | Component Advanced Patterns |
+| 12  | container-presenter      | Container Presenter      | Separate data logic (container) from presentation (presenter) components. Use this pattern for cleaner, more reusable component architecture.                                                  | Component Advanced Patterns |
+| 13  | dynamic-components       | Dynamic Components       | Create and insert components dynamically at runtime using ViewContainerRef. Pass data to dynamic components and handle their lifecycle.                                                        | Component Advanced Patterns |
+| 14  | resource-api             | Resource API             | Use resource() for declarative, reactive HTTP data loading with automatic loading states and error handling. Replace manual Observable + subscribe() patterns with signal-based data fetching. | Data Loading                |
+| 15  | antipatterns             | Antipatterns             | Learn what NOT to do in modern Angular. Understand outdated patterns like Observable subscriptions, manual state management, and legacy decorators. See why resource() and signals are better. | Component Antipatterns      |

@@ -1,6 +1,8 @@
 # Optimizing Angular
 
-## Demo Index
+Angular applications can reach significant performance gains through bundle analysis, zoneless change detection, and modern image and list optimization. This module covers measuring Core Web Vitals with Lighthouse, reducing bundle size with esbuild tree-shaking, enabling `provideZonelessChangeDetection()`, and using CDK virtual scrolling for large datasets. Accessibility standards and ESLint configuration round out the production-readiness picture.
+
+## Demos
 
 | #   | Route              | Title                      | Teaches                                                                                                                    | Topic                    |
 | --- | ------------------ | -------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------ |

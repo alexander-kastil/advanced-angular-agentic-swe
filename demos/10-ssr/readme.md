@@ -1,6 +1,17 @@
 # Server Side Rendering (SSR)
 
-This module demonstrates **Server-Side Rendering (SSR)** in Angular v21+ using Express.js and client hydration. The `food-shop-ssr` application showcases modern patterns: signal-based state, `httpResource()` for reactive data loading, dynamic routing with route parameters as signals, and production-ready SSR configuration.
+Angular SSR with `@angular/ssr` delivers pre-rendered HTML from an Express server, improving First Contentful Paint and search engine visibility without sacrificing client interactivity. This module demonstrates a complete food shop application using `httpResource()` for reactive data loading, `signal()` for cart state, and `input()`/`output()` for component APIs, all running transparently under SSR. You will compare CSR and SSR build output using Lighthouse, enable non-destructive hydration, and set up pre-rendering for static routes.
+
+## Demos
+
+| #   | Feature                         | Title                     | Teaches                                                                                                                                                          | Topic            |
+| --- | ------------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| 1   | `/food`                         | SSR Data Loading          | Fetch product data with httpResource() in an SSR context. Compare First Contentful Paint between the CSR dev server and the SSR production build.                | SSR Fundamentals |
+| 2   | `/food/:id`                     | Route Params as Signals   | Use toSignal() with ActivatedRoute to bind route parameters reactively in an SSR app. httpResource() automatically refetches when the signal value changes.      | SSR Fundamentals |
+| 3   | `server.ts` + app.config.server | SSR Configuration         | Configure @angular/ssr with Express, provideServerRendering(), and CommonEngine. Understand the separation between client and server application configurations. | SSR Setup        |
+| 4   | `provideClientHydration()`      | Non-Destructive Hydration | Enable non-destructive hydration so that server-rendered HTML is reused on the client without re-rendering. Observe DOM reuse in browser DevTools.               | SSR Setup        |
+| 5   | `routes.txt`                    | Pre-rendering             | Declare routes in routes.txt for build-time static pre-rendering. Inspect the generated HTML files and compare with dynamic SSR output.                          | Performance      |
+| 6   | Lighthouse Audit                | CSR vs SSR Comparison     | Build the production SSR bundle and run Lighthouse audits. Measure the FCP improvement and reduced Time to Interactive compared to client-only rendering.        | Performance      |
 
 ## Quick Start
 
@@ -391,6 +402,7 @@ Browser (hydration attaches event listeners)
    - Called as functions in component logic
 
 4. **Route Parameters as Signals**
+
    ```typescript
    private id = toSignal(this.route.paramMap.pipe(...));
    item = httpResource<FoodItem>(() => `${environment.api}food/${this.id()}`);
