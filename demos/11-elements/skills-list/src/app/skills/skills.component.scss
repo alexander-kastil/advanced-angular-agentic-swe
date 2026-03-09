@@ -1,11 +1,11 @@
 .container {
   background-color: lavender;
   padding: 1rem;
+  width: 100%;
 }
 
 table {
   margin: 0 auto;
-  min-width: 40vw;
   width: 100%;
 
   tr:hover td {

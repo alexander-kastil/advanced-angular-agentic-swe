@@ -14,7 +14,12 @@ import { Skill } from './skills.model';
   selector: 'app-skills',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './skills.component.html',
-  styleUrl: './skills.component.scss'
+  styleUrl: './skills.component.scss',
+  host: {
+    '[style.width]': 'width() + "px"',
+    '[style.display]': '"block"',
+    '[style.overflow]': '"hidden"'
+  }
 })
 export class SkillsComponent {
   readonly initialSkills = input<Skill[]>([], { alias: 'skills' });
