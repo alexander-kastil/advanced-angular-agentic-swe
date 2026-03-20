@@ -17,8 +17,7 @@ import { SignalFormsPetsComponent } from './samples/signal-form-pets/signal-form
 import { SfArraysObjectsComponent } from './samples/signal-form-arrays-objects/signal-form-arrays-objects.component';
 import { SfNullValuesComponent } from './samples/signal-form-null-values/signal-form-null-values.component';
 import { SfValidateComponent } from './samples/signal-form-validate/signal-form-validate.component';
-import { SfWhenComponent } from './samples/signal-form-when/signal-form-when.component';
-
+import { SfWhenComponent } from './samples/signal-form-when/signal-form-when.component';import { ContainerPresenterComponent } from './samples/signal-form-container-presenter/container-presenter.component';
 export const demoRoutes: Routes = [
   {
     path: '',
@@ -41,6 +40,7 @@ export const demoRoutes: Routes = [
       { path: 'signal-form-null-values', component: SfNullValuesComponent },
       { path: 'signal-form-validate', component: SfValidateComponent },
       { path: 'signal-form-when', component: SfWhenComponent },
+      { path: 'signal-form-container-presenter', component: ContainerPresenterComponent },
     ],
   },
 ];

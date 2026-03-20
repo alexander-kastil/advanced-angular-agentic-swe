@@ -118,6 +118,13 @@
       "teaches": "Complete CRUD workflow: list, select, edit, and create pets from a service. Tracks model changes via effect() into a change log.",
       "sortOrder": 32,
       "topic": "Signal Form Advanced"
+    },
+    {
+      "url": "container-presenter",
+      "title": "Container Presenter + NgRx Store",
+      "teaches": "Implement the container-presenter pattern with a Signal Form edit component. The container uses a scoped NgRx Signal Store (PersonStore) to load persons via HTTP, track selection, and persist saves back to the API.",
+      "sortOrder": 33,
+      "topic": "Signal Form Advanced"
     }
   ],
   "pets": [
@@ -201,7 +208,7 @@
   "persons": [
     {
       "id": "1",
-      "name": "Cleo",
+      "name": "Cletschi",
       "lastname": "Whippet",
       "age": 15,
       "gender": "female",

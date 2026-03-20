@@ -1,0 +1,42 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Edit</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form column>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter name"
+          [formField]="personForm.name"
+        />
+      </mat-form-field>
+      @if (personForm.name().touched() && personForm.name().invalid()) {
+        @for (err of personForm.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+      <mat-form-field>
+        <mat-label>Age</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter age"
+          [formField]="personForm.age"
+        />
+      </mat-form-field>
+      @if (personForm.age().touched() && personForm.age().invalid()) {
+        @for (err of personForm.age().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" type="button" (click)="doSave()">
+      Save
+    </button>
+  </mat-card-actions>
+</mat-card>

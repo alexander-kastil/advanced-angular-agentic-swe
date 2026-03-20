@@ -1,13 +1,15 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 import { Person } from './person.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PersonService {
-
-    constructor() { }
+    private http = inject(HttpClient);
+    private apiUrl = `${environment.api}persons`;
 
     getPerson(): Observable<Person> {
         const person: Person = {
@@ -29,52 +31,11 @@ export class PersonService {
     }
 
     getPersons(): Observable<Person[]> {
-        const persons: Person[] = [
-            {
-                id: 1,
-                name: 'John',
-                lastName: 'Doe',
-                age: 30,
-                email: 'john@example.com',
-                gender: 'male',
-                wealth: 'middle_class',
-                address: {
-                    street: '123 Main St',
-                    city: 'New York',
-                    postalCode: '10001'
-                }
-            },
-            {
-                id: 2,
-                name: 'Jane',
-                lastName: 'Smith',
-                age: 28,
-                email: 'jane@example.com',
-                gender: 'female',
-                wealth: 'rich',
-                address: {
-                    street: '456 Oak Ave',
-                    city: 'Los Angeles',
-                    postalCode: '90001'
-                }
-            },
-            {
-                id: 3,
-                name: 'Bob',
-                lastName: 'Johnson',
-                age: 35,
-                email: 'bob@example.com',
-                gender: 'male',
-                wealth: 'poor',
-                address: {
-                    street: '789 Pine Rd',
-                    city: 'Chicago',
-                    postalCode: '60601'
-                }
-            }
-        ];
+        return this.http.get<Person[]>(this.apiUrl);
+    }
 
-        return of(persons);
+    savePerson(person: Person): Observable<Person> {
+        return this.http.put<Person>(`${this.apiUrl}/${person.id}`, person);
     }
 
     save(person: Person): void {
@@ -82,9 +43,6 @@ export class PersonService {
     }
 
     checkMailExists(email: string): Observable<boolean> {
-        // Simulate async mail check - return false (mail doesn't exist) after delay
-        return of(false).pipe(
-            // delay(1000)
-        );
+        return of(false);
     }
 }

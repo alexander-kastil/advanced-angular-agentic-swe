@@ -1,0 +1,11 @@
+<app-presenter-list
+  [persons]="store.persons()"
+  (personSelected)="store.selectPerson($event)"
+/>
+
+@if (store.selectedPerson()) {
+  <app-presenter-edit
+    [person]="store.selectedPerson()!"
+    (savePerson)="store.savePerson($event)"
+  />
+}
