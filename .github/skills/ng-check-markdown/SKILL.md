@@ -380,3 +380,65 @@ export const appConfig: ApplicationConfig = {
 **No syntax colors**: Verify Prism CSS/JS in angular.json  
 **Mermaid not working**: Check mermaid().initialize() is called before app bootstrap  
 **Plugins not working**: Ensure CSS/JS files are listed in angular.json in correct order
+
+## Audit Checklist — Diagnose Broken Setups
+
+When checking an existing project for markdown/Prism issues, verify all of the following:
+
+### 1. `angular.json` scripts must not be empty
+
+```bash
+# Check
+grep -A5 '"scripts"' angular.json
+```
+
+If `"scripts": []`, Prism JS is not loaded — code blocks will render as plain text with no colours even if the CSS is present.
+
+### 2. Prism CSS must be in `angular.json` styles — not injected dynamically
+
+**Anti-pattern** (broken in production builds and dev server with base-href changes):
+
+```typescript
+// ❌ Never do this
+async loadPrismJsTheme() {
+  const link = document.createElement('link');
+  link.href = 'node_modules/prismjs/themes/prism-okaidia.min.css'; // path not valid after build
+  document.head.appendChild(link);
+}
+```
+
+**Correct approach** — CSS in `angular.json` styles, no runtime injection needed:
+
+```json
+"styles": [
+  "src/styles.scss",
+  "node_modules/prismjs/themes/prism-okaidia.min.css"
+]
+```
+
+If a `LibraryLoaderService` or similar service has a `loadPrismJsTheme()` / `loadPrismJsCss()` method, **remove it** and ensure the CSS is in `angular.json`. Also remove any calls to it from `markdown-renderer.component.ts`.
+
+### 3. Scan pattern — check all demos at once
+
+```powershell
+Get-ChildItem "demos" -Recurse -Filter "angular.json" | ForEach-Object {
+  Write-Host "=== $($_.FullName) ==="
+  Select-String -Path $_.FullName -Pattern "prism|scripts" | Select-Object -ExpandProperty Line
+}
+
+# Find any library-loader with the anti-pattern
+Get-ChildItem "demos" -Recurse -Filter "library-loader*" | ForEach-Object {
+  $content = Get-Content $_.FullName -Raw
+  if ($content -match "loadPrismJsTheme|loadPrismJsCss") {
+    Write-Host "❌ Anti-pattern found: $($_.FullName)"
+  }
+}
+
+# Find any renderers still calling the anti-pattern
+Get-ChildItem "demos" -Recurse -Filter "markdown-renderer.component.ts" | ForEach-Object {
+  $content = Get-Content $_.FullName -Raw
+  if ($content -match "loadPrismJsTheme|loadPrismJsCss") {
+    Write-Host "❌ Active call found: $($_.FullName)"
+  }
+}
+```

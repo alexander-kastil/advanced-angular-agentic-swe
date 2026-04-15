@@ -33,7 +33,6 @@ export class MarkdownRendererComponent {
   async onMarkdownLoad() {
     try {
       await this.libLoader.loadMermaid();
-      await this.libLoader.loadPrismJsTheme();
 
       this.ngZone.runOutsideAngular(async () => {
         setTimeout(async () => {
