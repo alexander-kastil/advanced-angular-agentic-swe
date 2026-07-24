@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     providers: [
         // provideZoneChangeDetection({ eventCoalescing: true }),
         provideZonelessChangeDetection(),
-        provideHttpClient(),
+        provideHttpClient(withXhr()),
         provideRouter(appRoutes, withComponentInputBinding()),
         provideAnimations(),
         importProvidersFrom(

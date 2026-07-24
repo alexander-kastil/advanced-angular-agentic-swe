@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { ApplicationConfig, ErrorHandler, importProvidersFrom, provideAppInitializer, inject, provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding, withViewTransitions } from '@angular/router';
@@ -24,7 +24,7 @@ import { globalErrorHandler } from './error/error.handler';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(
+        provideHttpClient(withXhr(), 
             withInterceptors([
                 authInterceptor,
                 httpErrorInterceptor

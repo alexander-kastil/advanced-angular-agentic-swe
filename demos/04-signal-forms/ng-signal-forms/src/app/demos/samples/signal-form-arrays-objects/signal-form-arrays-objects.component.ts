@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form, FormField, required, applyEach, min, max, pattern, schema } from '@angular/forms/signals';
+import { form, FormField, required, applyEach, min, max, schema } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -11,7 +11,7 @@ import { JsonPipe } from '@angular/common';
 interface VetVisit {
     vetName: string;
     reason: string;
-    year: string;
+    year: number | null;
 }
 
 interface PetHealthModel {
@@ -19,7 +19,7 @@ interface PetHealthModel {
     vetVisits: VetVisit[];
 }
 
-const initialVisit: VetVisit = { vetName: '', reason: '', year: '' };
+const initialVisit: VetVisit = { vetName: '', reason: '', year: null };
 
 const initialData: PetHealthModel = {
     petName: '',
@@ -34,7 +34,6 @@ const visitSchema = schema<VetVisit>((path) => {
     });
     min(path.year, 2000, { message: 'Year must be 2000 or later' });
     max(path.year, new Date().getFullYear(), { message: 'Year cannot be in the future' });
-    pattern(path.year, /^\d{4}$/, { message: 'Year must be four digits (YYYY)' });
 });
 
 @Component({

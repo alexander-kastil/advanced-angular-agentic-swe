@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { RouterOutlet } from '@angular/router';
@@ -8,6 +8,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     imports: [NavbarComponent, RouterOutlet]
 })
 export class AppComponent {

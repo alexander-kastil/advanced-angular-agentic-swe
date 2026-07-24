@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
@@ -21,7 +21,7 @@ mermaid.initialize({ startOnLoad: false, theme: 'dark' });
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZonelessChangeDetection(),
-        provideHttpClient(withInterceptors([loadingInterceptor])),
+        provideHttpClient(withXhr(), withInterceptors([loadingInterceptor])),
         provideRouter(appRoutes, withComponentInputBinding()),
         provideAnimations(),
         //NgRx

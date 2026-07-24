@@ -21,6 +21,7 @@ Always start applications from their respective project folders, not the reposit
 
 ## Important Rules
 
+- The AI NEVER commits. Do not stage, commit, or push under any circumstance, and do not mention, offer, or ask anything commit-related. Leave all changes as uncommitted working-tree edits for the user to handle.
 - Write clean code. No comments. Do not over-engineer.
 - Never use PowerShell for Angular code refactoring - use bash.
 - Do not write docs unless asked. If asked, be concise and to the point.
