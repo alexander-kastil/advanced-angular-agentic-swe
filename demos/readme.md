@@ -34,8 +34,8 @@ By the end of the workshop you will have a thorough understanding of how modern 
 ### [Module 01: Agentic Angular Development](./01-agentic-dev/)
 
 - Agentic Coding with GitHub Copilot and Claude Code
-- Instructions and Reusable Prompt Files
-- Skills and Plugins
+- Base Harness Setup
+- Agents, Skills & Hooks
 - Designing and Using Custom Agents
 
 ### [Module 02: Mastering Signals](./02-signals/)
@@ -86,7 +86,7 @@ By the end of the workshop you will have a thorough understanding of how modern 
 - Preloading Strategies and Component Input Bindings
 - View Transitions API and Router Animations
 
-### [Module 08: Advanced Testing with Vitest](./08-testing/)
+### [Module 08: Testing with Vitest & Playwright](./08-testing/)
 
 - Component Signal Input Testing with setInput()
 - Service Testing with HttpTestingController
@@ -101,6 +101,7 @@ By the end of the workshop you will have a thorough understanding of how modern 
 - Zoneless Change Detection
 - Virtual Scrolling and Image Optimization
 - Accessibility and Linting
+- Automating Compliance Checks with GitHub Actions
 
 ### [Module 10: Server Side Rendering](./10-ssr/)
 
@@ -109,3 +110,11 @@ By the end of the workshop you will have a thorough understanding of how modern 
 - httpResource() in SSR Context
 - Pre-rendering Static Routes
 - CSR vs SSR Performance Comparison
+
+### [Module 12: Agentic Angular DevOps](./12-agentic-devops/)
+
+- The Deployment Agent: Allowlists, Manifest and the Deploy-then-Prove Contract
+- Bootstrapping and Hardening an Ubuntu Box over SSH
+- Angular Multi-Stage Image behind a Caddy Edge with TLS
+- DNS before the First ACME Attempt
+- Core Web Vitals and SEO Fix-Verify Loop on Every Deploy

@@ -17,26 +17,26 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^22.0.8",
-    "@angular/common": "^22.0.8",
-    "@angular/compiler": "^22.0.8",
-    "@angular/core": "^22.0.8",
-    "@angular/elements": "^22.0.8",
-    "@angular/forms": "^22.0.8",
-    "@angular/platform-browser": "^22.0.8",
-    "@angular/platform-browser-dynamic": "^22.0.8",
-    "@angular/router": "^22.0.8",
+    "@angular/animations": "^22.1.4",
+    "@angular/common": "^22.1.4",
+    "@angular/compiler": "^22.1.4",
+    "@angular/core": "^22.1.4",
+    "@angular/elements": "^22.1.4",
+    "@angular/forms": "^22.1.4",
+    "@angular/platform-browser": "^22.1.4",
+    "@angular/platform-browser-dynamic": "^22.1.4",
+    "@angular/router": "^22.1.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
     "@analogjs/vitest-angular": "^1.18.1",
-    "@angular/build": "^22.0.8",
-    "@angular/cli": "^22.0.8",
-    "@angular/compiler-cli": "^22.0.8",
+    "@angular/build": "^22.1.6",
+    "@angular/cli": "^22.1.6",
+    "@angular/compiler-cli": "^22.1.4",
     "jsdom": "^26.0.0",
     "typescript": "~6.0.3",
-    "vitest": "^4.0.8"
+    "vitest": "^4.1.11"
   }
 }

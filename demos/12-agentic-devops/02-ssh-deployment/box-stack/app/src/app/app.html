@@ -1,0 +1,16 @@
+<h1>Box Stack</h1>
+<p class="tag">An Angular app, built to static files, that proves a container reached the box.</p>
+
+<h2>What is running</h2>
+<ul>
+  <li>This page is served by nginx inside a container, listening on port 8080.</li>
+  <li>The container is not published to the host: only the Caddy edge is.</li>
+  <li>Caddy terminates TLS and proxies the request in over the stack network.</li>
+</ul>
+
+<h2>How to prove a redeploy</h2>
+<p>The build marker in the footer is the byte that only exists in a given build. Change it, rebuild, redeploy, then fetch the page and check the marker rather than trusting the pipeline log.</p>
+
+<footer>
+  <p>Build 1</p>
+</footer>

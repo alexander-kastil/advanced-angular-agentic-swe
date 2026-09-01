@@ -98,6 +98,13 @@
           "options": {
             "buildTarget": "component-forms:build"
           }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "buildTarget": "component-forms:build"
+          }
         }
       }
     }

@@ -36,7 +36,7 @@
         </div>
         <div class="gdMain">
           <as-split direction="vertical" unit="pixel" (dragProgress)="onSplitDragEnd($any($event))" (dragEnd)="onSplitDragEnd($event)">
-            <as-split-area #paneDemo [size]="demoPaneSize()" [visible]="hasDemoContent()">
+            <as-split-area #paneDemo [size]="showMarkdownPane() ? demoPaneSize() : '*'" [visible]="hasDemoContent()">
               <div class="split-content" #demoPaneContent>
                 <router-outlet />
               </div>
