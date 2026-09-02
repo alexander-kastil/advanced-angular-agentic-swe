@@ -1,52 +1,78 @@
 {
   "demos": [
     {
+      "id": 1,
       "url": "angular-mcp-server",
       "title": "Angular CLI MCP Server",
       "teaches": "Register the Angular CLI MCP server and browse the nine tools it exposes, with run_target and the three devserver tools stable as of 22.1. See what --read-only and --local-only drop, and copy the config for Claude Code or VS Code.",
       "sortOrder": 1,
       "topic": "Agentic Tooling",
-      "md": "angular-mcp-server"
+      "md": "angular-mcp-server",
+      "visible": true
     },
     {
+      "id": 2,
       "url": "harness-files",
       "title": "Harness Files",
       "teaches": "Compare CLAUDE.md, AGENTS.md and .github/copilot-instructions.md side by side, written from the rules get_best_practices actually returns for Angular 22. Understand scope, precedence, per-turn cost and what belongs in a skill instead.",
       "sortOrder": 2,
       "topic": "Agentic Tooling",
-      "md": "harness-files"
+      "md": "harness-files",
+      "visible": true
     },
     {
+      "id": 3,
       "url": "agent-skills",
       "title": "Agent Skills",
       "teaches": "Weigh the official Angular Agent Skills against this repo's own angular-conventions skill and see which one wins per question. Then build a SKILL.md and watch the frontmatter description that does the routing.",
       "sortOrder": 3,
       "topic": "Customization",
-      "md": "agent-skills"
+      "md": "agent-skills",
+      "visible": true
     },
     {
+      "id": 4,
       "url": "angular-expert-agent",
       "title": "Angular Expert Agent",
       "teaches": "Define a specialized subagent in .claude/agents with its own frontmatter, tool allowlist and model. Sort rules into the agent file or a skill, and decide which prompts get routed to it at all.",
       "sortOrder": 4,
       "topic": "Customization",
-      "md": "angular-expert-agent"
+      "md": "angular-expert-agent",
+      "visible": true
     },
     {
+      "id": 5,
       "url": "hooks-and-gates",
       "title": "Hooks & Quality Gates",
       "teaches": "Wire settings.json hooks that enforce what instructions only ask for: format on write with PostToolUse, block a banned Angular API with PreToolUse, and refuse to end a session on a red build with Stop.",
       "sortOrder": 5,
       "topic": "Automation",
-      "md": "hooks-and-gates"
+      "md": "hooks-and-gates",
+      "visible": true
     },
     {
+      "id": 6,
       "url": "webmcp-counterpart",
       "title": "WebMCP Counterpart",
       "teaches": "Expose the running app to a browser agent with declareExperimentalWebMcpTool() from @angular/core. Register two live tools, read the tools/list payload an agent would see, and watch registration no-op where no model context exists.",
       "sortOrder": 6,
       "topic": "Automation",
-      "md": "webmcp-counterpart"
+      "md": "webmcp-counterpart",
+      "visible": true
     }
-  ]
+  ],
+  "top-links": [
+    {
+      "id": 1,
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "id": 2,
+      "label": "Demos",
+      "url": "demos"
+    }
+  ],
+  "markdownItems": [],
+  "comments": []
 }

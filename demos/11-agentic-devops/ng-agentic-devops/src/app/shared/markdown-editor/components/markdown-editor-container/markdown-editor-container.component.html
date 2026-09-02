@@ -1,0 +1,31 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Mock Markdown Editor</mat-card-title>
+  </mat-card-header>
+  <mat-card-content column>
+    @if (!editorEdit()) {
+      <app-markdown-list [items]="allItems()" [demoUrl]="demoUrl()" [demoSaved]="isDemoSaved()"
+        (itemEdit)="editMarkdownItem($event)"
+        (itemDelete)="deleteMarkdownItem($event)"
+       />
+    }
+    @if (editorEdit() && current() != null) {
+      <app-markdown-edit [(markdownItem)]="currentItem" [mdSrc]="current()!.id === -1 ? current()!.comment : null" />
+    }
+  </mat-card-content>
+  <mat-card-actions align="end">
+    @if (editorEdit()) {
+      <button mat-flat-button (click)="saveMarkdownItem()" color="primary">
+        Save
+      </button>
+      <button
+        mat-flat-button
+        (click)="editorEdit.set(false)"
+        color="primary"
+        >
+        Cancel
+      </button>
+    }
+
+  </mat-card-actions>
+</mat-card>

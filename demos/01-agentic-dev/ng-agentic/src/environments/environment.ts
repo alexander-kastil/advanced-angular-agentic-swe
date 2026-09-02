@@ -1,5 +1,5 @@
 export const environment = {
-  title: 'Agentic Angular Engineering',
-  markdownPath: 'markdown/',
-  demosPath: 'db.json'
+    title: 'Agentic Angular Engineering',
+    markdownPath: 'markdown/',
+    api: 'http://localhost:3000/'
 };
