@@ -4,12 +4,13 @@ import { SnackbarService } from '../snackbar/snackbar.service';
 import { NavbarService } from './navbar.service';
 import { RouterLinkActive, RouterLink } from '@angular/router';
 import { SideNavService } from '../sidenav/sidenav.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  imports: [RouterLinkActive, RouterLink],
+  imports: [RouterLinkActive, RouterLink, LoadingComponent],
 })
 export class NavbarComponent {
   nav = inject(SideNavService);

@@ -15,7 +15,7 @@ test.describe('Markdown Editor', () => {
 
         test('editor shows "Mock Markdown Editor" card title', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
-            await expect(page.locator('app-markdown-editor-container mat-card-title')).toHaveText('Mock Markdown Editor');
+            await expect(page.locator('app-markdown-editor-container .card-title')).toHaveText('Mock Markdown Editor');
         });
 
         test('closing editor hides the editor pane', async ({ page }) => {
@@ -30,12 +30,12 @@ test.describe('Markdown Editor', () => {
         test('displays page override entry (id=-1) at the top with article icon', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             const firstRow = page.locator('app-markdown-list .row').first();
-            await expect(firstRow.locator('mat-icon')).toHaveText('article');
+            await expect(firstRow.locator('.icon')).toHaveText('article');
         });
 
         test('displays seeded comment items with comment icon', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
-            const commentRows = page.locator('app-markdown-list .row mat-icon:has-text("comment")');
+            const commentRows = page.locator('app-markdown-list .row .icon:has-text("comment")');
             await expect(commentRows).toHaveCount(seedMarkdownItems.length);
         });
 
@@ -49,7 +49,7 @@ test.describe('Markdown Editor', () => {
         test('page override row has no Delete button', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             const firstRow = page.locator('app-markdown-list .row').first();
-            await expect(firstRow.locator('mat-icon')).toHaveText('article');
+            await expect(firstRow.locator('.icon')).toHaveText('article');
             await expect(firstRow.locator('.no-delete')).toBeVisible();
             await expect(firstRow.getByRole('button', { name: 'Delete' })).not.toBeVisible();
         });
@@ -86,7 +86,7 @@ test.describe('Markdown Editor', () => {
             await page.getByRole('button', { name: 'Add Comment' }).click();
             await expect(page.locator('app-markdown-edit')).toBeVisible();
             await expect(page.locator('app-markdown-list')).not.toBeVisible();
-            const titleInput = page.locator('app-markdown-edit input[matinput]');
+            const titleInput = page.locator('app-markdown-edit input.input');
             await expect(titleInput).toHaveValue('');
         });
 
@@ -101,9 +101,9 @@ test.describe('Markdown Editor', () => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             await page.getByRole('button', { name: 'Add Comment' }).click();
 
-            const titleInput = page.locator('app-markdown-edit input[matinput]');
+            const titleInput = page.locator('app-markdown-edit input.input');
             await titleInput.fill('New Test Comment');
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
+            const textarea = page.locator('app-markdown-edit textarea.textarea');
             await textarea.fill('This is a new comment body');
 
             const postPromise = page.waitForRequest(req =>
@@ -128,10 +128,10 @@ test.describe('Markdown Editor', () => {
             await commentRow.getByRole('button', { name: 'Edit' }).click();
 
             await expect(page.locator('app-markdown-edit')).toBeVisible();
-            const titleInput = page.locator('app-markdown-edit input[matinput]');
+            const titleInput = page.locator('app-markdown-edit input.input');
             await expect(titleInput).toHaveValue(seedMarkdownItems[0].title);
 
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
+            const textarea = page.locator('app-markdown-edit textarea.textarea');
             await expect(textarea).toHaveValue(seedMarkdownItems[0].comment);
         });
 
@@ -140,7 +140,7 @@ test.describe('Markdown Editor', () => {
             const commentRow = page.locator('app-markdown-list .row', { hasText: seedMarkdownItems[0].title });
             await commentRow.getByRole('button', { name: 'Edit' }).click();
 
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
+            const textarea = page.locator('app-markdown-edit textarea.textarea');
             await textarea.fill('Updated comment text');
 
             const putPromise = page.waitForRequest(req =>
@@ -160,7 +160,7 @@ test.describe('Markdown Editor', () => {
             const commentRow = page.locator('app-markdown-list .row', { hasText: seedMarkdownItems[0].title });
             await commentRow.getByRole('button', { name: 'Edit' }).click();
 
-            const titleInput = page.locator('app-markdown-edit input[matinput]');
+            const titleInput = page.locator('app-markdown-edit input.input');
             await expect(titleInput).not.toHaveAttribute('readonly');
             await titleInput.fill('Changed Title');
             await expect(titleInput).toHaveValue('Changed Title');
@@ -171,11 +171,11 @@ test.describe('Markdown Editor', () => {
         test('clicking Edit on page override opens form with readonly title', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             const pageRow = page.locator('app-markdown-list .row').first();
-            await expect(pageRow.locator('mat-icon')).toHaveText('article');
+            await expect(pageRow.locator('.icon')).toHaveText('article');
             await pageRow.getByRole('button', { name: 'Edit' }).click();
 
             await expect(page.locator('app-markdown-edit')).toBeVisible();
-            const titleInput = page.locator('app-markdown-edit input[matinput]');
+            const titleInput = page.locator('app-markdown-edit input.input');
             await expect(titleInput).toHaveAttribute('readonly');
         });
 
@@ -184,7 +184,7 @@ test.describe('Markdown Editor', () => {
             const pageRow = page.locator('app-markdown-list .row').first();
             await pageRow.getByRole('button', { name: 'Edit' }).click();
 
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
+            const textarea = page.locator('app-markdown-edit textarea.textarea');
             await expect(textarea).toHaveValue(/Test Markdown|Sample content/, { timeout: 5000 });
         });
     });
@@ -239,7 +239,7 @@ test.describe('Markdown Editor', () => {
             const commentRow = page.locator('app-markdown-list .row', { hasText: seedMarkdownItems[0].title });
             await commentRow.getByRole('button', { name: 'Edit' }).click();
 
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
+            const textarea = page.locator('app-markdown-edit textarea.textarea');
             await textarea.fill('Should not be saved');
 
             await page.getByRole('button', { name: 'Cancel' }).click();
@@ -252,15 +252,21 @@ test.describe('Markdown Editor', () => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             await page.getByRole('button', { name: 'Add Comment' }).click();
 
-            await expect(page.locator('app-markdown-edit mat-label', { hasText: 'Title' })).toBeVisible();
-            await expect(page.locator('app-markdown-edit mat-label', { hasText: 'Comment' })).toBeVisible();
+            await expect(page.locator('app-markdown-edit label[for="md-item-title"]')).toBeVisible();
+            await expect(page.locator('app-markdown-edit label[for="md-item-comment"]')).toBeVisible();
         });
 
-        test('textarea uses autosize', async ({ page }) => {
+        test('source view offers a Preview toggle that renders the markdown', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             await page.getByRole('button', { name: 'Add Comment' }).click();
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
-            await expect(textarea).toHaveAttribute('cdktextareaautosize', '');
+            await expect(page.locator('app-markdown-edit textarea.md-source')).toBeVisible();
+
+            await page.getByRole('button', { name: 'Preview' }).click();
+            await expect(page.locator('app-markdown-edit .md-preview')).toBeVisible();
+            await expect(page.locator('app-markdown-edit textarea.md-source')).toHaveCount(0);
+
+            await page.getByRole('button', { name: 'Source' }).click();
+            await expect(page.locator('app-markdown-edit textarea.md-source')).toBeVisible();
         });
     });
 
@@ -270,7 +276,7 @@ test.describe('Markdown Editor', () => {
             const pageRow = page.locator('app-markdown-list .row').first();
             await pageRow.getByRole('button', { name: 'Edit' }).click();
 
-            const textarea = page.locator('app-markdown-edit textarea[matinput]');
+            const textarea = page.locator('app-markdown-edit textarea.textarea');
             await textarea.fill('# Custom override content');
 
             const savePromise = page.waitForRequest(req =>
@@ -303,7 +309,7 @@ test.describe('Markdown Editor', () => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
             await page.getByRole('button', { name: 'Open Editor' }).click();
 
-            const pageIcon = page.locator('app-markdown-list .row').first().locator('mat-icon');
+            const pageIcon = page.locator('app-markdown-list .row').first().locator('.icon');
             await expect(pageIcon).toHaveText('article');
         });
     });
@@ -313,14 +319,14 @@ test.describe('Markdown Editor', () => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             await expect(page.locator('app-markdown-editor-container')).toBeVisible();
 
-            await page.locator('[mattooltip="Toggle Markdown Guide"]').click();
+            await page.locator('[data-tip="Toggle Markdown Guide"]').click();
             await expect(page.locator('app-markdown-editor-container')).not.toBeVisible();
             await expect(page.locator('app-markdown-renderer')).toBeVisible();
         });
 
         test('switching back to editor from guide restores editor container', async ({ page }) => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
-            await page.locator('[mattooltip="Toggle Markdown Guide"]').click();
+            await page.locator('[data-tip="Toggle Markdown Guide"]').click();
             await expect(page.locator('app-markdown-renderer')).toBeVisible();
 
             await page.getByRole('button', { name: 'Open Editor' }).click();
@@ -331,7 +337,7 @@ test.describe('Markdown Editor', () => {
             await page.getByRole('button', { name: 'Open Editor' }).click();
             await expect(page.locator('app-markdown-list')).toBeVisible();
 
-            await page.locator('[mattooltip="Toggle Markdown Guide"]').click();
+            await page.locator('[data-tip="Toggle Markdown Guide"]').click();
             await page.getByRole('button', { name: 'Open Editor' }).click();
 
             await expect(page.locator('app-markdown-list')).toBeVisible();

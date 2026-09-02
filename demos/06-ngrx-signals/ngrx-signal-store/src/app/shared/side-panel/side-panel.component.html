@@ -1,8 +1,9 @@
-<div class="app-toolbar h-full flex-col items-center gap-4 pt-12">
+<div class="rail-right">
   <button
     type="button"
-    class="btn-fab tip tip-left"
+    class="rail-btn tip tip-left"
     data-tip="Toggle the SideNav"
+    aria-label="Toggle the SideNav"
     (click)="toggleSideNav()"
   >
     <span class="icon">menu</span>
@@ -10,25 +11,28 @@
   @if (isDemosRoute() && layout.hasMarkdownContent()) {
     <button
       type="button"
-      class="btn-fab tip tip-left"
+      class="rail-btn tip tip-left"
+      [class.rail-btn-active]="layout.isGuideActive()"
       data-tip="Toggle Markdown Guide"
+      aria-label="Toggle Markdown Guide"
       (click)="showGuide()"
     >
-      <span class="icon">help_clinic</span>
+      <span class="icon">menu_book</span>
     </button>
     <button
       type="button"
-      class="btn-fab tip tip-left"
+      class="rail-btn tip tip-left"
+      [class.rail-btn-active]="isEditorActive()"
       [attr.data-tip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
       [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
       (click)="toggleEditor()"
     >
-      <span class="icon">{{ isEditorActive() ? "cancel" : "edit_square" }}</span>
+      <span class="icon">{{ isEditorActive() ? "close" : "edit_square" }}</span>
     </button>
     @if (isEditorActive()) {
       <button
         type="button"
-        class="btn-fab tip tip-left"
+        class="rail-btn tip tip-left"
         data-tip="Add Comment"
         aria-label="Add Comment"
         (click)="addMarkdownItem()"

@@ -66,7 +66,7 @@ protected dispatch = injectDispatch(cartEvents);
 ```
 
 ```html
-<button mat-stroked-button (click)="dispatch.added(item)">+ {{ item }}</button>
+<button type="button" class="btn btn-outline" (click)="dispatch.added(item)">+ {{ item }}</button>
 ```
 
 `injectDispatch()` binds the whole group to the `Dispatcher`, so the template calls the event by name and passes the payload. No store method is involved.

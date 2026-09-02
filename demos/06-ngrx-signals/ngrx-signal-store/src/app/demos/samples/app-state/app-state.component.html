@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title">Application Settings State</div>
+    <h2 class="card-title">Application Settings State</h2>
   </div>
   <div class="card-content content">
     <div class="field w-64">
@@ -28,7 +28,7 @@
     <p class="summary">{{ store.summary() }}</p>
     <p>Derived row height: <strong>{{ store.rowHeight() }}px</strong></p>
 
-    <pre class="state">{{ store.snapshot() }}</pre>
+    <pre class="state" tabindex="0" role="region" aria-label="Store state snapshot">{{ store.snapshot() }}</pre>
 
     <button type="button" class="btn btn-primary" (click)="store.reset()">Reset state</button>
   </div>

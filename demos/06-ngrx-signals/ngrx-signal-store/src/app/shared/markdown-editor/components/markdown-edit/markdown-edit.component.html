@@ -1,14 +1,39 @@
-<div column class="gap-3">
+<div class="editor-fields">
   <div class="field">
-    <label class="label">Title</label>
+    <label class="label" for="md-item-title">Title</label>
     @if (markdownItem().id === -1) {
-      <input class="input" [value]="markdownItem().title" readonly />
+      <input id="md-item-title" class="input" [value]="markdownItem().title" readonly />
     } @else {
-      <input class="input" [formField]="itemForm.title" />
+      <input id="md-item-title" class="input" [formField]="itemForm.title" />
     }
   </div>
-  <div class="field">
-    <label class="label">Comment</label>
-    <textarea class="textarea" autosize [formField]="itemForm.comment"></textarea>
+
+  <div class="field comment-field">
+    @if (view() === 'source') {
+      <div class="label-row">
+        <label class="label" for="md-item-comment">Markdown source</label>
+        <span class="label">{{ charCount() }} chars &middot; {{ lineCount() }} lines</span>
+      </div>
+      <textarea
+        id="md-item-comment"
+        class="textarea md-source"
+        spellcheck="false"
+        autocapitalize="off"
+        autocorrect="off"
+        [formField]="itemForm.comment"
+      ></textarea>
+    } @else {
+      <div class="label-row">
+        <span class="label">Preview</span>
+        <span class="label">{{ charCount() }} chars &middot; {{ lineCount() }} lines</span>
+      </div>
+      <div class="md-preview" tabindex="0" role="region" aria-label="Markdown preview">
+        @if (markdownItem().comment) {
+          <markdown [data]="markdownItem().comment" />
+        } @else {
+          <p class="text-slate-500">Nothing to preview yet.</p>
+        }
+      </div>
+    }
   </div>
 </div>

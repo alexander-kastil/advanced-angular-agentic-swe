@@ -1,9 +1,9 @@
-<div class="card min-w-[500px]">
-  <div class="card-header items-center h-[var(--toolbar-xl)]">
-    <div class="card-title text-xl">{{ title() }}</div>
-    <div class="card-subtitle text-lg">{{ subtitle() }}</div>
+<div class="card w-full max-w-2xl">
+  <div class="card-header items-center gap-1 py-4" style="min-height: var(--toolbar-xl)">
+    <div class="card-title text-lg">{{ title() }}</div>
+    <div class="card-subtitle">{{ subtitle() }}</div>
   </div>
-  <div class="card-content">
+  <div class="card-content gap-6">
     <div class="showcase">
       <img src="images/{{ img() }}" alt="" />
     </div>
@@ -12,6 +12,6 @@
     </div>
   </div>
   <div class="card-actions justify-center">
-    <button type="button" class="btn btn-primary" routerLink="/demos">Proceed</button>
+    <button type="button" class="btn btn-primary px-6" routerLink="/demos">Proceed</button>
   </div>
 </div>

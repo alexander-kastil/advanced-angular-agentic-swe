@@ -1,25 +1,38 @@
-<div class="card max-w-xl">
-  <div class="card-header">
-    <div class="card-title">{{ isNew ? 'Add Skill' : 'Edit Skill' }}</div>
-  </div>
-  <div class="card-content flex flex-col gap-3">
-    <div class="field">
-      <label class="label" for="skill-name">Name</label>
-      <input id="skill-name" class="input" type="text" placeholder="Name" [formField]="skillForm.name" />
+<dialog #dialog class="modal" aria-labelledby="skill-dialog-title" (close)="doCancel()" (cancel)="doCancel()">
+  <div class="card mb-0">
+    <div class="card-header">
+      <h2 id="skill-dialog-title" class="card-title">{{ isNew ? 'Add Skill' : 'Edit Skill' }}</h2>
     </div>
-    @if (skillForm.name().touched() && skillForm.name().invalid()) {
-      @for (err of skillForm.name().errors(); track err.kind) {
-        <div class="error">{{ err.message }}</div>
-      }
-    }
-    <label class="switch">
-      <input type="checkbox" class="sr-only" [formField]="skillForm.completed" />
-      <span class="switch-track"><span class="switch-thumb"></span></span>
-      Completed
-    </label>
+    <div class="card-content gap-4">
+      <div class="field">
+        <label class="label" for="skill-name">Name</label>
+        <input
+          id="skill-name"
+          class="input"
+          type="text"
+          placeholder="Name"
+          autocomplete="off"
+          [attr.aria-invalid]="skillForm.name().touched() && skillForm.name().invalid() ? 'true' : null"
+          [attr.aria-describedby]="skillForm.name().touched() && skillForm.name().invalid() ? 'skill-name-error' : null"
+          [formField]="skillForm.name"
+        />
+        @if (skillForm.name().touched() && skillForm.name().invalid()) {
+          <div id="skill-name-error" class="error" role="alert">
+            @for (err of skillForm.name().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
+        }
+      </div>
+      <label class="switch">
+        <input type="checkbox" class="sr-only" [formField]="skillForm.completed" />
+        <span class="switch-track"><span class="switch-thumb"></span></span>
+        Completed
+      </label>
+    </div>
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-outline" (click)="doCancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="saveSkill()">Save</button>
+    </div>
   </div>
-  <div class="card-actions justify-end">
-    <button type="button" class="btn btn-primary" (click)="doCancel()">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="saveSkill()">Save</button>
-  </div>
-</div>
+</dialog>

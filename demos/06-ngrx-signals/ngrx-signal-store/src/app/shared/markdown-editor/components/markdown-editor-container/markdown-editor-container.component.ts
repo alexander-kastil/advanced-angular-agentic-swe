@@ -26,6 +26,7 @@ export class MarkdownEditorContainerComponent {
     readonly demoUrl = input('');
 
     editorEdit = signal(false);
+    view = signal<'source' | 'preview'>('source');
     current = signal<MarkdownItem | null>(null);
 
     get currentItem(): MarkdownItem { return this.current()!; }
@@ -42,6 +43,7 @@ export class MarkdownEditorContainerComponent {
 
     addMarkdownItem() {
         this.current.set(createMarkdownItem());
+        this.view.set('source');
         this.editorEdit.set(true);
     }
 
@@ -59,6 +61,7 @@ export class MarkdownEditorContainerComponent {
 
     editMarkdownItem(item: MarkdownItem) {
         this.current.set({ ...item });
+        this.view.set('source');
         this.editorEdit.set(true);
     }
 }

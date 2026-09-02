@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title">Store Composition: withProps, withFeature and signalMethod</div>
+    <h2 class="card-title">Store Composition: withProps, withFeature and signalMethod</h2>
   </div>
   <div class="card-content content">
     <p>Desk: <strong>{{ store.desk() }}</strong> - watching <strong>{{ store.watched() }}</strong> symbols</p>
@@ -33,7 +33,7 @@
       by itself every time the selection changes.
     </p>
 
-    <h4>Audit log (from withFeature)</h4>
+    <h3>Audit log (from withFeature)</h3>
     <ol class="log">
       @for (entry of store.auditLog(); track $index) {
         <li>{{ entry }}</li>

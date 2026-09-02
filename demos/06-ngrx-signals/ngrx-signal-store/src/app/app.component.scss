@@ -1,18 +1,20 @@
 .grid {
   display: grid;
-  grid-template-rows: 80px auto;
+  grid-template-rows: var(--toolbar-big) auto;
   grid-template-columns: auto;
   grid-template-areas:
     "navbar"
     "mainrow";
   height: 100vh;
-  margin: 0 var(--gap-medium);
+  height: 100dvh;
 }
 
-.gdNavbar{
+.gdNavbar {
   grid-area: navbar;
+  position: relative;
 }
 
-.gdMainrow{
+.gdMainrow {
   grid-area: mainrow;
+  overflow: hidden;
 }

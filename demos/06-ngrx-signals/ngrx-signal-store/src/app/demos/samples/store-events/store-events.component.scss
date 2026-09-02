@@ -14,8 +14,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .grow {
@@ -23,7 +23,7 @@
 }
 
 .order {
-  color: #81c784;
+  color: #15803d;
 }
 
 .log {
@@ -34,6 +34,6 @@
 }
 
 .hint {
-  opacity: 0.75;
+  color: #64748b;
   font-size: 0.9rem;
 }

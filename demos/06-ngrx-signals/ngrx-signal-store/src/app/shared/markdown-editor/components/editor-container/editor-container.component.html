@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title">Mock Markdown Editor</div>
+    <h2 class="card-title">Mock Markdown Editor</h2>
   </div>
-  <div class="card-content" column>
+  <div class="card-content">
     @if (!editorEdit()) {
       <app-markdown-list [items]="store.entities()"
         (itemEdit)="editMarkdownItem($event)"

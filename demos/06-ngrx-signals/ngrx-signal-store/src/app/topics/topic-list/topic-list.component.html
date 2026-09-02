@@ -1,25 +1,41 @@
-<div class="topics-container">
+<div class="page">
+  <div class="app-toolbar justify-between">
+    <div class="text-sm font-semibold tracking-tight text-ink">Topics</div>
+    <div class="text-slate-600">
+      Completed: <strong class="text-ink">{{ completedCount() }}</strong> of {{ topics().length }}
+    </div>
+  </div>
+
   <div class="loading">
     @if (store.isPending()) {
-    <app-progress-bar />
+      <app-progress-bar />
     }
   </div>
+
   <table class="data-table">
     <thead>
       <tr>
-        <th>ID</th>
+        <th class="w-20">ID</th>
         <th>Name</th>
-        <th>Completed</th>
+        <th class="w-40">Completed</th>
       </tr>
     </thead>
     <tbody>
       @for (topic of topics(); track topic.id) {
         <tr>
-          <td>{{ topic.id }}</td>
-          <td>{{ topic.name }}</td>
+          <td class="text-slate-500">#{{ topic.id }}</td>
+          <td class="font-medium">{{ topic.name }}</td>
           <td>
-            <app-slide-toggle [checked]="topic.completed" (toggled)="toggleCompleted(topic)" />
+            <app-slide-toggle
+              [checked]="topic.completed"
+              [aria-label]="'Completed: ' + topic.name"
+              (toggled)="toggleCompleted(topic)"
+            />
           </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="3" class="text-slate-500">No topics. Start json-server on the app db.json.</td>
         </tr>
       }
     </tbody>

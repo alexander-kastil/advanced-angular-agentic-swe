@@ -1,19 +1,25 @@
 <div class="skillrow">
-  <div class="id">ID: {{ skill().id }}</div>
+  <div class="id">#{{ skill().id }}</div>
   <div class="name">{{ skill().name }}</div>
   <div class="completed">
-    <span class="icon">{{ skill().completed ? 'check_circle' : 'radio_button_unchecked' }}</span>
+    <span class="icon" [class.text-primary]="skill().completed" [class.text-slate-300]="!skill().completed">
+      {{ skill().completed ? 'check_circle' : 'radio_button_unchecked' }}
+    </span>
   </div>
   <div class="cmd">
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn-icon tip tip-left"
+      data-tip="Edit"
+      aria-label="Edit skill"
       [routerLink]="['/skills', skill().id]">
       <span class="icon">edit</span>
     </button>
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn-icon tip tip-left hover:bg-warn/10 hover:text-warn"
+      data-tip="Delete"
+      aria-label="Delete skill"
       (click)="deleteItem(skill())">
       <span class="icon">delete</span>
     </button>

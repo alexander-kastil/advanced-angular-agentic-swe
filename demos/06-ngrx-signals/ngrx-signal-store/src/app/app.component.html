@@ -1,5 +1,8 @@
 <div class="grid">
   <div class="gdNavbar"><app-navbar /></div>
-  <div class="gdMainrow"><router-outlet /></div>
+  <main class="gdMainrow" id="main-content">
+    <h1 class="sr-only">{{ pageTitle() }}</h1>
+    <router-outlet />
+  </main>
 </div>
 <app-snackbar />

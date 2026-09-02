@@ -1,39 +1,66 @@
 <div class="demo-container-wrapper">
   <div class="relative flex h-full overflow-hidden">
     @if (sidenavVisible() && sidenavMode() === 'over') {
-      <div class="absolute inset-0 z-10 bg-black/40" (click)="closeSidenav()"></div>
+      <div class="absolute inset-0 z-10 bg-ink/40" (click)="closeSidenav()"></div>
     }
-    @if (sidenavVisible()) {
+
+    @if (sidenavVisible() || sidenavMode() === 'side') {
       <aside
-        class="sidenav"
-        [class.sidenav-over]="sidenavMode() === 'over'"
+        class="rail"
+        [class.rail-collapsed]="!sidenavVisible()"
+        [class.rail-over]="sidenavMode() === 'over'"
       >
-        <div class="app-toolbar">{{ title }}</div>
-        <nav class="nav-list">
-          <div class="app-toolbar text-base">
-            <span>Please select:</span>
-          </div>
-          @for (item of demos(); track item) {
-            <a
-              class="nav-item"
-              [routerLink]="['./' + item.url]"
-              (mouseenter)="showPopup(item, $event)"
-              (mouseleave)="hidePopup()"
-            >
-              {{ item.title }}
-            </a>
+        <div class="rail-brand" [class.justify-center]="!sidenavVisible()">
+          @if (sidenavVisible()) {
+            <span class="flex-1 truncate">{{ title }}</span>
           }
-        </nav>
+          <button
+            type="button"
+            class="rail-btn h-8 w-8"
+            [attr.aria-label]="sidenavVisible() ? 'Collapse navigation' : 'Expand navigation'"
+            [attr.aria-expanded]="sidenavVisible()"
+            (click)="toggleSidenav()"
+          >
+            <span class="icon">{{ sidenavVisible() ? 'chevron_left' : 'chevron_right' }}</span>
+          </button>
+        </div>
+
+        @if (sidenavVisible()) {
+          <nav class="nav-list" aria-label="Demos">
+            <div class="rail-label">Demos</div>
+            @for (item of demos(); track item) {
+              <a
+                class="nav-item"
+                [routerLink]="['./' + item.url]"
+                routerLinkActive="nav-item-active"
+                (mouseenter)="showPopup(item, $event)"
+                (mouseleave)="hidePopup()"
+              >
+                <span class="truncate">{{ item.title }}</span>
+              </a>
+            }
+          </nav>
+        }
+
+        <div class="rail-footer">
+          <a href="https://integrations.at" target="_blank" rel="noopener" class="copyright-badge" aria-label="Crafted with AI by integrations.at">
+            <svg class="badge-spark" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M12 3.5 13.9 10.1 20.5 12 13.9 13.9 12 20.5 10.1 13.9 3.5 12 10.1 10.1Z" fill="currentColor" />
+            </svg>
+            @if (sidenavVisible()) {
+              <span>Crafted with AI by</span>
+              <img src="images/integrations-wordmark.webp" alt="Integrations" loading="lazy" width="554" height="130">
+            }
+          </a>
+        </div>
       </aside>
     }
+
     <div class="min-w-0 flex-1 overflow-hidden">
-      <div
-        class="gdSidenavContent"
-        [style.margin-left]="sidenavVisible() ? '5px' : '0'"
-      >
+      <div class="gdSidenavContent">
         <div class="gdToolbar">
-          <div class="app-toolbar">
-            <h4>{{ header() }}</h4>
+          <div class="page-header">
+            <span class="truncate">{{ header() }}</span>
           </div>
         </div>
         <div class="gdMain">
@@ -63,12 +90,11 @@
     </div>
   </div>
 
-  @if (hoveredItem()) {
+  @if (hoveredItem(); as item) {
     <div class="demo-popup" [style.top.px]="popupTop()">
-      <strong>{{ hoveredItem()!.title }}</strong>
-      <p>{{ hoveredItem()!.teaches }}</p>
-      <hr />
-      <small>{{ hoveredItem()!.topic }}</small>
+      <strong>{{ item.title }}</strong>
+      <p>{{ item.teaches }}</p>
+      <small>{{ item.topic }}</small>
     </div>
   }
 </div>

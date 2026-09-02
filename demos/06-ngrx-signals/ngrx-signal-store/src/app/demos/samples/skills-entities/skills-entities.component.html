@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title">Skills - withEntities against a REST API</div>
+    <h2 class="card-title">Skills - withEntities against a REST API</h2>
   </div>
   <div class="card-content content">
     @if (store.isPending()) {
@@ -23,7 +23,7 @@
     @for (s of store.visibleSkills(); track s.id) {
       <div class="row">
         <span class="grow" [class.done]="s.completed">#{{ s.id }} {{ s.name }}</span>
-        <app-slide-toggle [checked]="s.completed" (toggled)="toggle(s)" />
+        <app-slide-toggle [checked]="s.completed" [aria-label]="'Completed: ' + s.name" (toggled)="toggle(s)" />
         <button type="button" class="btn-icon" (click)="remove(s)"><span class="icon">delete</span></button>
       </div>
     } @empty {

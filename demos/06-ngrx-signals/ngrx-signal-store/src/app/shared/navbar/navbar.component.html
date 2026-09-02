@@ -1,21 +1,22 @@
-<div class="app-toolbar app-toolbar-primary h-[var(--toolbar-big)] gap-2.5">
-  <div (click)="toggleMenu()" class="hamburgerMenu">
-    <span class="icon">menu</span>
-  </div>
-  <div><img width="50px" src="images/angular.svg" /></div>
+<nav class="topbar" aria-label="Main">
+  <button type="button" class="hamburgerMenu rail-btn text-white hover:bg-white/15 hover:text-white" aria-label="Toggle navigation" (click)="toggleMenu()">
+    <span class="icon" aria-hidden="true">menu</span>
+  </button>
+  <img class="mr-2 ml-1" width="34" height="34" src="images/angular.svg" alt="Angular" />
   <div class="menuContainer">
     @for (mi of menuItems(); track mi) {
-      <div
+      <a
+        class="topbar-link"
         routerLink="{{ '/' + mi.url }}"
-        routerLinkActive="navLinkActive"
+        routerLinkActive="topbar-link-active"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="navLink"
-        >
+      >
         {{ mi.label }}
-      </div>
+      </a>
     }
   </div>
-  <div (click)="toggleApps()" class="hamburgerMenu">
-    <span class="icon">apps</span>
-  </div>
-</div>
+  <app-loading />
+  <button type="button" class="hamburgerMenu rail-btn text-white hover:bg-white/15 hover:text-white" aria-label="Apps" (click)="toggleApps()">
+    <span class="icon" aria-hidden="true">apps</span>
+  </button>
+</nav>

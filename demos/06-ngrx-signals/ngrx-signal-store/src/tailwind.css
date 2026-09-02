@@ -4,12 +4,21 @@
 @source "./index.html";
 
 @theme {
-  --color-primary: #1e88e5;
+  --color-primary: #1976d2;
   --color-primary-dark: #1565c0;
+  --color-primary-soft: #e8f2fd;
   --color-accent: #b0bec5;
   --color-surface: #e5eff5;
+  --color-canvas: #f6f9fb;
+  --color-line: #dce5ec;
+  --color-ink: #17222e;
   --color-warn: #e53935;
+  --color-brand-accent: #4a9eff;
   --font-sans: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  --shadow-frame: 0 1px 2px rgb(15 34 46 / 0.06), 0 1px 3px rgb(15 34 46 / 0.08);
+  --shadow-raised: 0 1px 2px rgb(15 34 46 / 0.05), 0 4px 12px rgb(15 34 46 / 0.08);
+  --shadow-topbar: 0 1px 3px rgb(15 34 46 / 0.12), 0 4px 12px rgb(15 34 46 / 0.08);
 }
 
 :root {
@@ -17,16 +26,49 @@
   --color-fg: #e5eff5;
   --color-bg: #cfd8dc;
   --gap-small: 0.5rem;
-  --gap-medium: 0.8rem;
+  --gap-medium: 0.75rem;
   --gap-big: 1rem;
-  --toolbar-xl: 85px;
-  --toolbar-big: 70px;
+  --toolbar-xl: 80px;
+  --toolbar-big: 56px;
   --toolbar-medium: 40px;
-  --toolbar-small: 30px;
+  --toolbar-small: 32px;
   --font-small: 0.9rem;
   --font-medium: 1.2rem;
   --font-big: 1.4rem;
   --breakpoint-mobile: 960px;
+  --rail-width: 250px;
+  --rail-right-width: 56px;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
 }
 
 @layer components {
@@ -47,91 +89,243 @@
     user-select: none;
   }
 
-  .card {
-    @apply mb-4 rounded border border-slate-200 bg-surface shadow-sm;
+  .topbar {
+    @apply flex items-center gap-2 bg-primary px-4 text-white;
+    height: var(--toolbar-big);
+    box-shadow: var(--shadow-topbar);
   }
 
-  .card-header {
-    @apply flex flex-col justify-center rounded-t bg-primary px-3 py-1.5 text-white;
+  .topbar-link {
+    @apply relative flex h-9 cursor-pointer items-center rounded px-3 text-[15px] font-medium text-white transition-colors hover:bg-white/15;
   }
 
-  .card-title {
-    @apply text-base leading-tight font-semibold;
+  .topbar-link-active {
+    @apply bg-primary-dark text-white;
   }
 
-  .card-subtitle {
-    @apply text-sm text-white/85;
+  .topbar-link-active::after {
+    content: "";
+    @apply absolute right-3 bottom-0.5 left-3 h-0.5 rounded-full bg-white;
   }
 
-  .card-content {
-    @apply p-3;
+  .rail {
+    @apply no-scrollbar flex h-full flex-col overflow-y-auto bg-white;
+    width: var(--rail-width);
+    border-right: 1px solid var(--color-line);
   }
 
-  .card-actions {
-    @apply flex items-center gap-2 px-3 pb-3;
+  .rail-brand {
+    @apply flex flex-none items-center px-4 text-sm font-semibold tracking-tight text-ink;
+    height: var(--toolbar-big);
+    border-bottom: 1px solid var(--color-line);
   }
 
-  .btn {
-    @apply inline-flex h-8 cursor-pointer items-center justify-center gap-1.5 rounded px-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  .rail-footer {
+    margin-top: auto;
+    flex: none;
+    background: #2d3436;
+    padding: 0.5rem 0.25rem;
+    overflow: hidden;
   }
 
-  .btn-primary {
-    @apply bg-primary text-white shadow-sm hover:bg-primary-dark;
+  .rail-footer .copyright-badge {
+    flex-wrap: nowrap;
+    transform: scale(0.74);
+    transform-origin: center;
   }
 
-  .btn-outline {
-    @apply border border-slate-400 bg-white text-slate-700 hover:bg-slate-100;
+  .rail-footer .copyright-badge:hover {
+    transform: scale(0.78) !important;
   }
 
-  .btn-warn {
-    @apply bg-warn text-white shadow-sm hover:brightness-90;
+  .copyright-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    text-decoration: none !important;
+    transition: transform 0.2s;
   }
 
-  .btn-icon {
-    @apply inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded text-slate-600 transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50;
+  .copyright-badge:hover {
+    transform: scale(1.05) !important;
   }
 
-  .btn-fab {
-    @apply inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary text-white shadow-md transition-colors hover:bg-primary-dark;
+  .copyright-badge span {
+    white-space: nowrap;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
   }
 
-  .field {
-    @apply flex flex-col gap-1;
+  .copyright-badge:hover span {
+    color: white;
   }
 
-  .label {
-    @apply text-xs font-medium text-slate-600;
+  .badge-spark {
+    height: 16px;
+    width: 16px;
+    flex: none;
+    color: var(--color-brand-accent);
+    opacity: 0.85;
+    transition: opacity 0.2s ease-in-out;
   }
 
-  .input {
-    @apply h-8 w-full rounded border border-slate-300 bg-white px-2 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary read-only:bg-slate-100;
+  .copyright-badge:hover .badge-spark {
+    opacity: 1;
   }
 
-  .textarea {
-    @apply w-full resize-y rounded border border-slate-300 bg-white p-2 text-sm text-slate-900 outline-none focus:border-primary focus:ring-1 focus:ring-primary;
+  .copyright-badge img {
+    height: 24px;
+    width: auto;
+    opacity: 0.75;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .copyright-badge:hover img {
+    opacity: 1;
+  }
+
+  .rail-label {
+    @apply px-4 pt-4 pb-2 text-[11px] font-semibold tracking-[0.08em] text-slate-500 uppercase;
+  }
+
+  .rail-right {
+    @apply flex h-full flex-col items-center gap-2 bg-white pt-4;
+    width: var(--rail-right-width);
+    border-left: 1px solid var(--color-line);
+  }
+
+  .rail-btn {
+    @apply inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-primary-soft hover:text-primary;
+  }
+
+  .rail-btn-active {
+    @apply bg-primary text-white hover:bg-primary-dark hover:text-white;
+  }
+
+  .page-header {
+    @apply flex items-center gap-3 bg-white px-4 text-sm font-medium text-slate-700;
+    height: var(--toolbar-big);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .app-toolbar {
-    @apply flex items-center gap-3 bg-accent px-3 text-slate-800;
+    @apply flex items-center gap-3 rounded-lg bg-white px-4 text-sm text-slate-700;
+    min-height: var(--toolbar-medium);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-frame);
+  }
+
+  .modal {
+    @apply w-[min(92vw,32rem)] rounded-lg border-0 bg-transparent p-0 shadow-none;
+    margin: auto;
+    max-height: calc(100dvh - 2rem);
+    overflow: visible;
+  }
+
+  .modal::backdrop {
+    background-color: rgb(15 34 46 / 0.45);
+    backdrop-filter: blur(2px);
+  }
+
+  .page {
+    @apply mx-auto flex w-full max-w-7xl flex-col gap-4 p-4;
+  }
+
+  .card {
+    @apply overflow-hidden rounded-lg bg-white;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .card + .card {
+    @apply mt-4;
+  }
+
+  .card-header {
+    @apply flex flex-col justify-center bg-primary px-4;
     min-height: var(--toolbar-medium);
   }
 
-  .app-toolbar-primary {
-    @apply bg-primary text-white;
+  .card-title {
+    @apply text-sm leading-tight font-semibold tracking-tight text-white;
+  }
+
+  .card-subtitle {
+    @apply text-sm text-white;
+  }
+
+  .card-content {
+    @apply flex flex-col gap-3 p-4 text-sm text-slate-700;
+  }
+
+  .card-actions {
+    @apply flex items-center gap-2 px-4 pb-4;
+  }
+
+  .btn {
+    @apply inline-flex h-9 cursor-pointer items-center justify-center gap-1.5 rounded-md px-3.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-45;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark;
+    box-shadow: var(--shadow-frame);
+  }
+
+  .btn-outline {
+    @apply bg-white text-slate-700 hover:border-primary hover:bg-primary-soft hover:text-primary;
+    border: 1px solid var(--color-line);
+  }
+
+  .btn-warn {
+    @apply bg-warn text-white hover:brightness-90;
+    box-shadow: var(--shadow-frame);
+  }
+
+  .btn-icon {
+    @apply inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md text-slate-600 transition-colors hover:bg-primary-soft hover:text-primary disabled:cursor-not-allowed disabled:opacity-45;
+  }
+
+  .btn-fab {
+    @apply inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-dark;
+    box-shadow: var(--shadow-raised);
+  }
+
+  .field {
+    @apply flex flex-col gap-1.5;
+  }
+
+  .label {
+    @apply text-xs font-medium text-slate-500;
+  }
+
+  .input {
+    @apply h-9 w-full rounded-md bg-white px-2.5 text-sm text-ink transition-colors outline-none read-only:bg-slate-50 read-only:text-slate-500 focus:border-primary focus:ring-2 focus:ring-primary/25;
+    border: 1px solid var(--color-line);
+  }
+
+  .textarea {
+    @apply w-full resize-y rounded-md bg-white p-2.5 text-sm text-ink transition-colors outline-none focus:border-primary focus:ring-2 focus:ring-primary/25;
+    border: 1px solid var(--color-line);
   }
 
   .progress {
-    @apply relative h-1 w-full overflow-hidden rounded bg-primary/25;
+    @apply relative h-1 w-full overflow-hidden rounded-full bg-primary/20;
   }
 
   .progress-value {
-    @apply absolute inset-y-0 left-0 bg-primary transition-all duration-300;
+    @apply absolute inset-y-0 left-0 rounded-full bg-primary transition-all duration-300;
   }
 
   .progress-indeterminate {
     position: absolute;
     top: 0;
     bottom: 0;
+    border-radius: 9999px;
     background-color: var(--color-primary);
     animation: progress-slide 1.4s ease-in-out infinite;
   }
@@ -156,6 +350,10 @@
     transform: translateX(1rem);
   }
 
+  .switch > input:focus-visible + .switch-track {
+    @apply ring-2 ring-primary/40 ring-offset-2;
+  }
+
   .switch > input:disabled + .switch-track {
     @apply opacity-50;
   }
@@ -170,68 +368,84 @@
   }
 
   .toggle-group {
-    @apply inline-flex overflow-hidden rounded border border-slate-400;
+    @apply inline-flex overflow-hidden rounded-md bg-white;
+    border: 1px solid var(--color-line);
   }
 
   .toggle-btn {
-    @apply cursor-pointer border-r border-slate-400 bg-white px-3 py-1 text-sm text-slate-700 transition-colors last:border-r-0 hover:bg-slate-100;
+    @apply cursor-pointer px-3.5 py-1.5 text-sm text-slate-600 transition-colors hover:bg-primary-soft hover:text-primary;
+    border-right: 1px solid var(--color-line);
+  }
+
+  .toggle-btn:last-child {
+    border-right: 0;
   }
 
   .toggle-btn.active {
-    @apply bg-primary text-white hover:bg-primary-dark;
+    @apply bg-primary text-white hover:bg-primary-dark hover:text-white;
   }
 
   .tabs {
-    @apply flex gap-1 border-b border-slate-300;
+    @apply flex gap-1;
+    border-bottom: 1px solid var(--color-line);
   }
 
   .tab {
-    @apply cursor-pointer border-b-2 border-transparent px-3 py-1.5 text-sm text-slate-600 transition-colors hover:text-primary;
+    @apply cursor-pointer border-b-2 border-transparent px-3.5 py-2 text-sm text-slate-600 transition-colors hover:text-primary;
   }
 
   .tab.active {
-    @apply border-primary font-medium text-primary;
+    @apply border-primary font-semibold text-primary;
   }
 
   .panel {
-    @apply mb-3 overflow-hidden rounded border border-slate-200;
+    @apply overflow-hidden rounded-lg bg-white;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-raised);
   }
 
   .panel-header {
-    @apply flex w-full cursor-pointer items-center justify-between bg-primary px-3 text-left text-white transition-colors hover:bg-primary-dark;
+    @apply flex w-full cursor-pointer items-center justify-between bg-primary px-4 text-left text-white transition-colors hover:bg-primary-dark;
     min-height: var(--toolbar-medium);
   }
 
   .panel-title {
-    @apply text-lg;
+    @apply text-sm font-semibold tracking-tight;
   }
 
   .panel-content {
-    @apply bg-white p-3;
+    @apply no-scrollbar bg-white p-4;
   }
 
   .nav-list {
-    @apply flex flex-col;
+    @apply flex flex-col pb-4;
   }
 
   .nav-item {
-    @apply flex h-9 cursor-pointer items-center border-b border-slate-200 px-3 text-sm text-slate-800 transition-colors hover:bg-primary hover:text-white;
+    @apply flex h-9 cursor-pointer items-center border-l-2 border-transparent px-4 text-sm text-slate-600 transition-colors hover:border-primary hover:bg-primary-soft hover:text-primary;
+  }
+
+  .nav-item-active {
+    @apply border-primary bg-primary-soft font-medium text-primary;
   }
 
   .data-table {
-    @apply w-full border-collapse text-sm;
+    @apply w-full overflow-hidden rounded-lg border-separate border-spacing-0 bg-white text-sm;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-frame);
   }
 
   .data-table thead th {
-    @apply bg-primary px-3 py-2 text-left font-medium text-white;
+    @apply bg-primary px-4 py-2.5 text-left text-xs font-semibold tracking-[0.06em] text-white uppercase;
   }
 
   .data-table tbody td {
-    @apply border-b border-slate-200 px-3 py-1.5;
+    @apply px-4 py-2;
+    border-top: 1px solid var(--color-line);
   }
 
-  .data-table tbody tr:hover {
-    @apply bg-slate-100;
+  .data-table tbody tr:hover td {
+    @apply bg-primary-soft;
   }
 
   .tip {
@@ -240,10 +454,11 @@
 
   .tip::after {
     content: attr(data-tip);
-    @apply pointer-events-none absolute top-1/2 left-full z-50 ml-2 -translate-y-1/2 rounded bg-slate-800 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition-opacity;
+    @apply pointer-events-none absolute top-1/2 left-full z-50 ml-2 -translate-y-1/2 rounded-md bg-ink px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 shadow-lg transition-opacity;
   }
 
-  .tip:hover::after {
+  .tip:hover::after,
+  .tip:focus-visible::after {
     @apply opacity-100;
   }
 

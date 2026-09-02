@@ -15,8 +15,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.25rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-line);
 }
 
 .grow {
@@ -25,7 +25,7 @@
 
 .done {
   text-decoration: line-through;
-  opacity: 0.6;
+  color: #64748b;
 }
 
 .badge {
@@ -36,5 +36,5 @@
 }
 
 .badge.high {
-  color: #ff8a65;
+  color: #c2410c;
 }

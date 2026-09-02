@@ -6,7 +6,7 @@
       "teaches": "Model application state with withState, derive it with withComputed and change it with withMethods and patchState. Inspect the live state snapshot via getState().",
       "sortOrder": 1,
       "topic": "SignalStore Fundamentals",
-      "id": 1,
+      "id": "1",
       "md": "app-state"
     },
     {
@@ -15,7 +15,7 @@
       "teaches": "Create, read, update and delete against a REST API with withMethods and rxMethod. Track loading state and derive filtered views with withComputed.",
       "sortOrder": 2,
       "topic": "SignalStore Fundamentals",
-      "id": 2,
+      "id": "2",
       "md": "store-crud"
     },
     {
@@ -24,7 +24,7 @@
       "teaches": "Read nested state as individual signals with store.user.address.city(), and handle the union case where a state slice is a union of record types and must be narrowed instead.",
       "sortOrder": 3,
       "topic": "SignalStore Fundamentals",
-      "id": 3,
+      "id": "3",
       "md": "deep-signals"
     },
     {
@@ -33,7 +33,7 @@
       "teaches": "Derive writable state from other state with withLinkedState. A linked slice recomputes when its source changes and stays writable in between.",
       "sortOrder": 4,
       "topic": "SignalStore Fundamentals",
-      "id": 10,
+      "id": "10",
       "md": "linked-state"
     },
     {
@@ -42,7 +42,7 @@
       "teaches": "Manage a normalized collection with withEntities(). Tour the updater API: setAllEntities, addEntity, updateEntity, updateAllEntities, removeEntity, removeAllEntities.",
       "sortOrder": 10,
       "topic": "Data Management",
-      "id": 4,
+      "id": "4",
       "md": "store-entities"
     },
     {
@@ -51,7 +51,7 @@
       "teaches": "Back an entity collection with a REST API. Combines withEntities, the withRequestStatus feature and rxMethod for load, add, update and remove.",
       "sortOrder": 11,
       "topic": "Data Management",
-      "id": 5,
+      "id": "5",
       "md": "skills-entities"
     },
     {
@@ -60,7 +60,7 @@
       "teaches": "Extend an httpResource with @ngrx/signals/resource. withPreviousValueOnLoading keeps the last value while reloading and withValueOnError supplies a fallback.",
       "sortOrder": 12,
       "topic": "Data Management",
-      "id": 6,
+      "id": "6",
       "md": "store-resource"
     },
     {
@@ -69,7 +69,7 @@
       "teaches": "Build reusable store features with signalStoreFeature. Compose withRequestStatus and withAttempts and drive them with pure updater functions.",
       "sortOrder": 20,
       "topic": "Advanced Patterns",
-      "id": 7,
+      "id": "7",
       "md": "custom-store-features"
     },
     {
@@ -78,7 +78,7 @@
       "teaches": "Decouple intent from state with @ngrx/signals/events: an eventGroup reduced by withReducer, side effects in withEventHandlers, and scoped dispatching through a component-level Dispatcher.",
       "sortOrder": 21,
       "topic": "Advanced Patterns",
-      "id": 8,
+      "id": "8",
       "md": "store-events"
     },
     {
@@ -87,7 +87,7 @@
       "teaches": "Compose custom store features into a real store. Uses withMarkdownItems() for entity CRUD and withRequestState() for loading and error tracking.",
       "sortOrder": 22,
       "topic": "Advanced Patterns",
-      "id": 9,
+      "id": "9",
       "md": "markdown-editor"
     },
     {
@@ -96,7 +96,7 @@
       "teaches": "Compose a store from parts: withProps for injected dependencies and observables, withFeature for a feature that needs store members, and signalMethod for a side effect bound to a signal.",
       "sortOrder": 23,
       "topic": "Advanced Patterns",
-      "id": 11,
+      "id": "11",
       "md": "store-composition"
     },
     {
@@ -105,7 +105,7 @@
       "teaches": "Expose SignalStore methods to a browser agent with declareExperimentalWebMcpTool. Each tool declares a JSON schema and calls the same store method the UI calls.",
       "sortOrder": 24,
       "topic": "Advanced Patterns",
-      "id": 12,
+      "id": "12",
       "md": "webmcp-store"
     },
     {
@@ -114,52 +114,57 @@
       "teaches": "Run an agent-driven migration: the classic actions, reducer, selectors and effects, the SignalStore that replaces them, the prompt that drives it and the checklist you review the diff against.",
       "sortOrder": 25,
       "topic": "Advanced Patterns",
-      "id": 13,
+      "id": "13",
       "md": "classic-to-signalstore"
     }
   ],
   "skills": [
     {
-      "id": 1,
-      "name": "RxJs",
+      "id": "1",
+      "name": "Signals",
       "completed": false
     },
     {
-      "id": 5,
-      "name": "Material",
+      "id": "5",
+      "name": "Tailwind",
       "completed": true
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Node",
       "completed": true
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Forms",
       "completed": true
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Authentication",
       "completed": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Angular",
+      "completed": false
+    },
+    {
+      "id": "9",
+      "name": "Agentic Engineering",
       "completed": false
     }
   ],
   "markdownItems": [
     {
-      "id": 1,
+      "id": "1",
       "url": "",
       "title": "Using @ngrx/store",
       "comment": "To use @ngrx/store, we need to install it first.",
       "saved": "2020-09-16T20:10:06.925Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "url": "",
       "title": "Optimizing change detection",
       "comment": "In order to optimize change detection, we need to use OnPush strategy.",
@@ -169,18 +174,18 @@
   "customers": [
     {
       "name": "Cleo",
-      "id": 1
+      "id": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Soi"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Giro"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Flora"
     }
   ],
@@ -188,54 +193,55 @@
     {
       "label": "Home",
       "url": "",
-      "id": 1
+      "id": "1"
     },
     {
       "label": "Demos",
       "url": "demos",
-      "id": 2
+      "id": "2"
     },
     {
       "label": "Skills",
       "url": "skills",
-      "id": 3
+      "id": "3"
     },
     {
       "label": "Customers",
       "url": "customers",
-      "id": 4
+      "id": "4"
     },
     {
       "label": "Topics",
       "url": "topics",
-      "id": 5
+      "id": "5"
     }
   ],
   "topics": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Angular",
-      "completed": true
+      "completed": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "NgRx",
       "completed": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Signals",
       "completed": false
     },
     {
-      "id": 4,
-      "name": "Material",
+      "id": "4",
+      "name": "Tailwind",
       "completed": true
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Copilot Dev",
       "completed": false
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

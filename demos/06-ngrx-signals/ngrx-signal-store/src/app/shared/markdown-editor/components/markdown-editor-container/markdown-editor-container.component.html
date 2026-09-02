@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title">Mock Markdown Editor</div>
+    <h2 class="card-title">Mock Markdown Editor</h2>
   </div>
-  <div class="card-content" column>
+  <div class="card-content">
     @if (!editorEdit()) {
       <app-markdown-list [items]="allItems()" [demoUrl]="demoUrl()" [demoSaved]="isDemoSaved()"
         (itemEdit)="editMarkdownItem($event)"
@@ -10,13 +10,39 @@
        />
     }
     @if (editorEdit() && current() != null) {
-      <app-markdown-edit [(markdownItem)]="currentItem" [mdSrc]="current()!.id === -1 ? current()!.comment : null" />
+      <app-markdown-edit
+        [(markdownItem)]="currentItem"
+        [view]="view()"
+        [mdSrc]="current()!.id === -1 ? current()!.comment : null"
+      />
     }
   </div>
-  <div class="card-actions justify-end">
-    @if (editorEdit()) {
-      <button type="button" class="btn btn-primary" (click)="saveMarkdownItem()">Save</button>
-      <button type="button" class="btn btn-primary" (click)="editorEdit.set(false)">Cancel</button>
-    }
-  </div>
+  @if (editorEdit()) {
+    <div class="card-actions justify-between">
+      <div class="toggle-group" role="group" aria-label="Editor view">
+        <button
+          type="button"
+          class="toggle-btn"
+          [class.active]="view() === 'source'"
+          [attr.aria-pressed]="view() === 'source'"
+          (click)="view.set('source')"
+        >
+          Source
+        </button>
+        <button
+          type="button"
+          class="toggle-btn"
+          [class.active]="view() === 'preview'"
+          [attr.aria-pressed]="view() === 'preview'"
+          (click)="view.set('preview')"
+        >
+          Preview
+        </button>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" class="btn btn-outline" (click)="editorEdit.set(false)">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="saveMarkdownItem()">Save</button>
+      </div>
+    </div>
+  }
 </div>

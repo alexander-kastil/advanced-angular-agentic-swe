@@ -139,6 +139,10 @@ export class DemoContainerComponent {
     this.nav.toggleMenuVisibility();
   }
 
+  toggleSidenav(): void {
+    this.nav.toggleMenuVisibility();
+  }
+
   private getRootRoute(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) {
       route = route.firstChild;

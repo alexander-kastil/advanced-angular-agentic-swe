@@ -1,22 +1,22 @@
-.title{
-  flex-grow: 1;
-}
-
 .skillrow.header {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 0;
-  font-weight: bold;
-  border-bottom: 2px solid #8d6e63;
+  align-items: center;
+  height: var(--toolbar-medium);
+  padding: 0 1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 
   .id {
     width: 70px;
-    padding-left: 2rem;
   }
 
   .name {
     flex: 3;
-    padding-left: 2rem;
   }
 
   .completed {

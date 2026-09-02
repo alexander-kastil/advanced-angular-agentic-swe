@@ -1,4 +1,4 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, ElementRef, afterRenderEffect, effect, inject, signal, viewChild } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -34,9 +34,19 @@ export class SkillsEditComponent {
     required(s.name, { message: 'Name is required' });
   });
 
+  private dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
+  private closing = false;
+
   get isNew() { return this.id() === 'new' || this.id() === ''; }
 
   constructor() {
+    afterRenderEffect(() => {
+      const el = this.dialog().nativeElement;
+      if (!el.open) {
+        el.showModal();
+      }
+    });
+
     effect(() => {
       const routeId = this.id();
       const idNum = Number(routeId);
@@ -63,11 +73,23 @@ export class SkillsEditComponent {
         this.store.update(skill);
       }
       this.sns.displayAlert('Skills', this.isNew ? 'Skill added' : 'Skill updated');
-      this.router.navigate(['/skills']);
+      this.close();
     });
   }
 
   doCancel() {
+    this.close();
+  }
+
+  private close() {
+    if (this.closing) {
+      return;
+    }
+    this.closing = true;
+    const el = this.dialog().nativeElement;
+    if (el.open) {
+      el.close();
+    }
     this.router.navigate(['/skills']);
   }
 }

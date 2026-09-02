@@ -10,6 +10,7 @@ import { injectDispatch } from '@ngrx/signals/events';
 @Component({
   selector: 'app-editor-container',
   templateUrl: './editor-container.component.html',
+  styleUrls: ['./editor-container.component.scss'],
   imports: [
     ColumnDirective,
     MarkdownListComponent,

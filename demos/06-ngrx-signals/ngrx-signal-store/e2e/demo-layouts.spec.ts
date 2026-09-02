@@ -9,19 +9,19 @@ test.describe('Demo layout', () => {
     test.describe('Guide button visibility', () => {
         test('not visible on /demos root (no demo selected)', async ({ page }) => {
             await page.goto('/demos', { waitUntil: 'networkidle' });
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await expect(guideBtn).not.toBeVisible();
         });
 
         test('visible on deep-signals (component has content + markdown)', async ({ page }) => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await expect(guideBtn).toBeVisible();
         });
 
         test('visible on store-entities (component has content + markdown)', async ({ page }) => {
             await page.goto('/demos/store-entities', { waitUntil: 'networkidle' });
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await expect(guideBtn).toBeVisible();
         });
     });
@@ -43,14 +43,14 @@ test.describe('Demo layout', () => {
     test.describe('Markdown pane', () => {
         test('opens on guide button click when demo has markdown', async ({ page }) => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await guideBtn.click();
             await expect(page.locator('.as-split-gutter')).toBeVisible();
         });
 
         test('closes on second guide button click', async ({ page }) => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await guideBtn.click();
             await expect(page.locator('.as-split-gutter')).toBeVisible();
             await guideBtn.click();
@@ -59,7 +59,7 @@ test.describe('Demo layout', () => {
 
         test('splits with the demo pane on store-entities', async ({ page }) => {
             await page.goto('/demos/store-entities', { waitUntil: 'networkidle' });
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await guideBtn.click();
             const gutter = page.locator('.as-split-gutter');
             await expect(gutter).toBeVisible();
@@ -67,7 +67,7 @@ test.describe('Demo layout', () => {
 
         test('guide content visible after guide button click', async ({ page }) => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
-            await page.locator('[mattooltip="Toggle Markdown Guide"]').click();
+            await page.locator('[data-tip="Toggle Markdown Guide"]').click();
             await expect(page.locator('app-markdown-renderer')).toBeVisible();
             await expect(page.locator('app-markdown-editor-container')).not.toBeVisible();
         });
@@ -78,7 +78,7 @@ test.describe('Demo layout', () => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
             const editorBtn = page.getByRole('button', { name: 'Open Editor' });
             await expect(editorBtn).toBeVisible();
-            await expect(editorBtn.locator('mat-icon')).toHaveText('edit_square');
+            await expect(editorBtn.locator('.icon')).toHaveText('edit_square');
         });
 
         test('editor button opens editor pane and switches to cancel icon', async ({ page }) => {
@@ -102,7 +102,7 @@ test.describe('Demo layout', () => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
             await page.getByRole('button', { name: 'Open Editor' }).click();
             await expect(page.locator('app-markdown-editor-container')).toBeVisible();
-            await page.locator('[mattooltip="Toggle Markdown Guide"]').click();
+            await page.locator('[data-tip="Toggle Markdown Guide"]').click();
             await expect(page.locator('app-markdown-renderer')).toBeVisible();
             await expect(page.locator('app-markdown-editor-container')).not.toBeVisible();
         });
@@ -112,7 +112,7 @@ test.describe('Demo layout', () => {
         test('demoPaneSize persists after drag and guide toggle', async ({ page }) => {
             await page.goto('/demos/deep-signals', { waitUntil: 'networkidle' });
 
-            const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
+            const guideBtn = page.locator('[data-tip="Toggle Markdown Guide"]');
             await guideBtn.click();
 
             const gutter = page.locator('.as-split-gutter').first();

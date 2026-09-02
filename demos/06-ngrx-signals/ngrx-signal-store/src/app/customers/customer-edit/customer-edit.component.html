@@ -1,13 +1,18 @@
-<div class="box">
-  <form class="flex max-w-md flex-col gap-3" [formGroup]="customersForm" (ngSubmit)="updateCustomer()">
-    <div class="field">
-      <label class="label" for="customer-id">Id</label>
-      <input id="customer-id" class="input" formControlName="id" readonly />
+<div class="page max-w-lg">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Edit Customer</h2>
     </div>
-    <div class="field">
-      <label class="label" for="customer-name">Name</label>
-      <input id="customer-name" class="input" formControlName="name" />
-    </div>
-    <button type="submit" class="btn btn-primary self-start">Save</button>
-  </form>
+    <form class="card-content" [formGroup]="customersForm" (ngSubmit)="updateCustomer()">
+      <div class="field">
+        <label class="label" for="customer-id">Id</label>
+        <input id="customer-id" class="input" formControlName="id" readonly />
+      </div>
+      <div class="field">
+        <label class="label" for="customer-name">Name</label>
+        <input id="customer-name" class="input" formControlName="name" />
+      </div>
+      <button type="submit" class="btn btn-primary mt-1 self-start">Save</button>
+    </form>
+  </div>
 </div>
