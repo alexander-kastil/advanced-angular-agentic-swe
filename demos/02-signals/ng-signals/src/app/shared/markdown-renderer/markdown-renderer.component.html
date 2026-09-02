@@ -1,5 +1,5 @@
-<mat-expansion-panel [expanded]="contentVisible()" (click)="togglePanel()">
-  <mat-expansion-panel-header>
+<mat-expansion-panel [expanded]="contentVisible()">
+  <mat-expansion-panel-header (click)="togglePanel()">
     <mat-panel-title>Instructions</mat-panel-title>
   </mat-expansion-panel-header>
   <markdown [src]="markdownSrc()" />

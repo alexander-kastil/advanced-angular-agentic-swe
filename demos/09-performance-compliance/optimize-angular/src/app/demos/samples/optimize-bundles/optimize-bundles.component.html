@@ -1,0 +1,72 @@
+<section class="bundles">
+  <header>
+    <h2>Optimize Bundles with Rolldown</h2>
+    <p>
+      Angular 22 ships <code>&#64;angular/build:application</code> with Rolldown as the bundler. Budgets are the
+      guard rail that turns a size regression into a failed build instead of a slow page.
+    </p>
+  </header>
+
+  <h3>Build pipeline</h3>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Stage</th>
+        <th scope="col">Tool</th>
+        <th scope="col">What it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (step of pipeline; track step.stage) {
+        <tr>
+          <th scope="row">{{ step.stage }}</th>
+          <td><code>{{ step.tool }}</code></td>
+          <td>{{ step.note }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h3>Budgets configured for this app</h3>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Covers</th>
+        <th scope="col">Warning</th>
+        <th scope="col">Error</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (budget of budgets; track budget.type) {
+        <tr>
+          <th scope="row"><code>{{ budget.type }}</code></th>
+          <td>{{ budget.scope }}</td>
+          <td>{{ budget.warning }}</td>
+          <td>{{ budget.error }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h3>Keep heavy dependencies out of the initial chunk</h3>
+  <p>
+    <code>moment</code> is not imported at the top of this component. It is pulled in by a dynamic
+    <code>import()</code>, so Rolldown emits it as a separate chunk that only downloads on demand.
+  </p>
+
+  <button type="button" (click)="loadHeavyLibrary()" [disabled]="loading()">
+    {{ loading() ? 'Loading chunk...' : 'Load moment on demand' }}
+  </button>
+
+  @if (loadedAt() !== null) {
+    <p class="result">
+      Chunk resolved in {{ loadedAt() }} ms. Formatted by moment: <strong>{{ stamp() }}</strong>
+    </p>
+    <p class="hint">Open the Network panel and reload: the chunk only appears after you press the button.</p>
+  }
+
+  <h3>Commands</h3>
+  <pre><code>npm run build
+npx source-map-explorer dist/optimize-angular/browser/*.js</code></pre>
+</section>

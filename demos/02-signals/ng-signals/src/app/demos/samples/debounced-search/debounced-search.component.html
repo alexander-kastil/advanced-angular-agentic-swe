@@ -1,0 +1,27 @@
+<mat-form-field appearance="fill" class="search">
+  <mat-label>Search skills</mat-label>
+  <input matInput [value]="term()" (input)="onInput($event)" placeholder="try Ang" />
+</mat-form-field>
+
+<div border class="state">
+  <div>raw signal: <code>{{ term() || '(empty)' }}</code></div>
+  <div>debounced value: <code>{{ debouncedTerm.value() || '(empty)' }}</code></div>
+  <div>debounce status: <code>{{ debouncedTerm.status() }}</code></div>
+  <div>{{ settling() ? 'waiting 400ms before the request' : 'settled' }}</div>
+</div>
+
+<div border>
+  @if (results.isLoading()) {
+    <p>Loading...</p>
+  } @else if (results.error()) {
+    <p>Search failed: {{ results.error()?.message }}</p>
+  } @else {
+    @for (skill of results.value(); track skill.id) {
+      <div [style.text-decoration]="skill.completed ? 'line-through' : 'none'">
+        {{ skill.name }}
+      </div>
+    } @empty {
+      <div>No match</div>
+    }
+  }
+</div>

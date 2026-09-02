@@ -1,0 +1,115 @@
+<section class="a11y" #scope>
+  <header>
+    <h2>Build Accessible UI</h2>
+    <p>
+      The European Accessibility Act has been in force since 28 June 2025. Consumer-facing digital
+      products sold in the EU must meet EN 301 549, which points at <strong>WCAG 2.2 level AA</strong>.
+      <code>&#64;angular/aria</code> supplies headless, keyboard-complete widget behaviour so the markup you
+      write stays semantic.
+    </p>
+  </header>
+
+  <div ngTabs class="tabs">
+    <ul ngTabList [(selectedTab)]="selectedTab" class="tablist">
+      <li ngTab value="criteria">WCAG 2.2 AA</li>
+      <li ngTab value="widgets">Aria widgets</li>
+      <li ngTab value="lint">Lint rules</li>
+    </ul>
+
+    <div ngTabPanel value="criteria" class="tabpanel">
+      <ng-template ngTabContent>
+        <table>
+          <caption>Success criteria added in WCAG 2.2</caption>
+          <thead>
+            <tr>
+              <th scope="col">Criterion</th>
+              <th scope="col">Level</th>
+              <th scope="col">Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of criteria; track item.id) {
+              <tr>
+                <th scope="row">{{ item.id }} {{ item.title }}</th>
+                <td>{{ item.level }}</td>
+                <td>{{ item.detail }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </ng-template>
+    </div>
+
+    <div ngTabPanel value="widgets" class="tabpanel">
+      <ng-template ngTabContent>
+        <p id="conformance-label">Target conformance level</p>
+        <ul ngListbox [(value)]="contrastMode" aria-labelledby="conformance-label" class="listbox">
+          <li ngOption value="a">Level A only</li>
+          <li ngOption value="aa">Level AA (required by EN 301 549)</li>
+          <li ngOption value="aaa">Level AAA</li>
+        </ul>
+        <p class="hint">
+          Selected: <strong>{{ contrastMode().join(', ') }}</strong>. Arrow keys move the active option,
+          typeahead jumps by label, and the roving <code>tabindex</code> keeps a single tab stop.
+        </p>
+      </ng-template>
+    </div>
+
+    <div ngTabPanel value="lint" class="tabpanel">
+      <ng-template ngTabContent>
+        <p>
+          Static analysis catches the defects a screen reader would find later. Enable these template rules
+          in <code>eslint.config.js</code> and run <code>npm run lint</code> in CI.
+        </p>
+        <ul class="rules">
+          @for (rule of lintRules; track rule) {
+            <li><code>{{ rule }}</code></li>
+          }
+        </ul>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="audit">
+    <h3>Run an axe check on this demo</h3>
+    <p>
+      <code>axe-core</code> is loaded through a dynamic import, so it never reaches the initial bundle.
+      It audits the live DOM of this component against the WCAG 2.2 AA rule set.
+    </p>
+    <button type="button" (click)="runAxe()" [disabled]="scanning()">
+      {{ scanning() ? 'Scanning...' : 'Run axe' }}
+    </button>
+
+    @if (scanError()) {
+      <p class="error" role="alert">{{ scanError() }}</p>
+    }
+
+    @if (violations(); as found) {
+      @if (found.length === 0) {
+        <p class="pass" role="status">No violations found in this subtree.</p>
+      } @else {
+        <table>
+          <caption>{{ found.length }} violation(s)</caption>
+          <thead>
+            <tr>
+              <th scope="col">Rule</th>
+              <th scope="col">Impact</th>
+              <th scope="col">Elements</th>
+              <th scope="col">Fix</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (violation of found; track violation.id) {
+              <tr>
+                <th scope="row"><code>{{ violation.id }}</code></th>
+                <td>{{ violation.impact }}</td>
+                <td>{{ violation.nodes }}</td>
+                <td>{{ violation.help }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </div>
+</section>

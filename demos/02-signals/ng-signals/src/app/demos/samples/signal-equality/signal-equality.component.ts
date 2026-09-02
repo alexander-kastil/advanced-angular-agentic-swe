@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
@@ -27,8 +27,7 @@ interface User {
         </button>
       </div>
     </div>
-  `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class SignalEqualityComponent {
     count = signal(0);

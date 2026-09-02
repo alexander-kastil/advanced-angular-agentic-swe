@@ -1,6 +1,6 @@
 <div boxed>
   <mat-form-field appearance="fill">
-    <mat-label>Choose an state for the tasks to show</mat-label>
+    <mat-label>Choose a state for the tasks to show</mat-label>
     <mat-select (selectionChange)="onStatusChange($event)">
       @for (option of options; track $index) {
         <mat-option [value]="option == 'Completed' ? true : false">

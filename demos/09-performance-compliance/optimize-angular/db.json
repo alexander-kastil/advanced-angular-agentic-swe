@@ -1,0 +1,181 @@
+{
+  "demos": [
+    {
+      "url": "lighthouse",
+      "title": "Audit Core Web Vitals",
+      "teaches": "Measure LCP, INP, CLS, FCP and TTFB live with PerformanceObserver and reproduce them in a Lighthouse lab run.",
+      "topic": "Performance Measurement",
+      "sortOrder": 1,
+      "md": "web-vitals",
+      "id": "5957"
+    },
+    {
+      "url": "optimize-bundles",
+      "title": "Optimize Bundles with Rolldown",
+      "teaches": "Read the Rolldown build pipeline of @angular/build, enforce size budgets, and keep heavy libraries out of the initial chunk.",
+      "topic": "Bundle Optimization",
+      "sortOrder": 2,
+      "md": "bundles",
+      "id": "440f"
+    },
+    {
+      "url": "defer-views",
+      "title": "Defer Non-Critical Views",
+      "teaches": "Split a template with @defer blocks, drive them with interaction, viewport and when triggers, and prefetch on idle.",
+      "topic": "Loading Performance",
+      "sortOrder": 3,
+      "md": "defer-views",
+      "id": "7b10"
+    },
+    {
+      "url": "configure-zoneless",
+      "title": "Configure Zoneless",
+      "teaches": "Run without zone.js using provideZonelessChangeDetection() so change detection is scheduled by signals and events.",
+      "topic": "Runtime Performance",
+      "sortOrder": 4,
+      "md": "configure-zoneless",
+      "id": "4f29"
+    },
+    {
+      "url": "virtual-scroll",
+      "title": "Virtual Scroll Large Lists",
+      "teaches": "Render 100000 rows with the CDK virtual scroll viewport and watch the rendered range instead of the whole list.",
+      "topic": "Runtime Performance",
+      "sortOrder": 5,
+      "md": "virtual-scroll",
+      "id": "6aad"
+    },
+    {
+      "url": "ng-optimized-img",
+      "title": "Optimize Images",
+      "teaches": "Use NgOptimizedImage for srcset generation, reserved layout space, lazy loading and a single prioritized LCP image.",
+      "topic": "Asset Optimization",
+      "sortOrder": 6,
+      "md": "optimized-img",
+      "id": "55c9"
+    },
+    {
+      "url": "a11y",
+      "title": "Build Accessible UI",
+      "teaches": "Meet WCAG 2.2 AA for the European Accessibility Act with @angular/aria widgets, template lint rules and an axe scan.",
+      "topic": "Accessibility Compliance",
+      "sortOrder": 7,
+      "md": "a11y",
+      "id": "51a2"
+    },
+    {
+      "url": "auto-csp",
+      "title": "Harden with Strict CSP",
+      "teaches": "Generate a hash-based strict Content Security Policy with the security.autoCsp build option and watch violations.",
+      "topic": "Security Compliance",
+      "sortOrder": 8,
+      "md": "auto-csp",
+      "id": "9c22"
+    },
+    {
+      "url": "consent-privacy",
+      "title": "Gate Third-Party Content",
+      "teaches": "Block analytics and external media until consent is granted, and make withdrawal as easy as granting.",
+      "topic": "Privacy Compliance",
+      "sortOrder": 9,
+      "md": "consent-privacy",
+      "id": "a41d"
+    },
+    {
+      "url": "license-audit",
+      "title": "Audit Dependencies and Licenses",
+      "teaches": "Inventory runtime dependencies, their licences and their obligations, and fail CI on new advisories.",
+      "topic": "Supply Chain Compliance",
+      "sortOrder": 10,
+      "md": "license-audit",
+      "id": "c8e7"
+    }
+  ],
+  "food": [
+    {
+      "name": "Pad Thai",
+      "rating": 1,
+      "id": "601e"
+    },
+    {
+      "name": "Butter Chicken",
+      "rating": 2,
+      "id": "d981"
+    },
+    {
+      "name": "Cannelloni",
+      "rating": 2,
+      "id": "66fa"
+    },
+    {
+      "name": "Cordon Bleu",
+      "rating": 4,
+      "id": "63b1"
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "name": "RxJs",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "name": "NgRx",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "name": "Angular",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "name": "TypeScript",
+      "completed": true
+    },
+    {
+      "id": "5",
+      "name": "Material",
+      "completed": true
+    },
+    {
+      "id": "6",
+      "name": "Node",
+      "completed": false
+    },
+    {
+      "id": "7",
+      "name": "Forms",
+      "completed": true
+    },
+    {
+      "id": "8",
+      "name": "Authentication",
+      "completed": true
+    },
+    {
+      "id": "8",
+      "name": "Authentication",
+      "completed": true
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": "",
+      "id": "3315"
+    },
+    {
+      "label": "Demos",
+      "url": "demos",
+      "id": "4ed8"
+    },
+    {
+      "label": "Skills",
+      "url": "skills",
+      "id": "d732"
+    }
+  ],
+  "logs": []
+}

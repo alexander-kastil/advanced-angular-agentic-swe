@@ -1,1 +1,0 @@
-This demo uses [Formly](https://formly.dev/) to generate dynamic forms. It passes it's layout as a FormlyFieldConfig in the *.ts

@@ -1,0 +1,38 @@
+<div border class="graph">
+  <div class="row">
+    <span class="node source">ticks</span>
+    <span class="node source">weight</span>
+    <span class="node source">running</span>
+  </div>
+  <div class="edge">&darr; score = ticks * weight</div>
+  <div class="row">
+    <span class="node derived">score = {{ score() }}</span>
+  </div>
+  <div class="edge">&darr; band</div>
+  <div class="row">
+    <span class="node derived">band = {{ band() }}</span>
+  </div>
+  <div class="edge">&darr; threshold (linkedSignal) &nbsp; &darr; skillsByBand (httpResource)</div>
+  <div class="row">
+    <span class="node linked">threshold = {{ threshold() }}</span>
+    <span class="node async">skillsByBand = {{ skills.status() }} / {{ skills.value().length }}</span>
+  </div>
+  <div class="edge">&darr; headline</div>
+  <div class="row">
+    <span class="node derived">{{ headline() }}</span>
+  </div>
+</div>
+
+<div class="actions">
+  <button mat-raised-button color="accent" (click)="toggle()">
+    {{ running() ? 'Stop ticker' : 'Start ticker' }}
+  </button>
+  <button mat-raised-button color="accent" (click)="bumpWeight()">Weight = {{ weight() }}</button>
+  <button mat-raised-button color="accent" (click)="raiseThreshold()">Override threshold</button>
+  <button mat-raised-button color="accent" (click)="reset()">Reset</button>
+</div>
+
+<div border class="state">
+  <div>ticks: {{ ticks() }}</div>
+  <div>tickerEffect runs: {{ effectRuns() }}</div>
+</div>

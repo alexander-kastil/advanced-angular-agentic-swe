@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, linkedSignal, signal } from '@angular/core';
+import { Component, linkedSignal, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
@@ -24,8 +24,7 @@ import { BoxedDirective } from '../../../shared/formatting/formatting-directives
         </button>
       </div>
     </div>
-  `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class LinkedSignalResetComponent {
     baseValue = signal({ count: 0, label: 'Initial' });

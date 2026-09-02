@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   input,
   output
@@ -13,7 +12,6 @@ import { Skill } from '../skill.model';
     selector: 'app-skill-row',
     templateUrl: './skill-row.component.html',
     styleUrls: ['./skill-row.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         MatButton,
         RouterLink,

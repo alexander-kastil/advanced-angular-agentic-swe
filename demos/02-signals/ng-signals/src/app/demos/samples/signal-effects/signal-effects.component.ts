@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
@@ -10,8 +10,7 @@ import { environment } from '../../../../environments/environment';
   selector: 'app-signal-effects',
   imports: [MatFormField, MatLabel, MatSelectModule, BoxedDirective],
   templateUrl: './signal-effects.component.html',
-  styleUrl: './signal-effects.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './signal-effects.component.scss'
 })
 export class SignalEffectsComponent {
   options = ['Completed', 'Open'];

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { DetailCardModelComponent } from './detail-card-model/detail-card-model.component';
 
@@ -6,8 +6,7 @@ import { DetailCardModelComponent } from './detail-card-model/detail-card-model.
   selector: 'app-model-inputs',
   imports: [MatButtonModule, DetailCardModelComponent],
   templateUrl: './model-inputs.component.html',
-  styleUrl: './model-inputs.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './model-inputs.component.scss'
 })
 export class ModelInputsComponent {
   expandedState = signal(false);

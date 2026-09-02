@@ -1,0 +1,17 @@
+<section class="virtual">
+  <header>
+    <h2>Virtual Scroll Large Lists</h2>
+    <p>
+      {{ items.length | number }} rows exist in memory, but only the rows inside the viewport are in the DOM.
+      Currently rendered: <strong>{{ rendered() }}</strong> (indices {{ range().start }} to {{ range().end }}).
+    </p>
+    <button type="button" (click)="jumpToEnd()">Scroll to the last row</button>
+  </header>
+
+  <cdk-virtual-scroll-viewport [itemSize]="itemSize" (scrolledIndexChange)="syncRange()">
+    <div class="row" *cdkVirtualFor="let item of items; let odd = odd" [class.alternate]="odd">
+      <span class="label">{{ item.label }}</span>
+      <span class="score">score {{ item.score }}</span>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</section>

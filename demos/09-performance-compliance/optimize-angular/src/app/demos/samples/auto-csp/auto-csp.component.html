@@ -1,0 +1,71 @@
+<section class="csp">
+  <header>
+    <h2>Harden with Strict CSP</h2>
+    <p>
+      A Content Security Policy is the last line of defence against injected script. The Angular
+      application builder can generate a hash-based strict policy for you and inline it into
+      <code>index.html</code> at build time.
+    </p>
+  </header>
+
+  <h3>Enable it in angular.json</h3>
+  <pre><code>"architect": &#123;
+  "build": &#123;
+    "options": &#123;
+      "security": &#123;
+        "autoCsp": true
+      &#125;
+    &#125;
+  &#125;
+&#125;</code></pre>
+  <p class="hint">
+    <code>autoCsp</code> is off by default while it is in preview. Set
+    <code>&#123; "unsafeEval": true &#125;</code> only if a dependency genuinely needs <code>eval</code>, and treat
+    that as a bug to remove.
+  </p>
+
+  <h3>Status in this document</h3>
+  <dl>
+    <dt>Policy meta tag</dt>
+    <dd>{{ active() ? policy() : 'No CSP meta tag. The dev server does not emit one; build for production to see it.' }}</dd>
+    <dt>Trusted Types available</dt>
+    <dd>{{ trustedTypes() ? 'Yes, this browser supports the Trusted Types API.' : 'No, this browser has no Trusted Types support.' }}</dd>
+    <dt>Dynamic code evaluation</dt>
+    <dd>
+      @switch (evalBlocked()) {
+        @case (null) { <button type="button" (click)="probeEval()">Probe new Function()</button> }
+        @case (true) { <span class="blocked">Blocked by the policy.</span> }
+        @default { <span class="allowed">Allowed. Without a CSP, injected script would run too.</span> }
+      }
+    </dd>
+  </dl>
+
+  <h3>Directives a strict policy sets</h3>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Directive</th>
+        <th scope="col">Why</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (directive of directives; track directive.name) {
+        <tr>
+          <th scope="row"><code>{{ directive.name }}</code></th>
+          <td>{{ directive.why }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h3>Violations observed on this page</h3>
+  @if (violations().length === 0) {
+    <p class="hint">Nothing blocked yet. Violations reported by the browser appear here as they happen.</p>
+  } @else {
+    <ul class="log">
+      @for (violation of violations(); track violation.at + violation.blocked) {
+        <li><time>{{ violation.at }}</time> <code>{{ violation.directive }}</code> blocked {{ violation.blocked }}</li>
+      }
+    </ul>
+  }
+</section>

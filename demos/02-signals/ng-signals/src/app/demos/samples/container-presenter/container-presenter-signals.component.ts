@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { PersonEditSignalsComponent } from './person-edit-signals/person-edit-signals.component';
 import { PersonListSignalsComponent } from './person-list-signals/person-list-signals.component';
@@ -12,8 +12,7 @@ import { environment } from '../../../../environments/environment';
     PersonEditSignalsComponent
   ],
   templateUrl: './container-presenter-signals.component.html',
-  styleUrl: './container-presenter-signals.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './container-presenter-signals.component.scss'
 })
 export class ContainerPresenterSignalsComponent {
   personsResource = httpResource<Person[]>(() => `${environment.api}persons`, { defaultValue: [] });

@@ -3,7 +3,7 @@
     {
       "url": "signals-basics",
       "title": "Signals Basics",
-      "teaches": "Create reactive state with signal(). Use computed() for derived state and effect() for side effects. Read values with calling the signal as function, update with .set() and .update().",
+      "teaches": "Create reactive state with signal(). Use computed() for derived state and effect() for side effects. Read values by calling the signal as a function, update with .set() and .update().",
       "sortOrder": 1,
       "topic": "Signals Fundamentals",
       "md": "signals-basics"
@@ -25,26 +25,18 @@
       "md": "signal-effects"
     },
     {
-      "url": "deep-signals",
-      "title": "Deep Signal Changes",
-      "teaches": "Track nested changes within signal objects using deep equality checks. Understand when signals notify dependent computations.",
-      "sortOrder": 4,
-      "topic": "Signals Fundamentals",
-      "md": "deep-signals"
-    },
-    {
       "url": "signal-inputs",
-      "title": "Inputs Signals",
-      "teaches": "Define typed component inputs as signals using input() and input.required(). Use with two-way binding in parent components.",
-      "sortOrder": 5,
+      "title": "Input Signals",
+      "teaches": "Define typed component inputs as signals using input() and input.required(). Derive state from inputs with computed().",
+      "sortOrder": 4,
       "topic": "Signals Fundamentals",
       "md": "signal-inputs"
     },
     {
       "url": "signal-equality",
       "title": "Signal Equality",
-      "teaches": "Define custom equality comparisons with the equal() option. Control when computed() and dependents re-run. Avoid unnecessary notifications for deep mutations.",
-      "sortOrder": 6,
+      "teaches": "Define custom equality comparisons with the equal option. Control when computed() and dependents re-run. Avoid unnecessary notifications for deep mutations.",
+      "sortOrder": 5,
       "topic": "Signals Fundamentals",
       "md": "signal-equality"
     },
@@ -52,73 +44,119 @@
       "url": "linked-signal-reset",
       "title": "LinkedSignal & Reset",
       "teaches": "Create writable dependent signals with linkedSignal(). Keep signals synced while allowing independent updates. Reset derived signals to base state.",
-      "sortOrder": 7,
+      "sortOrder": 6,
       "topic": "Signal Patterns",
       "md": "linked-signal-reset"
     },
     {
+      "url": "linked-signal-set",
+      "title": "LinkedSignal with a Custom Set",
+      "teaches": "Intercept writes to a linkedSignal with the set option. Keep derived state writable while clamping or logging every write, and recompute it from its source.",
+      "sortOrder": 7,
+      "topic": "Signal Patterns",
+      "md": "linked-signal-set"
+    },
+    {
       "url": "effect-cleanup",
-      "title": "Effect Cleanup",
-      "teaches": "Clean up resources in effects: timers, intervals, subscriptions, listeners. Use cleanup functions to prevent memory leaks when effects destroy.",
+      "title": "Effect Cleanup & One-Shot Effects",
+      "teaches": "Release timers and listeners with the onCleanup callback of effect(). Run initialization logic exactly once and stop an effect with its EffectRef destroy().",
       "sortOrder": 8,
       "topic": "Signal Patterns",
       "md": "effect-cleanup"
     },
     {
-      "url": "effect-once",
-      "title": "One-Shot Effects",
-      "teaches": "Run effects one time or conditionally. Use manual destroy() to disable effects. Common for initialization logic that only runs once.",
-      "sortOrder": 9,
-      "topic": "Signal Patterns",
-      "md": "effect-once"
-    },
-    {
       "url": "model-inputs",
       "title": "Model Two-Way Binding",
-      "teaches": "Implement two-way binding with model() signal API. Parent and child components sync data mutually without manual event handling.",
-      "sortOrder": 10,
+      "teaches": "Implement two-way binding with the model() signal API. Parent and child components sync data mutually without manual event handling.",
+      "sortOrder": 9,
       "topic": "Signal Patterns",
       "md": "model-inputs"
     },
     {
       "url": "container-presenter",
       "title": "Signals Container-Presenter",
-      "teaches": "Apply Container-Presenter pattern using signals. Container manages state and httpResource data, Presenter displays UI. Pass data and callbacks to child presenters.",
-      "sortOrder": 11,
+      "teaches": "Apply the Container-Presenter pattern using signals. The container manages state and httpResource data, presenters display UI and emit events.",
+      "sortOrder": 10,
       "topic": "Signal Patterns",
       "md": "container-presenter"
     },
     {
-      "url": "signals-event-bus",
-      "title": "Signals EventBus",
-      "teaches": "Create a lightweight event bus with signals for cross-component communication. Emit and subscribe to events without RxJS.",
-      "sortOrder": 12,
-      "topic": "Signal Patterns",
-      "md": "signals-bus"
-    },
-    {
       "url": "rxjs-interop",
-      "title": "RxJS to Signals Bridge",
-      "teaches": "Convert RxJS Observables to signals with toSignal(). Create writeable signals from async sources. Combine signals with existing Observable code.",
-      "sortOrder": 13,
+      "title": "RxJS Interop",
+      "teaches": "Bridge RxJS and signals with toSignal(), toObservable() and rxResource(). Consume streams as signals and drive streams from signal state.",
+      "sortOrder": 11,
       "topic": "Signal Patterns",
       "md": "rxjs-interop"
     },
     {
-      "url": "select-signal",
-      "title": "NgRx selectSignal Integration",
-      "teaches": "Use NgRx selectSignal() to derive signals directly from store state. Type-safe store integration without subscribe patterns.",
-      "sortOrder": 20,
-      "topic": "Advanced Integration",
-      "md": "select-signal"
+      "url": "resource-chain",
+      "title": "Chained Resources",
+      "teaches": "Sequence dependent async work with the chain() operator from the resource params context. Propagate loading, idle and error status down a chain of resources without manual undefined checks.",
+      "sortOrder": 12,
+      "topic": "Async Signals",
+      "md": "resource-chain"
     },
     {
-      "url": "zoneless-change-detection",
-      "title": "OnPush & Zoneless CD",
-      "teaches": "Run Angular with zoneless change detection using signals. Remove NgZone dependency and improve performance with pure signal-based reactivity.",
-      "sortOrder": 21,
-      "topic": "Advanced Integration",
-      "md": "zoneless-change-detection"
+      "url": "debounced-search",
+      "title": "Debounced Search",
+      "teaches": "Wrap a signal with debounced() from @angular/core and drive an httpResource search from the settled value. Read the debounce status to show a typing indicator.",
+      "sortOrder": 13,
+      "topic": "Async Signals",
+      "md": "debounced-search"
+    },
+    {
+      "url": "service-injectasync",
+      "title": "Service Decorator & injectAsync",
+      "teaches": "Declare services with the @Service() decorator and load them lazily with injectAsync() plus onIdle prefetching. Run the ng generate @angular/core:service-migration schematic to convert @Injectable.",
+      "sortOrder": 14,
+      "topic": "Signals Tooling",
+      "md": "service-injectasync"
+    },
+    {
+      "url": "webmcp-signal",
+      "title": "Signals as WebMCP Tools",
+      "teaches": "Expose a signal value and its setter to an AI agent with declareExperimentalWebMcpTool() and register page-level tools with provideExperimentalWebMcpTools().",
+      "sortOrder": 15,
+      "topic": "Signals Tooling",
+      "md": "webmcp-signal"
+    },
+    {
+      "url": "devtools-signal-graph",
+      "title": "Reading the Signal Graph",
+      "teaches": "Build a deliberately layered dependency graph of signal, computed, linkedSignal, httpResource and effect nodes, name every node with debugName and read the graph in Angular DevTools.",
+      "sortOrder": 16,
+      "topic": "Signals Tooling",
+      "md": "devtools-signal-graph"
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": 1,
+      "url": "signals-basics",
+      "title": "Signal read vs write",
+      "comment": "Calling the signal reads it, .set() replaces the value and .update() derives the next value from the current one.",
+      "saved": "2026-03-05T08:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "url": "http-resource",
+      "title": "httpResource status",
+      "comment": "httpResource() exposes value(), isLoading() and error() as signals, so no manual subscribe or async pipe is needed.",
+      "saved": "2026-03-05T08:05:00.000Z"
+    },
+    {
+      "id": 3,
+      "url": "linked-signal-reset",
+      "title": "When to reach for linkedSignal",
+      "comment": "Use linkedSignal() when derived state must stay writable and reset itself once its source changes.",
+      "saved": "2026-03-05T08:10:00.000Z"
+    },
+    {
+      "id": 4,
+      "url": "effect-cleanup",
+      "title": "Always release timers",
+      "comment": "The onCleanup callback of effect() runs before every re-run and on destroy, which is where intervals and listeners belong.",
+      "saved": "2026-03-05T08:15:00.000Z"
     }
   ],
   "skills": [

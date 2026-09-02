@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { computed, inject, Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Skill } from './skill.model';
 
@@ -8,18 +8,26 @@ import { Skill } from './skill.model';
   providedIn: 'root',
 })
 export class SkillsService {
-  http = inject(HttpClient);
+  private http = inject(HttpClient);
   private url = `${environment.api}skills`;
 
-  getSkill(id: number): Observable<Skill | undefined> {
-    return this.http.get<Skill>(`${this.url}/${id}`)
+  readonly skills = httpResource<Skill[]>(() => this.url, { defaultValue: [] });
+
+  readonly total = computed(() => this.skills.value().length);
+  readonly openCount = computed(() => this.skills.value().filter((s) => !s.completed).length);
+
+  async add(skill: Skill) {
+    await firstValueFrom(this.http.post<Skill>(this.url, skill));
+    this.skills.reload();
   }
 
-  addSkill(skill: Skill): Observable<Skill> {
-    return this.http.post<Skill>(this.url, skill);
+  async update(skill: Skill) {
+    await firstValueFrom(this.http.put<Skill>(`${this.url}/${skill.id}`, skill));
+    this.skills.reload();
   }
 
-  deleteSkill(skill: Skill): Observable<any> {
-    return this.http.delete(this.url);
+  async remove(skill: Skill) {
+    await firstValueFrom(this.http.delete(`${this.url}/${skill.id}`));
+    this.skills.reload();
   }
 }

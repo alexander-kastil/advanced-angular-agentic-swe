@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { httpResource } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Customer } from './customer.model';
 
@@ -7,9 +7,7 @@ import { Customer } from './customer.model';
   providedIn: 'root',
 })
 export class CustomersService {
-  http = inject(HttpClient);
-
-  getCustomers() {
-    return this.http.get<Customer[]>(environment.api + 'customers');
-  }
+  readonly customers = httpResource<Customer[]>(() => `${environment.api}customers`, {
+    defaultValue: [],
+  });
 }

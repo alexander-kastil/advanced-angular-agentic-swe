@@ -1,66 +1,84 @@
-import { ChangeDetectionStrategy, Component, effect, signal, Injector } from '@angular/core';
+import { Component, effect, EffectRef, inject, Injector, signal } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
 @Component({
-    selector: 'app-effect-cleanup',
-    imports: [MatButton, BoxedDirective],
-    template: `
+  selector: 'app-effect-cleanup',
+  imports: [MatButton, BoxedDirective],
+  template: `
     <div boxed>
       <div>
-        <p>Timer ticks: {{ ticks() }}</p>
-        <p>Auto-stop interval active: {{ isRunning() }}</p>
-        <p>Cleanup status: {{ cleanupStatus() }}</p>
+        <p>Interval running: {{ running() }}</p>
+        <p>Ticks: {{ ticks() }}</p>
+        <p>Cleanup runs: {{ cleanupRuns() }}</p>
       </div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <button mat-raised-button color="accent" (click)="startTimer()">
-          Start Timer
+        <button mat-raised-button color="accent" (click)="toggle()">
+          {{ running() ? 'Stop' : 'Start' }} Interval
         </button>
-        <button mat-raised-button color="accent" (click)="stopTimer()">
-          Stop Timer
+      </div>
+    </div>
+
+    <div boxed>
+      <div>
+        <p>One-shot log: {{ initLog() }}</p>
+        <p>Watched value: {{ watched() }}</p>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <button mat-raised-button color="accent" (click)="bump()">
+          Change Watched Value
+        </button>
+        <button mat-raised-button color="accent" (click)="armOnce()">
+          Arm One-Shot Effect
         </button>
       </div>
     </div>
   `,
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EffectCleanupComponent {
-    ticks = signal(0);
-    isRunning = signal(false);
-    cleanupStatus = signal('idle');
-    private timerEffect: any;
+  private injector = inject(Injector);
 
-    constructor(private injector: Injector) { }
+  readonly running = signal(false);
+  readonly ticks = signal(0);
+  readonly cleanupRuns = signal(0);
 
-    startTimer() {
-        if (this.timerEffect) return;
+  readonly watched = signal(0);
+  readonly initLog = signal('not armed');
 
-        this.isRunning.set(true);
-        this.cleanupStatus.set('timer-running');
+  private onceRef: EffectRef | null = null;
 
-        let interval: any;
-        this.timerEffect = effect(() => {
-            const running = this.isRunning();
-            if (running) {
-                interval = setInterval(() => {
-                    this.ticks.update(t => t + 1);
-                }, 1000);
-            }
+  constructor() {
+    effect((onCleanup) => {
+      if (!this.running()) {
+        return;
+      }
+      const handle = setInterval(() => this.ticks.update((t) => t + 1), 500);
+      onCleanup(() => {
+        clearInterval(handle);
+        this.cleanupRuns.update((c) => c + 1);
+      });
+    });
+  }
 
-            return () => {
-                if (interval) {
-                    clearInterval(interval);
-                    this.cleanupStatus.set('cleanup-executed');
-                }
-            };
-        }, { injector: this.injector });
-    }
+  toggle() {
+    this.running.update((r) => !r);
+  }
 
-    stopTimer() {
-        this.isRunning.set(false);
-        if (this.timerEffect) {
-            this.timerEffect.destroy?.();
-            this.timerEffect = null;
-        }
-    }
+  bump() {
+    this.watched.update((v) => v + 1);
+  }
+
+  armOnce() {
+    this.onceRef?.destroy();
+    this.initLog.set('armed, waiting for first run');
+    this.onceRef = effect(
+      () => {
+        const value = this.watched();
+        this.initLog.set(`ran once with value ${value}`);
+        this.onceRef?.destroy();
+        this.onceRef = null;
+      },
+      { injector: this.injector },
+    );
+  }
 }

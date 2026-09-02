@@ -1,0 +1,84 @@
+.vitals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-big);
+  padding: var(--gap-big);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  text-align: left;
+  padding-bottom: var(--gap-small);
+  font-weight: 600;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--color-accent);
+  padding: var(--gap-small);
+  text-align: left;
+  vertical-align: top;
+}
+
+th[scope='row'] small {
+  display: block;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: var(--font-small);
+  text-transform: uppercase;
+}
+
+.badge-good {
+  background: #1b5e20;
+  color: white;
+}
+
+.badge-warn {
+  background: #e65100;
+  color: white;
+}
+
+.badge-poor {
+  background: #b71c1c;
+  color: white;
+}
+
+.badge-pending {
+  background: var(--color-accent);
+  color: black;
+}
+
+.actions {
+  display: flex;
+  gap: var(--gap-medium);
+  flex-wrap: wrap;
+}
+
+button {
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.banner {
+  border: 2px dashed var(--color-warn);
+  padding: var(--gap-big);
+}
+
+.workflow {
+  margin: 0;
+  padding-left: var(--gap-big);
+  line-height: 1.8;
+}

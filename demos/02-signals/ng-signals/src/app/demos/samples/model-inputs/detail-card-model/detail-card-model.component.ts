@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, model } from '@angular/core';
+import { Component, model } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -6,14 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-detail-card-model',
   imports: [MatIconModule, MatButtonModule],
   templateUrl: './detail-card-model.component.html',
-  styleUrl: './detail-card-model.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './detail-card-model.component.scss'
 })
 export class DetailCardModelComponent {
   expanded = model(false);
 
   toggle() {
-    console.log('toggling');
     this.expanded.set(!this.expanded());
   }
 

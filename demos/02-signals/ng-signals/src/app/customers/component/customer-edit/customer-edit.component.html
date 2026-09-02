@@ -3,5 +3,9 @@
 </div>
 
 <div class="box">
-  {{ customer | async| json}}
+  @if (customer(); as c) {
+    {{ c.name }}
+  } @else {
+    Customer not found
+  }
 </div>
