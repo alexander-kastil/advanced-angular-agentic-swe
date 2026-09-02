@@ -1,10 +1,9 @@
 import { Component, effect, EffectRef, inject, Injector, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
 @Component({
   selector: 'app-effect-cleanup',
-  imports: [MatButton, BoxedDirective],
+  imports: [BoxedDirective],
   template: `
     <div boxed>
       <div>
@@ -13,7 +12,7 @@ import { BoxedDirective } from '../../../shared/formatting/formatting-directives
         <p>Cleanup runs: {{ cleanupRuns() }}</p>
       </div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <button mat-raised-button color="accent" (click)="toggle()">
+        <button type="button" class="btn btn-primary" (click)="toggle()">
           {{ running() ? 'Stop' : 'Start' }} Interval
         </button>
       </div>
@@ -25,10 +24,10 @@ import { BoxedDirective } from '../../../shared/formatting/formatting-directives
         <p>Watched value: {{ watched() }}</p>
       </div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <button mat-raised-button color="accent" (click)="bump()">
+        <button type="button" class="btn btn-primary" (click)="bump()">
           Change Watched Value
         </button>
-        <button mat-raised-button color="accent" (click)="armOnce()">
+        <button type="button" class="btn btn-primary" (click)="armOnce()">
           Arm One-Shot Effect
         </button>
       </div>

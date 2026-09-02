@@ -1,6 +1,4 @@
 import { Component, ElementRef, computed, signal, viewChild, viewChildren } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { QueryPanelComponent } from './query-panel/query-panel.component';
 import { StatusBadgeComponent } from './status-badge/status-badge.component';
 
@@ -8,15 +6,7 @@ import { StatusBadgeComponent } from './status-badge/status-badge.component';
   selector: 'app-signal-queries',
   templateUrl: './signal-queries.component.html',
   styleUrl: './signal-queries.component.scss',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
-    QueryPanelComponent,
-    StatusBadgeComponent,
-  ],
+  imports: [QueryPanelComponent, StatusBadgeComponent],
 })
 export class SignalQueriesComponent {
   readonly liters = viewChild.required<ElementRef<HTMLInputElement>>('liters');

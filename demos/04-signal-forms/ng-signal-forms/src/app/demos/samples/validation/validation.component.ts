@@ -1,12 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { email, form, FormField, max, min, required, validateAsync, validateHttp } from '@angular/forms/signals';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { environment } from 'src/environments/environment';
-import { MarkdownRendererComponent } from 'src/app/shared/markdown-renderer/markdown-renderer.component';
 import { BoxedDirective, ColumnDirective } from 'src/app/shared/ux-lib/formatting/formatting-directives';
 import { Person } from '../person/person.model';
 import { PersonService } from '../person/person.service';
@@ -22,14 +17,9 @@ interface PersonFormModel {
   templateUrl: './validation.component.html',
   styleUrls: ['./validation.component.scss'],
   imports: [
-    MatCardModule,
     ColumnDirective,
     BoxedDirective,
-    FormField,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MarkdownRendererComponent
+    FormField
   ]
 })
 export class ReactiveValidationComponent {

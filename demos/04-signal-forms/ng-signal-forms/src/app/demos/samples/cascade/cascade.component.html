@@ -1,25 +1,35 @@
-<app-markdown-renderer [md]="'cascade'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Cascading Dropdowns</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Cascading Dropdowns</h2>
+  </div>
+  <div class="card-content">
     <div column>
-      <mat-form-field>
-        <mat-label>First Name</mat-label>
-        <input matInput type="text" placeholder="First Name" [formField]="profileForm.firstName" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="profile-first-name">First Name</label>
+        <input
+          id="profile-first-name"
+          class="input"
+          type="text"
+          placeholder="First Name"
+          [formField]="profileForm.firstName"
+        />
+      </div>
       @if (profileForm.firstName().touched() && profileForm.firstName().invalid()) {
         @for (err of profileForm.firstName().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
 
-      <mat-form-field>
-        <mat-label>Last Name</mat-label>
-        <input matInput type="text" placeholder="Last Name" [formField]="profileForm.lastName" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="profile-last-name">Last Name</label>
+        <input
+          id="profile-last-name"
+          class="input"
+          type="text"
+          placeholder="Last Name"
+          [formField]="profileForm.lastName"
+        />
+      </div>
       @if (profileForm.lastName().touched() && profileForm.lastName().invalid()) {
         @for (err of profileForm.lastName().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
@@ -28,46 +38,55 @@
 
       @for (skill of profileForm.skills; track $index; let i = $index) {
         <div border>
-          <h4>Skill {{ i + 1 }}</h4>
-          <mat-form-field>
-            <mat-label>Category</mat-label>
-            <mat-select [formField]="skill.techType" (selectionChange)="onCategoryChange(i)">
+          <h3>Skill {{ i + 1 }}</h3>
+          <div class="field">
+            <label class="label" [attr.for]="'skill-category-' + i">Category</label>
+            <select
+              [id]="'skill-category-' + i"
+              class="input"
+              [formField]="skill.techType"
+              (change)="onCategoryChange(i)"
+            >
+              <option value=""></option>
               @for (category of categories; track category.type) {
-                <mat-option [value]="category.type">{{ category.type }}</mat-option>
+                <option [value]="category.type">{{ category.type }}</option>
               }
-            </mat-select>
-          </mat-form-field>
+            </select>
+          </div>
 
-          <mat-form-field>
-            <mat-label>Technology</mat-label>
-            <mat-select [formField]="skill.techValues">
+          <div class="field">
+            <label class="label" [attr.for]="'skill-technology-' + i">Technology</label>
+            <select [id]="'skill-technology-' + i" class="input" [formField]="skill.techValues">
+              <option value=""></option>
               @for (option of optionsFor(skill.techType().value()); track option) {
-                <mat-option [value]="option">{{ option }}</mat-option>
+                <option [value]="option">{{ option }}</option>
               }
-            </mat-select>
-          </mat-form-field>
+            </select>
+          </div>
           @if (skill.techValues().touched() && skill.techValues().invalid()) {
             @for (err of skill.techValues().errors(); track err.kind) {
               <div class="error">{{ err.message }}</div>
             }
           }
 
-          <button mat-stroked-button (click)="removeSkill(i)">Remove</button>
+          <button type="button" class="btn btn-outline" (click)="removeSkill(i)">Remove</button>
         </div>
       }
     </div>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="addSkill()">Add Skill</button>
-    <button mat-raised-button color="accent" [disabled]="profileForm().invalid()" (click)="saveForm()">Save</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="addSkill()">Add Skill</button>
+    <button type="button" class="btn btn-primary" [disabled]="profileForm().invalid()" (click)="saveForm()">
+      Save
+    </button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Selected Skills</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Selected Skills</h2>
+  </div>
+  <div class="card-content">
     @if (summary().length === 0) {
       <p>Nothing selected yet.</p>
     } @else {
@@ -78,5 +97,5 @@
       </ul>
     }
     Form valid: {{ profileForm().valid() }}
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

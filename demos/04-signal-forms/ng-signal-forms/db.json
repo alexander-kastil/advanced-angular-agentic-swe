@@ -91,7 +91,7 @@
     {
       "url": "err-state-matcher",
       "title": "ErrorStateMatcher",
-      "teaches": "Control when Angular Material renders mat-error by implementing isSignalErrorState() on a custom ErrorStateMatcher, registered per control or per component.",
+      "teaches": "Control when a field renders its error text by implementing isSignalErrorState() on a custom error-state matcher, applied per control or per component.",
       "sortOrder": 21,
       "topic": "Signal Form Error Handling",
       "md": "err-state-matcher"
@@ -161,18 +161,10 @@
       "md": "reactive-forms-migration"
     },
     {
-      "url": "webmcp-form-tool",
-      "title": "Form as an Agent Tool",
-      "teaches": "Expose a Signal Form to a browser agent: provideExperimentalWebMcpForms() plus the experimentalWebMcpTool option on form(), and an explicit read tool via declareExperimentalWebMcpTool().",
-      "sortOrder": 40,
-      "topic": "Signal Forms and Agents",
-      "md": "webmcp-form-tool"
-    },
-    {
       "url": "ai-written-form-tests",
       "title": "Reviewing AI-Written Form Tests",
       "teaches": "A Signal Form with the Vitest spec an agent produced for it, the review checklist that catches a weak spec, and a mutation switch that proves the spec fails when the schema really breaks.",
-      "sortOrder": 41,
+      "sortOrder": 40,
       "topic": "Signal Forms and Agents",
       "md": "ai-written-form-tests"
     }
@@ -337,6 +329,22 @@
     {
       "label": "Demos",
       "url": "demos"
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": "1",
+      "url": "",
+      "title": "Signals over BehaviorSubject",
+      "comment": "Local component state belongs in a signal, not a BehaviorSubject.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": "2",
+      "url": "",
+      "title": "Prefer httpResource",
+      "comment": "httpResource replaces the async pipe plus Observable pattern for HTTP reads.",
+      "saved": "2020-09-16T20:10:06.925Z"
     }
   ]
 }

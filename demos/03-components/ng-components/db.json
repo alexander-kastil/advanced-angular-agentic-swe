@@ -100,20 +100,11 @@
       "md": "resource-with-params"
     },
     {
-      "id": 12,
-      "url": "webmcp-in-components",
-      "title": "WebMCP in Components",
-      "teaches": "Register agent tools from inside a component with declareExperimentalWebMcpTool so the tool closes over the component signals and unregisters with the component.",
-      "sortOrder": 12,
-      "topic": "Agentic Angular",
-      "md": "webmcp-in-components"
-    },
-    {
       "id": 13,
       "url": "agentic-refactor",
       "title": "Agentic Refactor",
       "teaches": "Turn an NgModule-era component into an Angular 22 one, and see which steps a schematic owns and which ones an agent has to make against the Angular MCP get_best_practices output.",
-      "sortOrder": 13,
+      "sortOrder": 12,
       "topic": "Agentic Angular",
       "md": "agentic-refactor"
     },
@@ -122,7 +113,7 @@
       "url": "antipatterns",
       "title": "Antipatterns",
       "teaches": "The Angular 22 anti-pattern table: what to stop writing and what replaces it, from decorator inputs and structural directives to withXhr, Karma and allowSignalWrites.",
-      "sortOrder": 14,
+      "sortOrder": 13,
       "topic": "Component Antipatterns",
       "md": "antipatterns"
     }

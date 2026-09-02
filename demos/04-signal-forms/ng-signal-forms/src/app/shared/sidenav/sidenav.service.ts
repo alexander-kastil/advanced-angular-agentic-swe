@@ -1,57 +1,36 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { httpResource } from '@angular/common/http';
-import { Injectable, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { MatDrawerMode } from '@angular/material/sidenav';
-import { environment } from '../../../environments/environment';
-import { NavItem } from '../navbar/navitem.model';
+import { DestroyRef, Injectable, inject } from '@angular/core';
+import { LayoutStore } from '../layout/layout.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SideNavService {
-  private breakpointObserver = inject(BreakpointObserver);
-  private visible = signal(true);
-  private position = signal<MatDrawerMode>('side');
-
-  readonly sideNavVisible = this.visible.asReadonly();
-  readonly sideNavPosition = this.position.asReadonly();
-
-  private topItems = httpResource<NavItem[]>(() => `${environment.api}top-links`, {
-    defaultValue: [],
-  });
-
-  private breakpoint = toSignal(
-    this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
-  );
+  private layoutStore = inject(LayoutStore);
 
   constructor() {
-    effect(() => {
-      const state = this.breakpoint();
-      if (state) {
-        this.visible.set(!state.matches);
-        this.position.set(state.matches ? 'over' : 'side');
-      }
-    });
+    if (typeof window.matchMedia !== 'function') {
+      return;
+    }
+    const query = window.matchMedia('(max-width: 959.98px)');
+    const apply = (matches: boolean) => {
+      this.layoutStore.setSidenavVisible(!matches);
+      this.layoutStore.setSidenavPosition(matches ? 'over' : 'side');
+    };
+    const listener = (event: MediaQueryListEvent) => apply(event.matches);
+    query.addEventListener('change', listener);
+    inject(DestroyRef).onDestroy(() => query.removeEventListener('change', listener));
+    apply(query.matches);
   }
 
   getSideNavVisible() {
-    return this.sideNavVisible;
+    return this.layoutStore.sidenavVisible;
   }
 
   getSideNavPosition() {
-    return this.sideNavPosition;
-  }
-
-  setSideNavEnabled(val: boolean) {
-    this.visible.set(val);
+    return this.layoutStore.sidenavPosition;
   }
 
   toggleMenuVisibility() {
-    this.visible.update((v) => !v);
-  }
-
-  getTopItems() {
-    return this.topItems.value;
+    this.layoutStore.toggleSidenavVisible();
   }
 }

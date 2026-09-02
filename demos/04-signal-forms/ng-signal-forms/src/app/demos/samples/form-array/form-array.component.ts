@@ -1,10 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { applyEach, form, FormField, required } from '@angular/forms/signals';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MarkdownRendererComponent } from 'src/app/shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 
 interface SkillsModel {
@@ -18,11 +13,6 @@ interface SkillsModel {
   styleUrls: ['./form-array.component.scss'],
   imports: [
     FormField,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MarkdownRendererComponent,
     ColumnDirective,
   ]
 })
@@ -63,4 +53,3 @@ export class FormArrayComponent {
     console.log('saving ...', this.skillModel());
   }
 }
-

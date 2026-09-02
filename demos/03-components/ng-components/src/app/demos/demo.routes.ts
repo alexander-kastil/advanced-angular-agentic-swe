@@ -11,7 +11,6 @@ import { HostBindingListenerComponent } from './samples/host-binding-listener/ho
 import { DynamicComponentsComponent } from './samples/dynamic-components/dynamic-components.component';
 import { ResourceApiComponent } from './samples/resource-api/resource-api.component';
 import { ResourceWithParamsComponent } from './samples/resource-with-params/resource-with-params.component';
-import { WebmcpInComponentsComponent } from './samples/webmcp-in-components/webmcp-in-components.component';
 import { AgenticRefactorComponent } from './samples/agentic-refactor/agentic-refactor.component';
 import { AntipatternsComponent } from './samples/antipatterns/antipatterns.component';
 
@@ -31,7 +30,6 @@ export const demoRoutes: Routes = [
       { path: 'dynamic-components', component: DynamicComponentsComponent },
       { path: 'resource-api', component: ResourceApiComponent },
       { path: 'resource-with-params', component: ResourceWithParamsComponent },
-      { path: 'webmcp-in-components', component: WebmcpInComponentsComponent },
       { path: 'agentic-refactor', component: AgenticRefactorComponent },
       { path: 'antipatterns', component: AntipatternsComponent },
     ],

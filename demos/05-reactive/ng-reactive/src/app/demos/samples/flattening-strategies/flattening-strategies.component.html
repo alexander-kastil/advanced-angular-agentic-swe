@@ -1,8 +1,8 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Higher order mapping against a real endpoint</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Higher order mapping against a real endpoint</h2>
+  </div>
+  <div class="card-content">
     <p>
       Every click pushes the same id into four pipelines. Each one issues a real
       <code>GET /skills</code>
@@ -10,21 +10,21 @@
       or four times in a row and read the counters, not just the log.
     </p>
     <div class="actions">
-      <button mat-raised-button color="accent" (click)="fire()">
+      <button type="button" class="btn btn-primary" (click)="fire()">
         Fire request #{{ fired() + 1 }}
       </button>
-      <button mat-button (click)="reset()">Reset</button>
+      <button type="button" class="btn btn-outline" (click)="reset()">Reset</button>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
 <div class="strategies">
   @for (strategy of strategies; track strategy) {
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>{{ strategy }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+    <div class="card mt-0">
+      <div class="card-header">
+        <h2 class="card-title">{{ strategy }}</h2>
+      </div>
+      <div class="card-content">
         <p>{{ descriptions[strategy] }}</p>
         <div class="counters">
           <span [class.busy]="panes()[strategy].inFlight > 0">
@@ -33,14 +33,14 @@
           <span>subscribed {{ panes()[strategy].subscribed }}</span>
           <span>delivered {{ panes()[strategy].delivered }}</span>
         </div>
-        <div class="log">
+        <div class="log" tabindex="0" role="region" [attr.aria-label]="strategy + ' log'">
           @for (entry of panes()[strategy].log; track $index) {
             <div [class.cancelled]="entry.includes('cancelled')">{{ entry }}</div>
           } @empty {
             <div>no results yet</div>
           }
         </div>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   }
 </div>

@@ -1,10 +1,5 @@
 import { Component, effect, inject, input } from '@angular/core';
-import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../shared/snackbar/snackbar.service';
 import { Skill } from '../skill.model';
@@ -14,15 +9,7 @@ import { SkillsService } from '../skills.service';
   selector: 'app-skills-edit',
   templateUrl: './skills-edit.component.html',
   styleUrls: ['./skills-edit.component.scss'],
-  imports: [
-    MatCardModule,
-    MatFormField,
-    MatInput,
-    MatButtonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSlideToggle,
-  ],
+  imports: [ReactiveFormsModule],
 })
 export class SkillsEditComponent {
   readonly id = input.required({ transform: (value: string | number) => Number(value) });

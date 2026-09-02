@@ -1,20 +1,20 @@
 <div boxed>
-  <h3>Parameterised resources</h3>
+  <h2>Parameterised resources</h2>
   <p>
     A resource re-runs whenever a signal read inside its params function changes. Nothing calls
     the loader by hand, and <code>reload()</code> is the only imperative escape hatch.
   </p>
 </div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>httpResource driven by a signal input</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">httpResource driven by a signal input</h2>
+  </div>
+  <div class="card-content">
     <div class="actions">
-      <button mat-stroked-button (click)="previous()">Previous</button>
+      <button type="button" class="btn btn-outline" (click)="previous()">Previous</button>
       <span class="value">petId = {{ petId() }}</span>
-      <button mat-stroked-button (click)="next()">Next</button>
+      <button type="button" class="btn btn-outline" (click)="next()">Next</button>
     </div>
 
     <app-pet-detail [petId]="petId()" />
@@ -22,18 +22,34 @@
     <p class="hint">
       The child owns the request. The parent only writes to the signal it passes as an input.
     </p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>resource() with params, abortSignal and reload</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-button-toggle-group [value]="owner()" (change)="owner.set($event.value)">
-      <mat-button-toggle value="Alex">Alex</mat-button-toggle>
-      <mat-button-toggle value="Andreas">Andreas</mat-button-toggle>
-    </mat-button-toggle-group>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">resource() with params, abortSignal and reload</h2>
+  </div>
+  <div class="card-content">
+    <div class="toggle-group" role="group" aria-label="Owner">
+      <button
+        type="button"
+        class="toggle-btn"
+        [class.active]="owner() === 'Alex'"
+        [attr.aria-pressed]="owner() === 'Alex'"
+        (click)="owner.set('Alex')"
+      >
+        Alex
+      </button>
+      <button
+        type="button"
+        class="toggle-btn"
+        [class.active]="owner() === 'Andreas'"
+        [attr.aria-pressed]="owner() === 'Andreas'"
+        (click)="owner.set('Andreas')"
+      >
+        Andreas
+      </button>
+    </div>
 
     <p class="value">status: {{ pets.status() }}</p>
 
@@ -49,6 +65,6 @@
       }
     </ul>
 
-    <button mat-raised-button color="accent" (click)="reloadList()">Reload</button>
-  </mat-card-content>
-</mat-card>
+    <button type="button" class="btn btn-primary" (click)="reloadList()">Reload</button>
+  </div>
+</div>

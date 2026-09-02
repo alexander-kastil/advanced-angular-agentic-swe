@@ -1,9 +1,9 @@
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Classic switchMap pipeline</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Classic switchMap pipeline</h2>
+    </div>
+    <div class="card-content">
       <p>
         <code>valueChanges</code>
         ,
@@ -23,31 +23,31 @@
         <code>finalize</code>
         that you write yourself.
       </p>
-      <mat-form-field appearance="outline">
-        <mat-label>Filter skills</mat-label>
-        <input matInput [formControl]="classicTerm" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="classic-term">Filter skills</label>
+        <input id="classic-term" class="input" type="text" [formControl]="classicTerm" />
+      </div>
       <div class="meta">
         <span>requests {{ classicRequests() }}</span>
         <span>{{ classicLoading() ? "loading" : "idle" }}</span>
         <span>{{ classicFailed() ? "last request failed" : "ok" }}</span>
       </div>
       @if (classicLoading()) {
-        <mat-progress-bar mode="indeterminate" />
+        <app-progress-bar mode="indeterminate" />
       }
       @for (skill of classicResult(); track skill.id) {
         <div class="result">{{ skill.name }}</div>
       } @empty {
         <div class="result">no matches</div>
       }
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>rxResource</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">rxResource</h2>
+    </div>
+    <div class="card-content">
       <p>
         The
         <code>params</code>
@@ -55,17 +55,17 @@
         resource, and the counter shows the same switchMap behaviour without the
         operator.
       </p>
-      <mat-form-field appearance="outline">
-        <mat-label>Filter skills</mat-label>
-        <input matInput [(ngModel)]="resourceTerm" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="resource-term">Filter skills</label>
+        <input id="resource-term" class="input" type="text" [(ngModel)]="resourceTerm" />
+      </div>
       <div class="meta">
         <span>requests {{ resourceRequests() }}</span>
         <span>{{ skillsResource.status() }}</span>
         <span>{{ skillsResource.error() ? "error" : "ok" }}</span>
       </div>
       @if (skillsResource.isLoading()) {
-        <mat-progress-bar mode="indeterminate" />
+        <app-progress-bar mode="indeterminate" />
       } @else if (skillsResource.error()) {
         <p>Start json-server to see live data.</p>
       } @else {
@@ -75,15 +75,15 @@
           <div class="result">no matches</div>
         }
       }
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>
 
-<mat-card appearance="outlined" class="chain">
-  <mat-card-header>
-    <mat-card-title>chain(): one resource feeding the next</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card chain">
+  <div class="card-header">
+    <h2 class="card-title">chain(): one resource feeding the next</h2>
+  </div>
+  <div class="card-content">
     <p>
       <code>chain()</code>
       reads the list resource and propagates its loading and error status, so the
@@ -91,7 +91,7 @@
       version this is a nested pipeline you write by hand.
     </p>
     @if (firstSkillDetail.isLoading()) {
-      <mat-progress-bar mode="indeterminate" />
+      <app-progress-bar mode="indeterminate" />
     } @else if (firstSkillDetail.hasValue()) {
       <div class="result">
         first match reloaded by id: {{ firstSkillDetail.value().name }}
@@ -99,5 +99,5 @@
     } @else {
       <div class="result">waiting for the list</div>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

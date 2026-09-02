@@ -1,6 +1,11 @@
-<mat-expansion-panel [expanded]="contentVisible()">
-  <mat-expansion-panel-header (click)="togglePanel()">
-    <mat-panel-title>Instructions</mat-panel-title>
-  </mat-expansion-panel-header>
-  <markdown mermaid [src]="markdownSrc()" (load)="onMarkdownLoad()" />
-</mat-expansion-panel>
+<div class="panel">
+  <button type="button" class="panel-header" (click)="togglePanel()">
+    <span class="panel-title">Instructions</span>
+    <span class="icon">{{ contentVisible() ? 'expand_less' : 'expand_more' }}</span>
+  </button>
+  @if (contentVisible()) {
+    <div class="panel-content" tabindex="0" role="region" aria-label="Instructions">
+      <markdown mermaid [src]="markdownSrc()" (load)="onMarkdownLoad()" />
+    </div>
+  }
+</div>

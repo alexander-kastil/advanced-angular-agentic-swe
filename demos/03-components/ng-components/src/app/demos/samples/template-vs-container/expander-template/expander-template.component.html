@@ -1,8 +1,16 @@
-<div class="expander" (click)="toggleExpander()">
-  <h1>{{ title() }} - click to {{ expanded() ? "collapse" : "expand" }}</h1>
+<div class="panel">
+  <button
+    type="button"
+    class="panel-header"
+    [attr.aria-expanded]="expanded()"
+    (click)="toggleExpander()"
+  >
+    <span class="panel-title">{{ title() }} - click to {{ expanded() ? "collapse" : "expand" }}</span>
+    <span class="icon">{{ expanded() ? "expand_less" : "expand_more" }}</span>
+  </button>
+  @if (expanded()) {
+    <div class="panel-content">
+      <ng-container [ngTemplateOutlet]="content()" />
+    </div>
+  }
 </div>
-@if (expanded()) {
-  <div class="content">
-    <ng-container [ngTemplateOutlet]="content()" />
-  </div>
-}

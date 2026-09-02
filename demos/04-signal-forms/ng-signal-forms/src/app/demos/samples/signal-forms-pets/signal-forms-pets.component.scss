@@ -5,20 +5,6 @@
   align-items: start;
 }
 
-.pet-list mat-list-item.selected {
-  background: rgba(63, 81, 181, 0.12);
-}
-
-.pet-list mat-nav-list {
-  padding-top: 0;
-}
-
-form[column] {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
 .form-actions {
   display: flex;
   gap: 8px;
@@ -26,14 +12,12 @@ form[column] {
 }
 
 .error {
-  color: #f44336;
-  font-size: 0.8rem;
-  margin-top: -8px;
-  margin-bottom: 8px;
+  color: #dc2626;
+  font-size: 0.8125rem;
 }
 
 .success {
-  color: #4caf50;
+  color: #15803d;
   font-weight: 500;
   margin-top: 8px;
 }
@@ -45,7 +29,7 @@ form[column] {
 
 .state-info pre {
   font-size: 0.75rem;
-  background: rgba(0, 0, 0, 0.04);
+  background: #f8fafc;
   padding: 8px;
   border-radius: 4px;
   overflow-x: auto;
@@ -61,12 +45,12 @@ form[column] {
   font-family: monospace;
   font-size: 0.75rem;
   padding: 4px 8px;
-  background: rgba(0, 0, 0, 0.03);
+  background: #f8fafc;
   border-radius: 4px;
 }
 
 .log-empty {
-  color: rgba(0, 0, 0, 0.38);
+  color: #64748b;
   font-style: italic;
   font-size: 0.85rem;
 }

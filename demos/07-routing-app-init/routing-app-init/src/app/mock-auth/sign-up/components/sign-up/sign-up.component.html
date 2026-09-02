@@ -1,27 +1,28 @@
-<ng-template #dialog>
-  <div mat-dialog-title class="title">Sign Up</div>
-
-  <div mat-dialog-content>
-    <div>
-      <mat-form-field appearance="outline">
-        <input type="email" placeholder="Email" matInput />
-      </mat-form-field>
+<dialog #dialog class="modal" aria-labelledby="sign-up-title" (close)="onClosed()">
+  <div class="card mb-0">
+    <div class="card-header">
+      <h2 id="sign-up-title" class="card-title">Sign Up</h2>
     </div>
 
-    <div>
-      <mat-form-field appearance="outline">
-        <input type="password" placeholder="Password" matInput />
-      </mat-form-field>
+    <div class="card-content gap-4">
+      <div class="field">
+        <label class="label" for="sign-up-email">Email</label>
+        <input id="sign-up-email" class="input" type="email" placeholder="Email" autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <label class="label" for="sign-up-password">Password</label>
+        <input id="sign-up-password" class="input" type="password" placeholder="Password" autocomplete="new-password" />
+      </div>
+
+      <div class="field">
+        <label class="label" for="sign-up-password-repeat">Repeat Password</label>
+        <input id="sign-up-password-repeat" class="input" type="password" placeholder="Repeat Password" autocomplete="new-password" />
+      </div>
     </div>
 
-    <div>
-      <mat-form-field appearance="outline">
-        <input type="password" placeholder="Repeat Password" matInput />
-      </mat-form-field>
+    <div class="card-actions">
+      <button type="button" class="btn btn-primary">Sign Up</button>
     </div>
   </div>
-
-  <div mat-dialog-actions>
-    <button mat-flat-button color="primary">Sign Up</button>
-  </div>
-</ng-template>
+</dialog>

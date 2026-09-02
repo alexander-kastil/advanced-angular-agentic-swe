@@ -1,5 +1,4 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { ClockComponent } from './clock/clock.component';
 import { ExpanderComponent } from './expander-content/expander.component';
 import { ExpanderTemplateComponent } from './expander-template/expander-template.component';
@@ -8,15 +7,7 @@ import { ExpanderTemplateComponent } from './expander-template/expander-template
   selector: 'app-template-vs-container',
   templateUrl: './template-vs-container.component.html',
   styleUrls: ['./template-vs-container.component.scss'],
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    ExpanderComponent,
-    ClockComponent,
-    ExpanderTemplateComponent,
-  ],
+  imports: [ExpanderComponent, ClockComponent, ExpanderTemplateComponent],
 })
 export class TemplateVsContainerComponent {
   readonly currentTime = signal(new Date().toTimeString());

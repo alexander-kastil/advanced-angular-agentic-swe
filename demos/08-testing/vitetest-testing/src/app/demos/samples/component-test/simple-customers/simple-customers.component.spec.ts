@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Customer } from '../../../../customers/customer.model';
@@ -25,7 +24,7 @@ describe('Component - Resource & Spy - SimpleCustomersComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      imports: [SimpleCustomersComponent, NoopAnimationsModule],
+      imports: [SimpleCustomersComponent],
       providers: [{ provide: CustomersService, useValue: serviceSpy }],
     }).compileComponents();
 

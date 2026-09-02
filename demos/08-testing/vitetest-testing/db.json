@@ -1,11 +1,19 @@
 {
   "demos": [
     {
+      "url": "karma-to-vitest",
+      "title": "Karma to Vitest Migration",
+      "teaches": "Replace the Karma builder with @angular/build:unit-test, swap jasmine for vitest globals, and rewrite the specs. Covers the httpResource ordering trap: TestBed.tick() before HttpTestingController.flush(), never whenStable() first.",
+      "sortOrder": 1,
+      "topic": "Introduction",
+      "md": "karma-to-vitest"
+    },
+    {
       "url": "testing-foundations",
       "title": "Testing Foundations",
       "teaches": "Write your first Vitest tests with no TestBed at all: a plain class, two pipes, a service without dependencies, and a component tested through its class. describe/it/expect/beforeEach, value and error assertions.",
       "topic": "Introduction",
-      "sortOrder": 1,
+      "sortOrder": 2,
       "id": 1,
       "md": "testing-foundations"
     },
@@ -14,7 +22,7 @@
       "title": "Test Directive",
       "teaches": "Test an attribute directive by rendering it on a host component in TestBed and asserting the DOM change it causes. Uses the host object instead of @HostListener.",
       "topic": "Pipes & Directives",
-      "sortOrder": 2,
+      "sortOrder": 3,
       "id": 88,
       "md": "directive"
     },
@@ -23,7 +31,7 @@
       "title": "Service HTTP Test",
       "teaches": "Test CustomersService CRUD with HttpTestingController. Flush mock responses and verify request URL, method and body for GET, POST, PUT and DELETE.",
       "topic": "Services",
-      "sortOrder": 3,
+      "sortOrder": 4,
       "id": 8,
       "md": "httptest"
     },
@@ -32,7 +40,7 @@
       "title": "httpResource Test",
       "teaches": "Test a component that reads data with httpResource(). Flush the request through HttpTestingController and assert the loading state and the rendered rows.",
       "topic": "Services",
-      "sortOrder": 4,
+      "sortOrder": 5,
       "id": 83,
       "md": "httptest-signal"
     },
@@ -41,7 +49,7 @@
       "title": "HTTP Error Tests",
       "teaches": "Test the failure half of an HTTP call: flush 404, 409, 5xx and a transport error through HttpTestingController, and assert that a functional interceptor maps each status to a readable message and records it.",
       "topic": "Services",
-      "sortOrder": 5,
+      "sortOrder": 6,
       "id": 91,
       "md": "http-error-tests"
     },
@@ -50,7 +58,7 @@
       "title": "Comp DOM Test",
       "teaches": "Read and write the DOM from a spec: type into an input and assert component state, then fire clicks with triggerEventHandler and with the native click API.",
       "topic": "Component Testing",
-      "sortOrder": 6,
+      "sortOrder": 7,
       "id": 63,
       "md": "component-write"
     },
@@ -59,7 +67,7 @@
       "title": "Input Signals & Outputs",
       "teaches": "Set required signal inputs with fixture.componentRef.setInput() on CustomerEditComponent and assert that the save and cancel outputs emit the right values.",
       "topic": "Component Testing",
-      "sortOrder": 7,
+      "sortOrder": 8,
       "id": 633,
       "md": "component-input-signals"
     },
@@ -68,34 +76,16 @@
       "title": "CRUD Customers",
       "teaches": "Test SimpleCustomersComponent, which loads through Angular's resource() API. Spy on CustomersService to control responses and verify the delete and reload path.",
       "topic": "Component Testing",
-      "sortOrder": 8,
+      "sortOrder": 9,
       "id": 5,
       "md": "component-test"
-    },
-    {
-      "url": "material",
-      "title": "Material Harness",
-      "teaches": "Drive Material components through test harnesses instead of DOM selectors: MatButtonHarness, MatInputHarness, MatSliderHarness, MatTableHarness, and harnesses over asynchronous tab rendering.",
-      "topic": "Component Testing",
-      "sortOrder": 9,
-      "id": 19,
-      "md": "material-harness"
-    },
-    {
-      "url": "browser-mode-harnesses",
-      "title": "Harnesses in Browser Mode",
-      "teaches": "Drive slide toggle, checkbox, select and button through CDK component harnesses, including the select overlay through documentRootLoader, and run the same spec unchanged under jsdom or Vitest browser mode.",
-      "topic": "Component Testing",
-      "sortOrder": 10,
-      "id": 92,
-      "md": "browser-mode-harnesses"
     },
     {
       "url": "spy",
       "title": "Comp Spy & Async State",
       "teaches": "Replace the signal store with a vi.fn() spy object and steer its signals from the test. Assert store calls and the loading, loaded and selected states without fakeAsync.",
       "topic": "Component Testing",
-      "sortOrder": 11,
+      "sortOrder": 10,
       "id": 44,
       "md": "component-spy"
     },
@@ -104,7 +94,7 @@
       "title": "Test a Signal Form",
       "teaches": "Test a Signal Form without the DOM: write field values through field().value.set(), assert required, email, minLength and cross-field errors, then submit() and check touched state, the action result and a server error bound back onto a field.",
       "topic": "Forms Testing",
-      "sortOrder": 12,
+      "sortOrder": 11,
       "id": 93,
       "md": "signal-forms-testing"
     },
@@ -113,7 +103,7 @@
       "title": "Zoneless Async",
       "teaches": "Await asynchronous work in a zoneless app: PendingTasks plus fixture.whenStable(), TestBed.tick() to flush effects and rendering, Vitest fake timers for intervals, and TestBed.getLastFixture() when a helper created the fixture.",
       "topic": "Async Testing",
-      "sortOrder": 13,
+      "sortOrder": 12,
       "id": 94,
       "md": "zoneless-async"
     },
@@ -122,7 +112,7 @@
       "title": "Container / Presenter",
       "teaches": "Integration-test the container with its real presenters. Verify signal inputs flowing down and outputs wiring back up across the whole tree.",
       "topic": "Integration Testing",
-      "sortOrder": 14,
+      "sortOrder": 13,
       "id": 6,
       "md": "component-integration"
     },
@@ -131,34 +121,25 @@
       "title": "Test Signal Store",
       "teaches": "Test an NgRx SignalStore built from events. Dispatch through the Dispatcher and assert the state transitions for fetch, save, delete and loadContent.",
       "topic": "NgRx Testing",
-      "sortOrder": 15,
+      "sortOrder": 14,
       "id": 53,
       "md": "test-signals-store"
     },
     {
       "url": "playwright",
       "title": "Playwright E2E",
-      "teaches": "Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests for full isolation.",
+      "teaches": "Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests, mock the network with page.route, assert on requests and responses, drive the app from the keyboard, group work into test.step with soft assertions, and verify the backend through the API request context.",
       "topic": "E2E Testing",
-      "sortOrder": 16,
+      "sortOrder": 15,
       "id": 22,
       "md": "playwright"
-    },
-    {
-      "url": "webmcp-e2e",
-      "title": "WebMCP E2E",
-      "teaches": "Declare page tools with declareExperimentalWebMcpTool and test them the way an agent would call them: a Vitest spec against a stubbed model context, and a Playwright run that invokes the tools and asserts the rendered page.",
-      "topic": "E2E Testing",
-      "sortOrder": 17,
-      "id": 95,
-      "md": "webmcp-e2e"
     },
     {
       "url": "ai-generated-test",
       "title": "AI Generated Spec",
       "teaches": "Prompt the agent to generate a Vitest spec for a branch-heavy class, then review it: mutate the code to prove the tests bite, check boundary values, and reject assertions that only re-state the implementation.",
       "topic": "AI-Assisted Testing",
-      "sortOrder": 18,
+      "sortOrder": 16,
       "id": 90,
       "md": "ai-generated-test"
     },
@@ -167,7 +148,7 @@
       "title": "AI Writes the Test",
       "teaches": "The full loop: state the behaviour, let the agent write the spec with get_best_practices and run_target, review it against a checklist, then run a mutation round that proves the suite goes red when the code breaks.",
       "topic": "AI-Assisted Testing",
-      "sortOrder": 19,
+      "sortOrder": 17,
       "id": 96,
       "md": "ai-writes-the-test"
     }

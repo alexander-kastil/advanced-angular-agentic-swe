@@ -1,6 +1,6 @@
 export const environment = {
   authEnabled: false,
-  title: 'ngReactiveForms',
+  title: 'Signals',
   logChangeDetection: true,
   logChanges: false,
   logLoading: false,

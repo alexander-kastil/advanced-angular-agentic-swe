@@ -2,11 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import {
   Subject,
   catchError,
@@ -28,24 +23,15 @@ import { Skill } from '../../skills/skills';
 @Component({
   selector: 'app-combining',
   templateUrl: './combining.component.html',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    FormsModule,
-  ],
+  imports: [FormsModule],
   styles: `
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: start; }
+    .grid .card + .card { margin-top: 0; }
     .log { font-family: monospace; font-size: 0.82rem; max-height: 180px; overflow: auto; }
-    .log div { padding: 2px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.25); }
-    .filters { display: flex; gap: 16px; align-items: center; }
-    .badge { font-size: 0.78rem; padding: 2px 6px; border-radius: 4px; background: rgba(128, 128, 128, 0.15); }
+    .log div { padding: 2px 0; border-bottom: 1px solid var(--color-line); }
+    .filters { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+    .filters .field { flex: 1 1 12rem; }
+    .badge { font-size: 0.78rem; padding: 2px 6px; border-radius: 4px; background: var(--color-primary-soft); color: var(--color-primary-dark); }
   `,
 })
 export class CombiningComponent {

@@ -1,0 +1,85 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Booking Form Exposed as a WebMCP Tool</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="wmcp-guest">Guest</label>
+        <input id="wmcp-guest" class="input" type="text" [formField]="bookingForm.guest" />
+      </div>
+      @if (bookingForm.guest().touched() && bookingForm.guest().invalid()) {
+        @for (err of bookingForm.guest().errors(); track err.kind) {
+          <div class="error text-[0.8125rem] text-[#dc2626]">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="wmcp-email">Email</label>
+        <input id="wmcp-email" class="input" type="email" [formField]="bookingForm.guestEmail" />
+      </div>
+      @if (bookingForm.guestEmail().touched() && bookingForm.guestEmail().invalid()) {
+        @for (err of bookingForm.guestEmail().errors(); track err.kind) {
+          <div class="error text-[0.8125rem] text-[#dc2626]">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="wmcp-nights">Nights</label>
+        <input id="wmcp-nights" class="input" type="number" [formField]="bookingForm.nights" />
+      </div>
+      @if (bookingForm.nights().touched() && bookingForm.nights().invalid()) {
+        @for (err of bookingForm.nights().errors(); track err.kind) {
+          <div class="error text-[0.8125rem] text-[#dc2626]">{{ err.message }}</div>
+        }
+      }
+    </div>
+
+    @if (confirmation()) {
+      <p>{{ confirmation() }}</p>
+    }
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="book()">Book</button>
+    <button type="button" class="btn btn-outline" (click)="simulateAgentCall()">Simulate Agent Call</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Agent Surface</h2>
+  </div>
+  <div class="card-content">
+    <div boxed>
+      <div>navigator.modelContext present: {{ agentAvailable() }}</div>
+      <div>Implicit tool: fill-booking-form (from the form() options)</div>
+      <div>Explicit tool: read-booking-form (from declareExperimentalWebMcpTool)</div>
+      <div>Form valid: {{ bookingForm().valid() }}</div>
+      <div>Still invalid: {{ invalidFields() | json }}</div>
+    </div>
+    @if (!agentAvailable()) {
+      <p>
+        No WebMCP host is attached to this page, so both tools register as no-ops. Use
+        <strong>Simulate Agent Call</strong> to see what an agent invocation does to the model.
+      </p>
+    }
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Tool Call Log</h2>
+  </div>
+  <div class="card-content">
+    <div boxed>
+      @for (entry of toolLog(); track $index) {
+        <div>{{ entry }}</div>
+      } @empty {
+        <div>No tool calls yet.</div>
+      }
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-outline" (click)="clearLog()">Clear</button>
+  </div>
+</div>

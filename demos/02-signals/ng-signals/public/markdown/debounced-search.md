@@ -55,4 +55,4 @@ readonly results = httpResource<Skill[]>(({ chain }) =>
 ```
 
 > The demo talks to `http://localhost:3000/skills`. Run `json-server db.json` in the app folder and
-> type `Ang` or `Rx` to see the filter work.
+> type `Ang` or `Sig` to see the filter work.

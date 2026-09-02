@@ -1,5 +1,4 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { CustomersService } from '../../customers.service';
 
@@ -7,7 +6,7 @@ import { CustomersService } from '../../customers.service';
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss'],
-  imports: [MatButton, RouterLink],
+  imports: [RouterLink],
 })
 export class CustomersComponent {
   private service = inject(CustomersService);

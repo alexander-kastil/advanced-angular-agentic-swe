@@ -1,8 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
+import { SlideToggleComponent } from '../../../shared/slide-toggle/slide-toggle.component';
 
 type Status = 'idle' | 'running' | 'failed';
 
@@ -17,15 +15,7 @@ interface Dog {
   selector: 'app-control-flow',
   templateUrl: './control-flow.component.html',
   styleUrl: './control-flow.component.scss',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
-    MatSlideToggle,
-    BoxedDirective,
-  ],
+  imports: [BoxedDirective, SlideToggleComponent],
 })
 export class ControlFlowComponent {
   readonly membersOnly = signal(true);

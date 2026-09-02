@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Exposing SignalStore methods as WebMCP tools</h2>
+  </div>
+  <div class="card-content content">
+    @if (agentSurface()) {
+      <p class="ok">Agent surface detected. The three tools below are registered with this page.</p>
+    } @else {
+      <p class="warn">
+        No agent surface on this browser, so declareExperimentalWebMcpTool registered nothing. The store still works
+        through the UI, and the tool declarations stay in the source unchanged.
+      </p>
+    }
+
+    <ul class="tools">
+      @for (tool of tools; track tool) {
+        <li><code>{{ tool }}</code></li>
+      }
+    </ul>
+
+    <div class="toolbar">
+      <div class="field">
+        <label class="label" for="ticket-subject">New ticket subject</label>
+        <input id="ticket-subject" class="input" [ngModel]="subject()" (ngModelChange)="subject.set($event)" />
+      </div>
+      <button type="button" class="btn btn-primary self-end" (click)="add()">Add ticket</button>
+      <button type="button" class="btn btn-outline self-end" (click)="store.reset()">Reset queue</button>
+    </div>
+
+    <h3>Queue ({{ store.openCount() }} open)</h3>
+    @for (ticket of store.tickets(); track ticket.id) {
+      <div class="row" [class.closed]="!ticket.open">
+        <span class="grow">#{{ ticket.id }} {{ ticket.subject }}</span>
+        <span>{{ ticket.priority }}</span>
+        <button type="button" class="btn btn-outline" [disabled]="!ticket.open" (click)="store.closeTicket(ticket.id)">Close</button>
+      </div>
+    }
+
+    <h3>Agent calls</h3>
+    <ol class="log">
+      @for (call of store.agentCalls(); track $index) {
+        <li>{{ call }}</li>
+      } @empty {
+        <li>No tool has been invoked by an agent yet.</li>
+      }
+    </ol>
+  </div>
+</div>

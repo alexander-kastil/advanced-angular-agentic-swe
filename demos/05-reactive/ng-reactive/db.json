@@ -1622,5 +1622,21 @@
       "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
       "completed": false
     }
+  ],
+  "markdownItems": [
+    {
+      "id": "1",
+      "url": "",
+      "title": "Signals over BehaviorSubject",
+      "comment": "Local component state belongs in a signal, not a BehaviorSubject.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": "2",
+      "url": "",
+      "title": "Prefer httpResource",
+      "comment": "httpResource replaces the async pipe plus Observable pattern for HTTP reads.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    }
   ]
 }

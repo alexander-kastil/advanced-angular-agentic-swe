@@ -1,18 +1,11 @@
 import { Component, Injector, computed, effect, inject, signal } from '@angular/core';
 import { Topic } from './topic.model';
 import { BorderDirective, CenteredDirective } from '../../../shared/formatting/formatting-directives';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 @Component({
   selector: 'app-signals-basics',
   templateUrl: './signals-basics.component.html',
   styleUrls: ['./signals-basics.component.scss'],
   imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
     BorderDirective,
     CenteredDirective
   ]

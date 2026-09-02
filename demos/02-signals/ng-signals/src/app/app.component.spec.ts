@@ -18,7 +18,7 @@ describe('AppComponent', () => {
   it(`should load title from environment`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Signals');
+    expect(app.title()).toEqual('Signals');
   });
 
   it('should render navbar component', () => {

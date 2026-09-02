@@ -1,8 +1,8 @@
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideMarkdown } from 'ngx-markdown';
-import { vi } from 'vitest';
 import { environment } from '../../../environments/environment';
 import { MarkdownRendererComponent } from './markdown-renderer.component';
 import { RendererStateService } from './renderer-state.service';

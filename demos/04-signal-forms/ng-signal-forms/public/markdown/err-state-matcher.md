@@ -1,12 +1,12 @@
-`ErrorStateMatcher` decides *when* Angular Material renders `<mat-error>`. With Signal Forms the matcher implements `isSignalErrorState(field)` instead of `isErrorState(control, form)`:
+An error-state matcher decides *when* a form renders its error text. With Signal Forms the matcher implements `isSignalErrorState(field)` alongside the classic `isErrorState(control, form)`:
 
 ```typescript
-export class DirtyOnlyStateMatcher implements ErrorStateMatcher {
+export class DirtyOnlyStateMatcher implements FieldErrorStateMatcher {
   isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
     return !!control && control.invalid && control.dirty;
   }
 
-  isSignalErrorState(field: Field<unknown> | null): boolean {
+  isSignalErrorState<T>(field: Field<T> | null): boolean {
     if (!field) {
       return false;
     }
@@ -16,16 +16,15 @@ export class DirtyOnlyStateMatcher implements ErrorStateMatcher {
 }
 ```
 
-Register it per control:
+Ask it per control in the template:
 
 ```html
-<input matInput [formField]="registerForm.password" [errorStateMatcher]="eager" />
+<input class="input" type="password" [formField]="registerForm.password" />
+@if (eager.isSignalErrorState(registerForm.password)) {
+  <div class="error">At least 4 characters</div>
+}
 ```
 
-Or for the whole component / application:
+One matcher instance can be shared across every field of a component, or provided through DI when the whole application should use the same rule.
 
-```typescript
-providers: [{ provide: ErrorStateMatcher, useClass: DirtyOnlyStateMatcher }]
-```
-
-`Field<unknown>` is `() => FieldState<unknown>`, so the matcher reads the same `invalid()`, `dirty()`, `touched()` signals the template uses.
+`Field<T>` is `() => FieldState<T>`, so the matcher reads the same `invalid()`, `dirty()`, `touched()` signals the template uses.

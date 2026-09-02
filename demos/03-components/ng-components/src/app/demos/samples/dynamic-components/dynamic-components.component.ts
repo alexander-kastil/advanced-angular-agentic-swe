@@ -13,8 +13,6 @@ import {
   twoWayBinding,
   viewChild,
 } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { CounterCardComponent } from './counter-card/counter-card.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 import { WarningCardComponent } from './warning-card/warning-card.component';
@@ -23,7 +21,6 @@ import { WarningCardComponent } from './warning-card/warning-card.component';
   selector: 'app-dynamic-components',
   templateUrl: './dynamic-components.component.html',
   styleUrl: './dynamic-components.component.scss',
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton],
 })
 export class DynamicComponentsComponent {
   private readonly environmentInjector = inject(EnvironmentInjector);

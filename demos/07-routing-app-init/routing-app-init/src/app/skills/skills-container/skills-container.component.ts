@@ -1,7 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
+import { SlideToggleComponent } from '../../shared/slide-toggle/slide-toggle.component';
 import { Skill } from '../skill.model';
 import { SkillsKpiComponent } from '../skills-kpi/skills-kpi.component';
 import { SkillRowComponent } from '../skill-row/skill-row.component';
@@ -11,14 +9,7 @@ import { SkillsService } from '../skills.service';
   selector: 'app-skills-container',
   templateUrl: './skills-container.component.html',
   styleUrls: ['./skills-container.component.scss'],
-  imports: [
-    MatToolbar,
-    MatToolbarRow,
-    MatButton,
-    MatSlideToggle,
-    SkillRowComponent,
-    SkillsKpiComponent,
-  ],
+  imports: [SlideToggleComponent, SkillRowComponent, SkillsKpiComponent],
 })
 export class SkillsContainerComponent {
   private service = inject(SkillsService);

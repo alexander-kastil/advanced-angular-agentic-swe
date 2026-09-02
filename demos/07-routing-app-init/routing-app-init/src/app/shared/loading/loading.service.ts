@@ -4,7 +4,11 @@ import { Injectable, signal } from '@angular/core';
   providedIn: 'root',
 })
 export class LoadingService {
-  readonly isLoading = signal(false);
+  private isLoading = signal(false);
+
+  getLoading() {
+    return this.isLoading.asReadonly();
+  }
 
   setLoading(loading: boolean) {
     this.isLoading.set(loading);

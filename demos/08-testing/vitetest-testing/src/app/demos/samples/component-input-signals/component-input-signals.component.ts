@@ -1,17 +1,16 @@
 import { Component, signal } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
 import { CustomerEditComponent } from '../../../customers/customer-edit/customer-edit.component';
 import { Customer } from '../../../customers/customer.model';
 
 @Component({
     selector: 'app-component-input-signals',
-    imports: [MatCardModule, CustomerEditComponent],
+    imports: [CustomerEditComponent],
     template: `
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Input Signals and Outputs</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Input Signals and Outputs</h2>
+        </div>
+        <div class="card-content">
           <p>
             The spec sets <code>customer</code> with
             <code>fixture.componentRef.setInput()</code> and listens on the
@@ -23,8 +22,8 @@ import { Customer } from '../../../customers/customer.model';
             (cancel)="onCancel()"
           />
           <div data-testid="last-event">Last output: {{ lastEvent() }}</div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     `,
 })
 export class ComponentInputSignalsComponent {

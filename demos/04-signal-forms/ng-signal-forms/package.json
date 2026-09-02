@@ -23,11 +23,11 @@
     "@angular/compiler": "^22.1.4",
     "@angular/core": "^22.1.4",
     "@angular/forms": "^22.1.4",
-    "@angular/material": "^22.1.4",
     "@angular/platform-browser": "^22.1.4",
     "@angular/router": "^22.1.4",
     "@ngrx/operators": "^22.0.0",
     "@ngrx/signals": "^22.0.0",
+    "angular-split": "^20.0.0",
     "katex": "^0.16.47",
     "marked": "^17.0.3",
     "marked-katex-extension": "^5.1.12",
@@ -43,7 +43,10 @@
     "@angular/compiler-cli": "^22.1.4",
     "@playwright/test": "^1.62.1",
     "@standard-schema/spec": "^1.1.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "baseline-browser-mapping": "^2.10.0",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
     "vitest": "^4.1.11"
   }

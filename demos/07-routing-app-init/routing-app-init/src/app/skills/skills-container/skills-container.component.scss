@@ -1,7 +1,3 @@
-.title{
-  flex-grow: 1;
-}
-
-button{
-  margin-right: var(--gap-medium);
+app-skill-row:first-of-type .skillrow {
+  border-top: 0;
 }

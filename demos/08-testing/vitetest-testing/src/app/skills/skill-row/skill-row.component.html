@@ -2,20 +2,26 @@
   <div class="id">ID: {{ skill().id }}</div>
   <div class="name">{{ skill().name }}</div>
   <div class="completed">
-    <mat-icon>{{ skill().completed ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+    <span class="icon" [class.text-primary]="skill().completed" [class.text-slate-300]="!skill().completed">
+      {{ skill().completed ? 'check_circle' : 'radio_button_unchecked' }}
+    </span>
   </div>
   <div class="cmd">
     <button
-      mat-raised-button
-      color="primary"
+      type="button"
+      class="btn-icon tip tip-left"
+      data-tip="Edit"
+      aria-label="Edit skill"
       [routerLink]="['/skills', skill().id]">
-      <mat-icon>edit</mat-icon>
+      <span class="icon">edit</span>
     </button>
     <button
-      mat-raised-button
-      color="primary"
+      type="button"
+      class="btn-icon tip tip-left hover:bg-warn/10 hover:text-warn"
+      data-tip="Delete"
+      aria-label="Delete skill"
       (click)="deleteItem(skill())">
-      <mat-icon>delete</mat-icon>
+      <span class="icon">delete</span>
     </button>
   </div>
 </div>

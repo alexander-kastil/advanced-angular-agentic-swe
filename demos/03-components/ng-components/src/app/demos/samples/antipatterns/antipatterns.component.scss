@@ -5,6 +5,9 @@
 }
 
 .filters .selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
@@ -18,8 +21,9 @@
   gap: 12px;
 }
 
-.pair h4 {
+.pair h3 {
   margin: 0 0 4px;
+  font-weight: 600;
 }
 
 .pair pre {
@@ -28,7 +32,8 @@
   margin: 0;
   padding: 8px;
   border-radius: 4px;
-  border: 1px solid rgba(128, 128, 128, 0.4);
+  border: 1px solid var(--color-line);
+  background-color: var(--color-canvas);
 }
 
 .legacy pre {

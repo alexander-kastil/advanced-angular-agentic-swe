@@ -1,7 +1,14 @@
-<mat-form-field appearance="fill" class="search">
-  <mat-label>Search skills</mat-label>
-  <input matInput [value]="term()" (input)="onInput($event)" placeholder="try Ang" />
-</mat-form-field>
+<div class="field search">
+  <label class="label" for="debounced-search-term">Search skills</label>
+  <input
+    id="debounced-search-term"
+    class="input"
+    type="text"
+    [value]="term()"
+    (input)="onInput($event)"
+    placeholder="try Ang"
+  />
+</div>
 
 <div border class="state">
   <div>raw signal: <code>{{ term() || '(empty)' }}</code></div>

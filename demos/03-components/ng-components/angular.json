@@ -33,8 +33,9 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/prismjs/themes/prism-okaidia.css",
-              "src/styles.scss"
+              "src/tailwind.css",
+              "src/styles.scss",
+              "node_modules/prismjs/themes/prism-okaidia.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -53,8 +54,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",

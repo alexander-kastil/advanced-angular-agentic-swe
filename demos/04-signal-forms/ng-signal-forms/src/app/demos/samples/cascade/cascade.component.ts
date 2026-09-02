@@ -1,13 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { applyEach, disabled, form, FormField, required, submit } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { BorderDirective, ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { skillCatalog, SkillProfile } from './skill-profile.model';
 
 @Component({
@@ -15,21 +8,9 @@ import { skillCatalog, SkillProfile } from './skill-profile.model';
   templateUrl: './cascade.component.html',
   styleUrls: ['./cascade.component.scss'],
   imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatCardActions,
     FormField,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    MatButton,
     BorderDirective,
-    ColumnDirective,
-    MarkdownRendererComponent
+    ColumnDirective
   ]
 })
 export class ReactiveCascadeComponent {

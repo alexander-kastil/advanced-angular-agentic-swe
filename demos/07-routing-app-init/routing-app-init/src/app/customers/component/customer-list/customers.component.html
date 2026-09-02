@@ -1,12 +1,18 @@
-@for (c of customers(); track c.id) {
-  <div class="box row">
-    <div>{{ c.name }}</div>
-    <div>
-      <button mat-raised-button color="accent" [routerLink]="['/customers', c.id]" [queryParams]="{ readonly: true }">
-        Edit
-      </button>
-    </div>
+<div class="page">
+  <div class="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+    @for (c of customers(); track c.id) {
+      <div class="row">
+        <div class="font-medium">{{ c.name }}</div>
+        <button
+          type="button"
+          class="btn btn-outline"
+          [routerLink]="['/customers', c.id]"
+          [queryParams]="{ readonly: true }">
+          Edit
+        </button>
+      </div>
+    } @empty {
+      <p class="px-4 py-3 text-sm text-slate-500">No customers loaded. Start json-server using: json-server db.json</p>
+    }
   </div>
-} @empty {
-  <div class="box">No customers loaded. Start json-server using: json-server db.json</div>
-}
+</div>

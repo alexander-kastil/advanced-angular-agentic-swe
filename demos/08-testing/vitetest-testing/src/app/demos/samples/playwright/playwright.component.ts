@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-playwright',
-  imports: [MatCardModule, MatButtonModule, RouterLink],
+  imports: [RouterLink],
   template: `
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>Playwright E2E</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Playwright E2E</h2>
+      </div>
+      <div class="card-content">
         <p>
           The specs drive the real Customers screen in a browser. Start
           <code>ng serve</code> and <code>json-server</code>, then run
@@ -23,11 +21,11 @@ import { RouterLink } from '@angular/router';
             <span>{{ file.purpose }}</span>
           </div>
         }
-        <button mat-raised-button color="primary" routerLink="/customers">
+        <button type="button" class="btn btn-primary self-start" routerLink="/customers">
           Open the screen under test
         </button>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   `,
   styles: [`
     .row { display: flex; gap: 1rem; margin-bottom: .25rem; }

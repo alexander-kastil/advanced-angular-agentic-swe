@@ -1,89 +1,100 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { runShippingContract } from './shipping-contract';
 import { mutants } from './shipping-mutants';
 import { Zone, shippingCost } from './shipping-rules';
 
 @Component({
   selector: 'app-ai-writes-the-test',
-  imports: [
-    FormsModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
+  imports: [FormsModule],
   template: `
     <div class="grid">
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>1. State the behaviour</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">1. State the behaviour</h2>
+        </div>
+        <div class="card-content">
           @for (rule of behaviour; track rule) {
             <div data-testid="behaviour-rule">{{ rule }}</div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>2. The prompt the agent gets</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <pre data-testid="prompt">{{ prompt }}</pre>
-        </mat-card-content>
-      </mat-card>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">2. The prompt the agent gets</h2>
+        </div>
+        <div class="card-content">
+          <pre data-testid="prompt" tabindex="0" role="region" aria-label="Agent prompt">{{ prompt }}</pre>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>The unit under test</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-form-field>
-            <mat-label>Weight in kg</mat-label>
-            <input matInput type="number" data-testid="weight" [(ngModel)]="weightKg" />
-          </mat-form-field>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">The unit under test</h2>
+        </div>
+        <div class="card-content">
+          <div class="field">
+            <label class="label" for="weight">Weight in kg</label>
+            <input
+              id="weight"
+              class="input"
+              type="number"
+              data-testid="weight"
+              [(ngModel)]="weightKg"
+            />
+          </div>
 
-          <mat-form-field>
-            <mat-label>Subtotal</mat-label>
-            <input matInput type="number" data-testid="subtotal" [(ngModel)]="subtotal" />
-          </mat-form-field>
+          <div class="field">
+            <label class="label" for="subtotal">Subtotal</label>
+            <input
+              id="subtotal"
+              class="input"
+              type="number"
+              data-testid="subtotal"
+              [(ngModel)]="subtotal"
+            />
+          </div>
 
-          <mat-button-toggle-group [(ngModel)]="zone">
+          <div class="toggle-group" role="group" aria-label="Zone">
             @for (z of zones; track z) {
-              <mat-button-toggle [value]="z">{{ z }}</mat-button-toggle>
+              <button
+                type="button"
+                class="toggle-btn"
+                [class.active]="zone() === z"
+                [attr.aria-pressed]="zone() === z"
+                (click)="zone.set(z)"
+              >
+                {{ z }}
+              </button>
             }
-          </mat-button-toggle-group>
+          </div>
 
-          <mat-checkbox [(ngModel)]="express">Express</mat-checkbox>
+          <label class="checkbox">
+            <input type="checkbox" [(ngModel)]="express" />
+            Express
+          </label>
 
           <div class="quote" data-testid="quote">{{ quote() }}</div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>3. Review the generated spec</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">3. Review the generated spec</h2>
+        </div>
+        <div class="card-content">
           @for (check of checklist; track check) {
             <div data-testid="checklist-item">{{ check }}</div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>4. Mutation round</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">4. Mutation round</h2>
+        </div>
+        <div class="card-content">
           <p>Every row breaks one rule on purpose. A suite worth keeping goes red on all of them.</p>
           @for (row of mutationReport(); track row.name) {
             <div class="mutant" data-testid="mutant-row">
@@ -93,18 +104,20 @@ import { Zone, shippingCost } from './shipping-rules';
               </div>
             </div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
     .grid { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
-    mat-card { max-width: 34rem; }
-    pre { white-space: pre-wrap; margin: 0; }
+    .grid .card + .card { margin-top: 0; }
+    .card { max-width: 34rem; }
+    .toggle-group, .checkbox { align-self: flex-start; }
+    pre { white-space: pre-wrap; margin: 0; overflow-x: auto; }
     .quote { margin-top: 1rem; font-size: 1.4rem; }
     .mutant { margin-bottom: .6rem; }
-    .killed { color: #66bb6a; }
-    .survived { color: #ef5350; }
+    .killed { color: #15803d; }
+    .survived { color: #b91c1c; }
   `],
 })
 export class AiWritesTheTestComponent {

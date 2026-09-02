@@ -1,19 +1,16 @@
 import { Component, PendingTasks, computed, effect, inject, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 
 export type LoadStatus = 'idle' | 'loading' | 'loaded';
 
 @Component({
   selector: 'app-zoneless-async',
-  imports: [MatButtonModule, MatCardModule],
   template: `
     <div class="grid">
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Awaited work</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Awaited work</h2>
+        </div>
+        <div class="card-content">
           <p>
             The load runs inside <code>PendingTasks.run()</code>, so the application counts as unstable
             until it settles and <code>fixture.whenStable()</code> waits for exactly that.
@@ -23,35 +20,35 @@ export type LoadStatus = 'idle' | 'loading' | 'loaded';
             <div data-testid="row">{{ row }}</div>
           }
           <div data-testid="history">history: {{ history().join(' -> ') }}</div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary" data-testid="load" (click)="load()">Load</button>
-          <button mat-button data-testid="reset" (click)="reset()">Reset</button>
-        </mat-card-actions>
-      </mat-card>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="btn btn-primary" data-testid="load" (click)="load()">Load</button>
+          <button type="button" class="btn btn-outline" data-testid="reset" (click)="reset()">Reset</button>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>Timer driven state</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Timer driven state</h2>
+        </div>
+        <div class="card-content">
           <p>
             The ticker runs on <code>setInterval</code>. A spec replaces it with Vitest fake timers and
             drives the clock by hand, then flushes rendering with <code>TestBed.tick()</code>.
           </p>
           <div data-testid="ticks">{{ ticks() }} ticks</div>
           <div data-testid="elapsed">{{ elapsed() }}</div>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button data-testid="start" (click)="startTicking()">Start</button>
-          <button mat-button data-testid="stop" (click)="stopTicking()">Stop</button>
-        </mat-card-actions>
-      </mat-card>
+        </div>
+        <div class="card-actions">
+          <button type="button" class="btn btn-primary" data-testid="start" (click)="startTicking()">Start</button>
+          <button type="button" class="btn btn-outline" data-testid="stop" (click)="stopTicking()">Stop</button>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
     .grid { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
-    mat-card { max-width: 30rem; }
+    .grid .card { max-width: 30rem; margin-top: 0; }
   `],
 })
 export class ZonelessAsyncComponent {

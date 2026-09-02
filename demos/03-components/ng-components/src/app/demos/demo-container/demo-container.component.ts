@@ -12,9 +12,6 @@ import { DemoItem } from './demo-item.model';
 import { SidePanelComponent } from '../../shared/side-panel/side-panel.component';
 import { MarkdownEditorContainerComponent } from '../../shared/markdown-editor/components/markdown-editor-container/markdown-editor-container.component';
 import { MarkdownRendererComponent } from '../../shared/markdown-renderer/markdown-renderer.component';
-import { MatNavList, MatListItem } from '@angular/material/list';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
-import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { SplitComponent, SplitAreaComponent } from 'angular-split';
 
 @Component({
@@ -22,14 +19,7 @@ import { SplitComponent, SplitAreaComponent } from 'angular-split';
   templateUrl: './demo-container.component.html',
   styleUrls: ['./demo-container.component.scss'],
   imports: [
-    MatSidenavContainer,
-    MatSidenav,
-    MatToolbar,
-    MatToolbarRow,
-    MatNavList,
-    MatListItem,
     RouterLink,
-    MatSidenavContent,
     RouterOutlet,
     MarkdownEditorContainerComponent,
     MarkdownRendererComponent,
@@ -97,7 +87,7 @@ export class DemoContainerComponent {
 
   hasDemoContent = signal(true);
 
-  readonly demoPaneContent = viewChild<ElementRef<HTMLElement>>('demoPaneContent');
+  demoPaneContent = viewChild<ElementRef<HTMLElement>>('demoPaneContent');
 
   constructor() {
     this.router.events.pipe(
@@ -143,6 +133,14 @@ export class DemoContainerComponent {
 
   hidePopup(): void {
     this.hoveredItem.set(null);
+  }
+
+  closeSidenav(): void {
+    this.nav.toggleMenuVisibility();
+  }
+
+  toggleSidenav(): void {
+    this.nav.toggleMenuVisibility();
   }
 
   private getRootRoute(route: ActivatedRoute): ActivatedRoute {

@@ -60,8 +60,9 @@
               }
             ],
             "styles": [
-              "node_modules/prismjs/themes/prism-okaidia.min.css",
-              "src/styles.scss"
+              "src/tailwind.css",
+              "src/styles.scss",
+              "node_modules/prismjs/themes/prism-okaidia.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

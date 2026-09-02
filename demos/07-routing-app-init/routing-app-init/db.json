@@ -152,15 +152,6 @@
       "sortOrder": 17,
       "md": "view-transitions",
       "id": 99
-    },
-    {
-      "url": "webmcp-navigation",
-      "title": "WebMCP Navigation Tools",
-      "teaches": "Expose application navigation to an AI agent as WebMCP tools declared with declareExperimentalWebMcpTool, scoped to the component that owns them.",
-      "topic": "Agentic Interfaces",
-      "sortOrder": 18,
-      "md": "webmcp-navigation",
-      "id": 107
     }
   ],
   "skills": [
@@ -215,6 +206,22 @@
     {
       "label": "Customers",
       "url": "customers"
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": "1",
+      "url": "",
+      "title": "Note one",
+      "comment": "Placeholder note for the markdown editor.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": "2",
+      "url": "",
+      "title": "Note two",
+      "comment": "Placeholder note for the markdown editor.",
+      "saved": "2020-09-16T20:10:06.925Z"
     }
   ]
 }

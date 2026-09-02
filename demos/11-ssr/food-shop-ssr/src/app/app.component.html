@@ -1,0 +1,10 @@
+<header class="app-toolbar site-header">
+  <span class="brand">Food SSR Shop</span>
+  <nav aria-label="Main">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Shop</a>
+    <a routerLink="/demos" routerLinkActive="active">Demos</a>
+  </nav>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

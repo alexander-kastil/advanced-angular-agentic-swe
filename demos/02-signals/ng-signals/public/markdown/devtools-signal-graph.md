@@ -12,7 +12,7 @@
 
 The demo builds five layers on purpose, so the picture is not a straight line:
 
-```
+```text
 ticks   weight   running        (signal, writable sources)
    \      /         |
     score           |           (computed)

@@ -1,10 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { form, FormField, required, applyEach, min, max, schema } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 import { JsonPipe } from '@angular/common';
 
@@ -40,10 +35,7 @@ const visitSchema = schema<VetVisit>((path) => {
     selector: 'app-sf-arrays-objects',
     templateUrl: './signal-form-arrays-objects.component.html',
     imports: [
-        MarkdownRendererComponent,
-        MatCard, MatCardHeader, MatCardTitle, MatCardContent,
-        FormField, MatFormField, MatLabel, MatInput,
-        MatButton, JsonPipe, ColumnDirective,
+        FormField, JsonPipe, ColumnDirective,
     ]
 })
 export class SfArraysObjectsComponent {

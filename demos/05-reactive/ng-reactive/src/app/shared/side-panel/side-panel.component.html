@@ -1,38 +1,44 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
+<div class="rail-right">
+  <button
+    type="button"
+    class="rail-btn tip tip-left"
+    data-tip="Toggle the SideNav"
+    aria-label="Toggle the SideNav"
+    (click)="toggleSideNav()"
+  >
+    <span class="icon">menu</span>
+  </button>
+  @if (isDemosRoute() && layout.hasMarkdownContent()) {
     <button
-      mat-mini-fab
-      matTooltip="Toggle the SideNav"
-      (click)="toggleSideNav()"
+      type="button"
+      class="rail-btn tip tip-left"
+      [class.rail-btn-active]="layout.isGuideActive()"
+      data-tip="Toggle Markdown Guide"
+      aria-label="Toggle Markdown Guide"
+      (click)="showGuide()"
     >
-      <mat-icon>menu</mat-icon>
+      <span class="icon">menu_book</span>
     </button>
-    @if (isDemosRoute() && layout.hasMarkdownContent()) {
+    <button
+      type="button"
+      class="rail-btn tip tip-left"
+      [class.rail-btn-active]="isEditorActive()"
+      [attr.data-tip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+      [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+      (click)="toggleEditor()"
+    >
+      <span class="icon">{{ isEditorActive() ? "close" : "edit_square" }}</span>
+    </button>
+    @if (isEditorActive()) {
       <button
-        mat-mini-fab
-        matTooltip="Toggle Markdown Guide"
-        (click)="showGuide()"
+        type="button"
+        class="rail-btn tip tip-left"
+        data-tip="Add Comment"
+        aria-label="Add Comment"
+        (click)="addMarkdownItem()"
       >
-        <mat-icon>help_clinic</mat-icon>
+        <span class="icon">add</span>
       </button>
-      <button
-        mat-mini-fab
-        [matTooltip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
-        [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
-        (click)="toggleEditor()"
-      >
-        <mat-icon>{{ isEditorActive() ? "cancel" : "edit_square" }}</mat-icon>
-      </button>
-      @if (isEditorActive()) {
-        <button
-          mat-mini-fab
-          matTooltip="Add Comment"
-          aria-label="Add Comment"
-          (click)="addMarkdownItem()"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-      }
     }
-  </mat-toolbar-row>
-</mat-toolbar>
+  }
+</div>

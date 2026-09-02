@@ -1,22 +1,15 @@
-import {Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-route-titles',
   templateUrl: './route-titles.component.html',
   styleUrls: ['./route-titles.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardContent,
-    MatCardHeader,
-    MatCardTitle
-  ]
+  imports: [MarkdownRendererComponent],
 })
 export class RouteTitlesComponent {
   private router = inject(Router);

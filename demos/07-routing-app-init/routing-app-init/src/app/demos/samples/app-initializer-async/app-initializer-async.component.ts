@@ -1,12 +1,4 @@
 import { Component, inject, injectAsync, onIdle, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardTitle,
-} from '@angular/material/card';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { StartupLogService } from './startup-log.service';
 
@@ -14,15 +6,7 @@ import { StartupLogService } from './startup-log.service';
   selector: 'app-app-initializer-async',
   templateUrl: './app-initializer-async.component.html',
   styleUrls: ['./app-initializer-async.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-  ],
+  imports: [MarkdownRendererComponent],
 })
 export class AppInitializerAsyncComponent {
   private log = inject(StartupLogService);

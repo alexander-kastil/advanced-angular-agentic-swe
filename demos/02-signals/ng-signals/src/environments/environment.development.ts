@@ -1,9 +1,9 @@
 export const environment = {
   authEnabled: false,
   title: 'Signals',
-  logChangeDetection: false,
+  logChangeDetection: true,
   logChanges: false,
-  logLoading: true,
+  logLoading: false,
   markdownPath: 'markdown/',
   api: 'http://localhost:3000/'
 };

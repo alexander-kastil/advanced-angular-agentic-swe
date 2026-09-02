@@ -1,50 +1,68 @@
-<app-markdown-renderer [md]="'form-control'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Signal Form Fields</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Signal Form Fields</h2>
+  </div>
+  <div class="card-content">
     <div column>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name" [formField]="fields.name" />
-      </mat-form-field>
-      @if (fields.name().touched() && fields.name().invalid()) {
-        @for (err of fields.name().errors(); track err.kind) {
-          <div class="error">{{ err.message }}</div>
+      <div class="field">
+        <label class="label" for="fc-name">Name</label>
+        <input
+          id="fc-name"
+          class="input"
+          type="text"
+          placeholder="Name"
+          [attr.aria-invalid]="fields.name().touched() && fields.name().invalid() ? 'true' : null"
+          [attr.aria-describedby]="fields.name().touched() && fields.name().invalid() ? 'fc-name-error' : null"
+          [formField]="fields.name"
+        />
+        @if (fields.name().touched() && fields.name().invalid()) {
+          <div id="fc-name-error" class="error" role="alert">
+            @for (err of fields.name().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
         }
-      }
+      </div>
 
-      <mat-form-field>
-        <mat-label>Postal</mat-label>
-        <input matInput type="text" placeholder="Postal" [formField]="fields.postal" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="fc-postal">Postal</label>
+        <input id="fc-postal" class="input" type="text" placeholder="Postal" [formField]="fields.postal" />
+      </div>
 
-      <mat-form-field>
-        <mat-label>City</mat-label>
-        <input matInput type="text" placeholder="City" [formField]="fields.city" />
-      </mat-form-field>
-      @if (fields.city().touched() && fields.city().invalid()) {
-        @for (err of fields.city().errors(); track err.kind) {
-          <div class="error">{{ err.message }}</div>
+      <div class="field">
+        <label class="label" for="fc-city">City</label>
+        <input
+          id="fc-city"
+          class="input"
+          type="text"
+          placeholder="City"
+          [attr.aria-invalid]="fields.city().touched() && fields.city().invalid() ? 'true' : null"
+          [attr.aria-describedby]="fields.city().touched() && fields.city().invalid() ? 'fc-city-error' : null"
+          [formField]="fields.city"
+        />
+        @if (fields.city().touched() && fields.city().invalid()) {
+          <div id="fc-city-error" class="error" role="alert">
+            @for (err of fields.city().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
         }
-      }
+      </div>
     </div>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button color="accent" (click)="logName()">Log Name</button>
-    <button mat-raised-button color="accent" (click)="updateName()">Update Name</button>
-    <button mat-raised-button color="accent" (click)="markTouched()">Touch Name</button>
-    <button mat-raised-button (click)="resetForm()">Reset</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="logName()">Log Name</button>
+    <button type="button" class="btn btn-primary" (click)="updateName()">Update Name</button>
+    <button type="button" class="btn btn-primary" (click)="markTouched()">Touch Name</button>
+    <button type="button" class="btn btn-outline" (click)="resetForm()">Reset</button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Field State Signals - "Name"</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Field State Signals - "Name"</h2>
+  </div>
+  <div class="card-content">
     <div boxed>
       <div>Value: {{ fields.name().value() }}</div>
       <div>Valid: {{ fields.name().valid() }}</div>
@@ -53,18 +71,18 @@
       <div>Dirty: {{ fields.name().dirty() }}</div>
       <div>Pending: {{ fields.name().pending() }}</div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Form State</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Form State</h2>
+  </div>
+  <div class="card-content">
     <div boxed>
       <div>Valid: {{ fields().valid() }}</div>
       <div>Touched: {{ fields().touched() }}</div>
       <div>Dirty: {{ fields().dirty() }}</div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -1,11 +1,6 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormField, disabled, form, min, required, validate } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { BoxedDirective, ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 import { MoneyInputComponent } from './money-input.component';
 import { RatingInputComponent } from './rating-input.component';
@@ -21,9 +16,7 @@ interface ReviewModel {
   templateUrl: './form-value-control.component.html',
   styleUrls: ['./form-value-control.component.scss'],
   imports: [
-    MarkdownRendererComponent,
-    MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions,
-    FormField, MatFormField, MatLabel, MatInput, MatButton,
+    FormField,
     BoxedDirective, ColumnDirective, JsonPipe,
     RatingInputComponent, MoneyInputComponent,
   ],

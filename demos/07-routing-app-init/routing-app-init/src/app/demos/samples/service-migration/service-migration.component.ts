@@ -1,12 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardTitle,
-} from '@angular/material/card';
 import { Router } from '@angular/router';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { AppWideNotesService } from './app-wide-notes.service';
@@ -16,15 +8,7 @@ import { RouteScopedNotesService } from './route-scoped-notes.service';
   selector: 'app-service-migration',
   templateUrl: './service-migration.component.html',
   styleUrls: ['./service-migration.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-  ],
+  imports: [MarkdownRendererComponent],
 })
 export class ServiceMigrationComponent {
   private router = inject(Router);

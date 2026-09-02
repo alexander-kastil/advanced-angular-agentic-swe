@@ -63,7 +63,7 @@ export class FontBoldDirective {
 
 @Directive({
   selector: '[height-medium]',
-  host: { 'style': 'height:100px;' },
+  host: { 'style': 'min-height:100px;' },
   hostDirectives: [BorderDirective]
 })
 export class HeightDirective {
@@ -79,9 +79,18 @@ export class WidthDirective {
 
 @Directive({
   selector: '[boxed]',
+  host: {
+    'style': `
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-medium);
+      box-sizing: border-box;
+    `},
   hostDirectives: [
+    FontBoldDirective,
+    WidthDirective,
     BorderDirective
-  ]
+  ],
 })
 export class BoxedDirective {
 }

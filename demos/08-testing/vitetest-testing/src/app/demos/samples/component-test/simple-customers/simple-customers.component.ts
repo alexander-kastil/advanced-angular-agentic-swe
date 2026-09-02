@@ -1,6 +1,4 @@
 import { Component, inject, resource } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { lastValueFrom } from 'rxjs';
 import { Customer } from '../../../../customers/customer.model';
 import { CustomersService } from '../../../../customers/customers.service';
@@ -8,7 +6,6 @@ import { CustomersService } from '../../../../customers/customers.service';
 @Component({
   selector: 'app-simple-customers',
   templateUrl: './simple-customers.component.html',
-  imports: [MatCardModule, MatButtonModule],
 })
 export class SimpleCustomersComponent {
   private cs = inject(CustomersService);

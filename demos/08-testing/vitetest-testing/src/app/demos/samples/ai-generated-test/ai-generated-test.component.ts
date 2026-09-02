@@ -1,70 +1,76 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { DiscountCalculator, Tier } from './discount-calculator';
 
 @Component({
   selector: 'app-ai-generated-test',
-  imports: [
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonToggleModule,
-  ],
+  imports: [FormsModule],
   template: `
     <div class="grid">
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>The unit under test</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <mat-form-field>
-            <mat-label>Amount</mat-label>
-            <input matInput type="number" data-testid="amount" [(ngModel)]="amount" />
-          </mat-form-field>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">The unit under test</h2>
+        </div>
+        <div class="card-content">
+          <div class="field">
+            <label class="label" for="amount">Amount</label>
+            <input
+              id="amount"
+              class="input"
+              type="number"
+              data-testid="amount"
+              [(ngModel)]="amount"
+            />
+          </div>
 
-          <mat-button-toggle-group [(ngModel)]="tier">
+          <div class="toggle-group" role="group" aria-label="Tier">
             @for (t of tiers; track t) {
-              <mat-button-toggle [value]="t">{{ t }}</mat-button-toggle>
+              <button
+                type="button"
+                class="toggle-btn"
+                [class.active]="tier() === t"
+                [attr.aria-pressed]="tier() === t"
+                (click)="tier.set(t)"
+              >
+                {{ t }}
+              </button>
             }
-          </mat-button-toggle-group>
+          </div>
 
           <div data-testid="rate">Rate: {{ ratePercent() }}</div>
           <div data-testid="total">Total: {{ total() }}</div>
           @if (error(); as message) {
             <div data-testid="error">{{ message }}</div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>The prompt that produced the spec</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <pre>{{ prompt }}</pre>
-        </mat-card-content>
-      </mat-card>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">The prompt that produced the spec</h2>
+        </div>
+        <div class="card-content">
+          <pre tabindex="0" role="region" aria-label="Spec generation prompt">{{ prompt }}</pre>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>What to review before you trust it</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">What to review before you trust it</h2>
+        </div>
+        <div class="card-content">
           @for (check of reviewChecks; track check) {
             <div>{{ check }}</div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
     </div>
   `,
   styles: [`
     .grid { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
-    pre { white-space: pre-wrap; margin: 0; }
+    .grid .card + .card { margin-top: 0; }
+    .toggle-group { align-self: flex-start; }
+    pre { white-space: pre-wrap; margin: 0; overflow-x: auto; }
   `],
 })
 export class AiGeneratedTestComponent {

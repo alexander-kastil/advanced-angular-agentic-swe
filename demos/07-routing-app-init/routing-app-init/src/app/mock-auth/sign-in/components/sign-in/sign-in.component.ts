@@ -1,46 +1,34 @@
-import { AfterViewInit, Component, TemplateRef, inject, viewChild } from '@angular/core';
-import { MatDialog, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
+import { AfterViewInit, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthFacade } from '../../../auth.facade';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField } from '@angular/material/form-field';
 
 @Component({
-    selector: 'sign-in',
-    templateUrl: './sign-in.component.html',
-    styleUrls: ['./sign-in.component.scss'],
-    imports: [
-        MatDialogTitle,
-        MatDialogContent,
-        MatFormField,
-        MatInput,
-        MatDialogActions,
-        MatButton,
-        RouterLink
-    ]
+  selector: 'sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss'],
+  imports: [RouterLink]
 })
 export class SignInComponent implements AfterViewInit {
   router = inject(Router);
-  dialog = inject(MatDialog);
   as = inject(AuthFacade);
-  template = viewChild<TemplateRef<unknown>>('dialog');
+  dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
 
   ngAfterViewInit() {
-    const template = this.template();
-    if (template) {
-      const ref = this.dialog.open(template, {
-        width: '350px'
-      });
-
-      ref.afterClosed().subscribe(() => {
-        this.router.navigate(['demos']);
-      });
+    const el = this.dialog().nativeElement;
+    if (!el.open) {
+      el.showModal();
     }
   }
 
   signIn() {
     this.as.setFakeUserAndToken('mockUser');
-    this.dialog.closeAll();
+    const el = this.dialog().nativeElement;
+    if (el.open) {
+      el.close();
+    }
+  }
+
+  onClosed() {
+    this.router.navigate(['demos']);
   }
 }

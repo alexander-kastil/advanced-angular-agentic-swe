@@ -1,7 +1,9 @@
 # Migrating an Angular app off Angular Material onto Tailwind v4
 
 Verified end to end on an Angular 22 zoneless app with ~40 Material-using components: build clean,
-51/51 unit tests, axe-core 0 violations across 20 routes.
+51/51 unit tests, axe-core 0 violations across 20 routes. Then repeated across ten sibling apps in the same
+repo: all eleven off Material, all builds clean, 416 unit tests passing. The single-app material is below;
+[Rolling it out to many apps](#rolling-it-out-to-many-apps) carries what only the repeat run taught.
 
 ## Wiring
 
@@ -12,8 +14,21 @@ the sweep described further down.
 
 ```bash
 npm install -D tailwindcss @tailwindcss/postcss postcss
-npm uninstall @angular/material @angular/cdk
+npm uninstall @angular/material
 ```
+
+**Do not uninstall `@angular/cdk` reflexively.** Material depends on the CDK; the CDK does not depend on
+Material, and other packages sit on top of it. `@angular/aria` declares a *hard peer* on
+`@angular/cdk`, so removing it breaks `@angular/aria/{listbox,tabs,combobox}` imports with unresolved
+modules that no source edit can fix. `cdk/scrolling`, `cdk/overlay` and `cdk/testing` are likewise
+independent of Material. Check first:
+
+```bash
+grep -rn "@angular/cdk" src
+npm ls @angular/cdk        # shows the peer edges
+```
+
+Uninstall it only when both come back empty. Three of the eleven apps in this repo legitimately keep it.
 
 `.postcssrc.json` in the app root:
 
@@ -200,3 +215,77 @@ Two defects in this migration were invisible on screen and obvious in numbers:
 Read back `getBoundingClientRect()` and `getComputedStyle()` for both layers of any overlay, and for
 any two edges that are supposed to align. See [chrome-devtools](../../chrome-devtools/SKILL.md) for
 driving that measurement.
+
+
+## Rolling it out to many apps
+
+Migrating one app teaches the replacement map. Migrating ten more teaches where the boundary is.
+
+### Split the work at the copy/judgement line, not per app
+
+In a repo of sibling apps built from one template, the whole frame is usually **data driven and therefore
+verbatim-portable**: nav items come from `db.json`, the demo list from an API, the title from
+`environment.title`. Nothing in it names a module. That covers `src/app/shared/**`, the container component,
+`app.component.*`, `src/theme/*`, `tailwind.css`, `styles.scss` and `index.html`.
+
+Do that copy yourself, on the main thread, with `cp -r` from the reference app. It is exact and free.
+Fan agents out only over what is genuinely per-app: the sample/feature components, plus one build-and-verify
+agent per app afterwards. Briefing an agent to "recreate the shell" spends tokens to produce a worse copy.
+
+Keep the per-app config edits scripted rather than delegated too: `package.json` deps, the `angular.json`
+styles order and budgets, `db.json` seed rows. They are fidelity work, and a script does eleven apps in one pass.
+
+### The copied frame carries the reference app's environment contract
+
+If the reference `app.component.ts` imports `../environments/environment.development`, every target needs
+that file, with the same value for any key the frame reads. Two failure shapes:
+
+- Target has both files but different values, so a spec asserting `environment.title` fails after the copy.
+- Target uses the inverted convention (`environment.ts` for dev plus `environment.prod.ts` swapped in by
+  `fileReplacements`), so the import does not resolve at all.
+
+Reconcile the environment convention before the frame copy, and let a `environment.title` spec be the detector.
+
+### `rm -rf` before `cp -r` deletes what only the target had
+
+Replacing a shared directory wholesale drops any file unique to that copy (a spec, a local variant).
+Run `diff -rq <ref> <target>` first and read the `Only in <target>` lines. Recover with
+`git show HEAD:<path> > <path>`, never `git checkout --`. Read `git status` for ` D ` lines after any bulk
+directory operation.
+
+### Use the workspace's own test runner
+
+In an `@angular/build` workspace the suite is wired by the `@angular/build:unit-test` builder
+(`setupFiles`, the TestBed environment). `npx vitest run` bypasses all of it and reports a wall of
+`Need to call TestBed.initTestEnvironment() first`, `localStorage is not defined`, or an unresolved
+`templateUrl`. None of it is real. Run `npx ng test`. Check `angular.json` `architect.test.builder` before
+believing a red suite, and say so in any agent brief: subagents fall into this too.
+
+### Fixed heights survive the migration and then overlap
+
+A shared directive composing `host: { style: 'height:100px' }` is invisible while Material supplies its own
+box, and becomes a defect once the markup is plain: content taller than the box paints over whatever follows.
+Measure rather than squint:
+
+```js
+[...document.querySelectorAll('[boxed]')].map(el => ({
+  h: Math.round(el.getBoundingClientRect().height),
+  scroll: el.scrollHeight,
+  overflowing: el.scrollHeight > el.getBoundingClientRect().height + 1,
+}))
+```
+
+The fix is `min-height` plus a real flex column with a gap, never a fixed `height`.
+
+### The build passing is not the finish line, and neither is the suite
+
+Both were green on an app whose every demo rendered its guide twice, because each component embedded the same
+markdown renderer the shell already showed. Nothing static could see it. Budget one browser pass per app: open
+two routes, compare against the reference app, and measure any two edges that should align.
+
+### Code that *teaches* the library you are removing is a scope decision
+
+A testing module built demos on Material component harnesses; an optimization module taught
+`cdk/scrolling`. Removing the dependency deletes the lesson rather than the styling. Separate "uses X" from
+"teaches X", and take the second back to the owner with the options priced: keep the dependency for those
+demos, rewrite them against the replacement, or drop them. Ask before the sweep reaches them.

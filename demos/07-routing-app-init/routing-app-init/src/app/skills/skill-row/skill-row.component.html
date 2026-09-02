@@ -1,15 +1,34 @@
 <div class="skillrow">
   <div class="name">{{ skill().name }}</div>
-  <div class="completed">completed: {{ skill().completed }}</div>
+  <div class="completed">
+    <span class="icon" [class.text-primary]="skill().completed" [class.text-slate-300]="!skill().completed">
+      {{ skill().completed ? 'check_circle' : 'radio_button_unchecked' }}
+    </span>
+  </div>
   <div class="cmd">
-    <button mat-raised-button color="primary" (click)="itemCompleted.emit(skill())">
-      <mat-icon>done</mat-icon>
+    <button
+      type="button"
+      class="btn-icon tip tip-left"
+      data-tip="Toggle completed"
+      [attr.aria-label]="'Toggle completed: ' + skill().name"
+      (click)="itemCompleted.emit(skill())">
+      <span class="icon">done</span>
     </button>
-    <button mat-raised-button color="primary" [routerLink]="['/skills', skill().id]">
-      <mat-icon>edit</mat-icon>
+    <button
+      type="button"
+      class="btn-icon tip tip-left"
+      data-tip="Edit"
+      [attr.aria-label]="'Edit skill: ' + skill().name"
+      [routerLink]="['/skills', skill().id]">
+      <span class="icon">edit</span>
     </button>
-    <button mat-raised-button color="warn" (click)="itemDeleted.emit(skill())">
-      <mat-icon>delete</mat-icon>
+    <button
+      type="button"
+      class="btn-icon tip tip-left hover:bg-warn/10 hover:text-warn"
+      data-tip="Delete"
+      [attr.aria-label]="'Delete skill: ' + skill().name"
+      (click)="itemDeleted.emit(skill())">
+      <span class="icon">delete</span>
     </button>
   </div>
 </div>

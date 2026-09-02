@@ -1,6 +1,5 @@
 import { httpResource } from '@angular/common/http';
 import { Component, input } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { environment } from '../../../../../environments/environment';
 
 interface Pet {
@@ -16,7 +15,6 @@ interface Pet {
   selector: 'app-pet-detail',
   templateUrl: './pet-detail.component.html',
   styleUrl: './pet-detail.component.scss',
-  imports: [MatButton],
 })
 export class PetDetailComponent {
   readonly petId = input.required<number>();

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { ZonelessAsyncComponent } from './zoneless-async.component';
 
@@ -13,7 +12,7 @@ describe('Zoneless Async - ZonelessAsyncComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ZonelessAsyncComponent, NoopAnimationsModule],
+      imports: [ZonelessAsyncComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ZonelessAsyncComponent);
@@ -99,7 +98,7 @@ describe('Zoneless Async - ZonelessAsyncComponent', () => {
   it('lets a helper create the fixture and the test find it again', async () => {
     TestBed.resetTestingModule();
     await TestBed.configureTestingModule({
-      imports: [ZonelessAsyncComponent, NoopAnimationsModule],
+      imports: [ZonelessAsyncComponent],
     }).compileComponents();
     TestBed.createComponent(ZonelessAsyncComponent).detectChanges();
 

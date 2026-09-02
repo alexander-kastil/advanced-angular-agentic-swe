@@ -41,13 +41,6 @@ export const demoRoutes: Routes = [
             (m) => m.HooksAndGatesComponent
           )
       },
-      {
-        path: 'webmcp-counterpart',
-        loadComponent: () =>
-          import('./samples/webmcp-counterpart/webmcp-counterpart.component').then(
-            (m) => m.WebmcpCounterpartComponent
-          )
-      }
     ]
   }
 ];

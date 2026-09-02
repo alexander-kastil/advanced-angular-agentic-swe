@@ -12,7 +12,6 @@ import { StoreCrudComponent } from './samples/store-crud/store-crud.component';
 import { StoreEntitiesComponent } from './samples/store-entities/store-entities.component';
 import { StoreEventsComponent } from './samples/store-events/store-events.component';
 import { StoreResourceComponent } from './samples/store-resource/store-resource.component';
-import { WebmcpStoreComponent } from './samples/webmcp-store/webmcp-store.component';
 
 export const demoRoutes: Routes = [
   {
@@ -30,7 +29,6 @@ export const demoRoutes: Routes = [
       { path: 'store-events', component: StoreEventsComponent, title: 'Demos - Event-Based Store' },
       { path: 'markdown-editor', component: MarkdownEditorComponent, title: 'Demos - Markdown Editor' },
       { path: 'store-composition', component: StoreCompositionComponent, title: 'Demos - Store Composition' },
-      { path: 'webmcp-store', component: WebmcpStoreComponent, title: 'Demos - WebMCP Store' },
       { path: 'classic-to-signalstore', component: ClassicToSignalStoreComponent, title: 'Demos - Classic to SignalStore' },
     ],
   },

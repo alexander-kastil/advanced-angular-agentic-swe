@@ -1,9 +1,9 @@
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>toSignal()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">toSignal()</h2>
+    </div>
+    <div class="card-content">
       <p class="direction">OBSERVABLE &rarr; SIGNAL</p>
       <p>
         An
@@ -11,14 +11,14 @@
         read synchronously in the template, with teardown handled for you.
       </p>
       <div class="log">{{ clock() }}</div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>toObservable()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">toObservable()</h2>
+    </div>
+    <div class="card-content">
       <p class="direction">SIGNAL &rarr; OBSERVABLE</p>
       <p>
         Typing writes a signal.
@@ -29,19 +29,19 @@
         <code>toSignal</code>
         reads the result.
       </p>
-      <mat-form-field appearance="outline">
-        <mat-label>Filter skills</mat-label>
-        <input matInput [(ngModel)]="term" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="interop-filter">Filter skills</label>
+        <input id="interop-filter" class="input" type="text" autocomplete="off" [(ngModel)]="term" />
+      </div>
       <div class="log">raw: "{{ term() }}" &middot; settled: "{{ settledTerm() }}"</div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>outputToObservable()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">outputToObservable()</h2>
+    </div>
+    <div class="card-content">
       <p class="direction">OUTPUT &rarr; OBSERVABLE</p>
       <p>
         A child's
@@ -58,14 +58,14 @@
           <div>no pings yet</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>outputFromObservable()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">outputFromObservable()</h2>
+    </div>
+    <div class="card-content">
       <p class="direction">OBSERVABLE &rarr; OUTPUT</p>
       <p>
         The mirror image. The child declares an output backed by a stream it
@@ -79,15 +79,15 @@
           <div>waiting for the first beat</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>
 
-<mat-card appearance="outlined" class="bridge">
-  <mat-card-header>
-    <mat-card-title>rxResource(): the bridge for request and response</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card bridge">
+  <div class="card-header">
+    <h2 class="card-title">rxResource(): the bridge for request and response</h2>
+  </div>
+  <div class="card-content">
     <p>
       Not a fifth direction but the reason you rarely need the first four for
       HTTP. The debounced signal above is the
@@ -95,17 +95,17 @@
       . Every change cancels the previous stream and starts a new one.
     </p>
     @if (skillsResource.isLoading()) {
-      <mat-progress-bar mode="indeterminate" />
+      <app-progress-bar mode="indeterminate" />
     } @else if (skillsResource.error()) {
       <p>Start json-server to see live data.</p>
     } @else {
-      <mat-chip-set>
+      <div class="chips">
         @for (skill of skillsResource.value(); track skill.id) {
-          <mat-chip [highlighted]="skill.completed">{{ skill.name }}</mat-chip>
+          <span class="chip" [class.chip-on]="skill.completed">{{ skill.name }}</span>
         } @empty {
-          <mat-chip>no matches</mat-chip>
+          <span class="chip">no matches</span>
         }
-      </mat-chip-set>
+      </div>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

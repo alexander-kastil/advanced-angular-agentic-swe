@@ -1,10 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { FormField, FormRoot, email, form, minLength, required, submit } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 
 interface LoginModel {
@@ -18,18 +13,8 @@ const KNOWN_USER = 'cleothewhippet@integrations.at';
     selector: 'app-signal-forms-submit',
     templateUrl: './signal-forms-submit.component.html',
     imports: [
-        MarkdownRendererComponent,
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
-        MatCardActions,
         FormField,
         FormRoot,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatButton,
         ColumnDirective,
     ]
 })

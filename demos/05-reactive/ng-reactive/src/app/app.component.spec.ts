@@ -19,7 +19,7 @@ describe('AppComponent', () => {
 
   it('takes its title from the environment', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    expect(fixture.componentInstance.title).toBe(environment.title);
+    expect(fixture.componentInstance.title()).toBe(environment.title);
   });
 
   it('renders the router outlet', () => {

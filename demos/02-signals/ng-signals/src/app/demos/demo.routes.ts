@@ -15,7 +15,6 @@ import { SignalEffectsComponent } from './samples/signal-effects/signal-effects.
 import { SignalEqualityComponent } from './samples/signal-equality/signal-equality.component';
 import { SignalInputsComponent } from './samples/signal-inputs/signal-inputs.component';
 import { SignalsBasicsComponent } from './samples/signals-basics/signals-basics.component';
-import { WebmcpSignalComponent, webMcpSignalProviders } from './samples/webmcp-signal/webmcp-signal.component';
 
 export const demoRoutes: Routes = [
   {
@@ -36,7 +35,6 @@ export const demoRoutes: Routes = [
       { path: 'resource-chain', component: ResourceChainComponent },
       { path: 'debounced-search', component: DebouncedSearchComponent },
       { path: 'service-injectasync', component: ServiceInjectAsyncComponent },
-      { path: 'webmcp-signal', component: WebmcpSignalComponent, providers: webMcpSignalProviders },
       { path: 'devtools-signal-graph', component: DevtoolsSignalGraphComponent },
     ],
   },

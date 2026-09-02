@@ -1,29 +1,29 @@
-import {
-  A,
-  NINE,
-  SPACE,
-  Z,
-  ZERO
-} from '@angular/cdk/keycodes';
-import { NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subscription } from 'rxjs';
+import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
+
+const KEY_ZERO = 48;
+const KEY_NINE = 57;
+const KEY_A = 65;
+const KEY_Z = 90;
+const KEY_SPACE = 32;
+
+let nextFilterId = 0;
 
 @Component({
   selector: 'ux-select-filter',
   imports: [
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    NgStyle
+    ProgressBarComponent
   ],
   template: `
-  <form [formGroup]="searchForm" class="mat-filter" [ngStyle]="{'background-color': color ? color : 'white'}">
-    <div>
-      <input #input class="mat-filter-input" matInput placeholder="{{placeholder}}" formControlName="value" (keydown)="handleKeydown($event)">
+  <form [formGroup]="searchForm" class="ux-filter" [style.background-color]="color ? color : 'white'">
+    <div class="ux-filter-field">
+      <label class="sr-only" [attr.for]="inputId">{{ placeholder }}</label>
+      <input #input [id]="inputId" class="ux-filter-input" [placeholder]="placeholder" formControlName="value" (keydown)="handleKeydown($event)">
       @if (localSpinner) {
-        <mat-spinner class="spinner" diameter="16" />
+        <app-progress-bar class="spinner" mode="indeterminate" />
       }
     </div>
     @if (noResults) {
@@ -36,10 +36,12 @@ import { Subscription } from 'rxjs';
   `,
   styleUrls: ['./mat-select-filter.component.scss']
 })
-export class MatSelectFilterComponent implements OnInit, OnDestroy {
+export class UxSelectFilterComponent implements OnInit, OnDestroy {
   private cdr = inject(ChangeDetectorRef);
   private searchFormValueChangesSubscription: Subscription | undefined;
   @ViewChild('input', { static: true }) input: ElementRef<HTMLInputElement> | undefined;
+
+  readonly inputId = `ux-select-filter-${nextFilterId++}`;
 
   @Input('array') array: any;
   @Input('placeholder') placeholder: string = '';
@@ -113,9 +115,9 @@ export class MatSelectFilterComponent implements OnInit, OnDestroy {
   handleKeydown(event: KeyboardEvent) {
     // PREVENT PROPAGATION FOR ALL ALPHANUMERIC CHARACTERS IN ORDER TO AVOID SELECTION ISSUES
     if ((event.key && event.key.length === 1) ||
-      (event.keyCode >= A && event.keyCode <= Z) ||
-      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      (event.keyCode === SPACE)) {
+      (event.keyCode >= KEY_A && event.keyCode <= KEY_Z) ||
+      (event.keyCode >= KEY_ZERO && event.keyCode <= KEY_NINE) ||
+      (event.keyCode === KEY_SPACE)) {
       event.stopPropagation();
     }
   }

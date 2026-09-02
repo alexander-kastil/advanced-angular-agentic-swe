@@ -1,6 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 
 interface Panel {
@@ -12,15 +10,7 @@ interface Panel {
   selector: 'app-router-animations',
   templateUrl: './router-animations.component.html',
   styleUrls: ['./router-animations.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-  ],
+  imports: [MarkdownRendererComponent],
 })
 export class RouterAnimationsComponent {
   private nextId = 4;

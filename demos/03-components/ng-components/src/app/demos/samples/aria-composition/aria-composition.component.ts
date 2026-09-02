@@ -1,7 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { Listbox, Option } from '@angular/aria/listbox';
 import { Tab, TabContent, TabList, TabPanel, Tabs } from '@angular/aria/tabs';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
 interface Breed {
@@ -23,10 +22,6 @@ interface Breed {
     TabContent,
     Listbox,
     Option,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
     BoxedDirective,
   ],
 })

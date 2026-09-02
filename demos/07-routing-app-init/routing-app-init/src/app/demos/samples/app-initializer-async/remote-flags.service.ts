@@ -8,6 +8,6 @@ export class RemoteFlagsService {
 
   async load() {
     await new Promise((resolve) => setTimeout(resolve, 150));
-    this.flags.set(['route-inputs', 'webmcp-navigation', 'view-transitions']);
+    this.flags.set(['route-inputs', 'route-driven-store', 'view-transitions']);
   }
 }

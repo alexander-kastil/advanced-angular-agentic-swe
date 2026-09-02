@@ -33,6 +33,7 @@
               }
             ],
             "styles": [
+              "src/tailwind.css",
               "src/styles.scss",
               "node_modules/prismjs/themes/prism-okaidia.min.css"
             ],
@@ -53,8 +54,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1500kb",
-                  "maximumError": "2mb"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",

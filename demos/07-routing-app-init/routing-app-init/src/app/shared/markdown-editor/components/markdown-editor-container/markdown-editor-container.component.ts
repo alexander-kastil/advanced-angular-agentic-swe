@@ -1,52 +1,67 @@
-import {Component, inject, signal } from '@angular/core';
-import { MarkdownItem } from '../../markdown.model';
-import { MatButton } from '@angular/material/button';
+import { Component, computed, inject, input, signal } from '@angular/core';
+import { createMarkdownItem, MarkdownItem } from '../../markdown.model';
 import { MarkdownEditComponent } from '../markdown-edit/markdown-edit.component';
 import { MarkdownListComponent } from '../markdown-list/markdown-list.component';
 import { ColumnDirective } from '../../../formatting/formatting-directives';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions } from '@angular/material/card';
 import { markdownEditorStore } from '../../markdown-editor.store';
+import { mdEditorEvents } from '../../markdown-editor.events';
+import { injectDispatch, Events } from '@ngrx/signals/events';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-markdown-editor-container',
     templateUrl: './markdown-editor-container.component.html',
     styleUrls: ['./markdown-editor-container.component.scss'],
     imports: [
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
         ColumnDirective,
         MarkdownListComponent,
         MarkdownEditComponent,
-        MatCardActions,
-        MatButton,
-    ]
+    ],
 })
 export class MarkdownEditorContainerComponent {
-    store = inject(markdownEditorStore);
+    protected store = inject(markdownEditorStore);
+    private dispatch = injectDispatch(mdEditorEvents);
+    readonly demoTitle = input('');
+    readonly demoMd = input('');
+    readonly demoUrl = input('');
+
     editorEdit = signal(false);
+    view = signal<'source' | 'preview'>('source');
     current = signal<MarkdownItem | null>(null);
 
-    addComment() {
-        this.current.set(new MarkdownItem());
+    get currentItem(): MarkdownItem { return this.current()!; }
+    set currentItem(value: MarkdownItem) { this.current.set(value); }
+
+    allItems = computed(() => this.store.listItems(this.demoUrl(), this.demoTitle(), this.demoMd()));
+    isDemoSaved = computed(() => this.store.isPageSaved()(this.demoUrl()));
+
+    constructor() {
+        inject(Events).on(mdEditorEvents.addItem)
+            .pipe(takeUntilDestroyed())
+            .subscribe(() => this.addMarkdownItem());
+    }
+
+    addMarkdownItem() {
+        this.current.set(createMarkdownItem());
+        this.view.set('source');
         this.editorEdit.set(true);
     }
 
-    saveComment() {
+    saveMarkdownItem() {
         const item = this.current();
         if (item) {
-            this.store.saveComment(item);
+            this.dispatch.save(item);
             this.editorEdit.set(false);
         }
     }
 
-    deleteComment(item: MarkdownItem) {
-        this.store.deleteComment(item);
+    deleteMarkdownItem(item: MarkdownItem) {
+        this.dispatch.delete(item);
     }
 
-    editComment(item: MarkdownItem) {
+    editMarkdownItem(item: MarkdownItem) {
         this.current.set({ ...item });
+        this.view.set('source');
         this.editorEdit.set(true);
     }
 }

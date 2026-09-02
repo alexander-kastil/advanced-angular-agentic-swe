@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import {
   Subject,
   catchError,
@@ -39,16 +37,16 @@ const EMPTY_PANE: Pane = { subscribed: 0, inFlight: 0, delivered: 0, log: [] };
 @Component({
   selector: 'app-flattening-strategies',
   templateUrl: './flattening-strategies.component.html',
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton],
   styles: `
     .strategies { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
     .counters { display: flex; gap: 12px; font-size: 0.78rem; margin-bottom: 6px; }
-    .counters span { padding: 2px 6px; border-radius: 4px; background: rgba(128, 128, 128, 0.15); }
-    .busy { background: rgba(255, 152, 0, 0.35); font-weight: 700; }
+    .counters span { padding: 2px 6px; border-radius: 4px; background: #eef2f6; }
+    .busy { background: #fde3c0; font-weight: 700; }
     .log { font-family: monospace; font-size: 0.8rem; max-height: 200px; overflow: auto; }
-    .log div { padding: 2px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.25); }
-    .cancelled { opacity: 0.6; text-decoration: line-through; }
+    .log div { padding: 2px 0; border-bottom: 1px solid var(--color-line); }
+    .cancelled { color: #64748b; text-decoration: line-through; }
     .actions { display: flex; gap: 8px; align-items: center; }
+    code { font-family: monospace; background: #eef2f6; border-radius: 3px; padding: 0 3px; }
   `,
 })
 export class FlatteningStrategiesComponent {

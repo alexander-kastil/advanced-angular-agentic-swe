@@ -11,14 +11,25 @@ import { Component, computed, input } from '@angular/core';
       <code>paramsInheritanceStrategy</code> defaults to <code>'always'</code>, so every child
       inherits the parameters, data and resolved values of its ancestors.
     </p>
-    <pre>{{ inherited() | json }}</pre>
+    <pre class="code" tabindex="0" role="region" aria-label="Inherited route parameters">{{ inherited() | json }}</pre>
   `,
   styles: `
     :host {
       display: block;
       padding: 12px;
-      border: 1px dashed rgba(0, 0, 0, 0.24);
+      border: 1px dashed #cbd5e1;
       border-radius: 4px;
+    }
+
+    .code {
+      overflow: auto;
+      margin: 0.5rem 0 0;
+      padding: 0.75rem;
+      border-radius: 4px;
+      background: #0f172a;
+      color: #e2e8f0;
+      font-size: 0.8rem;
+      line-height: 1.4;
     }
   `,
 })

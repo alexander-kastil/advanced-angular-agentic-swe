@@ -3,11 +3,6 @@ import { Component, computed, signal } from '@angular/core';
 import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
 import { Listbox, Option } from '@angular/aria/listbox';
 import { FormField, form, required, validate } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { BoxedDirective, ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 
 const AIRPORTS = [
@@ -33,9 +28,7 @@ interface FlightModel {
   templateUrl: './aria-autocomplete.component.html',
   styleUrls: ['./aria-autocomplete.component.scss'],
   imports: [
-    MarkdownRendererComponent,
-    MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions,
-    FormField, MatFormField, MatLabel, MatInput, MatButton,
+    FormField,
     Combobox, ComboboxPopup, ComboboxWidget, Listbox, Option,
     BoxedDirective, ColumnDirective, JsonPipe,
   ],

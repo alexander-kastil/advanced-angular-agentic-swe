@@ -1,24 +1,13 @@
+import { JsonPipe } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
-import { JsonPipe } from '@angular/common';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 
 @Component({
   selector: 'app-multi-interceptor',
   templateUrl: './multi-interceptor.component.html',
   styleUrls: ['./multi-interceptor.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-    JsonPipe,
-  ],
+  imports: [MarkdownRendererComponent, JsonPipe],
 })
 export class MultiInterceptorComponent {
   protected readonly requestUrl = signal('https://jsonplaceholder.typicode.com/todos/1');

@@ -5,16 +5,20 @@ import { FormValueControl, transformedValue } from '@angular/forms/signals';
   selector: 'app-money-input',
   styles: `
     .money {
-      font: inherit;
-      padding: 0.5rem;
       width: 12rem;
+    }
+
+    .error {
+      font-size: 0.8125rem;
+      color: #dc2626;
     }
   `,
   template: `
     <input
-      class="money"
+      class="input money"
       type="text"
       inputmode="decimal"
+      [attr.aria-label]="label()"
       [value]="rawValue()"
       [disabled]="disabled()"
       (input)="rawValue.set($any($event.target).value)"
@@ -28,6 +32,7 @@ import { FormValueControl, transformedValue } from '@angular/forms/signals';
 export class MoneyInputComponent implements FormValueControl<number | null> {
   readonly value = model.required<number | null>();
   readonly disabled = input(false);
+  readonly label = input('Amount');
   readonly touch = output<void>();
 
   protected readonly rawValue = transformedValue(this.value, {

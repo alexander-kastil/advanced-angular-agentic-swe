@@ -1,8 +1,8 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>The prompt</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The prompt</h2>
+  </div>
+  <div class="card-content">
     <p>
       This is the prompt verbatim. It names one file, names the tools to call
       first, names the rule set to judge the result by, and fences what the agent
@@ -12,22 +12,24 @@
       <code>src/</code>
       so its anti-patterns never reach the bundle. Run the prompt against it.
     </p>
-    <div class="prompt">{{ prompt }}</div>
-    <button mat-raised-button color="accent" (click)="copyPrompt()">
-      Copy the prompt
-    </button>
-    @if (copied()) {
-      <span class="copied">copied</span>
-    }
-  </mat-card-content>
-</mat-card>
+    <div class="prompt" tabindex="0" role="region" aria-label="Migration prompt">{{ prompt }}</div>
+    <div class="flex items-center gap-2">
+      <button type="button" class="btn btn-primary" (click)="copyPrompt()">
+        Copy the prompt
+      </button>
+      @if (copied()) {
+        <span class="copied">copied</span>
+      }
+    </div>
+  </div>
+</div>
 
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>The MCP tools it calls</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">The MCP tools it calls</h2>
+    </div>
+    <div class="card-content">
       <p>
         The
         <code>angular-cli</code>
@@ -37,28 +39,32 @@
         <code>npx -y &#64;angular/cli mcp</code>
         . Tool names are the ones the agent sees.
       </p>
-      <table>
-        <tr>
-          <th>Tool</th>
-          <th>Server</th>
-          <th>Used for</th>
-        </tr>
-        @for (tool of tools; track tool.tool) {
+      <table class="data-table">
+        <thead>
           <tr>
-            <td><code>{{ tool.tool }}</code></td>
-            <td>{{ tool.server }}</td>
-            <td>{{ tool.usedFor }}</td>
+            <th>Tool</th>
+            <th>Server</th>
+            <th>Used for</th>
           </tr>
-        }
+        </thead>
+        <tbody>
+          @for (tool of tools; track tool.tool) {
+            <tr>
+              <td><code>{{ tool.tool }}</code></td>
+              <td>{{ tool.server }}</td>
+              <td>{{ tool.usedFor }}</td>
+            </tr>
+          }
+        </tbody>
       </table>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Why the prompt is shaped like that</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Why the prompt is shaped like that</h2>
+    </div>
+    <div class="card-content">
       @for (step of steps; track step; let i = $index) {
         <div class="step">
           <strong>{{ i + 1 }}.</strong>
@@ -71,73 +77,77 @@
         , sections "State Management" and "Data Loading". The agent proposes the
         rewrite; you check every changed line against this table.
       </p>
-      <table>
-        <tr>
-          <th>Anti-pattern</th>
-          <th>Replacement</th>
-          <th>Section</th>
-        </tr>
-        @for (rule of rules; track rule.antiPattern) {
+      <table class="data-table">
+        <thead>
           <tr>
-            <td>{{ rule.antiPattern }}</td>
-            <td>{{ rule.replacement }}</td>
-            <td>{{ rule.section }}</td>
+            <th>Anti-pattern</th>
+            <th>Replacement</th>
+            <th>Section</th>
           </tr>
-        }
+        </thead>
+        <tbody>
+          @for (rule of rules; track rule.antiPattern) {
+            <tr>
+              <td>{{ rule.antiPattern }}</td>
+              <td>{{ rule.replacement }}</td>
+              <td>{{ rule.section }}</td>
+            </tr>
+          }
+        </tbody>
       </table>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>
 
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Before</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <pre>{{ source }}</pre>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Before</h2>
+    </div>
+    <div class="card-content">
+      <pre tabindex="0" role="region" aria-label="Store before the migration">{{ source }}</pre>
       <p>
         Three anti-patterns in one class: a BehaviorSubject holding local state,
         a subscribe() driving it, and a hand-rolled status machine.
       </p>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>After</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <pre>{{ migrated }}</pre>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">After</h2>
+    </div>
+    <div class="card-content">
+      <pre tabindex="0" role="region" aria-label="Component after the migration">{{ migrated }}</pre>
       <p>
         The status machine is gone because the resource already has one. What is
         left is the filter, which is derived state, so it is a computed().
       </p>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>The migrated code, running</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-form-field appearance="outline">
-      <mat-label>Filter skills</mat-label>
-      <input matInput [(ngModel)]="filter" />
-    </mat-form-field>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The migrated code, running</h2>
+  </div>
+  <div class="card-content">
+    <div class="field">
+      <label class="label" for="migration-filter">Filter skills</label>
+      <input id="migration-filter" class="input" type="text" [(ngModel)]="filter" />
+    </div>
     @if (skills.isLoading()) {
-      <mat-progress-bar mode="indeterminate" />
+      <app-progress-bar mode="indeterminate" />
     } @else if (skills.error()) {
       <p>Start json-server to see live data.</p>
     } @else {
-      <mat-chip-set>
+      <div class="chip-set">
         @for (skill of visible(); track skill.id) {
-          <mat-chip [highlighted]="skill.completed">{{ skill.name }}</mat-chip>
+          <span class="chip" [class.chip-on]="skill.completed">{{ skill.name }}</span>
         } @empty {
-          <mat-chip>no matches</mat-chip>
+          <span class="chip">no matches</span>
         }
-      </mat-chip-set>
+      </div>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

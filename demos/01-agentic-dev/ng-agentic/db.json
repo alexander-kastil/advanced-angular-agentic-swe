@@ -49,16 +49,6 @@
       "topic": "Automation",
       "md": "hooks-and-gates",
       "visible": true
-    },
-    {
-      "id": 6,
-      "url": "webmcp-counterpart",
-      "title": "WebMCP Counterpart",
-      "teaches": "Expose the running app to a browser agent with declareExperimentalWebMcpTool() from @angular/core. Register two live tools, read the tools/list payload an agent would see, and watch registration no-op where no model context exists.",
-      "sortOrder": 6,
-      "topic": "Automation",
-      "md": "webmcp-counterpart",
-      "visible": true
     }
   ],
   "top-links": [
@@ -73,6 +63,21 @@
       "url": "demos"
     }
   ],
-  "markdownItems": [],
+  "markdownItems": [
+    {
+      "id": "1",
+      "url": "",
+      "title": "Agentic workflow notes",
+      "comment": "Delegate subject matter work to the owning expert agent instead of grinding on the main thread.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": "2",
+      "url": "",
+      "title": "Spec before code",
+      "comment": "A written contract of types and signatures makes a wrong fan-out visibly wrong.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    }
+  ],
   "comments": []
 }

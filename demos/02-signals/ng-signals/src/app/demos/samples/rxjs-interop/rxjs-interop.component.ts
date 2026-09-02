@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { MatButtonModule } from '@angular/material/button';
 import { interval, map, startWith } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Skill } from '../../../skills/skill.model';
@@ -9,7 +8,7 @@ import { BorderDirective, CenteredDirective } from '../../../shared/formatting/f
 
 @Component({
   selector: 'app-rxjs-interop',
-  imports: [MatButtonModule, BorderDirective, CenteredDirective],
+  imports: [BorderDirective, CenteredDirective],
   templateUrl: './rxjs-interop.component.html',
   styleUrl: './rxjs-interop.component.scss',
 })

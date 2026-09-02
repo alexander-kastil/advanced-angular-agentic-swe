@@ -1,14 +1,15 @@
 <div boxed>
-  <mat-form-field appearance="fill">
-    <mat-label>Choose a state for the tasks to show</mat-label>
-    <mat-select (selectionChange)="onStatusChange($event)">
+  <div class="field">
+    <label class="label" for="task-state">Choose a state for the tasks to show</label>
+    <select id="task-state" class="input" (change)="onStatusChange($event)">
+      <option value=""></option>
       @for (option of options; track $index) {
-        <mat-option [value]="option == 'Completed' ? true : false">
+        <option [value]="option === 'Completed' ? 'true' : 'false'">
           {{ option }}
-        </mat-option>
+        </option>
       }
-    </mat-select>
-  </mat-form-field>
+    </select>
+  </div>
 </div>
 
 <div class="result">

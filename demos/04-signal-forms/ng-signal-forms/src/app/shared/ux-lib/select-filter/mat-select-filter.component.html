@@ -1,10 +1,14 @@
-<form [formGroup]="searchForm" class="mat-filter" [ngStyle]="{'background-color': color ? color : 'white'}">
-    <div>
-    <input #input class="mat-filter-input" matInput placeholder="{{placeholder}}" formControlName="value" (keydown)="handleKeydown($event)">
-      <mat-spinner *ngIf="localSpinner" class="spinner" diameter="16"></mat-spinner>
-    </div>
-    <div *ngIf="noResults"
-       class="noResultsMessage">
-    {{noResultsMessage}}
+<form [formGroup]="searchForm" class="ux-filter" [style.background-color]="color ? color : 'white'">
+  <div class="ux-filter-field">
+    <label class="sr-only" [attr.for]="inputId">{{ placeholder }}</label>
+    <input #input [id]="inputId" class="ux-filter-input" [placeholder]="placeholder" formControlName="value" (keydown)="handleKeydown($event)">
+    @if (localSpinner) {
+      <app-progress-bar class="spinner" mode="indeterminate" />
+    }
   </div>
-  </form>
+  @if (noResults) {
+    <div class="noResultsMessage">
+      {{ noResultsMessage }}
+    </div>
+  }
+</form>

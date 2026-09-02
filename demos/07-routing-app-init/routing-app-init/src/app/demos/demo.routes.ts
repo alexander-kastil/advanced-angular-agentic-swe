@@ -30,7 +30,6 @@ import { RouterBindingsComponent } from './samples/router-bindings/router-bindin
 import { RouteScopedNotesService } from './samples/service-migration/route-scoped-notes.service';
 import { ServiceMigrationComponent } from './samples/service-migration/service-migration.component';
 import { ViewTransitionsComponent } from './samples/view-transitions/view-transitions.component';
-import { WebmcpNavigationComponent } from './samples/webmcp-navigation/webmcp-navigation.component';
 
 export const demoRoutes: Routes = [
   {
@@ -195,11 +194,6 @@ export const demoRoutes: Routes = [
         path: 'view-transitions',
         component: ViewTransitionsComponent,
         title: 'View Transitions',
-      },
-      {
-        path: 'webmcp-navigation',
-        component: WebmcpNavigationComponent,
-        title: 'WebMCP Navigation Tools',
       },
     ],
   },

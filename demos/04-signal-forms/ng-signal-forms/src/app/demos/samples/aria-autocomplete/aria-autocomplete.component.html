@@ -1,36 +1,36 @@
-<app-markdown-renderer [md]="'aria-autocomplete'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Accessible Autocomplete in a Signal Form</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Accessible Autocomplete in a Signal Form</h2>
+  </div>
+  <div class="card-content">
     <div column>
-      <mat-form-field>
-        <mat-label>Passenger</mat-label>
-        <input matInput type="text" [formField]="flightForm.passenger" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="ac-passenger">Passenger</label>
+        <input id="ac-passenger" class="input" type="text" [formField]="flightForm.passenger" />
+      </div>
       @if (flightForm.passenger().touched() && flightForm.passenger().invalid()) {
         @for (err of flightForm.passenger().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
 
-      <label id="origin-label" for="origin">Departure airport</label>
-      <input
-        id="origin"
-        class="combo"
-        ngCombobox
-        #combobox="ngCombobox"
-        type="text"
-        autocomplete="off"
-        aria-labelledby="origin-label"
-        [value]="originField().value()"
-        (valueChange)="onQuery($event)"
-        [expanded]="expanded()"
-        (expandedChange)="expanded.set($event)"
-        (blur)="originField().markAsTouched()"
-      />
+      <div class="field">
+        <label class="label" id="origin-label" for="origin">Departure airport</label>
+        <input
+          id="origin"
+          class="input"
+          ngCombobox
+          #combobox="ngCombobox"
+          type="text"
+          autocomplete="off"
+          aria-labelledby="origin-label"
+          [value]="originField().value()"
+          (valueChange)="onQuery($event)"
+          [expanded]="expanded()"
+          (expandedChange)="expanded.set($event)"
+          (blur)="originField().markAsTouched()"
+        />
+      </div>
       <ng-template ngComboboxPopup [combobox]="combobox">
         <div
           class="popup"
@@ -54,17 +54,17 @@
         }
       }
     </div>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button (click)="clear()">Clear</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-outline" (click)="clear()">Clear</button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Field State</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Field State</h2>
+  </div>
+  <div class="card-content">
     <div boxed>
       <div>Model: {{ model() | json }}</div>
       <div>Expanded: {{ expanded() }}</div>
@@ -72,5 +72,5 @@
       <div>Origin valid: {{ originField().valid() }}</div>
       <div>Form valid: {{ flightForm().valid() }}</div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

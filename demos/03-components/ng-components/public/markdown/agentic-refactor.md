@@ -38,7 +38,7 @@ The remaining three rows are judgement calls:
 Give the agent the version and the rule set before the file. The Angular MCP server exposes
 `get_best_practices`, which returns the version-specific standards for the workspace:
 
-```
+```text
 1. call get_best_practices for this workspace
 2. read src/app/demos/samples/agentic-refactor/pet-badge/pet-badge.component.ts
 3. rewrite it to Angular 22 against those practices

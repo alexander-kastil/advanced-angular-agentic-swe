@@ -1,13 +1,13 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>ViewContainerRef.createComponent() and setInput()</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">ViewContainerRef.createComponent() and setInput()</h2>
+  </div>
+  <div class="card-content">
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="addInfo()">Add info</button>
-      <button mat-raised-button color="warn" (click)="addWarning()">Add warning</button>
-      <button mat-stroked-button (click)="removeLast()">Remove last</button>
-      <button mat-stroked-button (click)="clear()">Clear</button>
+      <button type="button" class="btn btn-primary" (click)="addInfo()">Add info</button>
+      <button type="button" class="btn btn-warn" (click)="addWarning()">Add warning</button>
+      <button type="button" class="btn btn-outline" (click)="removeLast()">Remove last</button>
+      <button type="button" class="btn btn-outline" (click)="clear()">Clear</button>
     </div>
 
     <p>{{ created() }} components in the container</p>
@@ -19,18 +19,18 @@
     <p class="hint">
       setInput() pushes a value once. Nothing keeps the created component in sync with a signal.
     </p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Bindings at creation time</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Bindings at creation time</h2>
+  </div>
+  <div class="card-content">
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="addBound()">Create bound counter</button>
-      <button mat-stroked-button (click)="clearBound()">Clear</button>
-      <button mat-stroked-button (click)="headline.set('renamed at ' + (clicks() + 1))">
+      <button type="button" class="btn btn-primary" (click)="addBound()">Create bound counter</button>
+      <button type="button" class="btn btn-outline" (click)="clearBound()">Clear</button>
+      <button type="button" class="btn btn-outline" (click)="headline.set('renamed at ' + (clicks() + 1))">
         Rename from the parent
       </button>
     </div>
@@ -45,19 +45,19 @@
       Every instance shares the same three bindings, so renaming from the parent updates all of
       them and clicking +1 in any of them writes back into the parent signal.
     </p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>createComponent() into a plain DOM element</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">createComponent() into a plain DOM element</h2>
+  </div>
+  <div class="card-content">
     <div class="actions">
-      <button mat-raised-button color="primary" [disabled]="detachedAttached()" (click)="attachDetached()">
+      <button type="button" class="btn btn-primary" [disabled]="detachedAttached()" (click)="attachDetached()">
         Attach
       </button>
-      <button mat-stroked-button [disabled]="!detachedAttached()" (click)="destroyDetached()">
+      <button type="button" class="btn btn-outline" [disabled]="!detachedAttached()" (click)="destroyDetached()">
         Destroy
       </button>
     </div>
@@ -68,5 +68,5 @@
       The standalone createComponent() needs an EnvironmentInjector and a host element, and the
       view has to be attached to ApplicationRef to take part in change detection.
     </p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

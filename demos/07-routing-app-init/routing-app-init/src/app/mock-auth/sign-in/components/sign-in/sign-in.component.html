@@ -1,22 +1,24 @@
-<ng-template #dialog>
-  <div mat-dialog-title class="title">Please sign-in to continue </div>
-
-  <div mat-dialog-content>
-    <div>
-      <mat-form-field appearance="outline">
-        <input type="email" placeholder="Email" matInput />
-      </mat-form-field>
+<dialog #dialog class="modal" aria-labelledby="sign-in-title" (close)="onClosed()">
+  <div class="card mb-0">
+    <div class="card-header">
+      <h2 id="sign-in-title" class="card-title">Please sign-in to continue</h2>
     </div>
 
-    <div>
-      <mat-form-field appearance="outline">
-        <input type="password" placeholder="Password" matInput />
-      </mat-form-field>
+    <div class="card-content gap-4">
+      <div class="field">
+        <label class="label" for="sign-in-email">Email</label>
+        <input id="sign-in-email" class="input" type="email" placeholder="Email" autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <label class="label" for="sign-in-password">Password</label>
+        <input id="sign-in-password" class="input" type="password" placeholder="Password" autocomplete="current-password" />
+      </div>
+    </div>
+
+    <div class="card-actions actions">
+      <button type="button" class="btn btn-primary" (click)="signIn()">Sign In</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['../sign-up']">Register</button>
     </div>
   </div>
-
-  <div mat-dialog-actions class="actions">
-    <button mat-flat-button (click)="signIn()" color="primary">Sign In</button>
-    <button mat-flat-button [routerLink]="['../sign-up']" color="primary">Register</button>
-  </div>
-</ng-template>
+</dialog>

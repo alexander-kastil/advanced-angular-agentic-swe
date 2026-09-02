@@ -2,9 +2,6 @@ import { Component, computed, debounced, effect, signal, untracked, WritableSign
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounce, form, FormField } from '@angular/forms/signals';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { debounceTime } from 'rxjs';
 
 type Lane = 'control' | 'signal' | 'form';
@@ -13,24 +10,13 @@ type Counts = Record<Lane, number>;
 @Component({
   selector: 'app-debounce-three-ways',
   templateUrl: './debounce-three-ways.component.html',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    FormsModule,
-    ReactiveFormsModule,
-    FormField,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, FormField],
   styles: `
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .row { display: flex; justify-content: space-between; gap: 8px; font-family: monospace; font-size: 0.82rem; padding: 3px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.25); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+    .grid .card + .card { margin-top: 0; }
+    .row { display: flex; justify-content: space-between; gap: 8px; font-family: monospace; font-size: 0.82rem; padding: 3px 0; border-bottom: 1px solid var(--color-line); }
     .row span:last-child { font-weight: 600; }
-    .pending { color: #e07b00; font-weight: 700; font-size: 0.8rem; min-height: 1.3rem; }
-    mat-form-field { width: 100%; }
+    .pending { color: #b45309; font-weight: 700; font-size: 0.8rem; min-height: 1.3rem; }
   `,
 })
 export class DebounceThreeWaysComponent {

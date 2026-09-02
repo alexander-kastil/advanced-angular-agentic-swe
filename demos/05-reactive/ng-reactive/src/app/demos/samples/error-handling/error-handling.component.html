@@ -1,9 +1,9 @@
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>catchError</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">catchError</h2>
+    </div>
+    <div class="card-content">
       <p>
         A real
         <code>GET /skilz</code>
@@ -12,31 +12,31 @@
         decides what the subscriber sees.
       </p>
       <div class="actions">
-        <button mat-raised-button color="accent" (click)="runCatchError('empty')">
+        <button type="button" class="btn btn-primary" (click)="runCatchError('empty')">
           return EMPTY
         </button>
-        <button mat-raised-button color="accent" (click)="runCatchError('fallback')">
+        <button type="button" class="btn btn-primary" (click)="runCatchError('fallback')">
           return of(fallback)
         </button>
-        <button mat-raised-button color="accent" (click)="runCatchError('rethrow')">
+        <button type="button" class="btn btn-primary" (click)="runCatchError('rethrow')">
           rethrow
         </button>
       </div>
-      <div class="log">
+      <div class="log" tabindex="0" role="region" aria-label="catchError log">
         @for (entry of catchLog(); track $index) {
           <div>{{ entry }}</div>
         } @empty {
           <div>idle</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>retry</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">retry</h2>
+    </div>
+    <div class="card-content">
       <p>
         The first two attempts hit the 404 route, the third hits the real one.
         <code>retry</code>
@@ -45,23 +45,23 @@
         runs again and picks a new URL.
       </p>
       <div class="actions">
-        <button mat-raised-button color="accent" (click)="runRetry()">Run</button>
+        <button type="button" class="btn btn-primary" (click)="runRetry()">Run</button>
       </div>
-      <div class="log">
+      <div class="log" tabindex="0" role="region" aria-label="retry log">
         @for (entry of retryLog(); track $index) {
           <div>{{ entry }}</div>
         } @empty {
           <div>idle</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>catchWithFallback()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">catchWithFallback()</h2>
+    </div>
+    <div class="card-content">
       <p>
         A custom operator: report the failure once, then keep the stream alive
         with a fallback value. Covered by a marble test in
@@ -71,17 +71,17 @@
         .
       </p>
       <div class="actions">
-        <button mat-raised-button color="accent" (click)="runCustomOperator()">
+        <button type="button" class="btn btn-primary" (click)="runCustomOperator()">
           Run against the 404 route
         </button>
       </div>
-      <div class="log">
+      <div class="log" tabindex="0" role="region" aria-label="catchWithFallback log">
         @for (entry of operatorLog(); track $index) {
           <div>{{ entry }}</div>
         } @empty {
           <div>idle</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

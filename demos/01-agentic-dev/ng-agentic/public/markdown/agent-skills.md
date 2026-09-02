@@ -44,7 +44,7 @@ work*.
 
 ## Shape
 
-```
+```text
 .claude/skills/angular-conventions/
   SKILL.md
   references/components.md

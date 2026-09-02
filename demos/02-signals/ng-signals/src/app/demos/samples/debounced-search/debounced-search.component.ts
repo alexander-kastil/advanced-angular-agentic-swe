@@ -1,14 +1,12 @@
 import { httpResource } from '@angular/common/http';
 import { Component, computed, debounced, signal } from '@angular/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { environment } from '../../../../environments/environment';
 import { BorderDirective } from '../../../shared/formatting/formatting-directives';
 import { Skill } from '../../../skills/skill.model';
 
 @Component({
   selector: 'app-debounced-search',
-  imports: [MatFormField, MatLabel, MatInput, BorderDirective],
+  imports: [BorderDirective],
   templateUrl: './debounced-search.component.html',
   styleUrl: './debounced-search.component.scss',
 })

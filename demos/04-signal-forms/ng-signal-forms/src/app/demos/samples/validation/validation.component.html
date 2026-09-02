@@ -1,15 +1,19 @@
-<app-markdown-renderer [md]="'validators'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Async Validation - validateHttp & validateAsync</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Async Validation - validateHttp &amp; validateAsync</h2>
+  </div>
+  <div class="card-content">
     <form novalidate column>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Try Soi or Giro" [formField]="personForm.name" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="validation-name">Name</label>
+        <input
+          id="validation-name"
+          class="input"
+          type="text"
+          placeholder="Try Soi or Giro"
+          [formField]="personForm.name"
+        />
+      </div>
       @if (personForm.name().pending()) {
         <div>Checking name...</div>
       }
@@ -19,20 +23,26 @@
         }
       }
 
-      <mat-form-field>
-        <mat-label>Age</mat-label>
-        <input matInput type="number" placeholder="Age" [formField]="personForm.age" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="validation-age">Age</label>
+        <input id="validation-age" class="input" type="number" placeholder="Age" [formField]="personForm.age" />
+      </div>
       @if (personForm.age().touched() && personForm.age().invalid()) {
         @for (err of personForm.age().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
 
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="text" placeholder="Try cleothewhippet@integrations.at" [formField]="personForm.email" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="validation-email">Email</label>
+        <input
+          id="validation-email"
+          class="input"
+          type="text"
+          placeholder="Try cleothewhippet@integrations.at"
+          [formField]="personForm.email"
+        />
+      </div>
       @if (personForm.email().pending()) {
         <div>Checking email...</div>
       }
@@ -44,9 +54,8 @@
 
       <div class="cmdItems">
         <button
-          mat-raised-button
           type="button"
-          color="primary"
+          class="btn btn-primary"
           [disabled]="personForm().invalid() || personForm().pending()"
           (click)="savePerson()"
         >
@@ -54,18 +63,18 @@
         </button>
       </div>
     </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Validation State</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Validation State</h2>
+  </div>
+  <div class="card-content">
     <div boxed>
       <div>Name pending: {{ personForm.name().pending() }} | valid: {{ personForm.name().valid() }}</div>
       <div>Email pending: {{ personForm.email().pending() }} | valid: {{ personForm.email().valid() }}</div>
       <div>Form pending: {{ personForm().pending() }} | valid: {{ personForm().valid() }}</div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

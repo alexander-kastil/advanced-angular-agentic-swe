@@ -2,10 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { ProgressBarComponent } from 'src/app/shared/progress-bar/progress-bar.component';
 import {
   catchError,
   debounceTime,
@@ -23,25 +20,13 @@ import { Skill } from '../../skills/skills';
 @Component({
   selector: 'app-rxresource-vs-switchmap',
   templateUrl: './rxresource-vs-switchmap.component.html',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatProgressBar,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
+  imports: [ProgressBarComponent, FormsModule, ReactiveFormsModule],
   styles: `
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .result { font-family: monospace; font-size: 0.85rem; }
     .meta { display: flex; gap: 12px; font-size: 0.78rem; margin-bottom: 6px; }
-    .meta span { padding: 2px 6px; border-radius: 4px; background: rgba(128, 128, 128, 0.15); }
+    .meta span { padding: 2px 6px; border-radius: 4px; background: #eef2f6; color: #334155; }
     .chain { margin-top: 16px; }
-    mat-form-field { width: 100%; }
   `,
 })
 export class RxresourceVsSwitchmapComponent {

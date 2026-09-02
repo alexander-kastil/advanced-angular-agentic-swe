@@ -1,46 +1,59 @@
-<app-markdown-renderer [md]="'form-value-control'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Custom Controls Bound with [formField]</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Custom Controls Bound with [formField]</h2>
+  </div>
+  <div class="card-content">
     <div column>
-      <mat-form-field>
-        <mat-label>Title</mat-label>
-        <input matInput type="text" [formField]="reviewForm.title" />
-      </mat-form-field>
-      @if (reviewForm.title().touched() && reviewForm.title().invalid()) {
-        @for (err of reviewForm.title().errors(); track err.kind) {
-          <div class="error">{{ err.message }}</div>
+      <div class="field">
+        <label class="label" for="fvc-title">Title</label>
+        <input
+          id="fvc-title"
+          class="input"
+          type="text"
+          [attr.aria-invalid]="reviewForm.title().touched() && reviewForm.title().invalid() ? 'true' : null"
+          [attr.aria-describedby]="reviewForm.title().touched() && reviewForm.title().invalid() ? 'fvc-title-error' : null"
+          [formField]="reviewForm.title"
+        />
+        @if (reviewForm.title().touched() && reviewForm.title().invalid()) {
+          <div id="fvc-title-error" class="error" role="alert">
+            @for (err of reviewForm.title().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
         }
-      }
+      </div>
 
-      <label>Rating - FormValueControl&lt;number&gt;</label>
-      <app-rating-input [formField]="reviewForm.rating" label="Overall rating" />
+      <div class="field">
+        <span class="label">Rating - FormValueControl&lt;number&gt;</span>
+        <app-rating-input [formField]="reviewForm.rating" label="Overall rating" />
+      </div>
 
-      <label>Refund - transformedValue, string in the UI and number in the model</label>
-      <app-money-input [formField]="reviewForm.refund" />
-      @if (reviewForm.refund().touched() && reviewForm.refund().invalid()) {
-        @for (err of reviewForm.refund().errors(); track err.kind) {
-          <div class="error">{{ err.message }}</div>
+      <div class="field">
+        <span class="label">Refund - transformedValue, string in the UI and number in the model</span>
+        <app-money-input [formField]="reviewForm.refund" label="Refund amount" />
+        @if (reviewForm.refund().touched() && reviewForm.refund().invalid()) {
+          <div class="error" role="alert">
+            @for (err of reviewForm.refund().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
         }
-      }
+      </div>
     </div>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button (click)="toggleLock()">
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-outline" (click)="toggleLock()">
       {{ lockRating() ? 'Unlock' : 'Lock' }} Rating
     </button>
-    <button mat-raised-button (click)="resetReview()">Reset</button>
-  </mat-card-actions>
-</mat-card>
+    <button type="button" class="btn btn-outline" (click)="resetReview()">Reset</button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Model and Field State</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Model and Field State</h2>
+  </div>
+  <div class="card-content">
     <div boxed>
       <div>Model: {{ model() | json }}</div>
       <div>Rating touched: {{ reviewForm.rating().touched() }}</div>
@@ -49,5 +62,5 @@
       <div>Refund value type: {{ model().refund === null ? 'null' : 'number' }}</div>
       <div>Form valid: {{ reviewForm().valid() }}</div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

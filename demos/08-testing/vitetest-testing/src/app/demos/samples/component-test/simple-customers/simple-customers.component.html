@@ -1,17 +1,23 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Customers</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Customers</h2>
+  </div>
+  <div class="card-content">
     @if (customers.isLoading()) {
       <p>Loading...</p>
     } @else {
       @for (c of customers.value() ?? []; track c.id) {
         <div class="customerrow">
           <span>{{ c.id }} - {{ c.name }}</span>
-          <button mat-icon-button color="warn" (click)="deleteCustomer(c)">x</button>
+          <button
+            type="button"
+            class="btn-icon hover:bg-warn/10 hover:text-warn"
+            [attr.aria-label]="'Delete ' + c.name"
+            (click)="deleteCustomer(c)">
+            <span class="icon">close</span>
+          </button>
         </div>
       }
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

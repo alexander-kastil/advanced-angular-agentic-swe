@@ -1,4 +1,3 @@
-import { provideExperimentalWebMcpForms } from '@angular/forms/signals';
 import { Routes } from '@angular/router';
 import { DemoContainerComponent } from './demo-container/demo-container.component';
 
@@ -108,12 +107,6 @@ export const demoRoutes: Routes = [
           import('./samples/reactive-forms-migration/reactive-forms-migration.component').then(
             (m) => m.ReactiveFormsMigrationComponent,
           ),
-      },
-      {
-        path: 'webmcp-form-tool',
-        providers: [provideExperimentalWebMcpForms()],
-        loadComponent: () =>
-          import('./samples/webmcp-form-tool/webmcp-form-tool.component').then((m) => m.WebMcpFormToolComponent),
       },
       {
         path: 'ai-written-form-tests',

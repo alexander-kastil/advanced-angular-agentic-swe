@@ -1,23 +1,22 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <div (click)="toggleMenu()" class="hamburgerMenu">
-      <mat-icon color="accent">menu</mat-icon>
-    </div>
-    <div><img width="50px" src="/assets/images/angular.svg" /></div>
-    <div class="menuContainer">
-      @for (mi of menuItems(); track mi) {
-        <div
-          routerLink="{{ '/' + mi.url }}"
-          routerLinkActive="navLinkActive"
-          [routerLinkActiveOptions]="{ exact: true }"
-          class="navLink"
-        >
-          {{ mi.label }}
-        </div>
-      }
-    </div>
-    <div (click)="toggleApps()" class="hamburgerMenu">
-      <mat-icon color="accent">apps</mat-icon>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<nav class="topbar" aria-label="Main">
+  <button type="button" class="hamburgerMenu rail-btn text-white hover:bg-white/15 hover:text-white" aria-label="Toggle navigation" (click)="toggleMenu()">
+    <span class="icon" aria-hidden="true">menu</span>
+  </button>
+  <img class="mr-2 ml-1" width="34" height="34" src="images/angular.svg" alt="Angular" />
+  <div class="menuContainer">
+    @for (mi of menuItems(); track mi) {
+      <a
+        class="topbar-link"
+        routerLink="{{ '/' + mi.url }}"
+        routerLinkActive="topbar-link-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ mi.label }}
+      </a>
+    }
+  </div>
+  <app-loading />
+  <button type="button" class="hamburgerMenu rail-btn text-white hover:bg-white/15 hover:text-white" aria-label="Apps" (click)="toggleApps()">
+    <span class="icon" aria-hidden="true">apps</span>
+  </button>
+</nav>

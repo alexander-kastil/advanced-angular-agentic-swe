@@ -3,7 +3,7 @@ button {
   margin-bottom: var(--gap-medium);
 }
 
-span {
+.caption {
   @media only screen and (max-width: 960px) {
     display: none;
   }

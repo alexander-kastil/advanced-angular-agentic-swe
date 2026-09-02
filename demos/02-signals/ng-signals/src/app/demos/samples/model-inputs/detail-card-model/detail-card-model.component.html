@@ -1,8 +1,8 @@
 <div class="heading">
-  <h2>Semantic Kernel</h2>
-  <div class="icon" (click)="toggle()">
-    <mat-icon aria-label="Toggle expand" fontIcon="radio_button_unchecked" />
-  </div>
+  <h3>Semantic Kernel</h3>
+  <button type="button" class="btn-icon" aria-label="Toggle expand" (click)="toggle()">
+    <span class="icon">radio_button_unchecked</span>
+  </button>
 </div>
 @if (expanded()) {
 <div class="content">
@@ -13,7 +13,7 @@
   creating value through AI without worrying about the underlying complexities
   of model integration.
 </div>
-<button mat-raised-button color="primary" (click)="toggle()">
+<button type="button" class="btn btn-primary" (click)="toggle()">
   Toggle Expand
 </button>
 }

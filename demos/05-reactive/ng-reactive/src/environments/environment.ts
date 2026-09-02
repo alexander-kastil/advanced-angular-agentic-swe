@@ -3,6 +3,7 @@ export const environment = {
   title: 'RxJS Deep Dive',
   logChangeDetection: true,
   logChanges: false,
+  logLoading: false,
   markdownPath: 'markdown/',
-  api: 'http://localhost:3000/',
+  api: 'http://localhost:3000/'
 };

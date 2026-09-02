@@ -3,21 +3,14 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { SnackbarService } from '../snackbar/snackbar.service';
 import { NavbarService } from './navbar.service';
 import { RouterLinkActive, RouterLink } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { SideNavService } from '../sidenav/sidenav.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  imports: [
-    MatToolbar,
-    MatToolbarRow,
-    MatIcon,
-    RouterLinkActive,
-    RouterLink,
-  ]
+  imports: [RouterLinkActive, RouterLink, LoadingComponent],
 })
 export class NavbarComponent {
   nav = inject(SideNavService);

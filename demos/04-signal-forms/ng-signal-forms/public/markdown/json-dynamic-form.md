@@ -80,9 +80,9 @@ The template iterates the descriptor, not the model:
 
 ```html
 @for (f of active().descriptor.fields; track f.key) {
-  <mat-form-field>
-    <mat-label>{{ f.label }}</mat-label>
-    <input matInput [type]="f.kind" [formField]="active().fields[f.key]" />
-  </mat-form-field>
+  <div class="field">
+    <label class="label" [for]="'jdf-' + f.key">{{ f.label }}</label>
+    <input [id]="'jdf-' + f.key" class="input" [type]="f.kind" [formField]="active().fields[f.key]" />
+  </div>
 }
 ```

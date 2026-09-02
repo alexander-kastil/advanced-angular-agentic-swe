@@ -1,7 +1,5 @@
 import { JsonPipe } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthFacade } from '../../../mock-auth/auth.facade';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
@@ -10,17 +8,7 @@ import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/mar
   selector: 'app-multi-guard',
   templateUrl: './multi-guard.component.html',
   styleUrls: ['./multi-guard.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
-    RouterLink,
-    RouterOutlet,
-    JsonPipe,
-  ],
+  imports: [MarkdownRendererComponent, RouterLink, RouterOutlet, JsonPipe],
 })
 export class MultiGuardComponent {
   private auth = inject(AuthFacade);

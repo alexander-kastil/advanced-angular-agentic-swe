@@ -1,10 +1,9 @@
 import { Component, injectAsync, onIdle, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { BorderDirective } from '../../../shared/formatting/formatting-directives';
 
 @Component({
   selector: 'app-service-injectasync',
-  imports: [MatButton, BorderDirective],
+  imports: [BorderDirective],
   template: `
     <div border class="state">
       <div>service loaded: {{ loaded() }}</div>
@@ -12,7 +11,7 @@ import { BorderDirective } from '../../../shared/formatting/formatting-directive
     </div>
 
     <div class="actions">
-      <button mat-raised-button color="accent" [disabled]="pending()" (click)="run()">
+      <button type="button" class="btn btn-primary" [disabled]="pending()" (click)="run()">
         Load service and summarize
       </button>
     </div>

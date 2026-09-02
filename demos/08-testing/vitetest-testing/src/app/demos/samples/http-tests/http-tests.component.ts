@@ -1,6 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { Customer } from '../../../customers/customer.model';
 import { CustomersService } from '../../../customers/customers.service';
 import { environment } from '../../../../environments/environment';
@@ -9,19 +7,18 @@ type CallLog = { method: string; url: string; result: string };
 
 @Component({
   selector: 'app-http-tests',
-  imports: [MatCardModule, MatButtonModule],
   template: `
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>CustomersService over HttpClient</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">CustomersService over HttpClient</h2>
+      </div>
+      <div class="card-content">
         <p>Every call below is asserted in the spec with <b>HttpTestingController</b>.</p>
         <div class="actions">
-          <button mat-raised-button color="primary" (click)="load()">GET customers</button>
-          <button mat-raised-button (click)="add()">POST customer</button>
-          <button mat-raised-button (click)="rename()">PUT customer</button>
-          <button mat-raised-button color="warn" (click)="remove()">DELETE customer</button>
+          <button type="button" class="btn btn-primary" (click)="load()">GET customers</button>
+          <button type="button" class="btn btn-outline" (click)="add()">POST customer</button>
+          <button type="button" class="btn btn-outline" (click)="rename()">PUT customer</button>
+          <button type="button" class="btn btn-warn" (click)="remove()">DELETE customer</button>
         </div>
 
         <div class="endpoints">
@@ -40,13 +37,13 @@ type CallLog = { method: string; url: string; result: string };
             {{ entry.method }} {{ entry.url }} -> {{ entry.result }}
           </div>
         }
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   `,
   styles: [`
-    .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
-    .endpoints { font-family: monospace; margin-bottom: 1rem; }
-    .log { margin-top: 1rem; font-family: monospace; }
+    .actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .endpoints { font-family: monospace; }
+    .log { font-family: monospace; }
   `],
 })
 export class HttpTestsComponent {

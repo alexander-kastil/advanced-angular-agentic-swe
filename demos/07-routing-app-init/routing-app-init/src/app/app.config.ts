@@ -30,11 +30,13 @@ import { GlobalErrorHandler } from './error/error.handler';
 import { httpErrorInterceptor } from './error/http-error.interceptor';
 import { authInterceptor } from './interceptors/auth.interceptor';
 import { retryInterceptor } from './interceptors/retry.interceptor';
+import { loadingInterceptor } from './shared/loading/loading-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(
       withInterceptors([
+        loadingInterceptor,
         authInterceptor,
         retryInterceptor({ count: 3, delay: 1000 }),
         httpErrorInterceptor,

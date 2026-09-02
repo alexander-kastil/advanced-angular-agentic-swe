@@ -1,13 +1,17 @@
 import { AbstractControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { Field } from '@angular/forms/signals';
-import { ErrorStateMatcher } from '@angular/material/core';
 
-export class DirtyOnlyStateMatcher implements ErrorStateMatcher {
+export interface FieldErrorStateMatcher {
+  isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean;
+  isSignalErrorState<T>(field: Field<T> | null): boolean;
+}
+
+export class DirtyOnlyStateMatcher implements FieldErrorStateMatcher {
   isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
     return !!control && control.invalid && control.dirty;
   }
 
-  isSignalErrorState(field: Field<unknown> | null): boolean {
+  isSignalErrorState<T>(field: Field<T> | null): boolean {
     if (!field) {
       return false;
     }
@@ -16,12 +20,12 @@ export class DirtyOnlyStateMatcher implements ErrorStateMatcher {
   }
 }
 
-export class EagerStateMatcher implements ErrorStateMatcher {
+export class EagerStateMatcher implements FieldErrorStateMatcher {
   isErrorState(control: AbstractControl | null, form: FormGroupDirective | NgForm | null): boolean {
     return !!control && control.invalid;
   }
 
-  isSignalErrorState(field: Field<unknown> | null): boolean {
+  isSignalErrorState<T>(field: Field<T> | null): boolean {
     return !!field && field().invalid();
   }
 }

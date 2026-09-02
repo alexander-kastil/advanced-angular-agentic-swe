@@ -1,27 +1,27 @@
-import {
-  A,
-  NINE,
-  SPACE,
-  Z,
-  ZERO
-} from '@angular/cdk/keycodes';
-import { Component, ElementRef, effect, inject, input, output, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, input, output, signal, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
+
+const KEY_A = 65;
+const KEY_Z = 90;
+const KEY_ZERO = 48;
+const KEY_NINE = 57;
+const KEY_SPACE = 32;
 
 @Component({
   selector: 'ux-select-filter',
   imports: [
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    ProgressBarComponent
   ],
   template: `
-  <form [formGroup]="searchForm" class="mat-filter" [style.background-color]="color() || 'white'">
+  <form [formGroup]="searchForm" class="filter-form" [style.background-color]="color() || 'white'">
     <div>
-      <input #input class="mat-filter-input" matInput [placeholder]="placeholder()" formControlName="value" (keydown)="handleKeydown($event)">
+      <label class="sr-only" for="ux-select-filter-input">{{ placeholder() || 'Filter' }}</label>
+      <input #input id="ux-select-filter-input" class="filter-input" [placeholder]="placeholder()" formControlName="value" (keydown)="handleKeydown($event)">
       @if (localSpinner()) {
-        <mat-spinner class="spinner" diameter="16" />
+        <app-progress-bar class="filter-progress" mode="indeterminate" />
       }
     </div>
     @if (noResults()) {
@@ -71,9 +71,6 @@ export class MatSelectFilterComponent {
     setTimeout(() => {
       this.input()?.nativeElement.focus();
     }, 500);
-    if (!this.placeholder()) {
-      // Note: placeholder is readonly input, initial value can be set via binding
-    }
   }
 
   private handleSearchChange(value: any) {
@@ -107,9 +104,9 @@ export class MatSelectFilterComponent {
 
   handleKeydown(event: KeyboardEvent) {
     if ((event.key && event.key.length === 1) ||
-      (event.keyCode >= A && event.keyCode <= Z) ||
-      (event.keyCode >= ZERO && event.keyCode <= NINE) ||
-      (event.keyCode === SPACE)) {
+      (event.keyCode >= KEY_A && event.keyCode <= KEY_Z) ||
+      (event.keyCode >= KEY_ZERO && event.keyCode <= KEY_NINE) ||
+      (event.keyCode === KEY_SPACE)) {
       event.stopPropagation();
     }
   }

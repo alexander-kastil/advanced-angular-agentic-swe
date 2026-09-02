@@ -2,10 +2,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
 
   label {
     width: 80px;
+  }
+
+  .input {
+    width: 8rem;
   }
 }
 
@@ -13,5 +16,5 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 12px;
+  margin-top: 4px;
 }

@@ -1,10 +1,9 @@
 import { Component, linkedSignal, signal, untracked } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { BorderDirective } from '../../../shared/formatting/formatting-directives';
 
 @Component({
   selector: 'app-linked-signal-set',
-  imports: [MatButton, BorderDirective],
+  imports: [BorderDirective],
   template: `
     <div border class="state">
       <div>stock (source): {{ stock() }}</div>
@@ -13,11 +12,11 @@ import { BorderDirective } from '../../../shared/formatting/formatting-directive
     </div>
 
     <div class="actions">
-      <button mat-raised-button color="accent" (click)="restock()">Restock (+5)</button>
-      <button mat-raised-button color="accent" (click)="sellOut()">Sell out (stock = 2)</button>
-      <button mat-raised-button color="accent" (click)="request(3)">Order 3</button>
-      <button mat-raised-button color="accent" (click)="request(99)">Order 99</button>
-      <button mat-raised-button color="accent" (click)="request(0)">Order 0</button>
+      <button type="button" class="btn btn-primary" (click)="restock()">Restock (+5)</button>
+      <button type="button" class="btn btn-primary" (click)="sellOut()">Sell out (stock = 2)</button>
+      <button type="button" class="btn btn-primary" (click)="request(3)">Order 3</button>
+      <button type="button" class="btn btn-primary" (click)="request(99)">Order 99</button>
+      <button type="button" class="btn btn-primary" (click)="request(0)">Order 0</button>
     </div>
   `,
   styles: `

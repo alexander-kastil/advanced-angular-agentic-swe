@@ -1,13 +1,12 @@
 import { httpResource } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { environment } from '../../../../environments/environment';
 import { BorderDirective } from '../../../shared/formatting/formatting-directives';
 import { Skill } from '../../../skills/skill.model';
 
 @Component({
   selector: 'app-resource-chain',
-  imports: [MatButton, BorderDirective],
+  imports: [BorderDirective],
   templateUrl: './resource-chain.component.html',
   styleUrl: './resource-chain.component.scss',
 })

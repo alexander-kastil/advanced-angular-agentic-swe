@@ -1,30 +1,28 @@
 import { Component, inject } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthFacade } from '../../mock-auth/auth.facade';
-import { SideNavService } from '../sidenav/sidenav.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { SnackbarService } from '../snackbar/snackbar.service';
 import { NavbarService } from './navbar.service';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { SideNavService } from '../sidenav/sidenav.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  imports: [MatToolbar, MatToolbarRow, MatIcon, RouterLinkActive, RouterLink],
+  imports: [RouterLinkActive, RouterLink, LoadingComponent],
 })
 export class NavbarComponent {
-  private nav = inject(SideNavService);
-  private ms = inject(NavbarService);
-  private auth = inject(AuthFacade);
-
-  readonly menuItems = this.ms.topItems.value;
-  readonly isAuthenticated = this.auth.isAuthenticated;
+  nav = inject(SideNavService);
+  ms = inject(NavbarService);
+  sns = inject(SnackbarService);
+  menuItems = toSignal(this.ms.getTopItems(), { initialValue: [] });
 
   toggleMenu() {
     this.nav.toggleMenuVisibility();
   }
 
-  logIn() {
-    this.auth.toggleLoggedIn();
+  toggleApps() {
+    this.sns.displayAlert('Apps', 'Not implemented - just a mock');
   }
 }

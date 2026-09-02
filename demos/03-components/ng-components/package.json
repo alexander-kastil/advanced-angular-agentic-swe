@@ -23,7 +23,6 @@
     "@angular/compiler": "^22.1.4",
     "@angular/core": "^22.1.4",
     "@angular/forms": "^22.1.4",
-    "@angular/material": "^22.1.4",
     "@angular/platform-browser": "^22.1.4",
     "@angular/router": "^22.1.4",
     "@ngrx/operators": "^22.0.0",
@@ -43,7 +42,10 @@
     "@angular/cli": "~22.1.6",
     "@angular/compiler-cli": "^22.1.4",
     "@playwright/test": "^1.62.1",
+    "@tailwindcss/postcss": "^4.3.3",
     "baseline-browser-mapping": "^2.10.0",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
     "vitest": "^4.1.11"
   }

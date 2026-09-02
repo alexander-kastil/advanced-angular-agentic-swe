@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 import { PetBadgeComponent } from './pet-badge/pet-badge.component';
 import {
@@ -19,7 +18,7 @@ interface RefactorStep {
   selector: 'app-agentic-refactor',
   templateUrl: './agentic-refactor.component.html',
   styleUrl: './agentic-refactor.component.scss',
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, BoxedDirective, PetBadgeComponent],
+  imports: [BoxedDirective, PetBadgeComponent],
 })
 export class AgenticRefactorComponent {
   readonly legacyComponent = legacyComponentSource;

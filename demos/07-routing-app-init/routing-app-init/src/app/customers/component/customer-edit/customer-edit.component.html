@@ -1,9 +1,19 @@
-<div class="box">Customer ID: {{ id() }} - Param readonly: {{ readonly() }}</div>
-
-<div class="box">
-  @if (customer(); as c) {
-    <pre>{{ c | json }}</pre>
-  } @else {
-    <p>No customer with id {{ id() }}</p>
-  }
+<div class="page max-w-lg">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Customer Detail</h2>
+    </div>
+    <div class="card-content">
+      <p class="text-[#64748b]">Customer ID: {{ id() }} - Param readonly: {{ readonly() }}</p>
+      @if (customer(); as c) {
+        <pre
+          class="overflow-auto rounded-md bg-slate-50 p-3 text-xs text-ink"
+          tabindex="0"
+          role="region"
+          aria-label="Customer data as JSON">{{ c | json }}</pre>
+      } @else {
+        <p>No customer with id {{ id() }}</p>
+      }
+    </div>
+  </div>
 </div>

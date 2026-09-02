@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-prime-feature',
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent],
   template: `
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>Prime Feature</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Prime Feature</h2>
+      </div>
+      <div class="card-content">
         <p>This chunk was downloaded only because canMatch let the route match.</p>
-      </mat-card-content>
-    </mat-card>
+      </div>
+    </div>
   `,
 })
 export class PrimeFeatureComponent {}

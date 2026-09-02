@@ -1,13 +1,12 @@
 import { httpResource } from '@angular/common/http';
 import { Component, computed, effect, linkedSignal, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { environment } from '../../../../environments/environment';
 import { BorderDirective } from '../../../shared/formatting/formatting-directives';
 import { Skill } from '../../../skills/skill.model';
 
 @Component({
   selector: 'app-devtools-signal-graph',
-  imports: [MatButton, BorderDirective],
+  imports: [BorderDirective],
   templateUrl: './devtools-signal-graph.component.html',
   styleUrl: './devtools-signal-graph.component.scss',
 })

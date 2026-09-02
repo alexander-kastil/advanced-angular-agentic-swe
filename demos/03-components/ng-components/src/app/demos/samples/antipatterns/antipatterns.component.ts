@@ -1,6 +1,4 @@
 import { Component, computed, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 
 interface AntiPattern {
   id: number;
@@ -150,7 +148,6 @@ const patterns: AntiPattern[] = [
   selector: 'app-antipatterns',
   templateUrl: './antipatterns.component.html',
   styleUrl: './antipatterns.component.scss',
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton],
 })
 export class AntipatternsComponent {
   readonly all = signal(patterns);

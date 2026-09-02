@@ -1,87 +1,93 @@
-<app-markdown-renderer [md]="'nested-objects'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Signal Forms - Nested Objects</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Signal Forms - Nested Objects</h2>
+  </div>
+  <div class="card-content">
     <form role="form" novalidate column>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
+      <div class="field">
+        <label class="label" for="nested-name">Name</label>
         <input
-          matInput
+          id="nested-name"
+          class="input"
           type="text"
           placeholder="Name"
           [formField]="personForm.name"
         />
-      </mat-form-field>
+      </div>
       @if (personForm.name().touched() && personForm.name().invalid()) {
         @for (err of personForm.name().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
 
-      <mat-form-field>
-        <mat-label>Last Name</mat-label>
+      <div class="field">
+        <label class="label" for="nested-last-name">Last Name</label>
         <input
-          matInput
+          id="nested-last-name"
+          class="input"
           type="text"
           placeholder="Last Name"
           [formField]="personForm.lastName"
         />
-      </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Age</mat-label>
+      <div class="field">
+        <label class="label" for="nested-age">Age</label>
         <input
-          matInput
+          id="nested-age"
+          class="input"
           type="number"
           placeholder="Age"
           [formField]="personForm.age"
         />
-      </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <mat-label>E-Mail</mat-label>
+      <div class="field">
+        <label class="label" for="nested-email">E-Mail</label>
         <input
-          matInput
+          id="nested-email"
+          class="input"
           type="text"
           placeholder="Email"
           [formField]="personForm.email"
         />
-      </mat-form-field>
+      </div>
 
-      <mat-form-field>
-        <mat-label>Gender</mat-label>
-        <mat-select placeholder="Gender" [formField]="personForm.gender">
-          <mat-option value="male">Male</mat-option>
-          <mat-option value="female">Female</mat-option>
-          <mat-option value="not set">Not set</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="nested-gender">Gender</label>
+        <select id="nested-gender" class="input" [formField]="personForm.gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="not set">Not set</option>
+        </select>
+      </div>
 
-      <mat-radio-group
-        name="wealthNested"
-        [formField]="personForm.wealth"
-        border
-      >
-        <mat-label>Wealth:</mat-label>
+      <fieldset class="radio-group" border>
+        <legend class="label">Wealth:</legend>
         @for (opt of wealthOpts; track opt) {
-          <mat-radio-button [value]="opt">{{ opt }}</mat-radio-button>
+          <label class="checkbox">
+            <input
+              type="radio"
+              [value]="opt"
+              [formField]="personForm.wealth"
+            />
+            {{ opt }}
+          </label>
         }
-      </mat-radio-group>
+      </fieldset>
 
       <div column>
         <h3>Address</h3>
-        <mat-form-field>
-          <mat-label>Street</mat-label>
+        <div class="field">
+          <label class="label" for="nested-street">Street</label>
           <input
-            matInput
+            id="nested-street"
+            class="input"
             type="text"
             placeholder="Street"
             [formField]="personForm.address.street"
           />
-        </mat-form-field>
+        </div>
         @if (
           personForm.address.street().touched() &&
           personForm.address.street().invalid()
@@ -91,35 +97,36 @@
           }
         }
 
-        <mat-form-field>
-          <mat-label>Postal Code</mat-label>
+        <div class="field">
+          <label class="label" for="nested-postal-code">Postal Code</label>
           <input
-            matInput
+            id="nested-postal-code"
+            class="input"
             type="text"
             placeholder="Postal Code"
             [formField]="personForm.address.postalCode"
           />
-        </mat-form-field>
+        </div>
 
-        <mat-form-field>
-          <mat-label>City</mat-label>
+        <div class="field">
+          <label class="label" for="nested-city">City</label>
           <input
-            matInput
+            id="nested-city"
+            class="input"
             type="text"
             placeholder="City"
             [formField]="personForm.address.city"
           />
-        </mat-form-field>
+        </div>
       </div>
 
       <div class="cmdItems">
-        <button mat-raised-button color="primary" type="button" (click)="loadPerson()">
+        <button class="btn btn-primary" type="button" (click)="loadPerson()">
           Load Sample
         </button>
-        <button mat-stroked-button type="button" (click)="clearPerson()">Clear</button>
+        <button class="btn btn-outline" type="button" (click)="clearPerson()">Clear</button>
         <button
-          mat-raised-button
-          color="accent"
+          class="btn btn-primary"
           type="button"
           [disabled]="personForm().invalid()"
           (click)="savePerson()"
@@ -128,5 +135,5 @@
         </button>
       </div>
     </form>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

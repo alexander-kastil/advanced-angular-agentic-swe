@@ -1,0 +1,27 @@
+.site-header {
+  height: 64px;
+  gap: 2rem;
+  border-radius: 0;
+  border-width: 0 0 1px;
+}
+
+.brand {
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+nav a.active {
+  color: #1976d2;
+  font-weight: 600;
+  border-bottom: 2px solid currentColor;
+}

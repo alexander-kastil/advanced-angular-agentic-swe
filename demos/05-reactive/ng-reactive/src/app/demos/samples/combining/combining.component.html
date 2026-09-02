@@ -1,9 +1,9 @@
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>combineLatest</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">combineLatest</h2>
+    </div>
+    <div class="card-content">
       <p>
         Three sources: the search term, the checkbox, and the
         <code>GET /skills</code>
@@ -11,88 +11,97 @@
         every one. Nothing renders until all three have produced a value.
       </p>
       <div class="filters">
-        <mat-form-field appearance="outline">
-          <mat-label>Filter skills</mat-label>
-          <input matInput [(ngModel)]="term" />
-        </mat-form-field>
-        <mat-checkbox [(ngModel)]="onlyOpen">Only open</mat-checkbox>
+        <div class="field">
+          <label class="label" for="combining-term">Filter skills</label>
+          <input id="combining-term" class="input" [(ngModel)]="term" />
+        </div>
+        <label class="checkbox">
+          <input type="checkbox" [(ngModel)]="onlyOpen" />
+          Only open
+        </label>
         <span class="badge">{{ combineLatestEmissions() }} emissions</span>
       </div>
-      <div class="log">
+      <div class="log" tabindex="0" role="region" aria-label="combineLatest output">
         @for (skill of visible(); track skill.id) {
           <div>{{ skill.name }} ({{ skill.completed ? "done" : "open" }})</div>
         } @empty {
           <div>no matches, or json-server is not running</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>forkJoin</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">forkJoin</h2>
+    </div>
+    <div class="card-content">
       <p>
         Three real endpoints in parallel. Each one logs when it completes;
         forkJoin logs once, after the slowest.
       </p>
-      <button mat-raised-button color="accent" (click)="runForkJoin()">
-        Load skills, todos and accounts
-      </button>
-      <div class="log">
+      <div>
+        <button type="button" class="btn btn-primary" (click)="runForkJoin()">
+          Load skills, todos and accounts
+        </button>
+      </div>
+      <div class="log" tabindex="0" role="region" aria-label="forkJoin output">
         @for (entry of forkJoinLog(); track $index) {
           <div>{{ entry }}</div>
         } @empty {
           <div>idle</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>merge</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">merge</h2>
+    </div>
+    <div class="card-content">
       <p>
         Interleaves two timers with no pairing. Order is arrival order, and the
         result completes only when both sources have.
       </p>
-      <button mat-raised-button color="accent" (click)="runMerge()">Run</button>
-      <div class="log">
+      <div>
+        <button type="button" class="btn btn-primary" (click)="runMerge()">Run</button>
+      </div>
+      <div class="log" tabindex="0" role="region" aria-label="merge output">
         @for (entry of mergeLog(); track $index) {
           <div>{{ entry }}</div>
         } @empty {
           <div>idle</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>withLatestFrom</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">withLatestFrom</h2>
+    </div>
+    <div class="card-content">
       <p>
         Only the save button emits. The ticker and the draft field are read, never
         driving. The ticker is at
         <strong>{{ tick() }}</strong>
         , and typing produces no log entry at all.
       </p>
-      <mat-form-field appearance="outline">
-        <mat-label>Draft</mat-label>
-        <input matInput [(ngModel)]="draft" />
-      </mat-form-field>
-      <button mat-raised-button color="accent" (click)="save()">Save now</button>
-      <div class="log">
+      <div class="field">
+        <label class="label" for="combining-draft">Draft</label>
+        <input id="combining-draft" class="input" [(ngModel)]="draft" />
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" (click)="save()">Save now</button>
+      </div>
+      <div class="log" tabindex="0" role="region" aria-label="withLatestFrom output">
         @for (entry of withLatestFromLog(); track $index) {
           <div>{{ entry }}</div>
         } @empty {
           <div>idle</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

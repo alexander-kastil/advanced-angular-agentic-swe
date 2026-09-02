@@ -1,17 +1,17 @@
 <div boxed>
-  <h3>httpResource: reactive data loading</h3>
+  <h2>httpResource: reactive data loading</h2>
   <p>Changing the id signal refetches on its own. No subscribe, no manual loading flag.</p>
 </div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Pet {{ petId() }} - status: {{ pet.status() }}</mat-card-title>
-  </mat-card-header>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Pet {{ petId() }} - status: {{ pet.status() }}</h2>
+  </div>
 
-  <mat-card-content>
+  <div class="card-content">
     @if (pet.isLoading()) {
       <div class="state">
-        <mat-progress-spinner mode="indeterminate" diameter="40" />
+        <app-progress-bar mode="indeterminate" />
         <p>Loading pet data</p>
       </div>
     }
@@ -24,20 +24,20 @@
 
     @if (pet.value(); as data) {
       <div class="details">
-        <h4>{{ data.name }}</h4>
+        <h3>{{ data.name }}</h3>
         <p><strong>Type:</strong> {{ data.type }}</p>
         <p><strong>Breed:</strong> {{ data.breed }}</p>
         <p><strong>Age:</strong> {{ data.age }} years</p>
         <p><strong>Owner:</strong> {{ data.owner }}</p>
       </div>
     }
-  </mat-card-content>
+  </div>
 
-  <mat-card-actions>
-    <button mat-stroked-button [disabled]="petId() === 1" (click)="loadPrevious()">
+  <div class="card-actions">
+    <button type="button" class="btn btn-outline" [disabled]="petId() === 1" (click)="loadPrevious()">
       Previous
     </button>
-    <button mat-stroked-button (click)="loadNext()">Next</button>
-    <button mat-raised-button color="accent" (click)="reload()">Reload</button>
-  </mat-card-actions>
-</mat-card>
+    <button type="button" class="btn btn-outline" (click)="loadNext()">Next</button>
+    <button type="button" class="btn btn-primary" (click)="reload()">Reload</button>
+  </div>
+</div>

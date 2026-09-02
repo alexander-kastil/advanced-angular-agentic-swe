@@ -42,7 +42,7 @@ export class QueryPanelComponent {
 
 ```html
 <app-query-panel>
-  <h4 #headline>Projected headline</h4>
+  <h3 #headline>Projected headline</h3>
   <p #entry>Entry one</p>
   <p #entry>Entry two</p>
 </app-query-panel>

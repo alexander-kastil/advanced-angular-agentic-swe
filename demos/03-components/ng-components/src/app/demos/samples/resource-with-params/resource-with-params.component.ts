@@ -1,7 +1,4 @@
 import { Component, resource, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { environment } from '../../../../environments/environment';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 import { PetDetailComponent } from './pet-detail/pet-detail.component';
@@ -19,17 +16,7 @@ interface Pet {
   selector: 'app-resource-with-params',
   templateUrl: './resource-with-params.component.html',
   styleUrl: './resource-with-params.component.scss',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
-    MatButtonToggle,
-    MatButtonToggleGroup,
-    BoxedDirective,
-    PetDetailComponent,
-  ],
+  imports: [BoxedDirective, PetDetailComponent],
 })
 export class ResourceWithParamsComponent {
   readonly petId = signal(1);

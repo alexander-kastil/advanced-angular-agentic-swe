@@ -1,38 +1,38 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>viewChild &amp; viewChildren</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">viewChild &amp; viewChildren</h2>
+  </div>
+  <div class="card-content">
     <div class="row">
-      <label for="liters">Liters</label>
-      <input id="liters" #liters #field type="number" value="10" (input)="calculate()" />
+      <label class="label" for="liters">Liters</label>
+      <input id="liters" class="input" #liters #field type="number" value="10" (input)="calculate()" />
     </div>
     <div class="row">
-      <label for="cost">Cost</label>
-      <input id="cost" #cost #field type="number" readonly />
+      <label class="label" for="cost">Cost</label>
+      <input id="cost" class="input" #cost #field type="number" readonly />
     </div>
 
     <p>viewChildren('field') matched {{ fieldCount() }} inputs</p>
     <p>Last action: {{ lastAction() }}</p>
 
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="calculate()">Recalculate</button>
-      <button mat-stroked-button (click)="tagFields()">Tag fields</button>
+      <button type="button" class="btn btn-primary" (click)="calculate()">Recalculate</button>
+      <button type="button" class="btn btn-outline" (click)="tagFields()">Tag fields</button>
       <app-status-badge />
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>contentChild &amp; contentChildren</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">contentChild &amp; contentChildren</h2>
+  </div>
+  <div class="card-content">
     <app-query-panel>
-      <h4 #headline>Projected headline</h4>
+      <h3 #headline>Projected headline</h3>
       <p #entry>Whippets sleep 18 hours a day</p>
       <p #entry>Greyhounds accelerate faster than a race car</p>
       <p #entry>Salukis were bred in the desert</p>
     </app-query-panel>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Navigation exposed as agent tools</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      Three tools are declared in this component's injection context with
+      <code>declareExperimentalWebMcpTool</code>: <code>list_demos</code>,
+      <code>navigate_to_demo</code> and <code>current_route</code>. They register when the component
+      is created and unregister when it is destroyed, so an agent can only drive navigation while
+      this page is open.
+    </p>
+    @if (agentPresent()) {
+      <p class="agent on">A WebMCP host is present. The tools are registered.</p>
+    } @else {
+      <p class="agent off">
+        No <code>navigator.modelContext</code> in this browser, so registration is a no-op. The
+        buttons below call the same code the tool would run.
+      </p>
+    }
+
+    <h3 class="text-sm font-semibold text-ink">Tool calls</h3>
+    <ul class="list-disc pl-5">
+      @for (call of calls(); track call) {
+        <li>{{ call }}</li>
+      } @empty {
+        <li>No tool has been invoked yet.</li>
+      }
+    </ul>
+  </div>
+  <div class="card-actions flex-wrap">
+    @for (target of targets; track target) {
+      <button type="button" class="btn btn-primary" (click)="simulateAgentCall(target)">
+        {{ target }}
+      </button>
+    }
+  </div>
+</div>

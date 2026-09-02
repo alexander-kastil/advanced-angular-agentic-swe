@@ -1,18 +1,13 @@
 import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, max, min, minLength, required, submit } from '@angular/forms/signals';
 import { Person } from '../../person/person.model';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { ColumnDirective } from '../../../../shared/ux-lib/formatting/formatting-directives';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions } from '@angular/material/card';
 
 @Component({
   selector: 'app-presenter-edit',
   templateUrl: './presenter-edit.component.html',
   styleUrls: ['./presenter-edit.component.scss'],
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions,
-    ColumnDirective, FormField, MatFormField, MatLabel, MatInput, MatButton]
+  imports: [ColumnDirective, FormField]
 })
 export class PresenterEditComponent {
   readonly person = input.required<Person>();

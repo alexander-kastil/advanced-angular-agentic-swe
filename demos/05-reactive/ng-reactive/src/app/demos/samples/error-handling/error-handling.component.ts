@@ -1,8 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { EMPTY, catchError, defer, finalize, map, of, retry, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Skill } from '../../skills/skills';
@@ -13,12 +11,12 @@ type Recovery = 'empty' | 'fallback' | 'rethrow';
 @Component({
   selector: 'app-error-handling',
   templateUrl: './error-handling.component.html',
-  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton],
   styles: `
     .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .log { font-family: monospace; font-size: 0.82rem; max-height: 210px; overflow: auto; }
-    .log div { padding: 2px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.25); }
+    .log div { padding: 2px 0; border-bottom: 1px solid var(--color-line); }
     .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+    code { font-family: monospace; background: #eef2f6; border-radius: 3px; padding: 0 3px; }
   `,
 })
 export class ErrorHandlingComponent {

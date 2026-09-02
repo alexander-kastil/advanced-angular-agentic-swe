@@ -1,7 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { environment } from '../../../../environments/environment';
 import { ErrorLogService } from './error-log.service';
@@ -119,7 +118,7 @@ describe('HTTP Error Tests - HttpErrorTestsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpErrorTestsComponent, NoopAnimationsModule],
+      imports: [HttpErrorTestsComponent],
       providers: [
         provideHttpClient(withInterceptors([errorMappingInterceptor])),
         provideHttpClientTesting(),
@@ -170,7 +169,7 @@ describe('HTTP Error Tests - without the interceptor', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpErrorTestsComponent, NoopAnimationsModule],
+      imports: [HttpErrorTestsComponent],
       providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 

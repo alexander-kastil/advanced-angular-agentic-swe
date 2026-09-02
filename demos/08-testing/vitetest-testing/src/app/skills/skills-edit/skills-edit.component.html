@@ -1,21 +1,38 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ isNew ? 'Add Skill' : 'Edit Skill' }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput type="text" placeholder="Name" [formField]="skillForm.name" />
-    </mat-form-field>
-    @if (skillForm.name().touched() && skillForm.name().invalid()) {
-      @for (err of skillForm.name().errors(); track err.kind) {
-        <div class="error">{{ err.message }}</div>
-      }
-    }
-    <mat-slide-toggle [formField]="skillForm.completed">Completed</mat-slide-toggle>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="doCancel()">Cancel</button>
-    <button mat-raised-button (click)="saveSkill()" color="primary">Save</button>
-  </mat-card-actions>
-</mat-card>
+<div class="page">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">{{ isNew ? 'Add Skill' : 'Edit Skill' }}</h2>
+    </div>
+    <div class="card-content gap-4">
+      <div class="field">
+        <label class="label" for="skill-name">Name</label>
+        <input
+          id="skill-name"
+          class="input"
+          type="text"
+          placeholder="Name"
+          autocomplete="off"
+          [attr.aria-invalid]="skillForm.name().touched() && skillForm.name().invalid() ? 'true' : null"
+          [attr.aria-describedby]="skillForm.name().touched() && skillForm.name().invalid() ? 'skill-name-error' : null"
+          [formField]="skillForm.name"
+        />
+        @if (skillForm.name().touched() && skillForm.name().invalid()) {
+          <div id="skill-name-error" class="error" role="alert">
+            @for (err of skillForm.name().errors(); track err.kind) {
+              <div>{{ err.message }}</div>
+            }
+          </div>
+        }
+      </div>
+      <label class="switch">
+        <input type="checkbox" class="sr-only" [formField]="skillForm.completed" />
+        <span class="switch-track"><span class="switch-thumb"></span></span>
+        Completed
+      </label>
+    </div>
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-outline" (click)="doCancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="saveSkill()">Save</button>
+    </div>
+  </div>
+</div>

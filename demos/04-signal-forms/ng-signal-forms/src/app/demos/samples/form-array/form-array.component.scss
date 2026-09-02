@@ -1,15 +1,18 @@
-mat-form-field {
+.skill-row .field {
   flex: 1;
+  min-width: 0;
 }
 
-h6 {
-  margin-bottom: var(--gap-medium);
+h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0 0 var(--gap-medium);
 }
 
 .skill-row {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   gap: var(--gap-medium);
 }
 

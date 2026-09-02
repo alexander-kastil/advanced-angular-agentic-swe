@@ -1,27 +1,17 @@
-mat-card {
-  margin-bottom: var(--gap-big);
+.card {
+  margin-top: var(--gap-big);
 }
 
-.tablist {
-  display: flex;
-  gap: var(--gap-small);
+.tabs {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-}
-
-.tab {
-  padding: 8px 14px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  border-bottom: none;
-  border-radius: 4px 4px 0 0;
 }
 
 .tab[aria-selected='true'] {
-  border-color: rgba(128, 128, 128, 0.4);
-  font-weight: bold;
+  border-bottom-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .tab[data-active='true'] {
@@ -30,7 +20,7 @@ mat-card {
 }
 
 .tab[aria-disabled='true'] {
-  opacity: 0.5;
+  color: #64748b;
   cursor: not-allowed;
 }
 
@@ -47,14 +37,20 @@ mat-card {
   margin: 0;
   padding: 4px;
   max-width: 320px;
-  border: 1px solid rgba(128, 128, 128, 0.4);
-  border-radius: 4px;
+  border: 1px solid var(--color-line);
+  border-radius: 6px;
+  background-color: #ffffff;
 }
 
 .option {
   padding: 6px 10px;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.option[aria-selected='true'] {
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
 }
 
 .option[aria-selected='true']::before {
@@ -67,7 +63,7 @@ mat-card {
 }
 
 .option[aria-disabled='true'] {
-  opacity: 0.5;
+  color: #64748b;
   cursor: not-allowed;
 }
 
@@ -83,4 +79,5 @@ mat-card {
 
 .hint {
   font-size: var(--font-small);
+  color: #64748b;
 }

@@ -1,10 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { form, FormField, hidden, disabled, readonly } from '@angular/forms/signals';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 import { JsonPipe } from '@angular/common';
 
@@ -19,16 +14,7 @@ interface ConditionalModel {
     selector: 'app-signal-forms-conditional',
     templateUrl: './signal-forms-conditional.component.html',
     imports: [
-        MarkdownRendererComponent,
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
         FormField,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatCheckbox,
         JsonPipe,
         ColumnDirective,
     ]

@@ -1,25 +1,25 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>&#64;if / &#64;else</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-slide-toggle [checked]="membersOnly()" (change)="membersOnly.set($event.checked)">
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">&#64;if / &#64;else</h2>
+  </div>
+  <div class="card-content">
+    <app-slide-toggle [checked]="membersOnly()" (toggled)="membersOnly.set($event)">
       Members area
-    </mat-slide-toggle>
+    </app-slide-toggle>
 
     @if (membersOnly()) {
       <p>Members area content</p>
     } @else {
       <p>Public area content</p>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>&#64;for / &#64;empty / &#64;let</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">&#64;for / &#64;empty / &#64;let</h2>
+  </div>
+  <div class="card-content">
     @let average = averageAge().toFixed(1);
     <p>Average age: {{ average }}</p>
 
@@ -32,19 +32,19 @@
     </div>
 
     <div class="actions">
-      <button mat-stroked-button (click)="dogs.update(list => ageAllBy(list, 1))">
+      <button type="button" class="btn btn-outline" (click)="dogs.update(list => ageAllBy(list, 1))">
         Everyone ages a year
       </button>
-      <button mat-stroked-button (click)="dogs.set([])">Clear</button>
+      <button type="button" class="btn btn-outline" (click)="dogs.set([])">Clear</button>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>&#64;switch</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">&#64;switch</h2>
+  </div>
+  <div class="card-content">
     @switch (status()) {
       @case ('idle') {
         <p>Waiting for work</p>
@@ -56,32 +56,34 @@
         <p>Something went wrong</p>
       }
     }
-    <button mat-stroked-button (click)="cycleStatus()">Next status ({{ status() }})</button>
-  </mat-card-content>
-</mat-card>
+    <div class="actions">
+      <button type="button" class="btn btn-outline" (click)="cycleStatus()">Next status ({{ status() }})</button>
+    </div>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Arrow functions in template expressions</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Arrow functions in template expressions</h2>
+  </div>
+  <div class="card-content">
     <p>Count {{ count() }}, multiplied {{ count() * multiplier() }}</p>
     <div class="actions">
-      <button mat-stroked-button (click)="count.update(n => n + 1)">+1</button>
-      <button mat-stroked-button (click)="count.update(n => n - 1)">-1</button>
-      <button mat-stroked-button (click)="count.update(n => n * multiplier())">
+      <button type="button" class="btn btn-outline" (click)="count.update(n => n + 1)">+1</button>
+      <button type="button" class="btn btn-outline" (click)="count.update(n => n - 1)">-1</button>
+      <button type="button" class="btn btn-outline" (click)="count.update(n => n * multiplier())">
         &times; {{ multiplier() }}
       </button>
-      <button mat-stroked-button (click)="count.set(0)">Reset</button>
+      <button type="button" class="btn btn-outline" (click)="count.set(0)">Reset</button>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>&#64;defer / &#64;placeholder</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">&#64;defer / &#64;placeholder</h2>
+  </div>
+  <div class="card-content">
     @defer (on interaction) {
       <div boxed>
         <p>Deferred block rendered with {{ dogs().length }} dogs in state</p>
@@ -93,5 +95,5 @@
     } @loading {
       <p>Loading...</p>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

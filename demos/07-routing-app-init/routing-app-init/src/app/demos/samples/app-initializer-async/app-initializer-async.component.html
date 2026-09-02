@@ -1,10 +1,10 @@
 <app-markdown-renderer [md]="'app-initializer-async'" />
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>What ran before the app was on screen</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">What ran before the app was on screen</h2>
+  </div>
+  <div class="card-content">
     <p>
       <code>provideAppInitializer</code> in <code>app.config.ts</code> awaits a service that is not in
       the initial bundle. <code>injectAsync</code> returns a getter, so the dynamic
@@ -17,20 +17,20 @@
         <li>No startup entries recorded.</li>
       }
     </ol>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>The same service, injected lazily in a component</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The same service, injected lazily in a component</h2>
+  </div>
+  <div class="card-content">
     <p>
       Here <code>injectAsync</code> is configured with <code>&#123; prefetch: onIdle &#125;</code>, so
       the chunk is fetched while the browser is idle and the button resolves instantly.
     </p>
     @if (flags().length) {
-      <ul>
+      <ul class="log">
         @for (flag of flags(); track flag) {
           <li>{{ flag }}</li>
         }
@@ -38,10 +38,10 @@
     } @else {
       <p>Nothing loaded yet.</p>
     }
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="showFlags()" [disabled]="loading()">
+  </div>
+  <div class="card-actions">
+    <button type="button" class="btn btn-primary" (click)="showFlags()" [disabled]="loading()">
       Resolve the lazy service
     </button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+</div>

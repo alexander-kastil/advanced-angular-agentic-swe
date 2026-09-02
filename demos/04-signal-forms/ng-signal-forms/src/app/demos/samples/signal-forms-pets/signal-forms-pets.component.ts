@@ -1,19 +1,12 @@
 import { Component, computed, effect, signal } from '@angular/core';
 import { form, FormField, required, min, max, submit } from '@angular/forms/signals';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 import { PetService } from './pet.service';
 import { inject } from '@angular/core';
 import { Pet, Owner, PetType } from './pet.model';
 import { JsonPipe } from '@angular/common';
-import { MatProgressBar } from '@angular/material/progress-bar';
-import { MatListModule } from '@angular/material/list';
+import { ProgressBarComponent } from '../../../shared/progress-bar/progress-bar.component';
 
 interface PetFormModel {
     name: string;
@@ -35,20 +28,11 @@ const emptyPet: PetFormModel = {
     selector: 'app-signal-forms-pets',
     templateUrl: './signal-forms-pets.component.html',
     imports: [
-        MarkdownRendererComponent,
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
         FormField,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatButton,
-        MatSelectModule,
         FormsModule,
         JsonPipe,
-        MatProgressBar, ColumnDirective, MatListModule,
+        ProgressBarComponent,
+        ColumnDirective,
     ]
 })
 export class SignalFormsPetsComponent {

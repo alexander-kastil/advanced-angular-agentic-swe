@@ -1,17 +1,26 @@
-mat-expansion-panel{
-    margin-bottom: var(--gap-medium);
+:host {
+  display: block;
+  height: 100%;
 }
 
-mat-panel-title{
-  color: var(--color-font);
+.panel {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
 }
 
-markdown{
-  
-  span{
-    font-weight: bold !important;
-    font-size: larger;
+.panel-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+:host ::ng-deep .mermaid {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  svg {
+    max-width: 100%;
   }
-
 }
-

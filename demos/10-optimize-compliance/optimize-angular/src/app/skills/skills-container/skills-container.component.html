@@ -1,0 +1,34 @@
+<div class="page">
+  <div class="app-toolbar justify-between">
+    <div class="text-sm font-semibold tracking-tight text-ink">SPA Skills</div>
+    <div class="flex items-center gap-4">
+      <app-slide-toggle [checked]="showAll()" (toggled)="showAll.set($event)">
+        Show all
+      </app-slide-toggle>
+      <button type="button" class="btn btn-primary" (click)="addItem()">Add</button>
+    </div>
+  </div>
+
+  <div class="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+    <div class="skillrow header">
+      <div class="id">ID</div>
+      <div class="name">Name</div>
+      <div class="completed">Completed</div>
+      <div class="cmd">Actions</div>
+    </div>
+    @if (store.loading()) {
+      <p class="px-4 py-3 text-sm text-slate-500">Loading skills...</p>
+    }
+    @for (sk of skills(); track sk.id) {
+      <app-skill-row
+        [skill]="sk"
+        (itemDeleted)="deleteItem($event)"
+        (itemCompleted)="toggleItemComplete($event)"
+      />
+    } @empty {
+      <p class="px-4 py-3 text-sm text-slate-500">No skills to show.</p>
+    }
+  </div>
+
+  <app-skills-kpi />
+</div>

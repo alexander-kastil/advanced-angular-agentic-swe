@@ -1,53 +1,63 @@
-<app-markdown-renderer [md]="'err-state-matcher'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>ErrorStateMatcher with Signal Forms</mat-card-title>
-  </mat-card-header>
-  <mat-card-content column>
-    <mat-form-field>
-      <mat-label>Email - default matcher (touched and invalid)</mat-label>
-      <input matInput type="email" placeholder="Email Address" [formField]="registerForm.email" />
-      <mat-error>Email is required</mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Password - eager matcher (invalid only)</mat-label>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">ErrorStateMatcher with Signal Forms</h2>
+  </div>
+  <div class="card-content" column>
+    <div class="field">
+      <label class="label" for="matcher-email">Email - default matcher (touched and invalid)</label>
       <input
-        matInput
+        id="matcher-email"
+        class="input"
+        type="email"
+        placeholder="Email Address"
+        [formField]="registerForm.email"
+      />
+      @if (registerForm.email().touched() && registerForm.email().invalid()) {
+        <div class="error">Email is required</div>
+      }
+    </div>
+
+    <div class="field">
+      <label class="label" for="matcher-password">Password - eager matcher (invalid only)</label>
+      <input
+        id="matcher-password"
+        class="input"
         type="password"
         placeholder="Password"
         [formField]="registerForm.password"
-        [errorStateMatcher]="eager"
       />
-      <mat-error>At least 4 characters</mat-error>
-    </mat-form-field>
+      @if (eager.isSignalErrorState(registerForm.password)) {
+        <div class="error">At least 4 characters</div>
+      }
+    </div>
 
-    <mat-form-field>
-      <mat-label>Repeat Password - dirty-only matcher</mat-label>
+    <div class="field">
+      <label class="label" for="matcher-password-repeat">Repeat Password - dirty-only matcher</label>
       <input
-        matInput
+        id="matcher-password-repeat"
+        class="input"
         type="password"
         placeholder="Re-Enter Password"
         [formField]="registerForm.passwordRepeat"
-        [errorStateMatcher]="dirtyOnly"
       />
-      <mat-error>Passwords do not match</mat-error>
-    </mat-form-field>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button type="button" color="primary" (click)="registerUser()">Register</button>
-  </mat-card-actions>
-</mat-card>
+      @if (dirtyOnly.isSignalErrorState(registerForm.passwordRepeat)) {
+        <div class="error">Passwords do not match</div>
+      }
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Field State</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Field State</h2>
+  </div>
+  <div class="card-content">
     <div>Email touched: {{ registerForm.email().touched() }} | invalid: {{ registerForm.email().invalid() }}</div>
     <div>Password dirty: {{ registerForm.password().dirty() }} | invalid: {{ registerForm.password().invalid() }}</div>
     <div>Repeat dirty: {{ registerForm.passwordRepeat().dirty() }} | invalid: {{ registerForm.passwordRepeat().invalid() }}</div>
     <div>Form valid: {{ registerForm().valid() }}</div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

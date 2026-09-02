@@ -10,12 +10,12 @@
   cursor: pointer;
   font-size: 1.5rem;
   line-height: 1;
-  opacity: 0.35;
+  color: #94a3b8;
   padding: 0;
 }
 
 .star.filled {
-  opacity: 1;
+  color: #d97706;
 }
 
 .star:disabled {
@@ -24,4 +24,11 @@
 
 .readout {
   margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.error {
+  font-size: 0.8125rem;
+  color: #dc2626;
 }

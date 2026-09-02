@@ -1,0 +1,30 @@
+.skillrow.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: var(--toolbar-medium);
+  padding: 0 1rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  .id {
+    width: 70px;
+  }
+
+  .name {
+    flex: 3;
+  }
+
+  .completed {
+    flex: 2;
+  }
+
+  .cmd {
+    flex: 1;
+    text-align: end;
+  }
+}

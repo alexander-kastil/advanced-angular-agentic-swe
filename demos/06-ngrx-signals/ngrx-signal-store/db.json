@@ -40,7 +40,7 @@
       "url": "store-entities",
       "title": "SignalStore Entities",
       "teaches": "Manage a normalized collection with withEntities(). Tour the updater API: setAllEntities, addEntity, updateEntity, updateAllEntities, removeEntity, removeAllEntities.",
-      "sortOrder": 10,
+      "sortOrder": 5,
       "topic": "Data Management",
       "id": "4",
       "md": "store-entities"
@@ -49,7 +49,7 @@
       "url": "skills-entities",
       "title": "Skills with withEntities",
       "teaches": "Back an entity collection with a REST API. Combines withEntities, the withRequestStatus feature and rxMethod for load, add, update and remove.",
-      "sortOrder": 11,
+      "sortOrder": 6,
       "topic": "Data Management",
       "id": "5",
       "md": "skills-entities"
@@ -58,7 +58,7 @@
       "url": "store-resource",
       "title": "Resource Extensions",
       "teaches": "Extend an httpResource with @ngrx/signals/resource. withPreviousValueOnLoading keeps the last value while reloading and withValueOnError supplies a fallback.",
-      "sortOrder": 12,
+      "sortOrder": 7,
       "topic": "Data Management",
       "id": "6",
       "md": "store-resource"
@@ -67,7 +67,7 @@
       "url": "custom-store-features",
       "title": "Request Status Feature",
       "teaches": "Build reusable store features with signalStoreFeature. Compose withRequestStatus and withAttempts and drive them with pure updater functions.",
-      "sortOrder": 20,
+      "sortOrder": 8,
       "topic": "Advanced Patterns",
       "id": "7",
       "md": "custom-store-features"
@@ -76,7 +76,7 @@
       "url": "store-events",
       "title": "Event-Based Store",
       "teaches": "Decouple intent from state with @ngrx/signals/events: an eventGroup reduced by withReducer, side effects in withEventHandlers, and scoped dispatching through a component-level Dispatcher.",
-      "sortOrder": 21,
+      "sortOrder": 9,
       "topic": "Advanced Patterns",
       "id": "8",
       "md": "store-events"
@@ -85,7 +85,7 @@
       "url": "markdown-editor",
       "title": "Markdown Editor",
       "teaches": "Compose custom store features into a real store. Uses withMarkdownItems() for entity CRUD and withRequestState() for loading and error tracking.",
-      "sortOrder": 22,
+      "sortOrder": 10,
       "topic": "Advanced Patterns",
       "id": "9",
       "md": "markdown-editor"
@@ -94,25 +94,16 @@
       "url": "store-composition",
       "title": "Store Composition",
       "teaches": "Compose a store from parts: withProps for injected dependencies and observables, withFeature for a feature that needs store members, and signalMethod for a side effect bound to a signal.",
-      "sortOrder": 23,
+      "sortOrder": 11,
       "topic": "Advanced Patterns",
       "id": "11",
       "md": "store-composition"
     },
     {
-      "url": "webmcp-store",
-      "title": "WebMCP Store Tools",
-      "teaches": "Expose SignalStore methods to a browser agent with declareExperimentalWebMcpTool. Each tool declares a JSON schema and calls the same store method the UI calls.",
-      "sortOrder": 24,
-      "topic": "Advanced Patterns",
-      "id": "12",
-      "md": "webmcp-store"
-    },
-    {
       "url": "classic-to-signalstore",
       "title": "Classic NgRx to SignalStore",
       "teaches": "Run an agent-driven migration: the classic actions, reducer, selectors and effects, the SignalStore that replaces them, the prompt that drives it and the checklist you review the diff against.",
-      "sortOrder": 25,
+      "sortOrder": 12,
       "topic": "Advanced Patterns",
       "id": "13",
       "md": "classic-to-signalstore"
@@ -173,19 +164,19 @@
   ],
   "customers": [
     {
-      "name": "Cleo",
-      "id": "1"
+      "id": "hU0bu8p_ouQ",
+      "name": "Cleo"
     },
     {
-      "id": "2",
+      "id": "Va_k372C1-U",
       "name": "Soi"
     },
     {
-      "id": "3",
+      "id": "FhG-kjhv--8",
       "name": "Giro"
     },
     {
-      "id": "4",
+      "id": "AXW1bmr2coY",
       "name": "Flora"
     }
   ],

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { SignalFormsTestingComponent } from './signal-forms-testing.component';
 import { SignupService } from './signup.service';
@@ -18,7 +17,7 @@ describe('Signal Forms - SignalFormsTestingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SignalFormsTestingComponent, NoopAnimationsModule],
+      imports: [SignalFormsTestingComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SignalFormsTestingComponent);

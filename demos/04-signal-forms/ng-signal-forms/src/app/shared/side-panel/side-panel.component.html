@@ -1,13 +1,44 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
-    <button mat-mini-fab (click)="toggleSidenav()">
-      <mat-icon>menu</mat-icon>
+<div class="rail-right">
+  <button
+    type="button"
+    class="rail-btn tip tip-left"
+    data-tip="Toggle the SideNav"
+    aria-label="Toggle the SideNav"
+    (click)="toggleSideNav()"
+  >
+    <span class="icon">menu</span>
+  </button>
+  @if (isDemosRoute() && layout.hasMarkdownContent()) {
+    <button
+      type="button"
+      class="rail-btn tip tip-left"
+      [class.rail-btn-active]="layout.isGuideActive()"
+      data-tip="Toggle Markdown Guide"
+      aria-label="Toggle Markdown Guide"
+      (click)="showGuide()"
+    >
+      <span class="icon">menu_book</span>
     </button>
-    <button mat-mini-fab (click)="showUpload()">
-      <mat-icon>cloud_upload</mat-icon>
+    <button
+      type="button"
+      class="rail-btn tip tip-left"
+      [class.rail-btn-active]="isEditorActive()"
+      [attr.data-tip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+      [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+      (click)="toggleEditor()"
+    >
+      <span class="icon">{{ isEditorActive() ? "close" : "edit_square" }}</span>
     </button>
-    <button mat-mini-fab (click)="toggleEditor()">
-      <mat-icon>{{ icon }}</mat-icon>
-    </button>
-  </mat-toolbar-row>
-</mat-toolbar>
+    @if (isEditorActive()) {
+      <button
+        type="button"
+        class="rail-btn tip tip-left"
+        data-tip="Add Comment"
+        aria-label="Add Comment"
+        (click)="addMarkdownItem()"
+      >
+        <span class="icon">add</span>
+      </button>
+    }
+  }
+</div>

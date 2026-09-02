@@ -1,164 +1,131 @@
-<app-markdown-renderer [md]="'signal-forms-pets'" />
-
-<div class="pet-shell">
-  <!-- Pet List -->
-  <mat-card appearance="outlined" class="pet-list">
-    <mat-card-header>
-      <mat-card-title>Pets</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+<div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-[280px_1fr_1fr]">
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">Pets</h2>
+    </div>
+    <div class="card-content">
       @if (isLoading()) {
-        <mat-progress-bar mode="indeterminate" />
+        <app-progress-bar mode="indeterminate" />
       }
-      <mat-nav-list>
+      <div class="nav-list">
         @for (pet of pets(); track pet.id) {
-          <mat-list-item
-            [class.selected]="selectedPet()?.name === pet.name"
+          <button
+            type="button"
+            class="nav-item h-auto flex-col items-start py-2 text-left"
+            [class.nav-item-active]="selectedPet()?.name === pet.name"
             (click)="onSelectPet(pet)"
           >
-            <span matListItemIcon>{{ pet.type === "cat" ? "🐱" : "🐶" }}</span>
-            <span matListItemTitle>{{ pet.name }}</span>
-            <span matListItemLine>{{ pet.breed }} · {{ pet.owner }}</span>
-          </mat-list-item>
+            <span class="flex items-center gap-2 font-medium">
+              <span aria-hidden="true">{{ pet.type === "cat" ? "🐱" : "🐶" }}</span>
+              {{ pet.name }}
+            </span>
+            <span class="text-xs text-[#64748b]">{{ pet.breed }} · {{ pet.owner }}</span>
+          </button>
         }
-      </mat-nav-list>
-      <button
-        mat-stroked-button
-        (click)="addPet()"
-        style="margin-top: 8px; width: 100%"
-      >
-        + New Pet
-      </button>
-    </mat-card-content>
-  </mat-card>
+      </div>
+      <button type="button" class="btn btn-outline mt-2 w-full" (click)="addPet()">+ New Pet</button>
+    </div>
+  </div>
 
-  <!-- Pet Form -->
-  <mat-card appearance="outlined" class="pet-form">
-    <mat-card-header>
-      <mat-card-title>{{ pageTitle() }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">{{ pageTitle() }}</h2>
+    </div>
+    <div class="card-content">
       <form autocomplete="off" column>
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input
-            matInput
-            type="text"
-            [formField]="petForm.name"
-            placeholder="Pet name"
-          />
-        </mat-form-field>
+        <div class="field">
+          <label class="label" for="pet-name">Name</label>
+          <input id="pet-name" class="input" type="text" [formField]="petForm.name" placeholder="Pet name" />
+        </div>
         @if (petForm.name().touched() && petForm.name().invalid()) {
           @for (err of petForm.name().errors(); track err.kind) {
-            <div class="error">{{ err.message }}</div>
+            <div class="text-[13px] text-[#dc2626]">{{ err.message }}</div>
           }
         }
 
-        <mat-form-field>
-          <mat-label>Age</mat-label>
-          <input
-            matInput
-            type="number"
-            [formField]="petForm.age"
-            placeholder="Age in years"
-          />
-        </mat-form-field>
+        <div class="field">
+          <label class="label" for="pet-age">Age</label>
+          <input id="pet-age" class="input" type="number" [formField]="petForm.age" placeholder="Age in years" />
+        </div>
         @if (petForm.age().touched() && petForm.age().invalid()) {
           @for (err of petForm.age().errors(); track err.kind) {
-            <div class="error">{{ err.message }}</div>
+            <div class="text-[13px] text-[#dc2626]">{{ err.message }}</div>
           }
         }
 
-        <mat-form-field>
-          <mat-label>Type</mat-label>
-          <mat-select [formField]="petForm.type">
-            <mat-option value="cat">🐱 Cat</mat-option>
-            <mat-option value="dog">🐶 Dog</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="field">
+          <label class="label" for="pet-type">Type</label>
+          <select id="pet-type" class="input" [formField]="petForm.type">
+            <option value="cat">🐱 Cat</option>
+            <option value="dog">🐶 Dog</option>
+          </select>
+        </div>
 
-        <mat-form-field>
-          <mat-label>Breed</mat-label>
-          <input
-            matInput
-            type="text"
-            [formField]="petForm.breed"
-            placeholder="Breed"
-          />
-        </mat-form-field>
+        <div class="field">
+          <label class="label" for="pet-breed">Breed</label>
+          <input id="pet-breed" class="input" type="text" [formField]="petForm.breed" placeholder="Breed" />
+        </div>
         @if (petForm.breed().touched() && petForm.breed().invalid()) {
           @for (err of petForm.breed().errors(); track err.kind) {
-            <div class="error">{{ err.message }}</div>
+            <div class="text-[13px] text-[#dc2626]">{{ err.message }}</div>
           }
         }
 
-        <mat-form-field>
-          <mat-label>Owner</mat-label>
-          <mat-select [formField]="petForm.owner">
-            <mat-option value="Alex">Alex</mat-option>
-            <mat-option value="Andreas">Andreas</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <div class="field">
+          <label class="label" for="pet-owner">Owner</label>
+          <select id="pet-owner" class="input" [formField]="petForm.owner">
+            <option value="Alex">Alex</option>
+            <option value="Andreas">Andreas</option>
+          </select>
+        </div>
         @if (petForm.owner().touched() && petForm.owner().invalid()) {
           @for (err of petForm.owner().errors(); track err.kind) {
-            <div class="error">{{ err.message }}</div>
+            <div class="text-[13px] text-[#dc2626]">{{ err.message }}</div>
           }
         }
 
-        <div class="form-actions">
+        <div class="flex gap-2">
           @if (selectedPet()) {
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              (click)="savePet()"
-            >
-              Save
-            </button>
+            <button type="button" class="btn btn-primary" (click)="savePet()">Save</button>
           } @else {
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              (click)="createPet()"
-            >
-              Create
-            </button>
+            <button type="button" class="btn btn-primary" (click)="createPet()">Create</button>
           }
         </div>
 
         @if (submitted()) {
-          <div class="success">Pet saved successfully!</div>
+          <div class="font-medium text-[#15803d]">Pet saved successfully!</div>
         }
       </form>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <!-- On Change Log -->
-  <mat-card appearance="outlined" class="pet-log">
-    <mat-card-header>
-      <mat-card-title>On Change Log</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="state-info">
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">On Change Log</h2>
+    </div>
+    <div class="card-content">
+      <div class="flex flex-col gap-1">
         <div>
           Form valid: <strong>{{ petForm().valid() }}</strong>
         </div>
         <div>
           Form touched: <strong>{{ petForm().touched() }}</strong>
         </div>
-        <div>
-          Model:
-          <pre>{{ petModel() | json }}</pre>
-        </div>
+        <div>Model:</div>
+        <pre
+          class="overflow-auto rounded-md bg-slate-50 p-2 text-xs"
+          tabindex="0"
+          role="region"
+          aria-label="Pet form model JSON"
+        >{{ petModel() | json }}</pre>
       </div>
-      <div class="change-log">
+      <div class="flex flex-col gap-0.5">
         @for (entry of changeLog(); track $index) {
-          <div class="log-entry">{{ entry }}</div>
+          <div class="rounded bg-slate-50 px-2 py-1 font-mono text-xs">{{ entry }}</div>
         } @empty {
-          <div class="log-empty">Edit a field to see changes tracked here</div>
+          <div class="text-sm text-[#64748b] italic">Edit a field to see changes tracked here</div>
         }
       </div>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

@@ -1,12 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardTitle,
-} from '@angular/material/card';
 import { Router, RouterOutlet } from '@angular/router';
 import { ErrorLogService } from '../../../error/error-log.service';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
@@ -15,16 +7,7 @@ import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/mar
   selector: 'app-navigation-errors',
   templateUrl: './navigation-errors.component.html',
   styleUrls: ['./navigation-errors.component.scss'],
-  imports: [
-    MarkdownRendererComponent,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-    RouterOutlet,
-  ],
+  imports: [MarkdownRendererComponent, RouterOutlet],
 })
 export class NavigationErrorsComponent {
   private router = inject(Router);

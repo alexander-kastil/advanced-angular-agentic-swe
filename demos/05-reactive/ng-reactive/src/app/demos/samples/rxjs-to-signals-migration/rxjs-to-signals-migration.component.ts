@@ -1,12 +1,7 @@
 import { httpResource } from '@angular/common/http';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatChip, MatChipSet } from '@angular/material/chips';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { ProgressBarComponent } from 'src/app/shared/progress-bar/progress-bar.component';
 import { environment } from 'src/environments/environment';
 import { Skill } from '../../skills/skills';
 
@@ -25,29 +20,18 @@ interface AgentTool {
 @Component({
   selector: 'app-rxjs-to-signals-migration',
   templateUrl: './rxjs-to-signals-migration.component.html',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatChipSet,
-    MatChip,
-    MatProgressBar,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatButton,
-    FormsModule,
-  ],
+  imports: [ProgressBarComponent, FormsModule],
   styles: `
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
+    .grid + .card { margin-top: 16px; }
     pre { font-size: 0.78rem; overflow: auto; white-space: pre-wrap; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid rgba(128, 128, 128, 0.3); }
-    .prompt { font-family: monospace; font-size: 0.8rem; white-space: pre-wrap; background: rgba(128, 128, 128, 0.12); padding: 12px; border-radius: 6px; }
-    .copied { font-size: 0.8rem; margin-left: 12px; color: #2e7d32; }
+    .prompt { font-family: monospace; font-size: 0.8rem; white-space: pre-wrap; background: #f1f5f9; padding: 12px; border-radius: 6px; }
+    .copied { font-size: 0.8rem; color: #2e7d32; }
     .step { display: flex; gap: 10px; padding: 4px 0; font-size: 0.86rem; }
     .step strong { min-width: 1.4rem; }
+    .chip-set { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 9999px; border: 1px solid #dce5ec; background: #ffffff; font-size: 0.8rem; color: #334155; }
+    .chip-on { background: #1976d2; border-color: #1976d2; color: #ffffff; }
   `,
 })
 export class RxjsToSignalsMigrationComponent {

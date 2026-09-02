@@ -1,8 +1,8 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>One cold source, three consumers</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">One cold source, three consumers</h2>
+  </div>
+  <div class="card-content">
     <p>
       The source is a cold
       <code>interval()</code>
@@ -15,29 +15,28 @@
     </p>
     <div class="banner">
       <span class="counter">live source subscriptions: {{ sourceSubscriptions() }}</span>
-      <mat-slide-toggle
-        [checked]="duplicateAsync()"
-        (change)="duplicateAsync.set($event.checked)"
-      >
+      <app-slide-toggle [checked]="duplicateAsync()" (toggled)="duplicateAsync.set($event)">
         Render a second | async binding
-      </mat-slide-toggle>
+      </app-slide-toggle>
       @if (manualRunning()) {
-        <button mat-stroked-button (click)="stopManual()">Unsubscribe the manual one</button>
+        <button type="button" class="btn btn-outline" (click)="stopManual()">
+          Unsubscribe the manual one
+        </button>
       } @else {
-        <button mat-raised-button color="accent" (click)="startManual()">
+        <button type="button" class="btn btn-primary" (click)="startManual()">
           Resubscribe the manual one
         </button>
       }
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
 <div class="grid">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>subscribe()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">subscribe()</h2>
+    </div>
+    <div class="card-content">
       <div class="value">{{ manual() }}</div>
       <p class="meta">
         {{ manualEmissions() }} emissions handled by hand,
@@ -49,14 +48,14 @@
         <code>takeUntilDestroyed()</code>
         and the counter above never goes back down.
       </p>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>stream + async</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">stream + async</h2>
+    </div>
+    <div class="card-content">
       <div class="value">{{ stream$ | async }}</div>
       @if (duplicateAsync()) {
         <div class="value">{{ stream$ | async }}</div>
@@ -70,14 +69,14 @@
         <code>computed()</code>
         .
       </p>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>toSignal()</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">toSignal()</h2>
+    </div>
+    <div class="card-content">
       <div class="value">{{ fromSignal() }}</div>
       <code>toSignal(ticks$, &#123; initialValue: 0 &#125;)</code>
       <p>
@@ -88,6 +87,6 @@
         <code>effect()</code>
         . This is the default in Angular 22.
       </p>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

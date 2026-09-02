@@ -1,45 +1,43 @@
-<app-markdown-renderer [md]="'date-validators'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Trip Window</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Trip Window</h2>
+  </div>
+  <div class="card-content">
     <div column>
-      <mat-form-field>
-        <mat-label>Departure</mat-label>
-        <input matInput type="date" [formField]="tripForm.departure" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="trip-departure">Departure</label>
+        <input id="trip-departure" class="input" type="date" [formField]="tripForm.departure" />
+      </div>
       @if (tripForm.departure().touched()) {
         @for (err of tripForm.departure().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
 
-      <mat-form-field>
-        <mat-label>Arrival</mat-label>
-        <input matInput type="date" [formField]="tripForm.arrival" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="trip-arrival">Arrival</label>
+        <input id="trip-arrival" class="input" type="date" [formField]="tripForm.arrival" />
+      </div>
       @if (tripForm.arrival().touched()) {
         @for (err of tripForm.arrival().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
     </div>
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button (click)="loadValidTrip()">Valid Trip</button>
-    <button mat-raised-button (click)="loadTooEarly()">Too Early</button>
-    <button mat-raised-button (click)="loadTooLong()">Too Long</button>
-    <button mat-raised-button (click)="clear()">Clear</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="loadValidTrip()">Valid Trip</button>
+    <button type="button" class="btn btn-primary" (click)="loadTooEarly()">Too Early</button>
+    <button type="button" class="btn btn-primary" (click)="loadTooLong()">Too Long</button>
+    <button type="button" class="btn btn-primary" (click)="clear()">Clear</button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Reading Errors with getError()</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Reading Errors with getError()</h2>
+  </div>
+  <div class="card-content">
     <div boxed>
       <div>Booking window: {{ opens | date: 'mediumDate' }} to {{ closes | date: 'mediumDate' }}</div>
       <div>
@@ -58,5 +56,5 @@
       <div>Form valid: {{ tripForm().valid() }}</div>
       <div>Model: {{ model() | json }}</div>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

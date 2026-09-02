@@ -9,41 +9,55 @@ import {
   submit,
   validate,
 } from '@angular/forms/signals';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { Signup, SignupService } from './signup.service';
 
 @Component({
   selector: 'app-signal-forms-testing',
-  imports: [FormField, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule],
+  imports: [FormField],
   template: `
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>Signal Form under test</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Signal Form under test</h2>
+      </div>
+      <div class="card-content">
         <div class="fields">
-          <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput data-testid="email" [formField]="signupForm.email" />
-          </mat-form-field>
+          <div class="field">
+            <label class="label" for="signup-email">Email</label>
+            <input id="signup-email" class="input" data-testid="email" [formField]="signupForm.email" />
+          </div>
 
-          <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput type="password" data-testid="password" [formField]="signupForm.password" />
-          </mat-form-field>
+          <div class="field">
+            <label class="label" for="signup-password">Password</label>
+            <input
+              id="signup-password"
+              class="input"
+              type="password"
+              data-testid="password"
+              [formField]="signupForm.password"
+            />
+          </div>
 
-          <mat-form-field>
-            <mat-label>Repeat password</mat-label>
-            <input matInput type="password" data-testid="confirm" [formField]="signupForm.confirm" />
-          </mat-form-field>
+          <div class="field">
+            <label class="label" for="signup-confirm">Repeat password</label>
+            <input
+              id="signup-confirm"
+              class="input"
+              type="password"
+              data-testid="confirm"
+              [formField]="signupForm.confirm"
+            />
+          </div>
 
-          <mat-form-field>
-            <mat-label>Age</mat-label>
-            <input matInput type="number" data-testid="age" [formField]="signupForm.age" />
-          </mat-form-field>
+          <div class="field">
+            <label class="label" for="signup-age">Age</label>
+            <input
+              id="signup-age"
+              class="input"
+              type="number"
+              data-testid="age"
+              [formField]="signupForm.age"
+            />
+          </div>
         </div>
 
         @for (err of signupForm().errorSummary(); track err.kind + err.message) {
@@ -58,17 +72,17 @@ import { Signup, SignupService } from './signup.service';
         @if (accepted(); as value) {
           <div data-testid="accepted">Registered {{ value.email }}</div>
         }
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" data-testid="register" (click)="register()">
+      </div>
+      <div class="card-actions">
+        <button type="button" class="btn btn-primary" data-testid="register" (click)="register()">
           Register
         </button>
-      </mat-card-actions>
-    </mat-card>
+      </div>
+    </div>
   `,
   styles: [`
-    .fields { display: flex; flex-direction: column; max-width: 22rem; }
-    .error { color: #ef5350; }
+    .fields { display: flex; flex-direction: column; gap: .75rem; max-width: 22rem; }
+    .error { color: #e53935; }
     .state { margin-top: 1rem; font-family: monospace; }
   `],
 })

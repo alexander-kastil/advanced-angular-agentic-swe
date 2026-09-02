@@ -1,20 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { SlideToggleComponent } from '../../../../shared/slide-toggle/slide-toggle.component';
 
 @Component({
     selector: 'app-binding',
     templateUrl: './binding.component.html',
     styleUrls: ['./binding.component.scss'],
-    imports: [
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
-        MatSlideToggle,
-        FormsModule,
-    ],
+    imports: [SlideToggleComponent],
     host: {
         '[attr.isChecked]': 'checked()'
     },

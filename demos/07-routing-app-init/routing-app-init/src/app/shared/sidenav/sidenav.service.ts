@@ -1,30 +1,36 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Injectable, computed, effect, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { MatDrawerMode } from '@angular/material/sidenav';
-import { map } from 'rxjs/operators';
+import { DestroyRef, Injectable, inject } from '@angular/core';
+import { LayoutStore } from '../layout/layout.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SideNavService {
-  private breakpointObserver = inject(BreakpointObserver);
-
-  private readonly handset = toSignal(
-    this.breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(map((state) => state.matches)),
-    { initialValue: false }
-  );
-
-  readonly visible = signal(true);
-  readonly position = computed<MatDrawerMode>(() => (this.handset() ? 'over' : 'side'));
+  private layoutStore = inject(LayoutStore);
 
   constructor() {
-    effect(() => this.visible.set(!this.handset()));
+    if (typeof window.matchMedia !== 'function') {
+      return;
+    }
+    const query = window.matchMedia('(max-width: 959.98px)');
+    const apply = (matches: boolean) => {
+      this.layoutStore.setSidenavVisible(!matches);
+      this.layoutStore.setSidenavPosition(matches ? 'over' : 'side');
+    };
+    const listener = (event: MediaQueryListEvent) => apply(event.matches);
+    query.addEventListener('change', listener);
+    inject(DestroyRef).onDestroy(() => query.removeEventListener('change', listener));
+    apply(query.matches);
+  }
+
+  getSideNavVisible() {
+    return this.layoutStore.sidenavVisible;
+  }
+
+  getSideNavPosition() {
+    return this.layoutStore.sidenavPosition;
   }
 
   toggleMenuVisibility() {
-    this.visible.update((visible) => !visible);
+    this.layoutStore.toggleSidenavVisible();
   }
 }

@@ -1,20 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { form, FormField, required, minLength, maxLength } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { BoxedDirective, ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions } from '@angular/material/card';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 
 @Component({
   selector: 'app-form-control',
   templateUrl: './form-control.component.html',
   styleUrls: ['./form-control.component.scss'],
   imports: [
-    MatCard, MatCardHeader, MatCardTitle, MatCardContent,
-    BoxedDirective, ColumnDirective, MatFormField, MatLabel, MatInput,
-    MatCardActions, MatButton, FormField, MarkdownRendererComponent
+    BoxedDirective, ColumnDirective, FormField
   ]
 })
 export class FormControlComponent {

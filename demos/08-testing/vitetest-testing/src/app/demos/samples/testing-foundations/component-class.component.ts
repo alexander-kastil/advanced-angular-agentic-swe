@@ -1,23 +1,27 @@
 import { Component, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { Skill } from '../../../skills/skill.model';
 
 @Component({
   selector: 'app-component-class',
-  template: `<mat-card appearance="outlined">
-        <mat-card-header>
-          <mat-card-title>{{ title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
+  template: `<div class="card mt-0">
+        <div class="card-header">
+          <h2 class="card-title">{{ title }}</h2>
+        </div>
+        <div class="card-content">
           @for (sk of skills(); track sk.id) {
             <div>{{ sk.name }}</div>
           }
-        </mat-card-content>
-      </mat-card>
-      <button mat-raised-button (click)="addSkill({ id: 10, name: 'NgRx', completed: false })" color="primary">Add Skill</button>
+        </div>
+        <div class="card-actions">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="addSkill({ id: 10, name: 'NgRx', completed: false })">
+            Add Skill
+          </button>
+        </div>
+      </div>
       `,
-  imports: [MatCardModule, MatButtonModule],
 })
 export class ComponentClassComponent {
   readonly title = 'Skills';

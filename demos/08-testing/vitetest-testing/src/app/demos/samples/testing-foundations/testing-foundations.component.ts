@@ -1,9 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { ComponentClassComponent } from './component-class.component';
 import { PhonenumberPipe } from './phonenumber.pipe';
 import { RatingPipe } from './rating.pipe';
@@ -16,51 +12,53 @@ import { VoucherValidator } from './voucher-validator';
   selector: 'app-testing-foundations',
   imports: [
     FormsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
     PhonenumberPipe,
     RatingPipe,
     ComponentClassComponent,
   ],
   template: `
     <div class="grid">
-      <mat-card appearance="outlined">
-        <mat-card-header><mat-card-title>Plain Class</mat-card-title></mat-card-header>
-        <mat-card-content>
+      <div class="card mt-0">
+        <div class="card-header"><h2 class="card-title">Plain Class</h2></div>
+        <div class="card-content">
           <div data-testid="greeting">{{ greeting }}</div>
           <div>goodVoucher validates: <b>{{ goodVoucherValid }}</b></div>
           <div>badVoucher validates: <b>{{ badVoucherValid }}</b></div>
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header><mat-card-title>Pipes</mat-card-title></mat-card-header>
-        <mat-card-content>
+      <div class="card mt-0">
+        <div class="card-header"><h2 class="card-title">Pipes</h2></div>
+        <div class="card-content">
           <div>{{ phone }} &rarr; <b>{{ phone | phonenumber }}</b></div>
           @for (r of ratings; track r) {
             <div>{{ r }} &rarr; <b>{{ r | rating }}</b></div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
-      <mat-card appearance="outlined">
-        <mat-card-header><mat-card-title>Service without DI</mat-card-title></mat-card-header>
-        <mat-card-content>
-          <mat-form-field>
-            <mat-label>New message</mat-label>
-            <input matInput data-testid="message-input" [(ngModel)]="draft" />
-          </mat-form-field>
-          <button mat-raised-button color="primary" (click)="addMessage()">Add</button>
+      <div class="card mt-0">
+        <div class="card-header"><h2 class="card-title">Service without DI</h2></div>
+        <div class="card-content">
+          <div class="field">
+            <label class="label" for="message-input">New message</label>
+            <input
+              id="message-input"
+              class="input"
+              type="text"
+              data-testid="message-input"
+              [(ngModel)]="draft"
+            />
+          </div>
+          <button type="button" class="btn btn-primary" (click)="addMessage()">Add</button>
           @for (m of messages(); track m) {
             <div class="row">
               <span>{{ m }}</span>
-              <button mat-button color="warn" (click)="deleteMessage(m)">remove</button>
+              <button type="button" class="btn btn-warn" (click)="deleteMessage(m)">remove</button>
             </div>
           }
-        </mat-card-content>
-      </mat-card>
+        </div>
+      </div>
 
       <app-component-class />
     </div>

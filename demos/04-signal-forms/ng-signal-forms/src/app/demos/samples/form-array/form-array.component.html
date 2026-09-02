@@ -1,57 +1,57 @@
-<app-markdown-renderer [md]="'form-array'" />
-
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Skills Sheet - Signal Forms Array</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Skills Sheet - Signal Forms Array</h2>
+  </div>
+  <div class="card-content">
     <div column>
-      <mat-form-field>
-        <mat-label>Name</mat-label>
+      <div class="field">
+        <label class="label" for="fa-name">Name</label>
         <input
-          matInput
+          id="fa-name"
+          class="input"
           type="text"
           [formField]="skillForm.name"
           placeholder="Enter Name"
         />
-      </mat-form-field>
+      </div>
 
       @if (skillForm.name().value()) {
         <div column>
-          <h6>Add your skills:</h6>
+          <h3>Add your skills:</h3>
           @for (item of skillForm.skills; track $index; let i = $index) {
             <div class="skill-row">
-              <mat-form-field>
-                <mat-label>Skill</mat-label>
+              <div class="field">
+                <label class="label" [attr.for]="'fa-skill-' + i">Skill</label>
                 <input
-                  matInput
+                  [id]="'fa-skill-' + i"
+                  class="input"
                   [formField]="item.skill"
                   placeholder="Skill Name"
                 />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Years</mat-label>
-                <input matInput [formField]="item.years" placeholder="Years" />
-              </mat-form-field>
-              <button mat-raised-button (click)="removeSkill(i)" color="warn">
+              </div>
+              <div class="field">
+                <label class="label" [attr.for]="'fa-years-' + i">Years</label>
+                <input [id]="'fa-years-' + i" class="input" [formField]="item.years" placeholder="Years" />
+              </div>
+              <button type="button" class="btn btn-warn" (click)="removeSkill(i)">
                 Remove
               </button>
             </div>
           }
           <div class="skill-row actions">
             <button
-              mat-raised-button
+              type="button"
+              class="btn btn-primary"
               (click)="addSkill()"
               [disabled]="checkArrayValid()"
-              color="primary"
             >
               Add Skill
             </button>
             <button
-              mat-raised-button
+              type="button"
+              class="btn btn-primary"
               (click)="saveForm()"
               [disabled]="checkArrayValid()"
-              color="primary"
             >
               Save
             </button>
@@ -59,5 +59,5 @@
         </div>
       }
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

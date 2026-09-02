@@ -1,11 +1,6 @@
 import { DatePipe, JsonPipe } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormField, form, maxDate, minDate, required, validate } from '@angular/forms/signals';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { BoxedDirective, ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 
 interface TripModel {
@@ -28,9 +23,7 @@ const BOOKING_CLOSES = atMidnight(180);
   templateUrl: './date-validators.component.html',
   styleUrls: ['./date-validators.component.scss'],
   imports: [
-    MarkdownRendererComponent,
-    MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions,
-    FormField, MatFormField, MatLabel, MatInput, MatButton,
+    FormField,
     BoxedDirective, ColumnDirective, DatePipe, JsonPipe,
   ],
 })

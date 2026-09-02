@@ -1,18 +1,29 @@
-import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { MERMAID_OPTIONS, provideMarkdown } from 'ngx-markdown';
+import mermaid from 'mermaid';
 import { appRoutes } from './app.routes';
-import { MarkdownModule } from 'ngx-markdown';
+import { loadingInterceptor } from './shared/loading/loading-interceptor';
+
+(window as any).mermaid = mermaid;
+mermaid.initialize({ startOnLoad: false, theme: 'dark' });
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZonelessChangeDetection(),
-        provideHttpClient(),
-        provideRouter(appRoutes),
+        provideHttpClient(withInterceptors([loadingInterceptor])),
+        provideRouter(appRoutes, withComponentInputBinding()),
         provideAnimations(),
-        importProvidersFrom(
-            MarkdownModule.forRoot(),
-        )
+        provideMarkdown({
+            mermaidOptions: {
+                provide: MERMAID_OPTIONS,
+                useValue: {
+                    darkMode: true,
+                    theme: 'base',
+                },
+            },
+        }),
     ]
 };

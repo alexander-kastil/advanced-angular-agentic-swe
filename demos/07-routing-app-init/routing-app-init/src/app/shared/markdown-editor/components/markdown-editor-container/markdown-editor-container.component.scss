@@ -1,10 +1,26 @@
-.mat-mdc-card-actions {
-    padding: var(--gap-medium) !important;
-    margin-left: var(--gap-medium) !important;
-    margin-right: 0px !important;
-    margin-bottom: var(--gap-medium) !important;
+:host {
+  display: block;
+  height: 100%;
+  min-height: 22rem;
 }
 
-button{
-  margin-right: var(--gap-small);
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.card-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.card-content::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }

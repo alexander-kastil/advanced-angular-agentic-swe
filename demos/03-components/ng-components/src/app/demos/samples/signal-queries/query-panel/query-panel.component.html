@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="query-panel">
   <div class="projected">
     <ng-content />
   </div>
@@ -6,7 +6,7 @@
   <div class="report">
     <p>contentChild('headline'): {{ readHeadline() }}</p>
     <p>contentChildren('entry') matched {{ entryCount() }} nodes</p>
-    <button type="button" (click)="readTexts()">Read projected text</button>
+    <button type="button" class="btn btn-outline" (click)="readTexts()">Read projected text</button>
 
     @if (collected().length) {
       <ul>

@@ -1,23 +1,23 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title> Signals Basics </mat-card-title>
-  </mat-card-header>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Signals Basics</h2>
+  </div>
 
-  <mat-card-content class="cmdItems">
-    <button mat-raised-button color="accent" (click)="updateAmount()">
+  <div class="card-content cmdItems">
+    <button type="button" class="btn btn-primary" (click)="updateAmount()">
       Update Net amount
     </button>
-    <button mat-raised-button color="accent" (click)="addAmount()">
+    <button type="button" class="btn btn-primary" (click)="addAmount()">
       Add to Net amount
     </button>
-    <button mat-raised-button color="accent" (click)="likeTopic()">
+    <button type="button" class="btn btn-primary" (click)="likeTopic()">
       Like topic
     </button>
-    <button mat-raised-button color="accent" (click)="logLikes()">
+    <button type="button" class="btn btn-primary" (click)="logLikes()">
       Log likes
     </button>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
 <div border centered>
   <div>Net Amount {{ netAmount() }}</div>

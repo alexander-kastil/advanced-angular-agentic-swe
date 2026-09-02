@@ -29,9 +29,9 @@ pet.reload();     // force a refetch with an unchanged URL
 ```
 
 ```html
-@if (pet.isLoading()) { <mat-progress-spinner mode="indeterminate" /> }
+@if (pet.isLoading()) { <app-progress-bar mode="indeterminate" /> }
 @if (pet.error(); as error) { <p>{{ error }}</p> }
-@if (pet.value(); as data) { <h4>{{ data.name }}</h4> }
+@if (pet.value(); as data) { <h3>{{ data.name }}</h3> }
 ```
 
 ## Options

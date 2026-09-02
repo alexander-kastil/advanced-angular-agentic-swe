@@ -72,7 +72,7 @@ export class FontBoldDirective {
 
 @Directive({
   selector: '[height-medium]',
-  host: { 'style': 'height:100px;' },
+  host: { 'style': 'min-height:100px;' },
   hostDirectives: [BorderDirective]
 })
 export class HeightDirective {

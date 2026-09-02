@@ -1,5 +1,4 @@
 import { Component, signal, computed } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
 interface User {
@@ -10,7 +9,7 @@ interface User {
 
 @Component({
     selector: 'app-signal-equality',
-    imports: [MatButton, BoxedDirective],
+    imports: [BoxedDirective],
     template: `
     <div boxed>
       <div>
@@ -19,10 +18,10 @@ interface User {
         <p>Custom equality computed: {{ computedUser() }}</p>
       </div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <button mat-raised-button color="accent" (click)="updateUser()">
+        <button type="button" class="btn btn-primary" (click)="updateUser()">
           Update User (same reference)
         </button>
-        <button mat-raised-button color="accent" (click)="incrementCount()">
+        <button type="button" class="btn btn-primary" (click)="incrementCount()">
           Increment Count
         </button>
       </div>

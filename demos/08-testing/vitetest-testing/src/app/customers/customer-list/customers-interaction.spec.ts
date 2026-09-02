@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { signal } from '@angular/core';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -37,7 +36,7 @@ describe('Component - Interaction - CustomersComponent', () => {
     selectedCustomer.set(null);
 
     await TestBed.configureTestingModule({
-      imports: [CustomersComponent, NoopAnimationsModule],
+      imports: [CustomersComponent],
       providers: [{ provide: customersStore, useValue: storeSpy }],
     }).compileComponents();
 

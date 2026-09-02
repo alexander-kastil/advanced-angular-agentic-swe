@@ -22,7 +22,7 @@ Returning `undefined` switches the validator off, which is what happens while de
 `<input type="date">` works directly:
 
 ```html
-<input matInput type="date" [formField]="tripForm.departure" />
+<input class="input" type="date" [formField]="tripForm.departure" />
 ```
 
 When the model value is `null` or a `Date`, Signal Forms reads `element.valueAsDate` and writes `element.valueAsDate`, so no string parsing is needed on your side. Angular also mirrors the validator bounds onto the element's own `min` and `max` attributes, formatted for the input type, so the browser's date picker greys out the disallowed range.

@@ -1,11 +1,9 @@
 import { Component, output } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-pinger',
-  imports: [MatButton],
   template: `
-    <button mat-raised-button color="accent" (click)="ping()">
+    <button type="button" class="btn btn-primary" (click)="ping()">
       Ping the parent
     </button>
   `,

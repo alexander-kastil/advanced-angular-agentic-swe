@@ -1,31 +1,42 @@
-<app-markdown-renderer [md]="'signal-forms-submit'" />
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Signal Forms - submit()</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Signal Forms - submit()</h2>
+  </div>
+  <div class="card-content">
     <form [formRoot]="loginForm" column>
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Email" [formField]="loginForm.email" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="submit-email">Email</label>
+        <input
+          id="submit-email"
+          class="input"
+          type="email"
+          placeholder="Email"
+          [formField]="loginForm.email"
+        />
+      </div>
       @if (loginForm.email().touched() && loginForm.email().invalid()) {
         @for (err of loginForm.email().errors(); track err.kind) {
-          <div class="error">{{ err.message }}</div>
+          <div class="text-[13px] text-[#dc2626]">{{ err.message }}</div>
         }
       }
 
-      <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput type="password" placeholder="Password" [formField]="loginForm.password" />
-      </mat-form-field>
+      <div class="field">
+        <label class="label" for="submit-password">Password</label>
+        <input
+          id="submit-password"
+          class="input"
+          type="password"
+          placeholder="Password"
+          [formField]="loginForm.password"
+        />
+      </div>
       @if (loginForm.password().touched() && loginForm.password().invalid()) {
         @for (err of loginForm.password().errors(); track err.kind) {
-          <div class="error">{{ err.message }}</div>
+          <div class="text-[13px] text-[#dc2626]">{{ err.message }}</div>
         }
       }
 
-      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button class="btn btn-primary self-start" type="submit">Login</button>
     </form>
 
     @if (submitted() && loginForm().valid()) {
@@ -34,39 +45,41 @@
     @if (serverMessage()) {
       <p>{{ serverMessage() }}</p>
     }
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Submission Options</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <ul>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Submission Options</h2>
+  </div>
+  <div class="card-content">
+    <ul class="list-disc pl-5">
       <li><strong>action</strong> runs when the form is valid and may return errors to attach to a field</li>
       <li><strong>onInvalid</strong> runs instead when validation blocks the submit</li>
       <li><strong>ignoreValidators</strong>: 'pending' (default), 'none' or 'all'</li>
       <li><code>[formRoot]</code> on the form element wires the native submit event to these options</li>
     </ul>
-    Form valid: {{ loginForm().valid() }} | Touched: {{ loginForm().touched() }} | Submitting:
-    {{ loginForm().submitting() }} | Blocked attempts: {{ attempts() }}
-  </mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button (click)="loginIgnoringValidation()">Submit Ignoring Validators</button>
-    <button mat-raised-button (click)="reset()">Reset</button>
-  </mat-card-actions>
-</mat-card>
+    <div>
+      Form valid: {{ loginForm().valid() }} | Touched: {{ loginForm().touched() }} | Submitting:
+      {{ loginForm().submitting() }} | Blocked attempts: {{ attempts() }}
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-outline" (click)="loginIgnoringValidation()">Submit Ignoring Validators</button>
+    <button type="button" class="btn btn-outline" (click)="reset()">Reset</button>
+  </div>
+</div>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>How submit() works</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <ul>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">How submit() works</h2>
+  </div>
+  <div class="card-content">
+    <ul class="list-disc pl-5">
       <li>Marks all fields as <strong>touched</strong> to reveal validation errors</li>
       <li>Calls the action <strong>only if the form is valid</strong></li>
       <li>No need to check <code>loginForm().valid()</code> manually</li>
       <li>Known account for the happy path: <code>cleothewhippet&#64;integrations.at</code></li>
     </ul>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

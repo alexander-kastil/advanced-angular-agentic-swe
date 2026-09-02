@@ -1,7 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { CounterComponent } from './counter.component';
 
@@ -10,7 +9,6 @@ describe('Component - Click Events - CounterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NoopAnimationsModule],
       providers: [provideHttpClient()]
     }).compileComponents();
     fixture = TestBed.createComponent(CounterComponent);

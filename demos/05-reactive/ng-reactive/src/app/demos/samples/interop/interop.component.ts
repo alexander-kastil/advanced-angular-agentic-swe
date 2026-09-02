@@ -1,12 +1,8 @@
 import { Component, effect, inject, signal, viewChild } from '@angular/core';
 import { outputToObservable, rxResource, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatChip, MatChipSet } from '@angular/material/chips';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatProgressBar } from '@angular/material/progress-bar';
 import { debounceTime, interval, map, scan } from 'rxjs';
+import { ProgressBarComponent } from 'src/app/shared/progress-bar/progress-bar.component';
 import { HeartbeatComponent } from './heartbeat.component';
 import { PingerComponent } from './pinger.component';
 import { SkillsService } from '../../skills/skills.service';
@@ -14,26 +10,16 @@ import { SkillsService } from '../../skills/skills.service';
 @Component({
   selector: 'app-interop',
   templateUrl: './interop.component.html',
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatChipSet,
-    MatChip,
-    MatProgressBar,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    FormsModule,
-    PingerComponent,
-    HeartbeatComponent,
-  ],
+  imports: [FormsModule, ProgressBarComponent, PingerComponent, HeartbeatComponent],
   styles: `
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .log { font-family: monospace; font-size: 0.82rem; }
-    .direction { font-size: 0.75rem; letter-spacing: 0.04em; opacity: 0.7; }
+    .direction { font-size: 0.75rem; letter-spacing: 0.04em; color: #64748b; }
     .bridge { margin-top: 16px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { display: inline-flex; align-items: center; border-radius: 9999px; background: #eef2f6; padding: 4px 12px; font-size: 0.8125rem; color: #334155; }
+    .chip-on { background: var(--color-primary); color: #ffffff; }
+    code { font-family: monospace; background: #eef2f6; border-radius: 3px; padding: 0 3px; }
   `,
 })
 export class InteropComponent {

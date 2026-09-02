@@ -4,12 +4,12 @@ This demo never calls it by hand for the normal path. `[formRoot]` on the `<form
 
 ```html
 <form [formRoot]="loginForm" column>
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput type="email" [formField]="loginForm.email" />
-  </mat-form-field>
+  <div class="field">
+    <label class="label" for="submit-email">Email</label>
+    <input id="submit-email" class="input" type="email" [formField]="loginForm.email" />
+  </div>
 
-  <button mat-raised-button color="primary" type="submit">Login</button>
+  <button class="btn btn-primary" type="submit">Login</button>
 </form>
 ```
 

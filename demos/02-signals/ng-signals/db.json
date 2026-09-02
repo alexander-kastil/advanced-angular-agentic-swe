@@ -6,7 +6,8 @@
       "teaches": "Create reactive state with signal(). Use computed() for derived state and effect() for side effects. Read values by calling the signal as a function, update with .set() and .update().",
       "sortOrder": 1,
       "topic": "Signals Fundamentals",
-      "md": "signals-basics"
+      "md": "signals-basics",
+      "id": "zDBwXvyHEqo"
     },
     {
       "url": "http-resource",
@@ -14,7 +15,8 @@
       "teaches": "Load and display async data with httpResource(). Handle loading state, errors, and display data conditionally in templates.",
       "sortOrder": 2,
       "topic": "Signals Fundamentals",
-      "md": "http-resource"
+      "md": "http-resource",
+      "id": "XGrjIfNrzgM"
     },
     {
       "url": "signal-effects",
@@ -22,7 +24,8 @@
       "teaches": "Use effect() to react to signal changes for side effects. Track filter state with signals and update httpResource() parameters dynamically. Demonstrates conditional data loading.",
       "sortOrder": 3,
       "topic": "Signals Fundamentals",
-      "md": "signal-effects"
+      "md": "signal-effects",
+      "id": "9g-mHBAHfVA"
     },
     {
       "url": "signal-inputs",
@@ -30,7 +33,8 @@
       "teaches": "Define typed component inputs as signals using input() and input.required(). Derive state from inputs with computed().",
       "sortOrder": 4,
       "topic": "Signals Fundamentals",
-      "md": "signal-inputs"
+      "md": "signal-inputs",
+      "id": "4Ssw8BzItQE"
     },
     {
       "url": "signal-equality",
@@ -38,7 +42,8 @@
       "teaches": "Define custom equality comparisons with the equal option. Control when computed() and dependents re-run. Avoid unnecessary notifications for deep mutations.",
       "sortOrder": 5,
       "topic": "Signals Fundamentals",
-      "md": "signal-equality"
+      "md": "signal-equality",
+      "id": "pUIWzdXBu-c"
     },
     {
       "url": "linked-signal-reset",
@@ -46,7 +51,8 @@
       "teaches": "Create writable dependent signals with linkedSignal(). Keep signals synced while allowing independent updates. Reset derived signals to base state.",
       "sortOrder": 6,
       "topic": "Signal Patterns",
-      "md": "linked-signal-reset"
+      "md": "linked-signal-reset",
+      "id": "B4jR6GE53bk"
     },
     {
       "url": "linked-signal-set",
@@ -54,7 +60,8 @@
       "teaches": "Intercept writes to a linkedSignal with the set option. Keep derived state writable while clamping or logging every write, and recompute it from its source.",
       "sortOrder": 7,
       "topic": "Signal Patterns",
-      "md": "linked-signal-set"
+      "md": "linked-signal-set",
+      "id": "Kdq59lSDT58"
     },
     {
       "url": "effect-cleanup",
@@ -62,7 +69,8 @@
       "teaches": "Release timers and listeners with the onCleanup callback of effect(). Run initialization logic exactly once and stop an effect with its EffectRef destroy().",
       "sortOrder": 8,
       "topic": "Signal Patterns",
-      "md": "effect-cleanup"
+      "md": "effect-cleanup",
+      "id": "X8pdTTtvLFQ"
     },
     {
       "url": "model-inputs",
@@ -70,7 +78,8 @@
       "teaches": "Implement two-way binding with the model() signal API. Parent and child components sync data mutually without manual event handling.",
       "sortOrder": 9,
       "topic": "Signal Patterns",
-      "md": "model-inputs"
+      "md": "model-inputs",
+      "id": "A1lrghASyOo"
     },
     {
       "url": "container-presenter",
@@ -78,7 +87,8 @@
       "teaches": "Apply the Container-Presenter pattern using signals. The container manages state and httpResource data, presenters display UI and emit events.",
       "sortOrder": 10,
       "topic": "Signal Patterns",
-      "md": "container-presenter"
+      "md": "container-presenter",
+      "id": "33iuKoGGL5I"
     },
     {
       "url": "rxjs-interop",
@@ -86,7 +96,8 @@
       "teaches": "Bridge RxJS and signals with toSignal(), toObservable() and rxResource(). Consume streams as signals and drive streams from signal state.",
       "sortOrder": 11,
       "topic": "Signal Patterns",
-      "md": "rxjs-interop"
+      "md": "rxjs-interop",
+      "id": "SmTTojizhck"
     },
     {
       "url": "resource-chain",
@@ -94,7 +105,8 @@
       "teaches": "Sequence dependent async work with the chain() operator from the resource params context. Propagate loading, idle and error status down a chain of resources without manual undefined checks.",
       "sortOrder": 12,
       "topic": "Async Signals",
-      "md": "resource-chain"
+      "md": "resource-chain",
+      "id": "-N50F_DY6CU"
     },
     {
       "url": "debounced-search",
@@ -102,7 +114,8 @@
       "teaches": "Wrap a signal with debounced() from @angular/core and drive an httpResource search from the settled value. Read the debounce status to show a typing indicator.",
       "sortOrder": 13,
       "topic": "Async Signals",
-      "md": "debounced-search"
+      "md": "debounced-search",
+      "id": "17UXpumeIfg"
     },
     {
       "url": "service-injectasync",
@@ -110,49 +123,43 @@
       "teaches": "Declare services with the @Service() decorator and load them lazily with injectAsync() plus onIdle prefetching. Run the ng generate @angular/core:service-migration schematic to convert @Injectable.",
       "sortOrder": 14,
       "topic": "Signals Tooling",
-      "md": "service-injectasync"
-    },
-    {
-      "url": "webmcp-signal",
-      "title": "Signals as WebMCP Tools",
-      "teaches": "Expose a signal value and its setter to an AI agent with declareExperimentalWebMcpTool() and register page-level tools with provideExperimentalWebMcpTools().",
-      "sortOrder": 15,
-      "topic": "Signals Tooling",
-      "md": "webmcp-signal"
+      "md": "service-injectasync",
+      "id": "S-4fLS3okwk"
     },
     {
       "url": "devtools-signal-graph",
       "title": "Reading the Signal Graph",
       "teaches": "Build a deliberately layered dependency graph of signal, computed, linkedSignal, httpResource and effect nodes, name every node with debugName and read the graph in Angular DevTools.",
-      "sortOrder": 16,
+      "sortOrder": 15,
       "topic": "Signals Tooling",
-      "md": "devtools-signal-graph"
+      "md": "devtools-signal-graph",
+      "id": "Y23q0ZxBxPU"
     }
   ],
   "markdownItems": [
     {
-      "id": 1,
+      "id": "1",
       "url": "signals-basics",
       "title": "Signal read vs write",
       "comment": "Calling the signal reads it, .set() replaces the value and .update() derives the next value from the current one.",
       "saved": "2026-03-05T08:00:00.000Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "url": "http-resource",
       "title": "httpResource status",
       "comment": "httpResource() exposes value(), isLoading() and error() as signals, so no manual subscribe or async pipe is needed.",
       "saved": "2026-03-05T08:05:00.000Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "url": "linked-signal-reset",
       "title": "When to reach for linkedSignal",
       "comment": "Use linkedSignal() when derived state must stay writable and reset itself once its source changes.",
       "saved": "2026-03-05T08:10:00.000Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "url": "effect-cleanup",
       "title": "Always release timers",
       "comment": "The onCleanup callback of effect() runs before every re-run and on destroy, which is where intervals and listeners belong.",
@@ -161,56 +168,56 @@
   ],
   "skills": [
     {
-      "id": 1,
-      "name": "RxJs",
+      "id": "1",
+      "name": "Signals",
       "completed": false
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "NgRx",
       "completed": true
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Angular",
       "completed": false
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "TypeScript",
       "completed": true
     },
     {
-      "id": 5,
-      "name": "Material",
+      "id": "5",
+      "name": "Tailwind",
       "completed": true
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Node",
       "completed": true
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Forms",
       "completed": true
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Authentication",
       "completed": true
     }
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "url": "",
       "title": "Using @ngrx/store",
       "comment": "To use @ngrx/store, we need to install it first.",
       "saved": "2020-09-16T20:10:06.925Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "url": "",
       "title": "Optimizing change detection",
       "comment": "In order to optimize change detection, we need to use OnPush strategy.",
@@ -219,38 +226,42 @@
   ],
   "customers": [
     {
-      "id": 1,
+      "id": "OoT55yicgsY",
       "name": "Cleo"
     },
     {
-      "id": 2,
+      "id": "teiI2cih6Sc",
       "name": "Soi"
     },
     {
-      "id": 3,
+      "id": "dbKsAKthF3s",
       "name": "Giro"
     },
     {
-      "id": 4,
+      "id": "vc30bYoGhDw",
       "name": "Flora"
     }
   ],
   "top-links": [
     {
       "label": "Home",
-      "url": ""
+      "url": "",
+      "id": "Ti1_trus6pI"
     },
     {
       "label": "Demos",
-      "url": "demos"
+      "url": "demos",
+      "id": "TFNrq-H6zFo"
     },
     {
       "label": "Skills",
-      "url": "skills"
+      "url": "skills",
+      "id": "iZ2hfLBWim8"
     },
     {
       "label": "Customers",
-      "url": "customers"
+      "url": "customers",
+      "id": "ZVMTevsAUj8"
     }
   ],
   "persons": [
@@ -286,5 +297,6 @@
       "married": false,
       "imgUrl": "/assets/images/flora.png"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
