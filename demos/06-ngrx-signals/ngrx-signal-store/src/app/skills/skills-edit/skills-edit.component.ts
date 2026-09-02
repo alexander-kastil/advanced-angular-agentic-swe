@@ -1,10 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardActions, MatCardModule } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
@@ -17,8 +12,7 @@ import { SkillsStore } from '../skills.store';
   selector: 'app-skills-edit',
   templateUrl: './skills-edit.component.html',
   styleUrls: ['./skills-edit.component.scss'],
-  imports: [MatCardModule, MatFormField, MatLabel, MatInput, MatButtonModule,
-    FormField, MatSlideToggle, MatCardActions]
+  imports: [FormField]
 })
 export class SkillsEditComponent {
   private route = inject(ActivatedRoute);

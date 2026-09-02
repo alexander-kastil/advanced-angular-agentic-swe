@@ -2,7 +2,6 @@
   font-size: var(--font-big);
   color: var(--color-fg);
   cursor: pointer;
-  margin-top: -0.5rem;
   &:hover {
     text-decoration: underline;
   }
@@ -10,13 +9,6 @@
 
 .navLinkActive {
   text-decoration: underline;
-}
-
-mat-toolbar-row {
-  min-height: var(--toolbar-big);
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
 }
 
 .hamburgerMenu {

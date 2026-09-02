@@ -1,9 +1,7 @@
 import { Component, effect, inject, model } from '@angular/core';
 import { createMarkdownItem, MarkdownItem } from '../../markdown.model';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { ColumnDirective } from '../../../formatting/formatting-directives';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { AutosizeDirective } from '../../../formatting/autosize.directive';
 import { form, FormField } from '@angular/forms/signals';
 import { markdownEditorStore } from '../../markdown-editor.store';
 import { mdEditorEvents } from '../../markdown-editor.events';
@@ -13,14 +11,7 @@ import { injectDispatch } from '@ngrx/signals/events';
     selector: 'app-markdown-edit',
     templateUrl: './markdown-edit.component.html',
     styleUrls: ['./markdown-edit.component.scss'],
-    imports: [
-        ColumnDirective,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        CdkTextareaAutosize,
-        FormField,
-    ],
+    imports: [ColumnDirective, AutosizeDirective, FormField],
 })
 export class MarkdownEditComponent {
     private store = inject(markdownEditorStore);

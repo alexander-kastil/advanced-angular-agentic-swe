@@ -1,11 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { ProgressBarComponent } from '../../../shared/progress-bar/progress-bar.component';
 import { injectDispatch } from '@ngrx/signals/events';
 import { mdEditorEvents } from '../../../shared/markdown-editor/markdown-editor.events';
 import { markdownEditorStore } from '../../../shared/markdown-editor/markdown-editor.store';
@@ -13,20 +8,7 @@ import { createMarkdownItem, MarkdownItem } from '../../../shared/markdown-edito
 
 @Component({
   selector: 'app-markdown-editor',
-  imports: [
-    FormsModule,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatButton,
-    MatIconButton,
-    MatIcon,
-    MatProgressBar,
-  ],
+  imports: [FormsModule, ProgressBarComponent],
   templateUrl: './markdown-editor.component.html',
   styleUrl: './markdown-editor.component.scss',
 })

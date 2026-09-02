@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 
 @Component({
   selector: 'app-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
-  imports: [MatProgressBar],
+  imports: [ProgressBarComponent],
 })
 export class LoadingComponent { }

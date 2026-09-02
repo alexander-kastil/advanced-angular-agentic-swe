@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
+import { SlideToggleComponent } from '../../shared/slide-toggle/slide-toggle.component';
 import { Router } from '@angular/router';
 import { SkillRowComponent } from '../skill-row/skill-row.component';
 import { Skill } from '../skill.model';
@@ -12,14 +10,7 @@ import { SkillsStore } from '../skills.store';
   selector: 'app-skills-container',
   templateUrl: './skills-container.component.html',
   styleUrls: ['./skills-container.component.scss'],
-  imports: [
-    MatToolbar,
-    MatToolbarRow,
-    MatButton,
-    MatSlideToggle,
-    SkillRowComponent,
-    SkillsKpiComponent,
-  ]
+  imports: [SlideToggleComponent, SkillRowComponent, SkillsKpiComponent]
 })
 export class SkillsContainerComponent {
   protected store = inject(SkillsStore);

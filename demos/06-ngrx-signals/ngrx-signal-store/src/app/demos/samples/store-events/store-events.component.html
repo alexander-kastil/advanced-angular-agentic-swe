@@ -1,15 +1,15 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Event-Based Store: eventGroup, withReducer, withEventHandlers</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="content">
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Event-Based Store: eventGroup, withReducer, withEventHandlers</div>
+  </div>
+  <div class="card-content content">
     @if (store.checkingOut()) {
-      <mat-progress-bar mode="indeterminate" />
+      <app-progress-bar />
     }
 
     <div class="toolbar">
       @for (item of catalog; track item) {
-        <button mat-stroked-button (click)="dispatch.added(item)">+ {{ item }}</button>
+        <button type="button" class="btn btn-outline" (click)="dispatch.added(item)">+ {{ item }}</button>
       }
     </div>
 
@@ -17,16 +17,16 @@
     @for (line of store.lines(); track $index) {
       <div class="row">
         <span class="grow">{{ line }}</span>
-        <button mat-icon-button (click)="dispatch.removed(line)"><mat-icon>delete</mat-icon></button>
+        <button type="button" class="btn-icon" (click)="dispatch.removed(line)"><span class="icon">delete</span></button>
       </div>
     } @empty {
       <p>Cart is empty.</p>
     }
 
     <div class="toolbar">
-      <button mat-raised-button color="primary" [disabled]="store.lineCount() === 0 || store.checkingOut()"
+      <button type="button" class="btn btn-primary" [disabled]="store.lineCount() === 0 || store.checkingOut()"
         (click)="dispatch.checkoutStarted()">Checkout</button>
-      <button mat-stroked-button (click)="dispatch.cleared()">Clear</button>
+      <button type="button" class="btn btn-outline" (click)="dispatch.cleared()">Clear</button>
     </div>
 
     @if (store.orderNumber(); as order) {
@@ -39,13 +39,13 @@
       Dispatch with parent or global and the event leaves for the root dispatcher, where nothing reduces it, and
       the log below stays unchanged.
     </p>
-    <mat-button-toggle-group [value]="scope()" (change)="scope.set($event.value)">
+    <div class="toggle-group">
       @for (s of scopes; track s) {
-        <mat-button-toggle [value]="s">{{ s }}</mat-button-toggle>
+        <button type="button" class="toggle-btn" [class.active]="scope() === s" (click)="scope.set(s)">{{ s }}</button>
       }
-    </mat-button-toggle-group>
+    </div>
     <div class="toolbar">
-      <button mat-stroked-button (click)="addScoped('Scoped Ticket')">
+      <button type="button" class="btn btn-outline" (click)="addScoped('Scoped Ticket')">
         dispatcher.dispatch(added, scope)
       </button>
     </div>
@@ -56,5 +56,5 @@
         <li>{{ entry }}</li>
       }
     </ol>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

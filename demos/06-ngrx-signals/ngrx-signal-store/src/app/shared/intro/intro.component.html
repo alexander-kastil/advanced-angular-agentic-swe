@@ -1,19 +1,17 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ title() }}</mat-card-title>
-    <mat-card-subtitle>{{ subtitle() }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="showcase" column centered>
+<div class="card min-w-[500px]">
+  <div class="card-header items-center h-[var(--toolbar-xl)]">
+    <div class="card-title text-xl">{{ title() }}</div>
+    <div class="card-subtitle text-lg">{{ subtitle() }}</div>
+  </div>
+  <div class="card-content">
+    <div class="showcase">
       <img src="images/{{ img() }}" alt="" />
     </div>
     <div class="instructions">
       <ng-content select=".instructions" />
     </div>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button routerLink="/demos" color="primary">
-      Proceed
-    </button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="card-actions justify-center">
+    <button type="button" class="btn btn-primary" routerLink="/demos">Proceed</button>
+  </div>
+</div>

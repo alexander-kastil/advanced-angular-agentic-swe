@@ -1,14 +1,14 @@
-<div column>
-  <mat-form-field>
-    <mat-label>Title</mat-label>
+<div column class="gap-3">
+  <div class="field">
+    <label class="label">Title</label>
     @if (markdownItem().id === -1) {
-      <input matInput [value]="markdownItem().title" readonly />
+      <input class="input" [value]="markdownItem().title" readonly />
     } @else {
-      <input matInput [formField]="itemForm.title" />
+      <input class="input" [formField]="itemForm.title" />
     }
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Comment</mat-label>
-    <textarea matInput cdkTextareaAutosize [formField]="itemForm.comment"></textarea>
-  </mat-form-field>
+  </div>
+  <div class="field">
+    <label class="label">Comment</label>
+    <textarea class="textarea" autosize [formField]="itemForm.comment"></textarea>
+  </div>
 </div>

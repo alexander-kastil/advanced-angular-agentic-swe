@@ -15,3 +15,12 @@
   opacity: 0.75;
   font-size: 0.9rem;
 }
+
+.nav-item.selected {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.field .input {
+  width: 8rem;
+}

@@ -1,14 +1,12 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
-    <div class="title">SPA Skills</div>
-    <div>
-      <button mat-raised-button (click)="addItem()" color="primary">Add</button>
-      <mat-slide-toggle [checked]="store.showAll()" (change)="store.toggleShowAll()" color="primary">
-        ShowAll
-      </mat-slide-toggle>
-    </div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="app-toolbar justify-between">
+  <div class="title">SPA Skills</div>
+  <div class="flex items-center gap-4">
+    <button type="button" class="btn btn-primary" (click)="addItem()">Add</button>
+    <app-slide-toggle [checked]="store.showAll()" (toggled)="store.toggleShowAll()">
+      ShowAll
+    </app-slide-toggle>
+  </div>
+</div>
 <div class="skillrow header">
   <div class="id">ID</div>
   <div class="name">Name</div>

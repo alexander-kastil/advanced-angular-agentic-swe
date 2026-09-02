@@ -1,38 +1,40 @@
 <div class="demo-container-wrapper">
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav [opened]="sidenavVisible()" [mode]="sidenavMode()">
-      <mat-toolbar color="accent">
-        <mat-toolbar-row>
-          {{ title }}
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <mat-nav-list>
-        <mat-toolbar class="sidenav-menu">
-          <span>Please select:</span>
-        </mat-toolbar>
-        @for (item of demos(); track item) {
-          <mat-list-item
-            role="listitem"
-            [routerLink]="['./' + item.url]"
-            (mouseenter)="showPopup(item, $event)"
-            (mouseleave)="hidePopup()"
-          >
-            {{ item.title }}
-          </mat-list-item>
-        }
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
+  <div class="relative flex h-full overflow-hidden">
+    @if (sidenavVisible() && sidenavMode() === 'over') {
+      <div class="absolute inset-0 z-10 bg-black/40" (click)="closeSidenav()"></div>
+    }
+    @if (sidenavVisible()) {
+      <aside
+        class="sidenav"
+        [class.sidenav-over]="sidenavMode() === 'over'"
+      >
+        <div class="app-toolbar">{{ title }}</div>
+        <nav class="nav-list">
+          <div class="app-toolbar text-base">
+            <span>Please select:</span>
+          </div>
+          @for (item of demos(); track item) {
+            <a
+              class="nav-item"
+              [routerLink]="['./' + item.url]"
+              (mouseenter)="showPopup(item, $event)"
+              (mouseleave)="hidePopup()"
+            >
+              {{ item.title }}
+            </a>
+          }
+        </nav>
+      </aside>
+    }
+    <div class="min-w-0 flex-1 overflow-hidden">
       <div
         class="gdSidenavContent"
         [style.margin-left]="sidenavVisible() ? '5px' : '0'"
       >
         <div class="gdToolbar">
-          <mat-toolbar color="accent">
-            <mat-toolbar-row>
-              <h4>{{ header() }}</h4>
-            </mat-toolbar-row>
-          </mat-toolbar>
+          <div class="app-toolbar">
+            <h4>{{ header() }}</h4>
+          </div>
         </div>
         <div class="gdMain">
           <as-split direction="vertical" unit="pixel" (dragProgress)="onSplitDragEnd($any($event))" (dragEnd)="onSplitDragEnd($event)">
@@ -58,8 +60,8 @@
           <app-side-panel />
         </div>
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    </div>
+  </div>
 
   @if (hoveredItem()) {
     <div class="demo-popup" [style.top.px]="popupTop()">

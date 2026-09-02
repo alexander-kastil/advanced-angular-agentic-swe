@@ -1,29 +1,14 @@
 import { Component, computed, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { ProgressBarComponent } from '../../../shared/progress-bar/progress-bar.component';
 import { extendResource, withPreviousValueOnLoading, withValueOnError } from '@ngrx/signals/resource';
 import { environment } from '../../../../environments/environment';
 import { Topic } from '../../../topics/topic.model';
 
 @Component({
   selector: 'app-store-resource',
-  imports: [
-    FormsModule,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatButton,
-    MatProgressBar,
-  ],
+  imports: [FormsModule, ProgressBarComponent],
   templateUrl: './store-resource.component.html',
   styleUrl: './store-resource.component.scss',
 })

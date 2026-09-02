@@ -2,10 +2,6 @@
   flex-grow: 1;
 }
 
-button{
-  margin-right: var(--gap-medium);
-}
-
 .skillrow.header {
   display: flex;
   flex-direction: row;
@@ -14,7 +10,7 @@ button{
   border-bottom: 2px solid #8d6e63;
 
   .id {
-    width: 50px;
+    width: 70px;
     padding-left: 2rem;
   }
 

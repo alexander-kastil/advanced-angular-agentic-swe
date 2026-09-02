@@ -1,37 +1,37 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Customers - CRUD with withMethods and rxMethod</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="content">
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Customers - CRUD with withMethods and rxMethod</div>
+  </div>
+  <div class="card-content content">
     @if (store.loading()) {
-      <mat-progress-bar mode="indeterminate" />
+      <app-progress-bar />
     }
 
     <div class="toolbar">
-      <mat-form-field>
-        <mat-label>Search</mat-label>
-        <input matInput [ngModel]="store.filter()" (ngModelChange)="store.setFilter($event)" />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>New customer</mat-label>
-        <input matInput [ngModel]="newName()" (ngModelChange)="newName.set($event)" (keyup.enter)="add()" />
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="add()">Add</button>
+      <div class="field">
+        <label class="label" for="crud-search">Search</label>
+        <input id="crud-search" class="input" [ngModel]="store.filter()" (ngModelChange)="store.setFilter($event)" />
+      </div>
+      <div class="field">
+        <label class="label" for="crud-new">New customer</label>
+        <input id="crud-new" class="input" [ngModel]="newName()" (ngModelChange)="newName.set($event)" (keyup.enter)="add()" />
+      </div>
+      <button type="button" class="btn btn-primary self-end" (click)="add()">Add</button>
     </div>
 
     @for (c of store.filtered(); track c.id) {
       <div class="row">
         @if (editing()?.id === c.id) {
-          <mat-form-field class="grow">
-            <mat-label>Name</mat-label>
-            <input matInput [ngModel]="editing()!.name" (ngModelChange)="rename($event)" (keyup.enter)="saveEdit()" />
-          </mat-form-field>
-          <button mat-icon-button (click)="saveEdit()"><mat-icon>done</mat-icon></button>
-          <button mat-icon-button (click)="editing.set(null)"><mat-icon>close</mat-icon></button>
+          <div class="field grow">
+            <label class="label">Name</label>
+            <input class="input" [ngModel]="editing()!.name" (ngModelChange)="rename($event)" (keyup.enter)="saveEdit()" />
+          </div>
+          <button type="button" class="btn-icon" (click)="saveEdit()"><span class="icon">done</span></button>
+          <button type="button" class="btn-icon" (click)="editing.set(null)"><span class="icon">close</span></button>
         } @else {
           <span class="grow">#{{ c.id }} {{ c.name }}</span>
-          <button mat-icon-button (click)="startEdit(c)"><mat-icon>edit</mat-icon></button>
-          <button mat-icon-button (click)="remove(c)"><mat-icon>delete</mat-icon></button>
+          <button type="button" class="btn-icon" (click)="startEdit(c)"><span class="icon">edit</span></button>
+          <button type="button" class="btn-icon" (click)="remove(c)"><span class="icon">delete</span></button>
         }
       </div>
     } @empty {
@@ -39,5 +39,5 @@
     }
 
     <p>Total: <strong>{{ store.count() }}</strong> - next id: <strong>{{ store.nextId() }}</strong></p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

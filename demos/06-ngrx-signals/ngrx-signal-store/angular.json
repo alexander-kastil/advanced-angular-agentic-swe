@@ -30,6 +30,7 @@
               }
             ],
             "styles": [
+              "src/tailwind.css",
               "src/styles.scss",
               "node_modules/prismjs/themes/prism-okaidia.min.css"
             ],

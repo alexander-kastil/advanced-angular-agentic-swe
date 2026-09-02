@@ -1,12 +1,12 @@
 @if(store.loading()){
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<app-progress-bar />
 } @for (c of customers(); track c) {
 <div class="box row">
   <div>{{ c.name }}</div>
   <div>
     <button
-      mat-raised-button
-      color="primary"
+      type="button"
+      class="btn btn-primary"
       [routerLink]="['/customers', c.id]"
       [queryParams]="{ readonly: true }"
     >

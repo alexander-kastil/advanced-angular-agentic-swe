@@ -1,25 +1,25 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Store Composition: withProps, withFeature and signalMethod</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="content">
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Store Composition: withProps, withFeature and signalMethod</div>
+  </div>
+  <div class="card-content content">
     <p>Desk: <strong>{{ store.desk() }}</strong> - watching <strong>{{ store.watched() }}</strong> symbols</p>
 
     <div class="toolbar">
       @for (symbol of store.symbols(); track symbol) {
-        <button mat-stroked-button [class.active]="symbol === store.selected()" (click)="store.select(symbol)">
+        <button type="button" class="btn btn-outline" [class.active]="symbol === store.selected()" (click)="store.select(symbol)">
           {{ symbol }}
         </button>
       }
     </div>
 
     <div class="toolbar">
-      <mat-form-field>
-        <mat-label>Add symbol</mat-label>
-        <input matInput [ngModel]="newSymbol()" (ngModelChange)="newSymbol.set($event)" />
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="addSymbol()">Watch</button>
-      <button mat-stroked-button (click)="store.clearAudit()">Clear audit</button>
+      <div class="field">
+        <label class="label" for="add-symbol">Add symbol</label>
+        <input id="add-symbol" class="input" [ngModel]="newSymbol()" (ngModelChange)="newSymbol.set($event)" />
+      </div>
+      <button type="button" class="btn btn-primary self-end" (click)="addSymbol()">Watch</button>
+      <button type="button" class="btn btn-outline self-end" (click)="store.clearAudit()">Clear audit</button>
     </div>
 
     <p>
@@ -41,5 +41,5 @@
         <li>No entries yet.</li>
       }
     </ol>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

@@ -1,38 +1,40 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
+<div class="app-toolbar h-full flex-col items-center gap-4 pt-12">
+  <button
+    type="button"
+    class="btn-fab tip tip-left"
+    data-tip="Toggle the SideNav"
+    (click)="toggleSideNav()"
+  >
+    <span class="icon">menu</span>
+  </button>
+  @if (isDemosRoute() && layout.hasMarkdownContent()) {
     <button
-      mat-mini-fab
-      matTooltip="Toggle the SideNav"
-      (click)="toggleSideNav()"
+      type="button"
+      class="btn-fab tip tip-left"
+      data-tip="Toggle Markdown Guide"
+      (click)="showGuide()"
     >
-      <mat-icon>menu</mat-icon>
+      <span class="icon">help_clinic</span>
     </button>
-    @if (isDemosRoute() && layout.hasMarkdownContent()) {
+    <button
+      type="button"
+      class="btn-fab tip tip-left"
+      [attr.data-tip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+      [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
+      (click)="toggleEditor()"
+    >
+      <span class="icon">{{ isEditorActive() ? "cancel" : "edit_square" }}</span>
+    </button>
+    @if (isEditorActive()) {
       <button
-        mat-mini-fab
-        matTooltip="Toggle Markdown Guide"
-        (click)="showGuide()"
+        type="button"
+        class="btn-fab tip tip-left"
+        data-tip="Add Comment"
+        aria-label="Add Comment"
+        (click)="addMarkdownItem()"
       >
-        <mat-icon>help_clinic</mat-icon>
+        <span class="icon">add</span>
       </button>
-      <button
-        mat-mini-fab
-        [matTooltip]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
-        [attr.aria-label]="isEditorActive() ? 'Close Editor' : 'Open Editor'"
-        (click)="toggleEditor()"
-      >
-        <mat-icon>{{ isEditorActive() ? "cancel" : "edit_square" }}</mat-icon>
-      </button>
-      @if (isEditorActive()) {
-        <button
-          mat-mini-fab
-          matTooltip="Add Comment"
-          aria-label="Add Comment"
-          (click)="addMarkdownItem()"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-      }
     }
-  </mat-toolbar-row>
-</mat-toolbar>
+  }
+</div>

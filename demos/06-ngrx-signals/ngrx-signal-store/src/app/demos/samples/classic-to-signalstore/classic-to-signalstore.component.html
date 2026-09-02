@@ -1,35 +1,43 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Agent-Driven Migration: classic NgRx to SignalStore</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="content">
-    <mat-tab-group>
-      <mat-tab label="Before - classic NgRx">
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Agent-Driven Migration: classic NgRx to SignalStore</div>
+  </div>
+  <div class="card-content content">
+    <div class="tabs">
+      @for (t of tabs; track t) {
+        <button type="button" class="tab" [class.active]="tab() === t" (click)="tab.set(t)">{{ t }}</button>
+      }
+    </div>
+    @switch (tab()) {
+      @case ('Before - classic NgRx') {
         <pre class="code">{{ classic }}</pre>
-      </mat-tab>
-      <mat-tab label="After - SignalStore">
+      }
+      @case ('After - SignalStore') {
         <pre class="code">{{ signalStore }}</pre>
-      </mat-tab>
-      <mat-tab label="Prompt">
+      }
+      @case ('Prompt') {
         <pre class="code">{{ prompt }}</pre>
         <div class="toolbar">
-          <button mat-raised-button color="primary" (click)="copyPrompt()">Copy prompt</button>
+          <button type="button" class="btn btn-primary" (click)="copyPrompt()">Copy prompt</button>
           @if (copied()) {
             <span class="ok">Copied.</span>
           }
         </div>
-      </mat-tab>
-    </mat-tab-group>
+      }
+    }
 
     <h4>Review checklist - {{ store.doneCount() }} of {{ store.items().length }}</h4>
-    <mat-progress-bar mode="determinate" [value]="store.progress()" />
+    <app-progress-bar mode="determinate" [value]="store.progress()" />
 
     @for (item of store.items(); track item.id) {
-      <mat-checkbox [checked]="item.done" (change)="store.toggle(item.id)">{{ item.text }}</mat-checkbox>
+      <label class="checkbox">
+        <input type="checkbox" [checked]="item.done" (change)="store.toggle(item.id)" />
+        {{ item.text }}
+      </label>
     }
 
     <div class="toolbar">
-      <button mat-stroked-button (click)="store.reset()">Reset checklist</button>
+      <button type="button" class="btn btn-outline" (click)="store.reset()">Reset checklist</button>
     </div>
 
     <p class="hint">
@@ -37,5 +45,5 @@
       diff against: an agent that produces compiling code can still drop a cancellation guarantee or leave a
       dead package behind.
     </p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

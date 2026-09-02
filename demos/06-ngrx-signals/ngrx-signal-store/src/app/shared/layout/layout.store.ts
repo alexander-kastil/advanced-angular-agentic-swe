@@ -1,14 +1,14 @@
 import { computed, effect } from '@angular/core';
-import { MatDrawerMode } from '@angular/material/sidenav';
 import { getState, patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals';
 
 export type MarkdownMode = 'guide' | 'editor';
+export type DrawerMode = 'over' | 'side';
 
 type LayoutState = {
     markdownPaneVisible: boolean;
     markdownMode: MarkdownMode;
     sidenavVisible: boolean;
-    sidenavPosition: MatDrawerMode;
+    sidenavPosition: DrawerMode;
     demoPaneSize: number;
     hasMarkdownContent: boolean;
 };
@@ -67,7 +67,7 @@ export const LayoutStore = signalStore(
         setSidenavVisible(visible: boolean) {
             patchState(store, { sidenavVisible: visible });
         },
-        setSidenavPosition(position: MatDrawerMode) {
+        setSidenavPosition(position: DrawerMode) {
             patchState(store, { sidenavPosition: position });
         },
         setDemoPaneSize(size: number) {

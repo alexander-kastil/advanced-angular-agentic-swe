@@ -41,32 +41,25 @@
   padding: 4px;
 }
 
-mat-toolbar {
-  height: var(--toolbar-medium);
-  margin-bottom: var(--gap-small);
+.sidenav {
+  width: 250px;
+  flex: none;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--color-fg);
+  border-right: 1px solid #e2e8f0;
+}
+
+.sidenav-over {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .demo-container-wrapper {
   height: 100%;
   position: relative;
-}
-
-.mat-sidenav-container {
-  height: 100%;
-}
-
-.mat-sidenav {
-  width: 250px;
-  background-color: var(--color-fg);
-}
-
-.sidenav-menu {
-  font-size: 1rem;
-}
-
-.mat-mdc-list-base .mat-mdc-list-item,
-.mat-list-base .mat-list-option {
-  height: 36px;
 }
 
 .demo-popup {

@@ -1,14 +1,10 @@
 import { Component, declareExperimentalWebMcpTool, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { Priority, SupportQueueStore } from './support-queue.store';
 
 @Component({
   selector: 'app-webmcp-store',
-  imports: [FormsModule, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, MatButton],
+  imports: [FormsModule],
   providers: [SupportQueueStore],
   templateUrl: './webmcp-store.component.html',
   styleUrl: './webmcp-store.component.scss',

@@ -1,16 +1,16 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Composing signalStoreFeature: withRequestStatus + withAttempts</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="content">
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Composing signalStoreFeature: withRequestStatus + withAttempts</div>
+  </div>
+  <div class="card-content content">
     @if (store.isPending()) {
-      <mat-progress-bar mode="indeterminate" />
+      <app-progress-bar />
     }
 
     <div class="toolbar">
-      <button mat-raised-button color="primary" (click)="store.sync(false)">Sync (succeeds)</button>
-      <button mat-stroked-button (click)="store.sync(true)">Sync (fails)</button>
-      <button mat-stroked-button (click)="store.reset()">Reset</button>
+      <button type="button" class="btn btn-primary" (click)="store.sync(false)">Sync (succeeds)</button>
+      <button type="button" class="btn btn-outline" (click)="store.sync(true)">Sync (fails)</button>
+      <button type="button" class="btn btn-outline" (click)="store.reset()">Reset</button>
     </div>
 
     <div class="status" [class.pending]="store.isPending()" [class.ok]="store.isFulfilled()" [class.failed]="!!store.error()">
@@ -25,5 +25,5 @@
       attempts <strong>{{ store.attempts() }}</strong> - failures <strong>{{ store.failures() }}</strong> -
       success rate <strong>{{ store.successRate() }}%</strong>
     </p>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>
