@@ -144,6 +144,67 @@ Components consume the store; they do not own domain state.
 
 Anti-patterns this replaces (see `references/angular-antipatterns.md`): plain non-signal class fields for domain data, bare `.subscribe()` in components, manual `ChangeDetectorRef.markForCheck()`, per-component `BehaviorSubject` services, duplicate fetches of the same endpoint from two components (share one slice instead).
 
+## Resets never live in a parallel request's handler
+
+Two `rxMethod`s dispatched together are a race decided by payload size, not by call order. A reset
+written into one response handler will stomp state the other has already loaded.
+
+```ts
+// WRONG — details is the fatter payload, so it always lands last and wipes the loaded rule
+loadDetails: rxMethod<string>(pipe(switchMap(id => service.getDetails(id).pipe(tapResponse({
+  next: d => patchState(store, { current: d, currentRule: null, pendingRule: null }),
+})))))
+
+// RIGHT — clear synchronously before dispatching, in the one entry path that needs it
+onNew() { this.store.clearEdit(); this.store.loadDetails(id); }
+```
+
+Symptom: a saved value is present in the network tab and absent on screen, reproducibly, and
+"works" whenever the other endpoint is slow. Rules:
+
+- A response handler patches what its own response carries, nothing else.
+- A reset that exists to protect one entry path is fixed at that entry path, not on every response.
+- Pin it with a spec that flushes the two responses in **both** orders; only the real-world order
+  fails, so a single-order test passes against the bug.
+
+## A store method must not read store signals in its `patchState` arguments
+
+A component that loads on an input change writes `effect(() => this.store.load(this.id()))`. Every
+signal the method reads **synchronously** becomes a dependency of that effect, so a method that reads
+the state it is about to write turns the effect into an infinite request loop.
+
+```ts
+// WRONG — store.versionsOf() and store.versions() are read inside the effect's reactive context,
+// and the same call writes both. Each response re-runs the effect and fires the next request.
+loadVersions(name: string) {
+  patchState(store, {
+    versions: store.versionsOf() === name ? store.versions() : [],
+    versionsOf: name,
+    versionsLoading: true
+  });
+  return service.getVersions(name).pipe(tap(v => patchState(store, { versions: v, versionsLoading: false })), ...);
+}
+
+// RIGHT — the updater's `state` is a plain object, not a tracked read
+patchState(store, (state) => ({
+  versions: state.versionsOf === name ? state.versions : [],
+  versionsOf: name,
+  versionsLoading: true
+}));
+```
+
+```ts
+// AND at the call site: the effect depends on its inputs only
+effect(() => {
+  const name = this.secretName();
+  untracked(() => this.store.loadVersions(name).subscribe());
+});
+```
+
+Both halves. The updater form fixes this method; `untracked` at the call site stops the next method
+that forgets. Symptom: the page renders correctly and nothing errors — the only evidence is the
+network panel filling with the same GET, so check it after wiring any load-on-input effect.
+
 ## What stays OUT of the store
 
 - **Auth** — MSAL / `AuthStateService` (the sanctioned exception).

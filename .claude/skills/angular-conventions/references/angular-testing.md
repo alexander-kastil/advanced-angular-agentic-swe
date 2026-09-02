@@ -1,6 +1,14 @@
-# Angular Testing with Vitest
+# Writing Angular specs with Vitest
 
-Unit test Angular components, services, and signals using Vitest and Angular's TestBed.
+Author unit tests for Angular components, services, guards and signals with Vitest and `TestBed`.
+
+This leaf answers "how do I write a spec for this thing". Three siblings answer the other questions:
+
+| Arrival question | Leaf |
+| --- | --- |
+| How do I run the suite, and why does the run look wrong? | [`angular-test-execution`](angular-test-execution.md) |
+| Where are the coverage gaps and how do I close them? | [`angular-test-coverage`](angular-test-coverage.md) |
+| The spec fails for a reason that is not the code under test | [`angular-test-doubles`](angular-test-doubles.md) |
 
 ## File Structure
 
@@ -12,6 +20,10 @@ user-list.component.spec.ts
 user.service.ts
 user.service.spec.ts
 ```
+
+A spec is routinely named for the *concept* rather than the file: `with-tasks.feature.ts` is covered by
+`with-tasks.spec.ts`. Never read a missing same-stem spec as missing coverage; see
+[`angular-test-coverage`](angular-test-coverage.md).
 
 ## Component Testing
 
@@ -63,48 +75,86 @@ describe('UserListComponent', () => {
 });
 ```
 
+Drive real events rather than calling handlers: `querySelector(...).click()` covers the template's
+listener closures, `component.onSave()` does not. In a zoneless app the dispatched event is also the
+only thing that repaints a plain (non-signal) field.
+
+## `provideRouter` for `routerLink` templates
+
+`TestBed.createComponent` instantiates the component's template directives. A template using
+`routerLink`/`routerLinkActive` fails with `NG0201: No provider found for ActivatedRoute` unless the
+router is provided. Add `provideRouter([])`:
+
+```typescript
+import { provideRouter } from '@angular/router';
+
+TestBed.configureTestingModule({
+  providers: [
+    provideRouter([]),
+    { provide: SomeStore, useValue: storeMock },
+  ],
+});
+```
+
+For pure logic checks (method delegation, signal wiring), read `createComponent(X).componentInstance`
+directly without `detectChanges()`: the constructor and field initializers still run.
+
 ## Service Testing
 
-Mock HTTP with `HttpTestingController`. Always call `httpMock.verify()` in `afterEach`.
+The `provideHttpClient()` + `provideHttpClientTesting()` setup and the request/flush examples live in
+[`angular-http`](angular-http.md) under "Testing HTTP". Two rules that section does not state:
+
+- Call `httpMock.verify()` in `afterEach` of **every** HTTP spec, not just the first one.
+- Match requests that carry query parameters with the predicate overload, never a bare path string.
+  Both the failure it produces and the fix are in [`angular-test-doubles`](angular-test-doubles.md).
+
+## Functional Guard / Resolver Testing
+
+Functional guards (`CanActivateFn`, `CanMatchFn`) call `inject()`, so run them inside `TestBed.runInInjectionContext`. Mock `MsalService` via its `instance` shape and `Router` via `parseUrl`, then assert the boolean or the returned `UrlTree`.
 
 ```typescript
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { UserService } from './user.service';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { Router } from '@angular/router';
+import { MsalService } from '@azure/msal-angular';
+import { describe, it, expect, afterEach, vi } from 'vitest';
+import { canMatchAuth } from './msal-auth.guard';
 
-describe('UserService', () => {
-  let service: UserService;
-  let httpMock: HttpTestingController;
+function configure(activeAccount: unknown, accounts: unknown[]) {
+  const msalMock = { instance: { getActiveAccount: () => activeAccount, getAllAccounts: () => accounts } };
+  const urlTree = { redirectTo: '/' };
+  const routerMock = { parseUrl: vi.fn(() => urlTree) };
+  TestBed.configureTestingModule({
+    providers: [
+      { provide: MsalService, useValue: msalMock },
+      { provide: Router, useValue: routerMock },
+    ],
+  });
+  return { routerMock, urlTree };
+}
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [UserService, provideHttpClient(), provideHttpClientTesting()],
-    });
-    service = TestBed.inject(UserService);
-    httpMock = TestBed.inject(HttpTestingController);
+const run = () => TestBed.runInInjectionContext(() => canMatchAuth({} as never, [] as never));
+
+describe('canMatchAuth', () => {
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('allows access when an account exists', () => {
+    configure({ username: 'a@b.at' }, []);
+    expect(run()).toBe(true);
   });
 
-  afterEach(() => httpMock.verify());
-
-  it('fetches users from API', () => {
-    const mockUsers = [{ id: 1, name: 'Alice' }];
-    service.getUsers().subscribe((users) => expect(users).toEqual(mockUsers));
-
-    httpMock.expectOne('/api/users').flush(mockUsers);
-  });
-
-  it('handles API errors', () => {
-    service.getUsers().subscribe({ error: (e) => expect(e.status).toBe(500) });
-    httpMock.expectOne('/api/users').flush('error', { status: 500, statusText: 'Server Error' });
+  it('redirects a logged-out user to /', () => {
+    const { routerMock, urlTree } = configure(null, []);
+    expect(run()).toBe(urlTree);
+    expect(routerMock.parseUrl).toHaveBeenCalledWith('/');
   });
 });
 ```
 
+If the guard reads `isAuthEnabled()` (which checks `environment.authEnabled` and a `localStorage` flag), set/clear that `localStorage` key per-test in `afterEach` to exercise both the enabled and disabled branches.
+
 ## Signal Testing
 
-Test computed values and effects directly — no TestBed needed.
+Test computed values and effects directly, no TestBed needed.
 
 ```typescript
 import { signal, computed } from '@angular/core';
@@ -142,25 +192,3 @@ it('subscribes to observable', (done) => {
   });
 });
 ```
-
-## Mocking Strategy
-
-Mock external dependencies (services, HTTP). Test in isolation. Verify calls with spies.
-
-```typescript
-// Mock the service, not internal implementation
-const mockService = { getUsers: vi.fn().mockReturnValue(of([{ id: 1, name: 'Test' }])) };
-
-// Never test private methods
-// expect(component['privateMethod']).toHaveBeenCalled(); // wrong
-```
-
-## Coverage Goals
-
-Target 80%+ coverage. Prioritize:
-
-1. Happy path scenarios
-2. Error handling and edge cases
-3. User interactions and emitted outputs
-4. Service integration points
-5. State transitions

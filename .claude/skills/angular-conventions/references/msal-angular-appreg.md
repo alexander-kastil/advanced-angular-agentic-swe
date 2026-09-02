@@ -1,13 +1,3 @@
----
-name: msal-angular-appreg
-description: >-
-  Azure AD app registration management for MSAL Angular apps. Covers reading
-  and updating SPA redirect URIs via Azure CLI and MS Graph, registering
-  auth-redirect URIs for local dev and production, and diagnosing redirect_uri
-  mismatch errors. Use when adding a new redirect URI, checking app registration
-  state, or onboarding a new environment.
----
-
 # MSAL Angular — App Registration Reference
 
 > App registration in Azure AD (Entra ID) for SPA apps using MSAL Angular 22+ with PKCE auth code flow.
@@ -155,6 +145,41 @@ If you see `AADSTS50011: The redirect URI ... does not match`, check:
 
 ---
 
+## Localhost: the port is NOT part of the URI's identity
+
+Per [the reply-url doc](https://learn.microsoft.com/entra/identity-platform/reply-url#localhost-exceptions), for **localhost only**, the port component is ignored when matching a redirect URI. `https://localhost:4200`, `https://localhost:5001` and `https://localhost:7071` are all **the same URI** to the login server. Scheme still counts; port does not.
+
+The consequence is the trap, quoted from the doc:
+
+> Do not register multiple localhost redirect URIs where only the port differs. **The login server picks one arbitrarily and uses the behavior associated with that registered redirect URI** (for example, whether it's a `web`-, `native`-, or `spa`-type redirect).
+
+So a single app registration that serves both an API (`https://localhost:5001` on **Web**) and a SPA dev server (`https://localhost:4200` on **SPA**) has one ambiguous `https://localhost` entry with two platform types. When the login server picks the `web` one, the browser's code-to-token call is refused:
+
+```
+AADSTS9002326: Cross-origin token redemption is permitted only for the
+'Single-Page Application' client-type. Request origin: 'https://localhost:4200'
+```
+
+**This fires at the token exchange, not at `/authorize`** — sign-in completes, the app lands back on its redirect URI, then bootstrap dies. `handleRedirectObservable` in an `APP_INITIALIZER` rejects, so the symptom is a blank page plus that error in the console.
+
+Rules:
+
+- An `http://localhost:4200` SPA URI does **not** collide with `https://localhost:5001` on Web: the schemes differ. This is usually why a dev login works on http and breaks the moment the dev server is switched to https.
+- Never register a band of localhost ports "to be safe" (`4200`–`4210`). Every entry is the same URI; you are stacking ambiguity, not coverage.
+- To run more than one localhost flow off one registration, differentiate by **path**: `https://localhost/MyWebApp` does not match `https://localhost/MyNativeApp`. Set MSAL's `redirectUri` to that path and give the SPA a route for it.
+- Audit all three platforms together before adding anything:
+
+```bash
+az ad app show --id <appId> \
+  --query "{spa:spa.redirectUris, web:web.redirectUris, publicClient:publicClient.redirectUris}" -o json
+```
+
+### Do not "verify" a redirect URI by probing the token endpoint
+
+POSTing to `/oauth2/v2.0/token` with an `Origin` header and a fake `code` proves nothing: the malformed code short-circuits with `AADSTS9002313` **before** the cross-origin check runs, so a deliberately unregistered origin returns exactly the same response as a registered one. If you try it anyway, always run the same probe against a known-bad origin first; identical output means the probe discriminates nothing.
+
+---
+
 ## Adding a New Environment (e.g., staging)
 
 When deploying a new environment, add its origin to the SPA redirect URIs before deploying:
@@ -183,6 +208,48 @@ az rest \
 The app uses a custom API scope: `api://54f03c51-f41a-4f1f-97ca-d219ee28ee50/access_as_user`
 
 This scope must be exposed in the **Expose an API** section of the app registration. If users see "Need admin approval" errors, the scope may not be pre-consented for the tenant.
+
+---
+
+## App Registration Requirements
+
+Before writing any code, verify the Entra app registration:
+
+| Setting | Required value | Why |
+|---|---|---|
+| `api.requestedAccessTokenVersion` | `2` | Null (default) issues v1 tokens; `Microsoft.Identity.Web` validates the v2 issuer and rejects them, causing 401 |
+| SPA redirect URIs | Must be under **SPA** platform (not Web) | Web platform issues auth codes incompatible with PKCE flows |
+| `web.implicitGrantSettings.enableAccessTokenIssuance` | `false` | Implicit flow is obsolete; SPA platform uses auth code + PKCE |
+
+Check with:
+
+```bash
+az ad app show --id <clientId> --query "api.requestedAccessTokenVersion" -o tsv
+# Must return 2. If null, fix:
+az ad app update --id <clientId> --set "api={'requestedAccessTokenVersion': 2}"
+```
+
+### Creating the registrations via az CLI
+
+Create two app regs — an **API** (exposes the scope) and a **SPA** (consumes it). The scope
+is added to the API via a Graph PATCH, then referenced from the SPA's `requiredResourceAccess`.
+
+```bash
+az ad app create --display-name "<App> API"   --sign-in-audience AzureADMyOrg   # -> apiAppId, apiObjectId
+az ad app create --display-name "<App> Admin" --sign-in-audience AzureADMyOrg   # -> spaAppId, spaObjectId
+az ad sp create --id <apiAppId>; az ad sp create --id <spaAppId>                 # service principals
+```
+
+Then PATCH `https://graph.microsoft.com/v1.0/applications/<apiObjectId>` with `identifierUris:
+["api://<apiAppId>"]` and `api.{ requestedAccessTokenVersion: 2, oauth2PermissionScopes: [{ id:
+<newGuid>, value: "access_as_user", type: "User", isEnabled: true, …consent text… }] }`; PATCH
+the SPA with `spa.redirectUris: ["http://localhost:4200"]` and `requiredResourceAccess` pointing
+at `<apiAppId>` + the scope id (`type: "Scope"`); finally `az ad app permission admin-consent --id <spaAppId>`.
+
+**Gotcha (chicken-and-egg):** do NOT include `api.preAuthorizedApplications` in the same PATCH that
+*creates* the `oauth2PermissionScopes` — Graph rejects it (`InvalidValue … Permission Id … cannot be
+found`) because the scope doesn't exist yet. Either skip pre-authorization (admin consent covers it)
+or add it in a **second** PATCH after the scope exists, reusing the same scope GUID.
 
 ---
 

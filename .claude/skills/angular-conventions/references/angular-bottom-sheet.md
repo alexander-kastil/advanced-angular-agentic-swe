@@ -1,8 +1,3 @@
----
-name: angular-bottom-sheet
-description: Native <dialog>-based bottom-sheet (action sheet / slide-up panel) component for standalone Angular apps with no Angular Material and no @angular/cdk. Covers the viewport-anchored, full-width, slide-up variant of the native-dialog modal convention — imperative open()/close() via viewChild, OnPush, signals, the slide-up transition, focus return, Esc-to-close, and backdrop-click close. Triggers on bottom sheet, action sheet, slide-up panel, drawer from bottom, mobile sheet, native dialog modal, showModal.
----
-
 # Angular Bottom Sheet (Native `<dialog>`, No CDK)
 
 In apps with **no Angular Material and no `@angular/cdk`**, the natural modal

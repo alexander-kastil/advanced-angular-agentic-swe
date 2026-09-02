@@ -1,8 +1,3 @@
----
-name: angular-wizard
-description: Multi-step wizard / setup-flow UI for standalone Angular apps — a full-width shell with a sticky vertical step rail (Connect → Review → Deploy style), phase-driven active/done states, a two-column step body (actions sidebar + content panel), device-code + copy-to-clipboard, and chip filters derived from real data only. Dark-theme, OnPush + signals, CSS-token driven (--surface/--surface2/--border/--muted/--accent/--success/--radius). Triggers on "wizard", "setup wizard", "stepper", "step rail", "multi-step flow", "onboarding flow", "make it more wizard-like", "step indicator", "copy to clipboard button", "chip filters", "two-column step layout", "app uses too little width".
----
-
 # Angular Wizard / Setup-Flow UI
 
 A wizard turns a store-driven multi-phase flow (e.g. onboarding: `connect → review → deploy`) into a
