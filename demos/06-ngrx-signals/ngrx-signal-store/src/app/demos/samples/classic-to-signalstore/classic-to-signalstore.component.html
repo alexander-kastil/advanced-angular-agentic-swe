@@ -1,0 +1,49 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Agent-Driven Migration: classic NgRx to SignalStore</h2>
+  </div>
+  <div class="card-content content">
+    <div class="tabs">
+      @for (t of tabs; track t) {
+        <button type="button" class="tab" [class.active]="tab() === t" (click)="tab.set(t)">{{ t }}</button>
+      }
+    </div>
+    @switch (tab()) {
+      @case ('Before - classic NgRx') {
+        <pre class="code" tabindex="0" role="region" aria-label="Classic NgRx source">{{ classic }}</pre>
+      }
+      @case ('After - SignalStore') {
+        <pre class="code" tabindex="0" role="region" aria-label="SignalStore source">{{ signalStore }}</pre>
+      }
+      @case ('Prompt') {
+        <pre class="code" tabindex="0" role="region" aria-label="Migration prompt">{{ prompt }}</pre>
+        <div class="toolbar">
+          <button type="button" class="btn btn-primary" (click)="copyPrompt()">Copy prompt</button>
+          @if (copied()) {
+            <span class="ok">Copied.</span>
+          }
+        </div>
+      }
+    }
+
+    <h3>Review checklist - {{ store.doneCount() }} of {{ store.items().length }}</h3>
+    <app-progress-bar mode="determinate" [value]="store.progress()" />
+
+    @for (item of store.items(); track item.id) {
+      <label class="checkbox">
+        <input type="checkbox" [checked]="item.done" (change)="store.toggle(item.id)" />
+        {{ item.text }}
+      </label>
+    }
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-outline" (click)="store.reset()">Reset checklist</button>
+    </div>
+
+    <p class="hint">
+      Four files and roughly ninety lines become one store of about thirty. The checklist is what you read the
+      diff against: an agent that produces compiling code can still drop a cancellation guarantee or leave a
+      dead package behind.
+    </p>
+  </div>
+</div>

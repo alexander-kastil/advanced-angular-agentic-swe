@@ -1,0 +1,14 @@
+.agent {
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.agent.on {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.agent.off {
+  background: #f1f5f9;
+  color: #334155;
+}

@@ -1,28 +1,32 @@
 <app-markdown-renderer [md]="'preloading-strategy'" />
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Preloading Strategy</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Selective Preloading</h2>
+  </div>
+  <div class="card-content">
     <p>
-      Custom preloading strategy preloads routes marked with <code>data: {{ '{' }} preload: true {{ '}' }}</code>.
+      <code>SelectivePreloadingStrategy</code> is registered with <code>withPreloading()</code> in
+      <code>app.config.ts</code>. It loads only the lazy routes marked with
+      <code>data: &#123; preload: true &#125;</code> and leaves the rest for the first navigation.
     </p>
-    <p>
-      <strong>Preloaded Modules:</strong>
-      @if (strategy.preloadedModules.length > 0) {
-        <span>{{ strategy.preloadedModules.join(', ') }}</span>
-      } @else {
-        <span>None yet</span>
+    <p><strong>Preloaded in the background:</strong></p>
+    <ul>
+      @for (route of preloadedRoutes(); track route) {
+        <li>{{ route }}</li>
+      } @empty {
+        <li>None yet</li>
       }
+    </ul>
+    <p>
+      <code>customers</code> is not marked, so its chunk arrives only when you navigate there. Watch the
+      network panel while pressing the buttons.
     </p>
-    <div>
-      <button mat-raised-button color="primary" (click)="navigateToCustomers()">
+    <div class="flex flex-wrap gap-3">
+      <button type="button" class="btn btn-primary" (click)="navigateToCustomers()">
         Navigate to Customers
       </button>
-      <button mat-raised-button color="accent" (click)="navigateToSkills()">
-        Navigate to Skills
-      </button>
+      <button type="button" class="btn btn-outline" (click)="navigateToSkills()">Navigate to Skills</button>
     </div>
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

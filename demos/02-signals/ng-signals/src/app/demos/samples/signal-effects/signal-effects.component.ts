@@ -1,17 +1,14 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { httpResource } from '@angular/common/http';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 import { Skill } from '../../../skills/skill.model';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-signal-effects',
-  imports: [MatFormField, MatLabel, MatSelectModule, BoxedDirective],
+  imports: [BoxedDirective],
   templateUrl: './signal-effects.component.html',
-  styleUrl: './signal-effects.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './signal-effects.component.scss'
 })
 export class SignalEffectsComponent {
   options = ['Completed', 'Open'];
@@ -24,7 +21,8 @@ export class SignalEffectsComponent {
       : undefined;
   }, { defaultValue: [] });
 
-  onStatusChange(parm: MatSelectChange) {
-    this.completedFilter.set(parm.value);
+  onStatusChange(event: Event) {
+    const value = (event.target as HTMLSelectElement).value;
+    this.completedFilter.set(value === '' ? undefined : value === 'true');
   }
 }

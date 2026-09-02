@@ -1,0 +1,22 @@
+<app-markdown-renderer [md]="'route-resolvers-signals'" />
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Resolved album #{{ id() }}</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      The <code>albumResolver</code> ran the HTTP call before this component existed. The router handed the
+      result to <code>album</code>, an <code>input.required()</code> signal, and the route parameter to
+      <code>id</code>. The component never subscribes and never sees a loading state.
+    </p>
+    <h3>{{ album().title }}</h3>
+    <pre class="code" tabindex="0" role="region" aria-label="Resolved album payload">{{ album() | json }}</pre>
+  </div>
+  <div class="card-actions">
+    <button type="button" class="btn btn-primary" [routerLink]="['../', previousId()]" [disabled]="id() === 1">
+      Previous Album
+    </button>
+    <button type="button" class="btn btn-primary" [routerLink]="['../', nextId()]">Next Album</button>
+  </div>
+</div>

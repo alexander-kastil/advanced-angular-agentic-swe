@@ -1,28 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { interval } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AsyncPipe } from '@angular/common';
-import { ExpanderTemplateComponent } from './expander-template/expander-template.component';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { ClockComponent } from './clock/clock.component';
 import { ExpanderComponent } from './expander-content/expander.component';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { ExpanderTemplateComponent } from './expander-template/expander-template.component';
 
 @Component({
-    selector: 'app-template-vs-container',
-    templateUrl: './template-vs-container.component.html',
-    styleUrls: ['./template-vs-container.component.scss'],
-    imports: [
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
-        ExpanderComponent,
-        ClockComponent,
-        ExpanderTemplateComponent,
-        AsyncPipe,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-template-vs-container',
+  templateUrl: './template-vs-container.component.html',
+  styleUrls: ['./template-vs-container.component.scss'],
+  imports: [ExpanderComponent, ClockComponent, ExpanderTemplateComponent],
 })
 export class TemplateVsContainerComponent {
-    currentTime = interval(100).pipe(map(() => new Date().toTimeString()));
+  readonly currentTime = signal(new Date().toTimeString());
+
+  constructor() {
+    const handle = setInterval(() => this.currentTime.set(new Date().toTimeString()), 1000);
+    inject(DestroyRef).onDestroy(() => clearInterval(handle));
+  }
 }

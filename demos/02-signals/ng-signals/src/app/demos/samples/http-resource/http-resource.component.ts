@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 import { Skill } from '../../../skills/skill.model';
@@ -22,7 +22,6 @@ import { environment } from '../../../../environments/environment';
       }
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HttpResourceComponent {
   skillsResource = httpResource<Skill[]>(() => `${environment.api}skills`);

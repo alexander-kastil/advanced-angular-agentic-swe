@@ -1,0 +1,111 @@
+<div class="grid">
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">toSignal()</h2>
+    </div>
+    <div class="card-content">
+      <p class="direction">OBSERVABLE &rarr; SIGNAL</p>
+      <p>
+        An
+        <code>interval()</code>
+        read synchronously in the template, with teardown handled for you.
+      </p>
+      <div class="log">{{ clock() }}</div>
+    </div>
+  </div>
+
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">toObservable()</h2>
+    </div>
+    <div class="card-content">
+      <p class="direction">SIGNAL &rarr; OBSERVABLE</p>
+      <p>
+        Typing writes a signal.
+        <code>toObservable</code>
+        turns it back into a stream so
+        <code>debounceTime</code>
+        can do its job, then
+        <code>toSignal</code>
+        reads the result.
+      </p>
+      <div class="field">
+        <label class="label" for="interop-filter">Filter skills</label>
+        <input id="interop-filter" class="input" type="text" autocomplete="off" [(ngModel)]="term" />
+      </div>
+      <div class="log">raw: "{{ term() }}" &middot; settled: "{{ settledTerm() }}"</div>
+    </div>
+  </div>
+
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">outputToObservable()</h2>
+    </div>
+    <div class="card-content">
+      <p class="direction">OUTPUT &rarr; OBSERVABLE</p>
+      <p>
+        A child's
+        <code>output()</code>
+        consumed as a stream, so
+        <code>scan</code>
+        can keep the last five.
+      </p>
+      <app-pinger />
+      <div class="log">
+        @for (entry of pings(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>no pings yet</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">outputFromObservable()</h2>
+    </div>
+    <div class="card-content">
+      <p class="direction">OBSERVABLE &rarr; OUTPUT</p>
+      <p>
+        The mirror image. The child declares an output backed by a stream it
+        already has, and the parent binds to it like any other output.
+      </p>
+      <app-heartbeat (beat)="onBeat($event)" />
+      <div class="log">
+        @for (entry of beats(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>waiting for the first beat</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card bridge">
+  <div class="card-header">
+    <h2 class="card-title">rxResource(): the bridge for request and response</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      Not a fifth direction but the reason you rarely need the first four for
+      HTTP. The debounced signal above is the
+      <code>params</code>
+      . Every change cancels the previous stream and starts a new one.
+    </p>
+    @if (skillsResource.isLoading()) {
+      <app-progress-bar mode="indeterminate" />
+    } @else if (skillsResource.error()) {
+      <p>Start json-server to see live data.</p>
+    } @else {
+      <div class="chips">
+        @for (skill of skillsResource.value(); track skill.id) {
+          <span class="chip" [class.chip-on]="skill.completed">{{ skill.name }}</span>
+        } @empty {
+          <span class="chip">no matches</span>
+        }
+      </div>
+    }
+  </div>
+</div>

@@ -1,19 +1,16 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>The current time</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    {{ currentTime | async }}
-  </mat-card-content>
-</mat-card>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The current time</h2>
+  </div>
+  <div class="card-content">
+    {{ currentTime() }}
+  </div>
+</div>
 
-<!-- ng-content implementation -->
 <app-expander title="expander using ng-content">
   <app-clock />
 </app-expander>
 
-<!-- ng-template implementation -->
-<!-- notice local referenc #clock and it's usage as [content] in the expander -->
 <ng-template #clock>
   <app-clock />
 </ng-template>

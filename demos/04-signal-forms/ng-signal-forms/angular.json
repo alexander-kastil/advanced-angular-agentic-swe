@@ -26,11 +26,16 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
-              "node_modules/prismjs/themes/prism-okaidia.css",
-              "src/styles.scss"
+              "src/tailwind.css",
+              "src/styles.scss",
+              "node_modules/prismjs/themes/prism-okaidia.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -43,10 +48,7 @@
               "node_modules/prismjs/components/prism-javascript.min.js"
             ],
             "allowedCommonJsDependencies": [
-              "lodash",
-              "util",
-              "subsink",
-              "axios"
+              "util"
             ],
             "browser": "src/main.ts"
           },
@@ -55,13 +57,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
               "outputHashing": "all"
@@ -97,6 +99,17 @@
           "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "component-forms:build"
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "buildTarget": "component-forms:build:development",
+            "tsConfig": "tsconfig.spec.json",
+            "runner": "vitest",
+            "setupFiles": [
+              "src/test-setup.ts"
+            ]
           }
         }
       }

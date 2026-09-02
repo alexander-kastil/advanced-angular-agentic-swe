@@ -1,0 +1,86 @@
+<div class="sample">
+  <p>
+    A subagent is a separate context with its own system prompt, tool grant and model. Narrow the tool
+    list to what the job needs, keep the description sharp enough to route on, and the main thread
+    stays free of Angular detail.
+  </p>
+
+  <div class="controls">
+    <div>
+      <h4>Tools granted ({{ toolCount() }})</h4>
+      <div class="row">
+        @for (tool of allTools; track tool) {
+          <button [class.active]="tools().includes(tool)" (click)="toggleTool(tool)">
+            {{ tool }}
+          </button>
+        }
+      </div>
+      @if (!canWrite()) {
+        <p class="hint">
+          No Edit and no Write: this is a review agent. It can find defects and nothing else.
+        </p>
+      }
+    </div>
+
+    <div>
+      <h4>Model</h4>
+      <div class="row">
+        @for (candidate of models; track candidate) {
+          <button [class.active]="model() === candidate" (click)="setModel(candidate)">
+            {{ candidate }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <app-code-block label=".claude/agents/angular-expert.md" [code]="agentFile()" />
+
+  <h4>Agent file or skill?</h4>
+  <p class="hint">
+    The frontmatter and everything under it load whenever the agent runs. A skill loads only when its
+    description matches. Put a rule in the wrong place and it is either a per-turn tax or silently
+    absent. Score {{ correct() }} of {{ answered() }} answered.
+    @if (answered()) {
+      <button class="reset" (click)="reset()">Reset</button>
+    }
+  </p>
+
+  <ul class="placements">
+    @for (placement of placements; track placement.item) {
+      <li class="card">
+        <span class="item">{{ placement.item }}</span>
+        <span class="choices">
+          <button
+            [class.active]="guessFor(placement.item) === 'agent'"
+            (click)="guess(placement.item, 'agent')"
+          >
+            Agent file
+          </button>
+          <button
+            [class.active]="guessFor(placement.item) === 'skill'"
+            (click)="guess(placement.item, 'skill')"
+          >
+            Skill
+          </button>
+        </span>
+        @if (verdict(placement); as feedback) {
+          <p class="feedback" [class.wrong]="isWrong(placement)">{{ feedback }}</p>
+        }
+      </li>
+    }
+  </ul>
+
+  <h4>Where does the work go?</h4>
+  <div class="row">
+    @for (routingCase of routingCases; track routingCase.prompt) {
+      <button [class.active]="selectedCase() === routingCase" (click)="selectCase(routingCase)">
+        {{ routingCase.prompt }}
+      </button>
+    }
+  </div>
+  <div class="card verdict">
+    <strong>{{ selectedCase().agent }}</strong>
+    <p>{{ selectedCase().why }}</p>
+  </div>
+</div>

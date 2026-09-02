@@ -1,7 +1,9 @@
 export const environment = {
   authEnabled: false,
-  title: 'Components & Forms',
+  title: 'Components & Composition',
   logChangeDetection: true,
-  markdownPath: '/assets/markdown/',
-  api: 'http://localhost:3000/',
+  logChanges: false,
+  logLoading: false,
+  markdownPath: 'markdown/',
+  api: 'http://localhost:3000/'
 };

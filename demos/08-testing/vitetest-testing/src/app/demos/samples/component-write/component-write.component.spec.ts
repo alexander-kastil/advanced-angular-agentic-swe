@@ -1,7 +1,6 @@
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MarkdownModule } from 'ngx-markdown';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentWriteComponent } from './component-write.component';
@@ -13,7 +12,6 @@ describe('ComponentWriteComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         ComponentWriteComponent,
-        NoopAnimationsModule,
         MarkdownModule.forRoot()
       ],
       providers: [

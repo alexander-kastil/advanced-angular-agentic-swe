@@ -1,6 +1,4 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
-    <div>Skills Total: {{ ct | async }}</div>
-    <div>Not Completed: {{ (completed | async)?.length }}</div>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="app-toolbar gap-8 text-slate-600">
+  <div>Skills Total: <strong class="text-ink">{{ total() }}</strong></div>
+  <div>Not Completed: <strong class="text-ink">{{ open() }}</strong></div>
+</div>

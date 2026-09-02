@@ -1,0 +1,20 @@
+.sections {
+  display: flex;
+  gap: 8px;
+}
+
+.sections .active {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.code {
+  overflow: auto;
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}

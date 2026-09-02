@@ -62,3 +62,22 @@ dual-auth client (local token + MSAL), a token interceptor, or an admin route gu
    matched URLs, which fights local-token auth. Replace it with the custom local-first interceptor above;
    keep the MSAL providers (`MSAL_INSTANCE`, `MSAL_GUARD_CONFIG`, `MsalService`, `MsalGuard`,
    `MsalBroadcastService`).
+
+## Store slices (composed into `AppStore`, `store/app.store.ts`)
+
+**`withAuth()`** — current user + permission checks. State `{ user: UserDto|null, authEnabled, authType:
+'entra'|'local'|null, authResolved }`; seeds `DEV_SUPERUSER` (`permissions: ['*']`) when
+`!environment.authEnabled`. Computeds: `isAuthenticated` (`!authEnabled || user!==null`),
+`currentUserName`, **`userPermissions`**, `hasPermission`, `isAdmin`. Methods `setUser(user, authType)`,
+`clearUser()`, `markAuthResolved()`.
+
+**`withAdmin()`** — data access for the screens (all `rxMethod` + `tapResponse`, base
+`environment.webApiUrl`): `loadUsers({text?,roleId?})`, `saveUser`, `saveUserCredentials`, `setUserRoles`,
+`deleteUser`, `loadRoles`, `createRole`, `updateRole`, `deleteRole`, `loadPermissions`,
+`savePermissions({roleId,entries})`, `loadAdminEmails`. State `{ users, usersTotalCount, roles,
+permissions, adminEmails, *Loading }`.
+
+API surface wrapped: `GET/POST/PUT/DELETE /api/users` (+ `/{id}/roles`, `/{id}/credentials`),
+`GET/POST/PUT/DELETE /api/roles`, `GET /api/permissions` + `PUT /api/permissions/{roleId}` (replace-all,
+only rows where `canRead||canEdit`), `GET /api/auth/{me,admins}`, `POST /api/auth/login`.
+

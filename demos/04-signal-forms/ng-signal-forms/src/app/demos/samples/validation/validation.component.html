@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Async Validation - validateHttp &amp; validateAsync</h2>
+  </div>
+  <div class="card-content">
+    <form novalidate column>
+      <div class="field">
+        <label class="label" for="validation-name">Name</label>
+        <input
+          id="validation-name"
+          class="input"
+          type="text"
+          placeholder="Try Soi or Giro"
+          [formField]="personForm.name"
+        />
+      </div>
+      @if (personForm.name().pending()) {
+        <div>Checking name...</div>
+      }
+      @if (personForm.name().touched() && personForm.name().invalid()) {
+        @for (err of personForm.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="validation-age">Age</label>
+        <input id="validation-age" class="input" type="number" placeholder="Age" [formField]="personForm.age" />
+      </div>
+      @if (personForm.age().touched() && personForm.age().invalid()) {
+        @for (err of personForm.age().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="validation-email">Email</label>
+        <input
+          id="validation-email"
+          class="input"
+          type="text"
+          placeholder="Try cleothewhippet@integrations.at"
+          [formField]="personForm.email"
+        />
+      </div>
+      @if (personForm.email().pending()) {
+        <div>Checking email...</div>
+      }
+      @if (personForm.email().touched() && personForm.email().invalid()) {
+        @for (err of personForm.email().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="cmdItems">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="personForm().invalid() || personForm().pending()"
+          (click)="savePerson()"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Validation State</h2>
+  </div>
+  <div class="card-content">
+    <div boxed>
+      <div>Name pending: {{ personForm.name().pending() }} | valid: {{ personForm.name().valid() }}</div>
+      <div>Email pending: {{ personForm.email().pending() }} | valid: {{ personForm.email().valid() }}</div>
+      <div>Form pending: {{ personForm().pending() }} | valid: {{ personForm().valid() }}</div>
+    </div>
+  </div>
+</div>

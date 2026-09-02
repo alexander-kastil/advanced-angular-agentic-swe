@@ -1,0 +1,21 @@
+<app-customers-table
+  [customers]="customers()"
+  [loading]="loading()"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)"
+  (add)="onAdd()"
+/>
+
+@if (selectedCustomer(); as customer) {
+  <app-customer-edit
+    [customer]="customer"
+    (save)="onSave($event)"
+    (cancel)="onCancel()"
+  />
+}
+
+<div class="events">
+  @for (entry of events(); track $index) {
+    <div data-testid="event-row">{{ entry }}</div>
+  }
+</div>

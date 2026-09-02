@@ -1,0 +1,96 @@
+<section class="gates">
+  <header>
+    <h2>Gate the Pull Request</h2>
+    <p>
+      A performance rule nobody enforces is a preference. Four checks turn the rules in this module into
+      merge conditions: the build budget, the template accessibility lint, an axe scan of the running app,
+      and a Lighthouse CI run against the built <code>dist/</code>. Each one exits non-zero, so the workflow
+      fails and the pull request cannot be merged.
+    </p>
+  </header>
+
+  <article class="boundary">
+    <h3>Where this module stops</h3>
+    <p>
+      Module 09 gates the <strong>local build</strong>: everything below runs on a runner, against source and
+      against <code>dist/</code>, before anything is deployed. Module 12 measures <strong>Core Web Vitals
+      after deploy</strong>, against a live origin with real DNS and TLS. Same metrics, different question:
+      here you ask whether the artifact is allowed to ship, there you ask what the artifact does in the world.
+    </p>
+  </article>
+
+  <h3>The gate set</h3>
+  <table>
+    <caption>Four gates, each one able to fail the run on its own</caption>
+    <thead>
+      <tr>
+        <th scope="col">Gate</th>
+        <th scope="col">Command</th>
+        <th scope="col">Configured in</th>
+        <th scope="col">Fails when</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (gate of gates; track gate.key) {
+        <tr>
+          <th scope="row">{{ gate.name }}</th>
+          <td><code>{{ gate.runs }}</code></td>
+          <td><code>{{ gate.configuredIn }}</code></td>
+          <td>{{ gate.failsWhen }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h3>Simulate a check run</h3>
+  <p>Trip a gate and watch the verdict. This is the same arithmetic the workflow does: any failure blocks the merge.</p>
+  <div class="switches">
+    @for (gate of gates; track gate.key) {
+      <label class="switch">
+        <input type="checkbox" [checked]="failing()[gate.key]" (change)="toggle(gate.key)" />
+        trip {{ gate.name }}
+      </label>
+    }
+    <button type="button" (click)="reset()">Reset</button>
+  </div>
+
+  <div class="verdict" [class.blocked]="verdict() === 'blocked'" role="status">
+    <strong>{{ verdict() === 'blocked' ? 'Merge blocked' : 'All checks passed' }}</strong>
+    <span>workflow exit code {{ exitCode() }}</span>
+  </div>
+
+  @if (failedGates().length > 0) {
+    <div class="failures">
+      <h4>Annotations the run would post</h4>
+      @for (gate of failedGates(); track gate.key) {
+        <pre><code>{{ gate.name }}
+$ {{ gate.runs }}
+{{ gate.failureText }}</code></pre>
+      }
+    </div>
+  }
+
+  <h3>The workflow</h3>
+  <p>
+    The runnable file lives at <code>.github/workflows/compliance-gate.yml</code> in the module folder. Copy it
+    to the repository root <code>.github/workflows/</code> to activate it: GitHub only executes workflows found
+    at the repository root, which is why it ships here as a reviewable artifact rather than a live check on this
+    teaching repository.
+  </p>
+  <pre><code>jobs:
+  compliance-gate:
+    steps:
+      - run: npm ci
+      - run: npm run lint                # template accessibility rules
+      - run: npm run build               # budgets, exits 1 over maximumError
+      - run: npx playwright test         # axe-core against the running app
+      - run: npx --yes &#64;lhci/cli&#64;0.15.x autorun   # asserts against dist/</code></pre>
+
+  <ul class="notes">
+    <li>Assert on a floor, never on a delta. A gate that compares against the previous run ratchets down quietly as the branch gets slower.</li>
+    <li>Keep <code>maximumWarning</code> below <code>maximumError</code> so the number is visible in review long before it blocks anyone.</li>
+    <li>Run the axe scan against the built app on a static server, not the dev server. The dev server injects code your users never receive.</li>
+    <li>Upload the Lighthouse report and the Playwright trace as artifacts. A failing gate that shows no evidence gets disabled within a month.</li>
+    <li>Every gate here is deterministic on a runner. Field data belongs to module 12, and mixing the two makes a flaky check.</li>
+  </ul>
+</section>

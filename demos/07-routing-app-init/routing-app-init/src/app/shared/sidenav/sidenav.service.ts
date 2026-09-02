@@ -1,40 +1,36 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Injectable, inject } from '@angular/core';
-import { MatDrawerMode } from '@angular/material/sidenav';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { DestroyRef, Injectable, inject } from '@angular/core';
+import { LayoutStore } from '../layout/layout.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SideNavService {
-  breakpointObserver = inject(BreakpointObserver);
-
-  visible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  position$: BehaviorSubject<MatDrawerMode> = new BehaviorSubject<MatDrawerMode>('side');
+  private layoutStore = inject(LayoutStore);
 
   constructor() {
-    this.breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(
-        tap((matchesBreakpoint) => {
-          console.log(matchesBreakpoint);
-          this.visible$.next(matchesBreakpoint.matches ? false : true);
-          this.position$.next(matchesBreakpoint.matches ? 'over' : 'side');
-        })
-      ).subscribe();
+    if (typeof window.matchMedia !== 'function') {
+      return;
+    }
+    const query = window.matchMedia('(max-width: 959.98px)');
+    const apply = (matches: boolean) => {
+      this.layoutStore.setSidenavVisible(!matches);
+      this.layoutStore.setSidenavPosition(matches ? 'over' : 'side');
+    };
+    const listener = (event: MediaQueryListEvent) => apply(event.matches);
+    query.addEventListener('change', listener);
+    inject(DestroyRef).onDestroy(() => query.removeEventListener('change', listener));
+    apply(query.matches);
   }
 
   getSideNavVisible() {
-    return this.visible$.asObservable();
+    return this.layoutStore.sidenavVisible;
   }
 
   getSideNavPosition() {
-    return this.position$.asObservable();
+    return this.layoutStore.sidenavPosition;
   }
 
   toggleMenuVisibility() {
-    let status = !this.visible$.getValue();
-    this.visible$.next(status);
+    this.layoutStore.toggleSidenavVisible();
   }
 }

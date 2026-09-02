@@ -7,13 +7,23 @@ import { Customer } from './customer.model';
   providedIn: 'root',
 })
 export class CustomersService {
-  http = inject(HttpClient);
+  private http = inject(HttpClient);
+  private url = `${environment.api}customers`;
 
   getCustomers() {
-    return this.http.get<Customer[]>(environment.api + 'customers');
+    return this.http.get<Customer[]>(this.url);
+  }
+
+  addCustomer(customer: Customer) {
+    const { id: _id, ...payload } = customer;
+    return this.http.post<Customer>(this.url, payload);
   }
 
   updateCustomer(customer: Customer) {
-    return this.http.put<Customer>(environment.api + 'customers/' + customer.id, customer);
+    return this.http.put<Customer>(`${this.url}/${customer.id}`, customer);
+  }
+
+  deleteCustomer(customer: Customer) {
+    return this.http.delete<unknown>(`${this.url}/${customer.id}`);
   }
 }

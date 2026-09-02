@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Skills - withEntities against a REST API</h2>
+  </div>
+  <div class="card-content content">
+    @if (store.isPending()) {
+      <app-progress-bar />
+    }
+    @if (store.error(); as err) {
+      <p class="error">{{ err }}</p>
+    }
+
+    <div class="toolbar">
+      <div class="field">
+        <label class="label" for="new-skill">New skill</label>
+        <input id="new-skill" class="input" [ngModel]="name()" (ngModelChange)="name.set($event)" (keyup.enter)="add()" />
+      </div>
+      <button type="button" class="btn btn-primary self-end" (click)="add()">Add</button>
+      <app-slide-toggle [checked]="store.showAll()" (toggled)="store.toggleShowAll()">Show all</app-slide-toggle>
+      <button type="button" class="btn btn-outline self-end" (click)="store.load()">Reload</button>
+    </div>
+
+    @for (s of store.visibleSkills(); track s.id) {
+      <div class="row">
+        <span class="grow" [class.done]="s.completed">#{{ s.id }} {{ s.name }}</span>
+        <app-slide-toggle [checked]="s.completed" [aria-label]="'Completed: ' + s.name" (toggled)="toggle(s)" />
+        <button type="button" class="btn-icon" (click)="remove(s)"><span class="icon">delete</span></button>
+      </div>
+    } @empty {
+      <p>No skills loaded. Start json-server on the app db.json to serve /skills.</p>
+    }
+
+    <p>
+      Total <strong>{{ store.total() }}</strong> - open <strong>{{ store.openCount() }}</strong> - status
+      <strong>{{ statusLabel() }}</strong>
+    </p>
+  </div>
+</div>

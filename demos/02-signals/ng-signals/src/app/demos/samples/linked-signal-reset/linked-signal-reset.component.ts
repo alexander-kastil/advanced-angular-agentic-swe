@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, linkedSignal, signal } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { Component, linkedSignal, signal } from '@angular/core';
 import { BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
 @Component({
     selector: 'app-linked-signal-reset',
-    imports: [MatButton, BoxedDirective],
+    imports: [BoxedDirective],
     template: `
     <div boxed>
       <div>
@@ -13,19 +12,18 @@ import { BoxedDirective } from '../../../shared/formatting/formatting-directives
         <p>Sync Status: {{ syncStatus() }}</p>
       </div>
       <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <button mat-raised-button color="accent" (click)="updateBase()">
+        <button type="button" class="btn btn-primary" (click)="updateBase()">
           Update Base
         </button>
-        <button mat-raised-button color="accent" (click)="updateLinked()">
+        <button type="button" class="btn btn-primary" (click)="updateLinked()">
           Update Linked
         </button>
-        <button mat-raised-button color="accent" (click)="resetLinked()">
+        <button type="button" class="btn btn-primary" (click)="resetLinked()">
           Reset Linked
         </button>
       </div>
     </div>
-  `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  `
 })
 export class LinkedSignalResetComponent {
     baseValue = signal({ count: 0, label: 'Initial' });

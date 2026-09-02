@@ -1,0 +1,26 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hint {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.nav-item.selected {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.field .input {
+  width: 8rem;
+}

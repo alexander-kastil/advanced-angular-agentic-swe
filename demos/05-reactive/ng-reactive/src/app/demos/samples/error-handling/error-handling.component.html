@@ -1,0 +1,87 @@
+<div class="grid">
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">catchError</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        A real
+        <code>GET /skilz</code>
+        that json-server answers with 404. What you return from
+        <code>catchError</code>
+        decides what the subscriber sees.
+      </p>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" (click)="runCatchError('empty')">
+          return EMPTY
+        </button>
+        <button type="button" class="btn btn-primary" (click)="runCatchError('fallback')">
+          return of(fallback)
+        </button>
+        <button type="button" class="btn btn-primary" (click)="runCatchError('rethrow')">
+          rethrow
+        </button>
+      </div>
+      <div class="log" tabindex="0" role="region" aria-label="catchError log">
+        @for (entry of catchLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">retry</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        The first two attempts hit the 404 route, the third hits the real one.
+        <code>retry</code>
+        resubscribes with a 600 ms delay, so
+        <code>defer</code>
+        runs again and picks a new URL.
+      </p>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" (click)="runRetry()">Run</button>
+      </div>
+      <div class="log" tabindex="0" role="region" aria-label="retry log">
+        @for (entry of retryLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-0">
+    <div class="card-header">
+      <h2 class="card-title">catchWithFallback()</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        A custom operator: report the failure once, then keep the stream alive
+        with a fallback value. Covered by a marble test in
+        <code>catch-with-fallback.spec.ts</code>
+        , run with
+        <code>npm test</code>
+        .
+      </p>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" (click)="runCustomOperator()">
+          Run against the 404 route
+        </button>
+      </div>
+      <div class="log" tabindex="0" role="region" aria-label="catchWithFallback log">
+        @for (entry of operatorLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

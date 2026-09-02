@@ -1,107 +1,137 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { concat, forkJoin, interval, merge, of, zip } from 'rxjs';
-import { combineLatestWith, map, take, tap } from 'rxjs/operators';
-import { AccountService } from '../../vouchers/account.service';
-import { VouchersService } from '../../vouchers/voucher.service';
-import { DoublerService } from '../operators/doubler.service';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { HttpClient } from '@angular/common/http';
+import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
+import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import {
+  Subject,
+  catchError,
+  combineLatest,
+  debounceTime,
+  forkJoin,
+  interval,
+  map,
+  merge,
+  of,
+  shareReplay,
+  take,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Skill } from '../../skills/skills';
 
 @Component({
   selector: 'app-combining',
   templateUrl: './combining.component.html',
-  styleUrls: ['./combining.component.scss'],
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [FormsModule],
+  styles: `
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; align-items: start; }
+    .grid .card + .card { margin-top: 0; }
+    .log { font-family: monospace; font-size: 0.82rem; max-height: 180px; overflow: auto; }
+    .log div { padding: 2px 0; border-bottom: 1px solid var(--color-line); }
+    .filters { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+    .filters .field { flex: 1 1 12rem; }
+    .badge { font-size: 0.78rem; padding: 2px 6px; border-radius: 4px; background: var(--color-primary-soft); color: var(--color-primary-dark); }
+  `,
 })
 export class CombiningComponent {
-  vs = inject(VouchersService);
-  as = inject(AccountService);
-  ds = inject(DoublerService);
+  private http = inject(HttpClient);
+  private destroyRef = inject(DestroyRef);
+  private saves = new Subject<void>();
+  private ticks$ = interval(1000).pipe(shareReplay({ bufferSize: 1, refCount: true }));
 
-  useConcat() {
-    // Create a time that emits a value from array every x milliseconds
-    const arrA = [1, 2, 3, 4, 5];
-    const sourceA$ = interval(500).pipe(
-      take(arrA.length),
-      map((i) => arrA[i])
-    );
+  private skills$ = this.http.get<Skill[]>(`${environment.api}skills`).pipe(
+    catchError(() => of([] as Skill[])),
+    shareReplay(1),
+  );
 
-    const arrB = ['a', 'b', 'c'];
-    const sourceB$ = interval(300).pipe(
-      take(arrB.length),
-      map((i) => arrB[i])
-    );
+  protected term = signal('');
+  protected onlyOpen = signal(false);
+  protected combineLatestEmissions = signal(0);
 
-    console.log('concat');
-    concat(sourceA$, sourceB$).subscribe(console.log);
+  protected visible = toSignal(
+    combineLatest([
+      toObservable(this.term).pipe(debounceTime(200)),
+      toObservable(this.onlyOpen),
+      this.skills$,
+    ]).pipe(
+      tap(() => this.combineLatestEmissions.update((count) => count + 1)),
+      map(([term, onlyOpen, skills]) =>
+        skills
+          .filter((skill) => skill.name.toLowerCase().includes(term.toLowerCase()))
+          .filter((skill) => (onlyOpen ? !skill.completed : true)),
+      ),
+    ),
+    { initialValue: [] as Skill[] },
+  );
+
+  protected tick = toSignal(this.ticks$, { initialValue: 0 });
+  protected forkJoinLog = signal<string[]>([]);
+  protected mergeLog = signal<string[]>([]);
+  protected withLatestFromLog = signal<string[]>([]);
+  protected draft = signal('');
+
+  constructor() {
+    this.saves
+      .pipe(
+        withLatestFrom(this.ticks$, toObservable(this.draft)),
+        map(([, tick, draft]) => `saved "${draft}" while the ticker showed ${tick}`),
+        takeUntilDestroyed(),
+      )
+      .subscribe((entry) => this.push(this.withLatestFromLog, entry));
   }
 
-  useMerge() {
-    const arrA = [1, 2, 3, 4, 5];
-    const sourceA$ = interval(500).pipe(
-      take(arrA.length),
-      map((i) => arrA[i])
-    );
-    const arrB = ['a', 'b', 'c'];
-    const sourceB$ = interval(300).pipe(
-      take(arrB.length),
-      map((i) => arrB[i])
-    );
+  protected runForkJoin() {
+    this.forkJoinLog.set(['three parallel requests started ...']);
+    const started = performance.now();
+    const timed = <T>(name: string, url: string) =>
+      this.http.get<T>(`${environment.api}${url}`).pipe(
+        catchError(() => of([] as unknown as T)),
+        tap((value) =>
+          this.push(
+            this.forkJoinLog,
+            `${name} completed after ${this.elapsed(started)} with ${(value as unknown[]).length} rows`,
+          ),
+        ),
+      );
 
-    console.log('merge');
-    merge(sourceA$, sourceB$).subscribe(console.log);
+    forkJoin({
+      skills: timed<Skill[]>('skills', 'skills'),
+      todos: timed<unknown[]>('todos', 'todos'),
+      accounts: timed<unknown[]>('accounts', 'accounts'),
+    })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((result) =>
+        this.push(
+          this.forkJoinLog,
+          `forkJoin emitted once after ${this.elapsed(started)}: ` +
+            `${result.skills.length} skills, ${result.todos.length} todos, ${result.accounts.length} accounts`,
+        ),
+      );
   }
 
-  useZip() {
-    const age$ = of(27, 25, 29);
-    const name$ = of('Sepp', 'Mark', 'Susi');
-    const isDev$ = of(true, true, false);
+  protected runMerge() {
+    this.mergeLog.set([]);
+    const fast$ = interval(300).pipe(take(4), map((i) => `fast ${i}`));
+    const slow$ = interval(800).pipe(take(2), map((i) => `slow ${i}`));
 
-    zip(age$, name$, isDev$)
-      .pipe(map(([age, name, isDev]) => ({ age, name, isDev })))
-      .subscribe((x) => console.log(x));
+    merge(fast$, slow$)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (entry) => this.push(this.mergeLog, entry),
+        complete: () => this.push(this.mergeLog, 'both sources completed'),
+      });
   }
 
-  useForkJoin() {
-    const response1 = this.ds.double(3);
-    const response2 = this.ds.double(9);
-    const response3 = this.ds.double(2);
-
-    forkJoin([response1, response2, response3]).subscribe((arr) => {
-      console.log('forkJoin', arr);
-    });
+  protected save() {
+    this.saves.next();
   }
 
-  leftJoin() {
-    //get vouchers with prop Account being null -
-    //simulates sql left join of two entities
-    const vouchers$ = this.vs.getVoucher(2).pipe(
-      map((v) => v?.Details),
-      tap((d) => console.log('vouchers before combining', d))
-    );
+  private elapsed(started: number) {
+    return `${Math.round(performance.now() - started)} ms`;
+  }
 
-    const accounts$ = this.as.getAccounts();
-
-    let combined = vouchers$.pipe(
-      combineLatestWith(accounts$),
-      map(([vouchers, accounts]) => {
-        if (vouchers && accounts) {
-          return vouchers.map((d) => ({
-            ...d,
-            Account: accounts.find((a) => d.AccountID === a.ID)?.Name,
-          }));
-        }
-        return [];
-      })
-    );
-
-    combined.subscribe((item) => console.log('After combining', item));
+  private push(target: WritableSignal<string[]>, entry: string) {
+    target.update((entries) => [...entries, entry].slice(-12));
   }
 }

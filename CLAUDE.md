@@ -6,18 +6,18 @@ This repository contains training materials, demos, and infrastructure for Advan
 
 ### Key Directories
 
-- **`demos/`** - Module-organized demonstrations (8 modules, each in a separate folder, e.g., `demos/02-signals/ng-signals`)
+- **`demos/`** - Module-organized demonstrations (12 modules, each in a separate folder, e.g., `demos/02-signals/ng-signals`)
 - **`labs/`** - Step-by-step lab instructions and scripts for students
 
 Always start applications from their respective project folders, not the repository root.
 
 ## Angular Standards
 
-- **Angular Version**: 21.x or later
+- **Angular Version**: 22.x or later
 - **Architecture**: Standalone components (default - do NOT set `standalone: true` explicitly)
-- **Change Detection**: Always `ChangeDetectionStrategy.OnPush`
+- **Change Detection**: OnPush is the v22 default - never write `changeDetection` explicitly
 - **Dependency Injection**: Always use `inject()` function - never constructor parameters
-- **Testing**: Vitest (native Angular 21+ support via `@angular/build`)
+- **Testing**: Vitest (native Angular 22 support via `@angular/build`)
 
 ## Important Rules
 
@@ -31,11 +31,10 @@ Always start applications from their respective project folders, not the reposit
 ## Component Pattern
 
 ```typescript
-import { Component, ChangeDetectionStrategy, inject, input, output, computed } from '@angular/core';
+import { Component, inject, input, output, computed } from '@angular/core';
 
 @Component({
   selector: 'app-example',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (loading()) {
       <p>Loading...</p>
@@ -70,7 +69,7 @@ export class ExampleComponent {
 | `CommonModule` import | Remove - standalone by default |
 | `NgModules` for feature organization | Standalone + lazy routes |
 | `@HostBinding` / `@HostListener` | `host: {}` object in `@Component` |
-| `ChangeDetectionStrategy.Default` | `ChangeDetectionStrategy.OnPush` |
+| Explicit `changeDetection:` | Omit it - OnPush is the v22 default |
 
 ## State Management
 
@@ -124,6 +123,6 @@ Each demo app follows this pattern:
 ## Workflows
 
 See memory files for detailed workflow patterns:
-- `memory/angular-patterns.md` - Detailed Angular v21+ patterns
+- `memory/angular-patterns.md` - Detailed Angular v22+ patterns
 - `memory/testing-patterns.md` - Vitest testing patterns
 - `memory/workflows.md` - Common task workflows (ng-update, check-demos, describe-module)

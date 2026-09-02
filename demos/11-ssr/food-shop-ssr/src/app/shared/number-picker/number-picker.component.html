@@ -1,0 +1,9 @@
+<div class="container">
+  <button type="button" class="picker-btn" aria-label="Decrease quantity" (click)="onRemove()">
+    <span class="icon">remove_circle_outline</span>
+  </button>
+  <div class="quantity">{{ quantity() }}</div>
+  <button type="button" class="picker-btn" aria-label="Increase quantity" (click)="onAdd()">
+    <span class="icon">add_circle_outline</span>
+  </button>
+</div>

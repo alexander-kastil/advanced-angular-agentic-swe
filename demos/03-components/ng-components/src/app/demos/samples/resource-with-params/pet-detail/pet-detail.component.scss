@@ -1,0 +1,19 @@
+.detail {
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+  padding: var(--gap-medium);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  font-family: monospace;
+}
+
+.error {
+  color: #c62828;
+}

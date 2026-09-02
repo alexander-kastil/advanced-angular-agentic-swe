@@ -1,0 +1,63 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Skills Sheet - Signal Forms Array</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="fa-name">Name</label>
+        <input
+          id="fa-name"
+          class="input"
+          type="text"
+          [formField]="skillForm.name"
+          placeholder="Enter Name"
+        />
+      </div>
+
+      @if (skillForm.name().value()) {
+        <div column>
+          <h3>Add your skills:</h3>
+          @for (item of skillForm.skills; track $index; let i = $index) {
+            <div class="skill-row">
+              <div class="field">
+                <label class="label" [attr.for]="'fa-skill-' + i">Skill</label>
+                <input
+                  [id]="'fa-skill-' + i"
+                  class="input"
+                  [formField]="item.skill"
+                  placeholder="Skill Name"
+                />
+              </div>
+              <div class="field">
+                <label class="label" [attr.for]="'fa-years-' + i">Years</label>
+                <input [id]="'fa-years-' + i" class="input" [formField]="item.years" placeholder="Years" />
+              </div>
+              <button type="button" class="btn btn-warn" (click)="removeSkill(i)">
+                Remove
+              </button>
+            </div>
+          }
+          <div class="skill-row actions">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="addSkill()"
+              [disabled]="checkArrayValid()"
+            >
+              Add Skill
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="saveForm()"
+              [disabled]="checkArrayValid()"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

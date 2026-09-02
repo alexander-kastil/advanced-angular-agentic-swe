@@ -1,0 +1,52 @@
+<section class="vitals">
+  <header>
+    <h2>Audit Core Web Vitals</h2>
+    <p>
+      Measured live in this browser with <code>PerformanceObserver</code>. Lighthouse reports the same
+      metrics under a simulated network and CPU profile.
+    </p>
+  </header>
+
+  <table>
+    <caption>Field metrics for the current session</caption>
+    <thead>
+      <tr>
+        <th scope="col">Metric</th>
+        <th scope="col">Value</th>
+        <th scope="col">Good</th>
+        <th scope="col">Poor</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of vitals(); track row.key) {
+        <tr>
+          <th scope="row">
+            {{ row.label }}
+            <small>{{ row.hint }}</small>
+          </th>
+          <td>{{ format(row) }}</td>
+          <td>&le; {{ row.good }}{{ row.unit ? ' ' + row.unit : '' }}</td>
+          <td>&gt; {{ row.poor }}{{ row.unit ? ' ' + row.unit : '' }}</td>
+          <td><span class="badge" [class]="'badge-' + rating(row)">{{ rating(row) }}</span></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button type="button" (click)="blockMainThread()">Block the main thread for 320 ms</button>
+    <button type="button" (click)="triggerShift()">Toggle an unsized banner</button>
+  </div>
+
+  @if (shifted()) {
+    <div class="banner">This banner has no reserved space, so inserting it pushes content down and raises CLS.</div>
+  }
+
+  <ol class="workflow">
+    <li>Build for production: <code>npm run build</code>.</li>
+    <li>Serve the output and open DevTools &rarr; Lighthouse.</li>
+    <li>Audit Performance, Accessibility, Best Practices and SEO on a mobile profile.</li>
+    <li>Compare the lab scores with the field numbers above: lab is reproducible, field is real.</li>
+  </ol>
+</section>

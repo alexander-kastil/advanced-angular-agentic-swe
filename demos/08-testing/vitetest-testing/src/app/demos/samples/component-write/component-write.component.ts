@@ -1,19 +1,14 @@
-import { Component, Signal, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Signal, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCardModule } from '@angular/material/card';
+import { CounterComponent } from './counter.component';
 
 @Component({
     selector: 'app-component-write',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'component-write.component.html',
     styleUrls: ['./component-write.component.scss'],
     imports: [
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
         FormsModule,
+        CounterComponent,
     ]
 })
 export class ComponentWriteComponent {

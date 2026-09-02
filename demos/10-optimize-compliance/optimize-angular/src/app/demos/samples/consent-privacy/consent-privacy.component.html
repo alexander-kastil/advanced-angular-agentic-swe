@@ -1,0 +1,79 @@
+<section class="consent">
+  <header>
+    <h2>Gate Third-Party Content</h2>
+    <p>
+      Under the GDPR and the ePrivacy rules, anything that is not strictly necessary must not load before
+      the user agrees. Rejecting has to be as easy as accepting, and withdrawal has to be possible at any
+      time. Signals make the gate a piece of application state rather than a script tag race.
+    </p>
+  </header>
+
+  <table>
+    <caption>Processing categories</caption>
+    <thead>
+      <tr>
+        <th scope="col">Category</th>
+        <th scope="col">Purpose</th>
+        <th scope="col">Lawful basis</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (category of categories; track category.key) {
+        <tr>
+          <th scope="row">{{ category.label }}</th>
+          <td>{{ category.purpose }}</td>
+          <td>{{ category.lawfulBasis }}</td>
+          <td>
+            @if (category.locked) {
+              <span class="locked">always on</span>
+            } @else {
+              <label class="switch">
+                <input type="checkbox" [checked]="granted()[category.key]" (change)="toggle(category.key)" />
+                {{ granted()[category.key] ? 'granted' : 'denied' }}
+              </label>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button type="button" (click)="rejectOptional()">Reject optional</button>
+    <button type="button" (click)="acceptAll()">Accept all</button>
+    <button type="button" (click)="save()">Save my choice</button>
+    <button type="button" class="ghost" (click)="withdraw()">Withdraw consent</button>
+  </div>
+
+  <p class="status" role="status">
+    {{ decided() ? 'A consent record is stored for this browser.' : 'No consent record stored yet.' }}
+  </p>
+
+  <article>
+    <h3>External media</h3>
+    @if (mediaAllowed()) {
+      <div class="embed">
+        Third-party player loaded. In a real app this is where the provider iframe is created, never before.
+      </div>
+    } @else {
+      <div class="blocked">
+        <p>This content is provided by a third party that would receive your IP address.</p>
+        <button type="button" (click)="toggle('media')">Load it once</button>
+      </div>
+    }
+  </article>
+
+  <article>
+    <h3>Analytics beacons</h3>
+    @if (beacons().length === 0) {
+      <p class="hint">Nothing sent. The beacon only fires while the analytics category is granted.</p>
+    } @else {
+      <ul>
+        @for (beacon of beacons(); track beacon) {
+          <li>{{ beacon }}</li>
+        }
+      </ul>
+    }
+  </article>
+</section>

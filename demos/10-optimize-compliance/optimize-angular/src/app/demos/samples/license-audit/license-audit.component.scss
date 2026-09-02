@@ -1,0 +1,82 @@
+.licenses {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+  padding: var(--gap-big);
+}
+
+.filters {
+  display: flex;
+  gap: var(--gap-small);
+  flex-wrap: wrap;
+}
+
+button {
+  min-height: 24px;
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: inherit;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption {
+  text-align: left;
+  font-weight: 600;
+  padding-bottom: var(--gap-small);
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--color-accent);
+  padding: var(--gap-small);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: var(--font-small);
+}
+
+.tag-permissive {
+  background: #1b5e20;
+  color: white;
+}
+
+.tag-weak-copyleft {
+  background: #e65100;
+  color: white;
+}
+
+.tag-copyleft {
+  background: #b71c1c;
+  color: white;
+}
+
+.tag-review {
+  background: var(--color-accent);
+  color: black;
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.35);
+  padding: var(--gap-medium);
+  overflow-x: auto;
+}
+
+.notes {
+  line-height: 1.8;
+}

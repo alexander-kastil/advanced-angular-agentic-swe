@@ -1,27 +1,27 @@
-import {
-  A,
-  NINE,
-  SPACE,
-  Z,
-  ZERO
-} from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component, ElementRef, effect, inject, input, output, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, input, output, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProgressBarComponent } from '../../progress-bar/progress-bar.component';
+
+const A = 65;
+const Z = 90;
+const ZERO = 48;
+const NINE = 57;
+const SPACE = 32;
 
 @Component({
   selector: 'ux-select-filter',
   imports: [
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    ProgressBarComponent
   ],
   template: `
-  <form [formGroup]="searchForm" class="mat-filter" [style.background-color]="color() || 'white'">
-    <div>
-      <input #input class="mat-filter-input" matInput [placeholder]="placeholder()" formControlName="value" (keydown)="handleKeydown($event)">
+  <form [formGroup]="searchForm" class="filter-form" [style.background-color]="color() || 'white'">
+    <div class="field">
+      <label class="sr-only" for="ux-select-filter-value">{{ placeholder() || 'Filter' }}</label>
+      <input #input id="ux-select-filter-value" class="input" [placeholder]="placeholder()" formControlName="value" (keydown)="handleKeydown($event)">
       @if (localSpinner()) {
-        <mat-spinner class="spinner" diameter="16" />
+        <app-progress-bar mode="indeterminate" />
       }
     </div>
     @if (noResults()) {
@@ -31,10 +31,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     }
   </form>
   `,
-  styleUrls: ['./mat-select-filter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./mat-select-filter.component.scss']
 })
-export class MatSelectFilterComponent {
+export class SelectFilterComponent {
   private fb = inject(FormBuilder);
   @ViewChild('input', { static: true }) input: ElementRef<HTMLInputElement> | undefined;
 
@@ -72,9 +71,6 @@ export class MatSelectFilterComponent {
     setTimeout(() => {
       this.input?.nativeElement.focus();
     }, 500);
-    if (!this.placeholder()) {
-      // Note: placeholder is readonly input, initial value can be set via binding
-    }
   }
 
   private handleSearchChange(value: any) {

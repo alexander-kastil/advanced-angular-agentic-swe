@@ -1,11 +1,18 @@
-@for (c of Comments(); track c) {
+@for (c of items(); track c.id) {
   <div class="row">
+    @if (c.id === -1) {
+      <span class="icon tip" [class.text-primary]="demoSaved()" [attr.data-tip]="demoSaved() ? 'Page customized' : 'Page'">article</span>
+    } @else {
+      <span class="icon tip" data-tip="Comment">comment</span>
+    }
     <div class="title">{{ c.title }}</div>
-    <button mat-flat-button (click)="deleteComment(c)" color="primary">
-      Delete
-    </button>
-    <button mat-flat-button (click)="editComment(c)" color="primary">
-      Edit
-    </button>
+    @if (demoSaved() && c.url === demoUrl()) {
+      <button type="button" class="btn btn-primary min-w-20" (click)="deleteMarkdownItem(c)">Reset</button>
+    } @else if (c.id !== -1) {
+      <button type="button" class="btn btn-primary min-w-20" (click)="deleteMarkdownItem(c)">Delete</button>
+    } @else {
+      <div class="no-delete"></div>
+    }
+    <button type="button" class="btn btn-primary min-w-20" (click)="editItem(c)">Edit</button>
   </div>
 }

@@ -216,6 +216,20 @@ and the ARIA attributes:
 - divider exposes `role="separator"` + `aria-valuemin/max/now`;
 - Arrow Left/Right adjust and clamp.
 
+## Changing the stored unit needs a new storage key
+
+The pixel and ratio variants persist under the same kind of key, and a value written by one is a
+plausible value for the other: a stored `440` from the px build parses as a finite number, clamps into
+a ratio's `[0.25, 0.6]`, and silently opens the pane at the maximum. The layout, the CSS and the
+component are all correct while the split is visibly wrong, and only for people who used the earlier
+build — which is everyone except a fresh browser.
+
+- Change the key with the unit (`…-split` -> `…-split-ratio`), so an old value is simply absent.
+- Validate the parsed value against the new domain, not just `Number.isFinite`: for a ratio, reject
+  `parsed <= 0 || parsed >= 1` and fall back to the default.
+- Verify a changed default by measuring the rendered panes after clearing the key, never on the
+  browser you developed in.
+
 ## Gotchas learned in the field
 
 - **A component named `split`/`ux-split` may be a *static* grid, not a splitter.**
@@ -231,3 +245,131 @@ and the ARIA attributes:
   pointerdown→move→up→capture path.
 - Persisted width survives reloads — when done testing, **clear the storage key**
   (or reset to default) so you don't leave a maxed/min width behind for the user.
+
+## Where it's used
+
+| Page | Component | storageKey | initial / min / max (px) | Panes |
+| --- | --- | --- | --- | --- |
+| `/` (home) | `home/home-chat/home-chat.component` | `home-chat-split` | 256 / 200 / 420 | chat ↔ chat-history `<aside>` (`bg-surface-alt`) |
+| `/tasks/new`, `/tasks/:id` | `tasks/edit-task/edit-task.component` | `edit-task-split` | 416 / 320 / 640 | chat ↔ right meta panel |
+
+Both previously used static `grid-template-columns` (`[1fr_16rem]`, `[1fr_26rem]`);
+`ux-splitter` replaced only that inner two-column body grid — outer frames,
+`bg-ink` header bars, and `h-[calc(100vh-160px)]` height math stay intact.
+
+
+## API
+
+```html
+<ux-splitter storageKey="edit-task-split" [initial]="416" [min]="320" [max]="640">
+  <div slot-left> …chat card… </div>
+  <div slot-right> …right panel… </div>
+</ux-splitter>
+```
+
+Inputs: `storageKey` (**required**, unique per usage site), `initial` (320),
+`min` (200), `max` (560), `step` (16, px per Arrow key). Import
+`SplitterComponent` into the host's `imports`. Content projects two panes by
+attribute selector: `[slot-left]` / `[slot-right]`.
+
+
+## How it works (see the file for full source)
+
+- **Right pane is the resizable one**; its width is the single source of truth,
+  measured from the container's right edge to the pointer
+  (`rect.right - event.clientX`), so dragging the divider **left grows** the right
+  pane. State is a `linkedSignal` seeded (clamped) from `localStorage` yet freely
+  settable by drag/keyboard.
+- Layout is driven by a **CSS custom property via a host style binding**:
+  `host: { '[style.--ux-splitter-right]': 'rightWidthPx()' }`; the SCSS reads
+  `var(--ux-splitter-right)` in `grid-template-columns`.
+- Drag uses **Pointer Events + `setPointerCapture` on the divider** — no
+  document listeners, no `Renderer2`. `touch-action: none` on the divider.
+- Persistence is an `effect` writing `localStorage[storageKey]`, guarded for
+  missing `window`/`localStorage` (SSR / quota / disabled) so resize still works
+  without persistence.
+- **Mobile-first:** below `md` (768px) the panes stack in one column and the
+  divider is `display:none` — nothing to drag on a narrow viewport (home's aside
+  must still stack below the chat, as before).
+
+
+## Accessibility
+
+`role="separator"`, `aria-orientation="vertical"`, `tabindex="0"`, live
+`[attr.aria-valuemin/max/now]="…"`, and `(keydown.arrowleft)="growRight()"` /
+`(keydown.arrowright)="shrinkRight()"` (both `preventDefault()`). German aria-label
+"Bereichsgröße anpassen".
+
+
+## Tests
+
+`splitter.component.spec.ts` — behavior-level Vitest: clamps to min/max both
+directions, restores from `localStorage`, clamps an out-of-range persisted value,
+persists on change, divider ARIA attributes, Arrow keys adjust + clamp. Follow
+`angular-testing` conventions when extending.
+
+
+## Field gotchas
+
+- **Verify the pointer drag, not just keyboard,** in the browser: a click may only
+  *hover* the divider (gold shows) without giving it keyboard focus, so a keyboard
+  test can read as broken when it's the harness. `aria-valuenow` in a snapshot is
+  the reliable read of the current width.
+- Persisted width survives reloads — after testing a drag, **clear the storage
+  key** (`localStorage.removeItem('edit-task-split')`) so you don't leave a
+  maxed/min width behind for the user.
+
+For the full generic pattern (edge-anchored width, `linkedSignal` seed, pointer
+capture, CSS-var grid, testing shape), the global copy of this reference carries a
+project-agnostic version.
+
+## Ratio-based sibling: `app-ui-split-pane` in media-creator-ui
+
+`src/media-creator-ui/src/app/shared/ui/ui-split-pane.ts` is the same pattern with
+one deliberate variant: it stores a **ratio** (`linkedSignal<number>`, clamped to
+`[0.3, 0.75]`), not a pixel width, driving `grid-template-columns: minmax(0,
+calc(var(--split-ratio, 0.55) * 100%)) auto minmax(0, 1fr)` through a host style
+binding, restored from and persisted to `localStorage` under a per-usage
+`storageKey` (the Generate page uses `mc.generate.split`). Testids: `split-pane`,
+`split-start`, `split-handle`, `split-end`.
+
+Two things an E2E spec against this component (or any host page that composes it
+with a container query) needs to account for, found while writing
+`e2e/tests/generate-workspace.spec.ts`:
+
+- **A container-query breakpoint on the left pane and a persisted ratio can
+  interact across test runs.** The Generate page switches its Chat/Preview tabs
+  to an always-both-visible wide layout once the left pane's own inline size
+  crosses a `@container` breakpoint, not the viewport width. Since that pane's
+  width is `ratio * container width`, a ratio persisted by an earlier drag or
+  keyboard resize can widen the left pane past the breakpoint on the very next
+  test, silently flipping the layout and making the tabbed UI a spec expects
+  disappear. Any spec built on the narrow, tabbed layout should clear the split
+  pane's `localStorage` key before its first navigation: an `addInitScript`
+  removing the key works well there, since it runs before the app's first read.
+  Exactly one spec, the one that exercises drag and keyboard resize itself,
+  should be allowed to write the key, and it needs a different mechanism: it
+  cannot clear the key via `addInitScript`, because that script reruns on every
+  navigation for the lifetime of the page, including the reload the same test
+  performs later to check persistence, and it would erase the very ratio that
+  reload is meant to observe. Clear it with a one-off `page.evaluate(() =>
+  localStorage.removeItem(key))` followed by a single `page.reload()` before
+  taking any measurement, instead.
+- **Only the persistence side of the ratio's effects lags the input event that
+  changed it, not the layout.** The CSS custom property that drives the grid
+  track is a host style binding (`[style.--split-ratio]`), so it updates
+  synchronously with the `ratio` signal and the rendered width is correct the
+  moment change detection runs. The `localStorage` write sits in a separate
+  `effect()`, and that one is not synchronous with the triggering event.
+  Measured directly: three ArrowRight presses sent back to back can leave
+  `localStorage` reflecting only the first press for a couple hundred
+  milliseconds before catching up to the last, while the pane's own rendered
+  width already matches the third press. A spec that reads `localStorage` right
+  after the interaction can observe a stale, in-between value even though the
+  DOM is already correct; poll `localStorage` until it stops changing rather
+  than trusting a single read. A related race sits one step earlier, at the
+  keyboard step itself: a synthetic keydown sent too soon after a `focus()`
+  call can land before Chromium's own keyboard focus target has caught up with
+  `document.activeElement`, so a short wait between `focus()` and the first
+  key press is needed too.
+

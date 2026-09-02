@@ -1,6 +1,14 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Errors happen!</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>{{ error | json }} </mat-card-content>
-</mat-card>
+<div class="page max-w-3xl">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Errors happen!</h2>
+    </div>
+    <div class="card-content">
+      <pre
+        class="overflow-auto rounded-md bg-slate-50 p-3 text-xs text-ink"
+        tabindex="0"
+        role="region"
+        aria-label="Error details as JSON">{{ error | json }}</pre>
+    </div>
+  </div>
+</div>

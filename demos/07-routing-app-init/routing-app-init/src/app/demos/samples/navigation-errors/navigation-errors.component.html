@@ -1,0 +1,46 @@
+<app-markdown-renderer [md]="'navigation-errors'" />
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Two failure paths, one log</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      A resolver that throws produces a <code>NavigationError</code>, which
+      <code>withNavigationErrorHandler()</code> records and converts into a
+      <code>RedirectCommand</code> back to this page. Everything else lands in the custom
+      <code>ErrorHandler</code>, which records the failure and routes to the error page.
+    </p>
+    <div class="log-scroll" tabindex="0" role="region" aria-label="Recorded navigation errors">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Source</th>
+            <th>Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (entry of entries(); track entry.at + entry.message) {
+            <tr>
+              <td>{{ entry.at }}</td>
+              <td>{{ entry.source }}</td>
+              <td>{{ entry.message }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3">No errors recorded yet.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <router-outlet />
+  </div>
+  <div class="card-actions">
+    <button type="button" class="btn btn-primary" (click)="breakNavigation()">
+      Navigate into a failing resolver
+    </button>
+    <button type="button" class="btn btn-warn" (click)="throwUnhandled()">Throw an unhandled error</button>
+  </div>
+</div>

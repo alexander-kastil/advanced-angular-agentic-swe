@@ -1,0 +1,37 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Entity Collection with withEntities()</h2>
+  </div>
+  <div class="card-content content">
+    <div class="toolbar">
+      <div class="field">
+        <label class="label" for="new-task">New task</label>
+        <input id="new-task" class="input" [ngModel]="title()" (ngModelChange)="title.set($event)" (keyup.enter)="add()" />
+      </div>
+      <button type="button" class="btn btn-primary self-end" (click)="add()">addEntity</button>
+      <button type="button" class="btn btn-outline self-end" (click)="store.completeAll()">updateAllEntities</button>
+      <button type="button" class="btn btn-outline self-end" (click)="store.seed()">setAllEntities</button>
+      <button type="button" class="btn btn-outline self-end" (click)="store.clear()">removeAllEntities</button>
+    </div>
+
+    @for (t of store.entities(); track t.id) {
+      <div class="row">
+        <label class="checkbox">
+          <input type="checkbox" [checked]="t.done" [attr.aria-label]="'Done: ' + t.title" (change)="store.toggle(t.id)" />
+        </label>
+        <span class="grow" [class.done]="t.done">#{{ t.id }} {{ t.title }}</span>
+        <span class="badge" [class.high]="t.priority === 'high'">{{ t.priority }}</span>
+        <button type="button" class="btn-icon" (click)="store.promote(t.id)"><span class="icon">arrow_upward</span></button>
+        <button type="button" class="btn-icon" (click)="store.remove(t.id)"><span class="icon">delete</span></button>
+      </div>
+    } @empty {
+      <p>Collection is empty. Press setAllEntities to reseed.</p>
+    }
+
+    <p>
+      ids: <strong>{{ store.ids().join(', ') || '-' }}</strong> - total
+      <strong>{{ store.total() }}</strong> - open <strong>{{ store.openCount() }}</strong> - high priority
+      <strong>{{ store.highPriority().length }}</strong>
+    </p>
+  </div>
+</div>

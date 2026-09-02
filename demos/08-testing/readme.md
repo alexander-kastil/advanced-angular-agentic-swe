@@ -1,27 +1,44 @@
 # Advanced Testing with Vitest and Playwright
 
-This module covers modern Angular testing with Vitest using Angular 21+'s native test runner integration. You will test components with signal inputs using `fixture.componentRef.setInput()`, services with `HttpTestingController`, and NgRx SignalStores with both mock and real store patterns. The module also covers Angular Material test harnesses, async testing with `fakeAsync`, and end-to-end testing with Playwright using the Page Object Model.
+Modern Angular testing on Angular 22 with Vitest through the `@angular/build:unit-test` builder. You will test components with signal inputs using `fixture.componentRef.setInput()`, services with `HttpTestingController` including the error paths and an interceptor, `httpResource()` reads, Signal Forms through their `FieldTree`, NgRx SignalStores driven by events, and Material components through CDK harnesses that run unchanged under jsdom or Vitest browser mode. The app is zoneless, so asynchronous specs use `PendingTasks`, `fixture.whenStable()`, `TestBed.tick()` and Vitest fake timers rather than `fakeAsync`. The module closes with Playwright end-to-end tests, a Playwright run that drives the app through its WebMCP tools, and two demos on letting an agent write your specs: one on prompting for a spec, one on the full loop from behaviour statement to mutation round.
 
 ## Demos
 
-| #   | Route                     | Title                      | Teaches                                                                                                                                                                              | Topic               |
-| --- | ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
-| 1   | `testing-intro`           | Hello World Test           | Write your first Vitest unit test. Understand describe/it blocks, assertions with expect, and beforeEach setup. Test a plain TypeScript class without Angular.                       | Introduction        |
-| 2   | `pipe`                    | Test Pipe                  | Unit test Angular pipes in isolation by instantiating the pipe class directly and asserting transform output.                                                                        | Pipes & Directives  |
-| 3   | `directive`               | Test Directive             | Test attribute directives by creating a host component in TestBed and asserting DOM changes caused by the directive.                                                                 | Pipes & Directives  |
-| 4   | `http-tests`              | Service HTTP Test          | Test CustomersService CRUD operations using HttpTestingController. Flush mock responses and verify request URLs, methods, and body payloads for GET, POST, PUT and DELETE.           | Services            |
-| 5   | `http-tests-signal`       | httpResource Test          | Test a component that uses Angular's httpResource() for reactive data fetching. Use HttpTestingController to flush responses and assert loading state and rendered output.           | Services            |
-| 6   | `spy`                     | Comp Spy Customers         | Test CustomersComponent by providing a mock customersStore signal object. Use vi.fn() spies to assert that store methods are called correctly when component methods fire.           | Component Testing   |
-| 7   | `component-write`         | Comp DOM Test              | Test CustomersTableComponent DOM output using setInput() for signal inputs. Query mat-row and mat-cell elements to verify rendered customer data and progress bar visibility.        | Component Testing   |
-| 8   | `component-events`        | Comp Interaction Customers | Test CustomersComponent interactions end-to-end. Emit events from child presenter and assert that the container calls the correct store methods.                                     | Component Testing   |
-| 9   | `component-test`          | CRUD Customers             | Test SimpleCustomersComponent which uses Angular's resource() API for data loading. Spy on CustomersService to control HTTP responses and verify add/delete interactions.            | Component Testing   |
-| 10  | `component-input-signals` | Input Signals & Outputs    | Test CustomerEditComponent using fixture.componentRef.setInput() to set required signal inputs. Verify that save and cancel outputs emit the correct values.                         | Component Testing   |
-| 11  | `material`                | Material Harness           | Test CustomersTableComponent using Angular Material test harnesses (MatTableHarness, MatButtonHarness). Interact with Material elements without coupling to DOM internals.           | Component Testing   |
-| 12  | `async`                   | Comp Async Customers       | Test asynchronous loading in CustomersComponent using fakeAsync/tick. Verify that progress bar appears while loading and rows render after data arrives.                             | Async Testing       |
-| 13  | `integration-tests`       | Container / Presenter      | Integration-test CustomersComponent (container) with real CustomersTableComponent and CustomerEditComponent (presenters). Verify signal data flow and output wiring across the tree. | Integration Testing |
-| 14  | `mock-signals-store`      | Mock Signal Store          | Mock the markdownEditorStore in component tests by providing a fake store object with signal properties. Assert component behaviour based on controlled signal values.               | NgRx Testing        |
-| 15  | `test-signals-store`      | Test Signal Store          | Test the markdownEditorStore directly by dispatching events via the Dispatcher. Verify state transitions for fetch, save, delete, and loadContent event flows.                       | NgRx Testing        |
-| 16  | `simple-service`          | Simple Service             | Test a service class without DI by instantiating it directly. Verify add, delete and clear methods and state mutations in isolation.                                                 | Introduction        |
-| 17  | `component-class`         | Class-Only Test            | Test component signal state by instantiating the class directly without TestBed. Fast and simple for pure logic tests that do not need the DOM.                                      | Component Testing   |
-| 18  | `material-async`          | Material Async             | Combine Material test harnesses with async/await to interact with Material components that have asynchronous rendering.                                                              | Async Testing       |
-| 19  | `playwright`              | Playwright E2E             | Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests for full isolation.                                                   | E2E Testing         |
+| #   | Route | Title | Teaches | Topic |
+| --- | ----- | ----- | ------- | ----- |
+| 1 | `testing-foundations` | Testing Foundations | Write your first Vitest tests with no TestBed at all: a plain class, two pipes, a service without dependencies, and a component tested through its class. describe/it/expect/beforeEach, value and error assertions. | Introduction |
+| 2 | `directive` | Test Directive | Test an attribute directive by rendering it on a host component in TestBed and asserting the DOM change it causes. Uses the host object instead of @HostListener. | Pipes & Directives |
+| 3 | `http-tests` | Service HTTP Test | Test CustomersService CRUD with HttpTestingController. Flush mock responses and verify request URL, method and body for GET, POST, PUT and DELETE. | Services |
+| 4 | `http-tests-signal` | httpResource Test | Test a component that reads data with httpResource(). Flush the request through HttpTestingController and assert the loading state and the rendered rows. | Services |
+| 5 | `http-error-tests` | HTTP Error Tests | Test the failure half of an HTTP call: flush 404, 409, 5xx and a transport error through HttpTestingController, and assert that a functional interceptor maps each status to a readable message and records it. | Services |
+| 6 | `component-write` | Comp DOM Test | Read and write the DOM from a spec: type into an input and assert component state, then fire clicks with triggerEventHandler and with the native click API. | Component Testing |
+| 7 | `component-input-signals` | Input Signals & Outputs | Set required signal inputs with fixture.componentRef.setInput() on CustomerEditComponent and assert that the save and cancel outputs emit the right values. | Component Testing |
+| 8 | `component-test` | CRUD Customers | Test SimpleCustomersComponent, which loads through Angular's resource() API. Spy on CustomersService to control responses and verify the delete and reload path. | Component Testing |
+| 9 | `material` | Material Harness | Drive Material components through test harnesses instead of DOM selectors: MatButtonHarness, MatInputHarness, MatSliderHarness, MatTableHarness, and harnesses over asynchronous tab rendering. | Component Testing |
+| 10 | `browser-mode-harnesses` | Harnesses in Browser Mode | Drive slide toggle, checkbox, select and button through CDK component harnesses, including the select overlay through documentRootLoader, and run the same spec unchanged under jsdom or Vitest browser mode. | Component Testing |
+| 11 | `spy` | Comp Spy & Async State | Replace the signal store with a vi.fn() spy object and steer its signals from the test. Assert store calls and the loading, loaded and selected states without fakeAsync. | Component Testing |
+| 12 | `signal-forms-testing` | Test a Signal Form | Test a Signal Form without the DOM: write field values through field().value.set(), assert required, email, minLength and cross-field errors, then submit() and check touched state, the action result and a server error bound back onto a field. | Forms Testing |
+| 13 | `zoneless-async` | Zoneless Async | Await asynchronous work in a zoneless app: PendingTasks plus fixture.whenStable(), TestBed.tick() to flush effects and rendering, Vitest fake timers for intervals, and TestBed.getLastFixture() when a helper created the fixture. | Async Testing |
+| 14 | `integration-tests` | Container / Presenter | Integration-test the container with its real presenters. Verify signal inputs flowing down and outputs wiring back up across the whole tree. | Integration Testing |
+| 15 | `test-signals-store` | Test Signal Store | Test an NgRx SignalStore built from events. Dispatch through the Dispatcher and assert the state transitions for fetch, save, delete and loadContent. | NgRx Testing |
+| 16 | `playwright` | Playwright E2E | Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests for full isolation. | E2E Testing |
+| 17 | `webmcp-e2e` | WebMCP E2E | Declare page tools with declareExperimentalWebMcpTool and test them the way an agent would call them: a Vitest spec against a stubbed model context, and a Playwright run that invokes the tools and asserts the rendered page. | E2E Testing |
+| 18 | `ai-generated-test` | AI Generated Spec | Prompt the agent to generate a Vitest spec for a branch-heavy class, then review it: mutate the code to prove the tests bite, check boundary values, and reject assertions that only re-state the implementation. | AI-Assisted Testing |
+| 19 | `ai-writes-the-test` | AI Writes the Test | The full loop: state the behaviour, let the agent write the spec with get_best_practices and run_target, review it against a checklist, then run a mutation round that proves the suite goes red when the code breaks. | AI-Assisted Testing |
+
+## Running the tests
+
+```bash
+cd vitetest-testing
+npm install
+npm test
+```
+
+Playwright end-to-end tests live in `vitetest-testing/e2e/`, are type checked through `tsconfig.e2e.json` and run through `npm run e2e`. The config starts `ng serve` itself; `customers.spec.ts` also needs `npm run api`.
+
+The same specs run in a real Chromium through Vitest browser mode. Both dev dependencies are installed; only the browser binary is a one-time download:
+
+```bash
+npx playwright install chromium
+npm run test:browser
+```

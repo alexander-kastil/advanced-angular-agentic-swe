@@ -1,0 +1,56 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">{{ active().descriptor.title }}</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="jdf-descriptor">JSON descriptor</label>
+        <select
+          id="jdf-descriptor"
+          class="input"
+          (change)="selectedId.set($any($event.target).value)"
+        >
+          @for (d of descriptors; track d.id) {
+            <option [value]="d.id" [selected]="d.id === selectedId()">{{ d.title }}</option>
+          }
+        </select>
+      </div>
+
+      @for (f of active().descriptor.fields; track f.key) {
+        <div class="field">
+          <label class="label" [for]="'jdf-' + f.key">{{ f.label }}</label>
+          <input
+            [id]="'jdf-' + f.key"
+            class="input"
+            [type]="f.kind"
+            [formField]="active().fields[f.key]"
+          />
+        </div>
+        @for (err of errorsOf(f); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="send()">Submit</button>
+    <button type="button" class="btn btn-outline" (click)="clear()">Clear</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Descriptor and Live Model</h2>
+  </div>
+  <div class="card-content">
+    <div boxed>
+      <div>Form valid: {{ active().fields().valid() }}</div>
+      <div>Model: {{ active().model() | json }}</div>
+      @if (submittedValue()) {
+        <div>Submitted: {{ submittedValue() | json }}</div>
+      }
+    </div>
+    <pre tabindex="0" role="region" aria-label="JSON descriptor source">{{ descriptorJson() | json }}</pre>
+  </div>
+</div>

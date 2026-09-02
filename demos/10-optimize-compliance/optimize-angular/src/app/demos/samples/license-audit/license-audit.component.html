@@ -1,0 +1,62 @@
+<section class="licenses">
+  <header>
+    <h2>Audit Dependencies and Licenses</h2>
+    <p>
+      Shipping a bundle means shipping other people's code. The Cyber Resilience Act and most enterprise
+      procurement rules expect you to know what is in it, under which licence, and with which known
+      vulnerabilities.
+    </p>
+  </header>
+
+  <h3>Build output</h3>
+  <p>
+    <code>extractLicenses</code> is on by default in the production configuration, so every build writes
+    <code>dist/optimize-angular/3rdpartylicenses.txt</code>. That file is the attribution notice you are
+    obliged to make available.
+  </p>
+
+  <h3>Filter</h3>
+  <div class="filters">
+    <button type="button" [class.active]="filter() === 'all'" (click)="setFilter('all')">all</button>
+    @for (entry of counts(); track entry.category) {
+      <button type="button" [class.active]="filter() === entry.category" (click)="setFilter($any(entry.category))">
+        {{ entry.category }} ({{ entry.count }})
+      </button>
+    }
+  </div>
+
+  <table>
+    <caption>Direct runtime dependencies of this app</caption>
+    <thead>
+      <tr>
+        <th scope="col">Package</th>
+        <th scope="col">Licence</th>
+        <th scope="col">Class</th>
+        <th scope="col">Obligation</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (dependency of visible(); track dependency.name) {
+        <tr>
+          <th scope="row"><code>{{ dependency.name }}</code></th>
+          <td>{{ dependency.license }}</td>
+          <td><span class="tag" [class]="'tag-' + dependency.category">{{ dependency.category }}</span></td>
+          <td>{{ dependency.obligation }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h3>Commands to run in CI</h3>
+  <pre><code>npm audit --omit=dev
+npm ls --all --json
+npx license-checker --production --summary
+npm run build   # writes 3rdpartylicenses.txt</code></pre>
+
+  <ul class="notes">
+    <li>Fail the pipeline on a new high or critical advisory, not on the total count.</li>
+    <li>Pin transitive versions with a lockfile and review lockfile diffs in code review.</li>
+    <li>A copyleft licence on a build-time tool is harmless. On a runtime dependency it is a legal decision.</li>
+    <li>Publish an SBOM (CycloneDX or SPDX) alongside the release artifact.</li>
+  </ul>
+</section>

@@ -1,0 +1,79 @@
+<section class="panel">
+  <h3>Two caches, two mechanisms</h3>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th>primitive</th>
+        <th>cache</th>
+        <th>keyed by</th>
+        <th>opt out</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>httpResource()</code></td>
+        <td>HTTP transfer cache</td>
+        <td>method, URL and params of the request</td>
+        <td><code>withNoHttpTransferCache()</code></td>
+      </tr>
+      <tr>
+        <td><code>resource()</code></td>
+        <td><code>TransferState</code></td>
+        <td>the <code>id</code> you pass, identical on both sides</td>
+        <td>omit the <code>id</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="panel">
+  <h3>What the server handed over</h3>
+  <div class="cards">
+    <div class="card">
+      <span class="label">httpResource catalog</span>
+      <strong>{{ dishes().length }} dishes</strong>
+      <small>status: {{ catalog.status() }}</small>
+    </div>
+    <div class="card">
+      <span class="label">resource summary</span>
+      @if (summary.value(); as value) {
+        <strong>{{ value.dishes }} dishes, {{ value.stock }} in stock</strong>
+        <small>cheapest: {{ value.cheapest }}</small>
+      } @else {
+        <strong>loading</strong>
+        <small>status: {{ summary.status() }}</small>
+      }
+    </div>
+    <div class="card" [class.warn]="loaderRuns() > 0">
+      <span class="label">loader runs in this browser</span>
+      <strong>{{ loaderRuns() }}</strong>
+      <small>0 means the value came from TransferState</small>
+    </div>
+    <div class="card" [class.warn]="refetched()">
+      <span class="label">browser requests to /food</span>
+      <strong>{{ browserRequests().length }}</strong>
+      <small>0 means the HTTP transfer cache answered</small>
+    </div>
+  </div>
+
+  <p class="lead">
+    Hard reload the page to read these honestly. Reaching this route by clicking through the sidebar is a
+    client-side navigation, so nothing was server rendered and both numbers will be non-zero.
+  </p>
+
+  <button type="button" class="action" (click)="refetch()">Force a real refetch</button>
+  <p class="lead">
+    After forcing a refetch the request counter stays where it was until the next reload, because
+    <code>performance.getEntriesByType</code> is sampled once after the first render.
+  </p>
+</section>
+
+<section class="panel">
+  <app-code-panel heading="httpResource, cached automatically" [code]="httpSnippet" />
+  <app-code-panel
+    heading="resource with an explicit id"
+    caption="httpResource has no id option in 22.1.4. The id lives on resource() and rxResource(), where it keys the value into TransferState."
+    [code]="resourceSnippet"
+  />
+  <app-code-panel heading="Tuning the HTTP transfer cache" [code]="tuning" />
+</section>

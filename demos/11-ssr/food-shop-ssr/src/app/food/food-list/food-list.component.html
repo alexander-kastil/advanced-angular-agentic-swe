@@ -1,0 +1,21 @@
+@if (offline()) {
+  <p class="notice">
+    The API is not running, so the built-in catalog is shown. Start it with <code>npm run api</code>.
+  </p>
+}
+
+<p class="total">Cart total: {{ total().toFixed(2) }} &euro;</p>
+
+<div class="box">
+  @for (f of food(); track f.id) {
+    @defer (hydrate on viewport) {
+      <app-shop-item
+        [food]="f"
+        [inCart]="cart().find(item => item.id === f.id)?.quantity || 0"
+        (itemChanged)="updateCart($event)"
+      />
+    } @placeholder {
+      <div class="skeleton">{{ f.name }}</div>
+    }
+  }
+</div>

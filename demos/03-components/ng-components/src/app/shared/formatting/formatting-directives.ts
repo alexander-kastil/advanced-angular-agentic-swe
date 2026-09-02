@@ -6,8 +6,7 @@ import { Directive } from '@angular/core';
     'style': `
     display: flex;
     flex-direction: column;
-    `},
-  standalone: true
+    `}
 })
 export class ColumnDirective {
 }
@@ -18,8 +17,7 @@ export class ColumnDirective {
     'style': `
     display: flex;
     flex-direction: row;
-    `},
-  standalone: true
+    `}
 })
 export class RowDirective {
 }
@@ -31,8 +29,7 @@ export class RowDirective {
       display: flex;
       flex-direction: row;
       gap: var(--gap-medium);
-    `},
-  standalone: true
+    `}
 })
 export class GapDirective {
 }
@@ -45,32 +42,28 @@ export class GapDirective {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-    `},
-  standalone: true
+    `}
 })
 export class CenteredDirective {
 }
 
 @Directive({
   selector: '[border]',
-  host: { 'style': 'border:1px solid var(--color-accent); padding: var(--gap-medium)' },
-  standalone: true
+  host: { 'style': 'border:1px solid var(--color-accent); padding: var(--gap-medium)' }
 })
 export class BorderDirective {
 }
 
 @Directive({
   selector: '[bold]',
-  host: { 'style': 'font-weight:bold;' },
-  standalone: true
+  host: { 'style': 'font-weight:bold;' }
 })
 export class FontBoldDirective {
 }
 
 @Directive({
   selector: '[height-medium]',
-  host: { 'style': 'height:100px;' },
-  standalone: true,
+  host: { 'style': 'min-height:100px;' },
   hostDirectives: [BorderDirective]
 })
 export class HeightDirective {
@@ -79,18 +72,24 @@ export class HeightDirective {
 @Directive({
   selector: '[full-width]',
   host: { style: 'width:100%;' },
-  hostDirectives: [HeightDirective],
-  standalone: true,
+  hostDirectives: [HeightDirective]
 })
 export class WidthDirective {
 }
 
 @Directive({
   selector: '[boxed]',
-  standalone: true,
+  host: {
+    'style': `
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap-medium);
+      box-sizing: border-box;
+    `},
   hostDirectives: [
     FontBoldDirective,
-    WidthDirective
+    WidthDirective,
+    BorderDirective
   ],
 })
 export class BoxedDirective {

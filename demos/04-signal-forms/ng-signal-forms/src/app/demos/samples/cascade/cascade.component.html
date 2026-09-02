@@ -1,0 +1,101 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Cascading Dropdowns</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="profile-first-name">First Name</label>
+        <input
+          id="profile-first-name"
+          class="input"
+          type="text"
+          placeholder="First Name"
+          [formField]="profileForm.firstName"
+        />
+      </div>
+      @if (profileForm.firstName().touched() && profileForm.firstName().invalid()) {
+        @for (err of profileForm.firstName().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="profile-last-name">Last Name</label>
+        <input
+          id="profile-last-name"
+          class="input"
+          type="text"
+          placeholder="Last Name"
+          [formField]="profileForm.lastName"
+        />
+      </div>
+      @if (profileForm.lastName().touched() && profileForm.lastName().invalid()) {
+        @for (err of profileForm.lastName().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      @for (skill of profileForm.skills; track $index; let i = $index) {
+        <div border>
+          <h3>Skill {{ i + 1 }}</h3>
+          <div class="field">
+            <label class="label" [attr.for]="'skill-category-' + i">Category</label>
+            <select
+              [id]="'skill-category-' + i"
+              class="input"
+              [formField]="skill.techType"
+              (change)="onCategoryChange(i)"
+            >
+              <option value=""></option>
+              @for (category of categories; track category.type) {
+                <option [value]="category.type">{{ category.type }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" [attr.for]="'skill-technology-' + i">Technology</label>
+            <select [id]="'skill-technology-' + i" class="input" [formField]="skill.techValues">
+              <option value=""></option>
+              @for (option of optionsFor(skill.techType().value()); track option) {
+                <option [value]="option">{{ option }}</option>
+              }
+            </select>
+          </div>
+          @if (skill.techValues().touched() && skill.techValues().invalid()) {
+            @for (err of skill.techValues().errors(); track err.kind) {
+              <div class="error">{{ err.message }}</div>
+            }
+          }
+
+          <button type="button" class="btn btn-outline" (click)="removeSkill(i)">Remove</button>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="addSkill()">Add Skill</button>
+    <button type="button" class="btn btn-primary" [disabled]="profileForm().invalid()" (click)="saveForm()">
+      Save
+    </button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Selected Skills</h2>
+  </div>
+  <div class="card-content">
+    @if (summary().length === 0) {
+      <p>Nothing selected yet.</p>
+    } @else {
+      <ul>
+        @for (line of summary(); track line) {
+          <li>{{ line }}</li>
+        }
+      </ul>
+    }
+    Form valid: {{ profileForm().valid() }}
+  </div>
+</div>

@@ -1,0 +1,89 @@
+{
+  "demos": [
+    {
+      "url": "webmcp-counterpart",
+      "title": "WebMCP Counterpart",
+      "teaches": "Expose the running app to a browser agent with declareExperimentalWebMcpTool() from @angular/core. Register two live tools, read the tools/list payload an agent would see, and watch registration no-op where no model context exists.",
+      "sortOrder": 1,
+      "topic": "Agentic Web (WebMCP)",
+      "md": "webmcp-counterpart",
+      "visible": true
+    },
+    {
+      "url": "webmcp-signal",
+      "title": "Signals as WebMCP Tools",
+      "teaches": "Expose a signal value and its setter to an AI agent with declareExperimentalWebMcpTool() and register page-level tools with provideExperimentalWebMcpTools().",
+      "sortOrder": 2,
+      "topic": "Agentic Web (WebMCP)",
+      "md": "webmcp-signal"
+    },
+    {
+      "url": "webmcp-in-components",
+      "title": "WebMCP in Components",
+      "teaches": "Register agent tools from inside a component with declareExperimentalWebMcpTool so the tool closes over the component signals and unregisters with the component.",
+      "sortOrder": 3,
+      "topic": "Agentic Web (WebMCP)",
+      "md": "webmcp-in-components"
+    },
+    {
+      "url": "webmcp-form-tool",
+      "title": "Form as an Agent Tool",
+      "teaches": "Expose a Signal Form to a browser agent: provideExperimentalWebMcpForms() plus the experimentalWebMcpTool option on form(), and an explicit read tool via declareExperimentalWebMcpTool().",
+      "sortOrder": 4,
+      "topic": "Agentic Web (WebMCP)",
+      "md": "webmcp-form-tool"
+    },
+    {
+      "url": "webmcp-store",
+      "title": "WebMCP Store Tools",
+      "teaches": "Expose SignalStore methods to a browser agent with declareExperimentalWebMcpTool. Each tool declares a JSON schema and calls the same store method the UI calls.",
+      "sortOrder": 5,
+      "topic": "Agentic Web (WebMCP)",
+      "md": "webmcp-store"
+    },
+    {
+      "url": "webmcp-navigation",
+      "title": "WebMCP Navigation Tools",
+      "teaches": "Expose application navigation to an AI agent as WebMCP tools declared with declareExperimentalWebMcpTool, scoped to the component that owns them.",
+      "topic": "Agentic Web (WebMCP)",
+      "sortOrder": 6,
+      "md": "webmcp-navigation"
+    },
+    {
+      "url": "webmcp-e2e",
+      "title": "WebMCP E2E",
+      "teaches": "Declare page tools with declareExperimentalWebMcpTool and test them the way an agent would call them: a Vitest spec against a stubbed model context, and a Playwright run that invokes the tools and asserts the rendered page.",
+      "topic": "Agentic Web (WebMCP)",
+      "sortOrder": 7,
+      "md": "webmcp-e2e"
+    }
+  ],
+  "top-links": [
+    {
+      "label": "Home",
+      "url": "",
+      "id": "1"
+    },
+    {
+      "label": "Demos",
+      "url": "demos",
+      "id": "2"
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": "1",
+      "url": "",
+      "title": "Tools are the contract",
+      "comment": "A WebMCP tool declares a JSON schema and calls the same method the UI calls, so the agent and the user share one path.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": "2",
+      "url": "",
+      "title": "Scope tools to the component",
+      "comment": "declareExperimentalWebMcpTool registers while the component lives, so the agent only sees the tools of the page it is on.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    }
+  ]
+}

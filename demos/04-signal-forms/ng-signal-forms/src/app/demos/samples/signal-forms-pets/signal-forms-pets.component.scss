@@ -1,0 +1,56 @@
+.pet-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.8125rem;
+}
+
+.success {
+  color: #15803d;
+  font-weight: 500;
+  margin-top: 8px;
+}
+
+.state-info {
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+.state-info pre {
+  font-size: 0.75rem;
+  background: #f8fafc;
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.change-log {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.log-entry {
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  background: #f8fafc;
+  border-radius: 4px;
+}
+
+.log-empty {
+  color: #64748b;
+  font-style: italic;
+  font-size: 0.85rem;
+}

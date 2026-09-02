@@ -19,6 +19,7 @@ Patterns that must not appear in Angular v22+ code.
 | `[ngClass]="{ active: flag }"` | `[class.active]="flag()"` |
 | `[ngStyle]="{ color: val }"` | `[style.color]="val()"` |
 | `@HostBinding` / `@HostListener` | `host: { '[class.x]': '...', '(click)': '...' }` |
+| A scoped `--open` modifier class that silently fails to apply | Drive state-carrying properties with `[style.prop]` bindings — see `angular-disclosure-panels.md` |
 
 ## State Management
 
@@ -28,6 +29,33 @@ Patterns that must not appear in Angular v22+ code.
 | `Observable`-only state without signals | Combine with `toSignal()` or use `resource()` |
 | `subscribe()` in component body | `toSignal()`, async pipe, or `resource()` |
 | `@ngrx/store` class-based reducers | NgRx Signal Store (`withState`, `withMethods`) |
+
+## Signal inputs
+
+| Wrong | Correct |
+|---|---|
+| Reading a required `input()` from a field initializer | Read it from `computed`, `linkedSignal`, `effect`, or a lifecycle hook |
+| `signal({ x: this.someComputedOnInput() })` as a field | `linkedSignal({ source: () => this.input().id, computation: () => ({ ... }) })` |
+
+Required inputs are not set until after construction, so touching one while instance fields initialize throws
+**`NG0950: Input "x" is required but no value is available yet`**. The failure mode is nasty: the component
+never constructs, so the enclosing `@if` renders *nothing* while the button that toggles it still flips state.
+It reads as "the feature was never built" rather than as an error, and the only evidence is the console.
+
+```ts
+// WRONG: calls a computed that reads this.item() during field init
+protected readonly model = signal<Form>({ title: this.defaultTitle(), body: '' });
+
+// RIGHT: lazy, and re-derives only when the selected record actually changes
+protected readonly model = linkedSignal<number, Form>({
+  source: () => this.item().id,
+  computation: () => ({ title: this.defaultTitle(), body: '' }),
+});
+```
+
+Key the `source` on a stable id rather than the object itself: a re-emitted identical object would otherwise
+reset the signal and wipe whatever the user had typed. `linkedSignal` stays writable, so Signal Forms can bind
+to it directly.
 
 ## Architecture
 
@@ -86,3 +114,32 @@ A "constant-footprint" indicator (loader, spinner, status badge shown only while
 | `animation-play-state: paused` to "stop" a looping animation when idle | Freezes it on whatever random mid-cycle frame it reached. Use `animation: none` in the idle state and attach the `animation` shorthand only under the active class (`.x--active .dot { animation: … }`) so each activation restarts cleanly from 0% |
 
 Verify a constant-footprint indicator by sampling a neighbor's `getBoundingClientRect().left` across idle→active→idle — it must not move.
+
+## Component Composition
+
+| Wrong | Correct |
+|---|---|
+| Re-hosting a shared form/table pair but binding only inputs, hard-pinning selection (`entries()[0]`) | Diff the new host against the canonical host's template and wire every output too (`(selectEntry)`, `(entryChange)`) plus selection state |
+| Selection without feedback (row click changes state but no visual) | Pass a `selectedId` input and render the `bg-surface-alt` selected style (voucher-list convention) |
+
+Real case: `voucher-booking-wiz` embedded `voucher-edit-table` without `(selectEntry)` while `voucher-edit-container` binds it — booking lines looked dead ("details not editable").
+
+
+## A control whose only feedback lives in a conditionally-rendered panel
+
+```html
+@if (wideLayout() || activeTab() === 'preview') {
+  <app-preview [media]="store.selected()" />
+}
+```
+
+```html
+<button (click)="store.select(item)">...</button>
+```
+
+Clicking the button updates the store correctly and the user sees nothing, because the element that would show the change is not in the DOM. The default tab is the other one. Every part of the data path works and the control reads as dead.
+
+- A `@if` on a tab, a disclosure or a breakpoint removes the output element, so a correct signal write has nowhere to land. `@if` is not `[hidden]`: there is no element to inspect and no transition to notice.
+- Any control whose only feedback lives in a conditionally-rendered panel must bring that panel forward when it fires. Emit from the control, and let the shell switch the tab or open the panel.
+- Diagnose it the same way: before tracing the handler or the store, click the control in the running page and read back both the state and whether the output element exists. `document.querySelector('[data-testid="..."]')` returning null is the answer, not the state being wrong.
+- The wide-layout arm of the condition hides the bug on your machine: at a width where both panels render, the same click looks fine.

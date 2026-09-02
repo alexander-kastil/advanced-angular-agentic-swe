@@ -1,0 +1,72 @@
+<div class="sample">
+  <p>
+    The Angular CLI ships its own MCP server. Registering it once gives every agent in the repo the
+    workspace facts it would otherwise guess at: the real projects, the version-matched standards,
+    the docs index and the ability to run a target and read the actual output.
+  </p>
+
+  <div class="stability card">
+    <strong>Stability in 22.1</strong>
+    <p>
+      <code>run_target</code> and all three <code>devserver_*</code> tools sit in
+      <code>STABLE_TOOLS</code> in the installed <code>&#64;angular/cli</code>, so they register by
+      default. <code>EXPERIMENTAL_TOOLS</code> is an empty array and the <code>devserver</code>
+      experimental group is empty too: {{ experimentalCount() }} of the {{ tools.length }} tools need
+      the hidden <code>--experimental-tool</code> flag.
+    </p>
+  </div>
+
+  <div class="filters">
+    <button [class.active]="onlyReadOnly()" (click)="toggleReadOnly()">--read-only</button>
+    <button [class.active]="onlyLocal()" (click)="toggleLocal()">--local-only</button>
+    <span class="hint">
+      {{ visibleTools().length }} of {{ tools.length }} tools registered
+      @if (droppedCount()) {
+        <span> ({{ droppedCount() }} dropped by the flags)</span>
+      }
+    </span>
+  </div>
+
+  <div class="tools">
+    @for (tool of visibleTools(); track tool.name) {
+      <button [class.active]="selected()?.name === tool.name" (click)="select(tool.name)">
+        {{ tool.name }}
+      </button>
+    } @empty {
+      <span class="hint">Both flags together leave nothing that can also reach the network.</span>
+    }
+  </div>
+
+  @if (selected(); as tool) {
+    <div class="detail card">
+      <h4>{{ tool.name }}</h4>
+      <p class="title">{{ tool.title }}</p>
+      <p>{{ tool.purpose }}</p>
+      <div class="badges">
+        <span class="badge" [class.on]="tool.stability === 'stable'">{{ tool.stability }}</span>
+        <span class="badge" [class.on]="tool.readOnly">
+          {{ tool.readOnly ? 'readOnlyHint: true' : 'mutates the workspace' }}
+        </span>
+        <span class="badge" [class.on]="tool.localOnly">
+          {{ tool.localOnly ? 'openWorldHint: false' : 'needs the network' }}
+        </span>
+      </div>
+      <p class="ask">Prompt that reaches it: <em>{{ tool.askFor }}</em></p>
+    </div>
+  }
+
+  <h4>Register it</h4>
+  <div class="tools">
+    @for (config of hostConfigs; track config.host) {
+      <button [class.active]="selectedHost() === config.host" (click)="selectHost(config.host)">
+        {{ config.host }}
+      </button>
+    }
+  </div>
+  <app-code-block [label]="host().file" [code]="host().snippet" />
+
+  <p class="hint">
+    Running <code>npx ng mcp</code> in a terminal prints the same snippet instead of starting the
+    server, so a student can paste it without knowing the shape by heart.
+  </p>
+</div>

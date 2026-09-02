@@ -1,0 +1,76 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Accessible Autocomplete in a Signal Form</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="ac-passenger">Passenger</label>
+        <input id="ac-passenger" class="input" type="text" [formField]="flightForm.passenger" />
+      </div>
+      @if (flightForm.passenger().touched() && flightForm.passenger().invalid()) {
+        @for (err of flightForm.passenger().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" id="origin-label" for="origin">Departure airport</label>
+        <input
+          id="origin"
+          class="input"
+          ngCombobox
+          #combobox="ngCombobox"
+          type="text"
+          autocomplete="off"
+          aria-labelledby="origin-label"
+          [value]="originField().value()"
+          (valueChange)="onQuery($event)"
+          [expanded]="expanded()"
+          (expandedChange)="expanded.set($event)"
+          (blur)="originField().markAsTouched()"
+        />
+      </div>
+      <ng-template ngComboboxPopup [combobox]="combobox">
+        <div
+          class="popup"
+          ngComboboxWidget
+          ngListbox
+          #listbox="ngListbox"
+          [value]="selection()"
+          (valueChange)="onPick($event)"
+          [activeDescendant]="listbox.activeDescendant()"
+        >
+          @for (airport of filtered(); track airport) {
+            <div class="option" ngOption [value]="airport">{{ airport }}</div>
+          } @empty {
+            <div class="option empty">No airport matches</div>
+          }
+        </div>
+      </ng-template>
+      @if (originField().touched() && originField().invalid()) {
+        @for (err of originField().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-outline" (click)="clear()">Clear</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Field State</h2>
+  </div>
+  <div class="card-content">
+    <div boxed>
+      <div>Model: {{ model() | json }}</div>
+      <div>Expanded: {{ expanded() }}</div>
+      <div>Matches: {{ filtered().length }}</div>
+      <div>Origin valid: {{ originField().valid() }}</div>
+      <div>Form valid: {{ flightForm().valid() }}</div>
+    </div>
+  </div>
+</div>

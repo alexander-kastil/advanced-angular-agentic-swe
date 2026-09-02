@@ -1,4 +1,4 @@
-.mat-filter {
+.filter {
   position: sticky;
   top: 0;
   border-bottom-width: 1px;
@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 
-.mat-filter-input {
+.filter-input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -24,14 +24,7 @@
   width: 100%;
 }
 
-.spinner {
-  position: absolute;
-  right: 16px;
-  top: calc(50% - 8px);
-}
-
 .noResultsMessage {
-    margin-top: 10px;
-    font-family: Roboto,"Helvetica Neue",sans-serif;
-    font-size: 16px;
+  margin-top: 10px;
+  font-size: 16px;
 }

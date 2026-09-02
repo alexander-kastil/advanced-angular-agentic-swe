@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.field {
+  flex: 1;
+}
+
+.error {
+  font-size: 0.8125rem;
+  color: #dc2626;
+}

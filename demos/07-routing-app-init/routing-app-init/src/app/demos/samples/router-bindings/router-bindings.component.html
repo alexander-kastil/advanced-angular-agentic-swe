@@ -1,0 +1,36 @@
+<app-markdown-renderer [md]="'router-bindings'" />
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Route state bound straight into signal inputs</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      <code>withComponentInputBinding()</code> feeds every query parameter into a matching
+      <code>input()</code>. No <code>ActivatedRoute</code>, no subscription, no manual parsing: the URL is
+      the state.
+    </p>
+
+    <div class="field max-w-xs">
+      <label class="label" for="router-bindings-q">Search Query</label>
+      <input
+        id="router-bindings-q"
+        class="input"
+        type="text"
+        [value]="q()"
+        (change)="onSearch($any($event.target).value)"
+      />
+    </div>
+
+    <h3>Inputs bound from the URL</h3>
+    <pre class="code" tabindex="0" role="region" aria-label="Query parameters bound to inputs">{{ queryState() | json }}</pre>
+  </div>
+  <div class="card-actions flex-wrap">
+    <button type="button" class="btn btn-primary" (click)="previousPage()" [disabled]="page() === 1">
+      Previous Page
+    </button>
+    <button type="button" class="btn btn-primary" (click)="nextPage()">Next Page</button>
+    <button type="button" class="btn btn-outline" (click)="toggleRecent()">Toggle Recent</button>
+    <button type="button" class="btn btn-outline" (click)="clear()">Clear Params</button>
+  </div>
+</div>

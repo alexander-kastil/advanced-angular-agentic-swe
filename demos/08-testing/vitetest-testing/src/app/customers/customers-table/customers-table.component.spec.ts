@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Customer } from '../customer.model';
@@ -17,7 +16,7 @@ describe('Component - DOM - CustomersTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomersTableComponent, NoopAnimationsModule],
+      imports: [CustomersTableComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CustomersTableComponent);
@@ -31,12 +30,12 @@ describe('Component - DOM - CustomersTableComponent', () => {
   });
 
   it('should render one row per customer', () => {
-    const rows = fixture.debugElement.queryAll(By.css('mat-row'));
+    const rows = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(rows.length).toBe(3);
   });
 
   it('should display customer names in table cells', () => {
-    const cells = fixture.debugElement.queryAll(By.css('mat-cell'));
+    const cells = fixture.debugElement.queryAll(By.css('tbody td'));
     const cellTexts = cells.map(c => c.nativeElement.textContent.trim());
     expect(cellTexts).toContain('Soi');
     expect(cellTexts).toContain('Giro');
@@ -47,7 +46,7 @@ describe('Component - DOM - CustomersTableComponent', () => {
     fixture.componentRef.setInput('loading', true);
     fixture.detectChanges();
 
-    const bar = fixture.debugElement.query(By.css('mat-progress-bar'));
+    const bar = fixture.debugElement.query(By.css('app-progress-bar'));
     expect(bar).toBeTruthy();
   });
 
@@ -55,7 +54,7 @@ describe('Component - DOM - CustomersTableComponent', () => {
     fixture.componentRef.setInput('loading', false);
     fixture.detectChanges();
 
-    const bar = fixture.debugElement.query(By.css('mat-progress-bar'));
+    const bar = fixture.debugElement.query(By.css('app-progress-bar'));
     expect(bar).toBeNull();
   });
 
@@ -63,8 +62,8 @@ describe('Component - DOM - CustomersTableComponent', () => {
     const editSpy = vi.fn();
     component.edit.subscribe(editSpy);
 
-    const firstRow = fixture.debugElement.query(By.css('mat-row'));
-    const editBtn = firstRow.query(By.css('button[color=primary]'));
+    const firstRow = fixture.debugElement.query(By.css('tbody tr'));
+    const editBtn = firstRow.query(By.css('button[aria-label^="Edit"]'));
     editBtn.nativeElement.click();
 
     expect(editSpy).toHaveBeenCalledWith(mockCustomers[0]);
@@ -74,7 +73,7 @@ describe('Component - DOM - CustomersTableComponent', () => {
     const deleteSpy = vi.fn();
     component.delete.subscribe(deleteSpy);
 
-    const deleteBtn = fixture.debugElement.queryAll(By.css('button[color=warn]'))[0];
+    const deleteBtn = fixture.debugElement.queryAll(By.css('button[aria-label^="Delete"]'))[0];
     deleteBtn.nativeElement.click();
 
     expect(deleteSpy).toHaveBeenCalledWith(mockCustomers[0].id);
@@ -84,7 +83,7 @@ describe('Component - DOM - CustomersTableComponent', () => {
     const addSpy = vi.fn();
     component.add.subscribe(addSpy);
 
-    const addBtn = fixture.debugElement.query(By.css('button[color=primary]'));
+    const addBtn = fixture.debugElement.query(By.css('.toolbar button'));
     addBtn.nativeElement.click();
 
     expect(addSpy).toHaveBeenCalled();

@@ -1,0 +1,27 @@
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  margin-bottom: var(--gap-big);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap-big);
+}
+
+.hint {
+  border: 1px dashed rgba(128, 128, 128, 0.6);
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+.hint.clickable {
+  cursor: pointer;
+}
+
+.hint.error {
+  border-color: #c62828;
+}

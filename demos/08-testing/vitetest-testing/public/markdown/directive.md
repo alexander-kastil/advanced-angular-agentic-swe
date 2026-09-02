@@ -9,11 +9,14 @@ Navigate to `directive/` and examine `capitalize.directive.spec.ts`
 ```typescript
 @Directive({
   selector: "[appCapitalize]",
+  host: {
+    "(click)": "onClick()",
+  },
 })
 export class CapitalizeDirective {
   el = inject(ElementRef);
 
-  @HostListener("click") onClick() {
+  onClick() {
     this.el.nativeElement.style.textTransform === "uppercase" ? (this.el.nativeElement.style.textTransform = "lowercase") : (this.el.nativeElement.style.textTransform = "uppercase");
   }
 }
@@ -24,4 +27,4 @@ export class CapitalizeDirective {
 - Create a host component in TestBed to hold the directive
 - Query the element with `fixture.nativeElement.querySelector()`
 - Assert DOM state changes caused by the directive
-- Use `@HostListener` to respond to events
+- Bind events through the `host` object rather than `@HostListener`

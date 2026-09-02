@@ -1,0 +1,40 @@
+.virtual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+  padding: var(--gap-big);
+  height: 100%;
+}
+
+button {
+  align-self: flex-start;
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+cdk-virtual-scroll-viewport {
+  height: 60vh;
+  border: 1px solid var(--color-accent);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 var(--gap-big);
+  box-sizing: border-box;
+}
+
+.alternate {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.score {
+  font-size: var(--font-small);
+  opacity: 0.75;
+}

@@ -1,0 +1,92 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">One cold source, three consumers</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      The source is a cold
+      <code>interval()</code>
+      wrapped in
+      <code>defer</code>
+      , so every consumer starts its own. That is why the three numbers below
+      disagree, and why the counter is three and not one. Add
+      <code>share()</code>
+      and it becomes one.
+    </p>
+    <div class="banner">
+      <span class="counter">live source subscriptions: {{ sourceSubscriptions() }}</span>
+      <app-slide-toggle [checked]="duplicateAsync()" (toggled)="duplicateAsync.set($event)">
+        Render a second | async binding
+      </app-slide-toggle>
+      @if (manualRunning()) {
+        <button type="button" class="btn btn-outline" (click)="stopManual()">
+          Unsubscribe the manual one
+        </button>
+      } @else {
+        <button type="button" class="btn btn-primary" (click)="startManual()">
+          Resubscribe the manual one
+        </button>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">subscribe()</h2>
+    </div>
+    <div class="card-content">
+      <div class="value">{{ manual() }}</div>
+      <p class="meta">
+        {{ manualEmissions() }} emissions handled by hand,
+        {{ manualRunning() ? "subscribed" : "torn down" }}.
+      </p>
+      <code>ticks$.pipe(takeUntilDestroyed()).subscribe(v =&gt; sig.set(v))</code>
+      <p>
+        You own the teardown and you write into state yourself. Drop
+        <code>takeUntilDestroyed()</code>
+        and the counter above never goes back down.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">stream + async</h2>
+    </div>
+    <div class="card-content">
+      <div class="value">{{ stream$ | async }}</div>
+      @if (duplicateAsync()) {
+        <div class="value">{{ stream$ | async }}</div>
+      }
+      <code>{{ "{{ stream$ | async }}" }}</code>
+      <p>
+        The template subscribes and unsubscribes for you. Toggle the second
+        binding and watch the counter: every
+        <code>| async</code>
+        is another subscription, and the value cannot be composed with
+        <code>computed()</code>
+        .
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">toSignal()</h2>
+    </div>
+    <div class="card-content">
+      <div class="value">{{ fromSignal() }}</div>
+      <code>toSignal(ticks$, &#123; initialValue: 0 &#125;)</code>
+      <p>
+        One subscription however many times you read it, synchronous access,
+        automatic teardown, and it composes with
+        <code>computed()</code>
+        and
+        <code>effect()</code>
+        . This is the default in Angular 22.
+      </p>
+    </div>
+  </div>
+</div>

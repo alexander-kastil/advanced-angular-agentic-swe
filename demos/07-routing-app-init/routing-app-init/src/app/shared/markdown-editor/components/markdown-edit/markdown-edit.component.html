@@ -1,17 +1,39 @@
-<div column>
-  <mat-form-field
-    ><mat-label>Title</mat-label>
-    <input matInput [(ngModel)]="comment().title" />
-  </mat-form-field>
-  <mat-form-field
-    ><mat-label>Comment</mat-label
-    ><textarea
-      matInput
-      name=""
-      id=""
-      cols="30"
-      rows="8"
-      [(ngModel)]="comment().comment"
-    ></textarea>
-  </mat-form-field>
+<div class="editor-fields">
+  <div class="field">
+    <label class="label" for="md-item-title">Title</label>
+    @if (markdownItem().id === -1) {
+      <input id="md-item-title" class="input" [value]="markdownItem().title" readonly />
+    } @else {
+      <input id="md-item-title" class="input" [formField]="itemForm.title" />
+    }
+  </div>
+
+  <div class="field comment-field">
+    @if (view() === 'source') {
+      <div class="label-row">
+        <label class="label" for="md-item-comment">Markdown source</label>
+        <span class="label">{{ charCount() }} chars &middot; {{ lineCount() }} lines</span>
+      </div>
+      <textarea
+        id="md-item-comment"
+        class="textarea md-source"
+        spellcheck="false"
+        autocapitalize="off"
+        autocorrect="off"
+        [formField]="itemForm.comment"
+      ></textarea>
+    } @else {
+      <div class="label-row">
+        <span class="label">Preview</span>
+        <span class="label">{{ charCount() }} chars &middot; {{ lineCount() }} lines</span>
+      </div>
+      <div class="md-preview" tabindex="0" role="region" aria-label="Markdown preview">
+        @if (markdownItem().comment) {
+          <markdown [data]="markdownItem().comment" />
+        } @else {
+          <p class="text-slate-500">Nothing to preview yet.</p>
+        }
+      </div>
+    }
+  </div>
 </div>

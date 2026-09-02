@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { HoverListenerDirective } from './hover-listener.directive';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { BindingComponent } from './binding/binding.component';
 
 @Component({
@@ -9,12 +8,7 @@ import { BindingComponent } from './binding/binding.component';
     styleUrls: ['./host-binding-listener.component.scss'],
     imports: [
         BindingComponent,
-        MatCard,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardContent,
         HoverListenerDirective,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HostBindingListenerComponent { }

@@ -1,0 +1,33 @@
+.popup {
+  background: #fff;
+  border: 1px solid var(--color-line, #dce5ec);
+  border-radius: 6px;
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.option {
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.option[aria-selected='true'] {
+  font-weight: 600;
+}
+
+.option:focus,
+.option:hover {
+  background: #e8f2fd;
+  outline: none;
+}
+
+.option.empty {
+  cursor: default;
+  color: #64748b;
+}
+
+.error {
+  font-size: 0.8125rem;
+  color: #dc2626;
+}

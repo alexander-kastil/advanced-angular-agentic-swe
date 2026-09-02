@@ -1,12 +1,29 @@
-# Agentic Angular Software Engineering with GitHub Copilot & Claude Code
+# Agentic Angular Software Engineering
 
-This module introduces agentic development workflows for Angular using GitHub Copilot and Claude Code. You will learn to configure AI assistants with custom instructions and reusable prompt files, extend their capabilities with skills and plugins, and design custom agents for specialized Angular tasks. The focus is on practical patterns that make AI-assisted development faster and more consistent.
+This module sets up the agentic development environment the rest of the class runs on. You connect
+the Angular CLI MCP server so agents read the real workspace, write the harness files that shape
+every turn, package knowledge as skills, route Angular work to a specialized agent, enforce rules
+with hooks instead of hope, and finally turn the direction around and expose the running Angular app
+back to a browser agent with the experimental WebMCP API in Angular 22.
+
+## Demo App
+
+`ng-agentic` is an Angular 22 app. Its demo list is driven by `db.json`, served as a static asset, so
+there is no backend to start.
+
+```bash
+cd ng-agentic
+npm install
+npm start
+```
 
 ## Demos
 
-| #   | Title                       | Teaches                                                                                                                                                | Topic            |
-| --- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| 1   | Agentic Coding              | Use GitHub Copilot and Claude Code for AI-assisted Angular development. Understand agent mode, context management, and iterative code generation.      | Copilot & Claude |
-| 2   | Instructions & Prompt Files | Create .instructions.md and .prompt.md files to shape Copilot's behavior. Reuse prompts across sessions for consistent, context-aware code generation. | Customization    |
-| 3   | Skills & Plugins            | Extend Copilot with domain-specific skills and installable plugins. Package reusable knowledge and workflows as SKILL.md files.                        | Customization    |
-| 4   | Custom Agents               | Design and configure custom agents for specialized Angular tasks. Use agent modes to orchestrate multi-step development workflows.                     | Agents           |
+| #   | Route | Title | Teaches | Topic |
+| --- | ----- | ----- | ------- | ----- |
+| 1 | `angular-mcp-server` | Angular CLI MCP Server | Register the Angular CLI MCP server and browse the nine tools it exposes, with run_target and the three devserver tools stable as of 22.1. See what --read-only and --local-only drop, and copy the config for Claude Code or VS Code. | Agentic Tooling |
+| 2 | `harness-files` | Harness Files | Compare CLAUDE.md, AGENTS.md and .github/copilot-instructions.md side by side, written from the rules get_best_practices actually returns for Angular 22. Understand scope, precedence, per-turn cost and what belongs in a skill instead. | Agentic Tooling |
+| 3 | `agent-skills` | Agent Skills | Weigh the official Angular Agent Skills against this repo's own angular-conventions skill and see which one wins per question. Then build a SKILL.md and watch the frontmatter description that does the routing. | Customization |
+| 4 | `angular-expert-agent` | Angular Expert Agent | Define a specialized subagent in .claude/agents with its own frontmatter, tool allowlist and model. Sort rules into the agent file or a skill, and decide which prompts get routed to it at all. | Customization |
+| 5 | `hooks-and-gates` | Hooks & Quality Gates | Wire settings.json hooks that enforce what instructions only ask for: format on write with PostToolUse, block a banned Angular API with PreToolUse, and refuse to end a session on a red build with Stop. | Automation |
+| 6 | `webmcp-counterpart` | WebMCP Counterpart | Expose the running app to a browser agent with declareExperimentalWebMcpTool() from @angular/core. Register two live tools, read the tools/list payload an agent would see, and watch registration no-op where no model context exists. | Automation |

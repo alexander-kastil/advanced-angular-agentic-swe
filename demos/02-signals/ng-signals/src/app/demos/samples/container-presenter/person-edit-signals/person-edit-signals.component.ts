@@ -1,25 +1,12 @@
-import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
 import { Person } from '../person.model';
 
 @Component({
   selector: 'app-person-edit-signals',
-  imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatRadioModule,
-    MatButtonModule,
-  ],
+  imports: [ReactiveFormsModule],
   templateUrl: './person-edit-signals.component.html',
-  styleUrl: './person-edit-signals.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './person-edit-signals.component.scss'
 })
 export class PersonEditSignalsComponent {
   person = input<Person | undefined>();

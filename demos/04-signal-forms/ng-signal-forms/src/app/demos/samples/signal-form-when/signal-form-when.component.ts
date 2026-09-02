@@ -1,11 +1,5 @@
-import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { form, FormField, required, applyWhen } from '@angular/forms/signals';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 import { JsonPipe } from '@angular/common';
 
@@ -33,12 +27,8 @@ const initialData: PetWhenModel = {
     selector: 'app-sf-when',
     templateUrl: './signal-form-when.component.html',
     imports: [
-        MarkdownRendererComponent,
-        MatCard, MatCardHeader, MatCardTitle, MatCardContent,
-        FormField, MatFormField, MatLabel, MatInput,
-        MatCheckbox, MatSelectModule, JsonPipe, ColumnDirective,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+        FormField, JsonPipe, ColumnDirective,
+    ]
 })
 export class SfWhenComponent {
     petModel = signal<PetWhenModel>(initialData);

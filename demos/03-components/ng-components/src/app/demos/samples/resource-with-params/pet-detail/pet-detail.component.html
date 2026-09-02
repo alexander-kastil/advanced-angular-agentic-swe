@@ -1,0 +1,20 @@
+<div class="detail">
+  <header>
+    <strong>httpResource in the child</strong>
+    <span class="status">{{ pet.status() }}</span>
+  </header>
+
+  @if (pet.isLoading()) {
+    <p>Loading pet {{ petId() }}</p>
+  }
+
+  @if (pet.error()) {
+    <p class="error">Pet {{ petId() }} could not be loaded</p>
+  }
+
+  @if (pet.value(); as value) {
+    <p>{{ value.name }} - {{ value.breed }}, {{ value.age }} years, owned by {{ value.owner }}</p>
+  }
+
+  <button type="button" class="btn btn-outline" (click)="reload()">Reload this child</button>
+</div>

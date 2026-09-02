@@ -1,0 +1,49 @@
+<app-markdown-renderer [md]="'route-inputs'" />
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">withComponentInputBinding and its options</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      Four different sources reach this component as plain <code>input()</code> signals: the path
+      parameter <code>:tenant</code>, the static route <code>data</code> value
+      <code>release</code>, the query parameter <code>highlight</code>, and
+      <code>draftTitle</code>, which no route key matches at all.
+    </p>
+    <pre class="code" tabindex="0" role="region" aria-label="Bound route inputs">{{ bound() | json }}</pre>
+    <p>
+      <code>draftTitle</code> shows the default <code>unmatchedInputBehavior</code>:
+      <code>'alwaysUndefined'</code> overwrites the component's own default with
+      <code>undefined</code> so that stale data can never survive a navigation.
+    </p>
+  </div>
+  <div class="card-actions flex-wrap">
+    @for (name of tenants; track name) {
+      <button type="button" class="btn btn-primary" (click)="switchTenant(name)">{{ name }}</button>
+    }
+    <button type="button" class="btn btn-outline" (click)="setHighlight('overdue')">
+      Highlight overdue
+    </button>
+    <button type="button" class="btn btn-outline" (click)="setHighlight('')">Clear highlight</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Inherited parameters in a child route</h2>
+  </div>
+  <div class="card-content">
+    <nav class="sections" aria-label="Tenant sections">
+      @for (section of sections; track section) {
+        <a
+          class="btn btn-outline"
+          [routerLink]="['/demos/route-inputs', tenant(), section]"
+          routerLinkActive="active"
+          >{{ section }}</a
+        >
+      }
+    </nav>
+    <router-outlet />
+  </div>
+</div>

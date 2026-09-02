@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Event-Based Store: eventGroup, withReducer, withEventHandlers</h2>
+  </div>
+  <div class="card-content content">
+    @if (store.checkingOut()) {
+      <app-progress-bar />
+    }
+
+    <div class="toolbar">
+      @for (item of catalog; track item) {
+        <button type="button" class="btn btn-outline" (click)="dispatch.added(item)">+ {{ item }}</button>
+      }
+    </div>
+
+    <h3>Cart ({{ store.lineCount() }})</h3>
+    @for (line of store.lines(); track $index) {
+      <div class="row">
+        <span class="grow">{{ line }}</span>
+        <button type="button" class="btn-icon" (click)="dispatch.removed(line)"><span class="icon">delete</span></button>
+      </div>
+    } @empty {
+      <p>Cart is empty.</p>
+    }
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-primary" [disabled]="store.lineCount() === 0 || store.checkingOut()"
+        (click)="dispatch.checkoutStarted()">Checkout</button>
+      <button type="button" class="btn btn-outline" (click)="dispatch.cleared()">Clear</button>
+    </div>
+
+    @if (store.orderNumber(); as order) {
+      <p class="order">Order <strong>{{ order }}</strong> placed by the checkout event handler.</p>
+    }
+
+    <h3>Scoped dispatching</h3>
+    <p class="hint">
+      This component provides its own Dispatcher, so the cart store only reduces what stays in the local scope.
+      Dispatch with parent or global and the event leaves for the root dispatcher, where nothing reduces it, and
+      the log below stays unchanged.
+    </p>
+    <div class="toggle-group">
+      @for (s of scopes; track s) {
+        <button type="button" class="toggle-btn" [class.active]="scope() === s" (click)="scope.set(s)">{{ s }}</button>
+      }
+    </div>
+    <div class="toolbar">
+      <button type="button" class="btn btn-outline" (click)="addScoped('Scoped Ticket')">
+        dispatcher.dispatch(added, scope)
+      </button>
+    </div>
+
+    <h3>Event log</h3>
+    <ol class="log">
+      @for (entry of store.log(); track $index) {
+        <li>{{ entry }}</li>
+      }
+    </ol>
+  </div>
+</div>

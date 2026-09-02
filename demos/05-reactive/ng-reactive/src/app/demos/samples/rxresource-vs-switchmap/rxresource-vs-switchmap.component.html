@@ -1,0 +1,103 @@
+<div class="grid">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Classic switchMap pipeline</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        <code>valueChanges</code>
+        ,
+        <code>debounceTime</code>
+        ,
+        <code>distinctUntilChanged</code>
+        ,
+        <code>switchMap</code>
+        ,
+        <code>catchError</code>
+        , then
+        <code>toSignal</code>
+        to render. The loading flag and the error flag below are two extra
+        signals plus a
+        <code>defer</code>
+        and a
+        <code>finalize</code>
+        that you write yourself.
+      </p>
+      <div class="field">
+        <label class="label" for="classic-term">Filter skills</label>
+        <input id="classic-term" class="input" type="text" [formControl]="classicTerm" />
+      </div>
+      <div class="meta">
+        <span>requests {{ classicRequests() }}</span>
+        <span>{{ classicLoading() ? "loading" : "idle" }}</span>
+        <span>{{ classicFailed() ? "last request failed" : "ok" }}</span>
+      </div>
+      @if (classicLoading()) {
+        <app-progress-bar mode="indeterminate" />
+      }
+      @for (skill of classicResult(); track skill.id) {
+        <div class="result">{{ skill.name }}</div>
+      } @empty {
+        <div class="result">no matches</div>
+      }
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">rxResource</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        The
+        <code>params</code>
+        function is the trigger. Cancellation, status and error come with the
+        resource, and the counter shows the same switchMap behaviour without the
+        operator.
+      </p>
+      <div class="field">
+        <label class="label" for="resource-term">Filter skills</label>
+        <input id="resource-term" class="input" type="text" [(ngModel)]="resourceTerm" />
+      </div>
+      <div class="meta">
+        <span>requests {{ resourceRequests() }}</span>
+        <span>{{ skillsResource.status() }}</span>
+        <span>{{ skillsResource.error() ? "error" : "ok" }}</span>
+      </div>
+      @if (skillsResource.isLoading()) {
+        <app-progress-bar mode="indeterminate" />
+      } @else if (skillsResource.error()) {
+        <p>Start json-server to see live data.</p>
+      } @else {
+        @for (skill of skillsResource.value(); track skill.id) {
+          <div class="result">{{ skill.name }}</div>
+        } @empty {
+          <div class="result">no matches</div>
+        }
+      }
+    </div>
+  </div>
+</div>
+
+<div class="card chain">
+  <div class="card-header">
+    <h2 class="card-title">chain(): one resource feeding the next</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      <code>chain()</code>
+      reads the list resource and propagates its loading and error status, so the
+      detail request only runs once the list has resolved. In the switchMap
+      version this is a nested pipeline you write by hand.
+    </p>
+    @if (firstSkillDetail.isLoading()) {
+      <app-progress-bar mode="indeterminate" />
+    } @else if (firstSkillDetail.hasValue()) {
+      <div class="result">
+        first match reloaded by id: {{ firstSkillDetail.value().name }}
+      </div>
+    } @else {
+      <div class="result">waiting for the list</div>
+    }
+  </div>
+</div>

@@ -1,0 +1,49 @@
+.bound {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+}
+
+.label {
+  color: #6a6a7c;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+}
+
+.dish {
+  padding: 0.85rem;
+  border: 1px solid #cfd3e6;
+  border-radius: 8px;
+  background: #fbfbff;
+}
+
+.dish.hot {
+  border-color: #8a7fd0;
+  background: #f3efff;
+}
+
+.dish h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+}
+
+.price {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  color: #4a3f9c;
+}
+
+.dish p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.empty {
+  font-size: 0.85rem;
+  color: #777;
+}

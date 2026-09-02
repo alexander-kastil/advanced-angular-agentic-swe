@@ -6,7 +6,6 @@ test.describe('App smoke test', () => {
     });
 
     test('renders the application', async ({ page }) => {
-        // Check for app root element
         const appRoot = page.locator('app-root');
         await expect(appRoot).toBeVisible();
     });

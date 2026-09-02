@@ -1,6 +1,6 @@
 # Angular MSAL — Standalone Setup Reference
 
-> Angular 22 standalone + `@azure/msal-angular ^5.x` + `@azure/msal-browser ^5.x`
+> Angular 22 standalone + `@azure/msal-angular ^6.x` + `@azure/msal-browser ^5.x`
 
 ---
 
@@ -27,7 +27,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       authority: environment.azure.msalConfig.auth.authority,
       redirectUri: environment.azure.msalConfig.auth.redirectUri, // e.g. '/'
       postLogoutRedirectUri: environment.azure.msalConfig.auth.redirectUri,
-      // DO NOT add navigateToLoginRequestUrl here — removed in v5
+      // DO NOT add navigateToLoginRequestUrl here: removed from config in v5.
+      // It moved onto the call: handleRedirectObservable({ navigateToLoginRequestUrl: false })
     },
     cache: { cacheLocation: BrowserCacheLocation.LocalStorage },
     system: {
@@ -190,7 +191,7 @@ bootstrapApplication(App, appConfig).catch(err => console.error(err));
 - [ ] Remove `enableAccountStorageEvents()` call
 - [ ] Replace `EventType.ACCOUNT_ADDED` with `LOGIN_SUCCESS`, `ACCOUNT_REMOVED` with `LOGOUT_SUCCESS`
 - [ ] Replace `authService.logout()` with `logoutRedirect()` or `logoutPopup()`
-- [ ] Remove `navigateToLoginRequestUrl` from `BrowserAuthOptions`
+- [ ] Move `navigateToLoginRequestUrl` out of `BrowserAuthOptions` and into the `handleRedirectObservable({ navigateToLoginRequestUrl: false })` call
 - [ ] Add `allowPlatformBroker: false` to `system` config
 - [ ] Add `APP_INITIALIZER` with `handleRedirectObservable()`
 - [ ] Remove `MsalRedirectComponent` bootstrap and `<app-redirect>` from index.html
@@ -252,49 +253,11 @@ The `protectedScopes` value is also the `access_as_user` scope exposed in **Expo
 
 ---
 
-## 401 Troubleshooting
-
-If `https://localhost:5001/api/...` returns 401, work through these in order. (For server-side validation failures, see the .NET MSAL reference.)
-
-### 1. Is the `Authorization` header actually being sent?
-
-Open DevTools > Network > the failing request > Request Headers. If `Authorization: Bearer ...` is **missing**, the interceptor did not match the request URL. Continue to step 2.
-
-If the header is **present**, the problem is server-side — token rejected. Consult the .NET reference's IDX error table.
-
-### 2. `protectedResourceMap` key — strict matching trap
-
-msal-angular v5 enables `strictMatching` by default. Under strict matching, a key without a wildcard suffix only matches that exact URL, not subpaths. The `/*` suffix is a special marker the matcher recognizes as "match this prefix and anything under it".
-
-```typescript
-// WRONG — only matches the literal URL "https://localhost:5001/api/" (zero real requests hit this)
-protectedResourceMap.set(`${environment.apiUrl}/api/`, scopes);
-
-// CORRECT — matches /api/anything/anything
-protectedResourceMap.set(`${environment.apiUrl}/api/*`, scopes);
-```
-
-If the interceptor finds no matching key, it silently skips the request and no token is attached, resulting in 401 with `Authorization` header absent.
-
-**Counter-intuitive note:** the `/*` is NOT shell glob expansion — it is parsed by the matcher. The literal `*` character is the documented v5 wildcard form.
-
-### 3. Is the user signed in?
-
-In DevTools > Application > Local Storage, look for keys like `msal.<clientId>.account.keys` and `msal.<clientId>-login.<tenant>-accesstoken-...`. If absent, the login redirect never completed; verify `redirectUri` matches the SPA registration in Azure AD.
-
-### 4. Is the interceptor in the HttpClient chain?
-
-`provideHttpClient(withInterceptorsFromDi(), withFetch())` — the `withInterceptorsFromDi()` is **required** because `MsalInterceptor` is registered via the class-based `HTTP_INTERCEPTORS` token. Without it, the interceptor is silently dropped.
-
-### 5. Did the first HTTP call fire before MSAL settled?
-
-If a store or component fires an HTTP request from its constructor or `APP_INITIALIZER`-adjacent code, it may run before `inProgress$` reaches `InteractionStatus.None` and the active account is set. Symptom: first request 401s, subsequent requests succeed.
-
-Fix: gate HTTP calls behind `msalBroadcastService.inProgress$.pipe(filter(s => s === InteractionStatus.None))` or behind a "ready" signal in `AuthStateService`.
-
----
 
 ## See Also
 
-- [`msal-angular-appreg.md`](msal-angular-appreg.md) — Azure AD app registration via Azure CLI
-- [`angular-msal-auth.md`](angular-msal-auth.md) — MSAL overview: breaking changes, interaction-type rules, 401 triage
+- [`msal-version-changes.md`](msal-version-changes.md) - which major to run, v4 to v6 upgrade
+- [`angular-msal-auth.md`](angular-msal-auth.md) - provider wiring, `protectedResourceMap`, `app.config.ts`
+- [`msal-auth-patterns.md`](msal-auth-patterns.md) - `AuthService`, guards, logout
+- [`msal-troubleshooting.md`](msal-troubleshooting.md) - 401 triage and every other failure mode
+

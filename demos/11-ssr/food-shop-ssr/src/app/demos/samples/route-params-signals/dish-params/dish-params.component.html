@@ -1,0 +1,16 @@
+<div class="bound">
+  <span class="label">id input</span>
+  <code>{{ id() }}</code>
+  <span class="label">query param highlight</span>
+  <code>{{ highlight() || 'not set' }}</code>
+</div>
+
+@if (found(); as dish) {
+  <article class="dish" [class.hot]="highlight() === dish.code">
+    <h4>{{ dish.name }}</h4>
+    <p class="price">{{ dish.price | toEuro }} &middot; {{ dish.inStock }} in stock</p>
+    <p>{{ dish.description }}</p>
+  </article>
+} @else {
+  <p class="empty">No dish for id {{ id() }}.</p>
+}

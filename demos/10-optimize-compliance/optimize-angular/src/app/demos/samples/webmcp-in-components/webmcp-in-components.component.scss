@@ -1,0 +1,37 @@
+.tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tasks li {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  margin-bottom: var(--gap-small);
+}
+
+.done {
+  text-decoration: line-through;
+  color: #64748b;
+}
+
+.plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.value {
+  font-family: monospace;
+}
+
+.available {
+  border-left: 4px solid #2e7d32;
+  padding-left: var(--gap-medium);
+}
+
+.missing {
+  border-left: 4px solid #ef6c00;
+  padding-left: var(--gap-medium);
+}

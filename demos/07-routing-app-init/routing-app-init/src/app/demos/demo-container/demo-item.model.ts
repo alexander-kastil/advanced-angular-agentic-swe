@@ -6,4 +6,5 @@ export class DemoItem {
   sortOrder = 0;
   topic: string = '';
   visible = true;
+  md: string = '';
 }

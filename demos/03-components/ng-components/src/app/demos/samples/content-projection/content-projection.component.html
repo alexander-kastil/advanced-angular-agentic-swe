@@ -1,13 +1,15 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Content Projection</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <button mat-raised-button color="primary" (click)="openPopup()">
-      Show in Popup
-    </button>
-  </mat-card-content>
-</mat-card>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Content Projection</h2>
+  </div>
+  <div class="card-content">
+    <div class="flex flex-wrap items-center gap-2">
+      <button type="button" class="btn btn-primary" (click)="openPopup()">
+        Show in Popup
+      </button>
+    </div>
+  </div>
+</div>
 
 <ux-split>
   <div class="title">The Title</div> 
@@ -28,3 +30,14 @@
      />
   </div>
 </ux-split>
+
+<dialog #popup class="modal w-[min(92vw,60rem)]" aria-label="Split popup">
+  <div class="card">
+    <div class="card-content">
+      <app-split-popup />
+    </div>
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-outline" (click)="closePopup()">Close</button>
+    </div>
+  </div>
+</dialog>

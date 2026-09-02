@@ -1,0 +1,18 @@
+.state {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background: #0f172a;
+  color: #e2e8f0;
+  overflow-x: auto;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.list li {
+  margin-bottom: 0.25rem;
+}

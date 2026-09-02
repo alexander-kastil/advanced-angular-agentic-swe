@@ -1,18 +1,26 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
-    <div class="title">SPA Skills</div>
-    <div>
-      <button mat-raised-button (click)="addItem()" color="primary">Add</button>
-      <mat-slide-toggle [formControl]="fcToggle" color="primary"
-        >ShowAll</mat-slide-toggle>
+<div class="page">
+  <div class="app-toolbar justify-between">
+    <div class="text-sm font-semibold tracking-tight text-ink">SPA Skills</div>
+    <div class="flex items-center gap-4">
+      <button type="button" class="btn btn-primary" (click)="addItem()">Add</button>
+      <app-slide-toggle [checked]="showAll()" (toggled)="showAll.set($event)">
+        ShowAll
+      </app-slide-toggle>
     </div>
-  </mat-toolbar-row>
-</mat-toolbar>
-@for (sk of skills(); track sk) {
-  <app-skill-row [skill]="sk"
-    [editEnabled]="'true'"
-    (itemDeleted)="deleteItem($event)"    
-    (itemCompleted)="toggleItemComplete($event)"
-   />
-}
-<app-skills-kpi />
+  </div>
+
+  <div class="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+    @for (sk of skills(); track sk.id) {
+      <app-skill-row
+        [skill]="sk"
+        [editEnabled]="'true'"
+        (itemDeleted)="deleteItem($event)"
+        (itemCompleted)="toggleItemComplete($event)"
+      />
+    } @empty {
+      <p class="px-4 py-3 text-sm text-slate-500">No skills to show.</p>
+    }
+  </div>
+
+  <app-skills-kpi />
+</div>

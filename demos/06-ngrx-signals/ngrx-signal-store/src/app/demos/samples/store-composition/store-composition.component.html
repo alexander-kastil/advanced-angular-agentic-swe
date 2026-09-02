@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Store Composition: withProps, withFeature and signalMethod</h2>
+  </div>
+  <div class="card-content content">
+    <p>Desk: <strong>{{ store.desk() }}</strong> - watching <strong>{{ store.watched() }}</strong> symbols</p>
+
+    <div class="toolbar">
+      @for (symbol of store.symbols(); track symbol) {
+        <button type="button" class="btn btn-outline" [class.active]="symbol === store.selected()" (click)="store.select(symbol)">
+          {{ symbol }}
+        </button>
+      }
+    </div>
+
+    <div class="toolbar">
+      <div class="field">
+        <label class="label" for="add-symbol">Add symbol</label>
+        <input id="add-symbol" class="input" [ngModel]="newSymbol()" (ngModelChange)="newSymbol.set($event)" />
+      </div>
+      <button type="button" class="btn btn-primary self-end" (click)="addSymbol()">Watch</button>
+      <button type="button" class="btn btn-outline self-end" (click)="store.clearAudit()">Clear audit</button>
+    </div>
+
+    <p>
+      {{ store.selected() }} last quoted at <strong>{{ store.quote() }}</strong>
+    </p>
+    <p class="hint">
+      Selection changes observed through the selected$ prop: <strong>{{ selectionChanges() }}</strong>
+    </p>
+    <p class="hint">
+      No button calls refreshQuote. It is a signalMethod bound to the selected signal in onInit, so it re-runs
+      by itself every time the selection changes.
+    </p>
+
+    <h3>Audit log (from withFeature)</h3>
+    <ol class="log">
+      @for (entry of store.auditLog(); track $index) {
+        <li>{{ entry }}</li>
+      } @empty {
+        <li>No entries yet.</li>
+      }
+    </ol>
+  </div>
+</div>

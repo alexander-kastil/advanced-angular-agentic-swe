@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { SlideToggleComponent } from '../../shared/slide-toggle/slide-toggle.component';
 import { SkillRowComponent } from '../skill-row/skill-row.component';
 import { Skill } from '../skill.model';
 import { skillsStore } from '../skills.store';
@@ -13,13 +10,8 @@ import { SkillsKpiComponent } from '../skills-kpi/skills-kpi.component';
   selector: 'app-skills-container',
   templateUrl: './skills-container.component.html',
   styleUrls: ['./skills-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatToolbar,
-    MatToolbarRow,
-    MatButton,
-    MatSlideToggle,
-    FormsModule,
+    SlideToggleComponent,
     SkillRowComponent,
     SkillsKpiComponent,
   ]

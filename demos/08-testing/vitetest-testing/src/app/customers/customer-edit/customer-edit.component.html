@@ -1,19 +1,28 @@
 <div class="edit-form">
   <form (submit)="submit($event)">
-    <mat-form-field>
-      <mat-label>Id</mat-label>
-      <input matInput [value]="customerModel().id" readonly />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input matInput [formField]="customerForm.name" />
+    <div class="field">
+      <label class="label" for="customer-id">Id</label>
+      <input id="customer-id" class="input" [value]="customerModel().id" readonly />
+    </div>
+    <div class="field">
+      <label class="label" for="customer-name">Name</label>
+      <input
+        id="customer-name"
+        class="input"
+        type="text"
+        [attr.aria-invalid]="customerForm.name().touched() && customerForm.name().invalid() ? 'true' : null"
+        [attr.aria-describedby]="customerForm.name().touched() && customerForm.name().invalid() ? 'customer-name-error' : null"
+        [formField]="customerForm.name"
+      />
       @if (customerForm.name().touched() && customerForm.name().invalid()) {
-        <mat-error>{{ customerForm.name().errors()[0].message }}</mat-error>
+        <div id="customer-name-error" class="text-xs text-warn" role="alert">
+          {{ customerForm.name().errors()[0].message }}
+        </div>
       }
-    </mat-form-field>
+    </div>
     <div class="actions">
-      <button mat-raised-button type="submit" color="primary" [disabled]="customerForm().invalid()">Save</button>
-      <button mat-button type="button" (click)="cancel.emit()">Cancel</button>
+      <button class="btn btn-primary" type="submit" [disabled]="customerForm().invalid()">Save</button>
+      <button class="btn btn-outline" type="button" (click)="cancel.emit()">Cancel</button>
     </div>
   </form>
 </div>

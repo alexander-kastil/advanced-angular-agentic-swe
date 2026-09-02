@@ -9,24 +9,24 @@ test.describe('Skills', () => {
         test('displays all skills', async ({ page }) => {
             await expect(page.locator('app-skill-row')).toHaveCount(3);
             for (const skill of seedSkills) {
-                await expect(page.getByText(skill.name)).toBeVisible();
+                await expect(page.locator('app-skill-row .name', { hasText: skill.name })).toBeVisible();
             }
         });
 
         test('shows KPI totals', async ({ page }) => {
-            await expect(page.getByText('Skills Total: 3')).toBeVisible();
-            await expect(page.getByText('Not Completed: 2')).toBeVisible();
+            await expect(page.locator('app-skills-kpi')).toContainText('Skills total: 3');
+            await expect(page.locator('app-skills-kpi')).toContainText('Not completed: 2');
         });
 
         test('ShowAll toggle filters to non-completed only', async ({ page }) => {
-            await page.locator('mat-slide-toggle').click();
+            await page.locator('app-slide-toggle').click();
             await expect(page.locator('app-skill-row')).toHaveCount(2);
         });
 
         test('ShowAll toggle restores all skills', async ({ page }) => {
-            await page.locator('mat-slide-toggle').click();
+            await page.locator('app-slide-toggle').click();
             await expect(page.locator('app-skill-row')).toHaveCount(2);
-            await page.locator('mat-slide-toggle').click();
+            await page.locator('app-slide-toggle').click();
             await expect(page.locator('app-skill-row')).toHaveCount(3);
         });
     });
@@ -62,7 +62,7 @@ test.describe('Skills', () => {
             await page.getByRole('button', { name: /save/i }).click();
             await expect(page).toHaveURL(/\/skills$/);
             await expect(page.locator('app-skill-row')).toHaveCount(4);
-            await expect(page.getByText('RxJS')).toBeVisible();
+            await expect(page.locator('app-skill-row .name', { hasText: 'RxJS' })).toBeVisible();
         });
 
         test.skip('adding two skills does not override the first', async ({ page }) => {
@@ -77,7 +77,7 @@ test.describe('Skills', () => {
             await page.getByRole('button', { name: /save/i }).click();
             await expect(page).toHaveURL(/\/skills$/);
             await expect(page.locator('app-skill-row')).toHaveCount(5);
-            await expect(page.getByText('RxJS')).toBeVisible();
+            await expect(page.locator('app-skill-row .name', { hasText: 'RxJS' })).toBeVisible();
             await expect(page.getByText('Signals')).toBeVisible();
         });
     });

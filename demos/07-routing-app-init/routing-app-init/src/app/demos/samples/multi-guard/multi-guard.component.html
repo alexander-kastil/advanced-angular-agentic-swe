@@ -1,32 +1,25 @@
 <app-markdown-renderer [md]="'multi-guard'" />
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>{{ title }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="cmdItems">
-    <button mat-raised-button color="primary" (click)="toggleLoggedIn()">
-      Toggle LoggedIn
-    </button>
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="togglePrimeMember()"
-      [disabled]="btnTogglePrimeEnabled()"
-    >
-      Toggle Prime Member
-    </button>
-    <button mat-raised-button [routerLink]="['members']" color="primary">
-      Go to Members
-    </button>
-    <button mat-raised-button [routerLink]="['prime']" color="primary">
-      Go to Prime Members
-    </button>
-    <div>
-      <pre>
-        <p>Currently logged in: {{ user() | json  }}</p>
-      </pre>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">{{ title }}</h2>
+  </div>
+  <div class="card-content">
+    <div class="flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary" (click)="toggleLoggedIn()">Toggle LoggedIn</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="togglePrimeMember()"
+        [disabled]="btnTogglePrimeDisabled()"
+      >
+        Toggle Prime Member
+      </button>
+      <button type="button" class="btn btn-primary" [routerLink]="['members']">Go to Members</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['prime']">Go to Prime Members</button>
     </div>
-  </mat-card-content>
-</mat-card>
+    <pre tabindex="0" role="region" aria-label="Current authentication state">Currently logged in: {{ user() | json }}
+Prime member: {{ isPrimeMember() }}</pre>
+  </div>
+</div>
 
 <router-outlet />

@@ -1,13 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-members',
-    templateUrl: './members.component.html',
-    styleUrls: ['./members.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent]
+  selector: 'app-members',
+  templateUrl: './members.component.html',
+  styleUrls: ['./members.component.scss'],
 })
-export class MembersComponent {
-
-}
+export class MembersComponent {}

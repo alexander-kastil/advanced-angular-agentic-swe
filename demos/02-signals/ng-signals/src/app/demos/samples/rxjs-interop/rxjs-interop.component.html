@@ -1,8 +1,24 @@
 <div border centered>
-  <div>Amount Signal {{ amount() }}</div>
-  <div>Writable Amount Signal {{ writeableAmount() }}</div>
+  <div>toSignal over interval: {{ seconds() }}s</div>
+  <div>toObservable of the filter signal: {{ lastFilter() }}</div>
 </div>
 
-<button mat-raised-button (click)="updateAmount()" color="accent">
-  Update amount
+<button type="button" class="btn btn-primary" (click)="toggleFilter()">
+  Toggle filter
 </button>
+
+<div border>
+  @if (skills.isLoading()) {
+    <p>Loading...</p>
+  } @else if (skills.error()) {
+    <p>Error loading skills</p>
+  } @else {
+    @for (skill of skills.value(); track skill.id) {
+      <div [style.text-decoration]="skill.completed ? 'line-through' : 'none'">
+        {{ skill.name }}
+      </div>
+    } @empty {
+      <div>No skills</div>
+    }
+  }
+</div>

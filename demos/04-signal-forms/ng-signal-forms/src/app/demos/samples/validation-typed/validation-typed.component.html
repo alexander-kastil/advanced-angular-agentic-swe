@@ -1,0 +1,186 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Built-in Validators &amp; Password Match</h2>
+  </div>
+  <div class="card-content" column>
+    <div class="field">
+      <label class="label" for="register-email">Email</label>
+      <input
+        id="register-email"
+        class="input"
+        type="email"
+        placeholder="Email Address"
+        [formField]="registerForm.email"
+      />
+    </div>
+    @if (registerForm.email().touched() && registerForm.email().invalid()) {
+      @for (err of registerForm.email().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+
+    <div class="field">
+      <label class="label" for="register-password">Password</label>
+      <input
+        id="register-password"
+        class="input"
+        type="password"
+        placeholder="Password"
+        [formField]="registerForm.password"
+      />
+    </div>
+    @if (registerForm.password().touched() && registerForm.password().invalid()) {
+      @for (err of registerForm.password().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+
+    <div class="field">
+      <label class="label" for="register-password-repeat">Repeat Password</label>
+      <input
+        id="register-password-repeat"
+        class="input"
+        type="password"
+        placeholder="Re-Enter Password"
+        [formField]="registerForm.passwordRepeat"
+      />
+    </div>
+    @if (registerForm.passwordRepeat().touched() && registerForm.passwordRepeat().invalid()) {
+      @for (err of registerForm.passwordRepeat().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="registerUser()">Register</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Cross-Field Rules with validate() and valueOf()</h2>
+  </div>
+  <div class="card-content" column>
+    <div class="field">
+      <label class="label" for="adoption-pet-name">Pet Name</label>
+      <input
+        id="adoption-pet-name"
+        class="input"
+        type="text"
+        placeholder="Pet name"
+        [formField]="adoptionForm.petName"
+      />
+    </div>
+    @if (adoptionForm.petName().touched() && adoptionForm.petName().invalid()) {
+      @for (err of adoptionForm.petName().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+
+    <div class="field">
+      <label class="label" for="adoption-age">Age</label>
+      <input id="adoption-age" class="input" type="number" placeholder="Age" [formField]="adoptionForm.age" />
+    </div>
+    @if (adoptionForm.age().touched() && adoptionForm.age().invalid()) {
+      @for (err of adoptionForm.age().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+
+    <strong>Services - at least one required</strong>
+    <label class="checkbox">
+      <input type="checkbox" [formField]="adoptionForm.wantsInsurance" />
+      Pet Insurance
+    </label>
+    <label class="checkbox">
+      <input type="checkbox" [formField]="adoptionForm.wantsTraining" />
+      Obedience Training
+    </label>
+    @for (err of adoptionForm.wantsInsurance().errors(); track err.kind) {
+      <div class="error">{{ err.message }}</div>
+    }
+
+    <strong>Contact - email or phone</strong>
+    <div class="field">
+      <label class="label" for="adoption-contact-email">Email</label>
+      <input
+        id="adoption-contact-email"
+        class="input"
+        type="email"
+        placeholder="Email"
+        [formField]="adoptionForm.contactEmail"
+      />
+    </div>
+    <div class="field">
+      <label class="label" for="adoption-contact-phone">Phone</label>
+      <input
+        id="adoption-contact-phone"
+        class="input"
+        type="tel"
+        placeholder="Phone"
+        [formField]="adoptionForm.contactPhone"
+      />
+    </div>
+    @for (err of adoptionForm.contactEmail().errors(); track err.kind) {
+      <div class="error">{{ err.message }}</div>
+    }
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="adopt()">Adopt</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Standard Schema Validation</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="microchip-chip-id">Microchip id</label>
+        <input
+          id="microchip-chip-id"
+          class="input"
+          type="text"
+          placeholder="15 digits"
+          [formField]="microchipForm.chipId"
+        />
+      </div>
+      @if (microchipForm.chipId().touched()) {
+        @for (err of microchipForm.chipId().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="microchip-species">Species</label>
+        <input
+          id="microchip-species"
+          class="input"
+          type="text"
+          placeholder="dog, cat or ferret"
+          [formField]="microchipForm.species"
+        />
+      </div>
+      @if (microchipForm.species().touched()) {
+        @for (err of microchipForm.species().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-primary" (click)="registerMicrochip()">Register Chip</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Form State</h2>
+  </div>
+  <div class="card-content">
+    Register valid: {{ registerForm().valid() }} | Adoption valid: {{ adoptionForm().valid() }} | Microchip valid:
+    {{ microchipForm().valid() }}
+    <pre tabindex="0" role="region" aria-label="Adoption model state">{{ adoptionModel() | json }}</pre>
+  </div>
+</div>

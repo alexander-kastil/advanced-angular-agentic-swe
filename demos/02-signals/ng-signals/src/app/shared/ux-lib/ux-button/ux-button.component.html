@@ -1,4 +1,4 @@
-<button mat-raised-button (click)="buttonClicked()" [disabled]="disabled()">
-  <mat-icon>{{ icon() }}</mat-icon>
+<button type="button" class="btn btn-primary" [attr.aria-label]="label()" (click)="buttonClicked()" [disabled]="disabled()">
+  <span class="icon">{{ icon() }}</span>
   <span>{{ label() }}</span>
 </button>

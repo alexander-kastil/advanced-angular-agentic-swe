@@ -1,17 +1,22 @@
-@if(store.loading()){
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
-} @for (c of customers(); track c) {
-<div class="box row">
-  <div>{{ c.name }}</div>
-  <div>
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['/customers', c.id]"
-      [queryParams]="{ readonly: true }"
-    >
-      Edit
-    </button>
+<div class="page">
+  @if (store.loading()) {
+    <app-progress-bar />
+  }
+  <div class="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
+    @for (c of customers(); track c) {
+      <div class="row">
+        <div class="font-medium">{{ c.name }}</div>
+        <button
+          type="button"
+          class="btn btn-outline"
+          [routerLink]="['/customers', c.id]"
+          [queryParams]="{ readonly: true }"
+        >
+          Edit
+        </button>
+      </div>
+    } @empty {
+      <p class="px-4 py-3 text-sm text-slate-500">No customers loaded.</p>
+    }
   </div>
 </div>
-}

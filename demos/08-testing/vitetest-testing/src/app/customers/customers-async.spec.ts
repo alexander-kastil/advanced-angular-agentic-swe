@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { signal } from '@angular/core';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
@@ -38,7 +37,7 @@ describe('Component - Async - CustomersComponent', () => {
     selectedCustomer.set(null);
 
     await TestBed.configureTestingModule({
-      imports: [CustomersComponent, NoopAnimationsModule],
+      imports: [CustomersComponent],
       providers: [{ provide: customersStore, useValue: storeSpy }],
     }).compileComponents();
 
@@ -47,7 +46,7 @@ describe('Component - Async - CustomersComponent', () => {
   });
 
   it('should show progress bar while loading', () => {
-    const bar = fixture.debugElement.query(By.css('mat-progress-bar'));
+    const bar = fixture.debugElement.query(By.css('app-progress-bar'));
     expect(bar).toBeTruthy();
   });
 
@@ -56,7 +55,7 @@ describe('Component - Async - CustomersComponent', () => {
     customers.set(mockCustomers);
     fixture.detectChanges();
 
-    const bar = fixture.debugElement.query(By.css('mat-progress-bar'));
+    const bar = fixture.debugElement.query(By.css('app-progress-bar'));
     expect(bar).toBeNull();
   });
 
@@ -65,7 +64,7 @@ describe('Component - Async - CustomersComponent', () => {
     customers.set(mockCustomers);
     fixture.detectChanges();
 
-    const rows = fixture.debugElement.queryAll(By.css('mat-row'));
+    const rows = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(rows.length).toBe(2);
   });
 

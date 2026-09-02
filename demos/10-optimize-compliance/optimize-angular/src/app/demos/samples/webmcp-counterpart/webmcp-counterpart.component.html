@@ -1,0 +1,57 @@
+<div class="sample">
+  <p>
+    MCP works in both directions. The Angular CLI server lets an agent drive the workspace; WebMCP lets
+    the running app expose its own tools to a browser agent. Angular 22 ships
+    <code>declareExperimentalWebMcpTool()</code> and <code>provideExperimentalWebMcpTools()</code> in
+    <code>&#64;angular/core</code>, and <code>provideExperimentalWebMcpForms()</code> in
+    <code>&#64;angular/forms/signals</code>. This page really calls the first one, twice, in its
+    constructor.
+  </p>
+
+  <div class="status card" [class.supported]="hasModelContext()">
+    <p>{{ status() }}</p>
+    <p class="registration">{{ registration() }}</p>
+  </div>
+
+  <app-code-block label="Registering one tool" [code]="declareSnippet" />
+
+  <h4>What the agent sees</h4>
+  <p class="hint">
+    This is the <code>tools/list</code> payload, built from the exact descriptors handed to
+    <code>declareExperimentalWebMcpTool</code> above. The description and the schema are the whole
+    interface: an agent picks a tool by reading them, so vague wording here is a broken API.
+  </p>
+  <app-code-block label="tools/list" [code]="agentView()" />
+
+  <h4>Invoke execute() the way an agent would</h4>
+  <div class="row">
+    <input
+      [value]="draft()"
+      (input)="setDraft($any($event.target).value)"
+      placeholder="title argument for add_backlog_item"
+    />
+    <button (click)="invokeAdd()">add_backlog_item</button>
+    <button (click)="invokeList()">list_backlog_items</button>
+  </div>
+
+  @if (lastToolResult()) {
+    <pre class="result">{{ lastToolResult() }}</pre>
+  }
+
+  <h4>Backlog ({{ agentAdded() }} added by a tool)</h4>
+  <ul>
+    @for (item of backlog(); track $index) {
+      <li [class.agent]="item.source === 'agent'">
+        {{ item.title }} <small>{{ item.source }}</small>
+      </li>
+    }
+  </ul>
+
+  <h4>The application-wide alternative</h4>
+  <p class="hint">
+    <code>declareExperimentalWebMcpTool</code> ties a tool to the current injection context, so it
+    unregisters when this component is destroyed. Use the provider form for tools that should live as
+    long as the app or a lazy route.
+  </p>
+  <app-code-block label="app.config.ts" [code]="provideSnippet" />
+</div>

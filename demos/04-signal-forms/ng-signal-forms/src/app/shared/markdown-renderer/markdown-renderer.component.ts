@@ -1,25 +1,40 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { Component, computed, inject, input, NgZone } from '@angular/core';
 import { MarkdownComponent } from 'ngx-markdown';
-import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
+import { environment } from '../../../environments/environment';
+import { RendererStateService } from './renderer-state.service';
+import { LibraryLoaderService } from '../services/library-loader.service';
 
 @Component({
   selector: 'app-markdown-renderer',
   templateUrl: './markdown-renderer.component.html',
-  styleUrls: ['./markdown-renderer.component.scss'],
-  imports: [
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MarkdownComponent,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './markdown-renderer.component.scss',
+  imports: [MarkdownComponent]
 })
 export class MarkdownRendererComponent {
-  @Input({ required: true }) md = '';
-  panelOpenState = true;
+  private state = inject(RendererStateService);
+  private ngZone = inject(NgZone);
+  private libLoader = inject(LibraryLoaderService);
 
-  getMarkdown(): string {
-    return `${environment.markdownPath}${this.md}.md`;
+  md = input.required<string>();
+  contentVisible = this.state.visible;
+  markdownSrc = computed(() => `${environment.markdownPath}${this.md()}.md`);
+
+  togglePanel() {
+    this.state.toggleVisibility();
+  }
+
+  async onMarkdownLoad() {
+    try {
+      await this.libLoader.loadMermaid();
+
+      this.ngZone.runOutsideAngular(async () => {
+        setTimeout(async () => {
+          const mermaid = await import('mermaid');
+          await mermaid.default.run();
+        }, 100);
+      });
+    } catch (error) {
+      console.error('Error rendering mermaid diagrams:', error);
+    }
   }
 }

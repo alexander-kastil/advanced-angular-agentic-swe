@@ -1,0 +1,68 @@
+<div boxed>
+  <h2>WebMCP tools scoped to a component</h2>
+  <p>
+    <code>declareExperimentalWebMcpTool</code> registers a tool from inside an injection context
+    and unregisters it when that context is destroyed. The tool closes over the component signals,
+    so an agent reads and writes the same state the template renders.
+  </p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Component state the tools operate on</h2>
+  </div>
+  <div class="card-content">
+    <ul class="tasks">
+      @for (task of tasks(); track task.id) {
+        <li>
+          <button type="button" class="btn btn-outline" (click)="toggle(task.id)">
+            {{ task.done ? 'done' : 'open' }}
+          </button>
+          <span [class.done]="task.done">{{ task.id }}. {{ task.title }}</span>
+        </li>
+      }
+    </ul>
+
+    <p class="value">{{ open().length }} open of {{ tasks().length }}</p>
+
+    <div class="flex gap-2">
+      <button type="button" class="btn btn-primary" (click)="addTask('Task from the UI')">
+        Add a task from the UI
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Agent surface</h2>
+  </div>
+  <div class="card-content">
+    @if (agentSurface()) {
+      <p class="available">
+        A model context is present on this page. The three tools are registered against it.
+      </p>
+    } @else {
+      <p class="missing">
+        No <code>modelContext</code> on <code>document</code> or <code>navigator</code>, so
+        registration silently no-ops. The component still works; only the agent surface is missing.
+      </p>
+    }
+
+    <h3>Registered tools</h3>
+    <ul class="plain">
+      <li><code>list_open_tasks</code> - returns the open task titles</li>
+      <li><code>add_task(title)</code> - appends a task</li>
+      <li><code>complete_task(id)</code> - toggles a task</li>
+    </ul>
+
+    <h3>Tool call log</h3>
+    <ul class="plain">
+      @for (entry of log(); track entry) {
+        <li><code>{{ entry }}</code></li>
+      } @empty {
+        <li>No tool has been invoked yet</li>
+      }
+    </ul>
+  </div>
+</div>

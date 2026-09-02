@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, resource, effect, ElementRef, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal, resource, effect, ElementRef, viewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
@@ -12,9 +12,6 @@ import { DemoItem } from './demo-item.model';
 import { SidePanelComponent } from '../../shared/side-panel/side-panel.component';
 import { MarkdownEditorContainerComponent } from '../../shared/markdown-editor/components/markdown-editor-container/markdown-editor-container.component';
 import { MarkdownRendererComponent } from '../../shared/markdown-renderer/markdown-renderer.component';
-import { MatNavList, MatListItem } from '@angular/material/list';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
-import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { SplitComponent, SplitAreaComponent } from 'angular-split';
 
 @Component({
@@ -22,14 +19,7 @@ import { SplitComponent, SplitAreaComponent } from 'angular-split';
   templateUrl: './demo-container.component.html',
   styleUrls: ['./demo-container.component.scss'],
   imports: [
-    MatSidenavContainer,
-    MatSidenav,
-    MatToolbar,
-    MatToolbarRow,
-    MatNavList,
-    MatListItem,
     RouterLink,
-    MatSidenavContent,
     RouterOutlet,
     MarkdownEditorContainerComponent,
     MarkdownRendererComponent,
@@ -37,7 +27,6 @@ import { SplitComponent, SplitAreaComponent } from 'angular-split';
     SplitComponent,
     SplitAreaComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoContainerComponent {
   router = inject(Router);
@@ -98,7 +87,7 @@ export class DemoContainerComponent {
 
   hasDemoContent = signal(true);
 
-  @ViewChild('demoPaneContent') demoPaneContent!: ElementRef<HTMLElement>;
+  demoPaneContent = viewChild<ElementRef<HTMLElement>>('demoPaneContent');
 
   constructor() {
     this.router.events.pipe(
@@ -115,7 +104,7 @@ export class DemoContainerComponent {
       this.currentUrl.set(url);
 
       setTimeout(() => {
-        const el = this.demoPaneContent?.nativeElement;
+        const el = this.demoPaneContent()?.nativeElement;
         if (el && el.children.length > 1) {
           const componentEl = el.children[1] as HTMLElement;
           this.hasDemoContent.set(componentEl.offsetHeight > 10);
@@ -144,6 +133,14 @@ export class DemoContainerComponent {
 
   hidePopup(): void {
     this.hoveredItem.set(null);
+  }
+
+  closeSidenav(): void {
+    this.nav.toggleMenuVisibility();
+  }
+
+  toggleSidenav(): void {
+    this.nav.toggleMenuVisibility();
   }
 
   private getRootRoute(route: ActivatedRoute): ActivatedRoute {

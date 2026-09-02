@@ -706,6 +706,8 @@ import { PLATFORM_ID, isPlatformBrowser } from '@angular/common';
 
 ### Mocking Services
 
+Vitest (current convention):
+
 ```typescript
 describe('UserCmpt', () => {
   let userServiceMock: { getUser: ReturnType<typeof vi.fn>; updateUser: ReturnType<typeof vi.fn> };
@@ -729,6 +731,33 @@ describe('UserCmpt', () => {
     fixture.detectChanges();
 
     expect(userServiceMock.getUser).toHaveBeenCalled();
+  });
+});
+```
+
+Jasmine/Karma (legacy projects only — prefer `vi.fn()`, see `angular-antipatterns.md`):
+
+```typescript
+describe('UserCmpt', () => {
+  let userServiceSpy: jasmine.SpyObj<User>;
+
+  beforeEach(async () => {
+    userServiceSpy = jasmine.createSpyObj('User', ['getUser', 'updateUser']);
+    userServiceSpy.getUser.and.returnValue(of({ id: '1', name: 'Test' }));
+
+    await TestBed.configureTestingModule({
+      imports: [UserCmpt],
+      providers: [
+        { provide: User, useValue: userServiceSpy },
+      ],
+    }).compileComponents();
+  });
+
+  it('should load user', () => {
+    const fixture = TestBed.createComponent(UserCmpt);
+    fixture.detectChanges();
+
+    expect(userServiceSpy.getUser).toHaveBeenCalled();
   });
 });
 ```

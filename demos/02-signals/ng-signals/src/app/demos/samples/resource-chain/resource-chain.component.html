@@ -1,0 +1,42 @@
+<div border class="chain">
+  <div class="link">
+    <span class="label">1. skills (root)</span>
+    <span class="status">{{ skills.status() }}</span>
+    <span>{{ skills.value().length }} loaded</span>
+  </div>
+
+  <div class="arrow">chain()</div>
+
+  <div class="link">
+    <span class="label">2. selected</span>
+    <span class="status">{{ selected.status() }}</span>
+    <span>{{ selected.value().name || '-' }}</span>
+  </div>
+
+  <div class="arrow">chain()</div>
+
+  <div class="link">
+    <span class="label">3. related</span>
+    <span class="status">{{ related.status() }}</span>
+    <span>{{ related.value().length }} with completed = {{ selected.value().completed }}</span>
+  </div>
+</div>
+
+<div class="actions">
+  <button type="button" class="btn btn-primary" (click)="next()">Select next skill</button>
+  <button type="button" class="btn btn-primary" (click)="reloadRoot()">Reload root</button>
+</div>
+
+<div border>
+  @if (related.isLoading()) {
+    <p>Waiting for the chain to resolve...</p>
+  } @else if (related.error()) {
+    <p>Chain failed: {{ related.error()?.message }}</p>
+  } @else {
+    @for (skill of related.value(); track skill.id) {
+      <div>{{ skill.name }}</div>
+    } @empty {
+      <div>No related skills</div>
+    }
+  }
+</div>

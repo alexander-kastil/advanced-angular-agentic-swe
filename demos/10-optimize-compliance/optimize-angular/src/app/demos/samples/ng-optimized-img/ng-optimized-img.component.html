@@ -1,0 +1,48 @@
+<section class="images">
+  <header>
+    <h2>Optimize Images</h2>
+    <p>
+      <code>NgOptimizedImage</code> enforces width and height, warns about oversized downloads, sets
+      <code>loading</code> and <code>fetchpriority</code>, and generates a <code>srcset</code> from the
+      configured breakpoints.
+    </p>
+  </header>
+
+  <button type="button" (click)="toggle()">
+    {{ optimized() ? 'Switch to a plain src attribute' : 'Switch back to ngSrc' }}
+  </button>
+
+  <div class="hero">
+    <h3>Above the fold ({{ optimized() ? 'ngSrc with priority' : 'plain src' }})</h3>
+    @if (optimized()) {
+      <img ngSrc="images/optimize.jpg" width="600" height="350" priority alt="Module overview illustration" />
+    } @else {
+      <img src="images/optimize.jpg" width="600" height="350" alt="Module overview illustration" />
+    }
+    <p class="hint">
+      {{ optimized()
+        ? 'priority emits a preload link and fetchpriority="high" so the LCP candidate starts downloading first.'
+        : 'Without the directive the browser discovers this image only after the CSS and layout pass.' }}
+    </p>
+  </div>
+
+  <div class="gallery">
+    <h3>Below the fold (lazy by default)</h3>
+    <div class="grid">
+      @for (image of gallery; track image.file) {
+        <figure>
+          <img ngSrc="images/{{ image.file }}" [width]="image.width" [height]="image.height" [alt]="image.alt" />
+          <figcaption>{{ image.file }}</figcaption>
+        </figure>
+      }
+    </div>
+  </div>
+
+  <ul class="rules">
+    <li><code>width</code> and <code>height</code> are mandatory: they reserve space and remove layout shift.</li>
+    <li>Use <code>priority</code> for the LCP image only. More than one preload competes for bandwidth.</li>
+    <li>Use <code>fill</code> plus a positioned container when the intrinsic size is unknown.</li>
+    <li>Use <code>placeholder</code> for a blurred LQIP while the full image downloads.</li>
+    <li>Register an <code>IMAGE_LOADER</code> to rewrite URLs for a CDN such as Cloudflare or Imgix.</li>
+  </ul>
+</section>

@@ -1,7 +1,17 @@
-<div class="box">
-  Customer ID: {{ id() }} - Param readonly: {{ readonly() }}
-</div>
+<div class="page max-w-lg">
+  <div class="card">
+    <div class="card-content">
+      Customer ID: {{ id() }} - Param readonly: {{ readonly() }}
+    </div>
+  </div>
 
-<div class="box">
-  {{ customer | async| json}}
+  <div class="card">
+    <div class="card-content">
+      @if (customer(); as c) {
+        {{ c.name }}
+      } @else {
+        Customer not found
+      }
+    </div>
+  </div>
 </div>

@@ -2,9 +2,9 @@
 
 Build type-safe, reactive forms using Angular's Signal Forms API. Signal Forms provide automatic two-way binding, schema-based validation, and reactive field state.
 
-Signal Forms (`form()` + `[formField]` from `@angular/forms/signals`) are the mandated standard for Angular 22+ signal-based applications, including single-field cases like dropdowns. Do not replace `form()`/`FormField` with plain `linkedSignal` + native `[value]`/`(change)` bindings. When in doubt, keep Signal Forms. Reactive Forms patterns at the bottom of this file are retained only for maintenance of legacy codebases.
+Signal Forms (`form()` + `[formField]` from `@angular/forms/signals`) are the mandated standard for Angular 22+ signal-based applications, used for every input including single-field ones like a year dropdown. Do not replace `form()`/`FormField` with plain `linkedSignal` + native `[value]`/`(change)` bindings, and do not switch such an app back to Reactive Forms. Specs or optimization docs that recommend "replace `form()` with a plain signal for simple selects" should be pushed back on, not applied. Removing `FormField` imports or rewriting to native bindings breaks pattern consistency and will be rejected. When in doubt, keep Signal Forms. Reactive Forms patterns at the bottom of this file are retained only for maintenance of legacy codebases and for complex, dynamic forms in existing codebases.
 
-**Stability caveat (this repo).** The maintenance-planner runs Angular **22.0.5** (upgraded from 21.2.9), where `@angular/forms/signals` is present and fully functional — but **every exported symbol is still `@experimental` in 22** (the 21→22 upgrade brought no Signal Forms API delta: `form()`, `FormField`, `required()`, `email()`, `disabled()`, `hidden()` are unchanged). Signal Forms is the standard here for signal-based apps, but re-verify the API surface whenever `@angular/core`/`@angular/forms` are upgraded, since experimental signatures can change.
+**Stability caveat.** Signal Forms are recommended for new signal-based applications and are shipped and fully functional as of Angular **22** — `@angular/forms/signals` is present and works, and the 21 → 22 upgrade brought no Signal Forms API delta (`form()`, `FormField`, `required()`, `email()`, `disabled()`, `hidden()` are unchanged). But **every exported symbol is still `@experimental` in 22**. Signal Forms is the standard for signal-based apps, but re-verify the API surface whenever `@angular/core`/`@angular/forms` are upgraded, since experimental signatures can change.
 
 ## Gotchas
 
@@ -65,11 +65,10 @@ that list still offers every minute (00, 01, 02 …). `step` alone cannot force 
 selection.
 
 Pair `step` with a snap-to-nearest-step correction on `(change)`, so a picker click or pasted
-value gets rounded after the fact. Reuse the existing helper rather than reimplementing it:
-`roundTimeStringToStep(time, stepMinutes)` in `src/ui/src/app/shared/utils/time-functions.ts`
-(unit-tested in `time-functions.spec.ts`). See the Beginn/Ende fields in
-`src/ui/src/app/planning/schedule/schedule-popup/schedule-tab/schedule-tab.component.ts` and
-`.html` for the wiring:
+value gets rounded after the fact. Reuse an existing helper rather than reimplementing it — e.g.
+a `roundTimeStringToStep(time, stepMinutes)` util under the app's shared utils
+(`<app>/shared/utils/time-functions.ts`, unit-tested in `time-functions.spec.ts`). Wire it into
+the start/end time fields of the component's `.ts` and `.html` like this:
 
 ```typescript
 snapTimeToStep(controlName: 'StartTime' | 'EndTime', event: Event): void {
@@ -161,9 +160,9 @@ enabledModel = signal({ enabled: false });
 enabledForm = form(this.enabledModel);
 ```
 
-The project renders boolean toggles as a slide-toggle rather than a bare checkbox. The real
-`<input>` stays under the shared `.toggle` component (`theme/components.scss`) — visually hidden
-but focusable, with `role="switch"`:
+Where an app renders boolean toggles as a slide-toggle rather than a bare checkbox, the real
+`<input>` stays under a shared `.toggle` component (e.g. `theme/components.scss`) — visually
+hidden but focusable, with `role="switch"`:
 
 ```html
 <label class="toggle">
@@ -172,6 +171,29 @@ but focusable, with `role="switch"`:
   <span class="toggle__label">Testen</span>
 </label>
 ```
+
+**One-element variant, where the app has no shared component to hang the spans on.** Style the input
+itself with `appearance: none` and draw the thumb with `::after`, so there is no track or label span
+and nothing to keep in sync:
+
+```html
+<label class="switch">
+  <input type="checkbox" role="switch" [formField]="detailForm.mfa" />
+  MFA
+</label>
+```
+
+```css
+.switch input { appearance: none; position: relative; width: 2.75rem; height: 1.5rem; border-radius: var(--radius-pill); }
+.switch input::after { content: ''; position: absolute; top: 50%; left: 0.15rem; width: 1.1rem; height: 1.1rem; transform: translateY(-50%); border-radius: 50%; transition: left 0.15s ease; }
+.switch input:checked::after { left: calc(100% - 1.25rem); }
+```
+
+Same guarantees as the three-span version, because the input is still a real focusable checkbox:
+`[formField]`, keyboard, and `role="switch"` all behave. Pick the shared component where one exists;
+pick this where adding one would be the only reason to create a component. Either way the shared CSS
+lives in one file (`shared/styles/toggle.css`) that component styles `@import`, never inline per screen.
+Check for an existing toggle in the repo before writing a third variant.
 
 **Dynamic-key boolean fields** — a `Record<string, boolean>` model whose keys are only known at
 runtime (e.g. one boolean per dynamic table column) works the same way, because
@@ -262,7 +284,7 @@ emailField.errors()     // array of error objects
 emailField.pending()    // true if async validation in progress
 
 // Interaction state
-emailField.touched()    // true after focus + blur
+emailField.touched()    // true after focus + blur — ONLY for [formField]-bound controls
 emailField.dirty()      // true after user modification
 
 // Availability state
@@ -333,7 +355,7 @@ const orderForm = form(this.orderModel, (schemaPath) => {
 ```
 
 **Toggle gates a sibling field.** A boolean toggle (`enabled`) that both makes a sibling field
-`required` and `disabled` when off — the pattern used in the admin test-panel:
+`required` and `disabled` when off — the pattern used e.g. in an admin test-panel:
 
 ```typescript
 testModel = signal({ enabled: false, receiver: '' });
@@ -353,6 +375,37 @@ testForm = form(this.testModel, (p) => {
 
 Gate validation display on `touched()` so no error shows before interaction, and gate `required`
 on the controlling toggle so the field isn't required while the feature is off.
+
+#### A custom control gets none of that wiring
+
+`touched()` flips on blur because `[formField]` installs the listener. A custom component that
+wraps its own `<input>` (an autocomplete, a combobox, a currency field) is not `[formField]`-bound,
+so blur is invisible to the form and `touched()` stays `false` forever — the error branch above can
+never render, while a plain `[formField]` control sitting next to it behaves correctly. That
+contrast is the diagnostic: if validation works on some fields in a form and not others, compare
+how each is bound before looking at the validators.
+
+The component emits blur; the parent marks the field:
+
+```typescript
+// custom control
+readonly inputBlur = output<void>();
+protected onBlur() { this.inputBlur.emit(); }
+```
+
+```html
+<app-autocomplete [value]="model().Text" (valueChange)="onTextChange($event)" (inputBlur)="onTextBlur()" />
+```
+
+```typescript
+// parent
+protected onTextBlur() { this.headerForm.Text().markAsTouched(); }
+```
+
+Two failure modes, and one symptom covers both: the handler exists but never calls
+`markAsTouched()`, or the `(inputBlur)` binding is missing from the template so blur is dropped
+silently. Both fields in one form failed this way for different reasons — check each binding
+individually rather than fixing the first and assuming the second matches.
 
 ### Custom Validators
 

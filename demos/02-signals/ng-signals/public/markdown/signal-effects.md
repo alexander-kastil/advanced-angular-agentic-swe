@@ -20,8 +20,9 @@ skillsResource = httpResource<Skill[]>(
 - Use the signal to drive user selections:
 
 ```typescript
-onStatusChange(event: MatSelectChange) {
-  this.completedFilter.set(event.value);
+onStatusChange(event: Event) {
+  const value = (event.target as HTMLSelectElement).value;
+  this.completedFilter.set(value === '' ? undefined : value === 'true');
 }
 ```
 

@@ -1,0 +1,18 @@
+<div class="container">
+  @if (item.value(); as food) {
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">{{ food.name }}</h2>
+        <p class="card-subtitle">
+          {{ food.price | toEuro }} &middot; {{ food.inStock }} in stock
+        </p>
+      </div>
+      <div class="card-content">
+        <p>{{ food.description }}</p>
+      </div>
+    </div>
+  } @else {
+    <p>No dish found for this id.</p>
+  }
+  <button type="button" class="btn btn-primary" routerLink="/">Go back</button>
+</div>

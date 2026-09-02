@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Click Events</h2>
+  </div>
+  <div class="card-content">
+    <div data-testid="result">Current Count: {{ count() }}</div>
+    <button
+      data-testid="btnIncrement"
+      type="button"
+      class="btn btn-primary"
+      (click)="incrementCount()"
+    >
+      Click me to increment
+    </button>
+  </div>
+</div>

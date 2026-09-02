@@ -1,29 +1,17 @@
-.primary {
-  color: var(--mat-sys-primary);
-}
-
 .row {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: var(--gap-medium);
-  padding-top: var(--gap-medium);
-  border-bottom: 1px solid;
+  padding: var(--gap-small) 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.title{
+.title {
   flex-grow: 5;
-}
-
-.cmd{
-  flex: 1;
-  text-align: right;
-}
-
-.mat-mdc-unelevated-button{
-  margin-bottom: var(--gap-small);
-  min-width: 80px;
 }
 
 .no-delete {
   min-width: 80px;
+  height: 2.25rem;
 }

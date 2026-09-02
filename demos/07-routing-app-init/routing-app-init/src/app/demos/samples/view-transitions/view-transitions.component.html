@@ -1,1 +1,28 @@
 <app-markdown-renderer [md]="'view-transitions'" />
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Native View Transitions</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      <code>withViewTransitions()</code> hands each navigation to the browser's
+      <code>document.startViewTransition()</code>. The router snapshots the old view, swaps the DOM, then
+      cross-fades. Nothing in this component subscribes to anything.
+    </p>
+    <p><strong>Supported by this browser:</strong> {{ supported() }}</p>
+    <div class="hero">Shared element: <code>view-transition-name: demo-hero</code></div>
+    <p>
+      The keyframes for <code>::view-transition-old(root)</code> and
+      <code>::view-transition-new(root)</code> live in <code>src/theme/view-transition.scss</code>.
+    </p>
+  </div>
+  <div class="card-actions">
+    <button type="button" class="btn btn-primary" [routerLink]="['../route-titles']">
+      Navigate to Route Titles
+    </button>
+    <button type="button" class="btn btn-outline" [routerLink]="['../router-animations']">
+      Navigate to Router Animations
+    </button>
+  </div>
+</div>

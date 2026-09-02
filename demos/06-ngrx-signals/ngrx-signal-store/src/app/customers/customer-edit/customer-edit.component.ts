@@ -1,8 +1,5 @@
-import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
 import { Customer } from '../customer.model';
 import { customersStore } from '../customers.store';
 
@@ -10,14 +7,7 @@ import { customersStore } from '../customers.store';
   selector: 'app-customer-edit',
   templateUrl: './customer-edit.component.html',
   styleUrls: ['./customer-edit.component.scss'],
-  imports: [
-    ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatButton
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [ReactiveFormsModule],
 })
 export class CustomerEditComponent {
   id = input<number>(0);

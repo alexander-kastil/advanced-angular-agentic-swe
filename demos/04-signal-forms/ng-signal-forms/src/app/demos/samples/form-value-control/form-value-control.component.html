@@ -1,0 +1,66 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Custom Controls Bound with [formField]</h2>
+  </div>
+  <div class="card-content">
+    <div column>
+      <div class="field">
+        <label class="label" for="fvc-title">Title</label>
+        <input
+          id="fvc-title"
+          class="input"
+          type="text"
+          [attr.aria-invalid]="reviewForm.title().touched() && reviewForm.title().invalid() ? 'true' : null"
+          [attr.aria-describedby]="reviewForm.title().touched() && reviewForm.title().invalid() ? 'fvc-title-error' : null"
+          [formField]="reviewForm.title"
+        />
+        @if (reviewForm.title().touched() && reviewForm.title().invalid()) {
+          <div id="fvc-title-error" class="error" role="alert">
+            @for (err of reviewForm.title().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="field">
+        <span class="label">Rating - FormValueControl&lt;number&gt;</span>
+        <app-rating-input [formField]="reviewForm.rating" label="Overall rating" />
+      </div>
+
+      <div class="field">
+        <span class="label">Refund - transformedValue, string in the UI and number in the model</span>
+        <app-money-input [formField]="reviewForm.refund" label="Refund amount" />
+        @if (reviewForm.refund().touched() && reviewForm.refund().invalid()) {
+          <div class="error" role="alert">
+            @for (err of reviewForm.refund().errors(); track err.kind) {
+              <span>{{ err.message }}</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="card-actions justify-end">
+    <button type="button" class="btn btn-outline" (click)="toggleLock()">
+      {{ lockRating() ? 'Unlock' : 'Lock' }} Rating
+    </button>
+    <button type="button" class="btn btn-outline" (click)="resetReview()">Reset</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Model and Field State</h2>
+  </div>
+  <div class="card-content">
+    <div boxed>
+      <div>Model: {{ model() | json }}</div>
+      <div>Rating touched: {{ reviewForm.rating().touched() }}</div>
+      <div>Rating valid: {{ reviewForm.rating().valid() }}</div>
+      <div>Rating disabled: {{ reviewForm.rating().disabled() }}</div>
+      <div>Refund value type: {{ model().refund === null ? 'null' : 'number' }}</div>
+      <div>Form valid: {{ reviewForm().valid() }}</div>
+    </div>
+  </div>
+</div>

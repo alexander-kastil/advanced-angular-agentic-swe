@@ -1,0 +1,116 @@
+<div class="side-by-side">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Before: ReactiveFormsModule</h2>
+    </div>
+    <div class="card-content">
+      <form [formGroup]="reactiveProfile" column>
+        <div class="field">
+          <label class="label" for="rf-display-name">Display name</label>
+          <input id="rf-display-name" class="input" type="text" formControlName="displayName" />
+        </div>
+        @if (reactiveProfile.controls.displayName.touched && reactiveProfile.controls.displayName.invalid) {
+          <div class="error">Display name needs at least 3 characters</div>
+        }
+
+        <div class="field">
+          <label class="label" for="rf-password">Password</label>
+          <input id="rf-password" class="input" type="password" formControlName="password" />
+        </div>
+        @if (reactiveProfile.controls.password.touched && reactiveProfile.controls.password.invalid) {
+          <div class="error">Password needs at least 8 characters</div>
+        }
+
+        <div class="field">
+          <label class="label" for="rf-confirmation">Confirm password</label>
+          <input id="rf-confirmation" class="input" type="password" formControlName="confirmation" />
+        </div>
+        @if (reactiveProfile.touched && reactiveProfile.hasError('mismatch')) {
+          <div class="error">Passwords do not match</div>
+        }
+      </form>
+    </div>
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-primary" (click)="submitReactive()">Save</button>
+    </div>
+    <div class="card-content">
+      <div boxed>
+        <div>Status: {{ reactiveStatus() }}</div>
+        <div>Value: {{ reactiveValue() | json }}</div>
+        @if (reactiveResult()) {
+          <div>Saved: {{ reactiveResult() | json }}</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">After: Signal Forms</h2>
+    </div>
+    <div class="card-content">
+      <form column>
+        <div class="field">
+          <label class="label" for="sf-display-name">Display name</label>
+          <input id="sf-display-name" class="input" type="text" [formField]="signalProfile.displayName" />
+        </div>
+        @if (signalProfile.displayName().touched() && signalProfile.displayName().invalid()) {
+          @for (err of signalProfile.displayName().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <div class="field">
+          <label class="label" for="sf-password">Password</label>
+          <input id="sf-password" class="input" type="password" [formField]="signalProfile.password" />
+        </div>
+        @if (signalProfile.password().touched() && signalProfile.password().invalid()) {
+          @for (err of signalProfile.password().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <div class="field">
+          <label class="label" for="sf-confirmation">Confirm password</label>
+          <input id="sf-confirmation" class="input" type="password" [formField]="signalProfile.confirmation" />
+        </div>
+        @if (signalProfile.confirmation().touched() && signalProfile.confirmation().invalid()) {
+          @for (err of signalProfile.confirmation().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+      </form>
+    </div>
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-primary" (click)="submitSignal()">Save</button>
+    </div>
+    <div class="card-content">
+      <div boxed>
+        <div>Valid: {{ signalProfile().valid() }}</div>
+        <div>Value: {{ model() | json }}</div>
+        @if (signalResult()) {
+          <div>Saved: {{ signalResult() | json }}</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Migration Steps</h2>
+  </div>
+  <div class="card-content">
+    <ol>
+      <li>Replace the <code>FormGroup</code> shape with a plain interface and a <code>signal()</code> holding it.</li>
+      <li>Swap the <code>new FormGroup</code> construction for <code>form(model, schema)</code>.</li>
+      <li>Move each <code>Validators.x</code> into the schema as <code>required()</code>, <code>minLength()</code>, <code>email()</code>.</li>
+      <li>Turn group-level validators into <code>validate()</code> on the field that shows the error, reading siblings via <code>valueOf()</code>.</li>
+      <li>Replace <code>formControlName="x"</code> with <code>[formField]="myForm.x"</code> and drop <code>[formGroup]</code>.</li>
+      <li>Replace <code>control.hasError('required')</code> with <code>field().errors()</code> or <code>field().getError('required')</code>.</li>
+      <li>Replace <code>markAllAsTouched()</code> plus a validity check with <code>submit(myForm, action)</code>.</li>
+      <li>Delete <code>valueChanges</code> subscriptions and <code>toSignal()</code> bridges: the model signal is the value.</li>
+      <li>Remove <code>ReactiveFormsModule</code> from the component imports.</li>
+    </ol>
+  </div>
+</div>

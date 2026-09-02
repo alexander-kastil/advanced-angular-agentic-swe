@@ -1,0 +1,48 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Signal Forms - Conditional Fields</h2>
+  </div>
+  <div class="card-content">
+    <form column>
+      <label class="checkbox">
+        <input type="checkbox" [formField]="fields.subscribe" />
+        Subscribe to newsletter
+      </label>
+
+      @if (!fields.email().hidden()) {
+        <div class="field">
+          <label class="label" for="conditional-email">Email</label>
+          <input
+            id="conditional-email"
+            class="input"
+            type="email"
+            placeholder="Email"
+            [formField]="fields.email"
+          />
+        </div>
+      }
+
+      <div class="field">
+        <label class="label" for="conditional-username">Username (readonly)</label>
+        <input id="conditional-username" class="input" type="text" [formField]="fields.username" />
+      </div>
+
+      <div class="field">
+        <label class="label" for="conditional-promo">Promo Code (disabled when not subscribed)</label>
+        <input id="conditional-promo" class="input" type="text" [formField]="fields.promoCode" />
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Field State</h2>
+  </div>
+  <div class="card-content">
+    <div>email hidden: {{ fields.email().hidden() }}</div>
+    <div>promoCode disabled: {{ fields.promoCode().disabled() }}</div>
+    <div>username readonly: {{ fields.username().readonly() }}</div>
+    <div>model: {{ model() | json }}</div>
+  </div>
+</div>

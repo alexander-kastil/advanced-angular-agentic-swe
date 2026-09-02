@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Higher order mapping against a real endpoint</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      Every click pushes the same id into four pipelines. Each one issues a real
+      <code>GET /skills</code>
+      against json-server, held for 1500 ms so you can overlap them. Click three
+      or four times in a row and read the counters, not just the log.
+    </p>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" (click)="fire()">
+        Fire request #{{ fired() + 1 }}
+      </button>
+      <button type="button" class="btn btn-outline" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</div>
+
+<div class="strategies">
+  @for (strategy of strategies; track strategy) {
+    <div class="card mt-0">
+      <div class="card-header">
+        <h2 class="card-title">{{ strategy }}</h2>
+      </div>
+      <div class="card-content">
+        <p>{{ descriptions[strategy] }}</p>
+        <div class="counters">
+          <span [class.busy]="panes()[strategy].inFlight > 0">
+            in flight {{ panes()[strategy].inFlight }}
+          </span>
+          <span>subscribed {{ panes()[strategy].subscribed }}</span>
+          <span>delivered {{ panes()[strategy].delivered }}</span>
+        </div>
+        <div class="log" tabindex="0" role="region" [attr.aria-label]="strategy + ' log'">
+          @for (entry of panes()[strategy].log; track $index) {
+            <div [class.cancelled]="entry.includes('cancelled')">{{ entry }}</div>
+          } @empty {
+            <div>no results yet</div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

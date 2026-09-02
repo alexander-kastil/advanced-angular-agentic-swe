@@ -1,0 +1,194 @@
+{
+  "repo": "advanced-angular-agentic-swe",
+  "origin": "",
+  "sessions": [
+    {
+      "date": "2026-09-02",
+      "from": "07:58",
+      "to": "11:19",
+      "sessionId": "7a3c2d23-0ee0-4ff3-970b-cbc2e397388a",
+      "branch": "vagentic",
+      "commits": [
+        "10a82eb",
+        "9415644"
+      ],
+      "surfaces": [
+        "demos/06-ngrx-signals/ngrx-signal-store"
+      ],
+      "files": [
+        "demos/06-ngrx-signals/ngrx-signal-store/src/tailwind.css",
+        "demos/06-ngrx-signals/ngrx-signal-store/src/app/demos/demo-container/demo-container.component.html",
+        "demos/06-ngrx-signals/ngrx-signal-store/src/app/shared/loading/loading.component.scss",
+        "demos/06-ngrx-signals/ngrx-signal-store/src/app/shared/slide-toggle/slide-toggle.component.ts",
+        "demos/HANDOFF-material-to-tailwind.md"
+      ],
+      "mechanism": {
+        "takes": "an existing Angular app whose UI is built on a component library, plus a reference implementation for the target look",
+        "does": "replaces every library control with a hand-rolled token-driven equivalent, rebuilds the application shell around one measured alignment grid, then proves completion by measurement rather than by build success: a grep sweep across source, end-to-end specs and shipped documentation, browser-read geometry and composed colours for every overlay and every pair of edges that must align, and an automated accessibility audit over every route",
+        "returns": "an app with the library uninstalled, a reusable class vocabulary in one stylesheet, zero accessibility violations, and a handoff document plus a verification script that repeat the migration on sibling apps"
+      },
+      "portsAsIs": [
+        "the token and component-class vocabulary in a single Tailwind entry stylesheet",
+        "the migration verification script (packages, style order, the border-voiding reset, and the source/test/docs sweep)",
+        "the measure-do-not-look method for overlays and edge alignment",
+        "the accessibility remediation set that a component library used to cover"
+      ],
+      "perCustomer": [
+        "the palette and the brand lockup",
+        "which controls the app actually uses",
+        "the end-to-end selector conventions of the existing test suite"
+      ],
+      "evidence": [
+        "demos/HANDOFF-material-to-tailwind.md",
+        "tasks/lessons.md",
+        "unit tests: 51/51 pass",
+        "e2e: 59 of 61 pass, 2 known behavioural assertions listed in the handoff",
+        "accessibility: axe-core 4.10 reports 0 violations across 20 routes at wcag2a/aa, wcag21a/aa, wcag22aa and best-practice",
+        "frame alignment verified by measurement: rail and header bottom borders both at y=112, delta 0"
+      ],
+      "toolchain": {
+        "skills": [
+          "angular-conventions",
+          "ui-ux-pro-max",
+          "brand-voice-integrations",
+          "claude-learn",
+          "track-time"
+        ],
+        "mcpServers": [
+          "chrome-devtools",
+          "playwright"
+        ],
+        "agents": []
+      },
+      "industry": "developer education and technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "new",
+        "item": ""
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "from": "11:50",
+      "to": "12:36",
+      "sessionId": "f6c9ed55-8dbe-4809-9864-109431351456",
+      "branch": "vagentic",
+      "commits": [],
+      "surfaces": [
+        "demos/08-testing/vitetest-testing/e2e"
+      ],
+      "files": [
+        "demos/08-testing/vitetest-testing/e2e/customers.spec.ts",
+        "demos/08-testing/vitetest-testing/e2e/customers.fixture.ts",
+        "demos/08-testing/vitetest-testing/public/markdown/playwright.md",
+        "demos/08-testing/vitetest-testing/db.json",
+        "tasks/lessons.md"
+      ],
+      "mechanism": {
+        "takes": "an existing browser-driven test suite that only clicks through the happy path, plus the running application and its data service",
+        "does": "adds the techniques a team actually needs in production suites - intercepting and faking server responses so failure and empty states can be tested without a server, asserting on the requests the app sends and proving that a cancelled action sends none, driving the screen from the keyboard rather than by scripted value-setting, grouping a test into named reported steps with assertions that collect every failure instead of stopping at the first, and checking the backend directly after a screen action - then proves the whole suite green on ports isolated from every other service on the machine",
+        "returns": "a suite that covers error paths and backend state as well as the happy path, a written guide explaining each technique, and a reusable script that runs any such suite in isolation and restores every file it touched"
+      },
+      "portsAsIs": [
+        "the five test techniques and their worked examples",
+        "the isolated-run script: free-port selection, repointing every copy of the API address, private data server, byte-exact restore",
+        "the three diagnostics that separate a broken test from a broken environment"
+      ],
+      "perCustomer": [
+        "the application under test and its page objects",
+        "which data service the suite seeds through",
+        "the ports the machine already has in use"
+      ],
+      "evidence": [
+        "demos/08-testing/vitetest-testing/e2e/customers.spec.ts",
+        "demos/08-testing/vitetest-testing/public/markdown/playwright.md",
+        "e2e: 25 of 25 pass on isolated ports",
+        "the isolated-run script leaves the working tree clean apart from the intended edits (files_restored=3)"
+      ],
+      "toolchain": {
+        "skills": [
+          "e2e-playwright",
+          "claude-learn",
+          "track-time",
+          "git-history-ops"
+        ],
+        "mcpServers": [],
+        "agents": []
+      },
+      "industry": "developer education and technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "new",
+        "item": ""
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "from": "11:31",
+      "to": "12:41",
+      "sessionId": "b9fef48d-0d8e-4a23-86b1-c244c18c602c",
+      "branch": "vagentic",
+      "commits": [],
+      "surfaces": [
+        "demos/01-agentic-dev",
+        "demos/02-signals",
+        "demos/03-components",
+        "demos/04-signal-forms",
+        "demos/05-reactive",
+        "demos/07-routing-app-init",
+        "demos/08-testing",
+        "demos/09-optimize-compliance",
+        "demos/10-ssr",
+        "demos/11-agentic-devops"
+      ],
+      "files": [
+        "demos/readme.md",
+        "tasks/lessons.md",
+        ".claude/skills/angular-conventions/references/material-tailwind-migration.md",
+        "demos/01-agentic-dev/ng-agentic/src/tailwind.css",
+        "demos/09-optimize-compliance/optimize-angular/src/app/demos/demo.routes.ts",
+        "demos/08-testing/vitetest-testing/db.json"
+      ],
+      "mechanism": {
+        "takes": "a set of sibling applications built from one template, all still on a component library, plus one of them already migrated to the target look as the reference",
+        "does": "separates the part of each application that is identical across all of them from the part that is genuinely per-application, copies the first verbatim from the reference by script so it is exact and free, and spends parallel agents only on the second; then rebuilds and re-runs every suite per application, checks each one in a real browser because a passing build and a green suite both miss duplicated or clipped regions, and takes the cases where the library being removed is the subject being taught back to the owner as a scope decision rather than deciding them silently",
+        "returns": "every application on the same design system and the same shell, all builds clean and all suites green, one dependency deliberately retained where a genuine peer requirement exists, related demos consolidated into the module that owns the topic, and the course overview corrected against what is actually on disk"
+      },
+      "portsAsIs": [
+        "the split between the verbatim-copyable frame and the per-application judgement work",
+        "the replacement map from library controls to design-system classes",
+        "the dependency check that separates the library from the toolkit underneath it",
+        "the browser measurement pass that catches what the build and the suite cannot see"
+      ],
+      "perCustomer": [
+        "which application is the reference implementation",
+        "how many applications share the frame and how far each has drifted",
+        "which code uses the library versus teaches it"
+      ],
+      "evidence": [
+        "11 of 11 applications off the component library, 416 unit tests passing",
+        "3 applications keep the underlying toolkit for a stated peer requirement",
+        "demos/readme.md corrected: 3 dead links, module count, one module with no code behind it",
+        ".claude/skills/angular-conventions/references/material-tailwind-migration.md"
+      ],
+      "toolchain": {
+        "skills": [
+          "angular-conventions",
+          "claude-learn",
+          "track-time",
+          "chrome-devtools"
+        ],
+        "mcpServers": [
+          "chrome-devtools"
+        ],
+        "agents": []
+      },
+      "industry": "developer education and technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "extend",
+        "item": "design-system migration across an application estate"
+      }
+    }
+  ]
+}

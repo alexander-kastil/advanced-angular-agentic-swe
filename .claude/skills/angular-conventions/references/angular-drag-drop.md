@@ -1,8 +1,3 @@
----
-name: angular-drag-drop
-description: Hand-rolled Pointer Events drag-and-drop for grid cells and reorderable lists in standalone Angular 22 apps, without @angular/cdk/drag-drop. Covers draggable sources, elementsFromPoint drop-target resolution, disabled/not-allowed sources and targets, list reordering, auto-scroll, and OnPush-friendly signal state.
----
-
 # Angular Grid Drag-and-Drop (Pointer Events, No CDK)
 
 A project-agnostic pattern for dragging cards onto grid cells (e.g. a day × time
@@ -412,6 +407,56 @@ Three affordances, all proven necessary in practice — a reorder with only a
   just the handle cell, so the whole strip visibly lifts (opacity + shadow).
   Dimming only the small handle looks like a rendering glitch.
 
+### The handle element decides whether HTML5 drag works at all
+
+`draggable="true"` on a `<button>` (or any form control) **does not start a drag
+in Chrome**. The control swallows the drag gesture at `mousedown`, so
+`dragstart` never fires from real mouse input and the feature is simply dead —
+no console error, no warning, correct-looking markup.
+
+```html
+<!-- dead: Chrome never fires dragstart from a form control -->
+<button type="button" class="grip" draggable="true" (dragstart)="onDragStart($event, i)">…</button>
+
+<!-- works: non-form element, keyboard-accessible by hand -->
+<span class="grip" draggable="true" role="button" tabindex="0"
+      (dragstart)="onDragStart($event, i)" (dragend)="endDrag()"
+      (keydown)="onHandleKeydown($event, i)">…</span>
+```
+
+The `role="button"` + `tabindex="0"` pair is not optional: the moment you stop
+using `<button>` you own focusability, the accessible role, and the keyboard
+path (arrow keys that move the item) yourself.
+
+**This bug survives every test you are likely to write.** A synthetic
+`element.dispatchEvent(new DragEvent('dragstart', {dataTransfer: new DataTransfer()}))`
+fires the handler regardless of the element type, so Vitest specs, a
+`chrome-devtools` `evaluate_script` probe, and a scripted end-to-end drag all
+report success against a `<button>` handle that no user can drag. Synthetic
+DragEvents prove the *handlers* are wired; they say nothing about whether the
+browser will *originate* a drag. Verify origination by element type
+(`grip.tagName !== 'BUTTON'`), or by dragging it by hand once.
+
+### Gate reordering behind an explicit edit mode
+
+On a read-first surface (a dashboard, a report, a card wall) permanent grip
+handles add clutter and invite accidental reorders. Put the whole affordance
+behind an edit toggle:
+
+- An icon toggle (pencil) on the page, `aria-pressed` bound to the mode.
+- Mode lives in the page component as `signal(false)`; the grid takes it as
+  `readonly editMode = input(false)`.
+- `@if (editMode())` around **each grip**, so no handle exists at rest.
+- A command bar rendered only in edit mode, `role="toolbar"`, carrying the
+  reorder hint plus the mode's commands ("Reset the order", disabled until a
+  custom order exists). `position: sticky` keeps it reachable down a long page.
+- Guard `onDragStart` on `editMode()` as well. Rendering is the affordance;
+  the guard is the rule, and only the guard survives a stale DOM node.
+
+Persist the order (localStorage keyed by id, or the backend) and make the reset
+a command in that bar — a reorder that silently resets on reload reads as a bug,
+and one with no way back traps the user.
+
 ## Testing (Vitest, behavior-level)
 
 `jsdom` does not implement real hit-testing, so stub
@@ -494,6 +539,17 @@ outputs and public signals, not on internal event wiring.
 - **A disabled source must short-circuit at `pointerdown`, not just hide a CSS
   affordance** — otherwise a fast flick can still start a drag before any
   `disabled` check runs later in the handler chain.
+- **An insertion line drawn on an item that clips its own overflow is invisible,
+  and the class is applied correctly the whole time.** A card with
+  `overflow: hidden` (usually there to round an inner image/rail against the
+  card's `border-radius`) clips its own `::before`, so a bar positioned in the
+  gutter (`left: -18px`) never paints, and a bar at `left: 0` paints *on top of*
+  the card's own artwork where it reads as decoration rather than an insertion
+  point. Fix by moving the clip inward: drop `overflow: hidden` from the card and
+  give the inner element that actually needed it its own matching radius
+  (`border-radius: 7px 0 0 7px` on a left rail). Verify with
+  `getComputedStyle(card).overflow === 'visible'` plus a screenshot, not the
+  class list — `classList` shows `--drop-before` either way.
 - **A "slot taken?" check keys on the (row, position), not the entity.** When one
   entity can occupy multiple rows/strips (e.g. the same employee across several
   schedule rows), the occupancy test — the client's blocked-cell highlight AND

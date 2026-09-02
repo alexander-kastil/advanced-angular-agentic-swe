@@ -1,0 +1,44 @@
+<app-markdown-renderer [md]="'route-driven-store'" />
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The URL writes the store</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      The component owns no state. It declares <code>category</code> and <code>q</code> as signal
+      inputs bound from the route, folds them into one <code>computed()</code>, and hands that signal
+      to a <code>signalMethod</code> on the store. Every navigation patches the store exactly once.
+    </p>
+
+    <div class="field max-w-xs">
+      <label class="label" for="route-driven-store-q">Filter by name</label>
+      <input
+        id="route-driven-store-q"
+        class="input"
+        type="text"
+        [value]="q() ?? ''"
+        (change)="search($any($event.target).value)"
+      />
+    </div>
+
+    <p>
+      Store state: category <strong>{{ store.category() }}</strong>, query
+      <strong>{{ store.q() || '(none)' }}</strong>, patched
+      <strong>{{ store.applied() }}</strong> times.
+    </p>
+
+    <ul>
+      @for (item of store.visible(); track item.id) {
+        <li>{{ item.name }} <small>({{ item.category }})</small></li>
+      } @empty {
+        <li>Nothing matches this route.</li>
+      }
+    </ul>
+  </div>
+  <div class="card-actions flex-wrap">
+    @for (name of store.categories(); track name) {
+      <button type="button" class="btn btn-primary" (click)="selectCategory(name)">{{ name }}</button>
+    }
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="sample">
+  <p>
+    A harness file is the context an agent reads before it does anything else. All three below say the
+    same thing in a different dialect, and the rules come from the Angular best practices guide the
+    MCP server returns with <code>get_best_practices</code>, not from someone's memory.
+  </p>
+
+  <div class="row">
+    <button [class.active]="mode() === 'side-by-side'" (click)="setMode('side-by-side')">
+      Side by side
+    </button>
+    <button [class.active]="mode() === 'tabs'" (click)="setMode('tabs')">One at a time</button>
+    @if (mode() === 'tabs') {
+      @for (file of files; track file.key) {
+        <button [class.active]="selectedKey() === file.key" (click)="select(file.key)">
+          {{ file.key }}
+        </button>
+      }
+    }
+  </div>
+
+  <div class="grid" [class.single]="mode() === 'tabs'">
+    @for (file of shown(); track file.key) {
+      <article class="card">
+        <h4>{{ file.path }}</h4>
+        <dl>
+          <dt>Read by</dt>
+          <dd>{{ file.readBy }}</dd>
+          <dt>Scope</dt>
+          <dd>{{ file.scope }}</dd>
+          <dt>Per-turn cost</dt>
+          <dd>{{ file.content.length }} characters</dd>
+        </dl>
+        <app-code-block [label]="file.key" [code]="file.content" />
+      </article>
+    }
+  </div>
+
+  <p class="hint">
+    Together these cost {{ totalChars() }} characters on every turn in every tool that reads them.
+    That is the reason a harness file is an index: standards and prohibitions belong here, procedures
+    belong in a skill that loads only when it is needed.
+  </p>
+
+  <h4>What each environment reads</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Environment</th>
+        <th>Rules file</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (entry of rulesFiles; track entry.environment) {
+        <tr>
+          <td>{{ entry.environment }}</td>
+          <td><code>{{ entry.file }}</code></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

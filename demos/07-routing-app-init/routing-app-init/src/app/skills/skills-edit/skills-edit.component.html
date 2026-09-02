@@ -1,26 +1,26 @@
-<form [formGroup]="skillForm">
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Skill Detail</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field>
-        <input
-          matInput
-          type="number"
-          placeholder="id"
-          formControlName="id"
-          readonly="true"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text" placeholder="Name" formControlName="name" />
-      </mat-form-field>
-      <mat-slide-toggle formControlName="completed">Complete</mat-slide-toggle>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button (click)="doCancel()" color="primary">Cancel</button>
-      <button mat-raised-button (click)="saveSkill()" color="primary">Save</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+<div class="page max-w-lg">
+  <form class="card" [formGroup]="skillForm">
+    <div class="card-header">
+      <h2 class="card-title">Skill Detail</h2>
+    </div>
+    <div class="card-content gap-4">
+      <div class="field">
+        <label class="label" for="skill-id">Id</label>
+        <input id="skill-id" class="input" type="number" formControlName="id" readonly />
+      </div>
+      <div class="field">
+        <label class="label" for="skill-name">Name</label>
+        <input id="skill-name" class="input" type="text" placeholder="Name" formControlName="name" />
+      </div>
+      <label class="switch">
+        <input type="checkbox" class="sr-only" formControlName="completed" />
+        <span class="switch-track"><span class="switch-thumb"></span></span>
+        Complete
+      </label>
+    </div>
+    <div class="card-actions justify-end">
+      <button type="button" class="btn btn-outline" (click)="doCancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="saveSkill()">Save</button>
+    </div>
+  </form>
+</div>

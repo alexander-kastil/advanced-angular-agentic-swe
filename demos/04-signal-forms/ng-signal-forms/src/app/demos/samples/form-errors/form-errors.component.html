@@ -1,0 +1,79 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Skills Sheet - Signal Forms Errors</h2>
+  </div>
+  <div class="card-content">
+    <div class="field">
+      <label class="label" for="fe-name">Name</label>
+      <input
+        id="fe-name"
+        class="input"
+        type="text"
+        placeholder="Enter Name"
+        [attr.aria-invalid]="skillForm.name().touched() && skillForm.name().invalid() ? 'true' : null"
+        [attr.aria-describedby]="skillForm.name().touched() && skillForm.name().invalid() ? 'fe-name-error' : null"
+        [formField]="skillForm.name"
+      />
+      @if (skillForm.name().touched() && skillForm.name().invalid()) {
+        <div id="fe-name-error" class="error" role="alert">
+          @for (err of skillForm.name().errors(); track err.kind) {
+            <span>{{ err.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="field">
+      <label class="label" for="fe-age">Age</label>
+      <input
+        id="fe-age"
+        class="input"
+        type="number"
+        placeholder="Enter Age"
+        [attr.aria-invalid]="skillForm.age().touched() && skillForm.age().invalid() ? 'true' : null"
+        [attr.aria-describedby]="skillForm.age().touched() && skillForm.age().invalid() ? 'fe-age-error' : null"
+        [formField]="skillForm.age"
+      />
+      @if (skillForm.age().touched() && skillForm.age().invalid()) {
+        <div id="fe-age-error" class="error" role="alert">
+          @for (err of skillForm.age().errors(); track err.kind) {
+            <span>{{ err.message }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    @if (skillForm.name().valid()) {
+      <div class="border">
+        <h3>Skills:</h3>
+        @for (item of skillForm.skills; track $index; let i = $index) {
+          <div row class="skill-row">
+            <div class="field">
+              <label class="label" [attr.for]="'fe-skill-' + i">Skill Name</label>
+              <input [id]="'fe-skill-' + i" class="input" [formField]="item.skillName" placeholder="Skill Name" />
+            </div>
+            <div class="field">
+              <label class="label" [attr.for]="'fe-years-' + i">Years</label>
+              <input [id]="'fe-years-' + i" class="input" [formField]="item.years" placeholder="Years" />
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+  <div class="card-actions justify-end">
+    @if (skillForm.name().valid()) {
+      <button type="button" class="btn btn-primary" (click)="addSkill()">Add Skill</button>
+    }
+    <button type="button" class="btn btn-primary" (click)="saveForm()">Save</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">All Validation Errors</h2>
+  </div>
+  <div class="card-content">
+    <pre class="code-block" tabindex="0" role="region" aria-label="All validation errors">{{ allErrors() | json }}</pre>
+  </div>
+</div>

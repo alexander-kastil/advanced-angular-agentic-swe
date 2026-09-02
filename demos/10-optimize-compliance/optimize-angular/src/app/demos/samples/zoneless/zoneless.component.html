@@ -1,0 +1,87 @@
+<section class="zoneless">
+  <header>
+    <h2>Zoneless Change Detection</h2>
+    <p>
+      Without <code>zone.js</code> nothing monkey-patches the browser. Angular no longer finds out that
+      something happened; it has to be told. A signal write tells it, a compiled template listener tells
+      it, and <code>markForCheck()</code> tells it. A bare <code>setTimeout</code> tells it nothing.
+    </p>
+  </header>
+
+  <div class="grid">
+    <article>
+      <h3>1. Signal written from a timer</h3>
+      <p class="value">{{ signalTick() }}</p>
+      <p>The timer writes a signal the template reads, so the write itself schedules the refresh.</p>
+      <button type="button" (click)="bumpSignalAsync()">Write a signal in 600ms</button>
+    </article>
+
+    <article>
+      <h3>2. Plain field written from a timer</h3>
+      <p class="value">{{ plainTick }}</p>
+      <p>
+        The field really does change after 600ms, but the screen keeps the old number. Watch it without
+        clicking anything: any button you press marks this view dirty and hides the effect.
+      </p>
+      <button type="button" (click)="bumpPlainAsync()">Write a plain field in 600ms</button>
+    </article>
+
+    <article>
+      <h3>3. Plain field plus markForCheck()</h3>
+      <p class="value">{{ plainTick }}</p>
+      <p>Same write, followed by <code>ChangeDetectorRef.markForCheck()</code>. The screen catches up.</p>
+      <button type="button" (click)="bumpPlainAsyncMarked()">Write and mark in 600ms</button>
+    </article>
+
+    <article>
+      <h3>4. Application stability</h3>
+      <p class="small">{{ stability() }}</p>
+      <p>
+        <code>PendingTasks.add()</code> is how you tell a zoneless app that async work is in flight.
+        Server rendering, <code>whenStable()</code> and <code>ApplicationRef.isStable</code> all wait on it.
+        This button registers a task, releases it after 1.5 seconds, and reports when
+        <code>whenStable()</code> actually resolved.
+      </p>
+      <button type="button" [disabled]="busy()" (click)="runTrackedTask()">Run a tracked 1.5s task</button>
+    </article>
+  </div>
+
+  <p class="renders">
+    Application render passes counted by <code>afterEveryRender</code> since the counter was reset:
+    {{ renders }}. The whole page is one application, so the markdown pane on the right counts too, and the
+    number you see is the count as of the previous refresh.
+    <button type="button" class="ghost" (click)="resetRenders()">Reset</button>
+  </p>
+
+  <h3>Event log</h3>
+  @if (events().length === 0) {
+    <p class="hint">Nothing yet. Press one of the buttons above.</p>
+  } @else {
+    <ul class="log">
+      @for (entry of events(); track $index) {
+        <li>{{ entry }}</li>
+      }
+    </ul>
+  }
+
+  <h3>What schedules change detection</h3>
+  <table>
+    <caption>Sources of work in a zoneless application</caption>
+    <thead>
+      <tr>
+        <th scope="col">Source</th>
+        <th scope="col">Schedules a refresh</th>
+        <th scope="col">Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (trigger of triggers; track trigger.name) {
+        <tr>
+          <th scope="row"><code>{{ trigger.name }}</code></th>
+          <td><span class="tag" [class.yes]="trigger.schedules" [class.no]="!trigger.schedules">{{ trigger.schedules ? 'yes' : 'no' }}</span></td>
+          <td>{{ trigger.detail }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

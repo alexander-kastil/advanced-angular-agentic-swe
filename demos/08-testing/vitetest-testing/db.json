@@ -1,27 +1,26 @@
 {
   "demos": [
     {
-      "url": "testing-intro",
-      "title": "Hello World Test",
-      "teaches": "Write your first Vitest unit test. Understand describe/it blocks, assertions with expect, and beforeEach setup. Test a plain TypeScript class without Angular.",
-      "topic": "Introduction",
+      "url": "karma-to-vitest",
+      "title": "Karma to Vitest Migration",
+      "teaches": "Replace the Karma builder with @angular/build:unit-test, swap jasmine for vitest globals, and rewrite the specs. Covers the httpResource ordering trap: TestBed.tick() before HttpTestingController.flush(), never whenStable() first.",
       "sortOrder": 1,
-      "id": 1,
-      "md": "intro-unit-testsing"
+      "topic": "Introduction",
+      "md": "karma-to-vitest"
     },
     {
-      "url": "pipe",
-      "title": "Test Pipe",
-      "teaches": "Unit test Angular pipes in isolation by instantiating the pipe class directly and asserting transform output.",
-      "topic": "Pipes & Directives",
+      "url": "testing-foundations",
+      "title": "Testing Foundations",
+      "teaches": "Write your first Vitest tests with no TestBed at all: a plain class, two pipes, a service without dependencies, and a component tested through its class. describe/it/expect/beforeEach, value and error assertions.",
+      "topic": "Introduction",
       "sortOrder": 2,
-      "id": 2,
-      "md": "pipe"
+      "id": 1,
+      "md": "testing-foundations"
     },
     {
       "url": "directive",
       "title": "Test Directive",
-      "teaches": "Test attribute directives by creating a host component in TestBed and asserting DOM changes caused by the directive.",
+      "teaches": "Test an attribute directive by rendering it on a host component in TestBed and asserting the DOM change it causes. Uses the host object instead of @HostListener.",
       "topic": "Pipes & Directives",
       "sortOrder": 3,
       "id": 88,
@@ -30,7 +29,7 @@
     {
       "url": "http-tests",
       "title": "Service HTTP Test",
-      "teaches": "Test CustomersService CRUD operations using HttpTestingController. Flush mock responses and verify request URLs, methods, and body payloads for GET, POST, PUT and DELETE.",
+      "teaches": "Test CustomersService CRUD with HttpTestingController. Flush mock responses and verify request URL, method and body for GET, POST, PUT and DELETE.",
       "topic": "Services",
       "sortOrder": 4,
       "id": 8,
@@ -39,137 +38,119 @@
     {
       "url": "http-tests-signal",
       "title": "httpResource Test",
-      "teaches": "Test a component that uses Angular's httpResource() for reactive data fetching. Use HttpTestingController to flush responses and assert loading state and rendered output.",
+      "teaches": "Test a component that reads data with httpResource(). Flush the request through HttpTestingController and assert the loading state and the rendered rows.",
       "topic": "Services",
       "sortOrder": 5,
       "id": 83,
       "md": "httptest-signal"
     },
     {
-      "url": "spy",
-      "title": "Comp Spy Customers",
-      "teaches": "Test CustomersComponent by providing a mock customersStore signal object. Use vi.fn() spies to assert that store methods are called correctly when component methods fire.",
-      "topic": "Component Testing",
+      "url": "http-error-tests",
+      "title": "HTTP Error Tests",
+      "teaches": "Test the failure half of an HTTP call: flush 404, 409, 5xx and a transport error through HttpTestingController, and assert that a functional interceptor maps each status to a readable message and records it.",
+      "topic": "Services",
       "sortOrder": 6,
-      "id": 44,
-      "md": "component-spy"
+      "id": 91,
+      "md": "http-error-tests"
     },
     {
       "url": "component-write",
       "title": "Comp DOM Test",
-      "teaches": "Test CustomersTableComponent DOM output using setInput() for signal inputs. Query mat-row and mat-cell elements to verify rendered customer data and progress bar visibility.",
+      "teaches": "Read and write the DOM from a spec: type into an input and assert component state, then fire clicks with triggerEventHandler and with the native click API.",
       "topic": "Component Testing",
       "sortOrder": 7,
       "id": 63,
       "md": "component-write"
     },
     {
-      "url": "component-events",
-      "title": "Comp Interaction Customers",
-      "teaches": "Test CustomersComponent interactions end-to-end. Emit events from child presenter and assert that the container calls the correct store methods.",
+      "url": "component-input-signals",
+      "title": "Input Signals & Outputs",
+      "teaches": "Set required signal inputs with fixture.componentRef.setInput() on CustomerEditComponent and assert that the save and cancel outputs emit the right values.",
       "topic": "Component Testing",
       "sortOrder": 8,
-      "id": 89,
-      "md": "component-events"
+      "id": 633,
+      "md": "component-input-signals"
     },
     {
       "url": "component-test",
       "title": "CRUD Customers",
-      "teaches": "Test SimpleCustomersComponent which uses Angular's resource() API for data loading. Spy on CustomersService to control HTTP responses and verify add/delete interactions.",
+      "teaches": "Test SimpleCustomersComponent, which loads through Angular's resource() API. Spy on CustomersService to control responses and verify the delete and reload path.",
       "topic": "Component Testing",
       "sortOrder": 9,
       "id": 5,
       "md": "component-test"
     },
     {
-      "url": "component-input-signals",
-      "title": "Input Signals & Outputs",
-      "teaches": "Test CustomerEditComponent using fixture.componentRef.setInput() to set required signal inputs. Verify that save and cancel outputs emit the correct values.",
+      "url": "spy",
+      "title": "Comp Spy & Async State",
+      "teaches": "Replace the signal store with a vi.fn() spy object and steer its signals from the test. Assert store calls and the loading, loaded and selected states without fakeAsync.",
       "topic": "Component Testing",
       "sortOrder": 10,
-      "id": 633,
-      "md": "component-input-signals"
+      "id": 44,
+      "md": "component-spy"
     },
     {
-      "url": "material",
-      "title": "Material Harness",
-      "teaches": "Test CustomersTableComponent using Angular Material test harnesses (MatTableHarness, MatButtonHarness). Interact with Material elements without coupling to DOM internals.",
-      "topic": "Component Testing",
+      "url": "signal-forms-testing",
+      "title": "Test a Signal Form",
+      "teaches": "Test a Signal Form without the DOM: write field values through field().value.set(), assert required, email, minLength and cross-field errors, then submit() and check touched state, the action result and a server error bound back onto a field.",
+      "topic": "Forms Testing",
       "sortOrder": 11,
-      "id": 19,
-      "md": "material-harness"
+      "id": 93,
+      "md": "signal-forms-testing"
     },
     {
-      "url": "async",
-      "title": "Comp Async Customers",
-      "teaches": "Test asynchronous loading in CustomersComponent using fakeAsync/tick. Verify that progress bar appears while loading and rows render after data arrives.",
+      "url": "zoneless-async",
+      "title": "Zoneless Async",
+      "teaches": "Await asynchronous work in a zoneless app: PendingTasks plus fixture.whenStable(), TestBed.tick() to flush effects and rendering, Vitest fake timers for intervals, and TestBed.getLastFixture() when a helper created the fixture.",
       "topic": "Async Testing",
       "sortOrder": 12,
-      "id": 9,
-      "md": "component-async"
+      "id": 94,
+      "md": "zoneless-async"
     },
     {
       "url": "integration-tests",
       "title": "Container / Presenter",
-      "teaches": "Integration-test CustomersComponent (container) with real CustomersTableComponent and CustomerEditComponent (presenters). Verify signal data flow and output wiring across the tree.",
+      "teaches": "Integration-test the container with its real presenters. Verify signal inputs flowing down and outputs wiring back up across the whole tree.",
       "topic": "Integration Testing",
       "sortOrder": 13,
       "id": 6,
       "md": "component-integration"
     },
     {
-      "url": "mock-signals-store",
-      "title": "Mock Signal Store",
-      "teaches": "Mock the markdownEditorStore in component tests by providing a fake store object with signal properties. Assert component behaviour based on controlled signal values.",
-      "topic": "NgRx Testing",
-      "sortOrder": 14,
-      "id": 56,
-      "md": "mock-signals-store"
-    },
-    {
       "url": "test-signals-store",
       "title": "Test Signal Store",
-      "teaches": "Test the markdownEditorStore directly by dispatching events via the Dispatcher. Verify state transitions for fetch, save, delete, and loadContent event flows.",
+      "teaches": "Test an NgRx SignalStore built from events. Dispatch through the Dispatcher and assert the state transitions for fetch, save, delete and loadContent.",
       "topic": "NgRx Testing",
-      "sortOrder": 15,
+      "sortOrder": 14,
       "id": 53,
       "md": "test-signals-store"
     },
     {
-      "url": "simple-service",
-      "title": "Simple Service",
-      "teaches": "Test a service class without DI by instantiating it directly. Verify add, delete and clear methods and state mutations in isolation.",
-      "topic": "Introduction",
-      "sortOrder": 16,
-      "id": 3,
-      "md": "simpleservice"
-    },
-    {
-      "url": "component-class",
-      "title": "Class-Only Test",
-      "teaches": "Test component signal state by instantiating the class directly without TestBed. Fast and simple for pure logic tests that do not need the DOM.",
-      "topic": "Component Testing",
-      "sortOrder": 17,
-      "id": 77,
-      "md": "component-class"
-    },
-    {
-      "url": "material-async",
-      "title": "Material Async",
-      "teaches": "Combine Material test harnesses with async/await to interact with Material components that have asynchronous rendering.",
-      "topic": "Async Testing",
-      "sortOrder": 18,
-      "id": 12,
-      "md": "material-async"
-    },
-    {
       "url": "playwright",
       "title": "Playwright E2E",
-      "teaches": "Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests for full isolation.",
+      "teaches": "Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests, mock the network with page.route, assert on requests and responses, drive the app from the keyboard, group work into test.step with soft assertions, and verify the backend through the API request context.",
       "topic": "E2E Testing",
-      "sortOrder": 19,
+      "sortOrder": 15,
       "id": 22,
       "md": "playwright"
+    },
+    {
+      "url": "ai-generated-test",
+      "title": "AI Generated Spec",
+      "teaches": "Prompt the agent to generate a Vitest spec for a branch-heavy class, then review it: mutate the code to prove the tests bite, check boundary values, and reject assertions that only re-state the implementation.",
+      "topic": "AI-Assisted Testing",
+      "sortOrder": 16,
+      "id": 90,
+      "md": "ai-generated-test"
+    },
+    {
+      "url": "ai-writes-the-test",
+      "title": "AI Writes the Test",
+      "teaches": "The full loop: state the behaviour, let the agent write the spec with get_best_practices and run_target, review it against a checklist, then run a mutation round that proves the suite goes red when the code breaks.",
+      "topic": "AI-Assisted Testing",
+      "sortOrder": 17,
+      "id": 96,
+      "md": "ai-writes-the-test"
     }
   ],
   "food": [
@@ -250,15 +231,15 @@
     {
       "id": 1,
       "url": "",
-      "title": "Using @ngrx/store",
-      "comment": "To use @ngrx/store, we need to install it first.",
+      "title": "Using @ngrx/signals",
+      "comment": "The SignalStore is tested by dispatching events through the Dispatcher.",
       "saved": "2020-09-16T20:10:06.925Z"
     },
     {
       "id": 2,
       "url": "",
-      "title": "Optimizing change detection",
-      "comment": "In order to optimize change detection, we need to use OnPush strategy.",
+      "title": "Zoneless change detection",
+      "comment": "The app is zoneless, so specs use whenStable() and TestBed.tick() instead of fakeAsync.",
       "saved": "2020-09-16T20:10:06.925Z"
     }
   ],

@@ -1,28 +1,31 @@
+import { describe, expect, it, beforeEach } from 'vitest';
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment.development';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule, AppComponent]
-}));
-
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [AppComponent],
+      providers: [provideRouter([])],
+    }).compileComponents();
   });
 
-  it(`should have as title 'ng-reactive'`, () => {
+  it('creates the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('ng-reactive');
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render title', () => {
+  it('takes its title from the environment', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.title()).toBe(environment.title);
+  });
+
+  it('renders the router outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('ng-reactive app is running!');
+    expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 });

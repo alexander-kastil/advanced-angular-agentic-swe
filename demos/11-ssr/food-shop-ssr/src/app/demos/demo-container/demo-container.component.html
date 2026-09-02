@@ -1,0 +1,40 @@
+<div class="demo-shell">
+  <aside class="sidenav">
+    <div class="app-toolbar pane-header">{{ title }}</div>
+
+    @if (offline()) {
+      <p class="notice">API offline, showing the bundled catalog. Start it with <code>npm run api</code>.</p>
+    }
+
+    <nav class="nav-list" aria-label="Demos">
+      @for (group of groups(); track group.topic) {
+        <div class="topic">{{ group.topic }}</div>
+        @for (item of group.items; track item.url) {
+          <a
+            class="nav-item"
+            [routerLink]="['./', item.url]"
+            routerLinkActive="nav-item-active"
+            [title]="item.teaches"
+          >
+            {{ item.title }}
+          </a>
+        }
+      }
+    </nav>
+  </aside>
+
+  <div class="content">
+    <div class="app-toolbar pane-header">{{ header() }}</div>
+
+    <div class="panes">
+      <div class="demo-pane" tabindex="0" role="region" aria-label="Demo">
+        <router-outlet />
+      </div>
+      @if (currentMd()) {
+        <div class="guide-pane" tabindex="0" role="region" aria-label="Guide">
+          <app-markdown-renderer [md]="currentMd()" />
+        </div>
+      }
+    </div>
+  </div>
+</div>

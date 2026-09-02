@@ -1,0 +1,54 @@
+.graph {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap-small);
+}
+
+.node {
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: monospace;
+}
+
+.source {
+  border-style: solid;
+}
+
+.derived {
+  border-style: dashed;
+}
+
+.linked {
+  border-style: double;
+}
+
+.async {
+  border-style: dotted;
+}
+
+.edge {
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--gap-small);
+  margin: var(--gap-medium) 0;
+}
+
+.state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}

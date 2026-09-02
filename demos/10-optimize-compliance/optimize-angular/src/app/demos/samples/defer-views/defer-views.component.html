@@ -1,0 +1,57 @@
+<section class="defer">
+  <header>
+    <h2>Defer Non-Critical Views</h2>
+    <p>
+      A <code>&#64;defer</code> block moves its dependencies into a separate chunk and downloads them only
+      when the trigger fires. The placeholder is what the user sees until then, so the initial bundle
+      shrinks without leaving a hole in the layout.
+    </p>
+  </header>
+
+  <article>
+    <h3>1. Trigger: on interaction</h3>
+    <p>The chunk downloads the first time the placeholder is clicked or focused.</p>
+    @defer (on interaction) {
+      <app-revenue-chart />
+    } @placeholder (minimum 300ms) {
+      <button type="button" class="placeholder">Click to load the chart</button>
+    } @loading (minimum 200ms) {
+      <p class="loading">Downloading the chart chunk...</p>
+    } @error {
+      <p class="error" role="alert">The chart chunk failed to load.</p>
+    }
+  </article>
+
+  <article>
+    <h3>2. Trigger: on viewport</h3>
+    <p>Scroll this block into view and the chunk starts downloading.</p>
+    <div class="spacer">Keep scrolling</div>
+    @defer (on viewport) {
+      <app-revenue-chart />
+    } @placeholder {
+      <div class="placeholder">Not in the viewport yet</div>
+    }
+  </article>
+
+  <article>
+    <h3>3. Trigger: when, with prefetch on idle</h3>
+    <p>
+      The chunk is prefetched while the browser is idle, then rendered the moment the condition turns
+      true. The user pays no wait at all.
+    </p>
+    <button type="button" (click)="arm()">Show the chart</button>
+    @defer (when armed(); prefetch on idle) {
+      <app-revenue-chart />
+    } @placeholder {
+      <div class="placeholder">Waiting for the condition</div>
+    }
+  </article>
+
+  <ul class="notes">
+    <li>Triggers: <code>on idle</code>, <code>on viewport</code>, <code>on interaction</code>, <code>on hover</code>, <code>on timer</code>, <code>on immediate</code>, <code>when</code>.</li>
+    <li>Any trigger can be paired with <code>prefetch</code> to separate downloading from rendering.</li>
+    <li><code>&#64;placeholder</code> content is part of the parent bundle, so keep it small.</li>
+    <li><code>minimum</code> and <code>after</code> prevent a flash of placeholder on a fast connection.</li>
+    <li>Components used inside a defer block must not be referenced elsewhere in the same template, or the chunk is pulled back in eagerly.</li>
+  </ul>
+</section>

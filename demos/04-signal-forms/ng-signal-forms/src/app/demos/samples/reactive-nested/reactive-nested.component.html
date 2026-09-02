@@ -1,0 +1,139 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Signal Forms - Nested Objects</h2>
+  </div>
+  <div class="card-content">
+    <form role="form" novalidate column>
+      <div class="field">
+        <label class="label" for="nested-name">Name</label>
+        <input
+          id="nested-name"
+          class="input"
+          type="text"
+          placeholder="Name"
+          [formField]="personForm.name"
+        />
+      </div>
+      @if (personForm.name().touched() && personForm.name().invalid()) {
+        @for (err of personForm.name().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <div class="field">
+        <label class="label" for="nested-last-name">Last Name</label>
+        <input
+          id="nested-last-name"
+          class="input"
+          type="text"
+          placeholder="Last Name"
+          [formField]="personForm.lastName"
+        />
+      </div>
+
+      <div class="field">
+        <label class="label" for="nested-age">Age</label>
+        <input
+          id="nested-age"
+          class="input"
+          type="number"
+          placeholder="Age"
+          [formField]="personForm.age"
+        />
+      </div>
+
+      <div class="field">
+        <label class="label" for="nested-email">E-Mail</label>
+        <input
+          id="nested-email"
+          class="input"
+          type="text"
+          placeholder="Email"
+          [formField]="personForm.email"
+        />
+      </div>
+
+      <div class="field">
+        <label class="label" for="nested-gender">Gender</label>
+        <select id="nested-gender" class="input" [formField]="personForm.gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="not set">Not set</option>
+        </select>
+      </div>
+
+      <fieldset class="radio-group" border>
+        <legend class="label">Wealth:</legend>
+        @for (opt of wealthOpts; track opt) {
+          <label class="checkbox">
+            <input
+              type="radio"
+              [value]="opt"
+              [formField]="personForm.wealth"
+            />
+            {{ opt }}
+          </label>
+        }
+      </fieldset>
+
+      <div column>
+        <h3>Address</h3>
+        <div class="field">
+          <label class="label" for="nested-street">Street</label>
+          <input
+            id="nested-street"
+            class="input"
+            type="text"
+            placeholder="Street"
+            [formField]="personForm.address.street"
+          />
+        </div>
+        @if (
+          personForm.address.street().touched() &&
+          personForm.address.street().invalid()
+        ) {
+          @for (err of personForm.address.street().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <div class="field">
+          <label class="label" for="nested-postal-code">Postal Code</label>
+          <input
+            id="nested-postal-code"
+            class="input"
+            type="text"
+            placeholder="Postal Code"
+            [formField]="personForm.address.postalCode"
+          />
+        </div>
+
+        <div class="field">
+          <label class="label" for="nested-city">City</label>
+          <input
+            id="nested-city"
+            class="input"
+            type="text"
+            placeholder="City"
+            [formField]="personForm.address.city"
+          />
+        </div>
+      </div>
+
+      <div class="cmdItems">
+        <button class="btn btn-primary" type="button" (click)="loadPerson()">
+          Load Sample
+        </button>
+        <button class="btn btn-outline" type="button" (click)="clearPerson()">Clear</button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          [disabled]="personForm().invalid()"
+          (click)="savePerson()"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

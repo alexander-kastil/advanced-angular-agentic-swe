@@ -1,0 +1,77 @@
+<div class="grid">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">debounceTime()</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        The classic pipeline: a reactive control emits,
+        <code>debounceTime</code>
+        holds the value,
+        <code>toSignal</code>
+        renders it. Two conversions for one delay.
+      </p>
+      <div class="field">
+        <label class="label" for="debounce-control">Type here</label>
+        <input id="debounce-control" class="input" [formControl]="control" />
+      </div>
+      <div class="pending">{{ controlPending() ? "waiting " + wait + " ms ..." : "" }}</div>
+      <div class="row"><span>raw</span><span>{{ rawControl() || "-" }}</span></div>
+      <div class="row"><span>settled</span><span>{{ debouncedControl() || "-" }}</span></div>
+      <div class="row"><span>keystrokes</span><span>{{ keystrokes().control }}</span></div>
+      <div class="row"><span>settled values</span><span>{{ settled().control }}</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">debounced()</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        No stream at all.
+        <code>debounced()</code>
+        from
+        <code>&#64;angular/core</code>
+        wraps a signal and hands back a
+        <code>Resource</code>
+        , so the wait is observable through
+        <code>isLoading()</code>
+        .
+      </p>
+      <div class="field">
+        <label class="label" for="debounce-signal">Type here</label>
+        <input id="debounce-signal" class="input" [(ngModel)]="typed" />
+      </div>
+      <div class="pending">
+        {{ debouncedSignal.isLoading() ? "isLoading() is true ..." : "" }}
+      </div>
+      <div class="row"><span>raw</span><span>{{ typed() || "-" }}</span></div>
+      <div class="row"><span>settled</span><span>{{ debouncedSignal.value() || "-" }}</span></div>
+      <div class="row"><span>keystrokes</span><span>{{ keystrokes().signal }}</span></div>
+      <div class="row"><span>settled values</span><span>{{ settled().signal }}</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Signal Forms debounce()</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        Declared as form logic beside the other rules. The control keeps its own
+        <code>controlValue()</code>
+        so the input stays responsive, and the model is written late.
+      </p>
+      <div class="field">
+        <label class="label" for="debounce-form">Type here</label>
+        <input id="debounce-form" class="input" [formField]="searchForm.query" />
+      </div>
+      <div class="pending">{{ formPending() ? "model not written yet ..." : "" }}</div>
+      <div class="row"><span>controlValue()</span><span>{{ formRaw() || "-" }}</span></div>
+      <div class="row"><span>model</span><span>{{ model().query || "-" }}</span></div>
+      <div class="row"><span>keystrokes</span><span>{{ keystrokes().form }}</span></div>
+      <div class="row"><span>settled values</span><span>{{ settled().form }}</span></div>
+    </div>
+  </div>
+</div>

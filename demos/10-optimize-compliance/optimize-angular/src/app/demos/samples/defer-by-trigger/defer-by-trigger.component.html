@@ -1,0 +1,154 @@
+<section class="triggers">
+  <header>
+    <h2>Every &#64;defer Trigger, Side by Side</h2>
+    <p>
+      A trigger decides <em>when</em> a block renders. The chunk behind it is downloaded the first time any
+      block needs it, so the second block that uses the same component renders with no network cost at all.
+      The two tables below are measured live in your browser: the first from the components themselves, the
+      second from <code>PerformanceObserver</code> on the resource timeline.
+    </p>
+  </header>
+
+  <div class="blocks">
+    <article>
+      <h3><code>on immediate</code></h3>
+      <p>Fires as soon as the surrounding template finishes rendering. Useful only to move code out of the initial bundle.</p>
+      @defer (on immediate) {
+        <app-light-panel label="on immediate" />
+      } @placeholder {
+        <div class="placeholder">waiting</div>
+      }
+    </article>
+
+    <article>
+      <h3><code>on idle</code></h3>
+      <p>The default when no trigger is written. Waits for <code>requestIdleCallback</code>.</p>
+      @defer (on idle) {
+        <app-light-panel label="on idle" />
+      } @placeholder {
+        <div class="placeholder">waiting for idle time</div>
+      }
+    </article>
+
+    <article>
+      <h3><code>on timer(3s)</code></h3>
+      <p>A wall-clock delay. Honest but blunt: it fires whether the user cares or not.</p>
+      @defer (on timer(3s)) {
+        <app-light-panel label="on timer(3s)" />
+      } @placeholder {
+        <div class="placeholder">3 seconds after render</div>
+      }
+    </article>
+
+    <article>
+      <h3><code>on hover</code></h3>
+      <p>The pointer entering the placeholder is the signal. Nothing happens for keyboard-only users until they focus it.</p>
+      @defer (on hover) {
+        <app-light-panel label="on hover" />
+      } @placeholder {
+        <div class="placeholder">hover me</div>
+      }
+    </article>
+
+    <article>
+      <h3><code>on interaction</code></h3>
+      <p>Click or keydown on the placeholder. This is the one to pair with a real button.</p>
+      @defer (on interaction) {
+        <app-heavy-panel label="on interaction" />
+      } @placeholder {
+        <button type="button" class="placeholder">click to load the heavy panel</button>
+      }
+    </article>
+
+    <article>
+      <h3><code>on viewport</code></h3>
+      <p>An <code>IntersectionObserver</code> on the placeholder. The workhorse for anything below the fold.</p>
+      <div class="spacer">scroll down</div>
+      @defer (on viewport) {
+        <app-heavy-panel label="on viewport" />
+      } @placeholder {
+        <div class="placeholder">not in the viewport yet</div>
+      }
+    </article>
+
+    <article>
+      <h3><code>when</code> with <code>prefetch on idle</code></h3>
+      <p>The chunk is fetched during idle time, the block renders when the condition flips. The user waits for neither.</p>
+      <button type="button" (click)="arm()">Flip the condition</button>
+      @defer (when armed(); prefetch on idle) {
+        <app-heavy-panel label="when armed()" />
+      } @placeholder {
+        <div class="placeholder">condition is false</div>
+      }
+    </article>
+  </div>
+
+  <h3>Render order, measured</h3>
+  @if (timeline.entries().length === 0) {
+    <p class="hint">No block has rendered yet.</p>
+  } @else {
+    <table>
+      <caption>When each block actually rendered, relative to entering this demo</caption>
+      <thead>
+        <tr>
+          <th scope="col">Trigger</th>
+          <th scope="col">Component</th>
+          <th scope="col">Rendered at</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of timeline.entries(); track $index) {
+          <tr>
+            <th scope="row"><code>{{ entry.label }}</code></th>
+            <td>{{ entry.chunk }}</td>
+            <td>+{{ entry.offset }} ms</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  <h3>Payload, measured</h3>
+  <p class="hint">
+    Under <code>ng serve</code> the numbers are real but unminified and uncompressed, so they overstate
+    what ships by roughly a factor of eight. Run <code>npm run build</code> and read the lazy chunk table
+    for the sizes your users actually download. What is exact in both is the <em>timing</em>: which
+    trigger paid for the fetch, and which one rendered for free.
+  </p>
+  @if (chunks().length === 0) {
+    <p class="hint">No script has been fetched since this demo mounted.</p>
+  } @else {
+    <table>
+      <caption>JavaScript fetched since this demo mounted, total {{ kb(totalTransferred()) }} over the wire</caption>
+      <thead>
+        <tr>
+          <th scope="col">Chunk</th>
+          <th scope="col">Decoded</th>
+          <th scope="col">Transferred</th>
+          <th scope="col">Fetch time</th>
+          <th scope="col">Started at</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (chunk of chunks(); track $index) {
+          <tr>
+            <th scope="row"><code>{{ chunk.file }}</code></th>
+            <td>{{ kb(chunk.encoded) }}</td>
+            <td>{{ kb(chunk.transferred) }}</td>
+            <td>{{ chunk.duration }} ms</td>
+            <td>+{{ chunk.offset }} ms</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  <ul class="notes">
+    <li>The light panel has no dependencies, so its chunk is under a kilobyte. The heavy panel pulls <code>moment</code> in with a dynamic <code>import()</code>, so the first block that renders it fetches the whole library. That difference is the entire argument for deferring.</li>
+    <li>Two blocks share the heavy panel. Only the first one to fire pays for the download; the second renders from the module cache and adds no row at all.</li>
+    <li>Triggers compose: <code>&#64;defer (on viewport; on timer(5s))</code> fires on whichever comes first.</li>
+    <li><code>prefetch</code> takes the same trigger grammar and separates downloading from rendering.</li>
+    <li>Never defer the LCP element. Deferring the thing the user came for makes the score worse.</li>
+    <li>In a production build the file names are hashed. Run <code>ng build</code> and read the lazy chunk table to see the same split before shipping.</li>
+  </ul>
+</section>

@@ -1,0 +1,43 @@
+.stage {
+  padding: 16px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.overview {
+  background: #3f51b5;
+}
+
+.details {
+  background: #00796b;
+}
+
+.stage-enter {
+  animation: stage-enter 320ms ease-out;
+}
+
+.stage-leave {
+  animation: stage-leave 320ms ease-in;
+}
+
+@keyframes stage-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes stage-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.98);
+  }
+}

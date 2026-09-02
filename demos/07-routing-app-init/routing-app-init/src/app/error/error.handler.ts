@@ -1,12 +1,19 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { ErrorHandler, Injectable, Injector, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ErrorLogService } from './error-log.service';
 
-export function globalErrorHandler(error: Error | HttpErrorResponse) {
-  const router = inject(Router);
-  console.warn('An error occurred:', error);
-  if (error.message) {
-    console.warn('Err Message:', error.message);
+@Injectable({
+  providedIn: 'root',
+})
+export class GlobalErrorHandler implements ErrorHandler {
+  private injector = inject(Injector);
+
+  handleError(error: Error | HttpErrorResponse) {
+    const message = error.message ?? String(error);
+    console.warn('An error occurred:', error);
+
+    this.injector.get(ErrorLogService).record('ErrorHandler', message);
+    this.injector.get(Router).navigate(['/error'], { state: { data: message } });
   }
-  router.navigate(['/error'], { state: { data: (error as Error).message } });
 }

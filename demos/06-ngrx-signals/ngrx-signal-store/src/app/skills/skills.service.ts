@@ -8,15 +8,14 @@ import { Skill } from './skill.model';
   providedIn: 'root',
 })
 export class SkillsService {
-
-  http = inject(HttpClient);
+  private http = inject(HttpClient);
   private url = `${environment.api}skills`;
 
   getSkills(): Observable<Skill[]> {
     return this.http.get<Skill[]>(this.url);
   }
 
-  getSkill(id: number): Observable<Skill | undefined> {
+  getSkill(id: number): Observable<Skill> {
     return this.http.get<Skill>(`${this.url}/${id}`);
   }
 
@@ -25,7 +24,11 @@ export class SkillsService {
     return this.http.post<Skill>(this.url, payload);
   }
 
-  deleteSkill(skill: Skill): Observable<any> {
+  updateSkill(skill: Skill): Observable<Skill> {
+    return this.http.put<Skill>(`${this.url}/${skill.id}`, skill);
+  }
+
+  deleteSkill(skill: Skill): Observable<unknown> {
     return this.http.delete(`${this.url}/${skill.id}`);
   }
 }

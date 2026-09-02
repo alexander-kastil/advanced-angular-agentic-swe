@@ -1,0 +1,46 @@
+<section class="panel">
+  <h3>One request through the v22 server</h3>
+  <ol class="pipeline">
+    @for (stage of stages; track stage.title) {
+      <li>
+        <h4>{{ stage.title }}</h4>
+        <p>{{ stage.detail }}</p>
+        <app-code-panel [code]="stage.code" />
+      </li>
+    }
+  </ol>
+</section>
+
+<section class="panel">
+  <h3>What each path proves</h3>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th>path</th>
+        <th>served by</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (probe of probes; track probe.path) {
+        <tr>
+          <td><code>{{ probe.path }}</code></td>
+          <td>{{ probe.expect }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  <p class="lead">
+    These are paths of the built server, not of <code>ng serve</code>. Build first, then start
+    <code>node dist/food-shop-ssr/server/server.mjs</code> and request them.
+  </p>
+  <app-code-panel heading="Verify it yourself" [code]="verify" />
+</section>
+
+<section class="panel">
+  <app-code-panel heading="server.ts imports" [code]="imports" />
+  <app-code-panel
+    heading="The shape this replaced"
+    caption="CommonEngine still exists in @angular/ssr/node 22 but is superseded. The Express 4 '*' route is a hard error on Express 5."
+    [code]="retired"
+  />
+</section>

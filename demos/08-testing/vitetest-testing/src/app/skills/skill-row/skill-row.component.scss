@@ -1,18 +1,25 @@
 .skillrow {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #8d6e63;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.875rem;
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: var(--color-primary-soft);
+  }
 }
 
 .id {
-  width: 50px;
-  padding-left: 2rem
+  width: 70px;
+  color: #64748b;
 }
 
 .name {
   flex: 3;
-  padding-left: 2rem
+  font-weight: 500;
 }
 
 .completed {
@@ -21,7 +28,6 @@
 
 .cmd {
   flex: 1;
-  text-align: end;
   display: flex;
   gap: 0.5rem;
   justify-content: flex-end;

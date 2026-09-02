@@ -1,0 +1,17 @@
+:host {
+  display: inline-block;
+}
+
+.badge {
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+:host(.pulsing) .badge {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}

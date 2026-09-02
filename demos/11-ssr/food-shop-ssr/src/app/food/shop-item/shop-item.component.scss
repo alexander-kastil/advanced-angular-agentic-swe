@@ -1,0 +1,36 @@
+.card {
+  margin-bottom: 1rem;
+  background-color: wheat;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.imgContainer {
+  width: 160px;
+  height: 120px;
+  flex-grow: 0;
+}
+
+.details {
+  margin-right: 1rem;
+  background-color: #f5deb3;
+}
+
+img {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  max-width: 200px;
+}
+
+.textContainer {
+  padding-left: 2rem;
+  padding-top: 1rem;
+  text-align: left;
+}
+
+.card-actions {
+  padding-right: 1rem;
+}

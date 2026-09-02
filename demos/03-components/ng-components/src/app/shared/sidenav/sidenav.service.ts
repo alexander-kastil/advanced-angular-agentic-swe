@@ -1,7 +1,4 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Injectable, inject } from '@angular/core';
-import { tap } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { LayoutStore } from '../layout/layout.store';
 
 @Injectable({
@@ -9,20 +6,20 @@ import { LayoutStore } from '../layout/layout.store';
 })
 export class SideNavService {
   private layoutStore = inject(LayoutStore);
-  private breakpointObserver = inject(BreakpointObserver);
 
   constructor() {
-    this.breakpointObserver
-      .observe([Breakpoints.XSmall, Breakpoints.Small])
-      .pipe(
-        tap((result) => {
-          const position = result.matches ? 'over' : 'side';
-          const visible = !result.matches;
-          this.layoutStore.setSidenavVisible(visible);
-          this.layoutStore.setSidenavPosition(position);
-        }),
-        takeUntilDestroyed()
-      ).subscribe();
+    if (typeof window.matchMedia !== 'function') {
+      return;
+    }
+    const query = window.matchMedia('(max-width: 959.98px)');
+    const apply = (matches: boolean) => {
+      this.layoutStore.setSidenavVisible(!matches);
+      this.layoutStore.setSidenavPosition(matches ? 'over' : 'side');
+    };
+    const listener = (event: MediaQueryListEvent) => apply(event.matches);
+    query.addEventListener('change', listener);
+    inject(DestroyRef).onDestroy(() => query.removeEventListener('change', listener));
+    apply(query.matches);
   }
 
   getSideNavVisible() {

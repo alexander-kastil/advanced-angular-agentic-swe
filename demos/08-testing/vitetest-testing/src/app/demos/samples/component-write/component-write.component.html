@@ -1,20 +1,20 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Title</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-form-field>
-      <mat-label>Enter your text:</mat-label>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Write to the DOM</h2>
+  </div>
+  <div class="card-content">
+    <div class="field">
+      <label class="label" for="username">Enter your text:</label>
       <input
+        id="username"
         data-testid="username"
-        matInput
+        class="input"
         type="text"
         [(ngModel)]="user().username"
       />
-    </mat-form-field>
-  </mat-card-content>
-</mat-card>
-
-<div>
-  {{ user().username }}
+    </div>
+    <div class="output">{{ user().username }}</div>
+  </div>
 </div>
+
+<app-counter />

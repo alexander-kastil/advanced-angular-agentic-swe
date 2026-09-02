@@ -1,0 +1,52 @@
+.defer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-big);
+  padding: var(--gap-big);
+}
+
+article {
+  border: 1px solid var(--color-accent);
+  padding: var(--gap-big);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  border: 2px dashed var(--color-accent);
+  color: inherit;
+  background: transparent;
+  width: 100%;
+  cursor: pointer;
+}
+
+.spacer {
+  height: 40vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0.6;
+}
+
+.loading {
+  min-height: 180px;
+}
+
+.error {
+  color: var(--color-warn);
+}
+
+button {
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.notes {
+  line-height: 1.8;
+}

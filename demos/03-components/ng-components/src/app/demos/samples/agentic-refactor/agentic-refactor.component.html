@@ -1,0 +1,74 @@
+<div boxed>
+  <h2>Refactoring an NgModule-era component with an agent</h2>
+  <p>
+    The left column is the component as it was written for Angular 8. The right column is the same
+    component in Angular 22, and it is the code that actually runs in the badges below.
+  </p>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The rewrite, live</h2>
+  </div>
+  <div class="card-content">
+    <div class="badges">
+      <app-pet-badge name="soi" [adopted]="true" (selected)="select($event)" />
+      <app-pet-badge name="cleo" (selected)="select($event)" />
+      <app-pet-badge name="giro" [adopted]="true" (selected)="select($event)" />
+    </div>
+    <p class="value">last selected: {{ lastSelected() }}</p>
+    <p class="hint">Click a badge, or focus it and press Enter. Both paths run through the host object.</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Before and after</h2>
+  </div>
+  <div class="card-content">
+    <div class="split">
+      <div>
+        <h3>Legacy class</h3>
+        <pre tabindex="0" role="region" aria-label="Legacy component class source">{{ legacyComponent }}</pre>
+        <h3>Legacy template</h3>
+        <pre tabindex="0" role="region" aria-label="Legacy component template source">{{ legacyTemplate }}</pre>
+      </div>
+      <div>
+        <h3>Angular 22 class</h3>
+        <pre tabindex="0" role="region" aria-label="Angular 22 component class source">{{ modernComponent }}</pre>
+        <h3>Angular 22 template</h3>
+        <pre tabindex="0" role="region" aria-label="Angular 22 component template source">{{ modernTemplate }}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">What drives each step</h2>
+  </div>
+  <div class="card-content">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Legacy</th>
+          <th>Angular 22</th>
+          <th>Driven by</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (step of steps; track step.legacy) {
+          <tr>
+            <td><code>{{ step.legacy }}</code></td>
+            <td><code>{{ step.modern }}</code></td>
+            <td>{{ step.driver }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="hint">
+      Four of the seven rows have an official schematic. The rest are agent edits, and the guide
+      next to this demo shows how to brief them against the Angular MCP get_best_practices tool.
+    </p>
+  </div>
+</div>

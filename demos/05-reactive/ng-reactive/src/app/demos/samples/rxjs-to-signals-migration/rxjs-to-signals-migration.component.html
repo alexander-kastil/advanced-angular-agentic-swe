@@ -1,0 +1,153 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The prompt</h2>
+  </div>
+  <div class="card-content">
+    <p>
+      This is the prompt verbatim. It names one file, names the tools to call
+      first, names the rule set to judge the result by, and fences what the agent
+      may not touch. The file it names is real: it sits in
+      <code>ng-reactive/migration-exercise/skills.store.ts</code>
+      , outside
+      <code>src/</code>
+      so its anti-patterns never reach the bundle. Run the prompt against it.
+    </p>
+    <div class="prompt" tabindex="0" role="region" aria-label="Migration prompt">{{ prompt }}</div>
+    <div class="flex items-center gap-2">
+      <button type="button" class="btn btn-primary" (click)="copyPrompt()">
+        Copy the prompt
+      </button>
+      @if (copied()) {
+        <span class="copied">copied</span>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">The MCP tools it calls</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        The
+        <code>angular-cli</code>
+        server is declared in
+        <code>.mcp.json</code>
+        at the repository root and started with
+        <code>npx -y &#64;angular/cli mcp</code>
+        . Tool names are the ones the agent sees.
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Server</th>
+            <th>Used for</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tool of tools; track tool.tool) {
+            <tr>
+              <td><code>{{ tool.tool }}</code></td>
+              <td>{{ tool.server }}</td>
+              <td>{{ tool.usedFor }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Why the prompt is shaped like that</h2>
+    </div>
+    <div class="card-content">
+      @for (step of steps; track step; let i = $index) {
+        <div class="step">
+          <strong>{{ i + 1 }}.</strong>
+          <span>{{ step }}</span>
+        </div>
+      }
+      <p>
+        The rules below are quoted from
+        <code>.claude/skills/angular-conventions/references/angular-antipatterns.md</code>
+        , sections "State Management" and "Data Loading". The agent proposes the
+        rewrite; you check every changed line against this table.
+      </p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Anti-pattern</th>
+            <th>Replacement</th>
+            <th>Section</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (rule of rules; track rule.antiPattern) {
+            <tr>
+              <td>{{ rule.antiPattern }}</td>
+              <td>{{ rule.replacement }}</td>
+              <td>{{ rule.section }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Before</h2>
+    </div>
+    <div class="card-content">
+      <pre tabindex="0" role="region" aria-label="Store before the migration">{{ source }}</pre>
+      <p>
+        Three anti-patterns in one class: a BehaviorSubject holding local state,
+        a subscribe() driving it, and a hand-rolled status machine.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">After</h2>
+    </div>
+    <div class="card-content">
+      <pre tabindex="0" role="region" aria-label="Component after the migration">{{ migrated }}</pre>
+      <p>
+        The status machine is gone because the resource already has one. What is
+        left is the filter, which is derived state, so it is a computed().
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">The migrated code, running</h2>
+  </div>
+  <div class="card-content">
+    <div class="field">
+      <label class="label" for="migration-filter">Filter skills</label>
+      <input id="migration-filter" class="input" type="text" [(ngModel)]="filter" />
+    </div>
+    @if (skills.isLoading()) {
+      <app-progress-bar mode="indeterminate" />
+    } @else if (skills.error()) {
+      <p>Start json-server to see live data.</p>
+    } @else {
+      <div class="chip-set">
+        @for (skill of visible(); track skill.id) {
+          <span class="chip" [class.chip-on]="skill.completed">{{ skill.name }}</span>
+        } @empty {
+          <span class="chip">no matches</span>
+        }
+      </div>
+    }
+  </div>
+</div>

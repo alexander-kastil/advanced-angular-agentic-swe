@@ -1,6 +1,6 @@
 import { test as base, expect, type APIRequestContext, type Page } from '@playwright/test';
 
-const API = 'http://localhost:3000';
+export const API = 'http://localhost:3000';
 
 const INITIAL_CUSTOMERS = [
   { id: 1, name: 'Cleo' },
@@ -69,11 +69,11 @@ export class CustomersPage {
   }
 
   async expectRowVisible(name: string) {
-    await expect(this.page.getByRole('cell', { name })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name, exact: true })).toBeVisible();
   }
 
   async expectRowHidden(name: string) {
-    await expect(this.page.getByRole('cell', { name })).not.toBeVisible();
+    await expect(this.page.getByRole('cell', { name, exact: true })).not.toBeVisible();
   }
 
   async expectFormVisible() {

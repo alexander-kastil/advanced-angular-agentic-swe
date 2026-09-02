@@ -1,3 +1,0 @@
-- Show Router State in NgRx in `routing.component.html`
-- Explain CustomRouterSerializer and its Effect to the `header` in `demo-container.component.ts` 
-- Explain `auth.service.ts` which mocks an authentication service. Show the implementation of the LoginRedirect and Logout actions in `auth.actions.ts` and `auth.effects.ts`

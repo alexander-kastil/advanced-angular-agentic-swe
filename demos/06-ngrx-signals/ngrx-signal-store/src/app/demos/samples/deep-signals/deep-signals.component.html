@@ -1,0 +1,54 @@
+<div class="deep-signal-demo">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">User Profile - Deep Signals</h2>
+    </div>
+    <div class="card-content">
+      <div class="profile-info">
+        <p><strong>Name:</strong> {{ store.user.name() }}</p>
+        <p><strong>Email:</strong> {{ store.user.email() }}</p>
+        <p><strong>Street:</strong> {{ store.user.address.street() }}</p>
+        <p><strong>City:</strong> {{ store.user.address.city() }}</p>
+        <p><strong>Zip:</strong> {{ store.user.address.zip() }}</p>
+        <p><strong>Full Address (computed):</strong> {{ store.fullAddress() }}</p>
+      </div>
+      <div class="profile-edit">
+        <div class="field">
+          <label class="label" for="city">City</label>
+          <input id="city" class="input" [ngModel]="store.user.address.city()" (ngModelChange)="store.updateCity($event)" />
+        </div>
+        <div class="field">
+          <label class="label" for="zip">Zip</label>
+          <input id="zip" class="input" [ngModel]="store.user.address.zip()" (ngModelChange)="store.updateZip($event)" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">The Union Case</h2>
+    </div>
+    <div class="card-content">
+      <p>
+        The <code>contact</code> slice is a union of two record types, so there is no single set of nested keys
+        to hand out. Read it whole and narrow on the discriminant instead of reaching for
+        <code>store.contact.address()</code>.
+      </p>
+
+      @switch (store.contact().kind) {
+        @case ('email') {
+          <p><strong>Email contact:</strong> {{ store.contactLabel() }}</p>
+        }
+        @case ('phone') {
+          <p><strong>Phone contact:</strong> {{ store.contactLabel() }}</p>
+        }
+      }
+
+      <div class="contact-actions">
+        <button type="button" class="btn btn-outline" (click)="store.useEmail()">Use email</button>
+        <button type="button" class="btn btn-outline" (click)="store.usePhone()">Use phone</button>
+      </div>
+    </div>
+  </div>
+</div>

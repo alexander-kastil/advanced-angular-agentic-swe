@@ -1,0 +1,66 @@
+.gates {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-big);
+  padding: var(--gap-big);
+}
+
+article {
+  border: 1px solid var(--color-accent);
+  padding: var(--gap-big);
+}
+
+.boundary {
+  border-left: 4px solid var(--color-primary);
+}
+
+.switches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-big);
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+  cursor: pointer;
+}
+
+button {
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: transparent;
+  color: inherit;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.verdict {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-big);
+  padding: var(--gap-big);
+  border: 2px solid var(--color-primary);
+}
+
+.verdict.blocked {
+  border-color: var(--color-warn);
+  color: var(--color-warn);
+}
+
+.failures pre {
+  border: 1px solid var(--color-warn);
+  padding: var(--gap-small) var(--gap-big);
+  overflow-x: auto;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+.notes {
+  line-height: 1.8;
+}

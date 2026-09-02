@@ -11,5 +11,6 @@ export class SkillRowComponent {
 
   deleteItem(item: Skill): void {
     this.itemDeleted.emit(item);
+  }
 }
 ```

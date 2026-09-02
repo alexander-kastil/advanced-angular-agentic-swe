@@ -1,39 +1,28 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { SideNavService } from '../sidenav/sidenav.service';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { SnackbarService } from '../snackbar/snackbar.service';
 import { NavbarService } from './navbar.service';
-import { AsyncPipe } from '@angular/common';
 import { RouterLinkActive, RouterLink } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
-import { AuthFacade } from 'src/app/mock-auth/state/auth.facade';
+import { SideNavService } from '../sidenav/sidenav.service';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    MatToolbar,
-    MatToolbarRow,
-    MatIcon,
-    RouterLinkActive,
-    RouterLink,
-    AsyncPipe,
-  ]
+  imports: [RouterLinkActive, RouterLink, LoadingComponent],
 })
 export class NavbarComponent {
   nav = inject(SideNavService);
   ms = inject(NavbarService);
   sns = inject(SnackbarService);
-  auth = inject(AuthFacade);
-  menuItems = this.ms.getTopItems();
+  menuItems = toSignal(this.ms.getTopItems(), { initialValue: [] });
 
   toggleMenu() {
     this.nav.toggleMenuVisibility();
   }
 
-  logIn() {
-    this.auth.toggleLoggedIn();
+  toggleApps() {
+    this.sns.displayAlert('Apps', 'Not implemented - just a mock');
   }
 }

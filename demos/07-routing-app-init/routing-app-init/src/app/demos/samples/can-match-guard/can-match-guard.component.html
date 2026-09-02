@@ -1,31 +1,31 @@
 <app-markdown-renderer [md]="'can-match-guard'" />
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>canMatch Guard Demo</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <h3>canMatch vs canActivate</h3>
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">canMatch Guard</h2>
+  </div>
+  <div class="card-content">
     <ul>
       <li>
-        <strong>canMatch:</strong> Prevents lazy module from loading at all if
-        guard fails. Ideal for role-based features to avoid downloading code
-        users can't access.
+        <strong>canMatch:</strong> the route does not match at all, so its lazy chunk is never downloaded.
       </li>
       <li>
-        <strong>canActivate:</strong> Loads module but prevents route
-        activation. Module code is downloaded even if access is denied.
+        <strong>canActivate:</strong> the chunk is downloaded and only activation is blocked.
       </li>
     </ul>
 
+    <p><strong>Authenticated:</strong> {{ isAuthenticated() }}</p>
+    <p><strong>Prime member:</strong> {{ isPrimeMember() }}</p>
     <p>
-      <strong>Authentication Status:</strong>
-      {{ isAuthenticated() ? "Authenticated" : "Not Authenticated" }}
+      <code>featureAccessGuard</code> guards the child route below. Open the network panel, press
+      <em>Open Prime Feature</em> while you are not a prime member, and no chunk is requested.
     </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="tryNavigation()">
-      Try Protected Navigation
-    </button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="card-actions">
+    <button type="button" class="btn btn-primary" (click)="toggleLoggedIn()">Toggle LoggedIn</button>
+    <button type="button" class="btn btn-outline" (click)="togglePrimeMember()">Toggle Prime Member</button>
+    <button type="button" class="btn btn-outline" [routerLink]="['prime-feature']">Open Prime Feature</button>
+  </div>
+</div>
+
+<router-outlet />

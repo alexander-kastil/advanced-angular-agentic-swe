@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Composing signalStoreFeature: withRequestStatus + withAttempts</h2>
+  </div>
+  <div class="card-content content">
+    @if (store.isPending()) {
+      <app-progress-bar />
+    }
+
+    <div class="toolbar">
+      <button type="button" class="btn btn-primary" (click)="store.sync(false)">Sync (succeeds)</button>
+      <button type="button" class="btn btn-outline" (click)="store.sync(true)">Sync (fails)</button>
+      <button type="button" class="btn btn-outline" (click)="store.reset()">Reset</button>
+    </div>
+
+    <div class="status" [class.pending]="store.isPending()" [class.ok]="store.isFulfilled()" [class.failed]="!!store.error()">
+      requestStatus: <strong>{{ statusLabel() }}</strong>
+    </div>
+
+    @if (store.error(); as err) {
+      <p class="error">{{ err }}</p>
+    }
+
+    <p>
+      attempts <strong>{{ store.attempts() }}</strong> - failures <strong>{{ store.failures() }}</strong> -
+      success rate <strong>{{ store.successRate() }}%</strong>
+    </p>
+  </div>
+</div>

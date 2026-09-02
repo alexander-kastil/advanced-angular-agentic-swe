@@ -3,11 +3,11 @@
   <div class="completed">completed: {{ skill().completed }}</div>
   <div class="cmd">
     <button
-      mat-raised-button
-      color="primary"
+      type="button"
+      class="btn btn-primary"
+      aria-label="Edit skill"
       [routerLink]="['/skills', skill().id]">
-      @if (editEnabled()) {<mat-icon>edit</mat-icon>}
-      
+      @if (editEnabled()) {<span class="icon">edit</span>}
     </button>
   </div>
 </div>

@@ -1,15 +1,22 @@
-import { Injectable, inject } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { Injectable, signal } from '@angular/core';
+
+export type Snack = { title: string; msg: string };
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class SnackbarService {
-  snackbar = inject(MatSnackBar);
+  private timer: ReturnType<typeof setTimeout> | null = null;
+  readonly snack = signal<Snack | null>(null);
 
   displayAlert(title: string, msg: string) {
-    this.snackbar.open(title, msg, {
-      duration: 1000
-    });
+    if (this.timer) clearTimeout(this.timer);
+    this.snack.set({ title, msg });
+    this.timer = setTimeout(() => this.snack.set(null), 1000);
+  }
+
+  dismiss() {
+    if (this.timer) clearTimeout(this.timer);
+    this.snack.set(null);
   }
 }

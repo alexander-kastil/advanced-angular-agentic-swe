@@ -1,25 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTableModule } from '@angular/material/table';
+import { Component, computed, inject } from '@angular/core';
+import { ProgressBarComponent } from '../../shared/progress-bar/progress-bar.component';
+import { SlideToggleComponent } from '../../shared/slide-toggle/slide-toggle.component';
 import { Topic } from '../topic.model';
 import { topicsStore } from '../topics.store';
 
 @Component({
   selector: 'app-topic-list',
-  imports: [
-    MatTableModule,
-    MatSlideToggleModule,
-    MatProgressBarModule
-  ],
+  imports: [ProgressBarComponent, SlideToggleComponent],
   templateUrl: './topic-list.component.html',
   styleUrls: ['./topic-list.component.scss'],
   providers: [topicsStore],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopicListComponent {
   store = inject(topicsStore);
   topics = this.store.entities;
+  completedCount = computed(() => this.topics().filter((t) => t.completed).length);
 
   toggleCompleted(topic: Topic) {
     this.store.updateTopic({ ...topic, completed: !topic.completed });

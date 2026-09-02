@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { signal } from '@angular/core';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Customer } from '../customer.model';
@@ -30,7 +29,7 @@ describe('Component - Spy - CustomersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomersComponent, NoopAnimationsModule],
+      imports: [CustomersComponent],
       providers: [
         { provide: customersStore, useValue: storeSpy },
       ],

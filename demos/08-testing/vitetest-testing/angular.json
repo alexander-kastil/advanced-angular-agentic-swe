@@ -30,8 +30,9 @@
               }
             ],
             "styles": [
-              "node_modules/prismjs/themes/prism-okaidia.min.css",
-              "src/styles.scss"
+              "src/tailwind.css",
+              "src/styles.scss",
+              "node_modules/prismjs/themes/prism-okaidia.min.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -91,6 +92,16 @@
           "options": {
             "tsConfig": "tsconfig.spec.json",
             "buildTarget": "vitest-testing:build"
+          }
+        },
+        "test-browser": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "buildTarget": "vitest-testing:build",
+            "browsers": [
+              "chromium"
+            ]
           }
         },
         "extract-i18n": {

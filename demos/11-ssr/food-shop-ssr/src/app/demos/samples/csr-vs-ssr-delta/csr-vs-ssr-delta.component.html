@@ -1,0 +1,72 @@
+<section class="panel">
+  <h3>Measured, not estimated</h3>
+  @if (measurements.length) {
+    <p class="lead">
+      Recorded on {{ measuredAt }} against the production build of this app, served by
+      <code>node dist/food-shop-ssr/server/server.mjs</code> on localhost with json-server stopped.
+      Median of five runs per path.
+    </p>
+    <table class="grid">
+      <thead>
+        <tr>
+          <th>path</th>
+          <th>render path</th>
+          <th>html payload</th>
+          <th>ttfb</th>
+          <th>content in the first response</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of measurements; track row.path) {
+          <tr>
+            <td><code>{{ row.path }}</code></td>
+            <td>{{ row.mode }}</td>
+            <td>{{ bytes(row.htmlBytes) }}</td>
+            <td>{{ row.ttfbMs }} ms</td>
+            <td>{{ row.contentInHtml }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    @if (baseline(); as csr) {
+      <p class="lead">
+        The CSR shell is {{ bytes(csr.htmlBytes) }} of empty scaffolding. It answers fastest because it
+        contains nothing: the dish names only exist after the bundle has downloaded, parsed and made its
+        own request. Every other row already carries the content.
+      </p>
+    }
+  } @else {
+    <p class="lead">No measurements recorded yet.</p>
+  }
+</section>
+
+<section class="panel">
+  <h3>This page, right now</h3>
+  @if (hasLive()) {
+    <table class="grid">
+      <tbody>
+        @for (row of live(); track row.label) {
+          <tr>
+            <td>{{ row.label }}</td>
+            <td><strong>{{ row.value }}</strong></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p class="lead">
+      A <code>navigate</code> type means the server rendered this document. A client-side navigation from
+      the sidebar leaves the original navigation entry in place, so reload to measure this route itself.
+    </p>
+  } @else {
+    <p class="lead">Navigation timing is read in the browser after the first render.</p>
+  }
+</section>
+
+<section class="panel">
+  <app-code-panel heading="How the numbers were produced" [code]="method" />
+  <app-code-panel
+    heading="Getting a real CSR baseline"
+    caption="Add a route with RenderMode.Client to compare against the same app rather than against a different one."
+    [code]="clientBaseline"
+  />
+</section>

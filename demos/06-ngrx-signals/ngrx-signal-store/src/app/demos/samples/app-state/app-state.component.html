@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Application Settings State</h2>
+  </div>
+  <div class="card-content content">
+    <div class="field w-64">
+      <label class="label" for="app-title">App title</label>
+      <input id="app-title" class="input" [ngModel]="store.appTitle()" (ngModelChange)="store.setTitle($event)" />
+    </div>
+
+    <app-slide-toggle [checked]="store.darkMode()" (toggled)="store.toggleDarkMode()">
+      Dark mode
+    </app-slide-toggle>
+
+    <div class="toggle-group">
+      @for (d of densities; track d) {
+        <button type="button" class="toggle-btn" [class.active]="store.density() === d" (click)="store.setDensity(d)">
+          {{ d }}
+        </button>
+      }
+    </div>
+
+    <div class="field w-64">
+      <label class="label" for="page-size">Page size</label>
+      <input id="page-size" class="input" type="number" [ngModel]="store.pageSize()" (ngModelChange)="store.setPageSize(+$event)" />
+    </div>
+
+    <p class="summary">{{ store.summary() }}</p>
+    <p>Derived row height: <strong>{{ store.rowHeight() }}px</strong></p>
+
+    <pre class="state" tabindex="0" role="region" aria-label="Store state snapshot">{{ store.snapshot() }}</pre>
+
+    <button type="button" class="btn btn-primary" (click)="store.reset()">Reset state</button>
+  </div>
+</div>
