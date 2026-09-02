@@ -34,7 +34,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/prismjs/themes/prism-okaidia.min.css",
-              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.min.css"
+              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.min.css",
+              "src/theme/prism-a11y.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -49,7 +50,10 @@
               "node_modules/prismjs/components/prism-css.min.js",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.min.js"
             ],
-            "browser": "src/main.ts"
+            "browser": "src/main.ts",
+            "security": {
+              "autoCsp": true
+            }
           },
           "configurations": {
             "production": {

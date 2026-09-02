@@ -1,63 +1,53 @@
-<app-markdown-renderer [md]="'err-state.matcher'" />
+<app-markdown-renderer [md]="'err-state-matcher'" />
 
-<form
-  [formGroup]="registerForm"
-  (ngSubmit)="registerUser(registerForm)"
-  #form="ngForm"
-  >
-  <mat-card appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Validation Intro - Register Form</mat-card-title>
-    </mat-card-header>
-    <mat-card-content column>
-      <mat-form-field>
-        <input
-          type="text"
-          matInput
-          placeholder="Email Address"
-          id="username"
-          formControlName="email"
-          [errorStateMatcher]="matcher"
-          />
-          @if (registerForm.controls.email.hasError('email')) {
-            <mat-error
-              >Keine oder ungültige E-Mail-Adresse
-            </mat-error>
-          }
-        </mat-form-field>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>ErrorStateMatcher with Signal Forms</mat-card-title>
+  </mat-card-header>
+  <mat-card-content column>
+    <mat-form-field>
+      <mat-label>Email - default matcher (touched and invalid)</mat-label>
+      <input matInput type="email" placeholder="Email Address" [formField]="registerForm.email" />
+      <mat-error>Email is required</mat-error>
+    </mat-form-field>
 
-        <mat-form-field fxFlexFill>
-          <input
-            type="password"
-            matInput
-            id="password"
-            placeholder="Password"
-            formControlName="password"
-            />
-            @if (registerForm.controls.password.hasError('minlength')) {
-              <mat-error
-                >Min 4 Zeichen
-              </mat-error>
-            }
-          </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password - eager matcher (invalid only)</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Password"
+        [formField]="registerForm.password"
+        [errorStateMatcher]="eager"
+      />
+      <mat-error>At least 4 characters</mat-error>
+    </mat-form-field>
 
-          <mat-form-field fxFlexFill>
-            <input
-              type="password"
-              matInput
-              placeholder="Re-Enter Password"
-              formControlName="passwordRepeat"
-              />
-            </mat-form-field>
-            @if ((registerForm.controls.passwordRepeat.dirty || form.submitted) && registerForm.errors) {
-              <mat-error
-                >
-                Password does not match
-              </mat-error>
-            }
-          </mat-card-content>
-          <mat-card-actions align="end">
-            <button mat-raised-button type="submit" color="primary">Register</button>
-          </mat-card-actions>
-        </mat-card>
-      </form>
+    <mat-form-field>
+      <mat-label>Repeat Password - dirty-only matcher</mat-label>
+      <input
+        matInput
+        type="password"
+        placeholder="Re-Enter Password"
+        [formField]="registerForm.passwordRepeat"
+        [errorStateMatcher]="dirtyOnly"
+      />
+      <mat-error>Passwords do not match</mat-error>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button type="button" color="primary" (click)="registerUser()">Register</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Field State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>Email touched: {{ registerForm.email().touched() }} | invalid: {{ registerForm.email().invalid() }}</div>
+    <div>Password dirty: {{ registerForm.password().dirty() }} | invalid: {{ registerForm.password().invalid() }}</div>
+    <div>Repeat dirty: {{ registerForm.passwordRepeat().dirty() }} | invalid: {{ registerForm.passwordRepeat().invalid() }}</div>
+    <div>Form valid: {{ registerForm().valid() }}</div>
+  </mat-card-content>
+</mat-card>

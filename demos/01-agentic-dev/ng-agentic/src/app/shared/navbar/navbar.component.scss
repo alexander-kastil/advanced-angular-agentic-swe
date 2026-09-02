@@ -1,0 +1,25 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-big);
+  height: 100%;
+  padding: 0 var(--gap-big);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.brand {
+  font-size: var(--font-big);
+  font-weight: 500;
+  margin-right: auto;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+
+  &:hover,
+  &.active {
+    text-decoration: underline;
+  }
+}

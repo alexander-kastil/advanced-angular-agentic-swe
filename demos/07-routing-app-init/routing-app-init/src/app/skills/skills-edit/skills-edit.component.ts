@@ -1,21 +1,19 @@
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input, effect } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { MatCardActions, MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../shared/snackbar/snackbar.service';
 import { Skill } from '../skill.model';
-import { SkillsEntityService } from '../skills-entity.service';
+import { SkillsService } from '../skills.service';
 
 @Component({
   selector: 'app-skills-edit',
   templateUrl: './skills-edit.component.html',
   styleUrls: ['./skills-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatCardModule,
     MatFormField,
@@ -24,19 +22,17 @@ import { SkillsEntityService } from '../skills-entity.service';
     FormsModule,
     ReactiveFormsModule,
     MatSlideToggle,
-    MatCardActions,
-    MatButton
-  ]
+  ],
 })
 export class SkillsEditComponent {
-  id = input.required<number>();
-  router = inject(Router);
-  service = inject(SkillsEntityService);
-  sns = inject(SnackbarService);
-  fb = inject(NonNullableFormBuilder);
-  skill: Skill = new Skill();
+  readonly id = input.required({ transform: (value: string | number) => Number(value) });
 
-  skillForm = this.fb.group({
+  private router = inject(Router);
+  private service = inject(SkillsService);
+  private sns = inject(SnackbarService);
+  private fb = inject(NonNullableFormBuilder);
+
+  readonly skillForm = this.fb.group({
     id: [0, { validators: [Validators.required] }],
     name: '',
     completed: false,
@@ -45,19 +41,16 @@ export class SkillsEditComponent {
   constructor() {
     effect(() => {
       const skillId = this.id();
-      if (skillId && skillId !== 0) {
-        this.service.getSkillById(skillId).subscribe((data) => {
-          if (data) {
-            this.skillForm.patchValue(data);
-          }
-        });
+      if (skillId) {
+        this.service.getSkill(skillId).subscribe((skill) => this.skillForm.patchValue(skill));
       }
     });
   }
 
-  saveSkill() {
-    this.service.upsert(this.skillForm.value as Skill).subscribe((data) => {
-    })
+  async saveSkill() {
+    await this.service.updateSkill(this.skillForm.getRawValue() as Skill);
+    this.sns.displayAlert('Skills', 'Skill saved');
+    this.router.navigate(['/skills']);
   }
 
   doCancel() {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -17,7 +17,6 @@ import { customersStore } from '../customers.store';
     MatInput,
     MatButton
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerEditComponent {
   id = input<number>(0);

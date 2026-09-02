@@ -1,0 +1,35 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Entity Collection with withEntities()</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <div class="toolbar">
+      <mat-form-field>
+        <mat-label>New task</mat-label>
+        <input matInput [ngModel]="title()" (ngModelChange)="title.set($event)" (keyup.enter)="add()" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="add()">addEntity</button>
+      <button mat-stroked-button (click)="store.completeAll()">updateAllEntities</button>
+      <button mat-stroked-button (click)="store.seed()">setAllEntities</button>
+      <button mat-stroked-button (click)="store.clear()">removeAllEntities</button>
+    </div>
+
+    @for (t of store.entities(); track t.id) {
+      <div class="row">
+        <mat-checkbox [checked]="t.done" (change)="store.toggle(t.id)" />
+        <span class="grow" [class.done]="t.done">#{{ t.id }} {{ t.title }}</span>
+        <span class="badge" [class.high]="t.priority === 'high'">{{ t.priority }}</span>
+        <button mat-icon-button (click)="store.promote(t.id)"><mat-icon>arrow_upward</mat-icon></button>
+        <button mat-icon-button (click)="store.remove(t.id)"><mat-icon>delete</mat-icon></button>
+      </div>
+    } @empty {
+      <p>Collection is empty. Press setAllEntities to reseed.</p>
+    }
+
+    <p>
+      ids: <strong>{{ store.ids().join(', ') || '-' }}</strong> - total
+      <strong>{{ store.total() }}</strong> - open <strong>{{ store.openCount() }}</strong> - high priority
+      <strong>{{ store.highPriority().length }}</strong>
+    </p>
+  </mat-card-content>
+</mat-card>

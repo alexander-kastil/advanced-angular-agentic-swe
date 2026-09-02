@@ -3,15 +3,15 @@
     <div class="title">SPA Skills</div>
     <div>
       <button mat-raised-button (click)="addItem()" color="primary">Add</button>
-      <mat-slide-toggle [formControl]="fcToggle" color="primary"
-        >ShowAll</mat-slide-toggle>
+      <mat-slide-toggle [checked]="showAll()" (change)="showAll.set($event.checked)" color="primary">
+        ShowAll
+      </mat-slide-toggle>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-@for (sk of skills() ; track sk) {
-  <app-skill-row [skill]="sk"
-    (itemDeleted)="deleteItem($event)"
-    (itemCompleted)="toggleItemComplete($event)"
-   />
+@for (sk of skills(); track sk.id) {
+  <app-skill-row [skill]="sk" (itemDeleted)="deleteItem($event)" (itemCompleted)="toggleItemComplete($event)" />
+} @empty {
+  <div class="box">No skills loaded. Start json-server using: json-server db.json</div>
 }
 <app-skills-kpi />

@@ -42,6 +42,42 @@ export const routes: Routes = [
 ];
 ```
 
+## The three-argument signature
+
+`CanMatchFn` takes three arguments, not two:
+
+```typescript
+type CanMatchFn = (
+  route: Route,
+  segments: UrlSegment[],
+  currentSnapshot: PartialMatchRouteSnapshot,
+) => MaybeAsync<GuardResult>;
+```
+
+`route` is the `Route` config object being tested and `segments` are the URL segments still unmatched. Neither tells you anything about the route's own parameters, because at `canMatch` time the route has not been activated and no `ActivatedRouteSnapshot` exists yet.
+
+The third argument fills that gap. `PartialMatchRouteSnapshot` is the part of an `ActivatedRouteSnapshot` that is already known while matching:
+
+```typescript
+type PartialMatchRouteSnapshot = Pick<
+  ActivatedRouteSnapshot,
+  'routeConfig' | 'url' | 'params' | 'queryParams' | 'fragment' | 'data' | 'outlet' | 'title' | 'paramMap' | 'queryParamMap'
+>;
+```
+
+So a `canMatch` guard can read query parameters, the fragment, the parent's `params` and the route `data` without reconstructing them from `segments`:
+
+```typescript
+export const featureFlagGuard: CanMatchFn = (route, segments, snapshot) => {
+  const flags = inject(FeatureFlagService);
+  const preview = snapshot.queryParamMap.get('preview') === 'true';
+
+  return preview || flags.isEnabled(snapshot.data['feature']);
+};
+```
+
+What is deliberately absent from the type is `component`, `resolve` data and `children`: none of those are resolved before the route matches. `RedirectFunction` receives the same `PartialMatchRouteSnapshot` for the same reason.
+
 ## Multiple canMatch Guards
 
 Guards execute in order. First failure aborts:
@@ -122,3 +158,26 @@ export const featureGuard: CanMatchFn = (route, segments) => {
 - Return `UrlTree` for redirects
 - Keep guard logic simple and fast
 - Log guard failures for debugging
+
+## In this demo
+
+`featureAccessGuard` guards a child route that is loaded with `loadComponent`. It passes only for a prime member:
+
+```typescript
+{
+  path: 'can-match-guard',
+  component: CanMatchGuardComponent,
+  children: [
+    {
+      path: 'prime-feature',
+      canMatch: [featureAccessGuard],
+      loadComponent: () =>
+        import('./samples/can-match-guard/prime-feature/prime-feature.component').then(
+          (m) => m.PrimeFeatureComponent
+        ),
+    },
+  ],
+},
+```
+
+Open the network panel, press **Open Prime Feature** while prime membership is off, and confirm that `prime-feature-component` is never requested. Toggle prime membership on and press it again: only now does the chunk arrive.

@@ -4,6 +4,7 @@
     <mat-card-title>Interceptors</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <p><strong>URL:</strong> {{ requestUrl() }}</p>
     @if (data.isLoading()) {
       <p>Loading...</p>
     } @else if (data.error()) {

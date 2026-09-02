@@ -1,0 +1,22 @@
+<app-markdown-renderer [md]="'route-resolvers-signals'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Resolved album #{{ id() }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      The <code>albumResolver</code> ran the HTTP call before this component existed. The router handed the
+      result to <code>album</code>, an <code>input.required()</code> signal, and the route parameter to
+      <code>id</code>. The component never subscribes and never sees a loading state.
+    </p>
+    <h3>{{ album().title }}</h3>
+    <pre>{{ album() | json }}</pre>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [routerLink]="['../', previousId()]" [disabled]="id() === 1">
+      Previous Album
+    </button>
+    <button mat-raised-button color="primary" [routerLink]="['../', nextId()]">Next Album</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, linkedSignal, output } from '@angular/core';
+import { Component, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, max, min, minLength, required, submit } from '@angular/forms/signals';
 import { Person } from '../../person/person.model';
 import { MatButton } from '@angular/material/button';
@@ -12,8 +12,7 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions } 
   templateUrl: './presenter-edit.component.html',
   styleUrls: ['./presenter-edit.component.scss'],
   imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions,
-    ColumnDirective, FormField, MatFormField, MatLabel, MatInput, MatButton],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    ColumnDirective, FormField, MatFormField, MatLabel, MatInput, MatButton]
 })
 export class PresenterEditComponent {
   readonly person = input.required<Person>();

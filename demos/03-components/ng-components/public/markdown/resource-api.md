@@ -1,163 +1,83 @@
-# Resource API - Reactive Data Loading
+# Resource API
 
-## Overview
+`httpResource()` is the signal-native way to read data over HTTP. You describe the URL as a function of signals; Angular runs the request, tracks the dependencies and re-runs it whenever they change.
 
-The `resource()` API is Angular's modern, signal-based approach to HTTP data fetching. It replaces manual `Observable` + `.subscribe()` patterns with declarative, reactive data loading that automatically manages loading states, errors, and value changes.
-
-## Basic Usage
-
-Create a resource with a loader function:
+## The demo
 
 ```typescript
-import { Component, inject, resource } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { firstValueFrom } from "rxjs";
+export class ResourceApiComponent {
+  protected readonly petId = signal(1);
 
-interface Pet {
-  id: number;
-  name: string;
-  breed: string;
-}
-
-@Component({
-  selector: "app-pet-detail",
-  template: `
-    @if (petResource.isLoading()) {
-      <p>Loading...</p>
-    }
-    @if (petResource.error(); as error) {
-      <p>Error: {{ error }}</p>
-    }
-    @if (petResource.value(); as pet) {
-      <p>{{ pet.name }}</p>
-    }
-  `,
-})
-export class PetDetailComponent {
-  private http = inject(HttpClient);
-
-  protected petResource = resource({
-    loader: async () => {
-      return await firstValueFrom(this.http.get<Pet>("/api/pets/1"));
-    },
-  });
-}
-```
-
-## Reactive Requests
-
-Use the `request()` function to make resources automatically refetch when signals change:
-
-```typescript
-export class PetDetailComponent {
-  private http = inject(HttpClient);
-  protected petId = signal(1);
-
-  protected petResource = resource({
-    request: () => ({ id: this.petId() }),
-    loader: async ({ request }) => {
-      return await firstValueFrom(this.http.get<Pet>(`/api/pets/${request.id}`));
-    },
-  });
+  protected readonly pet = httpResource<Pet>(() => `${environment.api}pets/${this.petId()}`);
 
   protected loadNext() {
-    this.petId.update((id) => id + 1); // Automatically refetches!
+    this.petId.update((id) => id + 1);
   }
 }
 ```
 
-## Resource State
+`loadNext()` writes one signal. There is no fetch call, no loading flag and no error handler, because the URL function read `petId()` and the resource refetches on its own.
 
-Access the built-in loading state, errors, and values:
+## What the resource exposes
 
 ```typescript
-const myResource = resource({ ... });
-
-// Reactive signals
-myResource.value()      // Signal<Data | undefined>
-myResource.isLoading()  // Signal<boolean>
-myResource.error()      // Signal<Error | undefined>
-myResource.status()     // Signal<'loading' | 'success' | 'error'>
-
-// Manual control
-myResource.reload()     // Trigger refetch manually
+pet.value();      // Signal<Pet | undefined>
+pet.status();     // 'idle' | 'loading' | 'reloading' | 'resolved' | 'error' | 'local'
+pet.isLoading();  // Signal<boolean>
+pet.error();      // Signal<unknown>
+pet.reload();     // force a refetch with an unchanged URL
 ```
-
-## Template Usage
-
-Use with `@if`, `@for`, and modern control flow:
 
 ```html
-@if (myResource.isLoading()) {
-<app-spinner />
-} @if (myResource.error(); as error) {
-<div class="error">{{ error }}</div>
-} @if (myResource.value(); as data) { @for (item of data; track item.id) {
-<app-item [item]="item" />
-} }
+@if (pet.isLoading()) { <mat-progress-spinner mode="indeterminate" /> }
+@if (pet.error(); as error) { <p>{{ error }}</p> }
+@if (pet.value(); as data) { <h4>{{ data.name }}</h4> }
 ```
 
-## Advantages over Manual Subscription Pattern
+## Options
 
-| Feature                      | resource()                            | .subscribe()             |
-| ---------------------------- | ------------------------------------- | ------------------------ |
-| **Automatic loading state**  | ✅ Built-in                           | ❌ Manual signals        |
-| **Automatic error handling** | ✅ Built-in                           | ❌ Manual error logic    |
-| **Reactive updates**         | ✅ Automatic refetch on signal change | ❌ Must manually trigger |
-| **Memory leaks**             | ✅ No                                 | ❌ Must unsubscribe      |
-| **Lines of code**            | ✅ ~5 lines                           | ❌ ~20+ lines            |
-| **Test complexity**          | ✅ Simple                             | ❌ Complex mocking       |
-
-## Common Patterns
-
-### Conditional Requests
-
-Skip loading when conditions aren't met:
+Pass a request object instead of a bare URL when you need a method, headers or params:
 
 ```typescript
-protected id = signal<number | undefined>(undefined);
+readonly search = httpResource<Pet[]>(() => ({
+  url: `${environment.api}pets`,
+  params: { type: this.type() },
+}));
+```
 
-protected data = resource({
-  request: () => {
-    const currentId = this.id();
-    return currentId ? { id: currentId } : undefined;
-  },
-  loader: async ({ request }) => {
-    if (!request) return undefined;
-    return await firstValueFrom(this.http.get(`/api/items/${request.id}`));
-  }
+Returning `undefined` from the function makes the resource idle, which is how you express "do not load yet":
+
+```typescript
+readonly pet = httpResource<Pet>(() =>
+  this.selectedId() ? `${environment.api}pets/${this.selectedId()}` : undefined
+);
+```
+
+Sub-constructors parse other response types: `httpResource.text()`, `httpResource.blob()`, `httpResource.arrayBuffer()`.
+
+## resource() vs httpResource()
+
+`resource()` is the generic form and takes any async loader, so use it for IndexedDB, the file system access API, a WebSocket handshake or an SDK call. When the source is HTTP, `httpResource()` is the shorter and better-typed path.
+
+```typescript
+readonly config = resource({
+  params: () => ({ key: this.key() }),
+  loader: ({ params }) => loadFromIndexedDb(params.key),
 });
 ```
 
-### Manual Reload
+## Why not the alternatives
 
-Trigger refetch manually:
+| Approach | Problem |
+| --- | --- |
+| `.subscribe()` in the component | you own the subscription lifetime by hand |
+| `obs$ \| async` | no status, no error signal, one subscription per usage in the template |
+| `toSignal(http.get(...))` | fires once, never refetches, hides loading and error state |
 
-```typescript
-protected handleRefresh() {
-  this.myResource.reload();
-}
+## Running the demo
+
+The pets come from json-server:
+
+```bash
+json-server db.json
 ```
-
-### Transform Data
-
-Apply transformations in the loader:
-
-```typescript
-protected items = resource({
-  loader: async () => {
-    const data = await firstValueFrom(this.http.get<Pet[]>('/api/pets'));
-    return data.sort((a, b) => a.name.localeCompare(b.name));
-  }
-});
-```
-
-## Key Differences from Observables
-
-- **resource()**: Synchronous, signal-based, managed lifecycle
-- **Observable**: Asynchronous, RxJS-based, manual subscription management
-
-## Further Reading
-
-- [Angular Resource Documentation](https://angular.dev/guide/signals/resource)
-- [HTTP Client Guide](https://angular.dev/guide/http)

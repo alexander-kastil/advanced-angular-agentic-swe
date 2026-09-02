@@ -1,0 +1,30 @@
+<app-markdown-renderer [md]="'router-bindings'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Route state bound straight into signal inputs</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <code>withComponentInputBinding()</code> feeds every query parameter into a matching
+      <code>input()</code>. No <code>ActivatedRoute</code>, no subscription, no manual parsing: the URL is
+      the state.
+    </p>
+
+    <mat-form-field>
+      <mat-label>Search Query</mat-label>
+      <input matInput [value]="q()" (change)="onSearch($any($event.target).value)" />
+    </mat-form-field>
+
+    <h3>Inputs bound from the URL</h3>
+    <pre>{{ queryState() | json }}</pre>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="previousPage()" [disabled]="page() === 1">
+      Previous Page
+    </button>
+    <button mat-raised-button color="primary" (click)="nextPage()">Next Page</button>
+    <button mat-raised-button color="accent" (click)="toggleRecent()">Toggle Recent</button>
+    <button mat-raised-button (click)="clear()">Clear Params</button>
+  </mat-card-actions>
+</mat-card>

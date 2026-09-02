@@ -1,7 +1,9 @@
-<div class="box">
-  Customer ID: {{ id() }} - Param readonly: {{ readonly() }}
-</div>
+<div class="box">Customer ID: {{ id() }} - Param readonly: {{ readonly() }}</div>
 
 <div class="box">
-  {{ customer | async| json}}
+  @if (customer(); as c) {
+    <pre>{{ c | json }}</pre>
+  } @else {
+    <p>No customer with id {{ id() }}</p>
+  }
 </div>

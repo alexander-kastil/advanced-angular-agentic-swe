@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {Component, inject } from '@angular/core';
 import { SnackbarService } from '../snackbar/snackbar.service';
 import { SidebarActions } from './sidebar.actions';
 import { SidePanelService } from './sidepanel.service';
@@ -11,7 +11,6 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
   selector: 'app-side-panel',
   templateUrl: './side-panel.component.html',
   styleUrls: ['./side-panel.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatToolbar,
     MatToolbarRow,

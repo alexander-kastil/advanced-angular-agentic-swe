@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeepSignalComponent } from './deep-signal.component';
+import { DeepSignalComponent } from './deep-signals.component';
 
 describe('DeepSignalComponent', () => {
   let component: DeepSignalComponent;

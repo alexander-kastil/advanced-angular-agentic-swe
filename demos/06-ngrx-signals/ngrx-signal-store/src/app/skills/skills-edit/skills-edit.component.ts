@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardActions, MatCardModule } from '@angular/material/card';
@@ -8,35 +8,35 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
-import { firstValueFrom } from 'rxjs';
 import { SnackbarService } from '../../shared/snackbar/snackbar.service';
 import { Skill } from '../skill.model';
-import { SkillsEntityService } from '../skills-entity.service';
+import { SkillsService } from '../skills.service';
+import { SkillsStore } from '../skills.store';
 
 @Component({
   selector: 'app-skills-edit',
   templateUrl: './skills-edit.component.html',
   styleUrls: ['./skills-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatCardModule, MatFormField, MatLabel, MatInput, MatButtonModule,
     FormField, MatSlideToggle, MatCardActions]
 })
 export class SkillsEditComponent {
-  route = inject(ActivatedRoute);
-  router = inject(Router);
-  service = inject(SkillsEntityService);
-  sns = inject(SnackbarService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private service = inject(SkillsService);
+  private store = inject(SkillsStore);
+  private sns = inject(SnackbarService);
 
-  id = toSignal(
+  readonly id = toSignal(
     this.route.paramMap.pipe(
       map(params => params.get('id') || this.route.snapshot.data['id'] || 'new')
     ),
     { initialValue: this.route.snapshot.data['id'] || this.route.snapshot.paramMap.get('id') || 'new' }
   );
 
-  skillModel = signal<Skill>({ id: 0, name: '', completed: false });
+  readonly skillModel = signal<Skill>({ id: 0, name: '', completed: false });
 
-  skillForm = form(this.skillModel, (s) => {
+  readonly skillForm = form(this.skillModel, (s) => {
     required(s.name, { message: 'Name is required' });
   });
 
@@ -50,9 +50,12 @@ export class SkillsEditComponent {
       if (routeId === 'new' || routeId === '') {
         this.skillModel.set({ id: 0, name: '', completed: false });
       } else if (idNum > 0) {
-        this.service.getSkillById(idNum).subscribe((data) => {
-          if (data) this.skillModel.set(data);
-        });
+        const known = this.store.entityMap()[idNum];
+        if (known) {
+          this.skillModel.set({ ...known });
+        } else {
+          this.service.getSkill(idNum).subscribe((data) => this.skillModel.set(data));
+        }
       }
     });
   }
@@ -60,8 +63,11 @@ export class SkillsEditComponent {
   saveSkill() {
     submit(this.skillForm, async () => {
       const skill = this.skillModel();
-      const op$ = this.isNew ? this.service.add(skill) : this.service.update(skill);
-      await firstValueFrom(op$);
+      if (this.isNew) {
+        this.store.add(skill);
+      } else {
+        this.store.update(skill);
+      }
       this.sns.displayAlert('Skills', this.isNew ? 'Skill added' : 'Skill updated');
       this.router.navigate(['/skills']);
     });

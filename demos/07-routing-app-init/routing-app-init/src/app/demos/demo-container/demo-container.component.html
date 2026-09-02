@@ -10,7 +10,12 @@
         <mat-toolbar class="sidenav-menu">
           <span>Please select:</span>
         </mat-toolbar>
-        @for (item of demos(); track item) {
+        @if (isLoadingDemos()) {
+          <mat-list-item role="listitem">Loading demos ...</mat-list-item>
+        } @else if (hasErrorDemos()) {
+          <mat-list-item role="listitem">Start json-server using: json-server db.json</mat-list-item>
+        }
+        @for (item of demos(); track item.id) {
           <mat-list-item
             role="listitem"
             [routerLink]="['./' + item.url]"
@@ -34,9 +39,6 @@
             </mat-toolbar-row>
           </mat-toolbar>
         </div>
-        <!-- <div class="gdLoading">
-        <app-loading *ngIf="isLoading()"></app-loading>
-      </div> -->
         <div class="gdWorkbench">
           <router-outlet />
         </div>

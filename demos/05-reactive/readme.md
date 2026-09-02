@@ -1,42 +1,45 @@
-# Mastering Reactive Programming with RxJS
+# RxJS Where It Still Matters
 
-[RxJS Api Reference](https://rxjs-dev.firebaseapp.com/api)
+RxJS is no longer the way to hold state in an Angular application: signals are. What RxJS still owns is everything that is genuinely a stream over time, and the boundary between the two worlds. This module is eight demos long and every one of them is about a decision you have to make in Angular 22 code, not about the RxJS API surface.
 
-[ReactiveX home](http://reactivex.io/)
+The through line: consume streams as signals, keep the operators for the problems only operators solve (time, cancellation, retry, coordination), and let `rxResource` / `httpResource` own request and response.
 
-[Reactive How](https://reactive.how/)
+## Run it
 
-[RxJS Marbles](https://rxmarbles.com/)
+```bash
+cd ng-reactive
+npm install
+json-server db.json
+npm start
+```
 
-[RxJS Marbles iOS](https://apps.apple.com/us/app/rxmarbles/id1087272442)
-
-[Testing RxJS Code with Marble Diagrams](https://rxjs.dev/guide/testing/marble-testing)
-
-RxJS remains essential for professional Angular development, especially for library integration, complex async orchestration, and working with existing codebases. This module covers the full reactive programming model: Observables, operators, marble testing, custom operators, and signal interop via `toSignal()` and `httpResource()`. You will learn the foundational patterns that NgRx effects build on and understand when to reach for observables versus signals.
+The demo list, the guides shown beside each demo and the table below all come from `db.json`.
 
 ## Demos
 
-| #   | Route                | Title                      | Topic             | Teaches                                                                                                                                                                       |
-| --- | -------------------- | -------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | imperative           | Imperative Reactivity      | Foundations       | Understand the limitations of imperative programming with callbacks and mutable state. See how manual subscription management leads to memory leaks and complex control flow. |
-| 2   | reactive             | Declarative Reactivity     | Foundations       | Transition to declarative reactive programming with Observables. Let RxJS handle data flow and subscriptions automatically for cleaner, more maintainable code.               |
-| 3   | async-pipe           | Async Pipe                 | Foundations       | Use the async pipe to subscribe to Observables directly in templates. Mark components as OnPush for performance and let Angular handle subscription cleanup.                  |
-| 4   | unsubscribe          | Unsubscribing              | Foundations       | Prevent memory leaks by properly unsubscribing from Observables. Explore patterns like takeUntil() and subscription management in component lifecycle.                        |
-| 5   | subjects             | Subjects                   | Foundations       | Learn about Subjects, a special type of Observable that acts as both observer and observable. Use Subjects to multicast values to multiple subscribers.                       |
-| 6   | creating             | Creating Observables       | Foundations       | Create Observables from scratch using of(), from(), interval(), and custom Observable constructors. Understand cold vs hot Observables.                                       |
-| 7   | operators            | Base Operators             | Operators         | Master fundamental operators like map(), filter(), reduce(), and forEach(). Transform and filter Observable streams with common operations.                                   |
-| 8   | transformation       | Transformation             | Operators         | Use advanced transformation operators like flatMap(), switchMap(), and mergeMap(). Control how nested Observables are flattened into result streams.                          |
-| 9   | combining            | Combining Observables      | Operators         | Combine multiple Observable streams using operators like merge(), concat(), combineLatest(), and zip(). Coordinate data from multiple sources efficiently.                    |
-| 10  | err-handling         | Error Handling             | Operators         | Handle errors in Observable streams with catchError() and retry(). Recover from failures gracefully and log errors appropriately.                                             |
-| 11  | custom-operators     | Custom Operators           | Operators         | Build reusable custom operators with the pipe() pattern. Encapsulate complex transformation logic into composable, shareable utilities.                                       |
-| 12  | timer-interval       | Timer & Interval Operators | Operators         | Create time-based streams with interval(), timer(), and delay(). Understand cold observable creation and takeUntilDestroyed for cleanup.                                      |
-| 13  | marble-testing       | Marble Testing             | Testing           | Test Observable sequences using marble diagrams and TestScheduler. Verify complex async behavior predictably with visual test notation.                                       |
-| 14  | action-streams       | Action Streams             | Patterns for NgRx | Build reactive data flows from user actions using Subjects and operators. Combine multiple action streams for event-driven applications. Foundation pattern for NgRx effects. |
-| 15  | debounced            | Debounced Search           | Patterns for NgRx | Implement efficient search with debounceTime() and switchMap() to reduce API calls. Essential pattern for NgRx effects handling user input.                                   |
-| 16  | mouse-dom            | Mouse & DOM Events         | Patterns for NgRx | Convert DOM events into Observable streams using fromEvent(). Handle mouse movements, clicks, and other browser events reactively.                                            |
-| 17  | responsive-screen    | Responsive Screen          | Patterns for NgRx | React to screen size changes and media queries using Observables. Build responsive layouts that adapt dynamically to viewport dimensions.                                     |
-| 18  | event-bus            | Event Bus                  | Patterns for NgRx | Implement a publish-subscribe pattern with Observables. Use an event bus to decouple component communication. Compare with NgRx event-driven patterns.                        |
-| 19  | http-with-rxjs       | HTTP + RxJS Integration    | Patterns for NgRx | Use HttpClient with switchMap(), shareReplay(), and distinctUntilChanged(). Write efficient, cancelable HTTP streams. Foundation for NgRx effects.                            |
-| 20  | observable-to-signal | Observable to Signal       | Signal Interop    | Convert Observables to signals using toSignal(). Access reactive data synchronously in templates without async pipe. Modern interop pattern.                                  |
-| 21  | httpresource-pattern | HttpResource Pattern       | Signal Interop    | Use httpResource() for declarative HTTP data fetching with built-in loading, error, and value states. Modern alternative to Observable-based patterns.                        |
-| 22  | subject-to-output    | Subject vs output()        | Signal Interop    | Compare Subject-based event multicasting with Angular output() signals. Understand modern vs legacy patterns for component communication.                                     |
+| # | Route | Title | Topic | Teaches |
+| --- | --- | --- | --- | --- |
+| 1 | subscribe-vs-stream-vs-signal | Subscribe vs Stream vs Signal | Foundations | Compare the three ways to consume an Observable in a component: a manual subscribe() you must tear down, an async pipe binding, and toSignal(). See why toSignal() is the default in Angular 22. |
+| 2 | flattening-strategies | Flattening Strategies | Operators | Fire the same request into four pipelines against the live API and watch switchMap, mergeMap, concatMap and exhaustMap disagree. Read the in-flight counters, not just the results. |
+| 3 | combining | Combining Streams | Operators | Coordinate several sources with combineLatest, forkJoin, merge and withLatestFrom, three of them over real endpoints. Understand which operator emits when, and which source drives the result. |
+| 4 | error-handling | Error Handling | Operators | Recover from a real 404 with catchError and retry, compare EMPTY against a fallback against a rethrow, then package the pattern into a custom operator verified by a marble test. |
+| 5 | interop | Signal Interop Both Ways | Signal Interop | Cross the boundary in all four directions: toSignal, toObservable, outputToObservable and outputFromObservable. Then see why rxResource replaces all four for request and response. |
+| 6 | debounce-three-ways | Debounce Three Ways | Signal Interop | Delay user input with debounceTime, with the experimental debounced() from @angular/core, and with the Signal Forms debounce() rule. Compare the ceremony and the pending state each one gives you. |
+| 7 | rxresource-vs-switchmap | rxResource vs switchMap | Signal Interop | Put a hand-written switchMap search next to rxResource, then chain a dependent request with chain(). See what the resource API gives you for free. |
+| 8 | rxjs-to-signals-migration | RxJS to Signals Migration | Migration | Migrate a real BehaviorSubject store to signals with an agent, using the exact prompt and the angular-cli MCP tools shown in the demo, then review the result against the repository antipattern rules. |
+
+## Links
+
+- [RxJS API reference](https://rxjs.dev/api)
+- [RxJS marble testing](https://rxjs.dev/guide/testing/marble-testing)
+- [RxJS Marbles](https://rxmarbles.com/)
+- [Angular RxJS interop](https://angular.dev/ecosystem/rxjs-interop)
+- [Debouncing signals with `debounced`](https://angular.dev/guide/signals/debounced)
+
+## Notes for this module
+
+- Guides live in `ng-reactive/public/markdown`, served from `markdownPath: 'markdown/'`.
+- `json-server db.json` is required to run the app at all: the demo list and the guides come from the `demos` collection. Of the demos themselves, `subscribe-vs-stream-vs-signal` and `debounce-three-ways` touch no endpoint, and neither does the `merge` pane in `combining`; the other six do. `error-handling` deliberately requests `/skilz`, which json-server answers with 404.
+- The custom operator in `error-handling` is covered by a `TestScheduler` marble test. Run it with `npm test`.
+- `ng-reactive/migration-exercise/skills.store.ts` is the "before" file for demo 8. It sits outside `src/` so its anti-patterns are never compiled into the app.
+- `debounced()` from `@angular/core` and the Signal Forms `debounce()` rule are both experimental in 22.0. Both are verified present in the installed `@angular/core` 22.1.4 and `@angular/forms` 22.1.4.

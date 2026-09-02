@@ -1,4 +1,5 @@
 export const environment = {
-    api: 'http://localhost:3000/',
+    title: 'Hybrid Rendering',
+    markdownPath: 'markdown/',
+    api: 'http://localhost:3010/',
 };
-

@@ -1,1 +1,40 @@
 <app-markdown-renderer [md]="'router-animations'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>animate.enter and animate.leave</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Angular 22 animates entering and leaving elements with plain CSS. No
+      <code>@angular/animations</code> package, no trigger metadata: the element names a class and Angular
+      waits for the animation to finish before removing it from the DOM.
+    </p>
+    <div class="panels">
+      @for (panel of panels(); track panel.id) {
+        <div class="panel" animate.enter="slide-in" animate.leave="slide-out">
+          <span>{{ panel.label }}</span>
+          <button mat-button color="warn" (click)="removePanel(panel.id)">Remove</button>
+        </div>
+      } @empty {
+        <p>All panels removed. Add one to watch it animate in.</p>
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addPanel()">Add Panel</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Route transitions</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Navigation between routes is animated by <code>withViewTransitions()</code> in
+      <code>app.config.ts</code>, which hands the swap to the browser's native View Transitions API. The
+      styling lives in <code>src/theme/view-transition.scss</code>.
+    </p>
+  </mat-card-content>
+</mat-card>

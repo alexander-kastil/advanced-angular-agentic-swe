@@ -1,0 +1,49 @@
+<app-markdown-renderer [md]="'route-inputs'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>withComponentInputBinding and its options</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Four different sources reach this component as plain <code>input()</code> signals: the path
+      parameter <code>:tenant</code>, the static route <code>data</code> value
+      <code>release</code>, the query parameter <code>highlight</code>, and
+      <code>draftTitle</code>, which no route key matches at all.
+    </p>
+    <pre>{{ bound() | json }}</pre>
+    <p>
+      <code>draftTitle</code> shows the default <code>unmatchedInputBehavior</code>:
+      <code>'alwaysUndefined'</code> overwrites the component's own default with
+      <code>undefined</code> so that stale data can never survive a navigation.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    @for (name of tenants; track name) {
+      <button mat-raised-button color="primary" (click)="switchTenant(name)">{{ name }}</button>
+    }
+    <button mat-raised-button color="accent" (click)="setHighlight('overdue')">
+      Highlight overdue
+    </button>
+    <button mat-raised-button (click)="setHighlight('')">Clear highlight</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Inherited parameters in a child route</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <nav class="sections">
+      @for (section of sections; track section) {
+        <a
+          mat-button
+          [routerLink]="['/demos/route-inputs', tenant(), section]"
+          routerLinkActive="active"
+          >{{ section }}</a
+        >
+      }
+    </nav>
+    <router-outlet />
+  </mat-card-content>
+</mat-card>

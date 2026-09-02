@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 import { wealthOptsValues } from '../person/person.model';
-import { PersonService } from '../person/person.service';
 import { MatButton } from '@angular/material/button';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { MatOption } from '@angular/material/core';
@@ -26,10 +25,30 @@ interface NestedModel {
   };
 }
 
+const emptyModel: NestedModel = {
+  name: '',
+  lastName: '',
+  age: 0,
+  gender: 'not set',
+  email: '',
+  wealth: '',
+  address: { street: '', city: '', postalCode: '' },
+};
+
+const samplePerson: NestedModel = {
+  name: 'Cletschi',
+  lastName: 'Whippet',
+  age: 15,
+  gender: 'female',
+  email: 'cleothewhippet@integrations.at',
+  wealth: 'rich',
+  address: { street: 'Stairway to heaven', city: 'Better place', postalCode: '1000' },
+};
+
 @Component({
   selector: 'app-reactive-nested',
-  templateUrl: './signal-form-nested-objects.component.html',
-  styleUrls: ['./signal-form-nested-objects.component.scss'],
+  templateUrl: './reactive-nested.component.html',
+  styleUrls: ['./reactive-nested.component.scss'],
   imports: [
     MarkdownRendererComponent,
     MatCard,
@@ -47,53 +66,29 @@ interface NestedModel {
     BorderDirective,
     MatRadioButton,
     MatButton,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class ReactiveNestedComponent {
-  private ps = inject(PersonService);
   wealthOpts = wealthOptsValues;
 
-  personModel = signal<NestedModel>({
-    name: '',
-    lastName: '',
-    age: 0,
-    gender: 'not set',
-    email: '',
-    wealth: '',
-    address: { street: '', city: '', postalCode: '' },
-  });
+  personModel = signal<NestedModel>(emptyModel);
 
-  // Signal Forms supports nested objects via dot notation
   personForm = form(this.personModel, (s) => {
     required(s.name, { message: 'Name is required' });
     required(s.lastName, { message: 'Last name is required' });
     required(s.address.street, { message: 'Street is required' });
+    required(s.address.city, { message: 'City is required' });
   });
 
-  constructor() {
-    effect(() => {
-      this.ps.getPerson().subscribe((p) => {
-        this.personModel.update((m) => ({
-          ...m,
-          name: p.name,
-          lastName: p.lastName ?? '',
-          age: p.age,
-          gender: p.gender,
-          email: p.email,
-          wealth: p.wealth,
-          address: p.address ?? m.address,
-        }));
-      });
-    });
+  loadPerson(): void {
+    this.personModel.set(samplePerson);
+  }
 
-    setTimeout(() => {
-      this.personModel.update((m) => ({ ...m, name: 'Soi' }));
-    }, 3000);
+  clearPerson(): void {
+    this.personForm().reset(emptyModel);
   }
 
   savePerson(): void {
-    this.ps.save(this.personModel() as any);
+    console.log('person saved:', this.personModel());
   }
 }
-

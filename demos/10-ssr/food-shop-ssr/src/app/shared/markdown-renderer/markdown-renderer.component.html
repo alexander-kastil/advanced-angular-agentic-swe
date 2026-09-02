@@ -1,0 +1,5 @@
+@if (isBrowser && md()) {
+  <markdown class="markdown-body" [src]="src()" />
+} @else {
+  <p class="guide-hint">The guide is rendered in the browser.</p>
+}

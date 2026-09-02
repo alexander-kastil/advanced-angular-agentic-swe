@@ -3,8 +3,9 @@
     <div class="title">SPA Skills</div>
     <div>
       <button mat-raised-button (click)="addItem()" color="primary">Add</button>
-      <mat-slide-toggle [formControl]="fcToggle" color="primary"
-        >ShowAll</mat-slide-toggle>
+      <mat-slide-toggle [checked]="store.showAll()" (change)="store.toggleShowAll()" color="primary">
+        ShowAll
+      </mat-slide-toggle>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -14,7 +15,13 @@
   <div class="completed">Completed</div>
   <div class="cmd">Actions</div>
 </div>
-@for (sk of skills() ; track sk) {
+@if (store.isPending()) {
+  <p>Loading skills...</p>
+}
+@if (store.error(); as err) {
+  <p class="error">{{ err }}</p>
+}
+@for (sk of store.visibleSkills(); track sk.id) {
   <app-skill-row [skill]="sk"
     (itemDeleted)="deleteItem($event)"
     (itemCompleted)="toggleItemComplete($event)"

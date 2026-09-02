@@ -1,38 +1,36 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal, effect } from '@angular/core';
-import { MatDrawerMode } from '@angular/material/sidenav';
+import { httpResource } from '@angular/common/http';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NavItem } from '../navbar/navitem.model';
+import { MatDrawerMode } from '@angular/material/sidenav';
 import { environment } from '../../../environments/environment';
+import { NavItem } from '../navbar/navitem.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SideNavService {
-  http = inject(HttpClient);
-  breakpointObserver = inject(BreakpointObserver);
+  private breakpointObserver = inject(BreakpointObserver);
   private visible = signal(true);
   private position = signal<MatDrawerMode>('side');
+
   readonly sideNavVisible = this.visible.asReadonly();
   readonly sideNavPosition = this.position.asReadonly();
 
-  private topItemsSignal = toSignal(
-    this.http.get<NavItem[]>(`${environment.api}top-links`),
-    { initialValue: [] }
-  );
+  private topItems = httpResource<NavItem[]>(() => `${environment.api}top-links`, {
+    defaultValue: [],
+  });
 
-  private breakpointSignal = toSignal(
+  private breakpoint = toSignal(
     this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
   );
 
   constructor() {
     effect(() => {
-      const matchesBreakpoint = this.breakpointSignal();
-      if (matchesBreakpoint) {
-        console.log(matchesBreakpoint);
-        this.visible.set(!matchesBreakpoint.matches);
-        this.position.set(matchesBreakpoint.matches ? 'over' : 'side');
+      const state = this.breakpoint();
+      if (state) {
+        this.visible.set(!state.matches);
+        this.position.set(state.matches ? 'over' : 'side');
       }
     });
   }
@@ -50,10 +48,10 @@ export class SideNavService {
   }
 
   toggleMenuVisibility() {
-    this.visible.update(v => !v);
+    this.visible.update((v) => !v);
   }
 
   getTopItems() {
-    return this.topItemsSignal;
+    return this.topItems.value;
   }
 }

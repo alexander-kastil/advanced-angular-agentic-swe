@@ -1,36 +1,97 @@
-<div boxed>
-  <h3>Using &#64;if</h3>
-  <div>
-    <mat-slide-toggle [formControl]="fcDisplay"
-      >Display members area</mat-slide-toggle
-    >
-  </div>
-  <div>
-    @if (fcDisplay.value) {
-      <p>Members area</p>
-    } @else {
-      <p>Public area</p>
-    }
-  </div>
-</div>
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>&#64;if / &#64;else</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-slide-toggle [checked]="membersOnly()" (change)="membersOnly.set($event.checked)">
+      Members area
+    </mat-slide-toggle>
 
-<div>
-  <h3>Using &#64;for, &#64;defer and &#64;placeholder</h3>
-  @defer (when this.dogs.length > 0) {
+    @if (membersOnly()) {
+      <p>Members area content</p>
+    } @else {
+      <p>Public area content</p>
+    }
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>&#64;for / &#64;empty / &#64;let</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @let average = averageAge().toFixed(1);
+    <p>Average age: {{ average }}</p>
+
     <div boxed>
-      <div>
-        @for (dog of dogs(); track $index) {
-          <p>{{ dog }}</p>
-        }
-      </div>
+      @for (dog of dogs(); track dog.id) {
+        <p>{{ $index + 1 }}. {{ dog.name }} ({{ dog.breed }}) is {{ dog.age }}</p>
+      } @empty {
+        <p>No dogs left</p>
+      }
     </div>
-  } @error {
-    <div>Error happened ...</div>
-  } @placeholder {
-    <div boxed>
-      <div>
-        <p>Loading...</p>
-      </div>
+
+    <div class="actions">
+      <button mat-stroked-button (click)="dogs.update(list => ageAllBy(list, 1))">
+        Everyone ages a year
+      </button>
+      <button mat-stroked-button (click)="dogs.set([])">Clear</button>
     </div>
-  }
-</div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>&#64;switch</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @switch (status()) {
+      @case ('idle') {
+        <p>Waiting for work</p>
+      }
+      @case ('running') {
+        <p>Work in progress</p>
+      }
+      @default {
+        <p>Something went wrong</p>
+      }
+    }
+    <button mat-stroked-button (click)="cycleStatus()">Next status ({{ status() }})</button>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Arrow functions in template expressions</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Count {{ count() }}, multiplied {{ count() * multiplier() }}</p>
+    <div class="actions">
+      <button mat-stroked-button (click)="count.update(n => n + 1)">+1</button>
+      <button mat-stroked-button (click)="count.update(n => n - 1)">-1</button>
+      <button mat-stroked-button (click)="count.update(n => n * multiplier())">
+        &times; {{ multiplier() }}
+      </button>
+      <button mat-stroked-button (click)="count.set(0)">Reset</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>&#64;defer / &#64;placeholder</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @defer (on interaction) {
+      <div boxed>
+        <p>Deferred block rendered with {{ dogs().length }} dogs in state</p>
+      </div>
+    } @placeholder {
+      <div boxed>
+        <p>Click here to load the deferred block</p>
+      </div>
+    } @loading {
+      <p>Loading...</p>
+    }
+  </mat-card-content>
+</mat-card>

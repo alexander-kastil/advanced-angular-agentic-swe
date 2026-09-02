@@ -1,4 +1,4 @@
-Examine the conditional fields in `signal-form-conditional.component.ts`:
+Examine the conditional fields in `signal-forms-conditional.component.ts`:
 
 ```typescript
 fields = form(this.model, (s) => {

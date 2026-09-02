@@ -1,7 +1,7 @@
 <div class="deep-signal-demo">
   <mat-card appearance="outlined">
     <mat-card-header>
-      <mat-card-title>User Profile — Deep Signals</mat-card-title>
+      <mat-card-title>User Profile - Deep Signals</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="profile-info">
@@ -21,6 +21,33 @@
           <mat-label>Zip</mat-label>
           <input matInput [ngModel]="store.user.address.zip()" (ngModelChange)="store.updateZip($event)" />
         </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>The Union Case</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        The <code>contact</code> slice is a union of two record types, so there is no single set of nested keys
+        to hand out. Read it whole and narrow on the discriminant instead of reaching for
+        <code>store.contact.address()</code>.
+      </p>
+
+      @switch (store.contact().kind) {
+        @case ('email') {
+          <p><strong>Email contact:</strong> {{ store.contactLabel() }}</p>
+        }
+        @case ('phone') {
+          <p><strong>Phone contact:</strong> {{ store.contactLabel() }}</p>
+        }
+      }
+
+      <div class="contact-actions">
+        <button mat-stroked-button (click)="store.useEmail()">Use email</button>
+        <button mat-stroked-button (click)="store.usePhone()">Use phone</button>
       </div>
     </mat-card-content>
   </mat-card>

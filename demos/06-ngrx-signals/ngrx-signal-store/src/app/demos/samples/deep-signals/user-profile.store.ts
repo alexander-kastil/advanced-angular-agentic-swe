@@ -7,6 +7,10 @@ type Address = {
     zip: string;
 };
 
+export type Contact =
+    | { kind: 'email'; address: string }
+    | { kind: 'phone'; number: string; countryCode: string };
+
 type UserProfile = {
     name: string;
     email: string;
@@ -15,6 +19,7 @@ type UserProfile = {
 
 type UserProfileState = {
     user: UserProfile;
+    contact: Contact;
     editMode: boolean;
 };
 
@@ -28,6 +33,7 @@ const initialState: UserProfileState = {
             zip: '1190',
         },
     },
+    contact: { kind: 'email', address: 'jane@example.com' },
     editMode: false,
 };
 
@@ -37,6 +43,10 @@ export const UserProfileStore = signalStore(
         fullAddress: computed(() => {
             const addr = store.user.address;
             return `${addr.street()}, ${addr.zip()} ${addr.city()}`;
+        }),
+        contactLabel: computed(() => {
+            const contact = store.contact();
+            return contact.kind === 'email' ? contact.address : `${contact.countryCode} ${contact.number}`;
         }),
     })),
     withMethods((store) => ({
@@ -55,6 +65,12 @@ export const UserProfileStore = signalStore(
                     address: { ...state.user.address, zip },
                 },
             }));
+        },
+        useEmail() {
+            patchState(store, (state) => ({ contact: { kind: 'email' as const, address: state.user.email } }));
+        },
+        usePhone() {
+            patchState(store, { contact: { kind: 'phone', number: '660 1234567', countryCode: '+43' } });
         },
         toggleEditMode() {
             patchState(store, (state) => ({ editMode: !state.editMode }));

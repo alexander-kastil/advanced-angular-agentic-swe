@@ -2,83 +2,93 @@
   "demos": [
     {
       "url": "app-init",
-      "title": "App Initialization",
-      "teaches": "Configure application startup behavior using APP_INITIALIZER tokens. Run setup logic before the application bootstraps.",
+      "title": "App Initialization & inject",
+      "teaches": "Run startup logic before bootstrap with provideAppInitializer and read the loaded configuration from a service resolved with inject().",
       "topic": "App Initialization",
       "sortOrder": 1,
+      "md": "app-init",
       "id": 1
     },
     {
-      "url": "inject",
-      "title": "DI: Inject & Provide",
-      "teaches": "Use the inject() function to retrieve registered dependencies in a component. Learn how to provide custom services and configure injection tokens.",
+      "url": "app-initializer-async",
+      "title": "Async App Initializer",
+      "teaches": "Await a lazily imported service during bootstrap by combining provideAppInitializer with injectAsync, and prefetch the same chunk on idle from a component.",
       "topic": "App Initialization",
       "sortOrder": 2,
-      "id": 63
+      "md": "app-initializer-async",
+      "id": 101
     },
     {
-      "url": "global-errors",
-      "title": "Global Error Handler",
-      "teaches": "Implement a global error handler using ErrorHandler token. Catch and log all application errors in one place.",
-      "topic": "Error Handling",
+      "url": "service-migration",
+      "title": "Service Decorator & Migration",
+      "teaches": "Replace @Injectable with the @Service decorator, scope a service to a single route with autoProvided:false, and run the 22.1 service-migration schematic.",
+      "topic": "App Initialization",
       "sortOrder": 3,
-      "id": 9
+      "md": "service-migration",
+      "id": 102
     },
     {
       "url": "http-errors",
-      "title": "HTTP Error Handler",
-      "teaches": "Create interceptors that catch and transform HTTP errors. Implement centralized error recovery strategies.",
+      "title": "Error Handling",
+      "teaches": "Catch and transform HTTP failures in an interceptor, and route everything an interceptor misses through the global ErrorHandler token.",
       "topic": "Error Handling",
       "sortOrder": 4,
+      "md": "http-errors",
       "id": 13
     },
     {
       "url": "multi-interceptor",
       "title": "HTTP Interceptors",
-      "teaches": "Create multiple HTTP interceptors to add cross-cutting concerns like auth headers, logging, and error handling. Chain interceptors for request/response transformation.",
+      "teaches": "Chain multiple functional interceptors for auth headers, retries and error mapping in one provideHttpClient call.",
       "topic": "Error Handling",
       "sortOrder": 5,
+      "md": "interceptor",
       "id": 8
+    },
+    {
+      "url": "navigation-errors",
+      "title": "Navigation Errors",
+      "teaches": "Record and redirect failed navigations with withNavigationErrorHandler, and catch everything else in a custom ErrorHandler class.",
+      "topic": "Error Handling",
+      "sortOrder": 6,
+      "md": "navigation-errors",
+      "id": 103
     },
     {
       "url": "router-bindings",
       "title": "Component Input Bindings",
-      "teaches": "Bind route parameters directly to component inputs using bindToComponentInputs strategy. Simplify parameter handling with signal-based inputs.",
+      "teaches": "Bind route and query parameters straight into signal inputs with withComponentInputBinding, keeping component state and URL in sync without ActivatedRoute.",
       "topic": "Routing",
-      "sortOrder": 6,
+      "sortOrder": 7,
+      "md": "router-bindings",
       "id": 44
     },
     {
-      "url": "ngrx-routing",
-      "title": "NgRx Router State",
-      "teaches": "Access router state through NgRx store. Manage navigation history and route parameters in application state.",
+      "url": "route-inputs",
+      "title": "Route Input Bindings",
+      "teaches": "Configure withComponentInputBinding with its options object, and see why paramsInheritanceStrategy defaulting to always makes child routes inherit parent parameters and data.",
       "topic": "Routing",
-      "sortOrder": 7,
-      "id": 2
+      "sortOrder": 8,
+      "md": "route-inputs",
+      "id": 104
     },
     {
       "url": "route-titles",
       "title": "Route Titles",
       "teaches": "Set dynamic page titles for each route using the title property in route configuration. Update browser tab titles automatically.",
       "topic": "Routing",
-      "sortOrder": 8,
+      "sortOrder": 9,
+      "md": "route-titles",
       "id": 45
     },
     {
-      "url": "router-animations",
-      "title": "Router Animations",
-      "teaches": "Add smooth transitions between route components using Angular animations. Enhance navigation UX with view enter/exit effects.",
-      "topic": "Routing",
-      "sortOrder": 9,
-      "id": 100
-    },
-    {
-      "url": "view-transitions",
-      "title": "View Transitions",
-      "teaches": "Leverage native View Transitions API for seamless animated navigation. Create shared element animations across route changes.",
+      "url": "route-resolvers-signals",
+      "title": "Route Resolvers with Signals",
+      "teaches": "Preload route data with an HTTP ResolveFn and receive it in a required signal input, type-safe and auto-unwrapped, with no subscription in the component.",
       "topic": "Routing",
       "sortOrder": 10,
-      "id": 99
+      "md": "route-resolvers-signals",
+      "id": 312
     },
     {
       "url": "can-match-guard",
@@ -86,6 +96,7 @@
       "teaches": "Use canMatch guards to conditionally load routes based on runtime conditions. Prevent route initialization before matching.",
       "topic": "Routing",
       "sortOrder": 11,
+      "md": "can-match-guard",
       "id": 48
     },
     {
@@ -94,6 +105,7 @@
       "teaches": "Stack multiple route guards to enforce authorization policies. Combine authentication and role-based access control.",
       "topic": "Routing",
       "sortOrder": 12,
+      "md": "multi-guard",
       "id": 7
     },
     {
@@ -102,39 +114,53 @@
       "teaches": "Implement custom preloading strategies to eager-load routes in the background. Optimize performance with selective preloading.",
       "topic": "Routing",
       "sortOrder": 13,
+      "md": "preloading-strategy",
       "id": 46
     },
     {
-      "url": "http-resource",
-      "title": "HTTP Resource",
-      "teaches": "Fetch data declaratively using the resource() function with signal-based reactive requests. Manage loading and error states automatically.",
+      "url": "route-driven-store",
+      "title": "Route Driven Signal Store",
+      "teaches": "Feed a route-scoped NgRx SignalStore from route params bound as signal inputs, so the URL is the only writer of the filter state.",
       "topic": "Routing",
       "sortOrder": 14,
-      "id": 47
+      "md": "route-driven-store",
+      "id": 105
     },
     {
-      "url": "httpresource-resolver",
-      "title": "HTTP Resource Route Resolver",
-      "teaches": "Preload route data using ResolveFn with HTTP requests. Deliver type-safe data to components via signal-based inputs without managing subscriptions.",
+      "url": "router-animations",
+      "title": "Router Animations",
+      "teaches": "Animate entering and leaving elements with animate.enter and animate.leave, and let withViewTransitions animate navigation, all without @angular/animations.",
       "topic": "Routing",
       "sortOrder": 15,
-      "id": 314
+      "md": "router-animations",
+      "id": 100
     },
     {
-      "url": "route-resolvers-signals",
-      "title": "Route Resolvers with Signals",
-      "teaches": "Preload route data using ResolveFn with signals. Bind resolved data directly to component signal inputs for type-safe, auto-unwrapped data delivery.",
+      "url": "animate-enter-leave",
+      "title": "Animate Enter and Leave",
+      "teaches": "Animate routed components in and out with animate.enter and animate.leave while withViewTransitions cross-fades the surrounding page.",
       "topic": "Routing",
       "sortOrder": 16,
-      "id": 312
+      "md": "animate-enter-leave",
+      "id": 106
     },
     {
-      "url": "query-params-signals",
-      "title": "Query Parameters with Signals",
-      "teaches": "Manage query parameters reactively using signals. Synchronize component state with URL search params for bookmarkable, shareable filtered views.",
+      "url": "view-transitions",
+      "title": "View Transitions",
+      "teaches": "Leverage native View Transitions API for seamless animated navigation. Create shared element animations across route changes.",
       "topic": "Routing",
       "sortOrder": 17,
-      "id": 313
+      "md": "view-transitions",
+      "id": 99
+    },
+    {
+      "url": "webmcp-navigation",
+      "title": "WebMCP Navigation Tools",
+      "teaches": "Expose application navigation to an AI agent as WebMCP tools declared with declareExperimentalWebMcpTool, scoped to the component that owns them.",
+      "topic": "Agentic Interfaces",
+      "sortOrder": 18,
+      "md": "webmcp-navigation",
+      "id": 107
     }
   ],
   "skills": [

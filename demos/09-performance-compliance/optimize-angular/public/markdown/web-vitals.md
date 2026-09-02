@@ -55,6 +55,17 @@ For CI use the Lighthouse CLI and assert on the score:
 npx lighthouse http://localhost:4200 --output=json --output-path=./report.json --chrome-flags="--headless"
 ```
 
+## Auditing from an agent
+
+The `chrome-devtools` MCP server can run this audit for you, but pick the right tool:
+
+- **`performance_start_trace` / `performance_stop_trace`** is the tool for Core Web Vitals. It records a
+  real Chrome trace with `reload` and `autoStop` options, and `performance_analyze_insight` pulls a named
+  insight out of it (LCP breakdown, render blocking requests, document latency).
+- **`lighthouse_audit` excludes the performance category.** It runs accessibility, best practices and SEO
+  only. It will not give you an LCP, an INP or a performance score, so do not ask it for one; use it for
+  the compliance categories in this module instead.
+
 ## What moves each number
 
 - **LCP**: preload the hero image with `NgOptimizedImage` and `priority`, cut render-blocking CSS, keep

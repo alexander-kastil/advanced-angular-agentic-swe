@@ -149,3 +149,35 @@ it("should not call reload if delete fails", () => {
 - **No HttpClient** - The mock store eliminates HTTP calls, making tests deterministic
 - **No store initialization** - Component tests don't depend on complex store setup
 - **Verify integration** - This tests that component correctly calls and uses store methods
+
+## Asserting asynchronous state
+
+The same mock store drives the loading states, because a signal you own is easier to steer than a real request. Declare the signals outside the spy so the test can move them:
+
+```typescript
+const loading = signal(true);
+const customers = signal<Customer[]>([]);
+
+const storeSpy = { customers, loading, /* ... */ };
+```
+
+Then flip them and re-render:
+
+```typescript
+it("should show progress bar while loading", () => {
+  const bar = fixture.debugElement.query(By.css("mat-progress-bar"));
+  expect(bar).toBeTruthy();
+});
+
+it("should render customer rows after data loads", () => {
+  loading.set(false);
+  customers.set(mockCustomers);
+  fixture.detectChanges();
+
+  expect(fixture.debugElement.queryAll(By.css("mat-row")).length).toBe(2);
+});
+```
+
+No `fakeAsync`, no `tick()`. The app is zoneless, so `fakeAsync` is only available through the zone.js Vitest patch. Use `fixture.detectChanges()`, `await fixture.whenStable()`, `TestBed.tick()`, or Vitest's own fake timers instead.
+
+`customers-async.spec.ts` holds this full set of tests.

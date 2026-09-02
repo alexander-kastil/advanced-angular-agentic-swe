@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, linkedSignal, output } from '@angular/core';
+import { Component, input, linkedSignal, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -17,7 +17,6 @@ import { Customer } from '../customer.model';
     MatButtonModule,
     FormField
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerEditComponent {
   customer = input.required<Customer>();

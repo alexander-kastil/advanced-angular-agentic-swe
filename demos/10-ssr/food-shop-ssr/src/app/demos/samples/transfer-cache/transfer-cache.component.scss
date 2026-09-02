@@ -1,0 +1,78 @@
+.panel {
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.lead {
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.grid th,
+.grid td {
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid #e3e3ec;
+}
+
+.grid th {
+  font-weight: 600;
+  color: #6a6a7c;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.75rem;
+}
+
+.card {
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #cfe4d6;
+  border-radius: 8px;
+  background: #f3fbf5;
+}
+
+.card.warn {
+  border-color: #f0c48a;
+  background: #fff7ec;
+}
+
+.label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6a6a7c;
+}
+
+.card strong {
+  display: block;
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.card small {
+  color: #666;
+  font-size: 0.75rem;
+}
+
+.action {
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #8a7fd0;
+  border-radius: 999px;
+  background: #efeaff;
+  cursor: pointer;
+  font-size: 0.8rem;
+}

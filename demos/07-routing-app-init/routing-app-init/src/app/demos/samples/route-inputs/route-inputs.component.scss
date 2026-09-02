@@ -1,0 +1,10 @@
+.sections {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sections .active {
+  font-weight: 600;
+  text-decoration: underline;
+}

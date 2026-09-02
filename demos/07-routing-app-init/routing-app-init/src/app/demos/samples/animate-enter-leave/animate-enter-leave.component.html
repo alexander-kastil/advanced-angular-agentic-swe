@@ -1,0 +1,34 @@
+<app-markdown-renderer [md]="'animate-enter-leave'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>animate.enter and animate.leave on a routed outlet</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Switch between the two child routes. Each routed component wraps its content in an element that
+      names an enter class and a leave class, so the outgoing view finishes its animation before the
+      router removes it. <code>withViewTransitions()</code> is active app-wide, so the browser
+      cross-fades the surrounding page at the same time.
+    </p>
+    <div class="stage-host">
+      <router-outlet />
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <a
+      mat-raised-button
+      color="primary"
+      routerLink="/demos/animate-enter-leave/overview"
+      routerLinkActive="active"
+      >Overview</a
+    >
+    <a
+      mat-raised-button
+      color="accent"
+      routerLink="/demos/animate-enter-leave/details"
+      routerLinkActive="active"
+      >Details</a
+    >
+  </mat-card-actions>
+</mat-card>

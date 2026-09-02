@@ -1,0 +1,38 @@
+<app-markdown-renderer [md]="'route-driven-store'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>The URL writes the store</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      The component owns no state. It declares <code>category</code> and <code>q</code> as signal
+      inputs bound from the route, folds them into one <code>computed()</code>, and hands that signal
+      to a <code>signalMethod</code> on the store. Every navigation patches the store exactly once.
+    </p>
+
+    <mat-form-field>
+      <mat-label>Filter by name</mat-label>
+      <input matInput [value]="q() ?? ''" (change)="search($any($event.target).value)" />
+    </mat-form-field>
+
+    <p>
+      Store state: category <strong>{{ store.category() }}</strong>, query
+      <strong>{{ store.q() || '(none)' }}</strong>, patched
+      <strong>{{ store.applied() }}</strong> times.
+    </p>
+
+    <ul>
+      @for (item of store.visible(); track item.id) {
+        <li>{{ item.name }} <small>({{ item.category }})</small></li>
+      } @empty {
+        <li>Nothing matches this route.</li>
+      }
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    @for (name of store.categories(); track name) {
+      <button mat-raised-button color="primary" (click)="selectCategory(name)">{{ name }}</button>
+    }
+  </mat-card-actions>
+</mat-card>

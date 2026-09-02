@@ -1,0 +1,9 @@
+.grid {
+  display: grid;
+  grid-template-rows: 56px auto;
+  height: 100vh;
+}
+
+.gdMain {
+  overflow: hidden;
+}

@@ -1,0 +1,137 @@
+:root {
+  --color-primary: #1e88e5;
+  --color-accent: #b0bec5;
+  --color-surface: #ffffff;
+  --color-bg: #f5f7fa;
+  --color-border: #dde3ea;
+  --color-fg: #1f2933;
+  --color-muted: #6b7785;
+  --gap-small: 0.5rem;
+  --gap-medium: 0.8rem;
+  --gap-big: 1rem;
+  --font-small: 0.85rem;
+  --font-medium: 1rem;
+  --font-big: 1.3rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 var(--gap-small);
+}
+
+code,
+pre {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: var(--font-small);
+}
+
+pre {
+  background: #263238;
+  color: #eceff1;
+  padding: var(--gap-medium);
+  border-radius: 6px;
+  overflow: auto;
+}
+
+button {
+  font: inherit;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  &.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+  }
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  color: inherit;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: var(--gap-big);
+}
+
+.markdown {
+  line-height: 1.6;
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    margin-top: var(--gap-big);
+  }
+
+  h3,
+  h4 {
+    font-size: 1rem;
+    margin-top: var(--gap-big);
+  }
+
+  p,
+  li {
+    color: var(--color-fg);
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: var(--gap-medium) 0;
+    font-size: var(--font-small);
+  }
+
+  th,
+  td {
+    border: 1px solid var(--color-border);
+    padding: 0.35rem 0.5rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: var(--color-bg);
+  }
+
+  :not(pre) > code {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    padding: 0.05rem 0.25rem;
+  }
+}

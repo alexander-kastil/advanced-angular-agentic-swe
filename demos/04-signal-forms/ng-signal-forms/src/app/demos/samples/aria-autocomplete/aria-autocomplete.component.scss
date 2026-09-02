@@ -1,0 +1,33 @@
+.combo {
+  font: inherit;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.popup {
+  background: var(--mat-sys-surface-container, #fff);
+  border: 1px solid var(--color-accent, #888);
+  border-radius: 4px;
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.option {
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+}
+
+.option[aria-selected='true'] {
+  font-weight: 600;
+}
+
+.option:focus,
+.option:hover {
+  background: rgba(0, 0, 0, 0.08);
+  outline: none;
+}
+
+.option.empty {
+  cursor: default;
+  opacity: 0.6;
+}

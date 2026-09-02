@@ -1,0 +1,77 @@
+<div boxed>
+  <h3>Accessible composition with &#64;angular/aria</h3>
+  <p>
+    The aria package ships headless directives that own roles, ARIA state, roving tabindex,
+    typeahead and keyboard navigation. You bring the markup and the styling.
+  </p>
+</div>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>ngTabs: keyboard driven tab set</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div ngTabs>
+      <ul ngTabList [(selectedTab)]="selectedTab" class="tablist">
+        <li ngTab value="sighthounds" class="tab">Sighthounds</li>
+        <li ngTab value="cats" class="tab">Cats</li>
+        <li ngTab value="retired" class="tab" [disabled]="true">Retired</li>
+      </ul>
+
+      <div ngTabPanel value="sighthounds" class="tabpanel">
+        <ng-template ngTabContent>
+          <ul class="plain">
+            @for (breed of sighthounds(); track breed.id) {
+              <li>{{ breed.name }}</li>
+            }
+          </ul>
+        </ng-template>
+      </div>
+
+      <div ngTabPanel value="cats" class="tabpanel">
+        <ng-template ngTabContent>
+          <ul class="plain">
+            @for (breed of cats(); track breed.id) {
+              <li>{{ breed.name }}</li>
+            }
+          </ul>
+        </ng-template>
+      </div>
+
+      <div ngTabPanel value="retired" class="tabpanel">
+        <ng-template ngTabContent>
+          <p>Nothing here yet.</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <p class="state">selectedTab: {{ selectedTab() }}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>ngListbox: multi select with typeahead</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul ngListbox [(value)]="picked" [multi]="true" orientation="vertical" class="listbox">
+      @for (breed of breeds(); track breed.id) {
+        <li
+          ngOption
+          class="option"
+          [value]="breed.id"
+          [label]="breed.name"
+          [disabled]="breed.disabled"
+        >
+          {{ breed.name }}
+        </li>
+      }
+    </ul>
+
+    <p class="state">picked: {{ pickedNames().join(', ') || 'nothing' }}</p>
+    <p class="hint">
+      Focus the list and use the arrow keys, Home, End, Space and letter typeahead. Galgo Espanol
+      is disabled and is skipped during navigation.
+    </p>
+  </mat-card-content>
+</mat-card>

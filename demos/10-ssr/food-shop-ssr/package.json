@@ -9,6 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "api": "npx json-server db.json --port 3010",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -16,7 +17,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^22.1.4",
     "@angular/cdk": "^22.1.4",
     "@angular/common": "^22.1.4",
     "@angular/compiler": "^22.1.4",
@@ -28,26 +28,23 @@
     "@angular/platform-server": "^22.1.4",
     "@angular/router": "^22.1.4",
     "@angular/ssr": "^22.1.6",
-    "express": "^4.18.2",
+    "express": "^5.1.0",
+    "katex": "^0.16.47",
+    "marked": "^17.0.6",
+    "marked-katex-extension": "^5.1.12",
+    "ngx-markdown": "^22.0.2",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.15.1"
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^22.1.6",
     "@angular/cli": "^22.1.6",
     "@angular/compiler-cli": "^22.1.4",
-    "@types/express": "^4.17.17",
-    "@types/jasmine": "~5.1.0",
+    "@types/express": "^5.0.0",
     "@types/node": "^26.1.1",
     "baseline-browser-mapping": "^2.10.0",
-    "istanbul-lib-instrument": "^6.0.3",
-    "jasmine-core": "~5.1.0",
-    "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
-    "karma-coverage": "~2.2.0",
-    "karma-jasmine": "~5.1.0",
-    "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~6.0.3"
+    "jsdom": "^26.0.0",
+    "typescript": "~6.0.3",
+    "vitest": "^4.1.11"
   }
 }

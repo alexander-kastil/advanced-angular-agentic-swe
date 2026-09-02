@@ -2,7 +2,6 @@ import { Directive, signal } from '@angular/core';
 
 @Directive({
   selector: '[hoverListener]',
-  standalone: true,
   host: {
     '(mouseover)': 'onHover()',
     '[attr.wasHovered]': 'wasHovered()'

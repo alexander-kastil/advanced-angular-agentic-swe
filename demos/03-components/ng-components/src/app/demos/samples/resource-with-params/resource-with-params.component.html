@@ -1,0 +1,54 @@
+<div boxed>
+  <h3>Parameterised resources</h3>
+  <p>
+    A resource re-runs whenever a signal read inside its params function changes. Nothing calls
+    the loader by hand, and <code>reload()</code> is the only imperative escape hatch.
+  </p>
+</div>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>httpResource driven by a signal input</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="actions">
+      <button mat-stroked-button (click)="previous()">Previous</button>
+      <span class="value">petId = {{ petId() }}</span>
+      <button mat-stroked-button (click)="next()">Next</button>
+    </div>
+
+    <app-pet-detail [petId]="petId()" />
+
+    <p class="hint">
+      The child owns the request. The parent only writes to the signal it passes as an input.
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>resource() with params, abortSignal and reload</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-button-toggle-group [value]="owner()" (change)="owner.set($event.value)">
+      <mat-button-toggle value="Alex">Alex</mat-button-toggle>
+      <mat-button-toggle value="Andreas">Andreas</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <p class="value">status: {{ pets.status() }}</p>
+
+    @if (pets.error(); as error) {
+      <p class="error">{{ error }}</p>
+    }
+
+    <ul class="plain">
+      @for (pet of pets.value(); track pet.id) {
+        <li>{{ pet.name }} ({{ pet.type }}, {{ pet.age }})</li>
+      } @empty {
+        <li>No pets for this owner</li>
+      }
+    </ul>
+
+    <button mat-raised-button color="accent" (click)="reloadList()">Reload</button>
+  </mat-card-content>
+</mat-card>

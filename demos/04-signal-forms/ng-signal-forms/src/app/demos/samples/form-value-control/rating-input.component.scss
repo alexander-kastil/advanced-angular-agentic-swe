@@ -1,0 +1,27 @@
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  line-height: 1;
+  opacity: 0.35;
+  padding: 0;
+}
+
+.star.filled {
+  opacity: 1;
+}
+
+.star:disabled {
+  cursor: not-allowed;
+}
+
+.readout {
+  margin-left: 0.5rem;
+}

@@ -1,19 +1,17 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, resource } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, computed, inject, signal } from '@angular/core';
+import { MatListItem, MatNavList } from '@angular/material/list';
+import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
+import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
-import { SidebarActions } from '../../shared/side-panel/sidebar.actions';
-import { SidePanelService } from '../../shared/side-panel/sidepanel.service';
+import { filter } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { LoadingService } from '../../shared/loading/loading.service';
+import { MarkdownEditorContainerComponent } from '../../shared/markdown-editor/components/markdown-editor-container/markdown-editor-container.component';
+import { SidebarActions } from '../../shared/side-panel/sidebar.actions';
+import { SidePanelComponent } from '../../shared/side-panel/side-panel.component';
+import { SidePanelService } from '../../shared/side-panel/sidepanel.service';
 import { SideNavService } from '../../shared/sidenav/sidenav.service';
 import { DemoItem } from './demo-item.model';
-import { SidePanelComponent } from '../../shared/side-panel/side-panel.component';
-import { MarkdownEditorContainerComponent } from '../../shared/markdown-editor/components/markdown-editor-container/markdown-editor-container.component';
-import { MatNavList, MatListItem } from '@angular/material/list';
-import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
-import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
+import { DemoService } from './demo.service';
 
 @Component({
   selector: 'app-demo-container',
@@ -32,66 +30,52 @@ import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/mat
     MarkdownEditorContainerComponent,
     SidePanelComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoContainerComponent {
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-  http = inject(HttpClient);
-  nav = inject(SideNavService);
-  ls = inject(LoadingService);
-  eb = inject(SidePanelService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private nav = inject(SideNavService);
+  private panel = inject(SidePanelService);
+  private demoService = inject(DemoService);
 
-  hoveredItem = signal<DemoItem | null>(null);
-  popupTop = signal(0);
+  readonly title = environment.title;
 
-  title: string = environment.title;
+  readonly demos = this.demoService.demos;
+  readonly isLoadingDemos = this.demoService.isLoading;
+  readonly hasErrorDemos = this.demoService.hasError;
 
-  demosResource = resource({
-    loader: () => lastValueFrom(this.http.get<DemoItem[]>(`${environment.api}demos`))
-  });
+  readonly hoveredItem = signal<DemoItem | null>(null);
+  readonly popupTop = signal(0);
+  readonly header = signal('Please select a demo');
 
-  demos = computed(() => {
-    const items = this.demosResource.value() ?? [];
-    return [...items].sort((a, b) => a.sortOrder - b.sortOrder);
-  });
-  isLoadingDemos = computed(() => this.demosResource.status() === 'loading');
-  hasErrorDemos = computed(() => this.demosResource.status() === 'error');
+  readonly sidenavMode = this.nav.position;
+  readonly sidenavVisible = this.nav.visible;
 
-  sidenavMode = toSignal(this.nav.getSideNavPosition(), { initialValue: 'side' as const });
-  sidenavVisible = toSignal(this.nav.getSideNavVisible(), { initialValue: true });
-  isLoading = toSignal(this.ls.getLoading());
-
-  header = signal('Please select a demo');
-
-  showMdEditor = computed(() =>
-    (this.eb.getCommands() as any)() === SidebarActions.SHOW_MARKDOWN
+  readonly showMdEditor = computed(
+    () => this.panel.getCommands()() === SidebarActions.SHOW_MARKDOWN
   );
 
   constructor() {
-    effect(() => {
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          const rootRoute = this.getRootRoute(this.route);
-          if (rootRoute.outlet === 'primary' && rootRoute.component != null) {
-            const name = rootRoute.component.name.replace(/^_/, '');
-            this.header.set(`Component: ${name}`);
-          }
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const leaf = this.getLeafRoute(this.route);
+        if (leaf.outlet === 'primary' && leaf.component != null) {
+          this.header.set(`Component: ${(leaf.component as { name: string }).name.replace(/^_/, '')}`);
         }
       });
-    }, { allowSignalWrites: true });
   }
 
-  showPopup(item: DemoItem, event: MouseEvent): void {
+  showPopup(item: DemoItem, event: MouseEvent) {
     this.hoveredItem.set(item);
     this.popupTop.set((event.target as HTMLElement).getBoundingClientRect().top);
   }
 
-  hidePopup(): void {
+  hidePopup() {
     this.hoveredItem.set(null);
   }
 
-  private getRootRoute(route: ActivatedRoute): ActivatedRoute {
+  private getLeafRoute(route: ActivatedRoute): ActivatedRoute {
     while (route.firstChild) {
       route = route.firstChild;
     }

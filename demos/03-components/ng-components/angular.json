@@ -25,6 +25,10 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
@@ -41,12 +45,6 @@
               "node_modules/prismjs/prism.js",
               "node_modules/prismjs/components/prism-typescript.min.js",
               "node_modules/prismjs/components/prism-javascript.min.js"
-            ],
-            "allowedCommonJsDependencies": [
-              "lodash",
-              "util",
-              "subsink",
-              "axios"
             ],
             "browser": "src/main.ts"
           },

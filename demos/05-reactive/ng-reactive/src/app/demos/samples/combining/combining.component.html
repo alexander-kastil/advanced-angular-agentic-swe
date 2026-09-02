@@ -1,24 +1,98 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title> Combine </mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="cmdItems">
-    <button mat-raised-button color="accent" (click)="useMerge()">
-      merge()
-    </button>
-    <button mat-raised-button color="accent" (click)="useZip()">zip()</button>
-    <button mat-raised-button color="accent" (click)="useConcat()">
-      concat()
-    </button>
-    <button mat-raised-button color="accent" (click)="useForkJoin()">
-      forkJoin()
-    </button>
-  </mat-card-content>
-</mat-card>
+<div class="grid">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>combineLatest</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Three sources: the search term, the checkbox, and the
+        <code>GET /skills</code>
+        response. Emits whenever any of them emits, using the latest value of
+        every one. Nothing renders until all three have produced a value.
+      </p>
+      <div class="filters">
+        <mat-form-field appearance="outline">
+          <mat-label>Filter skills</mat-label>
+          <input matInput [(ngModel)]="term" />
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="onlyOpen">Only open</mat-checkbox>
+        <span class="badge">{{ combineLatestEmissions() }} emissions</span>
+      </div>
+      <div class="log">
+        @for (skill of visible(); track skill.id) {
+          <div>{{ skill.name }} ({{ skill.completed ? "done" : "open" }})</div>
+        } @empty {
+          <div>no matches, or json-server is not running</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title> Result </mat-card-title>
-  </mat-card-header>
-  <mat-card-content> See Console for output </mat-card-content>
-</mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>forkJoin</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Three real endpoints in parallel. Each one logs when it completes;
+        forkJoin logs once, after the slowest.
+      </p>
+      <button mat-raised-button color="accent" (click)="runForkJoin()">
+        Load skills, todos and accounts
+      </button>
+      <div class="log">
+        @for (entry of forkJoinLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>merge</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Interleaves two timers with no pairing. Order is arrival order, and the
+        result completes only when both sources have.
+      </p>
+      <button mat-raised-button color="accent" (click)="runMerge()">Run</button>
+      <div class="log">
+        @for (entry of mergeLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>withLatestFrom</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Only the save button emits. The ticker and the draft field are read, never
+        driving. The ticker is at
+        <strong>{{ tick() }}</strong>
+        , and typing produces no log entry at all.
+      </p>
+      <mat-form-field appearance="outline">
+        <mat-label>Draft</mat-label>
+        <input matInput [(ngModel)]="draft" />
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="save()">Save now</button>
+      <div class="log">
+        @for (entry of withLatestFromLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

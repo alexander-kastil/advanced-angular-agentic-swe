@@ -1,0 +1,118 @@
+<app-markdown-renderer [md]="'reactive-forms-migration'" />
+
+<div class="side-by-side">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Before: ReactiveFormsModule</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="reactiveProfile" column>
+        <mat-form-field>
+          <mat-label>Display name</mat-label>
+          <input matInput type="text" formControlName="displayName" />
+        </mat-form-field>
+        @if (reactiveProfile.controls.displayName.touched && reactiveProfile.controls.displayName.invalid) {
+          <div class="error">Display name needs at least 3 characters</div>
+        }
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+        </mat-form-field>
+        @if (reactiveProfile.controls.password.touched && reactiveProfile.controls.password.invalid) {
+          <div class="error">Password needs at least 8 characters</div>
+        }
+
+        <mat-form-field>
+          <mat-label>Confirm password</mat-label>
+          <input matInput type="password" formControlName="confirmation" />
+        </mat-form-field>
+        @if (reactiveProfile.touched && reactiveProfile.hasError('mismatch')) {
+          <div class="error">Passwords do not match</div>
+        }
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="submitReactive()">Save</button>
+    </mat-card-actions>
+    <mat-card-content>
+      <div boxed>
+        <div>Status: {{ reactiveStatus() }}</div>
+        <div>Value: {{ reactiveValue() | json }}</div>
+        @if (reactiveResult()) {
+          <div>Saved: {{ reactiveResult() | json }}</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>After: Signal Forms</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form column>
+        <mat-form-field>
+          <mat-label>Display name</mat-label>
+          <input matInput type="text" [formField]="signalProfile.displayName" />
+        </mat-form-field>
+        @if (signalProfile.displayName().touched() && signalProfile.displayName().invalid()) {
+          @for (err of signalProfile.displayName().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [formField]="signalProfile.password" />
+        </mat-form-field>
+        @if (signalProfile.password().touched() && signalProfile.password().invalid()) {
+          @for (err of signalProfile.password().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+
+        <mat-form-field>
+          <mat-label>Confirm password</mat-label>
+          <input matInput type="password" [formField]="signalProfile.confirmation" />
+        </mat-form-field>
+        @if (signalProfile.confirmation().touched() && signalProfile.confirmation().invalid()) {
+          @for (err of signalProfile.confirmation().errors(); track err.kind) {
+            <div class="error">{{ err.message }}</div>
+          }
+        }
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="submitSignal()">Save</button>
+    </mat-card-actions>
+    <mat-card-content>
+      <div boxed>
+        <div>Valid: {{ signalProfile().valid() }}</div>
+        <div>Value: {{ model() | json }}</div>
+        @if (signalResult()) {
+          <div>Saved: {{ signalResult() | json }}</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Migration Steps</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ol>
+      <li>Replace the <code>FormGroup</code> shape with a plain interface and a <code>signal()</code> holding it.</li>
+      <li>Swap the <code>new FormGroup</code> construction for <code>form(model, schema)</code>.</li>
+      <li>Move each <code>Validators.x</code> into the schema as <code>required()</code>, <code>minLength()</code>, <code>email()</code>.</li>
+      <li>Turn group-level validators into <code>validate()</code> on the field that shows the error, reading siblings via <code>valueOf()</code>.</li>
+      <li>Replace <code>formControlName="x"</code> with <code>[formField]="myForm.x"</code> and drop <code>[formGroup]</code>.</li>
+      <li>Replace <code>control.hasError('required')</code> with <code>field().errors()</code> or <code>field().getError('required')</code>.</li>
+      <li>Replace <code>markAllAsTouched()</code> plus a validity check with <code>submit(myForm, action)</code>.</li>
+      <li>Delete <code>valueChanges</code> subscriptions and <code>toSignal()</code> bridges: the model signal is the value.</li>
+      <li>Remove <code>ReactiveFormsModule</code> from the component imports.</li>
+    </ol>
+  </mat-card-content>
+</mat-card>

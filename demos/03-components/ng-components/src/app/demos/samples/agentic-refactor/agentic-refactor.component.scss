@@ -1,0 +1,49 @@
+mat-card {
+  margin-bottom: var(--gap-big);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-medium);
+  margin-bottom: var(--gap-medium);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--gap-big);
+}
+
+pre {
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 4px;
+  padding: var(--gap-medium);
+  overflow-x: auto;
+  font-size: var(--font-small);
+}
+
+h4 {
+  margin-bottom: var(--gap-small);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  vertical-align: top;
+}
+
+.value {
+  font-family: monospace;
+}
+
+.hint {
+  font-size: var(--font-small);
+}

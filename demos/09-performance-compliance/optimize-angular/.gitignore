@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Test and audit artifacts
+/playwright-report
+/test-results
+/.lighthouseci

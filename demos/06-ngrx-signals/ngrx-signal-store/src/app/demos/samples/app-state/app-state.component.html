@@ -1,0 +1,33 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Application Settings State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <mat-form-field>
+      <mat-label>App title</mat-label>
+      <input matInput [ngModel]="store.appTitle()" (ngModelChange)="store.setTitle($event)" />
+    </mat-form-field>
+
+    <mat-slide-toggle [checked]="store.darkMode()" (change)="store.toggleDarkMode()">
+      Dark mode
+    </mat-slide-toggle>
+
+    <mat-button-toggle-group [value]="store.density()" (change)="store.setDensity($event.value)">
+      @for (d of densities; track d) {
+        <mat-button-toggle [value]="d">{{ d }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+
+    <mat-form-field>
+      <mat-label>Page size</mat-label>
+      <input matInput type="number" [ngModel]="store.pageSize()" (ngModelChange)="store.setPageSize(+$event)" />
+    </mat-form-field>
+
+    <p class="summary">{{ store.summary() }}</p>
+    <p>Derived row height: <strong>{{ store.rowHeight() }}px</strong></p>
+
+    <pre class="state">{{ store.snapshot() }}</pre>
+
+    <button mat-raised-button color="primary" (click)="store.reset()">Reset state</button>
+  </mat-card-content>
+</mat-card>

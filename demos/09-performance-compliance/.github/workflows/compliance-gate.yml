@@ -1,0 +1,68 @@
+name: Compliance Gate
+
+on:
+  pull_request:
+    paths:
+      - 'demos/09-performance-compliance/**'
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: demos/09-performance-compliance/optimize-angular
+
+jobs:
+  compliance-gate:
+    name: Budgets, a11y lint, axe and Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Check out the pull request
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: demos/09-performance-compliance/optimize-angular/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Gate 2: template accessibility rules. Every @angular-eslint/template
+      # accessibility rule in eslint.config.js is set to error, so one
+      # violation fails the step. Runs first because it is the fastest.
+      - name: Gate 2 - template accessibility lint
+        run: npm run lint
+
+      # Gate 1: build budgets. angular.json sets initial maximumError to 2 MB.
+      # ng build exits 1 when a budget error is exceeded.
+      - name: Gate 1 - production build and size budgets
+        run: npm run build
+
+      - name: Install the Chromium browser for Playwright
+        run: npx playwright install --with-deps chromium
+
+      # Gate 3: axe-core against the built app on a static server.
+      # e2e/a11y.gate.spec.ts fails on any WCAG 2.2 AA violation.
+      - name: Gate 3 - axe-core accessibility scan
+        run: npx playwright test e2e/a11y.gate.spec.ts --project=chromium
+        env:
+          COMPLIANCE_GATE: '1'
+
+      # Gate 4: Lighthouse CI against dist/. lighthouserc.json holds the
+      # assertions; lhci autorun exits 1 when one of them fails.
+      - name: Gate 4 - Lighthouse CI against dist
+        run: npx --yes @lhci/cli@0.15.x autorun
+
+      - name: Upload the reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-gate-reports
+          path: |
+            demos/09-performance-compliance/optimize-angular/playwright-report
+            demos/09-performance-compliance/optimize-angular/.lighthouseci
+          retention-days: 7
+          if-no-files-found: ignore

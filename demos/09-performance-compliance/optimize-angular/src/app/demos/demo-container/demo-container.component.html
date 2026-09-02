@@ -12,7 +12,6 @@
         </mat-toolbar>
         @for (item of demos(); track item) {
           <mat-list-item
-            role="listitem"
             [routerLink]="['./' + item.url]"
             (mouseenter)="showPopup(item, $event)"
             (mouseleave)="hidePopup()"

@@ -1,0 +1,62 @@
+<app-markdown-renderer [md]="'date-validators'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Trip Window</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Departure</mat-label>
+        <input matInput type="date" [formField]="tripForm.departure" />
+      </mat-form-field>
+      @if (tripForm.departure().touched()) {
+        @for (err of tripForm.departure().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Arrival</mat-label>
+        <input matInput type="date" [formField]="tripForm.arrival" />
+      </mat-form-field>
+      @if (tripForm.arrival().touched()) {
+        @for (err of tripForm.arrival().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="loadValidTrip()">Valid Trip</button>
+    <button mat-raised-button (click)="loadTooEarly()">Too Early</button>
+    <button mat-raised-button (click)="loadTooLong()">Too Long</button>
+    <button mat-raised-button (click)="clear()">Clear</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Reading Errors with getError()</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div boxed>
+      <div>Booking window: {{ opens | date: 'mediumDate' }} to {{ closes | date: 'mediumDate' }}</div>
+      <div>
+        departure.getError('minDate'):
+        {{ departureMinError() ? (departureMinError()!.minDate | date: 'mediumDate') : 'none' }}
+      </div>
+      <div>
+        departure.getError('maxDate'):
+        {{ departureMaxError() ? (departureMaxError()!.maxDate | date: 'mediumDate') : 'none' }}
+      </div>
+      <div>
+        arrival.getError('minDate'):
+        {{ arrivalMinError() ? (arrivalMinError()!.minDate | date: 'mediumDate') : 'none' }}
+      </div>
+      <div>arrival.getError('tooLong'): {{ arrivalTooLong()?.message ?? 'none' }}</div>
+      <div>Form valid: {{ tripForm().valid() }}</div>
+      <div>Model: {{ model() | json }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

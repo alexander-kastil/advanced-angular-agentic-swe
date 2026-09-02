@@ -1,4 +1,4 @@
-Examine the pet CRUD form in `signal-form-pets.component.ts`:
+Examine the pet CRUD form in `signal-forms-pets.component.ts`:
 
 ```typescript
 petForm = form(this.petModel, (s) => {
@@ -20,4 +20,4 @@ savePet(): void {
 }
 ```
 
-Uses `rxResource` to fetch pets, `effect()` for on-change tracking, and `submit()` for save.
+Uses `httpResource` to fetch pets, `effect()` for on-change tracking, and `submit()` for save.

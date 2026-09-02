@@ -1,3 +1,4 @@
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
@@ -44,9 +45,9 @@ describe('MarkdownRendererComponent', () => {
     });
 
     it('should toggle panel visibility', () => {
-        spyOn(rendererStateService, 'toggleVisibility');
+        const spy = vi.spyOn(rendererStateService, 'toggleVisibility');
         component.togglePanel();
-        expect(rendererStateService.toggleVisibility).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     });
 
     it('should get initial content visibility state', () => {

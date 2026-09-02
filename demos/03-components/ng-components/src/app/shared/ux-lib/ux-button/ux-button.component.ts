@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
@@ -7,7 +7,6 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './ux-button.component.html',
   styleUrls: ['./ux-button.component.scss'],
   imports: [MatButton, MatIcon],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class uxButtonComponent {
   disabled = input<boolean>(false);

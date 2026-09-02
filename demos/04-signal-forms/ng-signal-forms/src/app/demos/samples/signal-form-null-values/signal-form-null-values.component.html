@@ -1,14 +1,13 @@
 <app-markdown-renderer [md]="'sf-null-values'" />
+
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>Signal Forms - Null Values</mat-card-title>
+    <mat-card-title>Nullable & Optional Fields</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form autocomplete="off" column>
       <mat-form-field>
-        <mat-label>Pet Name
-          @if (petForm.petName().required()) { <span class="text-danger">*</span> }
-        </mat-label>
+        <mat-label>Pet Name @if (petForm.petName().required()) { <span class="text-danger">*</span> }</mat-label>
         <input matInput type="text" [formField]="petForm.petName" placeholder="Pet name" />
       </mat-form-field>
       @if (petForm.petName().invalid() && petForm.petName().touched()) {
@@ -18,9 +17,7 @@
       }
 
       <mat-form-field>
-        <mat-label>Breed
-          @if (petForm.breed().required()) { <span class="text-danger">*</span> }
-        </mat-label>
+        <mat-label>Breed @if (petForm.breed().required()) { <span class="text-danger">*</span> }</mat-label>
         <input matInput type="text" [formField]="petForm.breed" placeholder="Breed" />
       </mat-form-field>
       @if (petForm.breed().invalid() && petForm.breed().touched()) {
@@ -30,11 +27,21 @@
       }
 
       <mat-form-field>
-        <mat-label>Notes</mat-label>
+        <mat-label>Notes (nullable in the domain)</mat-label>
         <input matInput type="text" [formField]="petForm.notes" placeholder="Notes about the pet" />
       </mat-form-field>
       @if (petForm.notes().invalid() && petForm.notes().touched()) {
         @for (err of petForm.notes().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Microchip ID (optional in the domain)</mat-label>
+        <input matInput type="text" [formField]="petForm.microchipId" placeholder="Microchip ID" />
+      </mat-form-field>
+      @if (petForm.microchipId().invalid() && petForm.microchipId().touched()) {
+        @for (err of petForm.microchipId().errors(); track err.kind) {
           <div class="error">{{ err.message }}</div>
         }
       }
@@ -55,19 +62,29 @@
       </mat-form-field>
     </form>
   </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" [disabled]="petForm().invalid()" (click)="save()">Save</button>
+    <button mat-stroked-button (click)="reset()">Reset</button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>Null Handling Best Practice</mat-card-title>
+    <mat-card-title>Form Model vs Domain Model</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <ul>
-      <li>Use strings or numbers, not nulls — except for <code>Date</code> bound to <code>&lt;input type="date"&gt;</code></li>
-      <li>If the domain model requires nullable types, define a separate domain model and form model</li>
-      <li><code>applyWhenValue</code> guards validators so they only run when the value is non-null</li>
+      <li>The form model uses plain strings and numbers, never <code>null</code> or <code>undefined</code></li>
+      <li><code>Date | null</code> is the exception, because <code>&lt;input type="date"&gt;</code> needs it</li>
+      <li>An optional domain property (<code>microchipId?</code>) becomes a required empty string in the form model</li>
+      <li><code>applyWhenValue()</code> guards validators so they only run once a value is present</li>
     </ul>
-    Form valid: {{ petForm().valid() }}<br />
-    Model: <pre>{{ petModel() | json }}</pre>
+    Form valid: {{ petForm().valid() }}
+    <h4>Form model</h4>
+    <pre>{{ petModel() | json }}</pre>
+    @if (domain(); as d) {
+      <h4>Mapped domain model</h4>
+      <pre>{{ d | json }}</pre>
+    }
   </mat-card-content>
 </mat-card>

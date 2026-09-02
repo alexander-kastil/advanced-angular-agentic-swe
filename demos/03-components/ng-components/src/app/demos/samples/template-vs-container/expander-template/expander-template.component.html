@@ -3,6 +3,6 @@
 </div>
 @if (expanded()) {
   <div class="content">
-    <ng-container *ngTemplateOutlet="content()" />
+    <ng-container [ngTemplateOutlet]="content()" />
   </div>
 }

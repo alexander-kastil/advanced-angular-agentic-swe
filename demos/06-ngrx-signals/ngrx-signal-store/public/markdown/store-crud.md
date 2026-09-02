@@ -1,42 +1,71 @@
-Examine the `Customers` route and it's definition of `customers.store.ts` and `customers.service.ts`. 
+## Overview
 
-It uses `withMethods` to define custom methods for the store and `rxMethod` to handle async reactivity and integrate `RxJs operators` and to handle the response. Finally it uses `patchState` to update the state. 
+This demo drives the `customers` REST collection through `customersStore`. It is the standard SignalStore data shape: `withState` for the payload plus loading flag, `withMethods` for the operations, `rxMethod` for the async plumbing, and `withHooks` to kick off the initial load.
 
-```typescript
-withMethods((store, service = inject(CustomersService)) => ({
-    fetchCustomers: rxMethod<void>(
-        pipe(
-            switchMap(() => {
-                patchState(store, { loading: true });
-                return service.getCustomers().pipe(
-                    tapResponse({
-                        next: (customers) => patchState(store, { customers }),
-                        error: logError,
-                        finalize: () => patchState(store, { loading: false }),
-                    })
-                );
-            })
-        )),
-    getById: (id: number) => {
-        return store.customers().find(c => c.id === id)
-    },
-```
+Examine `customers.store.ts` and `customers.service.ts`.
 
-`withHooks` is used to fetch the customers from the service and update the state in the `onInit` lifecycle hook.
+## rxMethod for Async Work
+
+`rxMethod` turns an RxJS pipeline into a callable store method. It accepts a value, a signal, or an observable:
 
 ```typescript
-withHooks({
-    onInit({ fetchCustomers }) {
-        fetchCustomers();
-    },
-})
+addCustomer: rxMethod<Customer>(
+  pipe(
+    switchMap((customer) => {
+      patchState(store, { loading: true });
+      return service.addCustomer(customer).pipe(
+        tapResponse({
+          next: (created) => patchState(store, { customers: [...store.customers(), created] }),
+          error: logError,
+          finalize: () => patchState(store, { loading: false }),
+        })
+      );
+    })
+  )
+),
 ```
 
-`withComputed` is used to implement computed properties for the store.
+`tapResponse` from `@ngrx/operators` splits the success, error and completion branches so a failing request can never tear down the subscription.
+
+## Update and Delete
+
+Both mutate the array immutably and let the computed members recalculate:
+
+```typescript
+next: (saved) => patchState(store, {
+  customers: store.customers().map((c) => (c.id === saved.id ? saved : c)),
+}),
+```
+
+```typescript
+next: () => patchState(store, {
+  customers: store.customers().filter((c) => c.id !== customer.id),
+}),
+```
+
+## Derived Views
 
 ```typescript
 withComputed((store) => ({
-    count: computed(() => store.customers().length),
-    nextId: computed(() => store.customers().reduce((max, p) => p.id > max ? p.id : max, 0) + 1),
-})),
+  count: computed(() => store.customers().length),
+  nextId: computed(() => store.customers().reduce((max, c) => (c.id > max ? c.id : max), 0) + 1),
+  filtered: computed(() => {
+    const term = store.filter().toLowerCase();
+    return term ? store.customers().filter((c) => c.name.toLowerCase().includes(term)) : store.customers();
+  }),
+}))
 ```
+
+The search box writes `filter` through `setFilter()`; the list renders `filtered()` and never filters in the template.
+
+## Initial Load
+
+```typescript
+withHooks({
+  onInit({ fetchCustomers }) {
+    fetchCustomers();
+  },
+})
+```
+
+> The demo talks to `http://localhost:3000/customers`. Run `json-server` against the app's `db.json` to see live data.

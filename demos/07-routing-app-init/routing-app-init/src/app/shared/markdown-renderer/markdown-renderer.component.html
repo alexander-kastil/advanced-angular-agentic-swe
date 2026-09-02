@@ -1,6 +1,6 @@
-<mat-expansion-panel [expanded]="panelOpenState">
-  <mat-expansion-panel-header>
+<mat-expansion-panel [expanded]="contentVisible()">
+  <mat-expansion-panel-header (click)="togglePanel()">
     <mat-panel-title>Instructions</mat-panel-title>
   </mat-expansion-panel-header>
-  <markdown [src]="getMarkdown()" />
+  <markdown [src]="markdownSrc()" />
 </mat-expansion-panel>

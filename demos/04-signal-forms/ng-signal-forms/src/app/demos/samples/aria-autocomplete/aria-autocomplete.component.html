@@ -1,0 +1,76 @@
+<app-markdown-renderer [md]="'aria-autocomplete'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Accessible Autocomplete in a Signal Form</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Passenger</mat-label>
+        <input matInput type="text" [formField]="flightForm.passenger" />
+      </mat-form-field>
+      @if (flightForm.passenger().touched() && flightForm.passenger().invalid()) {
+        @for (err of flightForm.passenger().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <label id="origin-label" for="origin">Departure airport</label>
+      <input
+        id="origin"
+        class="combo"
+        ngCombobox
+        #combobox="ngCombobox"
+        type="text"
+        autocomplete="off"
+        aria-labelledby="origin-label"
+        [value]="originField().value()"
+        (valueChange)="onQuery($event)"
+        [expanded]="expanded()"
+        (expandedChange)="expanded.set($event)"
+        (blur)="originField().markAsTouched()"
+      />
+      <ng-template ngComboboxPopup [combobox]="combobox">
+        <div
+          class="popup"
+          ngComboboxWidget
+          ngListbox
+          #listbox="ngListbox"
+          [value]="selection()"
+          (valueChange)="onPick($event)"
+          [activeDescendant]="listbox.activeDescendant()"
+        >
+          @for (airport of filtered(); track airport) {
+            <div class="option" ngOption [value]="airport">{{ airport }}</div>
+          } @empty {
+            <div class="option empty">No airport matches</div>
+          }
+        </div>
+      </ng-template>
+      @if (originField().touched() && originField().invalid()) {
+        @for (err of originField().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="clear()">Clear</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Field State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div boxed>
+      <div>Model: {{ model() | json }}</div>
+      <div>Expanded: {{ expanded() }}</div>
+      <div>Matches: {{ filtered().length }}</div>
+      <div>Origin valid: {{ originField().valid() }}</div>
+      <div>Form valid: {{ flightForm().valid() }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

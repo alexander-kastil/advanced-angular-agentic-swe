@@ -1,0 +1,43 @@
+<mat-sidenav-container class="demo-shell">
+  <mat-sidenav mode="side" opened>
+    <mat-toolbar color="accent">
+      <mat-toolbar-row>{{ title }}</mat-toolbar-row>
+    </mat-toolbar>
+
+    @if (offline()) {
+      <p class="notice">API offline, showing the bundled catalog. Start it with <code>npm run api</code>.</p>
+    }
+
+    <mat-nav-list>
+      @for (group of groups(); track group.topic) {
+        <div class="topic">{{ group.topic }}</div>
+        @for (item of group.items; track item.url) {
+          <mat-list-item
+            [routerLink]="['./', item.url]"
+            routerLinkActive="selected"
+            [title]="item.teaches"
+          >
+            {{ item.title }}
+          </mat-list-item>
+        }
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="accent">
+      <mat-toolbar-row>{{ header() }}</mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="panes">
+      <div class="demo-pane">
+        <router-outlet />
+      </div>
+      @if (currentMd()) {
+        <div class="guide-pane">
+          <app-markdown-renderer [md]="currentMd()" />
+        </div>
+      }
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

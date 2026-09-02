@@ -1,0 +1,67 @@
+<div boxed>
+  <h3>&#64;defer triggers, placeholder, loading and error</h3>
+  <p>
+    Every block below lives in its own lazy chunk. The trigger decides when that chunk is
+    requested, and the sub-blocks decide what is on screen until it arrives.
+  </p>
+</div>
+
+<div class="actions">
+  <button mat-raised-button color="primary" (click)="remount()">Remount blocks</button>
+  <span>mounted at {{ mountedAt() }}</span>
+</div>
+
+@if (mounted()) {
+  <div class="grid">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>on idle</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @defer (on idle) {
+          <app-idle-panel />
+        } @placeholder {
+          <p class="hint">Waiting for the browser to go idle</p>
+        } @loading (after 100ms; minimum 500ms) {
+          <p class="hint">Fetching the idle chunk</p>
+        } @error {
+          <p class="hint error">The idle chunk failed to load</p>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>on timer(3s)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @defer (on timer(3s)) {
+          <app-timer-panel />
+        } @placeholder (minimum 1s) {
+          <p class="hint">Three seconds on the clock</p>
+        } @loading {
+          <p class="hint">Fetching the timer chunk</p>
+        } @error {
+          <p class="hint error">The timer chunk failed to load</p>
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>on interaction; on timer(10s)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @defer (on interaction; on timer(10s); prefetch on idle) {
+          <app-interaction-panel />
+        } @placeholder {
+          <p class="hint clickable">Click me, or wait ten seconds</p>
+        } @loading {
+          <p class="hint">Fetching the interaction chunk</p>
+        } @error {
+          <p class="hint error">The interaction chunk failed to load</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+}

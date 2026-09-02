@@ -1,0 +1,29 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Composing signalStoreFeature: withRequestStatus + withAttempts</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    @if (store.isPending()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <div class="toolbar">
+      <button mat-raised-button color="primary" (click)="store.sync(false)">Sync (succeeds)</button>
+      <button mat-stroked-button (click)="store.sync(true)">Sync (fails)</button>
+      <button mat-stroked-button (click)="store.reset()">Reset</button>
+    </div>
+
+    <div class="status" [class.pending]="store.isPending()" [class.ok]="store.isFulfilled()" [class.failed]="!!store.error()">
+      requestStatus: <strong>{{ statusLabel() }}</strong>
+    </div>
+
+    @if (store.error(); as err) {
+      <p class="error">{{ err }}</p>
+    }
+
+    <p>
+      attempts <strong>{{ store.attempts() }}</strong> - failures <strong>{{ store.failures() }}</strong> -
+      success rate <strong>{{ store.successRate() }}%</strong>
+    </p>
+  </mat-card-content>
+</mat-card>

@@ -1,4 +1,4 @@
-Examine the signal form array in `signal-form-array.component.ts`:
+Examine the signal form array in `form-array.component.ts`:
 
 ```typescript
 skillModel = signal<SkillsModel>({

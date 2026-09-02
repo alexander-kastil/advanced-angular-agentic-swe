@@ -1,115 +1,101 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, DestroyRef, inject, signal, WritableSignal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { EMPTY, Observable, interval, of, throwError } from 'rxjs';
-import {
-  catchError,
-  finalize,
-  map,
-  retry,
-  tap
-} from 'rxjs/operators';
-import { Voucher } from '../../vouchers/voucher.model';
-import { VouchersService } from '../../vouchers/voucher.service';
+import { EMPTY, catchError, defer, finalize, map, of, retry, tap, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Skill } from '../../skills/skills';
+import { catchWithFallback } from './catch-with-fallback';
+
+type Recovery = 'empty' | 'fallback' | 'rethrow';
 
 @Component({
-  selector: 'app-err-handling',
-  templateUrl: './err-handling.component.html',
-  styleUrls: ['./err-handling.component.scss'],
-  imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardContent,
-    MatButton
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-error-handling',
+  templateUrl: './error-handling.component.html',
+  imports: [MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatButton],
+  styles: `
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .log { font-family: monospace; font-size: 0.82rem; max-height: 210px; overflow: auto; }
+    .log div { padding: 2px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.25); }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  `,
 })
-export class ErrHandlingComponent {
-  vs = inject(VouchersService);
+export class ErrorHandlingComponent {
+  private http = inject(HttpClient);
+  private destroyRef = inject(DestroyRef);
+  private goodUrl = `${environment.api}skills`;
+  private badUrl = `${environment.api}skilz`;
+  private attempt = 0;
 
-  completeStream() {
-    // handle exceptions in the source / service
-    const obs = (of(4, 6, 8, 'soi') as Observable<any>).pipe(
-      map((nbr) => nbr / 2),
-      catchError((err) => {
-        console.log('handled in catchError', err);
-        return EMPTY;
-      })
-    );
+  protected catchLog = signal<string[]>([]);
+  protected retryLog = signal<string[]>([]);
+  protected operatorLog = signal<string[]>([]);
 
-    // or in the subscriber / component
-    obs.subscribe({
-      next: (val: number) => console.log(val),
-      error: (err: Error) => console.log('handled in handler-error', err),
-      complete: () => console.log('completed'),
-    }
-    );
-  }
+  protected runCatchError(recovery: Recovery) {
+    this.catchLog.set([`GET ${this.badUrl} with recovery "${recovery}"`]);
 
-  // Used in tryCatchAlike
-  setLabel = (v: Voucher) => ({ ...v, Label: `${v.Text} costs € ${v.Amount}` });
-
-  rethrowErr() {
-    this.vs
-      .getVouchers()
+    this.http
+      .get<Skill[]>(this.badUrl)
       .pipe(
-        tap((data) => console.log('logged by tap(): ', data)),
-        map((vs) => vs.map(this.setLabel)),
-        catchError((err) => {
-          console.log('Error on getVouchers()', err);
+        map((skills) => `${skills.length} skills`),
+        catchError((err: HttpErrorResponse) => {
+          this.push(this.catchLog, `catchError saw HTTP ${err.status}`);
+          if (recovery === 'empty') return EMPTY;
+          if (recovery === 'fallback') return of('0 skills (cached fallback)');
           return throwError(() => err);
         }),
-        finalize(() => console.log('finalizing ...'))
+        finalize(() => this.push(this.catchLog, 'finalize ran')),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe({
-        next: (data) => console.log('tryCatchAlike result', data),
-        error: (err) => console.log('tryCatchAlike error', err)
+        next: (value) => this.push(this.catchLog, `next: ${value}`),
+        error: (err: HttpErrorResponse) =>
+          this.push(this.catchLog, `the subscriber's error handler ran: HTTP ${err.status}`),
+        complete: () => this.push(this.catchLog, 'complete, no error reached the subscriber'),
       });
   }
 
-  fallbackValue() {
-    const sampleItems = [
-      {
-        url: 'langfeatures',
-        title: 'Language Features',
-      },
-      {
-        url: 'creating',
-        title: 'Creating Observables',
-      },
-    ];
+  protected runRetry() {
+    this.retryLog.set([]);
+    this.attempt = 0;
 
-    of(sampleItems)
+    defer(() => {
+      this.attempt += 1;
+      const url = this.attempt < 3 ? this.badUrl : this.goodUrl;
+      this.push(this.retryLog, `attempt ${this.attempt}: GET ${url.split('/').pop()}`);
+      return this.http.get<Skill[]>(url);
+    })
       .pipe(
-        catchError((err) => {
-          console.log('caught mapping error and rethrowing', err);
-          return throwError(() => err);
-        }),
-        finalize(() => console.log('first finalize() block executed')),
-        catchError((err) => {
-          console.log('rethrow error, providing fallback value', err);
-          return of(sampleItems);
-        }),
-        finalize(() => console.log('second finalize() block executed'))
+        retry({ count: 5, delay: 600 }),
+        tap({ error: (err: HttpErrorResponse) => this.push(this.retryLog, `still failing: ${err.status}`) }),
+        takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe(
-        (res) => console.log('HTTP response', res),
-      );
+      .subscribe({
+        next: (skills) => this.push(this.retryLog, `succeeded on attempt ${this.attempt} with ${skills.length} skills`),
+        error: (err: HttpErrorResponse) => this.push(this.retryLog, `gave up after HTTP ${err.status}`),
+      });
   }
 
-  useRetry() {
-    interval(1000)
+  protected runCustomOperator() {
+    this.operatorLog.set([]);
+
+    this.http
+      .get<Skill[]>(this.badUrl)
       .pipe(
-        map((val) => {
-          if (val > 2) throw new Error('Invalid Value');
-          return val;
-        }),
-        retry({ count: 5, delay: 2000 }),
-        catchError((err) => err)
+        map((skills) => skills.map((skill) => skill.name)),
+        catchWithFallback<string[]>(['offline placeholder'], (message) =>
+          this.push(this.operatorLog, `operator reported: ${message}`),
+        ),
+        takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe(
-        (val) => console.log(val)
-      );
+      .subscribe({
+        next: (names) => this.push(this.operatorLog, `subscriber received: ${names.join(', ')}`),
+        complete: () => this.push(this.operatorLog, 'stream completed normally'),
+      });
+  }
+
+  private push(target: WritableSignal<string[]>, entry: string) {
+    target.update((entries) => [...entries, entry]);
   }
 }

@@ -19,7 +19,7 @@ test.describe('Demo layout', () => {
             await expect(guideBtn).toBeVisible();
         });
 
-        test('visible on store-entities (empty component but has markdown)', async ({ page }) => {
+        test('visible on store-entities (component has content + markdown)', async ({ page }) => {
             await page.goto('/demos/store-entities', { waitUntil: 'networkidle' });
             const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
             await expect(guideBtn).toBeVisible();
@@ -27,10 +27,10 @@ test.describe('Demo layout', () => {
     });
 
     test.describe('Demo pane visibility', () => {
-        test('demo pane is hidden when component has no content (store-entities)', async ({ page }) => {
+        test('demo pane is visible when component has content (store-entities)', async ({ page }) => {
             await page.goto('/demos/store-entities', { waitUntil: 'networkidle' });
             const demoPaneArea = page.locator('as-split-area').first();
-            await expect(demoPaneArea).toHaveClass(/as-hidden/);
+            await expect(demoPaneArea).not.toHaveClass(/as-hidden/);
         });
 
         test('demo pane is visible when component has content (deep-signals)', async ({ page }) => {
@@ -57,12 +57,12 @@ test.describe('Demo layout', () => {
             await expect(page.locator('.as-split-gutter')).not.toBeVisible();
         });
 
-        test('fills full height on store-entities (no demo content)', async ({ page }) => {
+        test('splits with the demo pane on store-entities', async ({ page }) => {
             await page.goto('/demos/store-entities', { waitUntil: 'networkidle' });
             const guideBtn = page.locator('[mattooltip="Toggle Markdown Guide"]');
             await guideBtn.click();
             const gutter = page.locator('.as-split-gutter');
-            await expect(gutter).not.toBeVisible();
+            await expect(gutter).toBeVisible();
         });
 
         test('guide content visible after guide button click', async ({ page }) => {

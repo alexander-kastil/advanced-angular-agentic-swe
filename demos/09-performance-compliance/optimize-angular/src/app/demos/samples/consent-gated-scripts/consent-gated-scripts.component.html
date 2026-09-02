@@ -1,0 +1,111 @@
+<section class="scripts">
+  <header>
+    <h2>Load Third-Party Scripts Only After Consent</h2>
+    <p>
+      The DSGVO and the ePrivacy rules do not care what your banner says. They care about what the browser
+      requested. A vendor script placed in <code>index.html</code> has already sent the IP address by the time
+      the banner renders, and no amount of blocking logic afterwards undoes that request. The only reliable
+      gate is not shipping the tag at all until consent exists.
+    </p>
+    <p class="hint">
+      The three vendors below are local stub files under <code>public/vendor/</code>. Nothing in this demo
+      contacts a real third party, but the injection, the network request and the side effects are real.
+    </p>
+  </header>
+
+  <h3>Vendors on this page</h3>
+  @for (vendor of vendors; track vendor.key) {
+    <article [class.active]="isPresent(vendor)">
+      <h4>{{ vendor.name }}</h4>
+      <dl>
+        <dt>Purpose</dt>
+        <dd>{{ vendor.purpose }}</dd>
+        <dt>Lawful basis</dt>
+        <dd>{{ vendor.lawfulBasis }}</dd>
+        <dt>Personal data it receives</dt>
+        <dd>{{ vendor.personalData }}</dd>
+        <dt>What it leaves behind</dt>
+        <dd><code>{{ vendor.storage }}</code></dd>
+        <dt>Script</dt>
+        <dd><code>{{ vendor.src }}</code></dd>
+      </dl>
+      <p class="state">
+        {{ isPresent(vendor) ? 'Loaded. window.' + vendor.global + ' now exists.' : 'Not requested. No tag in the document, no network request.' }}
+      </p>
+      <div class="actions">
+        <button type="button" [disabled]="granted()[vendor.key]" (click)="grant(vendor)">Consent and load</button>
+        <button type="button" class="ghost" [disabled]="!granted()[vendor.key]" (click)="deny(vendor)">Withdraw</button>
+      </div>
+    </article>
+  }
+
+  <div class="actions">
+    <button type="button" class="ghost" [disabled]="!anyGranted()" (click)="withdrawAll()">Withdraw everything</button>
+    @if (needsReload()) {
+      <button type="button" (click)="reload()">Reload to finish the withdrawal</button>
+    }
+  </div>
+
+  @if (needsReload()) {
+    <p class="warning" role="alert">
+      A script cannot be un-executed. Removing the tag stops future loads and deletes the storage it set, but
+      the code it already ran, its globals and its listeners live until the document is replaced. That is why
+      a withdrawal flow ends in a reload.
+    </p>
+  }
+
+  <h3>Network evidence</h3>
+  <p>Read straight from the browser's resource timeline. An empty table is the proof that consent worked.</p>
+  @if (evidence().length === 0) {
+    <p class="hint">No vendor script has been requested in this document. {{ loadedCount() }} vendors loaded.</p>
+  } @else {
+    <table>
+      <caption>Vendor requests actually made by this page</caption>
+      <thead>
+        <tr>
+          <th scope="col">Script</th>
+          <th scope="col">Transferred</th>
+          <th scope="col">Requested at</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of evidence(); track $index) {
+          <tr>
+            <th scope="row"><code>{{ row.file }}</code></th>
+            <td>{{ row.transferred }} bytes</td>
+            <td>{{ row.at }} ms after navigation</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  <h3>Consent log</h3>
+  @if (log().length === 0) {
+    <p class="hint">Nothing recorded yet.</p>
+  } @else {
+    <ul class="log">
+      @for (entry of log(); track $index) {
+        <li>{{ entry }}</li>
+      }
+    </ul>
+  }
+
+  <h3>The rules this pattern satisfies</h3>
+  <ul class="notes">
+    <li><strong>No pre-ticked boxes.</strong> Every vendor starts denied, and the stored record starts empty.</li>
+    <li><strong>Refusing is as easy as accepting.</strong> Withdraw sits beside Consent, same size, same page, no second dialog.</li>
+    <li><strong>Granular per purpose.</strong> Analytics, support and session recording are three decisions, not one.</li>
+    <li><strong>Withdrawal at any time.</strong> The record is removable and the page tells you what it cannot undo.</li>
+    <li><strong>Evidence.</strong> The consent record carries what was granted; a production version adds a timestamp and the text version the user saw.</li>
+    <li><strong>No dark patterns.</strong> The demo does not make refusal slower or uglier than acceptance.</li>
+  </ul>
+
+  <h3>What to copy into a real app</h3>
+  <ul class="notes">
+    <li>Keep the consent state in a signal in a root service, and let every embed read it. Never let a vendor snippet decide for itself.</li>
+    <li>Inject the tag from a service, not from a template. A template that renders a script tag is a template you have to audit forever.</li>
+    <li>Store the record server-side too if you need to prove it in an audit; browser storage is deletable by the person you would be proving it against.</li>
+    <li>A Content Security Policy is the backstop: if a vendor host is not in <code>script-src</code>, a mistake in this code cannot leak anything. See the strict CSP demo.</li>
+  </ul>
+</section>

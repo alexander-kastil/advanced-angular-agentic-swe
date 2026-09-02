@@ -1,16 +1,16 @@
 import { inject } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { CanActivateFn } from '@angular/router';
+import { AuthFacade } from '../../../mock-auth/auth.facade';
 import { SnackbarService } from '../../../shared/snackbar/snackbar.service';
-import { AuthFacade } from 'src/app/mock-auth/state/auth.facade';
 
-export const onlyAuthenticatedGuard = () => {
+export const onlyAuthenticatedGuard: CanActivateFn = () => {
   const auth = inject(AuthFacade);
   const sns = inject(SnackbarService);
-  return auth.isAuthenticated().pipe(
-    tap((authenticated) => {
-      if (!authenticated) {
-        sns.displayAlert('No Access', 'Access only for authenticated users');
-      }
-    })
-  );
-}; 
+
+  if (auth.isAuthenticated()) {
+    return true;
+  }
+
+  sns.displayAlert('No Access', 'Access only for authenticated users');
+  return false;
+};

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, model } from '@angular/core';
+import { Component, effect, inject, model } from '@angular/core';
 import { createMarkdownItem, MarkdownItem } from '../../markdown.model';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -21,7 +21,6 @@ import { injectDispatch } from '@ngrx/signals/events';
         CdkTextareaAutosize,
         FormField,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarkdownEditComponent {
     private store = inject(markdownEditorStore);

@@ -5,7 +5,7 @@
     </div>
     <div><img width="50px" src="/assets/images/angular.svg" /></div>
     <div class="menuContainer">
-      @for (mi of menuItems | async; track mi) {
+      @for (mi of menuItems(); track mi.url) {
         <div
           routerLink="{{ '/' + mi.url }}"
           routerLinkActive="navLinkActive"
@@ -16,8 +16,8 @@
         </div>
       }
     </div>
-    <div (click)="logIn()" >
-      <mat-icon color="accent">login</mat-icon>
+    <div (click)="logIn()" class="loginToggle">
+      <mat-icon color="accent">{{ isAuthenticated() ? 'logout' : 'login' }}</mat-icon>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

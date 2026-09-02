@@ -1,3 +1,5 @@
+<app-markdown-renderer [md]="'container-presenter'" />
+
 <app-presenter-list
   [persons]="store.persons()"
   (personSelected)="store.selectPerson($event)"

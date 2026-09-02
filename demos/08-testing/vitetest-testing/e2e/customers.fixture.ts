@@ -69,11 +69,11 @@ export class CustomersPage {
   }
 
   async expectRowVisible(name: string) {
-    await expect(this.page.getByRole('cell', { name })).toBeVisible();
+    await expect(this.page.getByRole('cell', { name, exact: true })).toBeVisible();
   }
 
   async expectRowHidden(name: string) {
-    await expect(this.page.getByRole('cell', { name })).not.toBeVisible();
+    await expect(this.page.getByRole('cell', { name, exact: true })).not.toBeVisible();
   }
 
   async expectFormVisible() {

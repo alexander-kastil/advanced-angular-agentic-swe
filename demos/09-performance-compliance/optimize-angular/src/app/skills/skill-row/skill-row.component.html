@@ -5,13 +5,13 @@
     <mat-icon>{{ skill().completed ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
   </div>
   <div class="cmd">
-    <button
+    <button type="button"
       mat-raised-button
       color="primary"
       [routerLink]="['/skills', skill().id]">
       <mat-icon>edit</mat-icon>
     </button>
-    <button
+    <button type="button"
       mat-raised-button
       color="primary"
       (click)="deleteItem(skill())">

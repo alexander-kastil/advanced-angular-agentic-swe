@@ -1,24 +1,25 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { form, FormField, applyEach } from '@angular/forms/signals';
+import { Component, computed, signal } from '@angular/core';
+import { applyEach, disabled, form, FormField, required, submit } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { BorderDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { BorderDirective, ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
-import { SkillItem, SkillProfile } from './skill-profile.model';
+import { skillCatalog, SkillProfile } from './skill-profile.model';
 
 @Component({
   selector: 'app-reactive-cascade',
-  templateUrl: './signal-form-cascade.component.html',
-  styleUrls: ['./signal-form-cascade.component.scss'],
+  templateUrl: './cascade.component.html',
+  styleUrls: ['./cascade.component.scss'],
   imports: [
     MatCard,
     MatCardHeader,
     MatCardTitle,
     MatCardContent,
+    MatCardActions,
     FormField,
     MatFormField,
     MatInput,
@@ -27,16 +28,12 @@ import { SkillItem, SkillProfile } from './skill-profile.model';
     MatOption,
     MatButton,
     BorderDirective,
+    ColumnDirective,
     MarkdownRendererComponent
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class ReactiveCascadeComponent {
-  readonly selectValues = [
-    { type: 'Frameworks', values: ['Angular', 'React', '.NET Core', 'Spring'] },
-    { type: 'Languages', values: ['TypeScript', 'JavaScript', 'C#', 'Java', 'Python'] },
-    { type: 'Cloud', values: ['Azure', 'AWS', 'Google'] },
-  ];
+  readonly categories = skillCatalog;
 
   profileModel = signal<SkillProfile>({
     firstName: '',
@@ -45,11 +42,31 @@ export class ReactiveCascadeComponent {
   });
 
   profileForm = form(this.profileModel, (s) => {
-    applyEach(s.skills, (_item) => { });
+    required(s.firstName, { message: 'First name is required' });
+    required(s.lastName, { message: 'Last name is required' });
+
+    applyEach(s.skills, (skill) => {
+      required(skill.techType, { message: 'Pick a category' });
+      disabled(skill.techValues, ({ valueOf }) => !valueOf(skill.techType));
+      required(skill.techValues, {
+        message: 'Pick a technology',
+        when: ({ valueOf }) => !!valueOf(skill.techType),
+      });
+    });
   });
 
-  getCriteria(techType: string): string[] {
-    return this.selectValues.find((s) => s.type === techType)?.values ?? [];
+  summary = computed(() =>
+    this.profileModel()
+      .skills.filter((s) => s.techType && s.techValues)
+      .map((s) => `${s.techType}: ${s.techValues}`)
+  );
+
+  optionsFor(category: string): string[] {
+    return this.categories.find((c) => c.type === category)?.values ?? [];
+  }
+
+  onCategoryChange(index: number): void {
+    this.profileForm.skills[index].techValues().value.set('');
   }
 
   addSkill(): void {
@@ -59,8 +76,14 @@ export class ReactiveCascadeComponent {
     }));
   }
 
+  removeSkill(index: number): void {
+    this.profileModel.update((m) => ({
+      ...m,
+      skills: m.skills.filter((_, i) => i !== index),
+    }));
+  }
+
   saveForm(): void {
-    console.log('form saves:', this.profileModel());
+    submit(this.profileForm, async () => console.log('profile:', this.profileModel()));
   }
 }
-

@@ -1,0 +1,47 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Linked State: writable state derived from other state</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <mat-selection-list [multiple]="false" (selectionChange)="store.select($event.options[0].value)">
+      @for (course of store.courses(); track course.id) {
+        <mat-list-option [value]="course.id" [selected]="course.id === store.selectedId()">
+          {{ course.name }} - {{ course.price }} EUR, min {{ course.minSeats }} seats
+        </mat-list-option>
+      } @empty {
+        <p class="hint">The catalog is empty, so selectedId fell back to 0.</p>
+      }
+    </mat-selection-list>
+
+    <div class="toolbar">
+      <mat-form-field>
+        <mat-label>Seats</mat-label>
+        <input matInput type="number" [ngModel]="store.seats()" (ngModelChange)="store.setSeats(+$event)" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tax rate</mat-label>
+        <input matInput type="number" step="0.05" [ngModel]="store.taxRate()" (ngModelChange)="store.setTaxRate(+$event)" />
+      </mat-form-field>
+    </div>
+
+    <p>selectedId: <strong>{{ store.selectedId() }}</strong> - seats: <strong>{{ store.seats() }}</strong></p>
+    <p>net: <strong>{{ store.net() }} EUR</strong> - gross: <strong>{{ store.gross() }} EUR</strong></p>
+
+    <p class="hint">
+      Seats is linked to the selected course: change the selection and it snaps back to that course's minimum,
+      yet you can still type over it because linked state stays writable.
+    </p>
+
+    <div class="toolbar">
+      <button mat-raised-button color="primary" [disabled]="store.courses().length === 0" (click)="store.dropSelected()">
+        Remove selected course
+      </button>
+      <button mat-stroked-button (click)="store.restoreCatalog()">Restore catalog</button>
+    </div>
+
+    <p class="hint">
+      Removing the selected course changes the source array, so selectedId recomputes to the first remaining course
+      instead of pointing at an entry that no longer exists.
+    </p>
+  </mat-card-content>
+</mat-card>

@@ -1,4 +1,4 @@
-Examine the nested objects signal form in `signal-form-nested-objects.component.ts`:
+Examine the nested objects signal form in `reactive-nested.component.ts`:
 
 ```typescript
 personModel = signal<NestedModel>({
@@ -16,5 +16,6 @@ personForm = form(this.personModel, (s) => {
   required(s.name, { message: "Name is required" });
   required(s.lastName, { message: "Last name is required" });
   required(s.address.street, { message: "Street is required" });
+  required(s.address.city, { message: "City is required" });
 });
 ```

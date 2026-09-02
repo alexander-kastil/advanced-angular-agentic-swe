@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { Skill } from '../../../skills/skill.model';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-skills-resource',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (skills.isLoading()) {
       <p data-testid="loading">Loading...</p>

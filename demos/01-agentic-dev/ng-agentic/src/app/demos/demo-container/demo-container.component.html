@@ -1,0 +1,41 @@
+<div class="gdDemos">
+  <aside class="gdSidenav">
+    @if (isLoading()) {
+      <p class="hint">Loading demos...</p>
+    } @else if (hasError()) {
+      <p class="hint">db.json could not be loaded.</p>
+    } @else {
+      @for (group of topics(); track group.topic) {
+        <h4>{{ group.topic }}</h4>
+        <ul>
+          @for (demo of group.demos; track demo.url) {
+            <li>
+              <a [routerLink]="['./', demo.url]" routerLinkActive="active" [title]="demo.teaches">
+                {{ demo.title }}
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </aside>
+
+  <section class="gdContent">
+    <header>
+      <h3>{{ current()?.title ?? 'Please select a demo' }}</h3>
+      @if (current(); as demo) {
+        <p>{{ demo.teaches }}</p>
+      }
+    </header>
+
+    <div class="pane demo-pane">
+      <router-outlet />
+    </div>
+
+    @if (guideSrc(); as src) {
+      <div class="pane guide-pane">
+        <app-markdown-renderer [src]="src" />
+      </div>
+    }
+  </section>
+</div>

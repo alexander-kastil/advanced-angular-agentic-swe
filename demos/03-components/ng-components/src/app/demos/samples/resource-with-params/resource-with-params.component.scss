@@ -1,0 +1,28 @@
+mat-card {
+  margin-bottom: var(--gap-big);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-medium);
+  margin-bottom: var(--gap-medium);
+}
+
+.value {
+  font-family: monospace;
+}
+
+.plain {
+  list-style: none;
+  margin: var(--gap-medium) 0;
+  padding: 0;
+}
+
+.error {
+  color: #c62828;
+}
+
+.hint {
+  font-size: var(--font-small);
+}

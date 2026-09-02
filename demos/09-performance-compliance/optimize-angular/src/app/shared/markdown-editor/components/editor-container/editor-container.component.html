@@ -9,16 +9,16 @@
         (itemDelete)="deleteMarkdownItem($event)"
        />
     }
-    @if (editorEdit() && current() != null) {
+    @if (editorEdit() && current() !== null) {
       <app-markdown-edit [(markdownItem)]="currentItem" />
     }
   </mat-card-content>
   <mat-card-actions align="end">
     @if (editorEdit()) {
-      <button mat-flat-button (click)="saveMarkdownItem()" color="primary">
+      <button type="button" mat-flat-button (click)="saveMarkdownItem()" color="primary">
         Save
       </button>
-      <button
+      <button type="button"
         mat-flat-button
         (click)="editorEdit.set(false)"
         color="primary"
@@ -27,7 +27,7 @@
       </button>
     }
     @if (!editorEdit()) {
-      <button mat-flat-button (click)="addMarkdownItem()" color="primary">
+      <button type="button" mat-flat-button (click)="addMarkdownItem()" color="primary">
         Add
       </button>
     }

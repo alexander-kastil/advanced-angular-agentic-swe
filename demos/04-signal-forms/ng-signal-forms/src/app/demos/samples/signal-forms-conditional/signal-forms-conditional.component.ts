@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, hidden, disabled, readonly } from '@angular/forms/signals';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatInput } from '@angular/material/input';
@@ -17,7 +17,7 @@ interface ConditionalModel {
 
 @Component({
     selector: 'app-signal-forms-conditional',
-    templateUrl: './signal-form-conditional.component.html',
+    templateUrl: './signal-forms-conditional.component.html',
     imports: [
         MarkdownRendererComponent,
         MatCard,
@@ -31,8 +31,7 @@ interface ConditionalModel {
         MatCheckbox,
         JsonPipe,
         ColumnDirective,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    ]
 })
 export class SignalFormsConditionalComponent {
     model = signal<ConditionalModel>({
@@ -43,11 +42,8 @@ export class SignalFormsConditionalComponent {
     });
 
     fields = form(this.model, (s) => {
-        // email is hidden when subscribe is false
         hidden(s.email, ({ valueOf }) => !valueOf(s.subscribe));
-        // promoCode is disabled when subscribe is false
         disabled(s.promoCode, ({ valueOf }) => !valueOf(s.subscribe));
-        // username is always readonly
         readonly(s.username);
     });
 }

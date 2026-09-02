@@ -1,69 +1,54 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomStateMatcher } from './custom-state-matcher';
+import { Component, signal } from '@angular/core';
+import { form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { MatFormField, MatError } from '@angular/material/form-field';
-import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions } from '@angular/material/card';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
+import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
+import { DirtyOnlyStateMatcher, EagerStateMatcher } from './custom-state-matcher';
 
 @Component({
   selector: 'app-err-state-matcher',
-  templateUrl: './signal-form-err-state-matcher.component.html',
-  styleUrls: ['./signal-form-err-state-matcher.component.scss'],
+  templateUrl: './err-state-matcher.component.html',
+  styleUrls: ['./err-state-matcher.component.scss'],
   imports: [
     MarkdownRendererComponent,
-    FormsModule,
-    ReactiveFormsModule,
+    FormField,
     MatCard,
     MatCardHeader,
     MatCardTitle,
     MatCardContent,
     ColumnDirective,
     MatFormField,
+    MatLabel,
     MatInput,
     MatError,
     MatCardActions,
     MatButton,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class ErrStateMatcherComponent {
-  matcher = new CustomStateMatcher();
+  dirtyOnly = new DirtyOnlyStateMatcher();
+  eager = new EagerStateMatcher();
 
-  registerForm = new FormGroup(
-    {
-      email: new FormControl('', [Validators.required, Validators.email]),
+  registerModel = signal({ email: '', password: '', passwordRepeat: '' });
 
-      password: new FormControl('', {
-        validators: [Validators.required, Validators.minLength(4)],
-        nonNullable: true,
-      }),
-      passwordRepeat: new FormControl('', {
-        validators: [Validators.required],
-        nonNullable: true,
-      }),
-    },
-    {
-      updateOn: 'blur',
-      validators: [this.passwordsMatchValidator],
-    }
-  );
+  registerForm = form(this.registerModel, (s) => {
+    required(s.email, { message: 'Email is required' });
+    required(s.password, { message: 'Password is required' });
+    minLength(s.password, 4, { message: 'Min 4 characters' });
+    required(s.passwordRepeat, { message: 'Please repeat the password' });
+    validate(s.passwordRepeat, ({ value, valueOf }) =>
+      value() !== valueOf(s.password)
+        ? { kind: 'mismatch', message: 'Passwords do not match' }
+        : null
+    );
+  });
 
-  registerUser(form: FormGroup) {
-    const usr = {
-      email: form.controls['email'].value,
-      password: form.controls['password'].value,
-    };
-    console.log('User to register: ', usr);
-    console.log('Form: ', form);
-  }
-
-  passwordsMatchValidator(control: AbstractControl): ValidationErrors | null {
-    const pwd = control.get('password')?.value;
-    const repeat = control.get('passwordRepeat')?.value;
-    return pwd && repeat && pwd === repeat ? null : { passwordMismatch: true };
+  registerUser() {
+    submit(this.registerForm, async () =>
+      console.log('registering', this.registerModel().email)
+    );
   }
 }
-

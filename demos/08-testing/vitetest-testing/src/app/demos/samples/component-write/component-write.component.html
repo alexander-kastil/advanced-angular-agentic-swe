@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Title</mat-card-title>
+    <mat-card-title>Write to the DOM</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-form-field>
@@ -12,9 +12,8 @@
         [(ngModel)]="user().username"
       />
     </mat-form-field>
+    <div>{{ user().username }}</div>
   </mat-card-content>
 </mat-card>
 
-<div>
-  {{ user().username }}
-</div>
+<app-counter />

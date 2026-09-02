@@ -1,15 +1,13 @@
-import { provideHttpClient, withXhr } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { MarkdownModule } from 'ngx-markdown';
+import { provideMarkdown } from 'ngx-markdown';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideHttpClient(withXhr()),
+        provideHttpClient(),
         provideRouter(routes),
-        importProvidersFrom(
-            MarkdownModule.forRoot()
-        )
+        provideMarkdown(),
     ],
 };

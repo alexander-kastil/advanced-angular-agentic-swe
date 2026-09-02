@@ -198,3 +198,30 @@ it("should interact with form harnesses", async () => {
 - **await harness.click()** / **setValue()** / **getValue()** - Interact with component through harness API
 - **Decoupled from DOM** - Tests survive Material CSS/HTML refactors
 - **Matches user interactions** - Harness methods correspond to user actions (click, type, etc.)
+
+## Harnesses over asynchronous Material
+
+Every harness call is a promise, which is exactly what makes them work with Material components that render lazily. `MatTabGroup` is the clearest case: the tab bodies are not in the DOM until the group settles.
+
+The demo renders a tab per user below the slider form. `material-async.component.spec.ts` asserts the rendered tabs:
+
+```typescript
+it("should render 3 tags", () => {
+  fixture.detectChanges();
+  const tags = fixture.nativeElement.querySelectorAll(".mat-mdc-tab");
+  expect(tags.length).toBe(3);
+});
+```
+
+The harness version reads better and does not depend on Material's class names:
+
+```typescript
+const group = await loader.getHarness(MatTabGroupHarness);
+const tabs = await group.getTabs();
+expect(tabs.length).toBe(3);
+
+await tabs[1].select();
+expect(await tabs[1].getTextContent()).toContain("Giro");
+```
+
+Rules of thumb: `await` every harness call, never mix a harness interaction with a manual `dispatchEvent` on the same control, and prefer `NoopAnimationsModule` so nothing waits on a real transition.

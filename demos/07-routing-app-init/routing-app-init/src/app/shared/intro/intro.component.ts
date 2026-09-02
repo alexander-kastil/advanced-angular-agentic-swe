@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, MatCardActions } from '@angular/material/card';
@@ -7,7 +7,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent, 
     selector: 'app-intro',
     templateUrl: './intro.component.html',
     styleUrls: ['./intro.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         MatCard,
         MatCardHeader,

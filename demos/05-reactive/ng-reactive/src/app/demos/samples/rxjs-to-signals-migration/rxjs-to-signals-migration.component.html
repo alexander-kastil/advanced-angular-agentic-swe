@@ -1,29 +1,141 @@
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title
-      >Request Status Pattern (RxJS BehaviorSubject)</mat-card-title
-    >
+    <mat-card-title>The prompt</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <p>
-      Status: <strong>{{ status$ | async }}</strong>
+      This is the prompt verbatim. It names one file, names the tools to call
+      first, names the rule set to judge the result by, and fences what the agent
+      may not touch. The file it names is real: it sits in
+      <code>ng-reactive/migration-exercise/skills.store.ts</code>
+      , outside
+      <code>src/</code>
+      so its anti-patterns never reach the bundle. Run the prompt against it.
     </p>
-    <button mat-raised-button color="accent" (click)="load()">
-      Load Skills
+    <div class="prompt">{{ prompt }}</div>
+    <button mat-raised-button color="accent" (click)="copyPrompt()">
+      Copy the prompt
     </button>
+    @if (copied()) {
+      <span class="copied">copied</span>
+    }
+  </mat-card-content>
+</mat-card>
 
-    @if ((status$ | async) === "loading") {
+<div class="grid">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>The MCP tools it calls</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        The
+        <code>angular-cli</code>
+        server is declared in
+        <code>.mcp.json</code>
+        at the repository root and started with
+        <code>npx -y &#64;angular/cli mcp</code>
+        . Tool names are the ones the agent sees.
+      </p>
+      <table>
+        <tr>
+          <th>Tool</th>
+          <th>Server</th>
+          <th>Used for</th>
+        </tr>
+        @for (tool of tools; track tool.tool) {
+          <tr>
+            <td><code>{{ tool.tool }}</code></td>
+            <td>{{ tool.server }}</td>
+            <td>{{ tool.usedFor }}</td>
+          </tr>
+        }
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Why the prompt is shaped like that</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      @for (step of steps; track step; let i = $index) {
+        <div class="step">
+          <strong>{{ i + 1 }}.</strong>
+          <span>{{ step }}</span>
+        </div>
+      }
+      <p>
+        The rules below are quoted from
+        <code>.claude/skills/angular-conventions/references/angular-antipatterns.md</code>
+        , sections "State Management" and "Data Loading". The agent proposes the
+        rewrite; you check every changed line against this table.
+      </p>
+      <table>
+        <tr>
+          <th>Anti-pattern</th>
+          <th>Replacement</th>
+          <th>Section</th>
+        </tr>
+        @for (rule of rules; track rule.antiPattern) {
+          <tr>
+            <td>{{ rule.antiPattern }}</td>
+            <td>{{ rule.replacement }}</td>
+            <td>{{ rule.section }}</td>
+          </tr>
+        }
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="grid">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Before</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <pre>{{ source }}</pre>
+      <p>
+        Three anti-patterns in one class: a BehaviorSubject holding local state,
+        a subscribe() driving it, and a hand-rolled status machine.
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>After</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <pre>{{ migrated }}</pre>
+      <p>
+        The status machine is gone because the resource already has one. What is
+        left is the filter, which is derived state, so it is a computed().
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>The migrated code, running</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Filter skills</mat-label>
+      <input matInput [(ngModel)]="filter" />
+    </mat-form-field>
+    @if (skills.isLoading()) {
       <mat-progress-bar mode="indeterminate" />
-    }
-
-    @if ((status$ | async) === "error") {
-      <p>Error: {{ error$ | async }}</p>
-    }
-
-    @if ((status$ | async) === "success") {
+    } @else if (skills.error()) {
+      <p>Start json-server to see live data.</p>
+    } @else {
       <mat-chip-set>
-        @for (skill of data$ | async; track skill.id) {
+        @for (skill of visible(); track skill.id) {
           <mat-chip [highlighted]="skill.completed">{{ skill.name }}</mat-chip>
+        } @empty {
+          <mat-chip>no matches</mat-chip>
         }
       </mat-chip-set>
     }

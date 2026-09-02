@@ -6,7 +6,7 @@ import {
   ZERO
 } from '@angular/cdk/keycodes';
 import { NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subscription } from 'rxjs';
@@ -34,8 +34,7 @@ import { Subscription } from 'rxjs';
     }
   </form>
   `,
-  styleUrls: ['./mat-select-filter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./mat-select-filter.component.scss']
 })
 export class MatSelectFilterComponent implements OnInit, OnDestroy {
   private cdr = inject(ChangeDetectorRef);

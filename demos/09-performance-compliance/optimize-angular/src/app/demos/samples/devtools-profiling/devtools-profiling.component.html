@@ -1,0 +1,108 @@
+<section class="profiling">
+  <header>
+    <h2>Profile with Angular DevTools</h2>
+    <p>
+      Angular 22 ships <code>enableProfiling()</code> in <code>&#64;angular/core</code>. It routes Angular's
+      internal change detection events into the Chrome DevTools Performance panel, so a recording shows an
+      <em>Angular</em> track next to Main, Interactions and Layout instead of an anonymous wall of frames.
+      It is a development-mode feature and a no-op in a production build.
+    </p>
+  </header>
+
+  <article class="control">
+    <h3>1. Turn the integration on</h3>
+    <p>
+      Development mode: <strong>{{ devMode ? 'yes' : 'no, this build is optimized and profiling is a no-op' }}</strong>
+    </p>
+    <button type="button" (click)="toggleProfiling()">
+      {{ profiling() ? 'Stop sending profiling data' : 'Start sending profiling data' }}
+    </button>
+    <p class="hint">
+      <code>enableProfiling()</code> returns the stop function. This component keeps it and calls it on destroy,
+      which is the pattern to copy: leaving it on costs you every change detection pass for the rest of the session.
+    </p>
+  </article>
+
+  <article class="control">
+    <h3>2. Record a trace, then generate a signature</h3>
+    <p>
+      Open DevTools, go to Performance, press record, click one of the buttons below, stop the recording. Each
+      button wraps its work in <code>performance.mark</code> and <code>performance.measure</code>, so it also
+      appears by name on the Timings track.
+    </p>
+    <div class="actions">
+      <button type="button" (click)="cheapUpdate()">Cheap: one signal write</button>
+      <button type="button" (click)="wideUpdate()">Wide: toggle {{ rowCount() === 2000 ? 'back to 20' : 'to 2000' }} rows</button>
+      <button type="button" (click)="longTask()">Long task: block for 300 ms</button>
+      <button type="button" class="ghost" (click)="clear()">Clear measures</button>
+    </div>
+    <p class="hint">
+      The measure covers the synchronous handler only. The render it schedules lands afterwards, which is exactly
+      why you read the Angular track rather than trusting the number below.
+    </p>
+  </article>
+
+  <h3>Measures taken in this session</h3>
+  @if (measures().length === 0) {
+    <p class="hint">Nothing measured yet.</p>
+  } @else {
+    <table>
+      <caption>
+        Slowest so far: {{ slowest()?.name }} at {{ slowest()?.duration }} ms
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Measure</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Taken at</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of measures(); track $index) {
+          <tr>
+            <th scope="row"><code>{{ entry.name }}</code></th>
+            <td [class.slow]="entry.duration > 50">{{ entry.duration }} ms</td>
+            <td>{{ entry.at }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  <h3>The workload being rendered ({{ rows().length }} rows)</h3>
+  <div class="rows">
+    @for (row of rows(); track row.id) {
+      <span class="cell">{{ row.label }}: {{ row.value }}</span>
+    }
+  </div>
+
+  <h3>Reading the recording</h3>
+  <table>
+    <caption>What a shape in the trace usually means</caption>
+    <thead>
+      <tr>
+        <th scope="col">What you see</th>
+        <th scope="col">Track</th>
+        <th scope="col">Usual cause</th>
+        <th scope="col">Usual fix</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (reading of readings; track reading.symptom) {
+        <tr>
+          <th scope="row">{{ reading.symptom }}</th>
+          <td>{{ reading.track }}</td>
+          <td>{{ reading.cause }}</td>
+          <td>{{ reading.fix }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <ul class="notes">
+    <li>The Angular DevTools extension has its own Profiler tab: it records change detection cycles and draws a bar chart per cycle plus a flame graph per component. Use it to find <em>which component</em>; use the Chrome Performance panel to find <em>how long</em>.</li>
+    <li>Record with the CPU throttled to 4x and the network to Fast 3G. An unthrottled desktop trace hides almost everything a user would feel.</li>
+    <li>Profile a production build served from <code>dist/</code>. A development build has no optimization, so its numbers are not the ones your users get.</li>
+    <li>Fix one thing per recording. Two changes in one trace and you cannot attribute the delta.</li>
+  </ul>
+</section>

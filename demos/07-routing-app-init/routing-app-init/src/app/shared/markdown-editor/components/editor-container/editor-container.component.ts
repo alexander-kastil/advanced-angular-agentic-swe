@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import {Component, inject, signal } from '@angular/core';
 import { MarkdownItem } from '../../markdown.model';
 import { MatButton } from '@angular/material/button';
 import { MarkdownEditComponent } from '../markdown-edit/markdown-edit.component';
@@ -21,8 +21,7 @@ import { markdownEditorStore } from '../../markdown-editor.store';
     MarkdownEditComponent,
     MatCardActions,
     MatButton,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class EditorContainerComponent {
   store = inject(markdownEditorStore);

@@ -21,14 +21,16 @@
               "base": "dist/routing-app-init"
             },
             "index": "src/index.html",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
             ],
             "styles": [
               "src/styles.scss",
@@ -44,7 +46,7 @@
               "node_modules/prismjs/components/prism-typescript.min.js",
               "node_modules/prismjs/components/prism-javascript.min.js"
             ],
-            "browser": "src/main.ts",
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -92,6 +94,13 @@
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n",
           "options": {
+            "buildTarget": "routing-app-init:build"
+          }
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
             "buildTarget": "routing-app-init:build"
           }
         }

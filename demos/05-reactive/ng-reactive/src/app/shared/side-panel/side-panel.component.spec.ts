@@ -1,4 +1,6 @@
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { SidePanelComponent } from './side-panel.component';
 import { LayoutStore } from '../layout/layout.store';
 import { SideNavService } from '../sidenav/sidenav.service';
@@ -13,7 +15,7 @@ describe('SidePanelComponent', () => {
         localStorage.clear();
         await TestBed.configureTestingModule({
             imports: [SidePanelComponent],
-            providers: [LayoutStore, SideNavService]
+            providers: [provideRouter([]), LayoutStore, SideNavService],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SidePanelComponent);
@@ -27,24 +29,24 @@ describe('SidePanelComponent', () => {
         localStorage.clear();
     });
 
-    it('should create', () => {
+    it('creates', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should call layout.showGuide on showGuide', () => {
-        const spy = spyOn(layoutStore, 'showGuide');
+    it('delegates showGuide to the layout store', () => {
+        const spy = vi.spyOn(layoutStore, 'showGuide');
         component.showGuide();
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should call layout.showEditor on showEditor', () => {
-        const spy = spyOn(layoutStore, 'showEditor');
-        component.showEditor();
+    it('delegates toggleEditor to the layout store', () => {
+        const spy = vi.spyOn(layoutStore, 'toggleEditor');
+        component.toggleEditor();
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should toggle sidenav visibility via service', () => {
-        const spy = spyOn(sideNavService, 'toggleMenuVisibility');
+    it('toggles sidenav visibility via the service', () => {
+        const spy = vi.spyOn(sideNavService, 'toggleMenuVisibility');
         component.toggleSideNav();
         expect(spy).toHaveBeenCalled();
     });

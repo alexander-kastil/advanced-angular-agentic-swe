@@ -1,0 +1,10 @@
+.side-by-side {
+  display: grid;
+  gap: var(--gap-medium);
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+}
+
+ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}

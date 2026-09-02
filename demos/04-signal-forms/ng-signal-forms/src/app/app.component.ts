@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment.development';
 import { RouterOutlet } from '@angular/router';
@@ -6,11 +6,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [NavbarComponent, RouterOutlet],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [NavbarComponent, RouterOutlet]
 })
 export class AppComponent {
   titleService = inject(Title);

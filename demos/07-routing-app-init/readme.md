@@ -1,142 +1,168 @@
 # Advanced Routing and App Initialization
 
-[Animations Explorer](https://williamjuan027.github.io/angular-animations-explorer/)
+This module covers the Angular router alongside dependency injection and application bootstrapping. You configure startup work with `provideAppInitializer` and `injectAsync`, declare services with the new `@Service` decorator, chain functional HTTP interceptors, catch navigation failures with `withNavigationErrorHandler` and everything else with a custom `ErrorHandler`, bind route and query parameters straight into signal inputs, feed a route-scoped SignalStore from the URL, preload lazy routes selectively, stack functional guards, animate elements and navigations without `@angular/animations`, and expose navigation to an AI agent as WebMCP tools.
 
-This module covers the full Angular router feature set alongside dependency injection patterns and application bootstrapping. Topics include functional guards, HTTP interceptors, route resolvers with `ResolveFn`, signal-based route parameter binding, and preloading strategies. You will configure global error handling with the `ErrorHandler` token, run startup logic with `APP_INITIALIZER`, and use the View Transitions API and router animations for polished navigation.
+Run the app from `routing-app-init`. Start the mock API first:
+
+```
+json-server db.json
+```
+
+```
+npm start
+```
 
 ## Demos
 
-| #   | Route                     | Title                         | Teaches                                                                                                                                                                 | Topic              |
-| --- | ------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| 1   | `app-init`                | App Initialization            | Configure application startup behavior using APP_INITIALIZER tokens. Run setup logic before the application bootstraps.                                                 | App Initialization |
-| 2   | `inject`                  | DI: Inject & Provide          | Use the inject() function to retrieve registered dependencies in a component. Learn how to provide custom services and configure injection tokens.                      | App Initialization |
-| 3   | `global-errors`           | Global Error Handler          | Implement a global error handler using ErrorHandler token. Catch and log all application errors in one place.                                                           | Error Handling     |
-| 4   | `http-errors`             | HTTP Error Handler            | Create interceptors that catch and transform HTTP errors. Implement centralized error recovery strategies.                                                              | Error Handling     |
-| 5   | `multi-interceptor`       | HTTP Interceptors             | Create multiple HTTP interceptors to add cross-cutting concerns like auth headers, logging, and error handling. Chain interceptors for request/response transformation. | Error Handling     |
-| 6   | `router-bindings`         | Component Input Bindings      | Bind route parameters directly to component inputs using bindToComponentInputs strategy. Simplify parameter handling with signal-based inputs.                          | Routing            |
-| 7   | `ngrx-routing`            | NgRx Router State             | Access router state through NgRx store. Manage navigation history and route parameters in application state.                                                            | Routing            |
-| 8   | `route-titles`            | Route Titles                  | Set dynamic page titles for each route using the title property in route configuration. Update browser tab titles automatically.                                        | Routing            |
-| 9   | `router-animations`       | Router Animations             | Add smooth transitions between route components using Angular animations. Enhance navigation UX with view enter/exit effects.                                           | Routing            |
-| 10  | `view-transitions`        | View Transitions              | Leverage native View Transitions API for seamless animated navigation. Create shared element animations across route changes.                                           | Routing            |
-| 11  | `can-match-guard`         | CanMatch Guard                | Use canMatch guards to conditionally load routes based on runtime conditions. Prevent route initialization before matching.                                             | Routing            |
-| 12  | `multi-guard`             | Route Guards                  | Stack multiple route guards to enforce authorization policies. Combine authentication and role-based access control.                                                    | Routing            |
-| 13  | `preloading-strategy`     | Preloading Strategy           | Implement custom preloading strategies to eager-load routes in the background. Optimize performance with selective preloading.                                          | Routing            |
-| 14  | `http-resource`           | HTTP Resource                 | Fetch data declaratively using the resource() function with signal-based reactive requests. Manage loading and error states automatically.                              | Routing            |
-| 15  | `httpresource-resolver`   | HTTP Resource Route Resolver  | Preload route data using ResolveFn with HTTP requests. Deliver type-safe data to components via signal-based inputs without managing subscriptions.                     | Routing            |
-| 16  | `route-resolvers-signals` | Route Resolvers with Signals  | Preload route data using ResolveFn with signals. Bind resolved data directly to component signal inputs for type-safe, auto-unwrapped data delivery.                    | Routing            |
-| 17  | `query-params-signals`    | Query Parameters with Signals | Manage query parameters reactively using signals. Synchronize component state with URL search params for bookmarkable, shareable filtered views.                        | Routing            |
+| #   | Route | Title | Teaches | Topic |
+| --- | --- | --- | --- | --- |
+| 1 | `app-init` | App Initialization & inject | Run startup logic before bootstrap with provideAppInitializer and read the loaded configuration from a service resolved with inject(). | App Initialization |
+| 2 | `app-initializer-async` | Async App Initializer | Await a lazily imported service during bootstrap by combining provideAppInitializer with injectAsync, and prefetch the same chunk on idle from a component. | App Initialization |
+| 3 | `service-migration` | Service Decorator & Migration | Replace @Injectable with the @Service decorator, scope a service to a single route with autoProvided:false, and run the 22.1 service-migration schematic. | App Initialization |
+| 4 | `http-errors` | Error Handling | Catch and transform HTTP failures in an interceptor, and route everything an interceptor misses through the global ErrorHandler token. | Error Handling |
+| 5 | `multi-interceptor` | HTTP Interceptors | Chain multiple functional interceptors for auth headers, retries and error mapping in one provideHttpClient call. | Error Handling |
+| 6 | `navigation-errors` | Navigation Errors | Record and redirect failed navigations with withNavigationErrorHandler, and catch everything else in a custom ErrorHandler class. | Error Handling |
+| 7 | `router-bindings` | Component Input Bindings | Bind route and query parameters straight into signal inputs with withComponentInputBinding, keeping component state and URL in sync without ActivatedRoute. | Routing |
+| 8 | `route-inputs` | Route Input Bindings | Configure withComponentInputBinding with its options object, and see why paramsInheritanceStrategy defaulting to always makes child routes inherit parent parameters and data. | Routing |
+| 9 | `route-titles` | Route Titles | Set dynamic page titles for each route using the title property in route configuration. Update browser tab titles automatically. | Routing |
+| 10 | `route-resolvers-signals` | Route Resolvers with Signals | Preload route data with an HTTP ResolveFn and receive it in a required signal input, type-safe and auto-unwrapped, with no subscription in the component. | Routing |
+| 11 | `can-match-guard` | CanMatch Guard | Use canMatch guards to conditionally load routes based on runtime conditions. Prevent route initialization before matching. | Routing |
+| 12 | `multi-guard` | Route Guards | Stack multiple route guards to enforce authorization policies. Combine authentication and role-based access control. | Routing |
+| 13 | `preloading-strategy` | Preloading Strategy | Implement custom preloading strategies to eager-load routes in the background. Optimize performance with selective preloading. | Routing |
+| 14 | `route-driven-store` | Route Driven Signal Store | Feed a route-scoped NgRx SignalStore from route params bound as signal inputs, so the URL is the only writer of the filter state. | Routing |
+| 15 | `router-animations` | Router Animations | Animate entering and leaving elements with animate.enter and animate.leave, and let withViewTransitions animate navigation, all without @angular/animations. | Routing |
+| 16 | `animate-enter-leave` | Animate Enter and Leave | Animate routed components in and out with animate.enter and animate.leave while withViewTransitions cross-fades the surrounding page. | Routing |
+| 17 | `view-transitions` | View Transitions | Leverage native View Transitions API for seamless animated navigation. Create shared element animations across route changes. | Routing |
+| 18 | `webmcp-navigation` | WebMCP Navigation Tools | Expose application navigation to an AI agent as WebMCP tools declared with declareExperimentalWebMcpTool, scoped to the component that owns them. | Agentic Interfaces |
 
-## Demos Reference
+## Reference
 
-Add Routing:
+### Application configuration
 
-```
-ng add @ngrx/router-store
-```
-
-```
-npm install @ngrx/router-store --save
-```
-
-### Configuration
-
-This effects changes in app.module.ts
-
-Possible Settings:
+Everything the app needs is registered in `src/app/app.config.ts`. The router carries four features, and the HTTP client carries three interceptors in order.
 
 ```typescript
-interface StoreRouterConfig {
-  stateKey?: string | Selector<any, RouterReducerState<T>>;
-  serializer?: new (...args: any[]) => RouterStateSerializer;
-  navigationActionTiming?: NavigationActionTiming;
-  routerState?: RouterState;
-}
+provideHttpClient(
+  withInterceptors([
+    authInterceptor,
+    retryInterceptor({ count: 3, delay: 1000 }),
+    httpErrorInterceptor,
+  ])
+),
+provideRouter(
+  appRoutes,
+  withComponentInputBinding({ queryParams: true, unmatchedInputBehavior: 'alwaysUndefined' }),
+  withViewTransitions(),
+  withPreloading(SelectivePreloadingStrategy),
+  withExperimentalAutoCleanupInjectors(),
+  withNavigationErrorHandler((error: NavigationError) => {
+    inject(ErrorLogService).record('NavigationError', error.error?.message ?? String(error.error));
+    return new RedirectCommand(inject(Router).parseUrl('/demos/navigation-errors'));
+  })
+),
+provideZonelessChangeDetection(),
 ```
 
-### Router State Serialization:
+Angular 22 uses the Fetch backend by default, so neither `withFetch()` nor `withXhr()` appears here, and the app runs zoneless with no `zone.js` polyfill.
 
-Setting to Full enables the DefaultRouterStateSerializer
+### Startup
 
-```typescript
-StoreRouterConnectingModule.forRoot({
-  routerState: RouterState.Full,
-});
-```
-
-Setting to Minimal enables the MinimalRouterStateSerialzer
+Four initializers run before the first render. The last one awaits a service that is not in the initial bundle:
 
 ```typescript
-StoreRouterConnectingModule.forRoot({
-  routerState: RouterState.Minimal,
-});
-```
-
-REMARK:
-Dependent on Runtime Checks only the minimal Router Serializer can be used! The Full Router State will not be serializeable and therefore does not work with the Serializeability runtime checks!
-An own serializer can be implemented.
-
-Example for runtime checks
-
-```typescript
-    StoreModule.forRoot(reducers, {
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-        strictStateSerializability: true,
-        strictActionSerializability: true,
-      },
-      metaReducers
-    })
-```
-
-### Navigate by Action - Effect
-
-e.g there is a canLoad Guard:
-
-```typescript
-@Injectable({
-  providedIn: 'root'
-})
-export class FBAuthGuard implements CanLoad {
-  constructor(private store: Store<AuthState>) {}
-
-  // this is a canLoad Guard - it does not prevent access after a logout
-  canLoad(): boolean | Observable<boolean> | Promise<boolean> {
-    return this.store.select(getUser).pipe(
-      map(user => {
-        if (user && user.email) {
-        	return true
-        } else {
-          this.store.dispatch(new LoginRedirect());
-          return false;
-        }
-      })
-    );
-  }
-}
-```
-
-The LoginRedirect can be listened to in an effect:
-
-```typescript
-@Injectable()
-export class AuthEffects {
-  constructor(
-  	private actions$: Actions,
-  	private as: AuthService,
-  	private router:Router) {}
-
-  // Redirect to login page
-  @Effect()
-  loginRedirect$ = this.actions$.pipe(
-    ofType(AuthActionTypes.LoginRedirect),
-    pluck('payload'),
-    exhaustMap(() => {
-      this.router.navigate(['demos','login'])
-      return EMPTY
-    })
-
+provideAppInitializer(async () => {
+  const log = inject(StartupLogService);
+  const loadFlags = injectAsync(() =>
+    import('./demos/samples/app-initializer-async/remote-flags.service').then(
+      (m) => m.RemoteFlagsService
+    )
   );
+
+  log.record('initializer started, requesting the lazy flags service');
+  const flags = await loadFlags();
+  await flags.load();
+  log.record(`flags resolved: ${flags.enabled().join(', ')}`);
+}),
 ```
 
-This mechanism can be used to transfer the control over the viewed page completely to the state, instead of the UI and the router.
+`inject()` and `injectAsync()` are both called before the first `await`, because the injection context ends at the first suspension point. The getter `injectAsync` returns has already captured the injector, so it can be called afterwards.
+
+### Services
+
+New services use the `@Service` decorator. `@Service()` is auto-provided; `@Service({ autoProvided: false })` is scoped by whichever `providers` array lists it, and a route is a natural owner.
+
+```typescript
+{
+  path: 'service-migration',
+  component: ServiceMigrationComponent,
+  providers: [RouteScopedNotesService],
+}
+```
+
+Convert an existing codebase with the schematic, which skips classes still using constructor injection:
+
+```
+ng generate @angular/core:service-migration
+```
+
+Route-scoped state only resets on re-entry because `withExperimentalAutoCleanupInjectors()` is enabled. Without it the router keeps one `EnvironmentInjector` per `Route` config for as long as the config is loaded, and a service listed in `providers` outlives every deactivation.
+
+### Guards
+
+A guard is a function that runs in an injection context. When the state it reads is a signal, the guard is synchronous and returns a plain boolean.
+
+```typescript
+export const onlyAuthenticatedGuard: CanActivateFn = () => {
+  const auth = inject(AuthFacade);
+  const sns = inject(SnackbarService);
+
+  if (auth.isAuthenticated()) {
+    return true;
+  }
+
+  sns.displayAlert('No Access', 'Access only for authenticated users');
+  return false;
+};
+```
+
+`canMatch` decides whether a route matches at all, so a failing `canMatch` guard means the lazy chunk is never downloaded. `canActivate` runs after the chunk has loaded and only blocks activation.
+
+`CanMatchFn` takes three arguments. The third, `PartialMatchRouteSnapshot`, carries the `params`, `queryParams`, `data`, `fragment` and `paramMap` that are already known while matching, which is everything an `ActivatedRouteSnapshot` would give except what only exists after activation.
+
+```typescript
+type CanMatchFn = (
+  route: Route,
+  segments: UrlSegment[],
+  currentSnapshot: PartialMatchRouteSnapshot,
+) => MaybeAsync<GuardResult>;
+```
+
+### Route data into components
+
+`withComponentInputBinding()` writes path parameters, query parameters, `data` and resolved values into matching `input()` signals. Query parameters arrive as strings, so coerce them in an input `transform`.
+
+```typescript
+readonly page = input(1, { transform: (value: string | number) => Number(value) || 1 });
+```
+
+Its options object carries two defaults: `queryParams: true` binds query parameters, and `unmatchedInputBehavior: 'alwaysUndefined'` overwrites an unmatched input with `undefined` on every navigation so stale values cannot survive. Use `'undefinedIfStale'` when a component mixes router-bound inputs with inputs a parent template sets.
+
+`paramsInheritanceStrategy` defaults to `'always'` in Angular 22, so every child route inherits its ancestors' parameters, `data` and resolved values whatever its own path looks like. `withRouterConfig({ paramsInheritanceStrategy: 'emptyOnly' })` restores the pre-22 behaviour.
+
+### Animations
+
+`@angular/animations` is not installed. Entering and leaving elements name a CSS class:
+
+```html
+<div animate.enter="slide-in" animate.leave="slide-out">...</div>
+```
+
+Navigation itself is animated by `withViewTransitions()`, styled through `::view-transition-old(root)` and `::view-transition-new(root)` in `src/theme/view-transition.scss`. The two compose: view transitions cross-fade the page, `animate.enter` and `animate.leave` animate one element on its own path. A routed component only animates out when the outlet's component actually changes, so two child routes sharing one component reuse the instance and never fire `animate.leave`.
+
+### WebMCP
+
+Angular 22 exposes `declareExperimentalWebMcpTool` and `provideExperimentalWebMcpTools` from `@angular/core`, and `provideExperimentalWebMcpForms` from `@angular/forms/signals`. No polyfill package is used. A tool declared in a component's injection context is registered on creation and unregistered on destroy, so an agent can drive navigation only while that page is open. Without `document.modelContext` or `navigator.modelContext` the registration is a silent no-op and the page behaves normally.
+
+### Mock authentication
+
+`AuthFacade` keeps the mock session in one signal and exposes `user`, `token`, `isAuthenticated` and `isPrimeMember` as `computed()`. Guards, the auth interceptor and the demo components all read those signals directly.

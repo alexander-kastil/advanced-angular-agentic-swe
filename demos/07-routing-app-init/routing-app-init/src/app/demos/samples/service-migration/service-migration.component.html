@@ -1,0 +1,41 @@
+<app-markdown-renderer [md]="'service-migration'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Two lifetimes, one decorator</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <code>&#64;Service()</code> replaces <code>&#64;Injectable(&#123; providedIn: 'root' &#125;)</code>.
+      Passing <code>&#123; autoProvided: false &#125;</code> keeps the class out of the root injector so
+      that a route can own it through its own <code>providers</code> array.
+    </p>
+
+    <table class="lifetimes">
+      <tr>
+        <th></th>
+        <th>&#64;Service()</th>
+        <th>&#64;Service(&#123; autoProvided: false &#125;)</th>
+      </tr>
+      <tr>
+        <td>Instance</td>
+        <td>#{{ appWide.instanceId }}</td>
+        <td>#{{ routeScoped.instanceId }}</td>
+      </tr>
+      <tr>
+        <td>Notes kept</td>
+        <td>{{ appWide.count() }}</td>
+        <td>{{ routeScoped.count() }}</td>
+      </tr>
+    </table>
+
+    <p>
+      Add a few notes, then leave the route and come back. The root instance keeps its number and its
+      notes; the route-scoped one is destroyed with the route injector and starts over.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addNote()">Add note to both</button>
+    <button mat-raised-button color="accent" (click)="leaveAndReturn()">Leave and return</button>
+  </mat-card-actions>
+</mat-card>

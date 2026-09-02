@@ -1,21 +1,46 @@
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title> Transformation </mat-card-title>
+    <mat-card-title>Higher order mapping against a real endpoint</mat-card-title>
   </mat-card-header>
-  <mat-card-content class="cmdItems">
-    <button mat-raised-button color="accent" (click)="useSwitchMap()">
-      switchMap()
-    </button>
-    <button mat-raised-button color="accent" (click)="useConcatMap()">
-      concatMap()
-    </button>
-    <button mat-raised-button color="accent" (click)="useMergeMap()">
-      mergeMap()
-    </button>
-    <button mat-raised-button color="accent" (click)="useExhaustMap()">
-      exhaustMap()
-    </button>
+  <mat-card-content>
+    <p>
+      Every click pushes the same id into four pipelines. Each one issues a real
+      <code>GET /skills</code>
+      against json-server, held for 1500 ms so you can overlap them. Click three
+      or four times in a row and read the counters, not just the log.
+    </p>
+    <div class="actions">
+      <button mat-raised-button color="accent" (click)="fire()">
+        Fire request #{{ fired() + 1 }}
+      </button>
+      <button mat-button (click)="reset()">Reset</button>
+    </div>
   </mat-card-content>
 </mat-card>
 
-<div boxed>See Console for output</div>
+<div class="strategies">
+  @for (strategy of strategies; track strategy) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{ strategy }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ descriptions[strategy] }}</p>
+        <div class="counters">
+          <span [class.busy]="panes()[strategy].inFlight > 0">
+            in flight {{ panes()[strategy].inFlight }}
+          </span>
+          <span>subscribed {{ panes()[strategy].subscribed }}</span>
+          <span>delivered {{ panes()[strategy].delivered }}</span>
+        </div>
+        <div class="log">
+          @for (entry of panes()[strategy].log; track $index) {
+            <div [class.cancelled]="entry.includes('cancelled')">{{ entry }}</div>
+          } @empty {
+            <div>no results yet</div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

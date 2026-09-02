@@ -1,0 +1,60 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Event-Based Store: eventGroup, withReducer, withEventHandlers</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    @if (store.checkingOut()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <div class="toolbar">
+      @for (item of catalog; track item) {
+        <button mat-stroked-button (click)="dispatch.added(item)">+ {{ item }}</button>
+      }
+    </div>
+
+    <h4>Cart ({{ store.lineCount() }})</h4>
+    @for (line of store.lines(); track $index) {
+      <div class="row">
+        <span class="grow">{{ line }}</span>
+        <button mat-icon-button (click)="dispatch.removed(line)"><mat-icon>delete</mat-icon></button>
+      </div>
+    } @empty {
+      <p>Cart is empty.</p>
+    }
+
+    <div class="toolbar">
+      <button mat-raised-button color="primary" [disabled]="store.lineCount() === 0 || store.checkingOut()"
+        (click)="dispatch.checkoutStarted()">Checkout</button>
+      <button mat-stroked-button (click)="dispatch.cleared()">Clear</button>
+    </div>
+
+    @if (store.orderNumber(); as order) {
+      <p class="order">Order <strong>{{ order }}</strong> placed by the checkout event handler.</p>
+    }
+
+    <h4>Scoped dispatching</h4>
+    <p class="hint">
+      This component provides its own Dispatcher, so the cart store only reduces what stays in the local scope.
+      Dispatch with parent or global and the event leaves for the root dispatcher, where nothing reduces it, and
+      the log below stays unchanged.
+    </p>
+    <mat-button-toggle-group [value]="scope()" (change)="scope.set($event.value)">
+      @for (s of scopes; track s) {
+        <mat-button-toggle [value]="s">{{ s }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+    <div class="toolbar">
+      <button mat-stroked-button (click)="addScoped('Scoped Ticket')">
+        dispatcher.dispatch(added, scope)
+      </button>
+    </div>
+
+    <h4>Event log</h4>
+    <ol class="log">
+      @for (entry of store.log(); track $index) {
+        <li>{{ entry }}</li>
+      }
+    </ol>
+  </mat-card-content>
+</mat-card>

@@ -1,83 +1,75 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal, Signal } from '@angular/core';
-import { form, FormField, required, email, validate, validateAsync, min, max } from '@angular/forms/signals';
+import { Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { email, form, FormField, max, min, required, validateAsync, validateHttp } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
-import { MatOptionModule } from '@angular/material/core';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { environment } from 'src/environments/environment';
 import { MarkdownRendererComponent } from 'src/app/shared/markdown-renderer/markdown-renderer.component';
-import { ColumnDirective } from 'src/app/shared/ux-lib/formatting/formatting-directives';
+import { BoxedDirective, ColumnDirective } from 'src/app/shared/ux-lib/formatting/formatting-directives';
+import { Person } from '../person/person.model';
 import { PersonService } from '../person/person.service';
 
 interface PersonFormModel {
   name: string;
   age: number;
-  gender: string;
   email: string;
-  wealth: string;
 }
 
 @Component({
   selector: 'app-reactive-validation',
-  templateUrl: './signal-form-validators.component.html',
-  styleUrls: ['./signal-form-validators.component.scss'],
+  templateUrl: './validation.component.html',
+  styleUrls: ['./validation.component.scss'],
   imports: [
     MatCardModule,
     ColumnDirective,
+    BoxedDirective,
     FormField,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatRadioModule,
     MatButtonModule,
     MarkdownRendererComponent
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class ReactiveValidationComponent {
   private ps = inject(PersonService);
-  wealthOpts = ['poor', 'rich', 'middle_class'];
 
-  personModel = signal<PersonFormModel>({ name: '', age: 0, gender: 'not set', email: '', wealth: '' });
-
-  private createEmailResource = (emailSignal: Signal<string | undefined>) =>
-    rxResource({
-      params: () => emailSignal(),
-      stream: ({ params: mail }) => this.ps.checkMailExists(mail ?? ''),
-    });
+  personModel = signal<PersonFormModel>({ name: '', age: 18, email: '' });
 
   personForm = form(this.personModel, (s) => {
     required(s.name, { message: 'Name is required' });
-    validate(s.name, ({ value }) =>
-      value() === 'Hugo' ? { kind: 'invalidName', message: 'The name Hugo is not allowed' } : null
-    );
     min(s.age, 18, { message: 'Person must be at least 18' });
     max(s.age, 99, { message: 'Person must be at most 99' });
     required(s.email, { message: 'Email is required' });
     email(s.email, { message: 'Invalid email address' });
-    validateAsync(s.email, {
-      params: ({ value }) => value() ?? undefined,
-      factory: this.createEmailResource,
-      onSuccess: (exists) =>
-        exists ? { kind: 'mailExists', message: 'Sorry this mail is already registered' } : null,
-      onError: () => ({ kind: 'serverError', message: 'Could not verify email' }),
+
+    validateHttp<string, Person[]>(s.email, {
+      request: ({ value }) =>
+        value() ? `${environment.api}persons?email=${encodeURIComponent(value())}` : undefined,
+      debounce: 400,
+      onSuccess: (persons) =>
+        persons.length > 0
+          ? { kind: 'mailExists', message: 'This mail is already registered' }
+          : null,
+      onError: () => ({ kind: 'serverError', message: 'Could not verify the email' }),
+    });
+
+    validateAsync(s.name, {
+      params: ({ value }) => value() || undefined,
+      debounce: 400,
+      factory: (name) =>
+        rxResource({
+          params: () => name(),
+          stream: ({ params }) => this.ps.checkNameTaken(params),
+        }),
+      onSuccess: (taken) =>
+        taken ? { kind: 'nameTaken', message: 'This name is already taken' } : null,
+      onError: () => ({ kind: 'serverError', message: 'Could not verify the name' }),
     });
   });
 
-  constructor() {
-    effect(() => {
-      this.ps.getPerson().subscribe((p) => {
-        this.personModel.update((m) => ({ ...m, name: p.name, age: p.age, email: p.email, gender: p.gender, wealth: p.wealth }));
-      });
-    });
-  }
-
   savePerson(): void {
-    this.ps.save(this.personModel() as any);
+    console.log('valid person:', this.personModel());
   }
 }
-

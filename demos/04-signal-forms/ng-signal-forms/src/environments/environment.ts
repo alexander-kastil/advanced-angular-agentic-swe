@@ -2,6 +2,6 @@ export const environment = {
   authEnabled: false,
   title: 'Signal Forms',
   logChangeDetection: true,
-  markdownPath: '/assets/markdown/',
+  markdownPath: 'markdown/',
   api: 'http://localhost:3000/',
 };

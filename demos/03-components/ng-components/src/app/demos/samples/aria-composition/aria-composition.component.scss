@@ -1,0 +1,86 @@
+mat-card {
+  margin-bottom: var(--gap-big);
+}
+
+.tablist {
+  display: flex;
+  gap: var(--gap-small);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.tab {
+  padding: 8px 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+.tab[aria-selected='true'] {
+  border-color: rgba(128, 128, 128, 0.4);
+  font-weight: bold;
+}
+
+.tab[data-active='true'] {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.tab[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tabpanel {
+  padding: var(--gap-medium) 0;
+}
+
+.tabpanel[inert] {
+  display: none;
+}
+
+.listbox {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  max-width: 320px;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 4px;
+}
+
+.option {
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.option[aria-selected='true']::before {
+  content: '\2713\00a0';
+}
+
+.option[data-active='true'] {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+.option[aria-disabled='true'] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.state {
+  font-family: monospace;
+}
+
+.hint {
+  font-size: var(--font-small);
+}

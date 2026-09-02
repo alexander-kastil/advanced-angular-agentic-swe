@@ -1,6 +1,6 @@
 <mat-toolbar color="accent">
   <mat-toolbar-row>
-    <div>Skills Total: {{ ct() }}</div>
-    <div>Not Completed: {{ notCompleted() }}</div>
+    <div>Skills Total: {{ store.total() }}</div>
+    <div>Not Completed: {{ store.openCount() }}</div>
   </mat-toolbar-row>
 </mat-toolbar>

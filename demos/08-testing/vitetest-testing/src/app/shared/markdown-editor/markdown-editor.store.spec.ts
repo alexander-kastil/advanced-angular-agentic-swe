@@ -47,7 +47,7 @@ describe('Signal Store - markdownEditorStore', () => {
   });
 
   it('should load items on init via fetch event', () => {
-    TestBed.flushEffects();
+    TestBed.tick();
 
     expect(serviceSpy.getMarkdownItems).toHaveBeenCalled();
     expect(store.entities().length).toBe(2);
@@ -55,7 +55,7 @@ describe('Signal Store - markdownEditorStore', () => {
   });
 
   it('should set isLoading to true when fetch event is dispatched', () => {
-    TestBed.flushEffects(); // complete init with of(mockItems) — isLoading is now false
+    TestBed.tick(); // complete init with of(mockItems) — isLoading is now false
 
     const subject = new Subject<MarkdownItem[]>();
     serviceSpy.getMarkdownItems.mockReturnValue(subject.asObservable());
@@ -69,7 +69,7 @@ describe('Signal Store - markdownEditorStore', () => {
   });
 
   it('should add items to the entity collection after fetchSuccess', () => {
-    TestBed.flushEffects();
+    TestBed.tick();
 
     dispatcher.dispatch(mdEditorEvents.fetchSuccess(mockItems));
 
@@ -78,7 +78,7 @@ describe('Signal Store - markdownEditorStore', () => {
   });
 
   it('should update an existing entity on saveSuccess', () => {
-    TestBed.flushEffects();
+    TestBed.tick();
 
     const updated: MarkdownItem = { id: 1, url: 'intro', title: 'Updated Intro', comment: '# Updated', saved: new Date() };
     dispatcher.dispatch(mdEditorEvents.saveSuccess(updated));
@@ -89,7 +89,7 @@ describe('Signal Store - markdownEditorStore', () => {
   });
 
   it('should remove entity from collection on deleteSuccess', () => {
-    TestBed.flushEffects();
+    TestBed.tick();
 
     dispatcher.dispatch(mdEditorEvents.deleteSuccess(1));
 
@@ -115,14 +115,14 @@ describe('Signal Store - markdownEditorStore', () => {
     const subject = new Subject<string>();
     serviceSpy.getMarkdownContent.mockReturnValue(subject.asObservable());
 
-    TestBed.flushEffects(); // complete onInit fetch
+    TestBed.tick(); // complete onInit fetch
 
     dispatcher.dispatch(mdEditorEvents.loadContentSuccess('# Previous'));
     expect(store.markdownContent()).toBe('# Previous');
 
     // loadContent: reducer sets markdownContent=null, effect subscribes to subject (no emission)
     dispatcher.dispatch(mdEditorEvents.loadContent('some-file'));
-    TestBed.flushEffects();
+    TestBed.tick();
     expect(store.markdownContent()).toBeNull();
 
     subject.complete();

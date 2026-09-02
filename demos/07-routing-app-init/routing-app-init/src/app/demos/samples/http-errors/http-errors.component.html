@@ -1,10 +1,32 @@
 <app-markdown-renderer [md]="'http-errors'" />
+
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>Global Http Err Handling</mat-card-title>
+    <mat-card-title>HTTP error handling via interceptor</mat-card-title>
   </mat-card-header>
-  <mat-card-content />
+  <mat-card-content>
+    <p>
+      <code>retryInterceptor</code> retries three times, then <code>httpErrorInterceptor</code> maps the
+      failure into a plain Error.
+    </p>
+    <p><strong>Last error:</strong> {{ lastError() }}</p>
+  </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="doCall()" color="primary" >Do Call</button>
+    <button mat-raised-button (click)="doCall()" color="primary">Call a missing endpoint</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Global ErrorHandler</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Anything an interceptor does not catch ends up in the <code>ErrorHandler</code> registered in
+      <code>app.config.ts</code>, which navigates to <code>/error</code>.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="throwErr()" color="warn">Throw an unhandled error</button>
   </mat-card-actions>
 </mat-card>

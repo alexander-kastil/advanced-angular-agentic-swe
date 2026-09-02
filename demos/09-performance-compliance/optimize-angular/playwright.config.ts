@@ -28,8 +28,11 @@ export default defineConfig({
     ],
 
     webServer: {
-        command: 'npm run start',
+        command: process.env.COMPLIANCE_GATE
+            ? 'npx --yes serve -s dist/optimize-angular/browser -l 4200'
+            : 'npm run start',
         url: 'http://localhost:4200',
         reuseExistingServer: !process.env.CI,
+        timeout: 180000,
     },
 });

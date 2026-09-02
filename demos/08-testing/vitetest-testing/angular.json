@@ -93,6 +93,14 @@
             "buildTarget": "vitest-testing:build"
           }
         },
+        "test-browser": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "buildTarget": "vitest-testing:build",
+            "browsers": ["chromium"]
+          }
+        },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         }

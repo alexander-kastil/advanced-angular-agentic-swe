@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { BorderDirective, BoxedDirective } from '../../../shared/formatting/formatting-directives';
 
 @Component({
@@ -9,7 +9,6 @@ import { BorderDirective, BoxedDirective } from '../../../shared/formatting/form
         BorderDirective,
         BoxedDirective
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DirectiveCompositionComponent {
 

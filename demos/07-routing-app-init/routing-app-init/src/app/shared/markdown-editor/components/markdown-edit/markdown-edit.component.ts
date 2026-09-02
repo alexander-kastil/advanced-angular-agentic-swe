@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import {Component, input } from '@angular/core';
 import { MarkdownItem } from '../../markdown.model';
 import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -15,8 +15,7 @@ import { ColumnDirective } from '../../../formatting/formatting-directives';
         MatLabel,
         MatInput,
         FormsModule,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    ]
 })
 export class MarkdownEditComponent {
     readonly comment = input(new MarkdownItem());

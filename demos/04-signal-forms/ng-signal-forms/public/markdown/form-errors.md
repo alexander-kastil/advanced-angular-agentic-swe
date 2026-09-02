@@ -1,4 +1,4 @@
-Examine the error collection in `signal-form-errors.component.ts`:
+Examine the error collection in `form-errors.component.ts`:
 
 ```typescript
 skillForm = form(this.skillModel, (s) => {

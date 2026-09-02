@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, effect, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { form, FormField, required, min, max, submit } from '@angular/forms/signals';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -33,7 +33,7 @@ const emptyPet: PetFormModel = {
 
 @Component({
     selector: 'app-signal-forms-pets',
-    templateUrl: './signal-form-pets.component.html',
+    templateUrl: './signal-forms-pets.component.html',
     imports: [
         MarkdownRendererComponent,
         MatCard,
@@ -49,8 +49,7 @@ const emptyPet: PetFormModel = {
         FormsModule,
         JsonPipe,
         MatProgressBar, ColumnDirective, MatListModule,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    ]
 })
 export class SignalFormsPetsComponent {
     private petService = inject(PetService);

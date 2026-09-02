@@ -1,72 +1,91 @@
-import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
-import { form, FormField, required, min, minLength, applyWhenValue } from '@angular/forms/signals';
-import { MatInput } from '@angular/material/input';
+import { JsonPipe } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { applyWhenValue, form, FormField, min, minLength, required } from '@angular/forms/signals';
+import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { MatInput } from '@angular/material/input';
 import { MarkdownRendererComponent } from '../../../shared/markdown-renderer/markdown-renderer.component';
 import { ColumnDirective } from '../../../shared/ux-lib/formatting/formatting-directives';
-import { JsonPipe } from '@angular/common';
 
 interface PetDomain {
-    petName: string;
-    breed: string;
-    notes: string | null;
-    weight: number | null;
-    adoptionDate: Date | null;
+  petName: string;
+  breed: string;
+  notes: string | null;
+  weight: number | null;
+  microchipId?: string;
+  adoptionDate: Date | null;
 }
 
 interface PetFormModel {
-    petName: string;
-    breed: string;
-    notes: string;
-    weight: number;
-    adoptionDate: Date | null;
+  petName: string;
+  breed: string;
+  notes: string;
+  weight: number;
+  microchipId: string;
+  adoptionDate: Date | null;
 }
 
 const initialData: PetFormModel = {
-    petName: '',
-    breed: '',
-    notes: '',
-    weight: NaN,
-    adoptionDate: null,
+  petName: '',
+  breed: '',
+  notes: '',
+  weight: 0,
+  microchipId: '',
+  adoptionDate: null,
 };
 
 @Component({
-    selector: 'app-sf-null-values',
-    templateUrl: './signal-form-null-values.component.html',
-    imports: [
-        MarkdownRendererComponent,
-        MatCard, MatCardHeader, MatCardTitle, MatCardContent,
-        FormField, MatFormField, MatLabel, MatInput,
-        JsonPipe, ColumnDirective,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-sf-null-values',
+  templateUrl: './signal-form-null-values.component.html',
+  imports: [
+    MarkdownRendererComponent,
+    MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatCardActions, MatButton,
+    FormField, MatFormField, MatLabel, MatInput,
+    JsonPipe, ColumnDirective,
+  ]
 })
 export class SfNullValuesComponent {
-    petModel = signal<PetFormModel>(initialData);
+  petModel = signal<PetFormModel>(initialData);
 
-    petForm = form(this.petModel, (s) => {
-        required(s.petName, { message: 'Pet name is required' });
-        required(s.breed, { message: 'Breed is required' });
-        min(s.weight, 0, { message: 'Weight cannot be negative' });
-        applyWhenValue(
-            s.notes,
-            (value) => value !== null,
-            (notesPath) => {
-                minLength(notesPath, 5, { message: 'Notes must be at least 5 characters' });
-            }
-        );
-    });
+  petForm = form(this.petModel, (s) => {
+    required(s.petName, { message: 'Pet name is required' });
+    required(s.breed, { message: 'Breed is required' });
+    min(s.weight, 0, { message: 'Weight cannot be negative' });
 
-    eff = effect(() => {
-        console.log('--- MODEL ---');
-        console.log('petName:', this.petModel().petName);
-        console.log('notes:', this.petModel().notes);
-        console.log('adoptionDate:', this.petModel().adoptionDate);
-        console.log('--- FORM ---');
-        console.log('petName found?', !!this.petForm.petName);
-        console.log('notes found?', !!this.petForm.notes);
-        console.log('adoptionDate found?', !!this.petForm.adoptionDate);
-    });
+    applyWhenValue(
+      s.notes,
+      (value) => value !== null && value !== '',
+      (notesPath) => minLength(notesPath, 5, { message: 'Notes must be at least 5 characters' })
+    );
+
+    applyWhenValue(
+      s.microchipId,
+      (value) => value !== '',
+      (chipPath) => minLength(chipPath, 10, { message: 'Microchip ID must be at least 10 characters' })
+    );
+  });
+
+  toDomain(): PetDomain {
+    const m = this.petModel();
+    return {
+      petName: m.petName,
+      breed: m.breed,
+      notes: m.notes === '' ? null : m.notes,
+      weight: Number.isNaN(m.weight) ? null : m.weight,
+      microchipId: m.microchipId === '' ? undefined : m.microchipId,
+      adoptionDate: m.adoptionDate,
+    };
+  }
+
+  domain = signal<PetDomain | null>(null);
+
+  save(): void {
+    this.domain.set(this.toDomain());
+  }
+
+  reset(): void {
+    this.petForm().reset(initialData);
+    this.domain.set(null);
+  }
 }
-

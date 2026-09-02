@@ -1,20 +1,87 @@
-<mat-card appearance="outlined">
-  <mat-card-header>
-    <mat-card-title> Error handling </mat-card-title>
-  </mat-card-header>
+<div class="grid">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>catchError</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        A real
+        <code>GET /skilz</code>
+        that json-server answers with 404. What you return from
+        <code>catchError</code>
+        decides what the subscriber sees.
+      </p>
+      <div class="actions">
+        <button mat-raised-button color="accent" (click)="runCatchError('empty')">
+          return EMPTY
+        </button>
+        <button mat-raised-button color="accent" (click)="runCatchError('fallback')">
+          return of(fallback)
+        </button>
+        <button mat-raised-button color="accent" (click)="runCatchError('rethrow')">
+          rethrow
+        </button>
+      </div>
+      <div class="log">
+        @for (entry of catchLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-  <mat-card-content class="cmdItems">
-    <button mat-raised-button color="accent" (click)="completeStream()">
-      Complete Stream
-    </button>
-    <button mat-raised-button color="accent" (click)="rethrowErr()">
-      Log & re-throw error
-    </button>
-    <button mat-raised-button color="accent" (click)="fallbackValue()">
-      Provide fallback instead of error
-    </button>
-    <button mat-raised-button color="accent" (click)="useRetry()">
-      Retry()
-    </button>
-  </mat-card-content>
-</mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>retry</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        The first two attempts hit the 404 route, the third hits the real one.
+        <code>retry</code>
+        resubscribes with a 600 ms delay, so
+        <code>defer</code>
+        runs again and picks a new URL.
+      </p>
+      <div class="actions">
+        <button mat-raised-button color="accent" (click)="runRetry()">Run</button>
+      </div>
+      <div class="log">
+        @for (entry of retryLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>catchWithFallback()</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        A custom operator: report the failure once, then keep the stream alive
+        with a fallback value. Covered by a marble test in
+        <code>catch-with-fallback.spec.ts</code>
+        , run with
+        <code>npm test</code>
+        .
+      </p>
+      <div class="actions">
+        <button mat-raised-button color="accent" (click)="runCustomOperator()">
+          Run against the 404 route
+        </button>
+      </div>
+      <div class="log">
+        @for (entry of operatorLog(); track $index) {
+          <div>{{ entry }}</div>
+        } @empty {
+          <div>idle</div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,37 +1,65 @@
-In this demo the Classic NgRx `AppState` is replaced with as state using `signalStore`. For simplicity we have removed the auth-flag and for clarity we have renamed the file to `sidenav.store.ts`. The store can be provides using Angular's dependency injection system or by using `providedIn`. The store is used to manage the state of the side navigation. The state is defined in `sidenav.store.ts` and is used in the following components:
+## Overview
 
-`withState` defines the state and `withMethods` defines the methods that do not persist the state. 
+`signalStore()` builds a state container out of composable features. This demo uses the three that every store starts with: `withState()` declares the shape, `withComputed()` derives from it, and `withMethods()` is the only place allowed to change it.
+
+Examine `app-settings.store.ts` next to the demo component.
+
+## Declaring State
 
 ```typescript
-type SideNavState = {
-  sideNavVisible: boolean;
-  sideNavPosition: MatDrawerMode;
-}
-
-const initialSideNavState: SideNavState = {
-  sideNavVisible: true,
-  sideNavPosition: 'side',
+type AppSettingsState = {
+  appTitle: string;
+  darkMode: boolean;
+  density: Density;
+  pageSize: number;
 };
 
-export const sideNavStore = signalStore(
-  { providedIn: 'root', protectedState: false },
-  withState(initialSideNavState),
-  withMethods((store) => ({
-    toggleSideNav() {
-      patchState(store, { sideNavVisible: !store.sideNavVisible() });
-    },
-    changeSideNavVisible(visible: boolean) {
-      patchState(store, { sideNavVisible: visible });
-    },
-    changeSideNavPosition(position: MatDrawerMode) {
-      patchState(store, { sideNavPosition: position });
-    }
-  })),
-);
+const initialState: AppSettingsState = {
+  appTitle: 'NgRx SignalStore',
+  darkMode: true,
+  density: 'comfortable',
+  pageSize: 10,
+};
+
+export const AppSettingsStore = signalStore(withState(initialState));
 ```
 
-The response to a possible change in screen width is handled by `sidenav.service.ts` which will replace the facade and acts as a mediator between the store and the component. It is used in the following components:
+Every root property becomes its own signal: `store.appTitle()`, `store.darkMode()`.
 
-- `demo-container.component.ts`
-- `navbar.component.ts`
-- `side-panel.component.ts`
+## Deriving with withComputed
+
+```typescript
+withComputed(({ appTitle, darkMode, density, pageSize }) => ({
+  summary: computed(() => `${appTitle()} - ${darkMode() ? 'dark' : 'light'} / ${density()} / ${pageSize()} rows`),
+  rowHeight: computed(() => ({ compact: 32, comfortable: 44, spacious: 60 })[density()]),
+}))
+```
+
+Computed members are read-only signals; they recalculate only when a dependency changes.
+
+## Changing State with withMethods
+
+State is protected by default, so `patchState()` may only be called from inside a store method:
+
+```typescript
+withMethods((store) => ({
+  toggleDarkMode() {
+    patchState(store, { darkMode: !store.darkMode() });
+  },
+  setDensity(density: Density) {
+    patchState(store, { density });
+  },
+  reset() {
+    patchState(store, initialState);
+  },
+  snapshot() {
+    return JSON.stringify(getState(store), null, 2);
+  },
+}))
+```
+
+`getState()` returns the whole state object as a plain value and stays reactive, which is what feeds the live JSON panel in the demo.
+
+## Providing the Store
+
+`AppSettingsStore` is listed in the component's `providers`, so its lifetime matches the demo page. Pass `{ providedIn: 'root' }` as the first `signalStore()` argument instead when the state must outlive a single route, as `LayoutStore` and `customersStore` do in this app.

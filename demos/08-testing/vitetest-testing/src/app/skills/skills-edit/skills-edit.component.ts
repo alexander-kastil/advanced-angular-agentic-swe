@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardActions, MatCardModule } from '@angular/material/card';
@@ -17,7 +17,6 @@ import { SkillsService } from '../skills.service';
   selector: 'app-skills-edit',
   templateUrl: './skills-edit.component.html',
   styleUrls: ['./skills-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatCardModule, MatFormField, MatLabel, MatInput, MatButtonModule,
     FormField, MatSlideToggle, MatCardActions]
 })

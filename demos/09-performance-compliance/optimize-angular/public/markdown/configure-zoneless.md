@@ -44,16 +44,24 @@ bootstrapApplication(AppComponent, {
 });
 ```
 
-### Step 2: Ensure OnPush on All Components
+### Step 2: Leave Change Detection Alone
+
+`OnPush` is the default strategy in Angular v22, so a component needs no `changeDetection`
+line at all. Under `provideZonelessChangeDetection()` the setting is redundant rather than
+required: zoneless never runs the zone-triggered global check that `OnPush` used to opt out of.
+This app is the proof - it provides zoneless in `app.config.ts` and no component declares
+`changeDetection`.
 
 ```typescript
 @Component({
   selector: "app-my-component",
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // ...
+  // no changeDetection line: OnPush is the v22 default
 })
 export class MyComponent {}
 ```
+
+Setting `ChangeDetectionStrategy.Default` explicitly is the only thing that changes behaviour
+here, and it is what you should look for when auditing a legacy codebase.
 
 ### Step 3: Use Signals for State
 
@@ -89,9 +97,10 @@ Use this prompt to guide your application migration to zoneless:
 I am migrating an Angular v20+ application to use zoneless change detection.
 Please help me with the following:
 
-1. **Audit Components**: Scan all components and identify those NOT using:
-   - ChangeDetectionStrategy.OnPush (required for zoneless)
-   - signal() / computed() for state management
+1. **Audit Components**: Scan all components and identify those still using:
+   - an explicit ChangeDetectionStrategy.Default (OnPush is the v22 default; an explicit
+     OnPush line is redundant, not required, and can simply be deleted)
+   - Observables or BehaviorSubject instead of signal() / computed() for state management
    - Standalone: true
 
 2. **migration Plan**: For each non-compliant component, provide:
@@ -117,7 +126,7 @@ Please help me with the following:
    - TestBed.configureTestingModule({ providers: [provideZonelessChangeDetection()] })
 
 6. **Validation Checklist**:
-   - [ ] All components use OnPush change detection
+   - [ ] No component sets ChangeDetectionStrategy.Default; redundant explicit OnPush lines removed
    - [ ] All components are standalone
    - [ ] State is signal-based, not Observable-based
    - [ ] No @Input/@Output decorators; using input()/output()
@@ -175,13 +184,11 @@ export class UserListComponent implements OnInit {
 ### After (Zoneless)
 
 ```typescript
-import { Component, ChangeDetectionStrategy, inject, input, output, resource } from "@angular/core";
+import { Component, inject, input, output, resource } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-user-list",
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   template: `
     @if (users.isLoading()) {
       <div>Loading...</div>
@@ -245,21 +252,20 @@ data = resource(() => this.service.getData());
 data = toSignal(this.service.data$);
 ```
 
-### ❌ Default Change Detection
+### ❌ Opting Back Into Default Change Detection
 
 ```typescript
 @Component({
   selector: 'app-test',
-  // Missing OnPush!
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 ```
 
-### ✅ Always Use OnPush
+### ✅ Say Nothing And Get OnPush
 
 ```typescript
 @Component({
   selector: 'app-test',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 ```
 
@@ -294,5 +300,5 @@ describe("MyComponent", () => {
 - [Angular Zoneless Guide](https://angular.dev/guide/zoneless)
 - [provideZonelessChangeDetection API](https://angular.dev/api/core/provideZonelessChangeDetection)
 - [Signals Documentation](https://angular.dev/guide/signals)
-- [OnPush Change Detection](https://angular.dev/guide/angular-compiler-options#onpush)
+- [Skipping Component Subtrees](https://angular.dev/best-practices/skipping-subtrees)
 - [Angular Performance Guide](https://angular.dev/best-practices/performance)

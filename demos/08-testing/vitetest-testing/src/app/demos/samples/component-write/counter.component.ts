@@ -1,18 +1,17 @@
-import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-component-events',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './component-events.component.html',
-  styleUrls: ['./component-events.component.scss'],
-  imports: [
-    MatCardModule,
-    MatButtonModule,
-  ]
+    selector: 'app-counter',
+    templateUrl: './counter.component.html',
+    styleUrls: ['./counter.component.scss'],
+    imports: [
+        MatCardModule,
+        MatButtonModule,
+    ]
 })
-export class ComponentEventsComponent {
+export class CounterComponent {
 
   count = signal(0);
 

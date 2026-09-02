@@ -1,5 +1,5 @@
 import { Component, effect, inject, model } from '@angular/core';
-import { createMarkdownItem, MarkdownItem } from '../../markdown.model';
+import { createMarkdownItem } from '../../markdown.model';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { ColumnDirective } from '../../../formatting/formatting-directives';

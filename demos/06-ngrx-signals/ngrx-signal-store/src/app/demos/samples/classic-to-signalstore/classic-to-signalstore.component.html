@@ -1,0 +1,41 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Agent-Driven Migration: classic NgRx to SignalStore</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <mat-tab-group>
+      <mat-tab label="Before - classic NgRx">
+        <pre class="code">{{ classic }}</pre>
+      </mat-tab>
+      <mat-tab label="After - SignalStore">
+        <pre class="code">{{ signalStore }}</pre>
+      </mat-tab>
+      <mat-tab label="Prompt">
+        <pre class="code">{{ prompt }}</pre>
+        <div class="toolbar">
+          <button mat-raised-button color="primary" (click)="copyPrompt()">Copy prompt</button>
+          @if (copied()) {
+            <span class="ok">Copied.</span>
+          }
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <h4>Review checklist - {{ store.doneCount() }} of {{ store.items().length }}</h4>
+    <mat-progress-bar mode="determinate" [value]="store.progress()" />
+
+    @for (item of store.items(); track item.id) {
+      <mat-checkbox [checked]="item.done" (change)="store.toggle(item.id)">{{ item.text }}</mat-checkbox>
+    }
+
+    <div class="toolbar">
+      <button mat-stroked-button (click)="store.reset()">Reset checklist</button>
+    </div>
+
+    <p class="hint">
+      Four files and roughly ninety lines become one store of about thirty. The checklist is what you read the
+      diff against: an agent that produces compiling code can still drop a cancellation guarantee or leave a
+      dead package behind.
+    </p>
+  </mat-card-content>
+</mat-card>

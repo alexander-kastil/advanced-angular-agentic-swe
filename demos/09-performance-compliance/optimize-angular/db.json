@@ -10,11 +10,20 @@
       "id": "5957"
     },
     {
+      "url": "devtools-profiling",
+      "title": "Profile with Angular DevTools",
+      "teaches": "Record a Chrome performance trace with enableProfiling(), read the Angular track, and turn a shape in the flame chart into a fix.",
+      "topic": "Performance Measurement",
+      "sortOrder": 2,
+      "md": "devtools-profiling",
+      "id": "1d3e"
+    },
+    {
       "url": "optimize-bundles",
       "title": "Optimize Bundles with Rolldown",
       "teaches": "Read the Rolldown build pipeline of @angular/build, enforce size budgets, and keep heavy libraries out of the initial chunk.",
       "topic": "Bundle Optimization",
-      "sortOrder": 2,
+      "sortOrder": 3,
       "md": "bundles",
       "id": "440f"
     },
@@ -23,16 +32,34 @@
       "title": "Defer Non-Critical Views",
       "teaches": "Split a template with @defer blocks, drive them with interaction, viewport and when triggers, and prefetch on idle.",
       "topic": "Loading Performance",
-      "sortOrder": 3,
+      "sortOrder": 4,
       "md": "defer-views",
       "id": "7b10"
+    },
+    {
+      "url": "defer-by-trigger",
+      "title": "Compare Defer Triggers",
+      "teaches": "Run all seven @defer triggers side by side and measure the chunk each one pulls, in bytes and in milliseconds.",
+      "topic": "Loading Performance",
+      "sortOrder": 5,
+      "md": "defer-by-trigger",
+      "id": "2f7a"
+    },
+    {
+      "url": "zoneless",
+      "title": "Zoneless Change Detection",
+      "teaches": "See what schedules a refresh without zone.js: signal writes and template listeners do, a bare setTimeout does not.",
+      "topic": "Runtime Performance",
+      "sortOrder": 6,
+      "md": "zoneless",
+      "id": "3b8c"
     },
     {
       "url": "configure-zoneless",
       "title": "Configure Zoneless",
       "teaches": "Run without zone.js using provideZonelessChangeDetection() so change detection is scheduled by signals and events.",
       "topic": "Runtime Performance",
-      "sortOrder": 4,
+      "sortOrder": 7,
       "md": "configure-zoneless",
       "id": "4f29"
     },
@@ -41,7 +68,7 @@
       "title": "Virtual Scroll Large Lists",
       "teaches": "Render 100000 rows with the CDK virtual scroll viewport and watch the rendered range instead of the whole list.",
       "topic": "Runtime Performance",
-      "sortOrder": 5,
+      "sortOrder": 8,
       "md": "virtual-scroll",
       "id": "6aad"
     },
@@ -50,7 +77,7 @@
       "title": "Optimize Images",
       "teaches": "Use NgOptimizedImage for srcset generation, reserved layout space, lazy loading and a single prioritized LCP image.",
       "topic": "Asset Optimization",
-      "sortOrder": 6,
+      "sortOrder": 9,
       "md": "optimized-img",
       "id": "55c9"
     },
@@ -59,7 +86,7 @@
       "title": "Build Accessible UI",
       "teaches": "Meet WCAG 2.2 AA for the European Accessibility Act with @angular/aria widgets, template lint rules and an axe scan.",
       "topic": "Accessibility Compliance",
-      "sortOrder": 7,
+      "sortOrder": 10,
       "md": "a11y",
       "id": "51a2"
     },
@@ -68,7 +95,7 @@
       "title": "Harden with Strict CSP",
       "teaches": "Generate a hash-based strict Content Security Policy with the security.autoCsp build option and watch violations.",
       "topic": "Security Compliance",
-      "sortOrder": 8,
+      "sortOrder": 11,
       "md": "auto-csp",
       "id": "9c22"
     },
@@ -77,20 +104,39 @@
       "title": "Gate Third-Party Content",
       "teaches": "Block analytics and external media until consent is granted, and make withdrawal as easy as granting.",
       "topic": "Privacy Compliance",
-      "sortOrder": 9,
+      "sortOrder": 12,
       "md": "consent-privacy",
       "id": "a41d"
+    },
+    {
+      "url": "consent-gated-scripts",
+      "title": "Load Scripts After Consent",
+      "teaches": "Inject third-party tags only once consent exists, prove it from the resource timeline, and handle withdrawal honestly.",
+      "topic": "Privacy Compliance",
+      "sortOrder": 13,
+      "md": "consent-gated-scripts",
+      "id": "4c1b"
     },
     {
       "url": "license-audit",
       "title": "Audit Dependencies and Licenses",
       "teaches": "Inventory runtime dependencies, their licences and their obligations, and fail CI on new advisories.",
       "topic": "Supply Chain Compliance",
-      "sortOrder": 10,
+      "sortOrder": 14,
       "md": "license-audit",
       "id": "c8e7"
+    },
+    {
+      "url": "compliance-gates",
+      "title": "Gate the Pull Request",
+      "teaches": "Fail the build on budgets, template accessibility lint, an axe scan and Lighthouse CI, with a workflow that blocks the merge.",
+      "topic": "Delivery Compliance",
+      "sortOrder": 15,
+      "md": "compliance-gates",
+      "id": "5e9d"
     }
   ],
+  "markdownItems": [],
   "food": [
     {
       "name": "Pad Thai",

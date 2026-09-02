@@ -1,23 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { mergeMap } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
-import { customerState } from '../../state/customers.state';
+import { JsonPipe } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { CustomersService } from '../../customers.service';
 
 @Component({
   selector: 'app-customer-edit',
   templateUrl: './customer-edit.component.html',
   styleUrls: ['./customer-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, JsonPipe]
+  imports: [JsonPipe],
 })
 export class CustomerEditComponent {
-  id = input.required<number>();
-  readonly readonly = input<boolean>();
+  readonly id = input.required({ transform: (value: string | number) => Number(value) });
+  readonly readonly = input(false, { transform: (value: string | boolean) => value === true || value === 'true' });
 
-  store = inject(Store);
-  customer = this.store.select(customerState.selectCustomers).pipe(
-    mergeMap(
-      (customers) => customers.filter(c => c.id == this.id())
-    ));
+  private service = inject(CustomersService);
+
+  readonly customer = computed(() =>
+    this.service.customers().find((c) => c.id === this.id())
+  );
 }

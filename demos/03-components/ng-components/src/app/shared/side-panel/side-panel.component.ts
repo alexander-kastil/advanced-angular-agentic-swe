@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, computed, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
@@ -22,7 +22,6 @@ import { injectDispatch } from '@ngrx/signals/events';
     MatIcon,
     MatTooltipModule
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidePanelComponent {
   protected layout = inject(LayoutStore);

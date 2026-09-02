@@ -101,3 +101,34 @@ preload(route: Route, load: () => Observable<any>): Observable<any> {
 - Consider network conditions
 - Monitor preloaded modules in dev tools
 - Preload high-probability routes (e.g., authenticated areas after login)
+
+## In this demo
+
+The strategy is registered on the router and keeps the preloaded paths in a signal:
+
+```typescript
+provideRouter(
+  appRoutes,
+  withComponentInputBinding(),
+  withViewTransitions(),
+  withPreloading(SelectivePreloadingStrategy)
+),
+```
+
+```typescript
+@Injectable({ providedIn: 'root' })
+export class SelectivePreloadingStrategy implements PreloadingStrategy {
+  readonly preloadedRoutes = signal<string[]>([]);
+
+  preload(route: Route, load: () => Observable<unknown>): Observable<unknown> {
+    if (!route.data?.['preload']) {
+      return of(null);
+    }
+
+    this.preloadedRoutes.update((routes) => [...routes, route.path ?? '']);
+    return load();
+  }
+}
+```
+
+`skills` carries `data: { preload: true }` in `app.routes.ts` and `customers` does not, so `skills-routes` is fetched in the background while `customer-routes` waits for the first navigation.

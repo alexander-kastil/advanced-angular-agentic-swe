@@ -10,5 +10,9 @@ export const foodRoutes: Routes = [
     {
         path: 'food/:id',
         component: FoodDetailsComponent,
+    },
+    {
+        path: 'demos',
+        loadChildren: () => import('./demos/demo.routes').then((m) => m.demoRoutes),
     }
 ];

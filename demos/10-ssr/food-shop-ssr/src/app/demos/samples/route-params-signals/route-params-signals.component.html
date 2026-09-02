@@ -1,0 +1,38 @@
+<section class="panel">
+  <h3>Pick an id, watch the input signal</h3>
+  <nav class="ids">
+    @for (id of ids; track id) {
+      <a [routerLink]="['./', id]" routerLinkActive="active">/{{ id }}</a>
+    }
+    <a [routerLink]="['./', '3']" [queryParams]="{ highlight: 'ws' }" routerLinkActive="active">
+      /3?highlight=ws
+    </a>
+  </nav>
+  <div class="outlet">
+    <router-outlet />
+  </div>
+</section>
+
+<section class="panel">
+  <h3>Why this matters for SSR</h3>
+  <p class="lead">
+    The child reads its params synchronously during the first render pass, so the server produces the
+    finished markup in one go. An <code>ActivatedRoute</code> subscription resolves a tick later, which on
+    the server means the first pass renders an empty shell.
+  </p>
+  <p class="lead">
+    Route params, query params and static <code>data</code> all bind by name. A name with no matching
+    param stays at its declared default, which is why <code>highlight</code> reads
+    <code>not set</code> until the query param is present.
+  </p>
+</section>
+
+<section class="panel">
+  <app-code-panel
+    heading="app.config.ts"
+    caption="Without withComponentInputBinding() the inputs are never populated and input.required() throws."
+    [code]="providers"
+  />
+  <app-code-panel heading="The child component" [code]="child" />
+  <app-code-panel heading="What it replaces" [code]="replaced" />
+</section>

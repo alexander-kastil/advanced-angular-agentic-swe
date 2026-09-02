@@ -1,6 +1,12 @@
-
-@for (c of customers; track c) {
+@for (c of customers(); track c.id) {
   <div class="box row">
-    <div> {{c.name}}</div> <div> <button mat-raised-button color="accent" [routerLink]="['/customers', c.id]" [queryParams]="{ readonly: true }">Edit</button> </div>
+    <div>{{ c.name }}</div>
+    <div>
+      <button mat-raised-button color="accent" [routerLink]="['/customers', c.id]" [queryParams]="{ readonly: true }">
+        Edit
+      </button>
+    </div>
   </div>
+} @empty {
+  <div class="box">No customers loaded. Start json-server using: json-server db.json</div>
 }

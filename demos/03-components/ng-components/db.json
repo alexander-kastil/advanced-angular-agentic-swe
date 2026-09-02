@@ -1,138 +1,129 @@
 {
   "demos": [
     {
-      "url": "standalone",
-      "title": "Standalone Component",
-      "teaches": "Create standalone components without NgModule. Declare dependencies directly in the component decorator with imports, providers, and styles.",
-      "sortOrder": 1,
-      "topic": "Component Fundamentals",
       "id": 1,
-      "md": "standalone"
-    },
-    {
-      "url": "lazy-standalone",
-      "title": "Lazy Standalone Comp.",
-      "teaches": "Load standalone components on-demand via routes. Reduce initial bundle size by lazy loading features that aren't immediately needed.",
-      "sortOrder": 2,
-      "topic": "Component Fundamentals",
-      "id": 11,
-      "md": "lazy-standalone"
-    },
-    {
-      "url": "standalone-bootstrap",
-      "title": "Load Standalone Apps",
-      "teaches": "Bootstrap standalone applications with bootstrapApplication(). Set up providers, routes, and configuration without NgModule.",
-      "sortOrder": 3,
-      "topic": "Component Fundamentals",
-      "id": 12,
-      "md": "bootstrap"
-    },
-    {
       "url": "control-flow",
-      "title": "Control Flow",
-      "teaches": "Use modern Angular control flow syntax with @if, @for, @switch, and @let. Replace ngIf, ngFor, and ngSwitch with cleaner, more performant alternatives.",
-      "sortOrder": 4,
-      "topic": "Component Fundamentals",
-      "id": 2,
+      "title": "Control Flow & Template Syntax",
+      "teaches": "Use the built-in control flow blocks @if, @for, @switch, @let and @defer, and write arrow functions and spread expressions directly in the template instead of wrapper methods.",
+      "sortOrder": 1,
+      "topic": "Template Syntax",
       "md": "control-flow"
     },
     {
+      "id": 2,
+      "url": "defer-idle-timeout",
+      "title": "Defer Triggers & Timeouts",
+      "teaches": "Drive @defer with on idle, on timer and on interaction triggers, and control what the user sees with the @placeholder, @loading and @error blocks and their after and minimum timings.",
+      "sortOrder": 2,
+      "topic": "Template Syntax",
+      "md": "defer-idle-timeout"
+    },
+    {
+      "id": 3,
       "url": "content-projection",
       "title": "Content Projection",
-      "teaches": "Design flexible components with <ng-content> slots. Pass template content to child components using named projections and default content.",
-      "sortOrder": 5,
+      "teaches": "Design flexible components with ng-content slots. Pass template content to child components using named projections and default content.",
+      "sortOrder": 3,
       "topic": "Component Composition",
-      "id": 3,
       "md": "content-projection"
     },
     {
-      "url": "directives-composition",
-      "title": "Directives Composition",
-      "teaches": "Combine multiple directives on a single element to compose behaviors. Use hostDirectives to attach directives as component dependencies.",
-      "sortOrder": 6,
-      "topic": "Component Composition",
       "id": 4,
+      "url": "directive-composition",
+      "title": "Directive Composition",
+      "teaches": "Combine multiple directives on a single element to compose behaviour, and attach directives to a component with hostDirectives.",
+      "sortOrder": 4,
+      "topic": "Component Composition",
       "md": "directive-composition"
     },
     {
-      "url": "content-child",
-      "title": "Content Child",
-      "teaches": "Query projected content with @ContentChild and @ContentChildren. Access and interact with elements passed via content projection.",
-      "sortOrder": 7,
-      "topic": "Component Composition",
       "id": 5,
-      "md": "content-child"
+      "url": "signal-queries",
+      "title": "Signal Queries",
+      "teaches": "Query the view and the projected content with viewChild, viewChildren, contentChild and contentChildren as signals, without AfterViewInit or AfterContentInit hooks.",
+      "sortOrder": 5,
+      "topic": "Component Composition",
+      "md": "signal-queries"
     },
     {
-      "url": "modern-template-features",
-      "title": "Modern Template Features",
-      "teaches": "Write arrow functions and spread syntax directly in templates (v21.1+). Use signal.update(n => n + 1) and spread operators without wrapper methods.",
-      "sortOrder": 8,
-      "topic": "Template Syntax",
-      "id": 15,
-      "md": "modern-template-features"
-    },
-    {
-      "url": "view-queries",
-      "title": "View Queries",
-      "teaches": "Query template elements with @ViewChild and @ViewChildren. Obtain references to child components or DOM elements in the component view.",
-      "sortOrder": 9,
-      "topic": "Component Advanced Patterns",
       "id": 6,
-      "md": "view-queries"
+      "url": "aria-composition",
+      "title": "Accessible Composition",
+      "teaches": "Compose accessible widgets from the headless @angular/aria directives: ngTabs with lazy tab content and a multi select ngListbox with roving tabindex and typeahead.",
+      "sortOrder": 6,
+      "topic": "Component Composition",
+      "md": "aria-composition"
     },
     {
+      "id": 7,
       "url": "template-vs-container",
       "title": "Template vs Container",
-      "teaches": "Understand the difference between ng-template and ng-container. Control when and where template content is rendered in the DOM.",
-      "sortOrder": 10,
+      "teaches": "Understand the difference between ng-template and ng-container, and compare ng-content projection with ngTemplateOutlet rendering.",
+      "sortOrder": 7,
       "topic": "Component Advanced Patterns",
-      "id": 7,
-      "md": "templ-content"
+      "md": "template-vs-container"
     },
     {
-      "url": "host-binding",
-      "title": "Host Binding & Listener",
-      "teaches": "Manage component host properties and events with @HostBinding and @HostListener. Style the component element and respond to user interactions.",
-      "sortOrder": 11,
-      "topic": "Component Advanced Patterns",
       "id": 8,
-      "md": "host-binding"
+      "url": "host-binding-listener",
+      "title": "Host Bindings & Listeners",
+      "teaches": "Bind host properties, attributes and events through the host object in the component and directive metadata instead of the retired @HostBinding and @HostListener decorators.",
+      "sortOrder": 8,
+      "topic": "Component Advanced Patterns",
+      "md": "host-binding-listener"
     },
     {
-      "url": "container-presenter",
-      "title": "Container Presenter",
-      "teaches": "Separate data logic (container) from presentation (presenter) components. Use this pattern for cleaner, more reusable component architecture.",
-      "sortOrder": 12,
-      "topic": "Component Advanced Patterns",
       "id": 9,
-      "md": "container-presenter"
-    },
-    {
       "url": "dynamic-components",
-      "title": "Dynamic Components",
-      "teaches": "Create and insert components dynamically at runtime using ViewContainerRef. Pass data to dynamic components and handle their lifecycle.",
-      "sortOrder": 13,
+      "title": "Dynamic Components & Bindings",
+      "teaches": "Create components at runtime with ViewContainerRef.createComponent() and the standalone createComponent(), and wire them with inputBinding, outputBinding and twoWayBinding instead of one-shot setInput() calls.",
+      "sortOrder": 9,
       "topic": "Component Advanced Patterns",
-      "id": 10,
       "md": "dynamic-components"
     },
     {
+      "id": 10,
       "url": "resource-api",
       "title": "Resource API",
-      "teaches": "Use resource() for declarative, reactive HTTP data loading with automatic loading states and error handling. Replace manual Observable + subscribe() patterns with signal-based data fetching.",
-      "sortOrder": 14,
+      "teaches": "Load HTTP data declaratively with httpResource(). The request tracks its signal dependencies and exposes value, status and error without a subscription.",
+      "sortOrder": 10,
       "topic": "Data Loading",
-      "id": 13,
       "md": "resource-api"
     },
     {
+      "id": 11,
+      "url": "resource-with-params",
+      "title": "Resources with Parameters",
+      "teaches": "Parameterise httpResource() from a component signal input and resource() from a params function, and use abortSignal and reload() to control the request lifecycle.",
+      "sortOrder": 11,
+      "topic": "Data Loading",
+      "md": "resource-with-params"
+    },
+    {
+      "id": 12,
+      "url": "webmcp-in-components",
+      "title": "WebMCP in Components",
+      "teaches": "Register agent tools from inside a component with declareExperimentalWebMcpTool so the tool closes over the component signals and unregisters with the component.",
+      "sortOrder": 12,
+      "topic": "Agentic Angular",
+      "md": "webmcp-in-components"
+    },
+    {
+      "id": 13,
+      "url": "agentic-refactor",
+      "title": "Agentic Refactor",
+      "teaches": "Turn an NgModule-era component into an Angular 22 one, and see which steps a schematic owns and which ones an agent has to make against the Angular MCP get_best_practices output.",
+      "sortOrder": 13,
+      "topic": "Agentic Angular",
+      "md": "agentic-refactor"
+    },
+    {
+      "id": 14,
       "url": "antipatterns",
       "title": "Antipatterns",
-      "teaches": "Learn what NOT to do in modern Angular. Understand outdated patterns like Observable subscriptions, manual state management, and legacy decorators. See why resource() and signals are better.",
-      "sortOrder": 15,
+      "teaches": "The Angular 22 anti-pattern table: what to stop writing and what replaces it, from decorator inputs and structural directives to withXhr, Karma and allowSignalWrites.",
+      "sortOrder": 14,
       "topic": "Component Antipatterns",
-      "id": 14,
       "md": "antipatterns"
     }
   ],
@@ -212,6 +203,22 @@
       "id": "456",
       "name": "ngrx from api",
       "completed": false
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": 1,
+      "url": "",
+      "title": "Using host bindings",
+      "comment": "Prefer the host object over @HostBinding and @HostListener.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": 2,
+      "url": "",
+      "title": "Content projection",
+      "comment": "Use ng-content with select to build flexible component APIs.",
+      "saved": "2020-09-16T20:10:06.925Z"
     }
   ],
   "persons": [

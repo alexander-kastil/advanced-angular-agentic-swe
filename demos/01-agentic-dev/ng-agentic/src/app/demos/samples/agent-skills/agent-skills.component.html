@@ -1,0 +1,82 @@
+<div class="sample">
+  <p>
+    A skill is knowledge the agent loads when it needs it instead of carrying on every turn. Two kinds
+    matter here: the official Angular Agent Skills that track the framework, and the skill this repo
+    writes for itself. They answer different questions and neither replaces the other.
+  </p>
+
+  <div class="grid">
+    @for (source of sources; track source.id) {
+      <article class="card" [class.house]="source.id === 'house'">
+        <h4>{{ source.name }}</h4>
+        <dl>
+          <dt>Lives at</dt>
+          <dd><code>{{ source.origin }}</code></dd>
+          <dt>Install</dt>
+          <dd><code>{{ source.install }}</code></dd>
+          <dt>Owner</dt>
+          <dd>{{ source.maintainer }}</dd>
+          <dt>Carries</dt>
+          <dd>{{ source.contains }}</dd>
+          <dt>Goes stale</dt>
+          <dd>{{ source.staleWhen }}</dd>
+        </dl>
+      </article>
+    }
+  </div>
+
+  <h4>Which one wins?</h4>
+  <div class="row">
+    @for (question of questions; track question.prompt) {
+      <button
+        [class.active]="selectedQuestion().prompt === question.prompt"
+        (click)="selectQuestion(question)"
+      >
+        {{ question.prompt }}
+      </button>
+    }
+  </div>
+  <div class="card verdict" [class.house]="selectedQuestion().winner === 'house'">
+    <strong>{{ winner(selectedQuestion().winner).name }}</strong>
+    <p>{{ selectedQuestion().why }}</p>
+  </div>
+
+  <h4>How a skill is structured</h4>
+  <p class="hint">
+    Only the frontmatter description is in context on every turn, so it has to carry the routing while
+    the depth stays in reference files. Edit the fields and watch the file that gets written.
+  </p>
+
+  <div class="fields">
+    <label>
+      Name
+      <input [value]="name()" (input)="setName($any($event.target).value)" />
+    </label>
+    <label>
+      Summary
+      <input [value]="summary()" (input)="setSummary($any($event.target).value)" />
+    </label>
+    <label>
+      Trigger phrases (comma separated)
+      <input [value]="triggers()" (input)="setTriggers($any($event.target).value)" />
+    </label>
+  </div>
+
+  <p class="budget" [class.over]="!descriptionOk()">
+    Description costs {{ descriptionLength() }} characters on every turn
+    @if (!descriptionOk()) {
+      <span> - trim it, this is an index entry not a node.</span>
+    }
+  </p>
+
+  <div class="chips">
+    @for (trigger of triggerList(); track trigger) {
+      <span class="chip">{{ trigger }}</span>
+    } @empty {
+      <span class="chip muted">No triggers, the skill can never be chosen</span>
+    }
+  </div>
+
+  <app-code-block label="SKILL.md" [code]="skillFile()" />
+  <app-code-block label="On disk" [code]="tree()" />
+</div>

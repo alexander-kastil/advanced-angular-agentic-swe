@@ -1,7 +1,8 @@
 <app-markdown-renderer [md]="'validation-intro'" />
+
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>Signal Forms - Cross-Field Validation</mat-card-title>
+    <mat-card-title>Built-in Validators & Password Match</mat-card-title>
   </mat-card-header>
   <mat-card-content column>
     <mat-form-field>
@@ -41,11 +42,84 @@
 
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>Password Field State</mat-card-title>
+    <mat-card-title>Cross-Field Rules with validate() and valueOf()</mat-card-title>
+  </mat-card-header>
+  <mat-card-content column>
+    <mat-form-field>
+      <mat-label>Pet Name</mat-label>
+      <input matInput type="text" placeholder="Pet name" [formField]="adoptionForm.petName" />
+    </mat-form-field>
+    @if (adoptionForm.petName().touched() && adoptionForm.petName().invalid()) {
+      @for (err of adoptionForm.petName().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+
+    <mat-form-field>
+      <mat-label>Age</mat-label>
+      <input matInput type="number" placeholder="Age" [formField]="adoptionForm.age" />
+    </mat-form-field>
+    @if (adoptionForm.age().touched() && adoptionForm.age().invalid()) {
+      @for (err of adoptionForm.age().errors(); track err.kind) {
+        <div class="error">{{ err.message }}</div>
+      }
+    }
+
+    <strong>Services - at least one required</strong>
+    <mat-checkbox [formField]="adoptionForm.wantsInsurance">Pet Insurance</mat-checkbox>
+    <mat-checkbox [formField]="adoptionForm.wantsTraining">Obedience Training</mat-checkbox>
+    @for (err of adoptionForm.wantsInsurance().errors(); track err.kind) {
+      <div class="error">{{ err.message }}</div>
+    }
+
+    <strong>Contact - email or phone</strong>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Email" [formField]="adoptionForm.contactEmail" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone</mat-label>
+      <input matInput type="tel" placeholder="Phone" [formField]="adoptionForm.contactPhone" />
+    </mat-form-field>
+    @for (err of adoptionForm.contactEmail().errors(); track err.kind) {
+      <div class="error">{{ err.message }}</div>
+    }
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button type="button" color="primary" (click)="adopt()">Adopt</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Standard Schema Validation</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    {{ registerForm.password().errors() | json }}
+    <div column>
+      <mat-form-field>
+        <mat-label>Microchip id</mat-label>
+        <input matInput type="text" placeholder="15 digits" [formField]="microchipForm.chipId" />
+      </mat-form-field>
+      @if (microchipForm.chipId().touched()) {
+        @for (err of microchipForm.chipId().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Species</mat-label>
+        <input matInput type="text" placeholder="dog, cat or ferret" [formField]="microchipForm.species" />
+      </mat-form-field>
+      @if (microchipForm.species().touched()) {
+        @for (err of microchipForm.species().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
   </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button type="button" color="primary" (click)="registerMicrochip()">Register Chip</button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card appearance="outlined">
@@ -53,6 +127,8 @@
     <mat-card-title>Form State</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    Valid: {{ registerForm().valid() }} | Touched: {{ registerForm().touched() }}
+    Register valid: {{ registerForm().valid() }} | Adoption valid: {{ adoptionForm().valid() }} | Microchip valid:
+    {{ microchipForm().valid() }}
+    <pre>{{ adoptionModel() | json }}</pre>
   </mat-card-content>
 </mat-card>

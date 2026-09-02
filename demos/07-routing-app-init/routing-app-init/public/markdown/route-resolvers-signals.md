@@ -2,98 +2,65 @@
 
 ## Overview
 
-`ResolveFn` with signals provides a modern way to preload route data before component initialization. Data flows directly to component signal inputs, eliminating manual subscription management.
+A `ResolveFn` runs before the route activates. The router waits for the returned observable or promise, then hands the value to the component. Combined with `withComponentInputBinding()` the component receives it as a required signal input, so it never renders a loading state and never subscribes.
 
-## Basic Usage
+## The resolver
+
+Return the observable directly; the router subscribes for you.
 
 ```typescript
-import { ResolveFn } from "@angular/router";
-import { inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { firstValueFrom } from "rxjs";
-
-export interface User {
+export interface Album {
+  userId: number;
   id: number;
-  name: string;
-  email: string;
+  title: string;
 }
 
-export const userResolver: ResolveFn<User> = async (route) => {
+export const albumResolver: ResolveFn<Album> = (route) => {
   const http = inject(HttpClient);
-  const id = route.paramMap.get("id");
+  const id = route.paramMap.get('id') ?? '1';
 
-  return await firstValueFrom(http.get<User>(`/api/users/${id}`));
+  return http.get<Album>(`https://jsonplaceholder.typicode.com/albums/${id}`);
 };
 ```
 
-## Route Configuration
+## Route configuration
 
 ```typescript
-export const routes: Routes = [
-  {
-    path: "users/:id",
-    component: UserDetailComponent,
-    resolve: {
-      user: userResolver,
-    },
-  },
-];
+{
+  path: 'route-resolvers-signals',
+  pathMatch: 'full',
+  redirectTo: 'route-resolvers-signals/1',
+},
+{
+  path: 'route-resolvers-signals/:id',
+  component: RouteResolversSignalsComponent,
+  resolve: { album: albumResolver },
+},
 ```
 
-## Component with Signal Inputs
+The key in the `resolve` map is the input name the value lands in.
+
+## The component
 
 ```typescript
-@Component({
-  selector: "app-user-detail",
-  template: `
-    @if (user(); as userData) {
-      <h1>{{ userData.name }}</h1>
-      <p>{{ userData.email }}</p>
-    }
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-})
-export class UserDetailComponent {
-  readonly user = input<User>();
+export class RouteResolversSignalsComponent {
+  readonly id = input.required({ transform: (value: string | number) => Number(value) });
+  readonly album = input.required<Album>();
+
+  readonly previousId = computed(() => Math.max(1, this.id() - 1));
+  readonly nextId = computed(() => this.id() + 1);
 }
 ```
 
-## Key Benefits
+`id` comes from the path, `album` from the resolver, and both are signals, so `computed()` derives from them like any other state.
 
-- **No manual subscriptions** — Resolver delivers data via signal input
-- **Type-safe** — Full TypeScript support for resolved data
-- **Automatic unwrapping** — Access resolved data without `async` pipe or `| json`
-- **Change detection friendly** — OnPush works seamlessly
-- **Error handling** — Resolver can catch and transform errors before component sees them
+## Resolver or httpResource?
 
-## Error Handling in Resolver
+| Concern | `ResolveFn` | `httpResource()` |
+|---|---|---|
+| When it runs | before activation | after the component exists |
+| Loading state | none, the route waits | `isLoading()` on the resource |
+| Navigation is blocked | yes, until the call finishes | no |
+| Best for | data the route cannot render without | data the page can load progressively |
 
-```typescript
-export const userResolver: ResolveFn<User | null> = async (route) => {
-  const http = inject(HttpClient);
-  const id = route.paramMap.get("id");
-
-  try {
-    return await firstValueFrom(http.get<User>(`/api/users/${id}`));
-  } catch (error) {
-    console.error("Failed to load user:", error);
-    return null; // Handle gracefully
-  }
-};
-```
-
-## When to Use
-
-✅ **Use ResolveFn when:**
-
-- Data MUST be available before route activation
-- You want to prevent navigation to incomplete states
-- Data is needed by multiple child routes
-- You need centralized error handling for route data
-
-❌ **Use httpResource() instead when:**
-
-- Component can render while loading
-- You need real-time data updates
-- Loading state UI is important (spinners, skeletons)
+Use a resolver when a half-rendered page would be wrong, and `httpResource()` when you would rather show the shell immediately.

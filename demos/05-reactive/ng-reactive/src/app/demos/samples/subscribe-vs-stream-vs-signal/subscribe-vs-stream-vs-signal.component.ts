@@ -1,59 +1,73 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, input, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { BoxedDirective } from "../../../shared/formatting/formatting-directives";
-import { Skill } from '../../skills/skills';
-import { SkillsService } from '../../skills/skills.service';
-
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { Subscription, defer, finalize, interval, map, scan } from 'rxjs';
 @Component({
-  selector: 'app-imperative',
-  templateUrl: './imperative.component.html',
-  styleUrls: ['./imperative.component.scss'],
+  selector: 'app-subscribe-vs-stream-vs-signal',
+  templateUrl: './subscribe-vs-stream-vs-signal.component.html',
   imports: [
     MatCard,
     MatCardHeader,
     MatCardTitle,
     MatCardContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    FormsModule,
-    ReactiveFormsModule,
-    BoxedDirective
+    MatButton,
+    MatSlideToggle,
+    AsyncPipe,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styles: `
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+    .value { font-size: 2rem; font-weight: 600; }
+    code { font-size: 0.78rem; display: block; margin: 6px 0; }
+    .meta { font-size: 0.8rem; opacity: 0.8; }
+    .banner { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .counter { font-size: 1.1rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; background: rgba(128, 128, 128, 0.18); }
+  `,
 })
-export class ImperativeComponent implements OnInit {
-  title = input('ImperativeProgramming');
-  showMD = input(true);
-  destroy = inject(DestroyRef)
+export class SubscribeVsStreamVsSignalComponent {
+  private destroyRef = inject(DestroyRef);
+  private manualSubscription: Subscription | null = null;
 
-  filter$ = new FormControl('', { nonNullable: true });
-  service = inject(SkillsService);
-  skills: Skill[] = [];
-  view = signal<Skill[]>([]);
+  protected sourceSubscriptions = signal(0);
 
-  ngOnInit(): void {
-    this.service
-      .getSkills()
-      .pipe(takeUntilDestroyed(this.destroy))
-      .subscribe((skills) => {
-        this.skills = skills;
-        this.view.set(skills);
-      });
+  private ticks$ = defer(() => {
+    this.sourceSubscriptions.update((count) => count + 1);
+    return interval(1000);
+  }).pipe(
+    map(() => Math.round(Math.random() * 100)),
+    scan((average, next) => Math.round((average + next) / 2), 50),
+    finalize(() => this.sourceSubscriptions.update((count) => count - 1)),
+  );
 
-    this.filter$.valueChanges
-      .pipe(takeUntilDestroyed(this.destroy))
-      .subscribe((val) => {
-        this.view.set(
-          val == ''
-            ? this.skills
-            : this.skills.filter((skill) => skill.name.includes(val))
-        );
-      });
+  protected manual = signal(0);
+  protected manualEmissions = signal(0);
+  protected manualRunning = signal(false);
+
+  protected stream$ = this.ticks$;
+  protected duplicateAsync = signal(false);
+
+  protected fromSignal = toSignal(this.ticks$, { initialValue: 0 });
+
+  constructor() {
+    this.startManual();
   }
 
+  protected startManual() {
+    if (this.manualSubscription) {
+      return;
+    }
+    this.manualRunning.set(true);
+    this.manualSubscription = this.ticks$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
+      this.manual.set(value);
+      this.manualEmissions.update((count) => count + 1);
+    });
+  }
+
+  protected stopManual() {
+    this.manualSubscription?.unsubscribe();
+    this.manualSubscription = null;
+    this.manualRunning.set(false);
+  }
 }

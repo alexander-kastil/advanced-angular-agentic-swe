@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { applyEach, form, FormField, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,8 +14,8 @@ interface SkillsModel {
 
 @Component({
   selector: 'app-form-array',
-  templateUrl: './signal-form-array.component.html',
-  styleUrls: ['./signal-form-array.component.scss'],
+  templateUrl: './form-array.component.html',
+  styleUrls: ['./form-array.component.scss'],
   imports: [
     FormField,
     MatCardModule,
@@ -24,8 +24,7 @@ interface SkillsModel {
     MatButtonModule,
     MarkdownRendererComponent,
     ColumnDirective,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class FormArrayComponent {
   skillModel = signal<SkillsModel>({

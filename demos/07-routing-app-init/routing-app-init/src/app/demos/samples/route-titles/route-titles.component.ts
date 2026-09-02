@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
@@ -10,7 +10,6 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/m
   selector: 'app-route-titles',
   templateUrl: './route-titles.component.html',
   styleUrls: ['./route-titles.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MarkdownRendererComponent,
     MatCard,

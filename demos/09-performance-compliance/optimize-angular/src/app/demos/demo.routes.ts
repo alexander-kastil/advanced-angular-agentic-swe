@@ -13,6 +13,11 @@ export const demoRoutes: Routes = [
                 loadComponent: () => import('./samples/lighthouse/lighthouse.component').then(m => m.LighthouseComponent),
             },
             {
+                path: 'devtools-profiling',
+                title: 'Demos - Profile with Angular DevTools',
+                loadComponent: () => import('./samples/devtools-profiling/devtools-profiling.component').then(m => m.DevtoolsProfilingComponent),
+            },
+            {
                 path: 'optimize-bundles',
                 title: 'Demos - Optimize Bundles with Rolldown',
                 loadComponent: () => import('./samples/optimize-bundles/optimize-bundles.component').then(m => m.OptimizeBundlesComponent),
@@ -21,6 +26,16 @@ export const demoRoutes: Routes = [
                 path: 'defer-views',
                 title: 'Demos - Defer Non-Critical Views',
                 loadComponent: () => import('./samples/defer-views/defer-views.component').then(m => m.DeferViewsComponent),
+            },
+            {
+                path: 'defer-by-trigger',
+                title: 'Demos - Compare Defer Triggers',
+                loadComponent: () => import('./samples/defer-by-trigger/defer-by-trigger.component').then(m => m.DeferByTriggerComponent),
+            },
+            {
+                path: 'zoneless',
+                title: 'Demos - Zoneless Change Detection',
+                loadComponent: () => import('./samples/zoneless/zoneless.component').then(m => m.ZonelessComponent),
             },
             {
                 path: 'configure-zoneless',
@@ -53,9 +68,19 @@ export const demoRoutes: Routes = [
                 loadComponent: () => import('./samples/consent-privacy/consent-privacy.component').then(m => m.ConsentPrivacyComponent),
             },
             {
+                path: 'consent-gated-scripts',
+                title: 'Demos - Load Scripts After Consent',
+                loadComponent: () => import('./samples/consent-gated-scripts/consent-gated-scripts.component').then(m => m.ConsentGatedScriptsComponent),
+            },
+            {
                 path: 'license-audit',
                 title: 'Demos - Audit Dependencies and Licenses',
                 loadComponent: () => import('./samples/license-audit/license-audit.component').then(m => m.LicenseAuditComponent),
+            },
+            {
+                path: 'compliance-gates',
+                title: 'Demos - Gate the Pull Request',
+                loadComponent: () => import('./samples/compliance-gates/compliance-gates.component').then(m => m.ComplianceGatesComponent),
             },
         ],
     },

@@ -1,0 +1,82 @@
+<section class="panel">
+  <h3>Four blocks, four hydration triggers</h3>
+  <p class="lead">
+    Reload this page so the server renders it. Every block below is in the server HTML from the first
+    byte. What differs is when, or whether, its JavaScript is downloaded and its listeners attached.
+  </p>
+
+  <div class="grid">
+    @defer (hydrate on immediate) {
+      <app-hydration-probe
+        label="immediate"
+        blurb="Hydrates as soon as the client is idle after bootstrap. Button works right away."
+      />
+    } @placeholder {
+      <div class="skeleton">immediate</div>
+    }
+
+    @defer (hydrate on interaction) {
+      <app-hydration-probe
+        label="on interaction"
+        blurb="Server HTML until you click or focus inside it. The first click is replayed by withEventReplay."
+      />
+    } @placeholder {
+      <div class="skeleton">on interaction</div>
+    }
+
+    @defer (hydrate never) {
+      <app-hydration-probe
+        label="never"
+        blurb="Static forever. The button is real HTML but nothing is listening, so the counter never moves."
+      />
+    } @placeholder {
+      <div class="skeleton">never</div>
+    }
+  </div>
+
+  <div class="spacer">
+    Scroll past this gap to trigger the viewport block below.
+  </div>
+
+  <div class="grid">
+    @defer (hydrate on viewport) {
+      <app-hydration-probe
+        label="on viewport"
+        blurb="Stays dehydrated until it is scrolled into view, then boots."
+      />
+    } @placeholder {
+      <div class="skeleton">on viewport</div>
+    }
+  </div>
+</section>
+
+<section class="panel">
+  <h3>Live hydration status</h3>
+  <table class="status">
+    <tbody>
+      @for (label of labels; track label) {
+        <tr>
+          <td><code>hydrate {{ label }}</code></td>
+          <td [class.live]="hydrated()[label]">{{ status(label) }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  <p class="lead">
+    Still dehydrated: {{ pending().length }} of {{ labels.length }}. The
+    <code>never</code> row is expected to stay dehydrated for the life of the page.
+  </p>
+</section>
+
+<section class="panel">
+  <app-code-panel
+    heading="app.config.ts"
+    caption="Incremental hydration is on by default in v22. withNoIncrementalHydration() is the opt-out; withIncrementalHydration() is deprecated because it is now redundant."
+    [code]="config"
+  />
+  <app-code-panel
+    heading="The block shape"
+    caption="A hydrate trigger renders the main content on the server. A plain @defer trigger renders the placeholder instead."
+    [code]="template"
+  />
+</section>

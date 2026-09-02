@@ -1,0 +1,32 @@
+.panel {
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.lead {
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.grid th,
+.grid td {
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid #e3e3ec;
+}
+
+.grid th {
+  font-weight: 600;
+  color: #6a6a7c;
+}

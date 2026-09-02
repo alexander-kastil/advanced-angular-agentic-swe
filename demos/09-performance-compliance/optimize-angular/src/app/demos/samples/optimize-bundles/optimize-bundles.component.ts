@@ -8,7 +8,7 @@ interface BudgetRow {
 }
 
 @Component({
-  selector: 'app-bundles',
+  selector: 'app-optimize-bundles',
   templateUrl: './optimize-bundles.component.html',
   styleUrls: ['./optimize-bundles.component.scss'],
   imports: []

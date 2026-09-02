@@ -2,11 +2,14 @@
   <div class="name">{{ skill().name }}</div>
   <div class="completed">completed: {{ skill().completed }}</div>
   <div class="cmd">
-    <button
-      mat-raised-button
-      color="primary"
-      [routerLink]="['/skills', skill().id]">
+    <button mat-raised-button color="primary" (click)="itemCompleted.emit(skill())">
+      <mat-icon>done</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" [routerLink]="['/skills', skill().id]">
       <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-raised-button color="warn" (click)="itemDeleted.emit(skill())">
+      <mat-icon>delete</mat-icon>
     </button>
   </div>
 </div>

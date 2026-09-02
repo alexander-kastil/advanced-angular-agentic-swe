@@ -1,28 +1,20 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { DemoItem } from './demo-item.model';
+import { httpResource } from '@angular/common/http';
+import { Injectable, computed } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { DemoItem } from './demo-item.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class DemoService {
-    private http = inject(HttpClient);
+  readonly demosResource = httpResource<DemoItem[]>(() => `${environment.api}demos`, {
+    defaultValue: [],
+  });
 
-    getDemos(): Observable<DemoItem[]> {
-        return this.http.get<DemoItem[]>(`${environment.api}demos`);
-    }
+  readonly demos = computed(() =>
+    [...this.demosResource.value()].sort((a, b) => a.sortOrder - b.sortOrder)
+  );
 
-    addDemo(item: DemoItem): Observable<DemoItem> {
-        return this.http.post<DemoItem>(`${environment.api}demos`, item);
-    }
-
-    updateDemo(item: DemoItem): Observable<DemoItem> {
-        return this.http.put<DemoItem>(`${environment.api}demos/${item.id}`, item);
-    }
-
-    deleteDemo(id: number): Observable<void> {
-        return this.http.delete<void>(`${environment.api}demos/${id}`);
-    }
+  readonly isLoading = this.demosResource.isLoading;
+  readonly hasError = computed(() => this.demosResource.status() === 'error');
 }

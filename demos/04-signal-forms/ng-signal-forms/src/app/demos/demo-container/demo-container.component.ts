@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, resource } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { httpResource } from '@angular/common/http';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
 import { SidebarActions } from 'src/app/shared/side-panel/sidebar.actions';
 import { SidePanelService } from 'src/app/shared/side-panel/sidepanel.service';
 import { environment } from 'src/environments/environment';
-import { LoadingService } from '../../shared/loading/loading.service';
 import { SideNavService } from '../../shared/sidenav/sidenav.service';
 import { DemoItem } from './demo-item.model';
 import { SidePanelComponent } from '../../shared/side-panel/side-panel.component';
@@ -30,55 +29,43 @@ import { MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/mat
     RouterOutlet,
     MarkdownEditorComponent,
     SidePanelComponent,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class DemoContainerComponent {
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-  http = inject(HttpClient);
-  nav = inject(SideNavService);
-  ls = inject(LoadingService);
-  eb = inject(SidePanelService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private nav = inject(SideNavService);
+  private eb = inject(SidePanelService);
 
   hoveredItem = signal<DemoItem | null>(null);
   popupTop = signal(0);
 
-  title: string = environment.title;
+  title = environment.title;
 
-  demosResource = resource({
-    loader: () => lastValueFrom(this.http.get<DemoItem[]>(`${environment.api}demos`))
-  });
+  demosResource = httpResource<DemoItem[]>(() => `${environment.api}demos`);
 
-  demos = computed(() => {
-    const items = this.demosResource.value() ?? [];
-    return [...items].sort((a, b) => a.sortOrder - b.sortOrder);
-  });
+  demos = computed(() =>
+    [...(this.demosResource.value() ?? [])].sort((a, b) => a.sortOrder - b.sortOrder)
+  );
   isLoadingDemos = computed(() => this.demosResource.status() === 'loading');
   hasErrorDemos = computed(() => this.demosResource.status() === 'error');
 
   sidenavMode = this.nav.getSideNavPosition();
   sidenavVisible = this.nav.getSideNavVisible();
-  isLoading = this.ls.getLoading();
 
   header = signal('Please select a demo');
 
-  showMdEditor = computed(() =>
-    this.eb.getCommands()() === SidebarActions.SHOW_MARKDOWN
-  );
+  showMdEditor = computed(() => this.eb.getCommands()() === SidebarActions.SHOW_MARKDOWN);
 
   constructor() {
-    effect(() => {
-      this.router.events.subscribe((event) => {
-        if (event instanceof NavigationEnd) {
-          const rootRoute = this.getRootRoute(this.route);
-          if (rootRoute.outlet === 'primary' && rootRoute.component != null) {
-            const name = rootRoute.component.name.replace(/^_/, '');
-            this.header.set(`Component: ${name}`);
-          }
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const rootRoute = this.getRootRoute(this.route);
+        if (rootRoute.outlet === 'primary' && rootRoute.component != null) {
+          this.header.set(`Component: ${rootRoute.component.name.replace(/^_/, '')}`);
         }
-      });
-    }, { allowSignalWrites: true });
+      }
+    });
   }
 
   showPopup(item: DemoItem, event: MouseEvent): void {

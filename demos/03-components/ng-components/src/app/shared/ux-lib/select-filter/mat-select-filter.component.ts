@@ -5,7 +5,7 @@ import {
   Z,
   ZERO
 } from '@angular/cdk/keycodes';
-import { ChangeDetectionStrategy, Component, ElementRef, effect, inject, input, output, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, effect, inject, input, output, signal, viewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -32,11 +32,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   </form>
   `,
   styleUrls: ['./mat-select-filter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MatSelectFilterComponent {
   private fb = inject(FormBuilder);
-  @ViewChild('input', { static: true }) input: ElementRef<HTMLInputElement> | undefined;
+  readonly input = viewChild<ElementRef<HTMLInputElement>>('input');
 
   readonly array = input.required<any>();
   readonly placeholder = input('');
@@ -70,7 +69,7 @@ export class MatSelectFilterComponent {
 
   private setupInitialFocus() {
     setTimeout(() => {
-      this.input?.nativeElement.focus();
+      this.input()?.nativeElement.focus();
     }, 500);
     if (!this.placeholder()) {
       // Note: placeholder is readonly input, initial value can be set via binding

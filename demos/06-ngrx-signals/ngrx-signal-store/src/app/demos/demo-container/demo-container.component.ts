@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, resource, effect, ElementRef, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal, resource, effect, ElementRef, viewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
@@ -37,7 +37,6 @@ import { SplitComponent, SplitAreaComponent } from 'angular-split';
     SplitComponent,
     SplitAreaComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DemoContainerComponent {
   router = inject(Router);
@@ -98,7 +97,7 @@ export class DemoContainerComponent {
 
   hasDemoContent = signal(true);
 
-  @ViewChild('demoPaneContent') demoPaneContent!: ElementRef<HTMLElement>;
+  demoPaneContent = viewChild<ElementRef<HTMLElement>>('demoPaneContent');
 
   constructor() {
     this.router.events.pipe(
@@ -115,7 +114,7 @@ export class DemoContainerComponent {
       this.currentUrl.set(url);
 
       setTimeout(() => {
-        const el = this.demoPaneContent?.nativeElement;
+        const el = this.demoPaneContent()?.nativeElement;
         if (el && el.children.length > 1) {
           const componentEl = el.children[1] as HTMLElement;
           this.hasDemoContent.set(componentEl.offsetHeight > 10);

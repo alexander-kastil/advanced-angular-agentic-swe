@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SplitPopupComponent } from './split-popup/split-popup.component';
 import { uxButtonComponent } from '../../../shared/ux-lib/ux-button/ux-button.component';
@@ -19,7 +19,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
     uxSplitComponent,
     uxButtonComponent,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentProjectionComponent {
   dialog: MatDialog = inject(MatDialog);

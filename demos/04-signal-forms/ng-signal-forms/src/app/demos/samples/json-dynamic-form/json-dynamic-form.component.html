@@ -1,0 +1,49 @@
+<app-markdown-renderer [md]="'json-dynamic-form'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ active().descriptor.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>JSON descriptor</mat-label>
+        <mat-select [value]="selectedId()" (valueChange)="selectedId.set($event)">
+          @for (d of descriptors; track d.id) {
+            <mat-option [value]="d.id">{{ d.title }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      @for (f of active().descriptor.fields; track f.key) {
+        <mat-form-field>
+          <mat-label>{{ f.label }}</mat-label>
+          <input matInput [type]="f.kind" [formField]="active().fields[f.key]" />
+        </mat-form-field>
+        @for (err of errorsOf(f); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="send()">Submit</button>
+    <button mat-raised-button (click)="clear()">Clear</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Descriptor and Live Model</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div boxed>
+      <div>Form valid: {{ active().fields().valid() }}</div>
+      <div>Model: {{ active().model() | json }}</div>
+      @if (submittedValue()) {
+        <div>Submitted: {{ submittedValue() | json }}</div>
+      }
+    </div>
+    <pre>{{ descriptorJson() | json }}</pre>
+  </mat-card-content>
+</mat-card>

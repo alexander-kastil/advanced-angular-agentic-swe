@@ -112,14 +112,21 @@
         </mat-form-field>
       </div>
 
-      <button
-        mat-raised-button
-        color="accent"
-        type="button"
-        (click)="savePerson()"
-      >
-        Submit
-      </button>
+      <div class="cmdItems">
+        <button mat-raised-button color="primary" type="button" (click)="loadPerson()">
+          Load Sample
+        </button>
+        <button mat-stroked-button type="button" (click)="clearPerson()">Clear</button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          [disabled]="personForm().invalid()"
+          (click)="savePerson()"
+        >
+          Submit
+        </button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

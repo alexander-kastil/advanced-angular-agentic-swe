@@ -1,0 +1,72 @@
+<section class="panel">
+  <h3>The builder swap</h3>
+  <div class="side-by-side">
+    <app-code-panel heading="Before, angular.json" [code]="before" />
+    <app-code-panel heading="After, angular.json" [code]="after" />
+  </div>
+  <p class="lead">
+    <code>&#64;angular/build:unit-test</code> runs Vitest on the same build graph as the application
+    target, so there is no second bundler config and no browser launcher. Karma is retired in Angular 22.
+  </p>
+</section>
+
+<section class="panel">
+  <h3>package.json</h3>
+  <div class="pills">
+    <div>
+      <span class="label">removed</span>
+      <ul>
+        @for (name of removed; track name) {
+          <li class="gone"><code>{{ name }}</code></li>
+        }
+      </ul>
+    </div>
+    <div>
+      <span class="label">added</span>
+      <ul>
+        @for (name of added; track name) {
+          <li class="new"><code>{{ name }}</code></li>
+        }
+      </ul>
+    </div>
+  </div>
+  <p class="lead">
+    <code>zone.js</code> went with them. This app is zoneless, so <code>polyfills</code> is an empty array
+    and the old <code>zone.js/testing</code> entry had nothing to patch.
+  </p>
+</section>
+
+<section class="panel">
+  <h3>Specs in this app</h3>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th>spec</th>
+        <th>covers</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of specs; track row.file) {
+        <tr>
+          <td><code>{{ row.file }}</code></td>
+          <td>{{ row.covers }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+<section class="panel">
+  <app-code-panel heading="tsconfig.spec.json" [code]="tsconfig" />
+  <app-code-panel
+    heading="src/test-setup.ts"
+    caption="The unit-test builder initialises the test platform itself. Guarding on getPlatform() keeps this file from throwing NG0400 while still working when it is run on its own."
+    [code]="setup"
+  />
+  <app-code-panel heading="A migrated spec" [code]="spec" />
+  <app-code-panel
+    heading="The ordering trap"
+    caption="Every spec that drives an httpResource hits this. It is the single biggest difference from the Karma-era specs."
+    [code]="trap"
+  />
+</section>

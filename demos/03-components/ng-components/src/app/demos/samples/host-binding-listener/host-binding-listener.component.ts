@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { HoverListenerDirective } from './hover-listener.directive';
 import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { BindingComponent } from './binding/binding.component';
@@ -15,6 +15,5 @@ import { BindingComponent } from './binding/binding.component';
         MatCardContent,
         HoverListenerDirective,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HostBindingListenerComponent { }

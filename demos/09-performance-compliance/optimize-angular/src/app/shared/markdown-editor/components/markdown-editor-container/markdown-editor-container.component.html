@@ -9,16 +9,16 @@
         (itemDelete)="deleteMarkdownItem($event)"
        />
     }
-    @if (editorEdit() && current() != null) {
+    @if (editorEdit() && current() !== null) {
       <app-markdown-edit [(markdownItem)]="currentItem" [mdSrc]="current()!.id === -1 ? current()!.comment : null" />
     }
   </mat-card-content>
   <mat-card-actions align="end">
     @if (editorEdit()) {
-      <button mat-flat-button (click)="saveMarkdownItem()" color="primary">
+      <button type="button" mat-flat-button (click)="saveMarkdownItem()" color="primary">
         Save
       </button>
-      <button
+      <button type="button"
         mat-flat-button
         (click)="editorEdit.set(false)"
         color="primary"

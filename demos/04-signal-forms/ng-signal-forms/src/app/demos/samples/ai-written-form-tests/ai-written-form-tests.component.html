@@ -1,0 +1,102 @@
+<app-markdown-renderer [md]="'ai-written-form-tests'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Order Form Under Test</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>SKU</mat-label>
+        <input matInput type="text" placeholder="ABC-1234" [formField]="orderForm.sku" />
+      </mat-form-field>
+      @if (orderForm.sku().touched() && orderForm.sku().invalid()) {
+        @for (err of orderForm.sku().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input matInput type="number" [formField]="orderForm.quantity" />
+      </mat-form-field>
+      @if (orderForm.quantity().touched() && orderForm.quantity().invalid()) {
+        @for (err of orderForm.quantity().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <mat-form-field>
+        <mat-label>Voucher (optional)</mat-label>
+        <input matInput type="text" [formField]="orderForm.voucher" />
+      </mat-form-field>
+      @if (orderForm.voucher().touched() && orderForm.voucher().invalid()) {
+        @for (err of orderForm.voucher().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+
+    @if (submittedOrder()) {
+      <p>Placed: {{ submittedOrder() | json }}</p>
+    }
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="primary" (click)="place()">Place Order</button>
+    <button mat-raised-button (click)="reset()">Reset</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>The Mutation</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      The mutation replaces <code>min(quantity, 1)</code> with <code>min(quantity, 0)</code>. A spec that only
+      checks the happy path stays green through it. The spec in
+      <code>ai-written-form-tests.component.spec.ts</code> does not, because it asserts that quantity 0 is
+      rejected.
+    </p>
+    <mat-checkbox [checked]="mutated()" (change)="toggleMutation($event.checked)">
+      Apply the mutation (min quantity 1 becomes 0)
+    </mat-checkbox>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="accent" (click)="runAssertions()">Run the Spec Assertions</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Assertion Results</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div boxed>
+      @for (result of results(); track result.name) {
+        <div [class.error]="!result.passed">
+          {{ result.passed ? 'PASS' : 'FAIL' }} - {{ result.name }}
+        </div>
+      } @empty {
+        <div>Press "Run the Spec Assertions" to evaluate them against the live form.</div>
+      }
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Review Checklist for an Agent-Written Spec</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ol>
+      <li>Every validator in the schema has at least one failing case, not only a passing one.</li>
+      <li>Boundaries are asserted on both sides: 0 and 1, 99 and 100.</li>
+      <li>Assertions read field state (<code>valid()</code>, <code>errors()</code>), never the DOM string.</li>
+      <li>Error identity is asserted by <code>kind</code> or message, not just by "is invalid".</li>
+      <li>Cross-field rules assert both directions of the dependency.</li>
+      <li>No test asserts something the schema does not state.</li>
+      <li>Mutate one threshold and confirm at least one test turns red.</li>
+    </ol>
+  </mat-card-content>
+</mat-card>

@@ -1,79 +1,84 @@
-# Server-Side Rendering Demo: Food Shop
+# food-shop-ssr
 
-A complete server-side rendering (SSR) implementation of a food shop application demonstrating Angular 21+ SSR patterns with Express.
+A hybrid-rendered Angular 22 food shop plus a demo browser for the module's seven topics. The catalog and the
+three detail pages are prerendered at build time, everything else is server-rendered by Express 5, and the
+browser hydrates one block at a time.
 
-## Overview
+See [../readme.md](../readme.md) for the guided walkthrough. This file is the map of the app.
 
-This module demonstrates a full-featured e-commerce application with server-side rendering, including:
-
-- **SSR Configuration**: Angular SSR setup with `@angular/ssr` and Express
-- **Server Bootstrap**: Node.js server with CommonEngine for rendering
-- **Responsive UI**: Food catalog with detailed product views
-- **State Management**: Reactive data loading and component state
-- **Material Design**: Angular Material integration for professional UI
-
-## Demonstrated Patterns & Features
-
-| Feature                  | Location                        | Description                                                                |
-| ------------------------ | ------------------------------- | -------------------------------------------------------------------------- |
-| **SSR Bootstrap**        | `main.server.ts`                | Server bootstrap function with Angular SSR context                         |
-| **Server Configuration** | `app.config.server.ts`          | Application config with `provideServerRendering()`                         |
-| **Express Server**       | `server.ts`                     | Node.js Express server setup with CommonEngine for rendering               |
-| **Food Service**         | `src/app/food/food.service.ts`  | Reactive data service for product catalog                                  |
-| **Food List**            | `src/app/food/food-list/`       | Main product list component with filtering and pagination                  |
-| **Food Details**         | `src/app/food/food-details/`    | Product detail view with selection capabilities                            |
-| **Shop Item**            | `src/app/food/shop-item/`       | Reusable product card component with add-to-cart                           |
-| **Euro Pipe**            | `src/app/shared/euro.pipe.ts`   | Custom pipe for currency formatting                                        |
-| **Number Picker**        | `src/app/shared/number-picker/` | Quantity selector component                                                |
-| **Static Assets**        | `src/assets/`                   | Product images and static resources                                        |
-| **Data Source**          | `db.json`                       | Mock product catalog (Butter Chicken, Blini with Salmon, Wiener Schnitzel) |
-
-## Application Structure
-
-```
-src/
-├── app/
-│   ├── app.component.ts
-│   ├── app.config.ts              # Client configuration
-│   ├── app.config.server.ts       # Server configuration with SSR provider
-│   ├── app.routes.ts              # Route definitions
-│   ├── food/
-│   │   ├── food.model.ts
-│   │   ├── food.service.ts
-│   │   ├── food-list/             # Product listing page
-│   │   ├── food-details/          # Product details page
-│   │   └── shop-item/             # Product card component
-│   └── shared/
-│       ├── euro.pipe.ts           # Currency formatting
-│       └── number-picker/         # Quantity selector
-├── main.ts                        # Client bootstrap
-├── main.server.ts                 # Server bootstrap
-└── server.ts                      # Express server with SSR rendering
-```
-
-## Key SSR Concepts
-
-- **Hydration**: Server-rendered HTML is hydrated on the client for interactive functionality
-- **CommonEngine**: Angular's server-side rendering engine for Express
-- **Static Asset Serving**: Efficient caching of compiled browser bundle
-- **APP_BASE_HREF**: Dynamic base URL handling for universal apps
-
-## Running the Application
+## Run It
 
 ```bash
-# Development server
-npm start
+npm install
+npm run api                        # json-server on http://localhost:3010, serves /demos and /food
+npm start                          # SSR dev server on http://localhost:4200
+npm test                           # Vitest via @angular/build:unit-test, 19 specs
 
-# Production build with SSR
-npm run build
-
-# Run SSR server
-npm run serve:ssr:food-shop-ssr
+npm run build                      # prerenders 4 routes, emits the Express 5 server
+npm run serve:ssr:food-shop-ssr    # http://localhost:4000
 ```
 
-## Performance Benefits
+`npm start` already serves server-rendered HTML. It is not a client-only baseline.
 
-- **Initial Page Load**: HTML rendered on server vs. empty shell in client-only apps
-- **SEO Improvement**: Pre-rendered content available to search engines
-- **Time to Interactive**: Reduced JavaScript parsing on client
-- **Network Efficiency**: Smaller initial JavaScript bundle with deferred hydration
+The API is optional. With it stopped, `offline-catalog.interceptor.ts` answers `/food`, `/food/:id` and
+`/demos` from bundled copies, so the build, the prerender and the running app all still work.
+
+## Layout
+
+| File                                       | Role                                                                        |
+| ------------------------------------------ | --------------------------------------------------------------------------- |
+| `src/app/app.routes.ts`                     | Client routes: `''`, `food/:id`, and the lazy `demos` children              |
+| `src/app/app.routes.server.ts`              | Render mode per route, plus `getPrerenderParams()` for `food/:id`           |
+| `src/app/app.config.ts`                     | `provideHttpClient()`, `provideRouter(..., withComponentInputBinding())`, `provideClientHydration(withEventReplay())` |
+| `src/app/app.config.server.ts`              | `provideServerRendering(withRoutes(serverRoutes))`                          |
+| `src/app/offline-catalog.interceptor.ts`    | Substitutes the bundled catalogs when the API is unreachable                |
+| `src/app/food/food.data.ts`                 | `FALLBACK_FOOD`, the bundled catalog used at prerender time                 |
+| `src/app/food/food.service.ts`              | Guarded `fetch` used by `getPrerenderParams()` and by `resource()`          |
+| `src/app/food/food-list/`                   | Catalog page: `httpResource()` + `@defer (hydrate on viewport)` per card    |
+| `src/app/food/food-details/`                | Detail page: route param signal drives the `httpResource()` url             |
+| `src/app/food/shop-item/`                   | Product card, `linkedSignal()` mirrors the cart quantity                    |
+| `src/app/demos/demo.routes.ts`              | One lazy child route per `db.json` demo row                                 |
+| `src/app/demos/demo-container/`             | Sidebar, guide pane, `demo.data.ts` offline mirror of the catalog           |
+| `src/app/demos/samples/<url>/`              | One folder per demo, named after its `url`                                  |
+| `src/app/shared/markdown-renderer/`         | Renders `public/markdown/<md>.md`, browser only, `ngSkipHydration`          |
+| `src/app/shared/code-panel/`                | Small code listing used across the samples                                  |
+| `src/app/shared/number-picker/`             | Quantity stepper                                                            |
+| `src/app/shared/euro.pipe.ts`               | Currency formatting                                                         |
+| `public/markdown/`                          | Seven guides, one per demo row, served as static assets                     |
+| `server.ts`                                 | Express 5 + `AngularNodeAppEngine`                                          |
+| `db.json`                                   | json-server seed: `demos` (seven rows) and `food` (three dishes)            |
+
+`db.json` is the API seed for this app. It carries both collections, so one `npm run api` feeds the shop and
+the demo browser.
+
+## Demo Rows
+
+| # | Route | Guide |
+| - | ----- | ----- |
+| 1 | `/demos/server-routes` | `public/markdown/server-routes.md` |
+| 2 | `/demos/node-app-engine` | `public/markdown/node-app-engine.md` |
+| 3 | `/demos/incremental-hydration` | `public/markdown/incremental-hydration.md` |
+| 4 | `/demos/transfer-cache` | `public/markdown/transfer-cache.md` |
+| 5 | `/demos/route-params-signals` | `public/markdown/route-params-signals.md` |
+| 6 | `/demos/csr-vs-ssr-delta` | `public/markdown/csr-vs-ssr-delta.md` |
+| 7 | `/demos/karma-to-vitest` | `public/markdown/karma-to-vitest.md` |
+
+## Render Modes
+
+| Route      | Mode                     | Result                                                     |
+| ---------- | ------------------------ | ---------------------------------------------------------- |
+| `/`        | `Prerender`              | `dist/food-shop-ssr/browser/index.html`                    |
+| `/food/:id`| `Prerender` + params     | `/food/1`, `/food/2`, `/food/3` written at build time      |
+| `/food/99` | `PrerenderFallback.Server` | Rendered on demand by the Express server                  |
+| `/demos/*` | `Server`                 | SSR per request, matched by the `**` route                 |
+| `**`       | `Server`                 | SSR                                                        |
+
+## Configuration Worth Knowing
+
+- `angular.json` needs `"outputMode": "server"` or `app.routes.server.ts` is ignored entirely.
+- `angular.json` needs `security.allowedHosts` or the server answers `400 Bad Request` on every request.
+- `"polyfills": []` and no `zone.js` dependency: this app is zoneless.
+- `provideMarkdown()` sits on the lazy `demos` route, not in `app.config.ts`. In the root config it pulls
+  `marked` into the initial bundle and the 550 kB budget fails.
+- The markdown renderer is browser only and carries `ngSkipHydration`: its `[src]` fetch is a relative URL,
+  which `HttpClient` cannot resolve during server rendering.

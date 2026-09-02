@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from './user-model';
 import { usersdata } from './users-data';
 import { DatePipe } from '@angular/common';
@@ -7,7 +7,6 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
 
 @Component({
     selector: 'app-material-async',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './material-async.component.html',
     styleUrls: ['./material-async.component.scss'],
     imports: [

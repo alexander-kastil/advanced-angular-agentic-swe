@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { customersStore } from '../customers.store';
 import { CustomersTableComponent } from '../customers-table/customers-table.component';
 import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
@@ -9,7 +9,6 @@ import { Customer } from '../customer.model';
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.scss'],
   imports: [CustomersTableComponent, CustomerEditComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomersComponent {
   store = inject(customersStore);

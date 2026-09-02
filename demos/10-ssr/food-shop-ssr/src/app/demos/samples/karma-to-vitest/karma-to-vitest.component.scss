@@ -1,0 +1,78 @@
+.panel {
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.lead {
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.side-by-side {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.pills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6a6a7c;
+}
+
+.pills ul {
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.pills li {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+.pills li.gone {
+  background: #fdeceb;
+  color: #9c2c2c;
+  text-decoration: line-through;
+}
+
+.pills li.new {
+  background: #e6f4ea;
+  color: #1e6b39;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.grid th,
+.grid td {
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid #e3e3ec;
+}
+
+.grid th {
+  font-weight: 600;
+  color: #6a6a7c;
+}

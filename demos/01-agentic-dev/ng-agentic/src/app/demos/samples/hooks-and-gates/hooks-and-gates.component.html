@@ -1,0 +1,51 @@
+<div class="sample">
+  <p>
+    Instructions are advice, hooks are enforcement. The harness runs them, so a rule written as a hook
+    holds even when the model is convinced it should do otherwise. Pick an event and see the
+    <code>settings.json</code> it produces.
+  </p>
+
+  <div class="row">
+    @for (event of events; track event.event + event.matcher) {
+      <button [class.active]="selected() === event" (click)="select(event)">
+        {{ event.event }}@if (event.matcher) {<span class="matcher"> / {{ event.matcher }}</span>}
+      </button>
+    }
+  </div>
+
+  <div class="card">
+    <h4>{{ selected().event }} {{ selected().blocking ? '(can block)' : '(cannot block)' }}</h4>
+    <p>{{ selected().fires }}</p>
+    <p class="gate-note">{{ selected().gate }}</p>
+  </div>
+
+  <app-code-block label=".claude/settings.json" [code]="settings()" />
+
+  <h4>Try the banned-API gate</h4>
+  <p class="hint">
+    This is the PreToolUse hook doing its job. Edit the code the model is about to write and watch the
+    exit code change.
+  </p>
+
+  <textarea rows="9" [value]="draft()" (input)="setDraft($any($event.target).value)"></textarea>
+
+  <div class="gate" [class.off]="!enabled()" [class.blocked]="exitCode() === 2">
+    <button (click)="toggle()">{{ enabled() ? 'Disable hook' : 'Enable hook' }}</button>
+    <div>
+      <strong>exit {{ exitCode() }}</strong>
+      <pre class="output">{{ hookOutput() }}</pre>
+    </div>
+  </div>
+
+  <h4>The hook itself</h4>
+  <app-code-block label=".claude/hooks/block-banned-api.mjs" [code]="hookScript" />
+
+  <h4>All five wired together</h4>
+  <app-code-block label=".claude/settings.json" [code]="fullSettings()" />
+
+  <p class="hint">
+    <code>0</code> allows. <code>2</code> blocks and feeds stderr back to the model as the reason. Any
+    other non-zero value surfaces as an error without blocking, which is the usual cause of a hook
+    that looks wired but never gates anything.
+  </p>
+</div>

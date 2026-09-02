@@ -1,0 +1,39 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.grow {
+  flex: 1;
+}
+
+.order {
+  color: #81c784;
+}
+
+.log {
+  max-height: 12rem;
+  overflow-y: auto;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.hint {
+  opacity: 0.75;
+  font-size: 0.9rem;
+}

@@ -1,33 +1,24 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { SideNavService } from '../sidenav/sidenav.service';
-import { SnackbarService } from '../snackbar/snackbar.service';
-import { NavbarService } from './navbar.service';
-import { AsyncPipe } from '@angular/common';
-import { RouterLinkActive, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
-import { AuthFacade } from 'src/app/mock-auth/state/auth.facade';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthFacade } from '../../mock-auth/auth.facade';
+import { SideNavService } from '../sidenav/sidenav.service';
+import { NavbarService } from './navbar.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    MatToolbar,
-    MatToolbarRow,
-    MatIcon,
-    RouterLinkActive,
-    RouterLink,
-    AsyncPipe,
-  ]
+  imports: [MatToolbar, MatToolbarRow, MatIcon, RouterLinkActive, RouterLink],
 })
 export class NavbarComponent {
-  nav = inject(SideNavService);
-  ms = inject(NavbarService);
-  sns = inject(SnackbarService);
-  auth = inject(AuthFacade);
-  menuItems = this.ms.getTopItems();
+  private nav = inject(SideNavService);
+  private ms = inject(NavbarService);
+  private auth = inject(AuthFacade);
+
+  readonly menuItems = this.ms.topItems.value;
+  readonly isAuthenticated = this.auth.isAuthenticated;
 
   toggleMenu() {
     this.nav.toggleMenuVisibility();

@@ -1,0 +1,65 @@
+.triggers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-big);
+  padding: var(--gap-big);
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-big);
+}
+
+article {
+  border: 1px solid var(--color-accent);
+  padding: var(--gap-big);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+  border: 2px dashed var(--color-accent);
+  background: transparent;
+  color: inherit;
+  width: 100%;
+  cursor: pointer;
+}
+
+.spacer {
+  height: 30vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #55595c;
+}
+
+button {
+  align-self: flex-start;
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.placeholder {
+  align-self: stretch;
+  background: transparent;
+  border: 2px dashed var(--color-accent);
+  color: inherit;
+}
+
+.hint {
+  color: #55595c;
+}
+
+.notes {
+  line-height: 1.8;
+}

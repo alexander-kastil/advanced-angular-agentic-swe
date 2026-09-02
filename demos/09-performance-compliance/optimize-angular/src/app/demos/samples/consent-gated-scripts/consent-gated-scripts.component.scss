@@ -1,0 +1,80 @@
+.scripts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-big);
+  padding: var(--gap-big);
+}
+
+article {
+  border: 1px solid var(--color-accent);
+  padding: var(--gap-big);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+article.active {
+  border-left: 4px solid var(--color-primary);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: minmax(180px, auto) 1fr;
+  gap: 4px var(--gap-big);
+  margin: 0;
+}
+
+dt {
+  color: #55595c;
+}
+
+dd {
+  margin: 0;
+}
+
+.state {
+  margin: 0;
+  font-weight: bold;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-small);
+}
+
+button {
+  padding: var(--gap-small) var(--gap-big);
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.ghost {
+  background: transparent;
+  color: inherit;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.warning {
+  border-left: 4px solid var(--color-warn);
+  padding-left: var(--gap-big);
+}
+
+.hint {
+  color: #55595c;
+}
+
+.log {
+  line-height: 1.7;
+}
+
+.notes {
+  line-height: 1.8;
+}

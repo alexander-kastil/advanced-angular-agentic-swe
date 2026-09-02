@@ -1,0 +1,53 @@
+<app-markdown-renderer [md]="'form-value-control'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Custom Controls Bound with [formField]</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div column>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput type="text" [formField]="reviewForm.title" />
+      </mat-form-field>
+      @if (reviewForm.title().touched() && reviewForm.title().invalid()) {
+        @for (err of reviewForm.title().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+
+      <label>Rating - FormValueControl&lt;number&gt;</label>
+      <app-rating-input [formField]="reviewForm.rating" label="Overall rating" />
+
+      <label>Refund - transformedValue, string in the UI and number in the model</label>
+      <app-money-input [formField]="reviewForm.refund" />
+      @if (reviewForm.refund().touched() && reviewForm.refund().invalid()) {
+        @for (err of reviewForm.refund().errors(); track err.kind) {
+          <div class="error">{{ err.message }}</div>
+        }
+      }
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="toggleLock()">
+      {{ lockRating() ? 'Unlock' : 'Lock' }} Rating
+    </button>
+    <button mat-raised-button (click)="resetReview()">Reset</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Model and Field State</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div boxed>
+      <div>Model: {{ model() | json }}</div>
+      <div>Rating touched: {{ reviewForm.rating().touched() }}</div>
+      <div>Rating valid: {{ reviewForm.rating().valid() }}</div>
+      <div>Rating disabled: {{ reviewForm.rating().disabled() }}</div>
+      <div>Refund value type: {{ model().refund === null ? 'null' : 'number' }}</div>
+      <div>Form valid: {{ reviewForm().valid() }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -2,7 +2,7 @@
 
 Write end-to-end tests with Playwright using the Page Object Model and fixtures. Reset API state between tests for full isolation.
 
-Playwright tests live in [`e2e/`](e2e/) alongside the app.
+Playwright tests live in `e2e/` alongside the app.
 
 ## Key Concepts
 
@@ -77,14 +77,20 @@ test("updates the row after save", async ({ customersPage }) => {
 
 ## Running
 
+`@playwright/test` is a devDependency of this app. `playwright.config.ts` sets `testDir: './e2e'`, `tsconfig: './tsconfig.e2e.json'` and a `webServer` that starts `ng serve` for you and reuses a running one.
+
 ```bash
-# Install (first time)
-npm install -D @playwright/test
+# Download the browser (first time, machine wide)
 npx playwright install chromium
 
+# json-server, because the fixture resets state through the API
+npm run api
+
 # Run all e2e tests
-npx playwright test
+npm run e2e
 
 # Interactive UI mode
 npx playwright test --ui
 ```
+
+Without `tsconfig.e2e.json` the `e2e/` folder belongs to no build: `tsconfig.app.json` starts at `src/main.ts` and `tsconfig.spec.json` collects `src/**/*.spec.ts`. The files still ran, but a type error in a page object stayed invisible until the assertion failed.

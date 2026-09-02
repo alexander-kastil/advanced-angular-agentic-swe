@@ -10,10 +10,7 @@ describe('SideNavService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [
-                provideHttpClient(),
-                provideHttpClientTesting(),
-            ],
+            providers: [provideHttpClient(), provideHttpClientTesting()],
         });
         service = TestBed.inject(SideNavService);
         httpMock = TestBed.inject(HttpTestingController);
@@ -51,14 +48,21 @@ describe('SideNavService', () => {
         expect(service.getSideNavVisible()()).toBe(false);
     });
 
-    it('should fetch top items from API', () => {
-        const mockItems = [{ label: 'Home', url: 'home' }];
-        service.getTopItems().subscribe((items) => {
-            expect(items).toEqual(mockItems);
-        });
+    it('should expose an empty top item list before the request resolves', () => {
+        expect(service.getTopItems()()).toEqual([]);
+    });
 
+    it('should load top items from the API', async () => {
+        const mockItems = [{ label: 'Home', url: 'home' }];
+
+        TestBed.tick();
         const req = httpMock.expectOne('http://localhost:3000/top-links');
         expect(req.request.method).toBe('GET');
         req.flush(mockItems);
+
+        await new Promise((resolve) => setTimeout(resolve));
+        TestBed.tick();
+
+        expect(service.getTopItems()()).toEqual(mockItems);
     });
 });

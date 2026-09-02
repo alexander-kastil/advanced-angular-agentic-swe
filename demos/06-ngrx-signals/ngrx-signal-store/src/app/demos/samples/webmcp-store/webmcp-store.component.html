@@ -1,0 +1,48 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Exposing SignalStore methods as WebMCP tools</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    @if (agentSurface()) {
+      <p class="ok">Agent surface detected. The three tools below are registered with this page.</p>
+    } @else {
+      <p class="warn">
+        No agent surface on this browser, so declareExperimentalWebMcpTool registered nothing. The store still works
+        through the UI, and the tool declarations stay in the source unchanged.
+      </p>
+    }
+
+    <ul class="tools">
+      @for (tool of tools; track tool) {
+        <li><code>{{ tool }}</code></li>
+      }
+    </ul>
+
+    <div class="toolbar">
+      <mat-form-field>
+        <mat-label>New ticket subject</mat-label>
+        <input matInput [ngModel]="subject()" (ngModelChange)="subject.set($event)" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="add()">Add ticket</button>
+      <button mat-stroked-button (click)="store.reset()">Reset queue</button>
+    </div>
+
+    <h4>Queue ({{ store.openCount() }} open)</h4>
+    @for (ticket of store.tickets(); track ticket.id) {
+      <div class="row" [class.closed]="!ticket.open">
+        <span class="grow">#{{ ticket.id }} {{ ticket.subject }}</span>
+        <span>{{ ticket.priority }}</span>
+        <button mat-stroked-button [disabled]="!ticket.open" (click)="store.closeTicket(ticket.id)">Close</button>
+      </div>
+    }
+
+    <h4>Agent calls</h4>
+    <ol class="log">
+      @for (call of store.agentCalls(); track $index) {
+        <li>{{ call }}</li>
+      } @empty {
+        <li>No tool has been invoked by an agent yet.</li>
+      }
+    </ol>
+  </mat-card-content>
+</mat-card>

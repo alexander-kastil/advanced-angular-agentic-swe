@@ -2,24 +2,18 @@ import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MarkdownModule } from 'ngx-markdown';
 import { describe, it, expect, beforeEach } from 'vitest';
-import { ComponentEventsComponent } from './component-events.component';
+import { CounterComponent } from './counter.component';
 
-describe('ComponentEventsComponent', () => {
-  let fixture: ComponentFixture<ComponentEventsComponent>;
+describe('Component - Click Events - CounterComponent', () => {
+  let fixture: ComponentFixture<CounterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        NoopAnimationsModule,
-        MarkdownModule.forRoot()
-      ],
-      providers: [
-        provideHttpClient()
-      ]
+      imports: [NoopAnimationsModule],
+      providers: [provideHttpClient()]
     }).compileComponents();
-    fixture = TestBed.createComponent(ComponentEventsComponent);
+    fixture = TestBed.createComponent(CounterComponent);
   });
 
   it('should create', () => {

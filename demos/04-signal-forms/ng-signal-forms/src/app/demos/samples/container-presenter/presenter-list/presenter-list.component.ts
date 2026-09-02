@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Person } from '../../person/person.model';
 import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
 
@@ -6,8 +6,7 @@ import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
   selector: 'app-presenter-list',
   templateUrl: './presenter-list.component.html',
   styleUrls: ['./presenter-list.component.scss'],
-  imports: [MatCard, MatCardHeader, MatCardTitle],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  imports: [MatCard, MatCardHeader, MatCardTitle]
 })
 export class PresenterListComponent {
   readonly persons = input<Person[]>([]);

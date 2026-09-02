@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { applyEach, form, FormField, maxLength, min, minLength, required, validate } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
@@ -16,16 +16,15 @@ interface SkillsForm {
 
 @Component({
   selector: 'app-form-errors',
-  templateUrl: './signal-form-errors.component.html',
-  styleUrls: ['./signal-form-errors.component.scss'],
+  templateUrl: './form-errors.component.html',
+  styleUrls: ['./form-errors.component.scss'],
   imports: [
     MarkdownRendererComponent,
     FormField,
     MatCard, MatCardHeader, MatCardTitle, MatCardContent,
     MatFormField, MatLabel, MatInput,
     RowDirective, MatCardActions, MatButton, JsonPipe,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class FormErrorsComponent {
   skillModel = signal<SkillsForm>({ name: '', age: 0, skills: [] });

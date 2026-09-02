@@ -1,15 +1,12 @@
-import { Observable } from 'rxjs';
+import { MonoTypeOperatorFunction, Observable, catchError, of, tap } from 'rxjs';
 
-export function filterOnlyEven(source: Observable<number>): Observable<number> {
-  return new Observable((observer) => {
-    source.subscribe({
-      next: (val: number) => {
-        if (val % 2 === 0) {
-          observer.next(val);
-        }
-      },
-      error: (err) => observer.error(err),
-      complete: () => observer.complete()
-    });
-  });
+export function catchWithFallback<T>(
+  fallback: T,
+  onError: (message: string) => void,
+): MonoTypeOperatorFunction<T> {
+  return (source: Observable<T>) =>
+    source.pipe(
+      tap({ error: (err: Error) => onError(err.message) }),
+      catchError(() => of(fallback)),
+    );
 }

@@ -11,9 +11,6 @@ const visitSchema = schema<VetVisit>((path) => {
   max(path.year, new Date().getFullYear(), {
     message: "Year cannot be in the future",
   });
-  pattern(path.year, /^\d{4}$/, {
-    message: "Year must be four digits (YYYY)",
-  });
 });
 
 petForm = form(this.petModel, (s) => {

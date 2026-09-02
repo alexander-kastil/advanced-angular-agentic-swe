@@ -1,0 +1,40 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.grow {
+  flex: 1;
+}
+
+.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.badge {
+  padding: 0.1rem 0.5rem;
+  border-radius: 10px;
+  border: 1px solid currentColor;
+  font-size: 0.75rem;
+}
+
+.badge.high {
+  color: #ff8a65;
+}

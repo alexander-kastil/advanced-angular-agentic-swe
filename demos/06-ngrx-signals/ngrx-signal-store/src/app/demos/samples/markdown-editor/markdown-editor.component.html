@@ -1,1 +1,43 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Composed Store: withRequestState + withMarkdownItems</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    @if (store.isLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+    @if (store.error(); as err) {
+      <p class="error">{{ err }}</p>
+    }
 
+    <div class="form">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [ngModel]="draft().title" (ngModelChange)="patch({ title: $event })" />
+      </mat-form-field>
+      <mat-form-field class="grow">
+        <mat-label>Markdown</mat-label>
+        <textarea matInput rows="3" [ngModel]="draft().comment" (ngModelChange)="patch({ comment: $event })"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="save()">
+        {{ draft().id === 0 ? 'Add note' : 'Save note' }}
+      </button>
+      <button mat-stroked-button (click)="dispatch.fetch()">Reload</button>
+    </div>
+
+    @for (item of store.comments(); track item.id) {
+      <div class="row">
+        <span class="grow"><strong>{{ item.title }}</strong> - {{ item.comment }}</span>
+        <button mat-icon-button (click)="edit(item)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button (click)="remove(item)"><mat-icon>delete</mat-icon></button>
+      </div>
+    } @empty {
+      <p>No notes stored. Start json-server on the app db.json to serve /markdownItems.</p>
+    }
+
+    <p>
+      notes <strong>{{ store.comments().length }}</strong> - saved page guides
+      <strong>{{ store.pageOverrides().length }}</strong>
+    </p>
+  </mat-card-content>
+</mat-card>

@@ -7,12 +7,12 @@
     }
     <div class="title">{{ c.title }}</div>
     @if (demoSaved() && c.url === demoUrl()) {
-      <button mat-flat-button (click)="deleteMarkdownItem(c)" color="primary">Reset</button>
+      <button type="button" mat-flat-button (click)="deleteMarkdownItem(c)" color="primary">Reset</button>
     } @else if (c.id !== -1) {
-      <button mat-flat-button (click)="deleteMarkdownItem(c)" color="primary">Delete</button>
+      <button type="button" mat-flat-button (click)="deleteMarkdownItem(c)" color="primary">Delete</button>
     } @else {
       <div class="no-delete"></div>
     }
-    <button mat-flat-button (click)="editItem(c)" color="primary">Edit</button>
+    <button type="button" mat-flat-button (click)="editItem(c)" color="primary">Edit</button>
   </div>
 }

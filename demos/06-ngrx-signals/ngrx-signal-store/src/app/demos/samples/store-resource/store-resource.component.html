@@ -1,0 +1,32 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>httpResource extended with @ngrx/signals/resource</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="content">
+    @if (topics.isLoading()) {
+      <mat-progress-bar mode="indeterminate" />
+    }
+
+    <div class="toolbar">
+      <mat-form-field>
+        <mat-label>Filter topics</mat-label>
+        <input matInput [ngModel]="search()" (ngModelChange)="search.set($event)" />
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="topics.reload()">Reload</button>
+    </div>
+
+    <p>status: <strong>{{ topics.status() }}</strong></p>
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    @for (t of topics.value() ?? []; track t.id) {
+      <div class="row">
+        <span class="grow">#{{ t.id }} {{ t.name }}</span>
+        <span>{{ t.completed ? 'completed' : 'open' }}</span>
+      </div>
+    } @empty {
+      <p>No topics. Start json-server on the app db.json to serve /topics.</p>
+    }
+  </mat-card-content>
+</mat-card>

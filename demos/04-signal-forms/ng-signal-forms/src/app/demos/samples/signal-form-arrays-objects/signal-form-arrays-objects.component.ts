@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { form, FormField, required, applyEach, min, max, schema } from '@angular/forms/signals';
 import { MatButton } from '@angular/material/button';
 import { MatInput } from '@angular/material/input';
@@ -44,8 +44,7 @@ const visitSchema = schema<VetVisit>((path) => {
         MatCard, MatCardHeader, MatCardTitle, MatCardContent,
         FormField, MatFormField, MatLabel, MatInput,
         MatButton, JsonPipe, ColumnDirective,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    ]
 })
 export class SfArraysObjectsComponent {
     petModel = signal<PetHealthModel>(initialData);

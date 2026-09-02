@@ -1,0 +1,54 @@
+<section class="panel">
+  <h3>The render mode of every route in this app</h3>
+  <table class="grid">
+    <thead>
+      <tr>
+        <th>path</th>
+        <th>renderMode</th>
+        <th>fallback</th>
+        <th>params</th>
+        <th>rendered</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows; track row.path) {
+        <tr>
+          <td><code>{{ row.path }}</code></td>
+          <td><span class="mode" [class.server]="row.renderMode === 'Server'">{{ row.renderMode }}</span></td>
+          <td>{{ row.fallback }}</td>
+          <td>{{ row.params }}</td>
+          <td>{{ row.when }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+
+<section class="panel">
+  <h3>What getPrerenderParams() returns right now</h3>
+  <p class="lead">
+    The same catalog call the build makes. Each id below becomes its own
+    <code>browser/food/&lt;id&gt;/index.html</code>.
+  </p>
+  <ul class="ids">
+    @for (item of prerenderedIds(); track item.id) {
+      <li><code>{{ '{' }} id: '{{ item.id }}' {{ '}' }}</code> &rarr; {{ item.name }}</li>
+    } @empty {
+      <li>Catalog is still loading.</li>
+    }
+  </ul>
+  <p class="lead">
+    An id that is not in the list, such as <code>/food/99</code>, is not prerendered. It is rendered per
+    request because <code>PrerenderFallback.Server</code> covers the gap.
+  </p>
+</section>
+
+<section class="panel">
+  <app-code-panel heading="src/app/app.routes.server.ts" [code]="routeFile" />
+  <app-code-panel heading="src/app/app.config.server.ts" [code]="registration" />
+  <app-code-panel
+    heading="angular.json"
+    caption="Without outputMode: server the builder ignores app.routes.server.ts entirely and silently prerenders a single route."
+    [code]="builderConfig"
+  />
+</section>

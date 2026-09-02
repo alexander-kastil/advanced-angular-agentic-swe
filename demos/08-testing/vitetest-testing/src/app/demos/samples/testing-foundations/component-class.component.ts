@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Skill } from '../../../skills/skill.model';
 
 @Component({
   selector: 'app-component-class',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<mat-card appearance="outlined">
         <mat-card-header>
           <mat-card-title>{{ title }}</mat-card-title>

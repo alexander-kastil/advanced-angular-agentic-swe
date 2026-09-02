@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SnackbarService } from '../snackbar/snackbar.service';
 import { SidebarActions } from './sidebar.actions';
 import { SidePanelService } from './sidepanel.service';
@@ -16,8 +16,7 @@ import { MatToolbar, MatToolbarRow } from '@angular/material/toolbar';
     MatToolbarRow,
     MatMiniFabButton,
     MatIcon,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class SidePanelComponent {
   sns = inject(SnackbarService);

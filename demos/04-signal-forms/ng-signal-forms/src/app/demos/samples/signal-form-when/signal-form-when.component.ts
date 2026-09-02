@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { form, FormField, required, applyWhen } from '@angular/forms/signals';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatInput } from '@angular/material/input';
@@ -37,8 +37,7 @@ const initialData: PetWhenModel = {
         MatCard, MatCardHeader, MatCardTitle, MatCardContent,
         FormField, MatFormField, MatLabel, MatInput,
         MatCheckbox, MatSelectModule, JsonPipe, ColumnDirective,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    ]
 })
 export class SfWhenComponent {
     petModel = signal<PetWhenModel>(initialData);

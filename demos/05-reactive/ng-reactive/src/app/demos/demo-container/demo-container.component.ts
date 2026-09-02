@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, resource, effect, ElementRef, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal, resource, effect, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpClient } from '@angular/common/http';
@@ -36,8 +36,7 @@ import { SplitComponent, SplitAreaComponent } from 'angular-split';
     SidePanelComponent,
     SplitComponent,
     SplitAreaComponent,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class DemoContainerComponent {
   router = inject(Router);

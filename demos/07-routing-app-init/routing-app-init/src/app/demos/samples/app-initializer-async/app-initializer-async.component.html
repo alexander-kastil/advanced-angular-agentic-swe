@@ -1,0 +1,47 @@
+<app-markdown-renderer [md]="'app-initializer-async'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>What ran before the app was on screen</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <code>provideAppInitializer</code> in <code>app.config.ts</code> awaits a service that is not in
+      the initial bundle. <code>injectAsync</code> returns a getter, so the dynamic
+      <code>import()</code> is what blocks bootstrap, not a synchronous dependency.
+    </p>
+    <ol class="log">
+      @for (entry of entries(); track entry.at) {
+        <li><strong>+{{ entry.at }}ms</strong> {{ entry.message }}</li>
+      } @empty {
+        <li>No startup entries recorded.</li>
+      }
+    </ol>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>The same service, injected lazily in a component</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Here <code>injectAsync</code> is configured with <code>&#123; prefetch: onIdle &#125;</code>, so
+      the chunk is fetched while the browser is idle and the button resolves instantly.
+    </p>
+    @if (flags().length) {
+      <ul>
+        @for (flag of flags(); track flag) {
+          <li>{{ flag }}</li>
+        }
+      </ul>
+    } @else {
+      <p>Nothing loaded yet.</p>
+    }
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="showFlags()" [disabled]="loading()">
+      Resolve the lazy service
+    </button>
+  </mat-card-actions>
+</mat-card>

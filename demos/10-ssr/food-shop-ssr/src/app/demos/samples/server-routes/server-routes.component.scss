@@ -1,0 +1,51 @@
+.panel {
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.lead {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.grid {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.grid th,
+.grid td {
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  border-bottom: 1px solid #e3e3ec;
+}
+
+.grid th {
+  font-weight: 600;
+  color: #6a6a7c;
+}
+
+.mode {
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #e6f4ea;
+  color: #1e6b39;
+  font-weight: 600;
+}
+
+.mode.server {
+  background: #e8eefc;
+  color: #24418c;
+}
+
+.ids {
+  margin: 0 0 0.75rem;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+}

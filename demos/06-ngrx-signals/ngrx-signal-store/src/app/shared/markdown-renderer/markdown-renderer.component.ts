@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, NgZone } from '@angular/core';
+import { Component, computed, inject, input, NgZone } from '@angular/core';
 import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
 import { MarkdownComponent } from 'ngx-markdown';
 import { environment } from '../../../environments/environment';
@@ -9,7 +9,6 @@ import { LibraryLoaderService } from '../services/library-loader.service';
   selector: 'app-markdown-renderer',
   templateUrl: './markdown-renderer.component.html',
   styleUrl: './markdown-renderer.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     MatExpansionPanel,
     MatExpansionPanelHeader,

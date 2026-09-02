@@ -3,7 +3,7 @@
     {
       "url": "app-state",
       "title": "SignalStore App State",
-      "teaches": "Create and manage application state with @ngrx/signals SignalStore. Define state shape and access it reactively with signals.",
+      "teaches": "Model application state with withState, derive it with withComputed and change it with withMethods and patchState. Inspect the live state snapshot via getState().",
       "sortOrder": 1,
       "topic": "SignalStore Fundamentals",
       "id": 1,
@@ -12,65 +12,110 @@
     {
       "url": "store-crud",
       "title": "SignalStore CRUD",
-      "teaches": "Implement Create, Read, Update, Delete operations in SignalStore. Manage entity mutations and side effects with effects().",
+      "teaches": "Create, read, update and delete against a REST API with withMethods and rxMethod. Track loading state and derive filtered views with withComputed.",
       "sortOrder": 2,
       "topic": "SignalStore Fundamentals",
       "id": 2,
       "md": "store-crud"
     },
     {
+      "url": "deep-signals",
+      "title": "Deep Signals",
+      "teaches": "Read nested state as individual signals with store.user.address.city(), and handle the union case where a state slice is a union of record types and must be narrowed instead.",
+      "sortOrder": 3,
+      "topic": "SignalStore Fundamentals",
+      "id": 3,
+      "md": "deep-signals"
+    },
+    {
+      "url": "linked-state",
+      "title": "Linked State",
+      "teaches": "Derive writable state from other state with withLinkedState. A linked slice recomputes when its source changes and stays writable in between.",
+      "sortOrder": 4,
+      "topic": "SignalStore Fundamentals",
+      "id": 10,
+      "md": "linked-state"
+    },
+    {
       "url": "store-entities",
       "title": "SignalStore Entities",
-      "teaches": "Efficiently manage collections of entities using withEntities() feature. Implement entity adapters for normalized state management.",
+      "teaches": "Manage a normalized collection with withEntities(). Tour the updater API: setAllEntities, addEntity, updateEntity, updateAllEntities, removeEntity, removeAllEntities.",
       "sortOrder": 10,
       "topic": "Data Management",
-      "id": 3,
+      "id": 4,
       "md": "store-entities"
     },
     {
-      "url": "deep-signals",
-      "title": "Deep Signals",
-      "teaches": "Create deeply nested signals for complex state structures. Access and update nested properties with automatic reactivity.",
+      "url": "skills-entities",
+      "title": "Skills with withEntities",
+      "teaches": "Back an entity collection with a REST API. Combines withEntities, the withRequestStatus feature and rxMethod for load, add, update and remove.",
       "sortOrder": 11,
       "topic": "Data Management",
-      "id": 4,
-      "md": "deep-signals"
+      "id": 5,
+      "md": "skills-entities"
+    },
+    {
+      "url": "store-resource",
+      "title": "Resource Extensions",
+      "teaches": "Extend an httpResource with @ngrx/signals/resource. withPreviousValueOnLoading keeps the last value while reloading and withValueOnError supplies a fallback.",
+      "sortOrder": 12,
+      "topic": "Data Management",
+      "id": 6,
+      "md": "store-resource"
     },
     {
       "url": "custom-store-features",
       "title": "Request Status Feature",
-      "teaches": "Build reusable store features with signalStoreFeature. Create a request status feature with state, computed properties, and pure updater functions.",
+      "teaches": "Build reusable store features with signalStoreFeature. Compose withRequestStatus and withAttempts and drive them with pure updater functions.",
       "sortOrder": 20,
       "topic": "Advanced Patterns",
-      "id": 5,
+      "id": 7,
       "md": "custom-store-features"
     },
     {
-      "url": "ngrx-interop",
-      "title": "NgRx Classic Interop",
-      "teaches": "Integrate SignalStore with classic NgRx features. Migrate from traditional reducers and effects to signal-based store patterns.",
+      "url": "store-events",
+      "title": "Event-Based Store",
+      "teaches": "Decouple intent from state with @ngrx/signals/events: an eventGroup reduced by withReducer, side effects in withEventHandlers, and scoped dispatching through a component-level Dispatcher.",
       "sortOrder": 21,
       "topic": "Advanced Patterns",
-      "id": 6,
-      "md": "ngrx-interop"
-    },
-    {
-      "url": "presenter-ngrx",
-      "title": "Container Presenter",
-      "teaches": "Implement the container-presenter pattern with SignalStore. Separate data management from presentation using smart and dumb components.",
-      "sortOrder": 22,
-      "topic": "Advanced Patterns",
-      "id": 7,
-      "md": "presenter-ngrx"
+      "id": 8,
+      "md": "store-events"
     },
     {
       "url": "markdown-editor",
       "title": "Markdown Editor",
-      "teaches": "Compose custom store features into a real-world store. Uses withMarkdownItems() for entity CRUD and withLoadingState() for loading tracking.",
+      "teaches": "Compose custom store features into a real store. Uses withMarkdownItems() for entity CRUD and withRequestState() for loading and error tracking.",
+      "sortOrder": 22,
+      "topic": "Advanced Patterns",
+      "id": 9,
+      "md": "markdown-editor"
+    },
+    {
+      "url": "store-composition",
+      "title": "Store Composition",
+      "teaches": "Compose a store from parts: withProps for injected dependencies and observables, withFeature for a feature that needs store members, and signalMethod for a side effect bound to a signal.",
       "sortOrder": 23,
       "topic": "Advanced Patterns",
-      "id": 8,
-      "md": "markdown-editor"
+      "id": 11,
+      "md": "store-composition"
+    },
+    {
+      "url": "webmcp-store",
+      "title": "WebMCP Store Tools",
+      "teaches": "Expose SignalStore methods to a browser agent with declareExperimentalWebMcpTool. Each tool declares a JSON schema and calls the same store method the UI calls.",
+      "sortOrder": 24,
+      "topic": "Advanced Patterns",
+      "id": 12,
+      "md": "webmcp-store"
+    },
+    {
+      "url": "classic-to-signalstore",
+      "title": "Classic NgRx to SignalStore",
+      "teaches": "Run an agent-driven migration: the classic actions, reducer, selectors and effects, the SignalStore that replaces them, the prompt that drives it and the checklist you review the diff against.",
+      "sortOrder": 25,
+      "topic": "Advanced Patterns",
+      "id": 13,
+      "md": "classic-to-signalstore"
     }
   ],
   "skills": [

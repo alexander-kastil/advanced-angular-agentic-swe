@@ -8,3 +8,9 @@ export interface SkillProfile {
     lastName: string;
     skills: SkillItem[];
 }
+
+export const skillCatalog: { type: string; values: string[] }[] = [
+    { type: 'Frameworks', values: ['Angular', 'React', '.NET Core', 'Spring'] },
+    { type: 'Languages', values: ['TypeScript', 'JavaScript', 'C#', 'Java', 'Python'] },
+    { type: 'Cloud', values: ['Azure', 'AWS', 'Google'] },
+];

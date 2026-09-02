@@ -1,0 +1,40 @@
+<app-markdown-renderer [md]="'webmcp-navigation'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Navigation exposed as agent tools</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Three tools are declared in this component's injection context with
+      <code>declareExperimentalWebMcpTool</code>: <code>list_demos</code>,
+      <code>navigate_to_demo</code> and <code>current_route</code>. They register when the component
+      is created and unregister when it is destroyed, so an agent can only drive navigation while
+      this page is open.
+    </p>
+    @if (agentPresent()) {
+      <p class="agent on">A WebMCP host is present. The tools are registered.</p>
+    } @else {
+      <p class="agent off">
+        No <code>navigator.modelContext</code> in this browser, so registration is a no-op. The
+        buttons below call the same code the tool would run.
+      </p>
+    }
+
+    <h3>Tool calls</h3>
+    <ul>
+      @for (call of calls(); track call) {
+        <li>{{ call }}</li>
+      } @empty {
+        <li>No tool has been invoked yet.</li>
+      }
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    @for (target of targets; track target) {
+      <button mat-raised-button color="primary" (click)="simulateAgentCall(target)">
+        {{ target }}
+      </button>
+    }
+  </mat-card-actions>
+</mat-card>

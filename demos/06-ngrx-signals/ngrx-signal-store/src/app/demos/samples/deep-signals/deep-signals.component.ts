@@ -1,12 +1,13 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { UserProfileStore } from './user-profile.store';
 
 @Component({
-    selector: 'app-deep-signal',
+    selector: 'app-deep-signals',
     imports: [
         MatCard,
         MatCardHeader,
@@ -15,12 +16,12 @@ import { UserProfileStore } from './user-profile.store';
         MatFormField,
         MatLabel,
         MatInput,
+        MatButton,
         FormsModule,
     ],
     providers: [UserProfileStore],
-    templateUrl: './deep-signal.component.html',
-    styleUrl: './deep-signal.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './deep-signals.component.html',
+    styleUrl: './deep-signals.component.scss',
 })
 export class DeepSignalComponent {
     store = inject(UserProfileStore);

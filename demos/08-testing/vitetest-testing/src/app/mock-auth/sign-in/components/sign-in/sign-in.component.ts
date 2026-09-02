@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  TemplateRef,
-  ViewChild,
-  inject,
-} from '@angular/core';
+import { AfterViewInit, Component, TemplateRef, inject, viewChild } from '@angular/core';
 import { MatDialog, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 import { Router, RouterLink } from '@angular/router';
 import { authStore } from '../../../auth.store';
@@ -17,8 +10,6 @@ import { MatFormField } from '@angular/material/form-field';
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatDialogTitle,
     MatDialogContent,
@@ -33,11 +24,12 @@ export class SignInComponent implements AfterViewInit {
   router = inject(Router);
   dialog = inject(MatDialog);
   store = inject(authStore);
-  @ViewChild('dialog') template: TemplateRef<any> | null = null;
+  template = viewChild<TemplateRef<any>>('dialog');
 
   ngAfterViewInit() {
-    if (this.template) {
-      const ref = this.dialog.open(this.template, {
+    const tpl = this.template();
+    if (tpl) {
+      const ref = this.dialog.open(tpl, {
         width: '350px',
       });
 

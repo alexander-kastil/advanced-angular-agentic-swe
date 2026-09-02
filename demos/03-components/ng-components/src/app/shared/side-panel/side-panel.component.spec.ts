@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { vi } from 'vitest';
 import { SidePanelComponent } from './side-panel.component';
 import { LayoutStore } from '../layout/layout.store';
 import { SideNavService } from '../sidenav/sidenav.service';
@@ -32,19 +33,19 @@ describe('SidePanelComponent', () => {
     });
 
     it('should call layout.showGuide on showGuide', () => {
-        const spy = spyOn(layoutStore, 'showGuide');
+        const spy = vi.spyOn(layoutStore, 'showGuide');
         component.showGuide();
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should call layout.showEditor on showEditor', () => {
-        const spy = spyOn(layoutStore, 'showEditor');
-        component.showEditor();
+    it('should call layout.toggleEditor on toggleEditor', () => {
+        const spy = vi.spyOn(layoutStore, 'toggleEditor');
+        component.toggleEditor();
         expect(spy).toHaveBeenCalled();
     });
 
     it('should toggle sidenav visibility via service', () => {
-        const spy = spyOn(sideNavService, 'toggleMenuVisibility');
+        const spy = vi.spyOn(sideNavService, 'toggleMenuVisibility');
         component.toggleSideNav();
         expect(spy).toHaveBeenCalled();
     });

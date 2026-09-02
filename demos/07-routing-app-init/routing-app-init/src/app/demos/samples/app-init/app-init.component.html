@@ -1,1 +1,34 @@
 <app-markdown-renderer [md]="'app-init'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Configuration loaded before bootstrap</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <code>provideAppInitializer</code> ran <code>ConfigService.loadConfig()</code> before the first
+      component rendered. The result is already here:
+    </p>
+    <pre>{{ config() | json }}</pre>
+  </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>inject() instead of a constructor</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Both services on this page come from <code>inject()</code>. No constructor parameter, no
+      <code>@Injectable</code> plumbing in the component.
+    </p>
+    <p><strong>Demos delivered by DemoService:</strong> {{ demos().length }}</p>
+    <ul>
+      @for (demo of demos(); track demo.id) {
+        <li>{{ demo.sortOrder }} - {{ demo.title }} ({{ demo.topic }})</li>
+      } @empty {
+        <li>No demos loaded. Start json-server using: json-server db.json</li>
+      }
+    </ul>
+  </mat-card-content>
+</mat-card>

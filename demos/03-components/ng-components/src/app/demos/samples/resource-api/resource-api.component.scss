@@ -1,0 +1,21 @@
+.state {
+  text-align: center;
+  padding: 20px;
+}
+
+.error {
+  border-left: 4px solid #c62828;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 4px;
+}
+
+.details {
+  padding: 16px;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 4px;
+}
+
+.details h4 {
+  margin-top: 0;
+}

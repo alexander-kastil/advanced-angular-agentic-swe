@@ -1,4 +1,4 @@
-import { provideHttpClient, withXhr } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
@@ -8,7 +8,7 @@ import { MarkdownModule } from 'ngx-markdown';
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZonelessChangeDetection(),
-        provideHttpClient(withXhr()),
+        provideHttpClient(),
         provideRouter(appRoutes),
         provideAnimations(),
         importProvidersFrom(

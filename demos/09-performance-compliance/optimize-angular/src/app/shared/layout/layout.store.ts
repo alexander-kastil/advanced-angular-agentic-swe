@@ -87,7 +87,7 @@ export const LayoutStore = signalStore(
                 patchState(store, saved);
             }
             effect(() => {
-                const { hasMarkdownContent, ...persisted } = getState(store);
+                const { hasMarkdownContent: _hasMarkdownContent, ...persisted } = getState(store);
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(persisted));
             });
         },

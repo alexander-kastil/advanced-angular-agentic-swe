@@ -1,1 +1,28 @@
 <app-markdown-renderer [md]="'view-transitions'" />
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Native View Transitions</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <code>withViewTransitions()</code> hands each navigation to the browser's
+      <code>document.startViewTransition()</code>. The router snapshots the old view, swaps the DOM, then
+      cross-fades. Nothing in this component subscribes to anything.
+    </p>
+    <p><strong>Supported by this browser:</strong> {{ supported() }}</p>
+    <div class="hero">Shared element: <code>view-transition-name: demo-hero</code></div>
+    <p>
+      The keyframes for <code>::view-transition-old(root)</code> and
+      <code>::view-transition-new(root)</code> live in <code>src/theme/view-transition.scss</code>.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [routerLink]="['../route-titles']">
+      Navigate to Route Titles
+    </button>
+    <button mat-raised-button color="accent" [routerLink]="['../router-animations']">
+      Navigate to Router Animations
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SnackbarService } from '../snackbar/snackbar.service';
 import { NavbarService } from './navbar.service';
@@ -18,7 +18,6 @@ import { SideNavService } from '../sidenav/sidenav.service';
     RouterLinkActive,
     RouterLink,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent {
   nav = inject(SideNavService);

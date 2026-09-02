@@ -4,7 +4,7 @@
     <mat-card-title>Signal Forms - submit()</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form column>
+    <form [formRoot]="loginForm" column>
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput type="email" placeholder="Email" [formField]="loginForm.email" />
@@ -25,13 +25,36 @@
         }
       }
 
-      <button mat-raised-button color="primary" type="button" (click)="login()">Login</button>
+      <button mat-raised-button color="primary" type="submit">Login</button>
     </form>
 
-    @if (submitted()) {
+    @if (submitted() && loginForm().valid()) {
       <p>Submitted successfully!</p>
     }
+    @if (serverMessage()) {
+      <p>{{ serverMessage() }}</p>
+    }
   </mat-card-content>
+</mat-card>
+
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Submission Options</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul>
+      <li><strong>action</strong> runs when the form is valid and may return errors to attach to a field</li>
+      <li><strong>onInvalid</strong> runs instead when validation blocks the submit</li>
+      <li><strong>ignoreValidators</strong>: 'pending' (default), 'none' or 'all'</li>
+      <li><code>[formRoot]</code> on the form element wires the native submit event to these options</li>
+    </ul>
+    Form valid: {{ loginForm().valid() }} | Touched: {{ loginForm().touched() }} | Submitting:
+    {{ loginForm().submitting() }} | Blocked attempts: {{ attempts() }}
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="loginIgnoringValidation()">Submit Ignoring Validators</button>
+    <button mat-raised-button (click)="reset()">Reset</button>
+  </mat-card-actions>
 </mat-card>
 
 <mat-card appearance="outlined">
@@ -41,9 +64,9 @@
   <mat-card-content>
     <ul>
       <li>Marks all fields as <strong>touched</strong> to reveal validation errors</li>
-      <li>Calls the callback <strong>only if the form is valid</strong></li>
+      <li>Calls the action <strong>only if the form is valid</strong></li>
       <li>No need to check <code>loginForm().valid()</code> manually</li>
+      <li>Known account for the happy path: <code>cleothewhippet&#64;integrations.at</code></li>
     </ul>
-    Form valid: {{ loginForm().valid() }} | Touched: {{ loginForm().touched() }}
   </mat-card-content>
 </mat-card>

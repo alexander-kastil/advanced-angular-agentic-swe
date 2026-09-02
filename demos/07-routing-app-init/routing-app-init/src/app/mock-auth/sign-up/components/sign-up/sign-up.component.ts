@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  TemplateRef,
-  ViewChild,
-  inject
-} from '@angular/core';
+import { AfterViewInit, Component, TemplateRef, inject, viewChild } from '@angular/core';
 import { MatDialog, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatButton } from '@angular/material/button';
@@ -16,7 +9,6 @@ import { MatFormField } from '@angular/material/form-field';
     selector: 'sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [
         MatDialogTitle,
         MatDialogContent,
@@ -29,12 +21,13 @@ import { MatFormField } from '@angular/material/form-field';
 export class SignUpComponent implements AfterViewInit {
   router = inject(Router);
   dialog = inject(MatDialog);
-  @ViewChild('dialog') template: TemplateRef<any> | null = null;
+  template = viewChild<TemplateRef<unknown>>('dialog');
 
   ngAfterViewInit() {
-    if (this.template) {
-      const ref = this.dialog.open(this.template, {
-        width: '350px',
+    const template = this.template();
+    if (template) {
+      const ref = this.dialog.open(template, {
+        width: '350px'
       });
 
       ref.afterClosed().subscribe(() => {

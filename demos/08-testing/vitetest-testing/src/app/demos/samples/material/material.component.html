@@ -40,7 +40,7 @@
         }
         @if (sliderForm.valid) {
           <div>
-            Slider has a <b><i>valid </i> </b> value {{ value }}.
+            Slider has a <b><i>valid </i> </b> value {{ value() }}.
           </div>
         }
         @if (sliderForm.pristine) {
@@ -71,3 +71,5 @@
     </form>
   </mat-card-content>
 </mat-card>
+
+<app-material-async />

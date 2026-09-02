@@ -1,164 +1,68 @@
 {
   "demos": [
     {
-      "url": "imperative",
-      "title": "Imperative Reactivity",
-      "teaches": "Understand the limitations of imperative programming with callbacks and mutable state. See how manual subscription management leads to memory leaks and complex control flow.",
+      "url": "subscribe-vs-stream-vs-signal",
+      "title": "Subscribe vs Stream vs Signal",
+      "teaches": "Compare the three ways to consume an Observable in a component: a manual subscribe() you must tear down, an async pipe binding, and toSignal(). See why toSignal() is the default in Angular 22.",
       "sortOrder": 1,
       "topic": "Foundations",
-      "md": "imperative"
+      "md": "subscribe-vs-stream-vs-signal"
     },
     {
-      "url": "reactive",
-      "title": "Declarative Reactivity",
-      "teaches": "Transition to declarative reactive programming with Observables. Let RxJS handle data flow and subscriptions automatically for cleaner, more maintainable code.",
+      "url": "flattening-strategies",
+      "title": "Flattening Strategies",
+      "teaches": "Fire the same request into four pipelines against the live API and watch switchMap, mergeMap, concatMap and exhaustMap disagree. Read the in-flight counters, not just the results.",
       "sortOrder": 2,
-      "topic": "Foundations",
-      "md": "reactive"
-    },
-    {
-      "url": "async-pipe",
-      "title": "Async Pipe",
-      "teaches": "Use the async pipe to subscribe to Observables directly in templates. Mark components as OnPush for performance and let Angular handle subscription cleanup.",
-      "sortOrder": 3,
-      "topic": "Foundations",
-      "md": "asyncpipe"
-    },
-    {
-      "url": "subjects",
-      "title": "Subjects",
-      "teaches": "Learn about Subjects, a special type of Observable that acts as both observer and observable. Use Subjects to multicast values to multiple subscribers.",
-      "sortOrder": 4,
-      "topic": "Foundations",
-      "md": "subjects"
-    },
-    {
-      "url": "creating",
-      "title": "Creating Observables",
-      "teaches": "Create Observables from scratch using of(), from(), interval(), and custom Observable constructors. Understand cold vs hot Observables.",
-      "sortOrder": 5,
-      "topic": "Foundations",
-      "md": "creating"
-    },
-    {
-      "url": "action-streams",
-      "title": "Action Streams",
-      "teaches": "Build reactive data flows from user actions using Subjects and operators. Combine multiple action streams for event-driven applications. Foundation pattern for NgRx effects.",
-      "sortOrder": 6,
-      "topic": "Foundations",
-      "md": "action-streams"
-    },
-    {
-      "url": "mouse-dom",
-      "title": "Mouse & DOM Events",
-      "teaches": "Convert DOM events into Observable streams using fromEvent(). Handle mouse movements, clicks, and other browser events reactively.",
-      "sortOrder": 7,
-      "topic": "Foundations",
-      "md": "mouse-dom"
-    },
-    {
-      "url": "responsive-screen",
-      "title": "Responsive Screen",
-      "teaches": "React to screen size changes and media queries using Observables. Build responsive layouts that adapt dynamically to viewport dimensions.",
-      "sortOrder": 8,
-      "topic": "Foundations",
-      "md": "responsive-screen"
-    },
-    {
-      "url": "operators",
-      "title": "Base Operators",
-      "teaches": "Master fundamental operators like map(), filter(), reduce(), and forEach(). Transform and filter Observable streams with common operations.",
-      "sortOrder": 9,
       "topic": "Operators",
-      "md": "operators"
-    },
-    {
-      "url": "transformation",
-      "title": "Transformation",
-      "teaches": "Use advanced transformation operators like flatMap(), switchMap(), and mergeMap(). Control how nested Observables are flattened into result streams.",
-      "sortOrder": 10,
-      "topic": "Operators",
-      "md": "transformation"
+      "md": "flattening-strategies"
     },
     {
       "url": "combining",
-      "title": "Combining Observables",
-      "teaches": "Combine multiple Observable streams using operators like merge(), concat(), combineLatest(), and zip(). Coordinate data from multiple sources efficiently.",
-      "sortOrder": 11,
+      "title": "Combining Streams",
+      "teaches": "Coordinate several sources with combineLatest, forkJoin, merge and withLatestFrom, three of them over real endpoints. Understand which operator emits when, and which source drives the result.",
+      "sortOrder": 3,
       "topic": "Operators",
       "md": "combining"
     },
     {
-      "url": "err-handling",
+      "url": "error-handling",
       "title": "Error Handling",
-      "teaches": "Handle errors in Observable streams with catchError() and retry(). Recover from failures gracefully and log errors appropriately.",
-      "sortOrder": 12,
+      "teaches": "Recover from a real 404 with catchError and retry, compare EMPTY against a fallback against a rethrow, then package the pattern into a custom operator verified by a marble test.",
+      "sortOrder": 4,
       "topic": "Operators",
       "md": "error-handling"
     },
     {
-      "url": "custom-operators",
-      "title": "Custom Operators",
-      "teaches": "Build reusable custom operators with the pipe() pattern. Encapsulate complex transformation logic into composable, shareable utilities.",
-      "sortOrder": 13,
-      "topic": "Operators",
-      "md": "custom-operators"
-    },
-    {
-      "url": "timer-interval",
-      "title": "Timer & Interval Operators",
-      "teaches": "Create time-based streams with interval(), timer(), and delay(). Understand cold observable creation and takeUntilDestroyed for cleanup.",
-      "sortOrder": 14,
-      "topic": "Operators",
-      "md": "timer-interval"
-    },
-    {
-      "url": "debounced",
-      "title": "Debounced Search",
-      "teaches": "Implement efficient search with debounceTime() and switchMap() to reduce API calls. Essential pattern for NgRx effects handling user input.",
-      "sortOrder": 15,
-      "topic": "Patterns for NgRx",
-      "md": "debounce"
-    },
-    {
-      "url": "http-with-rxjs",
-      "title": "HTTP + RxJS Integration",
-      "teaches": "Use HttpClient with switchMap(), shareReplay(), and distinctUntilChanged(). Write efficient, cancelable HTTP streams. Foundation for NgRx effects.",
-      "sortOrder": 16,
-      "topic": "Patterns for NgRx",
-      "md": "http-with-rxjs"
-    },
-    {
-      "url": "observable-to-signal",
-      "title": "Observable → Signal",
-      "teaches": "Convert Observables to signals using toSignal(). Access reactive data synchronously in templates without async pipe. Modern interop pattern.",
-      "sortOrder": 17,
+      "url": "interop",
+      "title": "Signal Interop Both Ways",
+      "teaches": "Cross the boundary in all four directions: toSignal, toObservable, outputToObservable and outputFromObservable. Then see why rxResource replaces all four for request and response.",
+      "sortOrder": 5,
       "topic": "Signal Interop",
-      "md": "observable-to-signal"
+      "md": "interop"
     },
     {
-      "url": "httpresource-pattern",
-      "title": "HttpResource Pattern",
-      "teaches": "Use httpResource() for declarative HTTP data fetching with built-in loading, error, and value states. Modern alternative to Observable-based patterns.",
-      "sortOrder": 18,
+      "url": "debounce-three-ways",
+      "title": "Debounce Three Ways",
+      "teaches": "Delay user input with debounceTime, with the experimental debounced() from @angular/core, and with the Signal Forms debounce() rule. Compare the ceremony and the pending state each one gives you.",
+      "sortOrder": 6,
       "topic": "Signal Interop",
-      "md": "httpresource-pattern"
+      "md": "debounce-three-ways"
     },
     {
-      "url": "subject-to-output",
-      "title": "Subject vs output()",
-      "teaches": "Compare Subject-based event multicasting with Angular output() signals. Understand modern vs legacy patterns for component communication.",
-      "sortOrder": 19,
+      "url": "rxresource-vs-switchmap",
+      "title": "rxResource vs switchMap",
+      "teaches": "Put a hand-written switchMap search next to rxResource, then chain a dependent request with chain(). See what the resource API gives you for free.",
+      "sortOrder": 7,
       "topic": "Signal Interop",
-      "md": "subject-to-output"
+      "md": "rxresource-vs-switchmap"
     },
     {
-      "url": "request-status-pattern",
-      "title": "Request Status Tracking",
-      "teaches": "Track HTTP request state using BehaviorSubject state machines with status, data, and error streams. Understand the legacy pattern before migrating to httpResource().",
-      "sortOrder": 20,
-      "topic": "Patterns for NgRx",
-      "md": "request-status-pattern"
+      "url": "rxjs-to-signals-migration",
+      "title": "RxJS to Signals Migration",
+      "teaches": "Migrate a real BehaviorSubject store to signals with an agent, using the exact prompt and the angular-cli MCP tools shown in the demo, then review the result against the repository antipattern rules.",
+      "sortOrder": 8,
+      "topic": "Migration",
+      "md": "rxjs-to-signals-migration"
     }
   ],
   "skills": [
