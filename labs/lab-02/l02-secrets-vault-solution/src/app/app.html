@@ -1,0 +1,20 @@
+<header>
+  <h1>Secrets and Document Vault</h1>
+</header>
+
+<main>
+  @if (isLoading()) {
+    <p class="state">Loading lists</p>
+  } @else if (error()) {
+    <p class="state error" role="alert">The Secrets and Document Vault API did not answer.</p>
+  } @else {
+    <app-secret-lists [lists]="all()" [(selectedListId)]="selectedListId" />
+
+    @if (selectedList(); as list) {
+      <section class="detail" aria-labelledby="detail-heading">
+        <h2 id="detail-heading">{{ list.name }}</h2>
+        <app-secrets-list [listId]="list.listId" />
+      </section>
+    }
+  }
+</main>

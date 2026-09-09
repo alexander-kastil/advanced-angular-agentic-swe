@@ -1,0 +1,18 @@
+{
+  "name": "Secrets and Document Vault",
+  "description": "A credential and document store. An agent may list, search and open secrets by name; it is never given their values.",
+  "tools": [
+    { "name": "list_secret_lists", "returns": "listId, name, kind, secretCount" },
+    { "name": "open_list", "returns": "confirmation, navigates the workbench" },
+    { "name": "search_secrets", "returns": "matching secret names" },
+    { "name": "open_secret", "returns": "name, user, url, mfa, version, categoryIds" },
+    { "name": "propose_secret_rename", "returns": "a proposal the user still has to save" },
+    { "name": "describe_withheld_tools", "returns": "the capabilities deliberately not exposed" }
+  ],
+  "withheld": [
+    "reveal a secret value",
+    "copy a secret value",
+    "export every secret as CSV",
+    "delete a secret or a list"
+  ]
+}

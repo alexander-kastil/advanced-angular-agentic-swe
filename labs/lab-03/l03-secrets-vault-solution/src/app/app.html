@@ -1,0 +1,30 @@
+<header>
+  <h1>Secrets and Document Vault</h1>
+</header>
+
+@if (isLoading()) {
+  <p class="state">Loading lists</p>
+} @else if (error()) {
+  <p class="state error" role="alert">The Secrets and Document Vault API did not answer.</p>
+} @else {
+  <div class="workbench" [style.--pane]="paneWidth()">
+    <aside class="pane">
+      <app-secret-lists [lists]="all()" [(selectedListId)]="selectedListId" />
+    </aside>
+
+    <div appSplitter class="splitter" aria-label="Resize the list pane"></div>
+
+    <main class="detail">
+      @if (selectedList(); as list) {
+        <h2>{{ list.name }}</h2>
+        <app-secrets-list [listId]="list.listId" (opened)="openSecret.set($event)" />
+
+        @if (openSecret(); as secret) {
+          <section class="inspector" aria-label="Secret detail">
+            <app-secret-detail [secret]="secret" />
+          </section>
+        }
+      }
+    </main>
+  </div>
+}

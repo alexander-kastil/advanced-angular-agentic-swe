@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /secrets
+Disallow: /status
+Allow: /login
+
+Sitemap: https://vault.example.org/sitemap.xml

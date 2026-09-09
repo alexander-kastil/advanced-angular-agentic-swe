@@ -1,0 +1,36 @@
+<header>
+  <h1>Secrets and Document Vault</h1>
+</header>
+
+@if (store.listsLoading()) {
+  <p class="state">Loading lists</p>
+} @else {
+  <div class="workbench" [style.--pane]="paneWidth()">
+    <aside class="pane">
+      <app-secret-lists [secretsLists]="store.secretsLists()" [vaultLists]="store.vaultLists()"
+                        [selectedListId]="store.selectedListId()"
+                        (listSelected)="store.selectList($event)" />
+    </aside>
+
+    <div appSplitter class="splitter" aria-label="Resize the list pane"></div>
+
+    <main class="detail">
+      @if (store.selectedList(); as list) {
+        <h2>{{ list.name }}</h2>
+
+        @if (list.type === 2) {
+          <app-vault-upload [listId]="list.listId" (uploaded)="onSaved()" />
+        }
+
+        <app-secrets-list />
+
+        @if (store.openSecret(); as secret) {
+          <section class="inspector" aria-label="Secret detail">
+            <app-secret-detail [secret]="secret" [categories]="store.categoryEntities()"
+                               (saved)="onSaved()" />
+          </section>
+        }
+      }
+    </main>
+  </div>
+}

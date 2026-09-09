@@ -2,5 +2,18 @@
     "permissions": {
         "defaultMode": "acceptEdits"
     },
-    "enableAllProjectMcpServers": true
+    "enableAllProjectMcpServers": true,
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "Write|Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "bash .claude/hooks/no-legacy-angular.sh"
+                    }
+                ]
+            }
+        ]
+    }
 }

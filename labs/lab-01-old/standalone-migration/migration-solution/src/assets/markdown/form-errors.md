@@ -1,1 +1,0 @@
-This sample makes use of the global errors collection

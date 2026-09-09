@@ -1,0 +1,35 @@
+name: quality gate
+
+on:
+  pull_request:
+    paths:
+      - 'labs/lab-10/l10-secrets-vault-starter/**'
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: labs/lab-10/l10-secrets-vault-starter
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm ci
+
+      # The production configuration carries the budgets, so this step is the size gate.
+      - run: npm run build
+
+      - run: npx ng test --watch=false
+
+      - run: docker run -d --name secrets-vault -p 5093:5093 -e Auth__Enabled=true secrets-vault-mcp:local
+        working-directory: .
+
+      - run: npx playwright install --with-deps chromium
+
+      # The axe suite fails the job on any WCAG 2.2 AA violation.
+      - run: npx playwright test

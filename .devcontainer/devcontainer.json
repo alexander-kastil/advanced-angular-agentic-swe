@@ -1,5 +1,5 @@
 {
-  "name": "Angular 20 and .NET 9 Development",
+  "name": "Angular 22 and .NET 10 Development",
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
@@ -47,20 +47,20 @@
     }
   },
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "24.0.0"
-    },
-    "ghcr.io/devcontainers/features/dotnet:1": {
-      "version": "9.0"
-    },
     "ghcr.io/devcontainers/features/git:1": {
       "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "version": "latest",
+      "moby": false
     }
   },
   "forwardPorts": [
     4200,
-    5000,
-    5001
+    3000,
+    3010,
+    5093,
+    7152
   ],
   "postCreateCommand": "bash ./.devcontainer/post-create.sh"
 }

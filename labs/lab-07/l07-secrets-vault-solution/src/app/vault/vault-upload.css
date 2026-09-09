@@ -1,0 +1,55 @@
+:host {
+  display: block;
+  margin-bottom: var(--space-xl);
+}
+
+.bar {
+  align-items: center;
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.pick input {
+  display: none;
+}
+
+.pick span,
+button {
+  background: none;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: var(--space-md) var(--space-lg);
+}
+
+.pick span:hover,
+button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.status {
+  align-items: center;
+  color: var(--color-muted-foreground);
+  display: flex;
+  font-size: 0.8125rem;
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0 0;
+}
+
+progress {
+  accent-color: var(--color-accent);
+  width: 180px;
+}
+
+.pct {
+  font-variant-numeric: tabular-nums;
+}
+
+.error {
+  color: var(--color-destructive);
+}

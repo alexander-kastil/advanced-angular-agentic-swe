@@ -1,0 +1,56 @@
+services:
+  vault-api:
+    image: secrets-vault-mcp:local
+    container_name: secrets-vault-api
+    restart: unless-stopped
+    environment:
+      Auth__Enabled: "true"
+      Cors__AllowedOrigins__0: "https://vault.box.test"
+    expose:
+      - "5093"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:5093/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks: [edge]
+
+  workbench:
+    image: secrets-workbench:v1
+    container_name: secrets-workbench
+    restart: unless-stopped
+    environment:
+      PORT: "4000"
+      VAULT_API_ORIGIN: "http://vault-api:5093"
+    expose:
+      - "4000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:4000/login"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      - vault-api
+    networks: [edge]
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: secrets-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - workbench
+    networks: [edge]
+
+networks:
+  edge:
+
+volumes:
+  caddy_data:
+  caddy_config:

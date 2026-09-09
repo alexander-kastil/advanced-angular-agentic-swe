@@ -1,0 +1,26 @@
+<div class="bar">
+  <label class="pick">
+    <input type="file" (change)="choose($event)" [disabled]="isBusy()" />
+    <span>Add a file to this vault</span>
+  </label>
+
+  <button type="button" (click)="export()">Export all secrets as CSV</button>
+</div>
+
+@if (state() !== 'idle') {
+  <p class="status" aria-live="polite">
+    @switch (state()) {
+      @case ('uploading') {
+        Uploading {{ fileName() }}
+        <progress max="100" [value]="progress()">{{ progress() }}%</progress>
+        <span class="pct">{{ progress() }}%</span>
+      }
+      @case ('done') {
+        {{ fileName() }} stored in this vault.
+      }
+      @case ('failed') {
+        <span class="error">{{ failure() }}</span>
+      }
+    }
+  </p>
+}

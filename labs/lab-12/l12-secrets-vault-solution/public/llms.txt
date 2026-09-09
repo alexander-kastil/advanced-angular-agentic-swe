@@ -1,0 +1,14 @@
+# Secrets and Document Vault
+
+> A credential and document store. Everything past the sign-in screen requires an account, and no
+> secret value is ever served in HTML.
+
+## Pages
+
+- [Sign in](https://vault.example.org/login): the only page an anonymous visitor can read.
+- [Vault status](https://vault.example.org/status): whether the API is answering.
+
+## Notes
+
+- The workbench exposes WebMCP tools for listing, searching and opening secrets by name.
+- Revealing, exporting and deleting are deliberately not available to an agent.

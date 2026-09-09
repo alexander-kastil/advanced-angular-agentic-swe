@@ -1,0 +1,20 @@
+{
+  "host": "localhost",
+  "sshPort": 2222,
+  "user": "deploy",
+  "keyFile": "deploy/target-box/keys/box_key",
+  "stackPath": "/opt/secrets-vault",
+  "hostname": "vault.box.test",
+  "edgeHttpsPort": 8443,
+  "caCertFile": "deploy/box-local-ca.crt",
+  "images": {
+    "workbench": "secrets-workbench",
+    "api": "secrets-vault-mcp:local"
+  },
+  "checks": [
+    "GET /login returns 200 and contains Sign in",
+    "GET /health returns Healthy",
+    "GET /api/lists returns 401 without a token",
+    "GET /status is server rendered and contains Healthy"
+  ]
+}

@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:9.0
+FROM mcr.microsoft.com/devcontainers/dotnet:10.0
 
 # Install Node.js 24
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
@@ -12,7 +12,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
 RUN npm install -g @angular/cli
 
 # Install json-server
-RUN npm install -g json-server@0.8.23
+RUN npm install -g json-server@0.17.4
 
 # Install SQLite
 RUN apt-get update \

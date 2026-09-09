@@ -1,4 +1,4 @@
-# Angular Advanced Agentic Software Engineering
+# Angular Agentic Software Engineering
 
 Companion Material for Class Delivery by [Alexander Kastil](https://www.integrations.at/kontakt-impressum.aspx)
 

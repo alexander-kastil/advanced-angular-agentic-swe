@@ -1,0 +1,10 @@
+demos/
+labs/**/node_modules/
+labs/**/dist/
+labs/**/bin/
+labs/**/obj/
+labs/**/.angular/
+labs/secrets-vault-mcp/data/
+labs/secrets-vault-mcp/appdata/
+.git/
+node_modules/
