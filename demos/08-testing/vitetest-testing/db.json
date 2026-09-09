@@ -155,18 +155,22 @@
   ],
   "food": [
     {
+      "id": 1,
       "name": "Pad Thai",
       "rating": 1
     },
     {
+      "id": 2,
       "name": "Butter Chicken",
       "rating": 2
     },
     {
+      "id": 3,
       "name": "Cannelloni",
       "rating": 2
     },
     {
+      "id": 4,
       "name": "Cordon Bleu",
       "rating": 4
     }

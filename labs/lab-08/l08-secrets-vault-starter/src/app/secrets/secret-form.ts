@@ -35,7 +35,6 @@ export class SecretForm {
   });
 
   readonly serverError = signal<string | null>(null);
-  readonly newCategory = signal('');
 
   readonly secretForm = form(this.model, (path) => {
     required(path.name, { message: 'A secret always has a name.' });
@@ -56,19 +55,6 @@ export class SecretForm {
   readonly canSave = computed(() => this.secretForm().dirty() && this.secretForm().valid());
 
   private readonly sync = effect(() => this.model.set(this.toModel(this.secret())));
-
-  async addCategory(): Promise<void> {
-    const topic = this.newCategory().trim();
-    if (!topic) return;
-
-    const created = await this.store.addCategory(this.secret().listId, topic);
-    this.newCategory.set('');
-    this.toggleCategory(created.categoryId);
-  }
-
-  onNewCategory(event: Event): void {
-    this.newCategory.set((event.target as HTMLInputElement).value);
-  }
 
   toggleCategory(categoryId: string): void {
     this.model.update((current) => {

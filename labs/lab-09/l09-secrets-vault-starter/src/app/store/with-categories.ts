@@ -10,13 +10,6 @@ export function withCategories() {
     { state: type<{ selectedListId: string | null }>() },
     withEntities({ entity: type<Category>(), collection: 'category' }),
     withMethods((store, http = inject(HttpClient)) => ({
-      async addCategory(listId: string, topic: string): Promise<Category> {
-        const created = await firstValueFrom(
-          http.post<Category>('/api/categories', { listId, topic, color: '#F59E0B' }),
-        );
-        await this.loadCategories();
-        return created;
-      },
       async loadCategories(): Promise<void> {
         const listId = store.selectedListId();
         if (!listId) return;

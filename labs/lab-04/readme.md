@@ -18,6 +18,9 @@ npm install
 npm start
 ```
 
+The starter also ships `secrets-vault.http`, holding every request this lab makes against the
+vault outside the app. Step 3 uses it; the rest of the lab never leaves the browser.
+
 ---
 
 ## Step 1: Put the detail fields into a form
@@ -113,10 +116,17 @@ Overview: the update contract allows at most three categories, and a rule the se
 a rule the form should state. `maxLength` works on the array field directly, so the chips need no
 counting logic of their own.
 
-Give the list a fourth category first, so the cap is reachable:
+The seed gives every list exactly three categories, so the cap cannot be reached until a fourth
+exists. The app folder ships `secrets-vault.http`, a REST client file holding the requests this
+lab needs against the vault. Open it and send the request under
+`### A fourth category, so the three-category cap becomes reachable in the form`, in VS Code with
+the REST Client extension or in Rider or Visual Studio, which both run `.http` files natively.
 
-```bash
-curl -X POST http://localhost:5093/api/categories -H "Content-Type: application/json" -d "{\"listId\":\"2b6344c5-8d55-4d4a-a1e8-e5efdeca60f1\",\"topic\":\"Rotation Due\",\"color\":\"#F59E0B\"}"
+Sending the `### The categories of one list` request above it before and after shows what changed:
+
+```text
+before  Azure, DeepInfra, Hetzner
+after   Rotation Due, Azure, DeepInfra, Hetzner
 ```
 
 Recipe:

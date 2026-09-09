@@ -12,8 +12,7 @@ import { Secret } from './secret';
   template: `
     <h3>{{ secret().name }}</h3>
 
-    <app-secret-form [secret]="secret()" [categories]="categories()" (saved)="saved.emit($event)"
-                     (categoryAdded)="categoryAdded.emit()" />
+    <app-secret-form [secret]="secret()" [categories]="categories()" (saved)="saved.emit($event)" />
 
     <p class="version">Version {{ secret().version }}, last changed {{ secret().lastChanged }}</p>
 
@@ -74,7 +73,6 @@ export class SecretDetail {
   readonly secret = input.required<Secret>();
   readonly categories = input.required<Category[]>();
   readonly saved = output<Secret>();
-  readonly categoryAdded = output<void>();
 
   private readonly http = inject(HttpClient);
 

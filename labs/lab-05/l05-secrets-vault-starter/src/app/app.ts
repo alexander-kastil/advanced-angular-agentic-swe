@@ -35,7 +35,7 @@ export class App {
 
   readonly openSecret = signal<Secret | null>(null);
 
-  readonly categoriesResource = httpResource<Category[]>(() => {
+  private readonly categoriesResource = httpResource<Category[]>(() => {
     const listId = this.selectedListId();
     return listId ? `/api/categories?listId=${listId}` : undefined;
   });
