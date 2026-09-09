@@ -34,7 +34,10 @@
       "Bash(cp scripts/SKILL_INTEGRATION.md .claude/skills/ng-configure-element/INTEGRATION.md)",
       "Bash(cp scripts/CICD_INTEGRATION.md .github/skills/ng-register-elements/CICD.md)",
       "Bash(rm scripts/*.md)",
-      "Bash(ls -1 *.md)"
+      "Bash(ls -1 *.md)",
+      "Bash(npm -v)",
+      "Bash(docker --version)",
+      "Bash(npx -y @angular/cli@latest version)"
     ],
     "additionalDirectories": [
       "C:\\Users\\AlexanderKastil\\.claude\\skills\\ng-update"

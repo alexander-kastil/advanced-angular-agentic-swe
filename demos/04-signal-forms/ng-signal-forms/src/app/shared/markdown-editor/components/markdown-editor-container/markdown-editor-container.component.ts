@@ -2,7 +2,6 @@ import { Component, computed, inject, input, signal } from '@angular/core';
 import { createMarkdownItem, MarkdownItem } from '../../markdown.model';
 import { MarkdownEditComponent } from '../markdown-edit/markdown-edit.component';
 import { MarkdownListComponent } from '../markdown-list/markdown-list.component';
-import { ColumnDirective } from '../../../formatting/formatting-directives';
 import { markdownEditorStore } from '../../markdown-editor.store';
 import { mdEditorEvents } from '../../markdown-editor.events';
 import { injectDispatch, Events } from '@ngrx/signals/events';
@@ -13,7 +12,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     templateUrl: './markdown-editor-container.component.html',
     styleUrls: ['./markdown-editor-container.component.scss'],
     imports: [
-        ColumnDirective,
         MarkdownListComponent,
         MarkdownEditComponent,
     ],

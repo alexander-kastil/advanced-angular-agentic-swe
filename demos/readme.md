@@ -1,4 +1,4 @@
-# Angular Advanced Agentic Software Engineering
+# Angular Agentic Software Engineering
 
 This workshop is for experienced Angular developers who want to master modern Angular development and learn to work with AI agents as a natural part of their daily workflow. Over twelve modules you will build real Angular v22 applications using standalone components, signal-based state, signal queries, and inject-based dependency injection throughout. Every concept is introduced through working demos that you can run, extend, and experiment with.
 
@@ -16,7 +16,54 @@ By the end of the workshop you will have a thorough understanding of how modern 
 
 ## Duration
 
-5 Days, 12 Modules
+4.5 Days, 12 Modules
+
+Four full days of 09:00 to 17:00 plus a closing half day, with one hour for lunch and two
+15 minute breaks. That is 390 net minutes on days 1 to 4 and 195 on day 5, so 1755 minutes of
+class time in total.
+
+## Schedule
+
+Every module is taught and then practised. Teaching is the concept prose in the module readme
+plus the demos walked through live; the lab is the hands-on build that carries the app forward
+one step. Lab minutes are a ceiling, not a target: a lab that overruns steals the next module.
+
+| Module | Demos | Teaching | Lab | Total |
+|---|---|---|---|---|
+| [01 Agentic Angular Software Engineering](./01-agentic-dev/) | 6 | 75 | 40 | 115 |
+| [02 Mastering Signals](./02-signals/) | 16 | 135 | 40 | 175 |
+| [03 Component Composition and Signal Queries](./03-components/) | 14 | 115 | 35 | 150 |
+| [04 Signal Forms](./04-signal-forms/) | 22 | 150 | 35 | 185 |
+| [05 RxJS Where It Still Matters](./05-reactive/) | 8 | 70 | 30 | 100 |
+| [06 State Management with NgRx SignalStore](./06-ngrx-signals/) | 13 | 110 | 35 | 145 |
+| [07 Advanced Routing and App Initialization](./07-routing-app-init/) | 18 | 130 | 35 | 165 |
+| [08 Advanced Testing with Vitest and Playwright](./08-testing/) | 19 | 130 | 35 | 165 |
+| [09 WebMCP, the Agentic Web](./09-webmcp/) | 7 | 70 | 30 | 100 |
+| [10 Optimization and Compliance](./10-optimize-compliance/) | 15 | 110 | 30 | 140 |
+| [11 Hybrid Rendering and Hydration](./11-ssr/) | 7 | 65 | 30 | 95 |
+| [12 Agentic Angular DevOps](./12-agentic-devops/) | 4 | 100 | 35 | 135 |
+| **Total** | **149** | **1260** | **410** | **1670** |
+
+Teaching time tracks demo count, with two deliberate exceptions. Module 01 gets more than its six
+demos suggest because the harness it sets up is used by every module after it. Module 12 gets far
+more than its four demos suggest because provisioning a host, waiting on DNS and watching a
+certificate issue are slow in wall-clock time whatever the demo count says.
+
+The 85 minutes between the 1670 allocated and the 1755 available are the buffer, and they sit on
+the last morning where overruns actually land.
+
+### Day plan
+
+| Day | Blocks |
+|---|---|
+| 1 | Welcome and environment setup (30), Module 01 (115), Module 02 (175), Module 03 teaching begins (70) |
+| 2 | Module 03 finishes teaching and runs its lab (80), Module 04 (185), Module 05 (100), Module 06 teaching begins (25) |
+| 3 | Module 06 finishes (120), Module 07 (165), Module 08 teaching begins (105) |
+| 4 | Module 08 finishes (60), Module 09 (100), Module 10 (140), Module 11 teaching begins (90) |
+| 5 | Module 11 finishes (5), Module 12 (135), wrap-up (15), buffer (40) |
+
+Modules 03, 06, 08 and 11 split across a day boundary. Each split falls between the teaching and
+the lab, so a day never ends mid-build and no lab is interrupted by a night.
 
 ## Audience
 
