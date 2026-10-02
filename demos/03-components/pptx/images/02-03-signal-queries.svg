@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Signal queries</title>
+  <desc>viewChild and viewChildren search the template; contentChild and contentChildren search projected content.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="140" width="820" height="640" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="470" y="205" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">view (own template)</text>
+    <rect x="120" y="260" width="700" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="470.0" y="314.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">#liters</text>
+    <rect x="120" y="390" width="700" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="470.0" y="444.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">#field  #field</text>
+    <rect x="120" y="520" width="700" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="470.0" y="574.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">&lt;app-status-badge /&gt;</text>
+    <rect x="1040" y="140" width="820" height="640" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1450" y="205" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">content (projected)</text>
+    <rect x="1100" y="260" width="700" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1450.0" y="314.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">#headline</text>
+    <rect x="1100" y="390" width="700" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1450.0" y="444.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">#entry  #entry</text>
+    <rect x="120" y="820" width="760" height="80" rx="40.0" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="500.0" y="869.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">viewChild.required('liters')</text>
+    <rect x="120" y="920" width="760" height="80" rx="40.0" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="500.0" y="969.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">computed(() =&gt; fields().length)</text>
+    <rect x="1100" y="820" width="760" height="80" rx="40.0" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1480.0" y="869.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">contentChild('headline')</text>
+    <rect x="1100" y="920" width="760" height="80" rx="40.0" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1480.0" y="969.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">computed(() =&gt; entries().length)</text>
+    <rect x="1100" y="560" width="700" height="80" rx="40.0" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="1450.0" y="609.1" text-anchor="middle" font-size="26" fill="#24292f">no ngAfterViewInit, no QueryList</text>
+  </g>
+</svg>

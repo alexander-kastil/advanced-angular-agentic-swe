@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Debounce three ways</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<text x="325" y="70" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">debounceTime()</text>
+<rect x="145" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="182" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<rect x="240" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="277" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">b</text>
+<rect x="335" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="372" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">c</text>
+<rect x="430" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="467" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">d</text>
+<text x="325" y="230" text-anchor="middle" font-size="26" fill="#57606a">4 keystrokes</text>
+<polyline points="325,245 325,316" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="40" y="320" width="570" height="300" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="325" y="400" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">valueChanges.pipe(</text>
+<text x="325" y="460" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">debounceTime(500))</text>
+<text x="325" y="520" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">+ toSignal()</text>
+<polyline points="325,624 325,706" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="125" y="710" width="400" height="100" rx="50" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="325" y="772" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">1 settled value</text>
+<text x="325" y="890" text-anchor="middle" font-size="26" fill="#57606a">pending: compare two signals</text>
+<text x="955" y="70" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">debounced()</text>
+<rect x="775" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="812" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<rect x="870" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="907" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">b</text>
+<rect x="965" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1002" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">c</text>
+<rect x="1060" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1097" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">d</text>
+<text x="955" y="230" text-anchor="middle" font-size="26" fill="#57606a">4 keystrokes</text>
+<polyline points="955,245 955,316" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="670" y="320" width="570" height="300" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="955" y="400" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">debounced(typed, 500)</text>
+<text x="955" y="460" text-anchor="middle" font-size="28" fill="#24292f">from @angular/core</text>
+<polyline points="955,624 955,706" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="755" y="710" width="400" height="100" rx="50" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="955" y="772" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">1 settled value</text>
+<text x="955" y="890" text-anchor="middle" font-size="26" fill="#57606a">a Resource with isLoading()</text>
+<text x="1585" y="70" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">Signal Forms debounce()</text>
+<rect x="1405" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1442" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<rect x="1500" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1537" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">b</text>
+<rect x="1595" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1632" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">c</text>
+<rect x="1690" y="110" width="75" height="75" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1727" y="160" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">d</text>
+<text x="1585" y="230" text-anchor="middle" font-size="26" fill="#57606a">4 keystrokes</text>
+<polyline points="1585,245 1585,316" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1300" y="320" width="570" height="300" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="1585" y="400" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">debounce(path.query, 500)</text>
+<text x="1585" y="460" text-anchor="middle" font-size="28" fill="#24292f">next to required()</text>
+<polyline points="1585,624 1585,706" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1385" y="710" width="400" height="100" rx="50" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1585" y="772" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">1 settled value</text>
+<text x="1585" y="890" text-anchor="middle" font-size="26" fill="#57606a">controlValue() now, model later</text>
+</g>
+</svg>

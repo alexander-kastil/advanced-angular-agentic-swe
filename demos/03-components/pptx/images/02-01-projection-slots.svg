@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Content projection with named slots</title>
+  <desc>Parent markup with title, main and sidebar divs lands in ux-split's ng-content select slots.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="130" width="700" height="820" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="410" y="195" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">parent markup</text>
+    <rect x="120" y="260" width="580" height="100" rx="50.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="410.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">&lt;div class="title"&gt;</text>
+    <rect x="120" y="460" width="580" height="100" rx="50.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="410.0" y="519.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">&lt;div class="main"&gt;</text>
+    <rect x="120" y="660" width="580" height="100" rx="50.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="410.0" y="719.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">&lt;div class="sidebar"&gt;</text>
+    <rect x="1160" y="130" width="700" height="820" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1510" y="195" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">ux-split</text>
+    <rect x="1220" y="260" width="580" height="100" rx="50.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1510.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">select=".title"</text>
+    <path d="M700,310 L1218,310" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1220" y="460" width="580" height="100" rx="50.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1510.0" y="519.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">select=".main"</text>
+    <path d="M700,510 L1218,510" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1220" y="660" width="580" height="100" rx="50.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1510.0" y="719.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">select=".sidebar"</text>
+    <path d="M700,710 L1218,710" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1220" y="820" width="580" height="90" rx="45.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1510.0" y="874.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">&lt;ng-content /&gt;  catches the rest</text>
+    <text x="410" y="880" text-anchor="middle" font-size="28" fill="#57606a">the parent creates the nodes</text>
+    <text x="960" y="1020" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#57606a">fallback: &lt;ng-content select=".title"&gt;Untitled&lt;/ng-content&gt;</text>
+  </g>
+</svg>

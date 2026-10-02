@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>An agent-driven component refactor</title>
+  <desc>Schematics handle inputs, outputs, inject and control flow; the agent handles host bindings, derived fields and OnPush after get_best_practices.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="380" width="300" height="260" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="210.0" y="501.4" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">Angular 8</text>
+    <text x="210.0" y="545.4" text-anchor="middle" font-size="28" fill="#57606a">component</text>
+    <rect x="1560" y="380" width="300" height="260" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1710.0" y="501.4" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">Angular 22</text>
+    <text x="1710.0" y="545.4" text-anchor="middle" font-size="28" fill="#57606a">component</text>
+    <rect x="440" y="110" width="1040" height="380" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="170" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">schematics (exact, first)</text>
+    <rect x="480" y="210" width="460" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="710.0" y="264.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">signal-input-migration</text>
+    <rect x="980" y="210" width="460" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1210.0" y="264.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">output-migration</text>
+    <rect x="480" y="330" width="460" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="710.0" y="384.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">inject-migration</text>
+    <rect x="980" y="330" width="460" height="90" rx="45.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1210.0" y="384.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">control-flow</text>
+    <rect x="440" y="560" width="1040" height="380" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="620" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">agent (judgement, after get_best_practices)</text>
+    <rect x="500" y="660" width="920" height="76" rx="38.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="707.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">@HostBinding -&gt; host {}</text>
+    <rect x="500" y="750" width="920" height="76" rx="38.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="797.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">ngOnInit field -&gt; computed()</text>
+    <rect x="500" y="840" width="920" height="76" rx="38.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="887.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">delete explicit OnPush</text>
+    <path d="M360,470 L438,300" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1482,300 L1558,470" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M960,492 L960,558" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1482,750 L1558,560" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1520" y="760" width="380" height="160" rx="80.0" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="1710.0" y="849.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f"></text>
+    <text x="1710" y="825" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">receipts</text>
+    <text x="1710" y="875" text-anchor="middle" font-size="26" fill="#57606a">build + empty grep</text>
+  </g>
+</svg>

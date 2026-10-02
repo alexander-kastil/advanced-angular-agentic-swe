@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Debounced search with debounced()</title>
+  <desc>Keystrokes feed debounced(term, 400), whose settled value drives an httpResource search.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="200" width="400" height="300" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="260.0" y="319.0" text-anchor="middle" font-size="40" font-family="Consolas, monospace" font-weight="700" fill="#24292f">term</text>
+    <text x="260.0" y="366.0" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#57606a">signal('')</text>
+    <text x="260.0" y="409.0" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#57606a">A, An, Ang</text>
+    <rect x="580" y="200" width="560" height="300" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="860.0" y="300.2" text-anchor="middle" font-size="34" font-family="Consolas, monospace" font-weight="700" fill="#24292f">debounced(term, 400)</text>
+    <text x="860.0" y="344.2" text-anchor="middle" font-size="28" fill="#57606a">Resource&lt;string&gt;</text>
+    <text x="860.0" y="384.2" text-anchor="middle" font-size="28" fill="#57606a">loading while typing</text>
+    <text x="860.0" y="424.2" text-anchor="middle" font-size="28" fill="#57606a">resolved when settled</text>
+    <rect x="1260" y="200" width="600" height="300" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1560.0" y="322.0" text-anchor="middle" font-size="40" font-family="Consolas, monospace" font-weight="700" fill="#24292f">results</text>
+    <text x="1560.0" y="366.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">httpResource(() =&gt;</text>
+    <text x="1560.0" y="406.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">debouncedTerm.value())</text>
+    <path d="M460,350 L578,350" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1140,350 L1258,350" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1200" y="320" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#57606a">value()</text>
+    <rect x="320" y="640" width="600" height="220" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="620.0" y="737.5" text-anchor="middle" font-size="30" font-family="Consolas, monospace" font-weight="700" fill="#24292f">debouncedTerm.isLoading()</text>
+    <text x="620.0" y="784.5" text-anchor="middle" font-size="30" fill="#57606a">still typing</text>
+    <rect x="1040" y="640" width="600" height="220" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1340.0" y="737.5" text-anchor="middle" font-size="30" font-family="Consolas, monospace" font-weight="700" fill="#24292f">results.isLoading()</text>
+    <text x="1340.0" y="784.5" text-anchor="middle" font-size="30" fill="#57606a">network wait</text>
+    <path d="M860,502 L620,638" fill="none" stroke="#57606a" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+    <path d="M1560,502 L1340,638" fill="none" stroke="#57606a" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrow)"/>
+    <text x="960" y="960" text-anchor="middle" font-size="30" fill="#57606a">one request per pause, not per keystroke</text>
+  </g>
+</svg>

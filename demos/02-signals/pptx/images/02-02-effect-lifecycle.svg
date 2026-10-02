@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Effect cleanup and one-shot effects</title>
+  <desc>Timeline: run, cleanup, run, destroy, cleanup; a one-shot effect destroys itself after its first run.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="80" y="150" text-anchor="start" font-size="32" font-weight="700" fill="#24292f">lifecycle</text>
+    <rect x="60" y="190" width="320" height="190" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="220.0" y="275.8" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">run 1</text>
+    <text x="220.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">setInterval</text>
+    <path d="M380,285 L428,285" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="430" y="190" width="320" height="190" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="590.0" y="275.8" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">onCleanup</text>
+    <text x="590.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">clearInterval</text>
+    <path d="M750,285 L798,285" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="800" y="190" width="320" height="190" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="275.8" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">run 2</text>
+    <text x="960.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">setInterval</text>
+    <path d="M1120,285 L1168,285" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1170" y="190" width="320" height="190" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="1330.0" y="275.8" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">destroy</text>
+    <text x="1330.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">component gone</text>
+    <path d="M1490,285 L1538,285" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1540" y="190" width="320" height="190" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="1700.0" y="275.8" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">onCleanup</text>
+    <text x="1700.0" y="319.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">clearInterval</text>
+    <text x="80" y="500" text-anchor="start" font-size="32" font-weight="700" fill="#24292f">one-shot</text>
+    <rect x="60" y="540" width="520" height="230" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="320.0" y="644.6" text-anchor="middle" font-size="32" font-family="Consolas, monospace" font-weight="700" fill="#24292f">effect(..., { injector })</text>
+    <text x="320.0" y="688.6" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">reads watched()</text>
+    <rect x="700" y="540" width="520" height="230" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="960.0" y="645.8" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">work</text>
+    <text x="960.0" y="689.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">initLog.set(...)</text>
+    <rect x="1340" y="540" width="520" height="230" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="1600.0" y="645.2" text-anchor="middle" font-size="34" font-family="Consolas, monospace" font-weight="700" fill="#24292f">onceRef.destroy()</text>
+    <text x="1600.0" y="689.2" text-anchor="middle" font-size="28" fill="#57606a">later changes ignored</text>
+    <path d="M580,655 L698,655" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1220,655 L1338,655" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="60" y="880" width="420" height="76" rx="38.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="270.0" y="927.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">clearInterval()</text>
+    <rect x="520" y="880" width="420" height="76" rx="38.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="730.0" y="927.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">removeEventListener()</text>
+    <rect x="980" y="880" width="420" height="76" rx="38.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1190.0" y="927.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">.unsubscribe()</text>
+    <rect x="1440" y="880" width="420" height="76" rx="38.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1650.0" y="927.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">abort()</text>
+  </g>
+</svg>

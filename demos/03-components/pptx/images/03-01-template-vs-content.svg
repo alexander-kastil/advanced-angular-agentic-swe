@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>ng-template versus ng-content</title>
+  <desc>The same clock passed to two expanders: projected once versus instantiated on every expand.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="130" width="860" height="700" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="490" y="200" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">ng-content: projects</text>
+    <rect x="140" y="260" width="700" height="170" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="490.0" y="334.0" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">parent creates &lt;app-clock /&gt;</text>
+    <text x="490.0" y="378.0" text-anchor="middle" font-size="28" fill="#57606a">once, at 10:00:00</text>
+    <rect x="140" y="520" width="700" height="220" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="490.0" y="619.0" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">expand, collapse, expand</text>
+    <text x="490.0" y="663.0" text-anchor="middle" font-size="28" fill="#57606a">clock still shows 10:00:00</text>
+    <path d="M490,432 L490,518" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="1000" y="130" width="860" height="700" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1430" y="200" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">ngTemplateOutlet: instantiates</text>
+    <rect x="1080" y="260" width="700" height="170" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1430.0" y="334.0" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">parent passes [content]="clock"</text>
+    <text x="1430.0" y="378.0" text-anchor="middle" font-size="28" fill="#57606a">a TemplateRef</text>
+    <rect x="1080" y="520" width="700" height="220" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1430.0" y="619.0" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">every expand renders it</text>
+    <text x="1430.0" y="663.0" text-anchor="middle" font-size="28" fill="#57606a">clock shows the current time</text>
+    <path d="M1430,432 L1430,518" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="360" y="900" width="1200" height="90" rx="45.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="954.8" text-anchor="middle" font-size="28" fill="#24292f">&lt;ng-container&gt;: groups elements, leaves no DOM node</text>
+  </g>
+</svg>

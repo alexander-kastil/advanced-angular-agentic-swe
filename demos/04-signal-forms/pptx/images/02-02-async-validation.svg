@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Async validation</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="40" y="60" width="880" height="220" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="480" y="135" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">validateHttp()</text>
+<text x="480" y="190" text-anchor="middle" font-size="28" fill="#57606a">request returns a URL</text>
+<text x="480" y="235" text-anchor="middle" font-size="28" fill="#57606a">an httpResource is built for you</text>
+<rect x="1000" y="60" width="880" height="220" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="1440" y="135" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">validateAsync()</text>
+<text x="1440" y="190" text-anchor="middle" font-size="28" fill="#57606a">factory returns any Resource</text>
+<text x="1440" y="235" text-anchor="middle" font-size="28" fill="#57606a">for example an rxResource</text>
+<rect x="40" y="400" width="400" height="200" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="240" y="485" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">sync rules pass</text>
+<text x="240" y="540" text-anchor="middle" font-size="28" fill="#57606a">required, email</text>
+<polyline points="444,500 506,500" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="510" y="400" width="400" height="200" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="710" y="485" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">debounce</text>
+<text x="710" y="540" text-anchor="middle" font-size="28" fill="#57606a">400 ms</text>
+<polyline points="914,500 976,500" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="980" y="400" width="400" height="200" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+<text x="1180" y="485" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">request in flight</text>
+<text x="1180" y="540" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">pending() = true</text>
+<polyline points="1384,500 1446,500" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1450" y="400" width="400" height="200" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1650" y="485" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">response</text>
+<text x="1650" y="540" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">onSuccess / onError</text>
+<polyline points="1650,604 1650,650 1250,650 1250,716" fill="none" stroke="#c24141" stroke-width="4" marker-end="url(#r)"/>
+<polyline points="1650,650 1650,716" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="960" y="720" width="560" height="130" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="1240" y="775" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">{ kind: 'mailExists' }</text>
+<text x="1240" y="818" text-anchor="middle" font-size="26" fill="#57606a">already registered</text>
+<rect x="1560" y="720" width="320" height="130" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1720" y="800" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">null: valid</text>
+<rect x="40" y="720" width="840" height="130" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+<text x="460" y="775" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">submit button disabled</text>
+<text x="460" y="818" text-anchor="middle" font-size="26" fill="#57606a">while pending() is true</text>
+<rect x="40" y="910" width="1840" height="110" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="960" y="978" text-anchor="middle" font-size="28" fill="#57606a">an empty field returns undefined from request: nothing is fetched</text>
+</g>
+</svg>

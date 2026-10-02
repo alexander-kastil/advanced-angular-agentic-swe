@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Reusable schemas and date bounds</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="40" y="60" width="840" height="300" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="125" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">visitSchema = schema&lt;VetVisit&gt;()</text>
+<text x="100" y="190" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#24292f">required(path.vetName)</text>
+<text x="100" y="245" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#24292f">required(path.reason, { when })</text>
+<text x="100" y="300" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#24292f">min / max (path.year)</text>
+<polyline points="460,364 460,446" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="40" y="450" width="840" height="130" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="528" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">applyEach(s.vetVisits, visitSchema)</text>
+<line x1="180" y1="620" x2="740" y2="620" stroke="#57606a" stroke-width="4"/>
+<line x1="460" y1="584" x2="460" y2="620" stroke="#57606a" stroke-width="4"/>
+<polyline points="180,620 180,696" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="60" y="700" width="240" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="180" y="760" text-anchor="middle" font-size="28" font-weight="700" fill="#24292f">visit 1</text>
+<text x="180" y="800" text-anchor="middle" font-size="24" fill="#57606a">same rules</text>
+<polyline points="460,620 460,696" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="340" y="700" width="240" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="760" text-anchor="middle" font-size="28" font-weight="700" fill="#24292f">visit 2</text>
+<text x="460" y="800" text-anchor="middle" font-size="24" fill="#57606a">same rules</text>
+<polyline points="740,620 740,696" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="620" y="700" width="240" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="740" y="760" text-anchor="middle" font-size="28" font-weight="700" fill="#24292f">visit 3</text>
+<text x="740" y="800" text-anchor="middle" font-size="24" fill="#57606a">same rules</text>
+<text x="460" y="900" text-anchor="middle" font-size="28" fill="#57606a">rows added later get the rules too</text>
+<rect x="1000" y="60" width="400" height="150" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1200" y="125" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">departure</text>
+<text x="1200" y="172" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#57606a">Date | null</text>
+<rect x="1480" y="60" width="400" height="150" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1680" y="125" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">arrival</text>
+<text x="1680" y="172" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#57606a">Date | null</text>
+<polyline points="1200,214 1200,336" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<text x="1215" y="285" text-anchor="start" font-size="24" fill="#57606a">bound from</text>
+<polyline points="1680,214 1680,336" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<text x="1695" y="285" text-anchor="start" font-size="24" fill="#57606a">constrained</text>
+<rect x="1000" y="340" width="880" height="200" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+<text x="1440" y="410" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">minDate(s.arrival,</text>
+<text x="1440" y="455" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">({ valueOf }) =&gt; valueOf(s.departure))</text>
+<text x="1440" y="505" text-anchor="middle" font-size="24" fill="#57606a">undefined switches the rule off</text>
+<polyline points="1440,544 1440,636" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1000" y="640" width="880" height="240" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1440" y="710" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">getError('minDate')</text>
+<text x="1440" y="765" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">MinDateValidationError</text>
+<text x="1440" y="815" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">minDate: Date</text>
+<text x="1440" y="940" text-anchor="middle" font-size="26" fill="#57606a">bounds also set the input's min and max</text>
+</g>
+</svg>

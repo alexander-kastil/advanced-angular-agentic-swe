@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Error handling</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="40" y="90" width="380" height="180" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="230" y="165" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">GET /skilz</text>
+<text x="230" y="220" text-anchor="middle" font-size="28" fill="#57606a">real 404</text>
+<polyline points="424,180 516,180" fill="none" stroke="#c24141" stroke-width="4" marker-end="url(#r)"/>
+<rect x="520" y="90" width="380" height="180" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="710" y="190" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">catchError</text>
+<rect x="1040" y="30" width="840" height="90" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1070" y="87" text-anchor="start" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">EMPTY</text>
+<text x="1850" y="87" text-anchor="end" font-size="26" fill="#57606a">complete, no next</text>
+<polyline points="904,180 970,180 970,75 1036,75" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1040" y="135" width="840" height="90" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1070" y="192" text-anchor="start" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">of(fallback)</text>
+<text x="1850" y="192" text-anchor="end" font-size="26" fill="#57606a">one next, then complete</text>
+<polyline points="904,180 970,180 970,180 1036,180" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1040" y="240" width="840" height="90" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="1070" y="297" text-anchor="start" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">throwError(() =&gt; err)</text>
+<text x="1850" y="297" text-anchor="end" font-size="26" fill="#57606a">the subscriber gets error</text>
+<polyline points="904,180 970,180 970,285 1036,285" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="40" y="400" width="460" height="200" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="270" y="480" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">defer(() =&gt;</text>
+<text x="270" y="530" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">http.get(url))</text>
+<polyline points="504,500 596,500" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="600" y="400" width="520" height="200" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+<text x="860" y="480" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">retry({ count: 5,</text>
+<text x="860" y="530" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">delay: 600 })</text>
+<polyline points="860,604 860,650 270,650 270,604" fill="none" stroke="#e0a534" stroke-width="4" marker-end="url(#o)"/>
+<text x="565" y="690" text-anchor="middle" font-size="26" fill="#57606a">resubscribes: the source runs again</text>
+<rect x="1240" y="390" width="640" height="64" rx="32" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="1560" y="432" text-anchor="middle" font-size="26" font-weight="700" font-family="Consolas, monospace" fill="#24292f">attempt 1: 404</text>
+<rect x="1240" y="465" width="640" height="64" rx="32" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="1560" y="507" text-anchor="middle" font-size="26" font-weight="700" font-family="Consolas, monospace" fill="#24292f">attempt 2: 404</text>
+<rect x="1240" y="540" width="640" height="64" rx="32" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1560" y="582" text-anchor="middle" font-size="26" font-weight="700" font-family="Consolas, monospace" fill="#24292f">attempt 3: ok</text>
+<polyline points="1124,500 1236,500" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="40" y="780" width="1840" height="250" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="80" y="840" text-anchor="start" font-size="28" font-weight="700" fill="#24292f">custom operator, marble-tested</text>
+<rect x="80" y="880" width="420" height="110" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="290" y="948" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">cold('a-#')</text>
+<polyline points="504,935 596,935" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="600" y="880" width="740" height="110" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="970" y="948" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">catchWithFallback(-1, onError)</text>
+<polyline points="1344,935 1436,935" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1440" y="880" width="400" height="110" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1640" y="948" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">'a-(f|)'</text>
+</g>
+</svg>

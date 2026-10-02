@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Signal interop both ways</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<text x="260" y="70" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">Signals</text>
+<text x="1660" y="70" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">Observables</text>
+<line x1="960" y1="40" x2="960" y2="740" stroke="#8c959f" stroke-width="3" stroke-dasharray="12 8"/>
+<rect x="80" y="130" width="360" height="100" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="260" y="192" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">signal</text>
+<rect x="1480" y="130" width="360" height="100" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="1660" y="192" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">Observable</text>
+<polyline points="1476,200 444,200" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="865.0" y="142" width="190" height="46" fill="#ffffff"/>
+<text x="960" y="175" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">toSignal()</text>
+<rect x="80" y="285" width="360" height="100" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="260" y="347" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">signal</text>
+<rect x="1480" y="285" width="360" height="100" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="1660" y="347" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">Observable</text>
+<polyline points="444,355 1476,355" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="827.0" y="297" width="266" height="46" fill="#ffffff"/>
+<text x="960" y="330" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">toObservable()</text>
+<rect x="80" y="440" width="360" height="100" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="260" y="502" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">output()</text>
+<rect x="1480" y="440" width="360" height="100" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="1660" y="502" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">Observable</text>
+<polyline points="444,510 1476,510" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="770.0" y="452" width="380" height="46" fill="#ffffff"/>
+<text x="960" y="485" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">outputToObservable()</text>
+<rect x="80" y="595" width="360" height="100" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="260" y="657" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">output()</text>
+<rect x="1480" y="595" width="360" height="100" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="1660" y="657" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">Observable</text>
+<polyline points="1476,665 444,665" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="751.0" y="607" width="418" height="46" fill="#ffffff"/>
+<text x="960" y="640" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">outputFromObservable()</text>
+<rect x="80" y="800" width="1760" height="220" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="960" y="870" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">rxResource({ params, stream })</text>
+<text x="960" y="925" text-anchor="middle" font-size="28" fill="#57606a">params changes: the previous stream is cancelled</text>
+<text x="960" y="975" text-anchor="middle" font-size="28" fill="#57606a">value(), isLoading(), error(), reload() for request and response</text>
+</g>
+</svg>

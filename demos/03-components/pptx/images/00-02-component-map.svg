@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Six groups of component techniques</title>
+  <desc>Template Syntax, Component Composition, Advanced Patterns, Data Loading, Agentic Angular, Anti-patterns.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="130" width="560" height="380" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="340.0" y="289.0" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Template syntax</text>
+    <text x="340.0" y="336.0" text-anchor="middle" font-size="30" fill="#57606a">@if  @for  @switch</text>
+    <text x="340.0" y="379.0" text-anchor="middle" font-size="30" fill="#57606a">@let  @defer</text>
+    <rect x="680" y="130" width="560" height="380" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="289.0" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Composition</text>
+    <text x="960.0" y="336.0" text-anchor="middle" font-size="30" fill="#57606a">ng-content, hostDirectives</text>
+    <text x="960.0" y="379.0" text-anchor="middle" font-size="30" fill="#57606a">viewChild, @angular/aria</text>
+    <rect x="1300" y="130" width="560" height="380" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1580.0" y="289.0" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Advanced patterns</text>
+    <text x="1580.0" y="336.0" text-anchor="middle" font-size="30" fill="#57606a">ng-template, host {}</text>
+    <text x="1580.0" y="379.0" text-anchor="middle" font-size="30" fill="#57606a">createComponent bindings</text>
+    <rect x="60" y="580" width="560" height="380" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="340.0" y="739.0" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Data loading</text>
+    <text x="340.0" y="786.0" text-anchor="middle" font-size="30" fill="#57606a">httpResource()</text>
+    <text x="340.0" y="829.0" text-anchor="middle" font-size="30" fill="#57606a">resource()</text>
+    <rect x="680" y="580" width="560" height="380" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="739.0" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Agentic Angular</text>
+    <text x="960.0" y="786.0" text-anchor="middle" font-size="30" fill="#57606a">schematics first</text>
+    <text x="960.0" y="829.0" text-anchor="middle" font-size="30" fill="#57606a">get_best_practices</text>
+    <rect x="1300" y="580" width="560" height="380" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="1580.0" y="739.0" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Anti-patterns</text>
+    <text x="1580.0" y="786.0" text-anchor="middle" font-size="30" fill="#57606a">what replaces what</text>
+    <text x="1580.0" y="829.0" text-anchor="middle" font-size="30" fill="#57606a">in Angular 22</text>
+  </g>
+</svg>

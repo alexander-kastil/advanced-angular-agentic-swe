@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Field state</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="60" y="160" width="480" height="160" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="300" y="232" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">value()</text>
+<text x="300" y="280" text-anchor="middle" font-size="28" fill="#57606a">read</text>
+<polyline points="544,240 686,450" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="60" y="390" width="480" height="160" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="300" y="462" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">value.set('Soi')</text>
+<text x="300" y="510" text-anchor="middle" font-size="28" fill="#57606a">write</text>
+<polyline points="544,470 686,450" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="60" y="620" width="480" height="160" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="300" y="692" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">markAsTouched()</text>
+<text x="300" y="740" text-anchor="middle" font-size="28" fill="#57606a">touch</text>
+<polyline points="544,700 686,450" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="690" y="330" width="540" height="260" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="960" y="430" text-anchor="middle" font-size="38" font-weight="700" font-family="Consolas, monospace" fill="#24292f">fields.name()</text>
+<text x="960" y="490" text-anchor="middle" font-size="30" fill="#57606a">FieldState</text>
+<text x="960" y="545" text-anchor="middle" font-size="26" fill="#57606a">one per property</text>
+<polyline points="1234,460 1356,460" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1360" y="100" width="500" height="720" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1610" y="170" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">status signals</text>
+<rect x="1410" y="210" width="400" height="86" rx="43" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1610" y="265" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">valid()</text>
+<rect x="1410" y="328" width="400" height="86" rx="43" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1610" y="383" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">invalid()</text>
+<rect x="1410" y="446" width="400" height="86" rx="43" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1610" y="501" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">touched()</text>
+<rect x="1410" y="564" width="400" height="86" rx="43" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1610" y="619" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">dirty()</text>
+<rect x="1410" y="682" width="400" height="86" rx="43" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1610" y="737" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">pending()</text>
+<rect x="690" y="780" width="540" height="200" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="960" y="860" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">fields()</text>
+<text x="960" y="915" text-anchor="middle" font-size="26" fill="#57606a">same signals for the whole form</text>
+<text x="960" y="955" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#57606a">plus reset()</text>
+</g>
+</svg>

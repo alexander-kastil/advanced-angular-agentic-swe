@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Signal, computed and effect</title>
+  <desc>netAmount and tax signals feed the computed grossAmount, which feeds an effect that logs.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="100" y="160" width="520" height="260" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="360.0" y="262.0" text-anchor="middle" font-size="40" font-family="Consolas, monospace" font-weight="700" fill="#24292f">netAmount</text>
+    <text x="360.0" y="306.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">signal(0)</text>
+    <text x="360.0" y="346.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">.set(100)  .update(n =&gt; n + 10)</text>
+    <rect x="100" y="640" width="520" height="260" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="360.0" y="742.0" text-anchor="middle" font-size="40" font-family="Consolas, monospace" font-weight="700" fill="#24292f">tax</text>
+    <text x="360.0" y="786.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">signal(0.2)</text>
+    <text x="360.0" y="826.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">.asReadonly()</text>
+    <rect x="780" y="390" width="560" height="300" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1060.0" y="492.0" text-anchor="middle" font-size="40" font-family="Consolas, monospace" font-weight="700" fill="#24292f">grossAmount</text>
+    <text x="1060.0" y="536.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">computed(() =&gt;</text>
+    <text x="1060.0" y="576.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">netAmount() * (1 + tax()))</text>
+    <text x="1060.0" y="616.0" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">read-only</text>
+    <rect x="1500" y="390" width="360" height="300" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1680.0" y="510.8" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">logChanges</text>
+    <text x="1680.0" y="554.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">effect(() =&gt;</text>
+    <text x="1680.0" y="594.8" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">console.log(...))</text>
+    <path d="M620,290 L700,290 L700,480 L778,480" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M620,770 L700,770 L700,600 L778,600" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1340,540 L1498,540" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1420" y="515" text-anchor="middle" font-size="26" fill="#57606a">reads</text>
+    <text x="700" y="535" text-anchor="end" font-size="26" fill="#57606a">read by</text>
+    <text x="700" y="565" text-anchor="end" font-size="26" fill="#57606a">calling</text>
+    <text x="960" y="1000" text-anchor="middle" font-size="30" fill="#57606a">recalculates only when netAmount or tax changes</text>
+  </g>
+</svg>

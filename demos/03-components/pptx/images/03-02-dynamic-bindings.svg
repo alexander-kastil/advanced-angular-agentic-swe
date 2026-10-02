@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Dynamic components with live bindings</title>
+  <desc>createComponent with inputBinding, twoWayBinding and outputBinding keeps created cards in sync with parent signals.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="100" width="1800" height="230" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="160" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">parent</text>
+    <rect x="140" y="200" width="480" height="80" rx="40.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="380.0" y="249.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">headline = signal('...')</text>
+    <rect x="720" y="200" width="480" height="80" rx="40.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="249.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">clicks = signal(0)</text>
+    <rect x="1300" y="200" width="480" height="80" rx="40.0" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1540.0" y="249.1" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">&lt;ng-container #host /&gt;</text>
+    <rect x="260" y="560" width="600" height="230" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="560.0" y="665.2" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">CounterCard 1</text>
+    <text x="560.0" y="709.2" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">label  count  (reset)</text>
+    <rect x="1060" y="560" width="600" height="230" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="1360.0" y="665.2" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">CounterCard 2</text>
+    <text x="1360.0" y="709.2" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#57606a">label  count  (reset)</text>
+    <path d="M380,282 L380,558" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="395" y="440" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#24292f">inputBinding</text>
+    <path d="M1160,282 L1160,558" fill="none" stroke="#57606a" stroke-width="3" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+    <text x="1175" y="440" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#24292f">twoWayBinding</text>
+    <path d="M1540,558 L1540,282" fill="none" stroke="#2f8f57" stroke-width="3" marker-end="url(#arrow-green)"/>
+    <text x="1555" y="440" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#24292f">outputBinding</text>
+    <rect x="160" y="840" width="1600" height="80" rx="40.0" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="960.0" y="890.5" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#24292f">createComponent(CounterCard, { bindings: [ ... ] })</text>
+    <rect x="260" y="960" width="1400" height="80" rx="40.0" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="960.0" y="1009.1" text-anchor="middle" font-size="26" fill="#24292f">setInput(): writes once, never tracks the source</text>
+  </g>
+</svg>

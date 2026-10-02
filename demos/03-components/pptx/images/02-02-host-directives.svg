@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Directive composition with hostDirectives</title>
+  <desc>boxed composes FontBold and Width; Width composes Height; Height composes Border.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="760" y="100" width="400" height="140" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="162.0" text-anchor="middle" font-size="40" font-family="Consolas, monospace" font-weight="700" fill="#24292f">boxed</text>
+    <text x="960.0" y="206.0" text-anchor="middle" font-size="28" fill="#57606a">hostDirectives</text>
+    <rect x="300" y="340" width="400" height="140" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="500.0" y="400.8" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">FontBold</text>
+    <text x="500.0" y="444.8" text-anchor="middle" font-size="28" fill="#57606a">font-weight</text>
+    <rect x="1220" y="340" width="400" height="140" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1420.0" y="400.8" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">Width</text>
+    <text x="1420.0" y="444.8" text-anchor="middle" font-size="28" fill="#57606a">width: 100%</text>
+    <rect x="1220" y="560" width="400" height="140" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1420.0" y="620.8" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">Height</text>
+    <text x="1420.0" y="664.8" text-anchor="middle" font-size="28" fill="#57606a">height: 100px</text>
+    <rect x="1220" y="780" width="400" height="140" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1420.0" y="840.8" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">Border</text>
+    <text x="1420.0" y="884.8" text-anchor="middle" font-size="28" fill="#57606a">border + padding</text>
+    <path d="M860,242 L500,338" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1060,242 L1420,338" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1420,482 L1420,558" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M1420,702 L1420,778" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="160" y="640" width="680" height="180" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+    <text x="500.0" y="720.8" text-anchor="middle" font-size="36" font-family="Consolas, monospace" font-weight="700" fill="#24292f">&lt;div boxed&gt;</text>
+    <text x="500.0" y="764.8" text-anchor="middle" font-size="28" fill="#57606a">bold, full width, 100px, border</text>
+    <text x="500" y="900" text-anchor="middle" font-size="28" fill="#57606a">the template imports only BoxedDirective</text>
+    <rect x="60" y="980" width="560" height="70" rx="35.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="340.0" y="1024.1" text-anchor="middle" font-size="26" fill="#24292f">standalone only</text>
+    <rect x="680" y="980" width="560" height="70" rx="35.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="960.0" y="1024.1" text-anchor="middle" font-size="26" fill="#24292f">inputs, outputs: list them</text>
+    <rect x="1300" y="980" width="560" height="70" rx="35.0" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1580.0" y="1024.1" text-anchor="middle" font-size="26" fill="#24292f">host wins conflicts</text>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Validation and cross-field rules</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="40" y="60" width="590" height="950" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="335" y="130" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">built-in</text>
+<rect x="670" y="60" width="590" height="950" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="965" y="130" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">cross-field: validate()</text>
+<rect x="1300" y="60" width="590" height="950" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1595" y="130" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">validateStandardSchema()</text>
+<rect x="80" y="190" width="510" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="335" y="252" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">required(s.email)</text>
+<rect x="80" y="340" width="510" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="335" y="402" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">email(s.email)</text>
+<rect x="80" y="490" width="510" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="335" y="552" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">required(s.password)</text>
+<rect x="80" y="640" width="510" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="335" y="702" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">minLength(s.password, 4)</text>
+<text x="335" y="820" text-anchor="middle" font-size="28" fill="#57606a">applied inside the schema</text>
+<text x="335" y="870" text-anchor="middle" font-size="28" fill="#57606a">to a path of the model</text>
+<rect x="710" y="190" width="510" height="110" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="965" y="257" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">password</text>
+<polyline points="965,304 965,446" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<text x="985" y="385" text-anchor="start" font-size="26" font-family="Consolas, monospace" fill="#57606a">valueOf(s.password)</text>
+<rect x="710" y="450" width="510" height="110" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="965" y="517" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">passwordRepeat</text>
+<polyline points="965,564 965,646" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="710" y="650" width="510" height="100" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="965" y="712" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">null: valid</text>
+<rect x="710" y="780" width="510" height="130" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="965" y="835" text-anchor="middle" font-size="26" font-weight="700" font-family="Consolas, monospace" fill="#24292f">{ kind: 'mismatch',</text>
+<text x="965" y="875" text-anchor="middle" font-size="26" font-weight="700" font-family="Consolas, monospace" fill="#24292f">message }</text>
+<rect x="1340" y="190" width="510" height="120" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1595" y="245" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">root path s</text>
+<text x="1595" y="285" text-anchor="middle" font-size="24" fill="#57606a">the whole shape at once</text>
+<polyline points="1595,314 1595,396" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1340" y="400" width="510" height="120" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1595" y="455" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">microchipSchema</text>
+<text x="1595" y="495" text-anchor="middle" font-size="24" fill="#57606a">Zod, Valibot, ArkType</text>
+<polyline points="1595,524 1595,606" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1340" y="610" width="510" height="100" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+<text x="1595" y="672" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">issue path ['chipId']</text>
+<polyline points="1595,714 1595,796" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1340" y="800" width="510" height="110" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1595" y="867" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">chipId().errors()</text>
+</g>
+</svg>

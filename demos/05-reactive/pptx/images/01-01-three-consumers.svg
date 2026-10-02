@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Subscribe vs stream vs signal</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="60" y="300" width="460" height="360" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="290" y="400" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">interval(1000)</text>
+<text x="290" y="455" text-anchor="middle" font-size="28" fill="#57606a">cold source</text>
+<rect x="110" y="520" width="360" height="90" rx="45" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="290" y="577" text-anchor="middle" font-size="28" font-weight="700" fill="#24292f">subscriptions: 3</text>
+<rect x="60" y="760" width="460" height="170" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+<text x="290" y="835" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">+ share()</text>
+<text x="290" y="885" text-anchor="middle" font-size="26" fill="#57606a">one subscription for all</text>
+<rect x="760" y="90" width="1100" height="230" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1310" y="190" text-anchor="middle" font-size="36" font-weight="700" font-family="Consolas, monospace" fill="#24292f">subscribe()</text>
+<text x="1310" y="250" text-anchor="middle" font-size="28" fill="#57606a">takeUntilDestroyed, state by hand</text>
+<polyline points="524,480 640,480 640,205 756,205" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="760" y="410" width="1100" height="230" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1310" y="510" text-anchor="middle" font-size="36" font-weight="700" font-family="Consolas, monospace" fill="#24292f">stream$ | async</text>
+<text x="1310" y="570" text-anchor="middle" font-size="28" fill="#57606a">every binding subscribes again</text>
+<polyline points="524,480 640,480 640,525 756,525" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="760" y="730" width="1100" height="230" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1310" y="830" text-anchor="middle" font-size="36" font-weight="700" font-family="Consolas, monospace" fill="#24292f">toSignal()</text>
+<text x="1310" y="890" text-anchor="middle" font-size="28" fill="#57606a">one subscription, sync reads, auto teardown</text>
+<polyline points="524,480 640,480 640,845 756,845" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+</g>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Anatomy of a Signal Form</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="60" y="260" width="440" height="520" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="280" y="340" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">model</text>
+<text x="280" y="400" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#24292f">signal({</text>
+<text x="110" y="460" text-anchor="start" font-size="28" font-family="Consolas, monospace" fill="#24292f">name: ''</text>
+<text x="110" y="516" text-anchor="start" font-size="28" font-family="Consolas, monospace" fill="#24292f">postal: '3544'</text>
+<text x="110" y="572" text-anchor="start" font-size="28" font-family="Consolas, monospace" fill="#24292f">city: 'Idolsberg'</text>
+<text x="280" y="640" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#24292f">})</text>
+<text x="280" y="720" text-anchor="middle" font-size="28" fill="#57606a">a signal you own</text>
+<polyline points="504,520 606,520" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="610" y="260" width="640" height="520" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="930" y="340" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">form(model, schema)</text>
+<rect x="660" y="400" width="540" height="76" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="930" y="448" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">required(s.name)</text>
+<rect x="660" y="500" width="540" height="76" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="930" y="548" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">minLength(s.name, 3)</text>
+<rect x="660" y="600" width="540" height="76" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="930" y="648" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">maxLength(s.city, 15)</text>
+<text x="930" y="730" text-anchor="middle" font-size="28" fill="#57606a">the schema holds the rules</text>
+<polyline points="1254,520 1356,520" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1360" y="160" width="520" height="620" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1620" y="240" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">field tree</text>
+<rect x="1400" y="290" width="440" height="110" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1620" y="335" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">fields.name</text>
+<text x="1620" y="378" text-anchor="middle" font-size="24" fill="#57606a">[formField] on an input</text>
+<rect x="1400" y="440" width="440" height="110" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1620" y="485" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">fields.postal</text>
+<text x="1620" y="528" text-anchor="middle" font-size="24" fill="#57606a">[formField] on an input</text>
+<rect x="1400" y="590" width="440" height="110" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1620" y="635" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">fields.city</text>
+<text x="1620" y="678" text-anchor="middle" font-size="24" fill="#57606a">[formField] on an input</text>
+<rect x="60" y="860" width="1820" height="150" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="970" y="915" text-anchor="middle" font-size="28" fill="#57606a">every state is a signal</text>
+<rect x="160" y="940" width="290" height="56" rx="28" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="305" y="978" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">value()</text>
+<rect x="490" y="940" width="290" height="56" rx="28" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="635" y="978" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">valid()</text>
+<rect x="820" y="940" width="290" height="56" rx="28" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="965" y="978" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">touched()</text>
+<rect x="1150" y="940" width="290" height="56" rx="28" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1295" y="978" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">dirty()</text>
+<rect x="1480" y="940" width="290" height="56" rx="28" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1625" y="978" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">pending()</text>
+</g>
+</svg>

@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Combining streams</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="40" y="50" width="900" height="470" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="80" y="110" text-anchor="start" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">combineLatest</text>
+<rect x="980" y="50" width="900" height="470" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1020" y="110" text-anchor="start" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">forkJoin</text>
+<rect x="40" y="560" width="900" height="470" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="80" y="620" text-anchor="start" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">merge</text>
+<rect x="980" y="560" width="900" height="470" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1020" y="620" text-anchor="start" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">withLatestFrom</text>
+<text x="80" y="199" text-anchor="start" font-size="26" fill="#57606a">term</text>
+<line x1="270" y1="190" x2="900" y2="190" stroke="#8c959f" stroke-width="3"/>
+<circle cx="340" cy="190" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="340" y="197.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<circle cx="600" cy="190" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="600" y="197.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">b</text>
+<text x="80" y="279" text-anchor="start" font-size="26" fill="#57606a">checkbox</text>
+<line x1="270" y1="270" x2="900" y2="270" stroke="#8c959f" stroke-width="3"/>
+<circle cx="420" cy="270" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="420" y="277.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">x</text>
+<circle cx="740" cy="270" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="740" y="277.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">y</text>
+<text x="80" y="359" text-anchor="start" font-size="26" fill="#57606a">skills</text>
+<line x1="270" y1="350" x2="900" y2="350" stroke="#8c959f" stroke-width="3"/>
+<circle cx="370" cy="350" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="370" y="357.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">s</text>
+<text x="80" y="459" text-anchor="start" font-size="26" fill="#57606a">result</text>
+<line x1="270" y1="450" x2="900" y2="450" stroke="#2f8f57" stroke-width="3"/>
+<circle cx="420" cy="450" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="420" y="457.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">1</text>
+<circle cx="600" cy="450" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="600" y="457.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">2</text>
+<circle cx="740" cy="450" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="740" y="457.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">3</text>
+<text x="1020" y="199" text-anchor="start" font-size="26" fill="#57606a">skills</text>
+<line x1="1210" y1="190" x2="1840" y2="190" stroke="#8c959f" stroke-width="3"/>
+<circle cx="1320" cy="190" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1320" y="197.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">s</text>
+<line x1="1360" y1="168" x2="1360" y2="212" stroke="#24292f" stroke-width="5"/>
+<text x="1020" y="279" text-anchor="start" font-size="26" fill="#57606a">todos</text>
+<line x1="1210" y1="270" x2="1840" y2="270" stroke="#8c959f" stroke-width="3"/>
+<circle cx="1500" cy="270" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1500" y="277.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">t</text>
+<line x1="1540" y1="248" x2="1540" y2="292" stroke="#24292f" stroke-width="5"/>
+<text x="1020" y="359" text-anchor="start" font-size="26" fill="#57606a">accounts</text>
+<line x1="1210" y1="350" x2="1840" y2="350" stroke="#8c959f" stroke-width="3"/>
+<circle cx="1410" cy="350" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1410" y="357.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<line x1="1450" y1="328" x2="1450" y2="372" stroke="#24292f" stroke-width="5"/>
+<text x="1020" y="459" text-anchor="start" font-size="26" fill="#57606a">result</text>
+<line x1="1210" y1="450" x2="1840" y2="450" stroke="#2f8f57" stroke-width="3"/>
+<circle cx="1600" cy="450" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1600" y="457.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">*</text>
+<line x1="1640" y1="428" x2="1640" y2="472" stroke="#24292f" stroke-width="5"/>
+<text x="80" y="729" text-anchor="start" font-size="26" fill="#57606a">A</text>
+<line x1="270" y1="720" x2="900" y2="720" stroke="#8c959f" stroke-width="3"/>
+<circle cx="340" cy="720" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="340" y="727.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<circle cx="560" cy="720" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="560" y="727.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">b</text>
+<circle cx="780" cy="720" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="780" y="727.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">c</text>
+<text x="80" y="829" text-anchor="start" font-size="26" fill="#57606a">B</text>
+<line x1="270" y1="820" x2="900" y2="820" stroke="#8c959f" stroke-width="3"/>
+<circle cx="450" cy="820" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="450" y="827.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">1</text>
+<circle cx="670" cy="820" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="670" y="827.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">2</text>
+<text x="80" y="949" text-anchor="start" font-size="26" fill="#57606a">result</text>
+<line x1="270" y1="940" x2="900" y2="940" stroke="#2f8f57" stroke-width="3"/>
+<circle cx="340" cy="940" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="340" y="947.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">a</text>
+<circle cx="450" cy="940" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="450" y="947.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">1</text>
+<circle cx="560" cy="940" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="560" y="947.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">b</text>
+<circle cx="670" cy="940" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="670" y="947.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">2</text>
+<circle cx="780" cy="940" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="780" y="947.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">c</text>
+<text x="1020" y="709" text-anchor="start" font-size="26" fill="#57606a">save</text>
+<line x1="1210" y1="700" x2="1840" y2="700" stroke="#8c959f" stroke-width="3"/>
+<circle cx="1400" cy="700" r="22" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="1400" y="707.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">S</text>
+<circle cx="1700" cy="700" r="22" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="1700" y="707.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">S</text>
+<text x="1020" y="789" text-anchor="start" font-size="26" fill="#57606a">ticks</text>
+<line x1="1210" y1="780" x2="1840" y2="780" stroke="#8c959f" stroke-width="3"/>
+<circle cx="1280" cy="780" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1280" y="787.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">1</text>
+<circle cx="1360" cy="780" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1360" y="787.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">2</text>
+<circle cx="1480" cy="780" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1480" y="787.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">3</text>
+<circle cx="1600" cy="780" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1600" y="787.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">4</text>
+<circle cx="1760" cy="780" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1760" y="787.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">5</text>
+<text x="1020" y="869" text-anchor="start" font-size="26" fill="#57606a">draft</text>
+<line x1="1210" y1="860" x2="1840" y2="860" stroke="#8c959f" stroke-width="3"/>
+<circle cx="1330" cy="860" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1330" y="867.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">d</text>
+<circle cx="1630" cy="860" r="22" fill="#eaf2ff" stroke="#4a7bd0" stroke-width="3"/>
+<text x="1630" y="867.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">e</text>
+<text x="1020" y="969" text-anchor="start" font-size="26" fill="#57606a">result</text>
+<line x1="1210" y1="960" x2="1840" y2="960" stroke="#2f8f57" stroke-width="3"/>
+<circle cx="1400" cy="960" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1400" y="967.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">1</text>
+<circle cx="1700" cy="960" r="22" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1700" y="967.7" text-anchor="middle" font-size="22" font-weight="700" font-family="Consolas, monospace" fill="#24292f">2</text>
+</g>
+</svg>

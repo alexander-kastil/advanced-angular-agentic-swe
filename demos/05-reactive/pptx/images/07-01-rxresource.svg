@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>rxResource vs switchMap</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<line x1="70" y1="80" x2="70" y2="900" stroke="#8c959f" stroke-width="4"/>
+<rect x="110" y="50" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="106" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">valueChanges</text>
+<rect x="110" y="158" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="214" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">startWith('')</text>
+<rect x="110" y="266" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="322" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">debounceTime(400)</text>
+<rect x="110" y="374" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="430" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">distinctUntilChanged()</text>
+<rect x="110" y="482" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="538" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">switchMap(defer(...))</text>
+<rect x="110" y="590" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="646" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">catchError(...)</text>
+<rect x="110" y="698" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="754" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">finalize(...)</text>
+<rect x="110" y="806" width="700" height="88" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="460" y="862" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">toSignal(...)</text>
+<text x="460" y="1000" text-anchor="middle" font-size="26" fill="#57606a">plus loading and error signals by hand</text>
+<rect x="960" y="50" width="920" height="400" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1420" y="130" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">rxResource({ params, stream })</text>
+<text x="1420" y="190" text-anchor="middle" font-size="26" fill="#57606a">params change cancels the previous stream</text>
+<rect x="1000" y="240" width="400" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1200" y="289" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">value()</text>
+<rect x="1440" y="240" width="400" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1640" y="289" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">isLoading()</text>
+<rect x="1000" y="335" width="400" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1200" y="384" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">error()</text>
+<rect x="1440" y="335" width="400" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1640" y="384" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">reload()</text>
+<polyline points="1420,454 1420,566" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<text x="1440" y="520" text-anchor="start" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">chain()</text>
+<rect x="960" y="570" width="920" height="300" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="1420" y="650" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">detail resource</text>
+<text x="1420" y="715" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">params: ({ chain }) =&gt;</text>
+<text x="1420" y="760" text-anchor="middle" font-size="26" font-family="Consolas, monospace" fill="#24292f">chain(skillsResource).at(0)?.id</text>
+<text x="1420" y="825" text-anchor="middle" font-size="26" fill="#57606a">loading and errors follow the list</text>
+</g>
+</svg>

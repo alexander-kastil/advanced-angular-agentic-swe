@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Migrating from Reactive Forms</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="60" y="50" width="760" height="80" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="440" y="103" text-anchor="middle" font-size="32" font-weight="700" font-family="Consolas, monospace" fill="#24292f">ReactiveFormsModule</text>
+<rect x="1100" y="50" width="760" height="80" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1480" y="103" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">Signal Forms</text>
+<rect x="60" y="160" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="221" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">new FormGroup({...})</text>
+<rect x="1100" y="160" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="221" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">form(model, schema)</text>
+<polyline points="824,210 1096,210" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="60" y="282" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="343" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">new FormControl('')</text>
+<rect x="1100" y="282" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="343" text-anchor="middle" font-size="28" fill="#24292f">a model interface property</text>
+<polyline points="824,332 1096,332" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="60" y="404" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="465" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">Validators.minLength(3)</text>
+<rect x="1100" y="404" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="465" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">minLength(path, 3, { message })</text>
+<polyline points="824,454 1096,454" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="60" y="526" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="587" text-anchor="middle" font-size="28" fill="#24292f">group-level validator</text>
+<rect x="1100" y="526" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="587" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">validate() on the error field</text>
+<polyline points="824,576 1096,576" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="60" y="648" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="709" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">formControlName="x"</text>
+<rect x="1100" y="648" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="709" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">[formField]="form.x"</text>
+<polyline points="824,698 1096,698" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="60" y="770" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="831" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">valueChanges + toSignal()</text>
+<rect x="1100" y="770" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="831" text-anchor="middle" font-size="28" fill="#24292f">the model signal itself</text>
+<polyline points="824,820 1096,820" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+<rect x="60" y="892" width="760" height="100" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="440" y="953" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">markAllAsTouched() + valid</text>
+<rect x="1100" y="892" width="760" height="100" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1480" y="953" text-anchor="middle" font-size="28" font-family="Consolas, monospace" fill="#24292f">submit(form, action)</text>
+<polyline points="824,942 1096,942" fill="none" stroke="#2f8f57" stroke-width="4" marker-end="url(#g)"/>
+</g>
+</svg>

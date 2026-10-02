@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Showing errors at the right time</title>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e0a534"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<rect x="40" y="120" width="420" height="260" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="250" y="190" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">name().errors()</text>
+<rect x="70" y="240" width="360" height="90" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="250" y="297" text-anchor="middle" font-size="26" fill="#24292f">Name is required</text>
+<rect x="40" y="450" width="420" height="260" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="250" y="520" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">age().errors()</text>
+<rect x="70" y="570" width="360" height="90" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="250" y="627" text-anchor="middle" font-size="26" fill="#24292f">Must be 18+</text>
+<polyline points="464,250 520,250 520,380 556,380" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<polyline points="464,580 520,580 520,450 556,450" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="560" y="300" width="400" height="230" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="760" y="395" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">computed()</text>
+<text x="760" y="450" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#24292f">allErrors</text>
+<polyline points="760,534 760,676" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="560" y="680" width="400" height="230" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="760" y="760" text-anchor="middle" font-size="30" font-weight="700" fill="#24292f">error summary</text>
+<text x="760" y="815" text-anchor="middle" font-size="26" fill="#57606a">Name is required</text>
+<text x="760" y="860" text-anchor="middle" font-size="26" fill="#57606a">Must be 18+</text>
+<rect x="1060" y="80" width="820" height="330" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="1470" y="150" text-anchor="middle" font-size="34" font-weight="700" font-family="Consolas, monospace" fill="#24292f">DirtyOnlyStateMatcher</text>
+<text x="1470" y="220" text-anchor="middle" font-size="30" font-family="Consolas, monospace" fill="#24292f">isSignalErrorState(field)</text>
+<rect x="1160" y="270" width="620" height="90" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="1470" y="328" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">invalid() &amp;&amp; dirty()</text>
+<polyline points="1470,414 1470,526" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+<rect x="1060" y="530" width="820" height="230" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="1470" y="610" text-anchor="middle" font-size="28" font-weight="700" font-family="Consolas, monospace" fill="#24292f">@if (matcher.isSignalErrorState(f))</text>
+<text x="1470" y="670" text-anchor="middle" font-size="28" fill="#57606a">render the error text</text>
+<text x="1470" y="715" text-anchor="middle" font-size="26" fill="#57606a">only after the user changed it</text>
+<rect x="1060" y="820" width="820" height="190" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1470" y="895" text-anchor="middle" font-size="30" font-weight="700" font-family="Consolas, monospace" fill="#24292f">Field&lt;T&gt; is () =&gt; FieldState&lt;T&gt;</text>
+<text x="1470" y="950" text-anchor="middle" font-size="26" fill="#57606a">one matcher per component, or via DI</text>
+</g>
+</svg>
