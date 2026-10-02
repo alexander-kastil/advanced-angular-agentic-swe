@@ -117,6 +117,37 @@ itself, so the failure looks like a bug in `HttpClient` rather than in the spec:
 req.flush(new Blob(['nope']), { status: 404, statusText: 'Not Found' });
 ```
 
+## A hardcoded future date in a fixture is a time bomb, not a fixture
+
+A suite went from green to 14 failures with no code change: the specs pinned fixtures to absolute
+calendar dates that were in the future when the spec was written and are now in the past, and the
+code under test filters by `Date > today`. Every fixture was silently filtered out of the list, the
+lookup returned `undefined`, and each `.click()` / `.dispatchEvent()` on that `undefined` threw. The
+failure reads like a DOM bug or a change-detection bug; it is neither, and the stack trace never
+mentions dates because nothing compared dates wrong, the fixture just was not there.
+
+```typescript
+// wrong: silently drops out of the list once "today" passes 2026-01-01
+const upcoming = { id: 1, startsAt: '2026-01-01T10:00:00Z' };
+
+// correct: stays upcoming forever, relative to the clock the test actually runs against
+const upcoming = { id: 1, startsAt: isoDaysFromNow(7) };
+```
+
+```typescript
+function isoDaysFromNow(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString();
+}
+```
+
+The rule: any fixture value the code under test compares against the real clock is expressed
+relative to now (`isoDaysFromNow(n)` or equivalent), preserving whatever relative ordering the
+assertions depend on (e.g. one fixture at `+7` and one at `-7` to keep an "upcoming vs past" split).
+Never an absolute literal date. A fixture the code does not date-filter can stay literal; the trap is
+specific to values that feed a `Date` comparison.
+
 ## An unmatched request fails the file that leaked it, and dozens more
 
 `httpMock.verify()` in `afterEach` throws when a request was issued and never flushed. That failure

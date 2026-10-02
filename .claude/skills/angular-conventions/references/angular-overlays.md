@@ -3,6 +3,56 @@
 Patterns for modal dialogs, confirm popups, and any overlay UI. Covers ESC-to-close,
 nested-overlay handling, and making native browser controls match a dark theme.
 
+## A dialog the user can link to is a CHILD ROUTE, not a component signal
+
+A dialog held open by a `dialogOpen` signal has no URL, cannot be linked to, cannot be reopened by
+the back button, and gets copy-pasted: one signal in the page header and a second in the sidebar,
+both rendering the same component. Make it a child of the list route instead. The parent page hosts
+the outlet, the child paints its own scrim, and closing is a navigation.
+
+```ts
+{
+  path: 'repos',
+  loadComponent: () => import('./apps/repos-page').then((m) => m.ReposPage),
+  children: [
+    { path: 'new',          loadComponent: () => import('./apps/register-repo-dialog').then((m) => m.RegisterRepoDialog) },
+    { path: 'edit/:repoId', loadComponent: () => import('./apps/register-repo-dialog').then((m) => m.RegisterRepoDialog) },
+  ],
+}
+```
+
+```html
+<!-- repos-page.html, last element -->
+<router-outlet />
+```
+
+```ts
+close() { this.router.navigate(['/repos']); }
+```
+
+Every trigger anywhere in the app then becomes `routerLink="/repos/new"`, and the duplicated open
+state disappears with it.
+
+Three things that decide whether this works:
+
+- **Children, not siblings.** A sibling route cannot render into the parent page's outlet, and a
+  sibling `repos/new` also loses the race to an earlier `repos/:repoId`. Declared as children of
+  `repos`, the overlay paths match first because Angular walks the config in order.
+- **Never `:id/<verb>` when a two-segment route already exists.** `repos/:repoId/edit` is
+  indistinguishable from `repos/:repoId/:environmentId`, and the guard on the second one will happily
+  treat `edit` as an environment id. Put the verb first: `repos/edit/:repoId`.
+- **Mode comes from the route, not from an input the caller sets.** `data: { isNew: true }` or the
+  presence of the `:repoId` param decides create versus edit, so one component serves both without a
+  parent deciding for it.
+
+Aux outlets (`{ outlets: { modal: [...] } }`) solve a different problem: an overlay that must sit
+above ANY page rather than one list. For a dialog that belongs to a single page, the child route is
+smaller and its URL reads properly.
+
+**A routed overlay with no `routerLink` anywhere is a dead feature.** Nothing lists routes for the
+user, so a route reachable only by typing it does not exist. Whenever a route is added, name the
+element that navigates to it in the same change.
+
 ## Close-on-ESC as a reusable directive (not per-component listeners)
 
 Do **not** scatter `@HostListener('document:keydown.escape')` across every component

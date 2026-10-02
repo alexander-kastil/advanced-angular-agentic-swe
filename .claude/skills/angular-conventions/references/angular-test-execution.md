@@ -34,6 +34,27 @@ loads the test-environment setup and the raw runner never ran it. **Read the uni
 message: every file failing, and all in the same way, is a runner problem.** A real defect fails a
 few files with different errors.
 
+## A standalone `vitest.config.ts` is a dead entry point, never a config source
+
+The CLI owns Vitest configuration through the `test` target in `angular.json`
+(`@angular/build:unit-test`), not through a project-root Vitest config file. That target's own
+options (`include`, `exclude`, `setupFiles`, `providersFile`, `coverage`, `browsers`) cover ordinary
+tuning; a genuinely custom Vitest config is wired in **only** through that target's `runnerConfig`
+option, and the Angular Unit Testing guide explicitly disclaims support for arbitrary content inside
+it (third-party plugins included).
+
+A bare `vitest.config.ts` sitting at the project root is not that mechanism. `ng test` never reads it,
+but `npx vitest` does, because it talks to Vitest directly and bypasses the Angular build pipeline
+entirely. The tell: `npx vitest run` fails to even start, typically on a missing plugin such as
+`@analogjs/vite-plugin-angular`, while `ng test` on the same project passes clean. That reads like a
+broken dependency; it is a leftover file with no reader on the path that actually matters. Delete it
+rather than trying to fix its plugin list.
+
+```bash
+ng test --watch=false     # reads angular.json's test target; passes
+npx vitest run            # reads the stray vitest.config.ts; fails to start
+```
+
 ## Scoping a run: `--include`, never `--filter`
 
 `@angular/build:unit-test` accepts `--filter`, but it matches **test names, not file paths**. Passing a
@@ -98,3 +119,36 @@ created it: a single broken `msal.auth.spec.ts` produced roughly 40 downstream f
 suite. Sort the failures by file, find the one failing in teardown rather than in an assertion, fix
 that, and re-run before triaging anything else. The unmatched-request diagnosis itself is in
 [`angular-test-doubles`](angular-test-doubles.md).
+
+## `tsc --noEmit` is not a substitute for the build
+
+`npx tsc -p tsconfig.spec.json --noEmit` checks TypeScript only. Templates are compiled by the Angular
+compiler, which `tsc` never invokes, so a template expression error passes it and fails `ng test` at
+build time before a single test runs. Three parallel agents once reported a clean `tsc` on work whose
+build died on `[dialogElement]="dialogEl()"`.
+
+Treat `tsc` as a fast pre-filter. The gate for anything that touched a template is `ng test
+--watch=false` or `ng build`.
+
+## jsdom has no `CSS.escape`
+
+The builder runs specs under jsdom, where `CSS.escape` is `undefined`. A helper that builds a selector
+with it throws inside the test rather than failing an assertion, and the failure names the helper, not
+the missing global:
+
+```ts
+host.querySelector(`#${CSS.escape(id)}`)   // TypeError under jsdom
+host.querySelector(`[id="${id}"]`)          // same element, no global needed
+```
+
+The attribute form is the fix, not a workaround: it selects the identical element. A spec carrying the
+`CSS.escape` pattern can sit green for months if that file was never actually executed, so the first
+full run of a suite surfaces it in files nobody touched.
+
+## Destroy fixtures whose components register listeners
+
+A component with a `host: {'(window:resize)': ...}` listener, or one that attaches its own listener in
+a constructor effect, outlives its test unless the fixture is destroyed. The leaked instances keep
+firing against detached nodes and throw during *later* files (`getBoundingClientRect is not a
+function`), which surfaces as "Unhandled Errors" in the run summary while every assertion still
+passes. Track the fixtures a file creates and `fixture.destroy()` them in `afterEach`.

@@ -1,7 +1,31 @@
 ---
 name: angular-conventions
-description: Angular 22+ conventions and the single entry point for Angular work: components, signals, DI with inject(), Signal Forms, httpResource(), routing and guards, NgRx Signal Store, directives, overlays and dialogs, MSAL auth, A2UI generative UI, Vitest testing, CSS that will not apply, data-table column geometry, bundle-size optimization, runtime config injection, drag-and-drop reordering, migrating off Angular Material to Tailwind v4, and file downloads. Use when the task is Angular-specific but not yet narrowed to one topic, or to route into a specific Angular concern. Triggers on remove angular material, material to tailwind, drop @angular/cdk, tailwind v4 angular, cannot apply unknown utility class, borders disappeared after tailwind, dialog not centered, migrate many apps to tailwind, roll out a shared app shell, uninstall @angular/cdk, @angular/aria peer dependency, cdk scrolling virtual scroll, TestBed.initTestEnvironment first, vitest reports mass failures, ng test vs vitest, fixed height overlaps content, Angular architecture, standalone component, inject(), signal(), computed(), signal forms, httpResource(), route guard, MSAL login does nothing, interaction_in_progress, duplicate HTTP requests, initial budget exceeded, css change has no effect, container query not working, table shifts on sort, column picker, empty aria-live gap, runtime config injection, reorder cards, download a file, TestBed, vi.mock, ng test.
----
+description: >-
+  Angular 22+ conventions and the single entry point for Angular work: components, signals, DI with
+  inject(), Signal Forms, httpResource(), routing and guards, NgRx Signal Store, directives, overlays
+  and dialogs, MSAL auth, A2UI generative UI, Vitest testing, CSS that will not apply, data-table
+  column geometry, bundle-size optimization, runtime config injection, drag-and-drop reordering,
+  migrating off Angular Material to Tailwind v4, and file downloads. Use when the task is Angular-
+  specific but not yet narrowed to one topic, or to route into a specific Angular concern. Triggers on
+  remove angular material, material to tailwind, drop @angular/cdk, tailwind v4 angular, cannot apply
+  unknown utility class, borders disappeared after tailwind, dialog not centered, dialog needs a URL, route-driven dialog, dialogOpen signal duplicated, overlay as a child route, migrate many apps to
+  tailwind, roll out a shared app shell, uninstall @angular/cdk, @angular/aria peer dependency, cdk
+  scrolling virtual scroll, infinite scroll stops loading, list frozen after the first page,
+  scrolling loads nothing, sentinel never fires, render only the first N rows,
+  TestBed.initTestEnvironment first, vitest reports mass failures, ng test
+  vs vitest, fixed height overlaps content, Angular architecture, standalone component, inject(),
+  signal(), computed(), signal forms, httpResource(), route guard, MSAL login does nothing,
+  interaction_in_progress, duplicate HTTP requests, initial budget exceeded, css change has no effect,
+  container query not working, table shifts on sort, column picker, colgroup width has no effect, column percentages ignored, adjust the column widths so the value fits, value will not fit in the column, nested horizontal scrollbar inside a card, empty aria-live gap, runtime
+  config injection, reorder cards, download a file, TestBed, vi.mock, ng test, environment.ts vs
+  environment.prod.ts, fileReplacements direction, inverted environment files, ng serve loads wrong
+  environment, hardcoded future date in test fixture, spec date filter silently drops fixture,
+  standalone vitest.config.ts, npx vitest run fails to start, missing @analogjs/vite-plugin-angular,
+  split a component, extract a child component, page component too large, css stopped matching after
+  extraction, unstyled after moving markup, tsc clean but ng test build fails, templates not type-
+  checked, this expression is not callable has no call signatures, template ref shadows viewChild,
+  CSS.escape is not a function, jsdom CSS.escape, unhandled errors getBoundingClientRect, test host
+  plain field not signal, form() outside injection context in a spec.---
 
 # Angular Conventions
 
@@ -9,11 +33,13 @@ Group reusable Angular guidance under one entry skill.
 
 ## When to Use This Skill
 
+
 - The task is Angular-specific but not yet narrowed to one Angular topic.
 - You need a single entry point for Angular components, DI, forms, HTTP, routing, or signals.
 - The repository has its own Angular rules in `docs/` and you want to pair those with general Angular conventions.
 
 ## Defaults
+
 
 | Topic                       | Current rule                                                                               |
 | --------------------------- | ------------------------------------------------------------------------------------------ |
@@ -35,58 +61,34 @@ Group reusable Angular guidance under one entry skill.
 | Component file layout       | Separate `.ts`, `.html`, `.css` files; kebab-case names; one folder per component         |
 | Component organization      | Functional hierarchy: feature folder → component sub-folder                                |
 
-## Usage Note
-
-- This skill captures shared Angular 22 conventions. Always check the target repository's own `docs/` or `CLAUDE.md` for repo-specific overrides (API base URLs, store architecture, auth provider, money conventions, etc.) before applying these defaults.
-
-## Component File Organization
-
-Angular projects use a functional storage hierarchy:
-
-```
-app/
-  <feature>/              ← domain/feature folder (auth, person, cart, …)
-    <component-name>/     ← one folder per component
-      <component-name>.ts
-      <component-name>.html  (if separate template)
-      <component-name>.spec.ts
-    <service>.ts          ← services live at feature level, not in a sub-folder
-  shared/                 ← cross-cutting UI components used across features
-    <shared-component>/
-  store/                  ← global state (NgRx store, signal stores)
-```
-
-Rules:
-
-- Each component gets its own folder named after the component.
-- Files inside the folder share the component's name (e.g., `user-card/user-card.ts`).
-- Services are placed at the feature level, not inside a component sub-folder.
-- `shared/` contains components reused across multiple features.
-- `store/` contains global state artifacts.
-
 ## Delegate Map
+
 
 | Request type                                          | Reference to use                                                   |
 | ----------------------------------------------------- | ------------------------------------------------------------------ |
 | Build or refactor standalone components               | [`angular-component`](references/angular-component.md)             |
 | Component folder layout and file organization         | [`angular-component`](references/angular-component.md)             |
+| Split a large component or page into child components (CSS that stops matching once markup moves, a template ref shadowing a viewChild of the same name, what the children may not inject) | [`angular-component-extraction`](references/angular-component-extraction.md) |
 | Configure dependency injection or providers           | [`angular-di`](references/angular-di.md)                           |
 | Build forms and validation flows                      | [`angular-forms`](references/angular-forms.md)                     |
 | Implement API calls and data loading                  | [`angular-http`](references/angular-http.md)                       |
+| Paged list / infinite scroll misbehaving (sentinel never fires, list frozen after the first chunk, scrolling loads nothing, a prefetch or app-initializer broke the loader, render a window of N rows to cut initial paint) | [`angular-http-patterns-sentinel-traps`](references/angular-http-patterns-sentinel-traps.md) |
 | Download a file the API generates, with auth          | [`angular-file-download`](references/angular-file-download.md)     |
 | Configure navigation and route behavior               | [`angular-routing`](references/angular-routing.md)                 |
+| Choose a render mode per route, SSR traps, transfer cache          | [`angular-ssr-hybrid-rendering`](references/angular-ssr-hybrid-rendering.md) |
+| Expose the app as WebMCP agent tools, and what not to expose       | [`angular-webmcp`](references/angular-webmcp.md)                   |
 | Model reactive state with signals                     | [`angular-signals`](references/angular-signals.md)                 |
 | Design app state so one composed signal store fully serves the app (feature-per-domain, container/presenter binding) | [`angular-signal-store-design`](references/angular-signal-store-design.md) |
 | Add a global store-driven activity indicator (HTTP request-counter + explicit AI-activity flag + interceptor + progress bar) | [`angular-activity-indicator`](references/angular-activity-indicator.md) |
 | Load-once data loading with local CRUD sync (ensure*Loaded guards, in-flight dedupe/shareReplay, resolvers scoped to what a route reads, mutations patch the store instead of refetching, sessionStorage TTL cache, duplicate-request elimination) | [`angular-load-once-store`](references/angular-load-once-store.md) |
 | Write a spec for a component, service, guard or signal with Vitest and `TestBed` | [`angular-testing`](references/angular-testing.md)                 |
-| Run or scope a Vitest suite and read the result (`ng test` vs raw `npx vitest`, `--include` vs `--filter`, a run that skipped everything but shows no red, one broken spec failing the whole type-check, which failing file to fix first) | [`angular-test-execution`](references/angular-test-execution.md) |
+| Run or scope a Vitest suite and read the result (`ng test` vs raw `npx vitest`, `--include` vs `--filter`, a run that skipped everything but shows no red, one broken spec failing the whole type-check, which failing file to fix first, a stray `vitest.config.ts` at the project root vs the `test` target's `runnerConfig`, `npx vitest run` failing to start on a missing plugin while `ng test` passes) | [`angular-test-execution`](references/angular-test-execution.md) |
 | Measure coverage and rank the gaps (`@vitest/coverage-v8` not installed, where `coverage-summary.json` actually lands, a `.html` file at ~0% functions, missing `<name>.spec.ts` is not missing coverage) | [`angular-test-coverage`](references/angular-test-coverage.md) |
-| The spec fails for a reason that is not the code under test: `vi.mock` factory traps (`__spreadValues is not a function`, mock is `undefined`, `is not a constructor`, `vi.hoisted`), `expectOne` finding no matching request when the URL has query params, flushing the wrong body type for a blob request, one leaked request cascading into dozens of failures | [`angular-test-doubles`](references/angular-test-doubles.md) |
+| The spec fails for a reason that is not the code under test: `vi.mock` factory traps (`__spreadValues is not a function`, mock is `undefined`, `is not a constructor`, `vi.hoisted`), `expectOne` finding no matching request when the URL has query params, flushing the wrong body type for a blob request, one leaked request cascading into dozens of failures, a suite that went from green to red with no code change because a fixture's hardcoded future date is now in the past and the code date-filters it out | [`angular-test-doubles`](references/angular-test-doubles.md) |
 | A plain-bound native `<select>` renders with nothing selected (no `ngModel`/`formField`): `[value]` on the select loses to the options' own bindings, put `[selected]` on the options | [`angular-select-binding`](references/angular-select-binding.md) |
-| Build modals/dialogs/popups, ESC-to-close, dark native controls | [`angular-overlays`](references/angular-overlays.md)     |
+| Build modals/dialogs/popups, ESC-to-close, dark native controls, a dialog that needs its own URL (route-driven overlay) | [`angular-overlays`](references/angular-overlays.md)     |
 | Build a draggable/resizable two-pane splitter (`ux-splitter`) | [`angular-draggable-splitter`](references/angular-draggable-splitter.md) |
-| Stable data-table column geometry (columns jump when sorting, table shifts on sort/filter, `table-fixed` vs `table-auto`, columns overflow the container, last column pushed off-screen, unwanted horizontal scrollbar, server-side sort with infinite scroll, collapsible nav rail changes available width at a fixed viewport, container query instead of media query, sidebar expanded vs collapsed, iPad Pro 13 inch) | [`angular-table-column-layout`](references/angular-table-column-layout.md) |
+| Stable data-table column geometry (columns jump when sorting, table shifts on sort/filter, colgroup width has no effect, column percentages ignored, adjust the column widths so the value fits, value will not fit in the column, nested horizontal scrollbar inside a card, table wider than its container, `table-fixed` vs `table-auto`, columns overflow the container, last column pushed off-screen, unwanted horizontal scrollbar, server-side sort with infinite scroll, collapsible nav rail changes available width at a fixed viewport, container query instead of media query, sidebar expanded vs collapsed, iPad Pro 13 inch) | [`angular-table-column-layout`](references/angular-table-column-layout.md) |
 | User-resizable table columns (drag column border, resize column width, column resize handle, drag fires the sort by mistake, flexible column collapses to a few px, persist column widths, stale stored widths override new defaults) | [`angular-table-column-resize`](references/angular-table-column-resize.md) |
 | Show/hide table columns (column picker, "Spalten" dropdown, hide a column, hidden by default, column visibility, explicit choice vs responsive breakpoint, checkbox stays checked below breakpoint, cannot hide last column) | [`angular-table-column-visibility`](references/angular-table-column-visibility.md) |
 | Drag and drop for grids or reorderable lists without a library (cdkDrag alternative, reorder rows, draggable grid, drop target, not-allowed drop) | [`angular-drag-drop`](references/angular-drag-drop.md) |
@@ -116,72 +118,8 @@ Rules:
 | Migrate markdown-renderer into a split demo-container layout | [`angular-migrate-markdown`](references/angular-migrate-markdown.md) |
 | Render agent-driven generative UI with the A2UI protocol (catalogs, surfaces, actions, theming) | [`angular-a2ui`](references/angular-a2ui.md) |
 | Build a multi-step wizard / setup flow: full-width step-rail shell, phase-driven active/done states, two-column step body, copy-to-clipboard, real-data chip filters | [`angular-wizard`](references/angular-wizard.md) |
-
-## Example Prompts
-
-- "Use angular-conventions to choose the right pattern for a new Angular form."
-- "Route this Angular data-loading task to the right conventions reference."
-- "Use angular-conventions for a component and signals refactor."
-- "Use angular-conventions to design a feature-per-domain signal store that fully serves the app."
-- "Use angular-conventions to add a global store-driven activity indicator (HTTP + AI activity) with an interceptor."
-- "Use angular-conventions to scaffold a standalone Angular component and confirm the right CLI command."
-- "Use angular-conventions to upgrade this workspace to the latest Angular version."
-- "Use angular-conventions to migrate markdown-renderer into the split demo-container layout."
-- "Use angular-conventions to wire an A2UI renderer and custom catalog into an Angular client."
-- "Use angular-conventions to add a drag-and-drop file drop zone that emits selected files to the store."
-- "Use angular-conventions to build a file-import wizard (upload → review → commit) for Mieterlisten."
-- "Use angular-conventions to add a retained-documents list with a blob download button."
-
-## Layout Rules
-
-| Rule | Detail |
-| ---- | ------ |
-| Button alignment | All button groups (`.actions`, `.section-actions`, `.hero-actions`) must use `justify-content: flex-end` so buttons sit at the right edge |
-| Default button style | Orange fill (`var(--accent)`) with black text (`#0a0c10`), `font-weight: 700`. This is the global default — no extra class needed |
-| Destructive buttons | Stop, Delete, Remove, Drop — use `.btn-danger`: solid red fill (`var(--danger)`) with black text (`#0a0c10`) |
-| Exceptions | Icon/utility buttons (`.btn-close`, `.tree-btn`, `.template-card`) keep their own component-scoped overrides |
-
-
-## Project-Specific Rule
-
-- Use this skill for reusable Angular guidance.
-- Check the repository's `docs/` for project-specific architecture, folder layout, naming, and build rules before applying these conventions.
-
-
-## Code Generation
-
-Use Angular CLI rather than hand-writing the initial file structure.
-
-```bash
-ng generate component my-component
-ng generate service my-service
-ng generate directive my-directive
-ng generate pipe my-pipe
-```
-
-
-## Development Commands
-
-| Command            | Use                                        |
-| ------------------ | ------------------------------------------ |
-| `ng serve`         | Start the local Angular development server |
-| `ng build`         | Create a production build                  |
-| `ng build --watch` | Rebuild continuously during development    |
-
-
-## Deployment Note
-
-Angular projects in this repository are typically deployed to Azure Static Web Apps or Azure Container Apps. Use the project-specific deployment scripts and documentation instead of inventing a new deployment path.
-
-## NDJSON Streaming into Signal Store
-
-When a store feature must consume a server-sent NDJSON stream:
-
-1. Use `fetch` (not `HttpClient`) to POST and obtain `response.body.getReader()`.
-2. Decode chunks with `new TextDecoder()` in streaming mode; split on `\n`; parse each non-empty line as JSON.
-3. Drive `patchState` for each event type (`stage`, `cost`, `result`) as lines arrive.
-4. Fall back to an `HttpClient` call on any `fetch` rejection, non-200 response, or absent body.
-5. Put the fallback in a separate async function and call it from both the `catch` block and the non-ok guard.
-6. Revoke any object-URL (`URL.revokeObjectURL`) in both success and error paths.
-
-Reference implementation: `src/inventory-ui/src/app/store/features/with-scan.feature.ts` (`resolvePhotoStream`).
+| Where a component's files live, and when the repo's own docs override these defaults. | [`angular-project-structure`](references/angular-project-structure.md) |
+| Button alignment, the default and destructive button styles, and which buttons are exempt. | [`angular-layout-rules`](references/angular-layout-rules.md) |
+| Scaffold with the CLI, serve, build, watch; where these apps deploy; environment.ts vs environment.development.ts, `fileReplacements` direction, inverted pre-v15 environment files | [`angular-cli-and-build`](references/angular-cli-and-build.md) |
+| Consume a server-sent NDJSON stream in a store feature, with the HttpClient fallback. | [`angular-ndjson-signal-store`](references/angular-ndjson-signal-store.md) |
+| Worked phrasings that route into this skill. | [`angular-example-prompts`](references/angular-example-prompts.md) |

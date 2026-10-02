@@ -208,3 +208,50 @@ have either broken the module or quietly rewritten its curriculum.
 **Rule:** In a teaching repository, separate "code that uses X" from "code that teaches X". The first is migration
 work; the second is a curriculum decision that goes back to the owner with the options priced (keep the dependency
 for those demos, rewrite them against the replacement, or drop them). Ask before the sweep reaches them, not after.
+
+## The estate is the reference implementation; grep it before designing from the vendor docs
+
+**Pattern:** Lab 9 (WebMCP) and lab 12 (deployment) were both designed from the API surface and from
+what a deployment "should" look like. Both were wrong in ways only the estate could have told me. The
+proven WebMCP implementation sits in `bauer-sport/src/vienna-fightnight-ui/webmcp.js` and
+`citythong.at`, and carries three parts I had invented around: the origin-trial meta tag that is the
+reason `document.modelContext` is undefined, `document.modelContext` first with `navigator` as the
+fallback, and a static `/webmcp.json` manifest. The deployment lab in `claude-code-masterclass`
+(`labs/11-agentic-devops/lab-01-deploy-to-an-ubuntu-box.md`) already had the throwaway-Ubuntu-container
+target; the GitHub Actions workflow I wrote instead could not be executed at all and taught less.
+**Rule:** before authoring teaching material about a technology this estate already ships, grep
+`git-customers/*` and `git-projects/*` for it. A sibling repo that runs the thing in production
+outranks the vendor documentation, and it names the failure modes the docs omit.
+
+## Which container owns the port decides the blast radius
+
+**Pattern:** The lab apps proxy `/api` to `localhost:5093`. On this machine 5093 is
+`secrets-mcp-integrations`, the real secrets database. Verifying the lab 4 category cap meant a POST,
+and the app opened showing "Ext. Resources, 22 secrets, alexander.kastil@..." one click before the
+write. The throwaway lab container was on 5193 and the proxy had been reset to the shipped value.
+**Rule:** before any write from a demo or lab app, read which container holds the port
+(`docker ps --format '{{.Names}} {{.Ports}}'`) and confirm the data on screen is the disposable seed,
+not production. Point disposable work at a disposable instance and treat the shipped proxy value as
+the student's setting, not yours.
+
+## Reach for the repo's existing mechanism before adding a feature to the app under test
+
+**Pattern:** Lab 4 needs a fourth category so the "at most three" cap is reachable, and the seed gives
+every list exactly three. To avoid one `curl` in the guide I built an in-app category creator: a new
+input, a POST, a store method, an output chain, patched across 18 starter and solution folders. The
+correction was one sentence: the repo already ships `.http` REST client files next to the backend, and
+one more of those answers it. The feature was reverted from all 18 folders and replaced by a
+`secrets-vault.http` beside `package.json`.
+**Rule:** when a lab or demo needs an out-of-band call, look for what the repo already uses for
+out-of-band calls (a `.http` file, a seed script, an existing tool) before adding a capability to the
+application under test. A new feature changes what the app is; a request file does not.
+
+## A carry-forward lab chain propagates every late change by hand
+
+**Pattern:** Labs are cut as lab N's solution becoming lab N+1's starter. Changing lab 9 after 10, 11
+and 12 had been cut meant patching five downstream folders; changing lab 4 meant eighteen, in two
+variants because lab 6 moved the call into the store. Each propagation needs a per-variant patch and a
+build, and the source files are not interchangeable across the boundary where the architecture changed.
+**Rule:** in a carry-forward chain, treat a change to lab N as a change to every folder from N onward,
+and check `md5sum` across the chain first to learn how many distinct variants of the file exist. Two
+variants is a two-patch job; discovering that after writing one patch is a rebuild.
