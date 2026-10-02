@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Seven defer triggers</title>
+  <desc>Each trigger with when it fires, plus the light and heavy chunk comparison.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="80" y="60" width="1100" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="120" y="128" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">on immediate</text>
+  <text x="560" y="128" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">after render</text>
+  <rect x="80" y="192" width="1100" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="120" y="260" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">on idle</text>
+  <text x="560" y="260" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">default, idle time</text>
+  <rect x="80" y="324" width="1100" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="120" y="392" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">on timer(3s)</text>
+  <text x="560" y="392" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">fixed delay</text>
+  <rect x="80" y="456" width="1100" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="120" y="524" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">on hover</text>
+  <text x="560" y="524" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">pointer enters</text>
+  <rect x="80" y="588" width="1100" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="120" y="656" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">on interaction</text>
+  <text x="560" y="656" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">click or keydown</text>
+  <rect x="80" y="720" width="1100" height="110" rx="14" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="120" y="788" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">on viewport</text>
+  <text x="560" y="788" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">scrolled into view</text>
+  <rect x="80" y="852" width="1100" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="120" y="920" text-anchor="start" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">when expr</text>
+  <text x="560" y="920" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">turns truthy, once</text>
+  <text x="1050" y="788" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#2f8f57">workhorse</text>
+  <rect x="1260" y="60" width="580" height="400" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1550" y="226" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">LightPanel</text>
+  <text x="1550" y="269" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">no dependencies</text>
+  <text x="1550" y="315" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">&lt; 1 kB chunk</text>
+  <rect x="1260" y="490" width="580" height="400" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="1550" y="656" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">HeavyPanel</text>
+  <text x="1550" y="699" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">import('moment')</text>
+  <text x="1550" y="745" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">large chunk</text>
+  <text x="1550" y="960" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="600" fill="#c24141">smaller than the placeholder = slower</text>
+</svg>

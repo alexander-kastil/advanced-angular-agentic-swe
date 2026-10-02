@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Fix-verify loop</title>
+  <desc>Baseline audit, Lighthouse CI gate after deploy, fix by layer, compare snapshots, through the Caddy edge.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="660" y="40" width="600" height="220" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="960" y="119" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">1  baseline</text>
+  <text x="960" y="161" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">agentic-seo audit</text>
+  <text x="960" y="202" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#24292f">scored snapshot in .seo/</text>
+  <rect x="1300" y="410" width="560" height="260" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="1580" y="490" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">2  Lighthouse CI</text>
+  <text x="1580" y="531" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#24292f">after the deploy</text>
+  <text x="1580" y="571" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="400" fill="#24292f">LCP &lt; 2500 ms</text>
+  <text x="1580" y="611" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="400" fill="#24292f">TBT &lt; 200 ms, CLS &lt; 0.1</text>
+  <rect x="660" y="820" width="600" height="220" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="960" y="900" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">3  fix by layer</text>
+  <text x="960" y="941" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#24292f">index.html, app.html: markup</text>
+  <text x="960" y="981" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#24292f">Caddyfile: headers, compression</text>
+  <rect x="60" y="410" width="560" height="260" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="340" y="508" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">4  compare</text>
+  <text x="340" y="550" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">snapshot delta</text>
+  <text x="340" y="592" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">per dimension</text>
+  <path d="M1260,150 C1500,150 1580,280 1580,404" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <path d="M1580,670 C1580,820 1450,930 1266,930" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <path d="M660,930 C450,930 340,820 340,676" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <path d="M340,410 C340,250 450,150 654,150" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="700" y="450" width="520" height="180" rx="18" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+  <text x="960" y="506" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">measured through</text>
+  <text x="960" y="548" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">the Caddy edge,</text>
+  <text x="960" y="590" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#24292f">never a local build</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Parameters inherit by default</title>
+  <desc>A parent route :tenant with data release 22.1 and a child route :section. With paramsInheritanceStrategy always, the default in Angular 22, the child sees tenant, release and section. With emptyOnly the child sees only section.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="560" y="40" width="800" height="150" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="600" y="105" font-size="32" fill="#24292f" font-family="Consolas, monospace">path: ':tenant'</text>
+    <text x="600" y="155" font-size="28" fill="#57606a" font-family="Consolas, monospace">data: { release: '22.1' }</text>
+    <line x1="960" y1="190" x2="960" y2="262" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="560" y="270" width="800" height="110" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="600" y="340" font-size="32" fill="#24292f" font-family="Consolas, monospace">child path: ':section'</text>
+    <line x1="760" y1="380" x2="520" y2="452" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="1160" y1="380" x2="1400" y2="452" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="40" y="460" width="880" height="420" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="530" font-size="32" font-weight="700" fill="#24292f">'always'</text>
+    <text x="80" y="575" font-size="26" fill="#57606a">Angular 22 default</text>
+    <g font-family="Consolas, monospace" font-size="30" fill="#24292f">
+      <text x="80" y="660">tenant   = acme</text>
+      <text x="80" y="720">release  = 22.1</text>
+      <text x="80" y="780">section  = billing</text>
+    </g>
+    <rect x="1000" y="460" width="880" height="420" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1040" y="530" font-size="32" font-weight="700" fill="#24292f">'emptyOnly'</text>
+    <text x="1040" y="575" font-size="26" fill="#57606a">the pre-22 rule</text>
+    <g font-family="Consolas, monospace" font-size="30">
+      <text x="1040" y="660" fill="#8c959f">tenant   = undefined</text>
+      <text x="1040" y="720" fill="#8c959f">release  = undefined</text>
+      <text x="1040" y="780" fill="#24292f">section  = billing</text>
+    </g>
+    <rect x="40" y="920" width="1840" height="120" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="80" y="995" font-size="28" fill="#24292f" font-family="Consolas, monospace">withRouterConfig({ paramsInheritanceStrategy: 'emptyOnly' })</text>
+  </g>
+</svg>

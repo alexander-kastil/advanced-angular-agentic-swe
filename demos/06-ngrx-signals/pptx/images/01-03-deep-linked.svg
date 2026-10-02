@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Deep signals and linked state</title>
+  <desc>Left: store.user.address.city is a nested signal; a union-typed contact slice has no deep members and is narrowed on kind. Right: withLinkedState seats is derived from the selected course, writable by the user, and resets when the selection changes.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="40" width="900" height="1000" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="110" font-size="36" font-weight="700" fill="#24292f">Deep signals</text>
+    <g font-family="Consolas, monospace" font-size="32" fill="#24292f">
+      <rect x="80" y="150" width="300" height="90" rx="12" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="230" y="208" text-anchor="middle">user()</text>
+      <rect x="240" y="290" width="340" height="90" rx="12" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="410" y="348" text-anchor="middle">address()</text>
+      <rect x="440" y="430" width="300" height="90" rx="12" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+      <text x="590" y="488" text-anchor="middle">city()</text>
+    </g>
+    <path d="M160 240 V335 H232" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <path d="M320 380 V475 H432" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <text x="80" y="590" font-size="28" fill="#24292f" font-family="Consolas, monospace">store.user.address.city()</text>
+    <rect x="80" y="650" width="820" height="350" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="110" y="715" font-size="32" font-weight="700" fill="#24292f">Union slice</text>
+    <text x="110" y="770" font-size="28" fill="#24292f" font-family="Consolas, monospace">contact: email | phone</text>
+    <text x="110" y="830" font-size="28" fill="#57606a">only shared keys survive</text>
+    <text x="110" y="890" font-size="28" fill="#57606a">narrow on kind in a computed</text>
+    <text x="110" y="950" font-size="28" fill="#57606a">or an @switch, replace it whole</text>
+    <rect x="980" y="40" width="900" height="1000" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1020" y="110" font-size="36" font-weight="700" fill="#24292f" font-family="Consolas, monospace">withLinkedState</text>
+    <text x="1020" y="160" font-size="28" fill="#57606a">derived and still writable</text>
+    <rect x="1020" y="220" width="820" height="110" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="290" font-size="30" fill="#24292f" font-family="Consolas, monospace">selectedId = Angular course</text>
+    <line x1="1430" y1="330" x2="1430" y2="402" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <text x="1450" y="375" font-size="26" fill="#57606a">derives</text>
+    <rect x="1020" y="410" width="820" height="110" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="480" font-size="30" fill="#24292f" font-family="Consolas, monospace">seats = minSeats (2)</text>
+    <line x1="1430" y1="520" x2="1430" y2="592" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <text x="1450" y="565" font-size="26" fill="#57606a">user types 5</text>
+    <rect x="1020" y="600" width="820" height="110" rx="14" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="1050" y="670" font-size="30" fill="#24292f" font-family="Consolas, monospace">seats = 5 (patchState)</text>
+    <line x1="1430" y1="710" x2="1430" y2="782" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <text x="1450" y="755" font-size="26" fill="#57606a">select another course</text>
+    <rect x="1020" y="790" width="820" height="110" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="860" font-size="30" fill="#24292f" font-family="Consolas, monospace">seats resets to its minSeats</text>
+    <text x="1020" y="970" font-size="28" fill="#57606a">recomputes on source change</text>
+  </g>
+</svg>

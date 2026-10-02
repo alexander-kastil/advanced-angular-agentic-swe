@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>The @Service decorator</title>
+  <desc>Mapping from @Injectable to @Service, a route-scoped service with autoProvided false whose injector withExperimentalAutoCleanupInjectors destroys on deactivation, and the service-migration schematic.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Consolas, monospace" font-size="28" fill="#24292f">
+    <rect x="40" y="40" width="860" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="70" y="108">@Injectable({ providedIn: 'root' })</text>
+    <line x1="900" y1="95" x2="1012" y2="95" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1020" y="40" width="860" height="110" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="108">@Service()</text>
+    <rect x="40" y="180" width="860" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="70" y="248">@Injectable() + providers</text>
+    <line x1="900" y1="235" x2="1012" y2="235" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1020" y="180" width="860" height="110" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="248">@Service({ autoProvided: false })</text>
+    <rect x="40" y="320" width="860" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="70" y="388">{ provide, useFactory }</text>
+    <line x1="900" y1="375" x2="1012" y2="375" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1020" y="320" width="860" height="110" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="388">@Service({ factory })</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="480" width="1220" height="400" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="545" font-size="32" font-weight="700" fill="#24292f">Route scope</text>
+    <text x="80" y="605" font-size="28" fill="#24292f" font-family="Consolas, monospace">path: 'service-migration',</text>
+    <text x="80" y="650" font-size="28" fill="#24292f" font-family="Consolas, monospace">providers: [RouteScopedNotesService]</text>
+    <rect x="80" y="690" width="1140" height="150" rx="14" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="110" y="750" font-size="28" fill="#24292f" font-family="Consolas, monospace">withExperimentalAutoCleanupInjectors()</text>
+    <text x="110" y="800" font-size="28" fill="#57606a">destroys the route injector on deactivate</text>
+    <rect x="1320" y="480" width="560" height="400" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1355" y="545" font-size="32" font-weight="700" fill="#24292f">Leave and return</text>
+    <text x="1355" y="610" font-size="28" fill="#24292f">root service:</text>
+    <text x="1355" y="650" font-size="28" fill="#57606a">same instance, notes kept</text>
+    <text x="1355" y="720" font-size="28" fill="#24292f">route service:</text>
+    <text x="1355" y="760" font-size="28" fill="#57606a">fresh instance, empty</text>
+    <rect x="40" y="920" width="1840" height="120" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="995" font-size="30" fill="#24292f" font-family="Consolas, monospace">ng generate @angular/core:service-migration</text>
+  </g>
+</svg>

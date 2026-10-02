@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>A store is a list of features</title>
+  <desc>signalStore applies features in order: withState, withLinkedState, withComputed, withProps and withFeature, withMethods, withHooks. Entities, events and resource extensions plug in as features.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="100" y="80" font-size="40" font-weight="700" fill="#24292f" font-family="Consolas, monospace">signalStore(</text>
+    <g font-family="Consolas, monospace" font-size="36" fill="#24292f">
+      <rect x="140" y="115" width="700" height="110" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="180" y="183">withState</text>
+      <rect x="140" y="245" width="700" height="110" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="180" y="313">withLinkedState</text>
+      <rect x="140" y="375" width="700" height="110" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+      <text x="180" y="443">withComputed</text>
+      <rect x="140" y="505" width="700" height="110" rx="14" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <text x="180" y="573">withProps / withFeature</text>
+      <rect x="140" y="635" width="700" height="110" rx="14" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+      <text x="180" y="703">withMethods</text>
+      <rect x="140" y="765" width="700" height="110" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+      <text x="180" y="833">withHooks</text>
+    </g>
+    <text x="100" y="940" font-size="40" font-weight="700" fill="#24292f" font-family="Consolas, monospace">)</text>
+    <line x1="920" y1="130" x2="920" y2="860" stroke="#57606a" stroke-width="4" marker-end="url(#a)"/>
+    <text x="960" y="470" font-size="34" font-weight="700" fill="#24292f">order is</text>
+    <text x="960" y="515" font-size="34" font-weight="700" fill="#24292f">the contract</text>
+    <text x="960" y="570" font-size="28" fill="#57606a">each feature sees</text>
+    <text x="960" y="608" font-size="28" fill="#57606a">only what came before</text>
+    <text x="1340" y="160" font-size="32" font-weight="700" fill="#24292f">plug in as features</text>
+    <rect x="1340" y="200" width="520" height="170" rx="16" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1375" y="270" font-size="32" fill="#24292f" font-family="Consolas, monospace">withEntities</text>
+    <text x="1375" y="325" font-size="28" fill="#57606a">normalized collections</text>
+    <rect x="1340" y="410" width="520" height="210" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="1375" y="475" font-size="30" fill="#24292f" font-family="Consolas, monospace">@ngrx/signals/events</text>
+    <text x="1375" y="530" font-size="28" fill="#57606a" font-family="Consolas, monospace">withReducer</text>
+    <text x="1375" y="578" font-size="28" fill="#57606a" font-family="Consolas, monospace">withEventHandlers</text>
+    <rect x="1340" y="660" width="520" height="170" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1375" y="728" font-size="30" fill="#24292f" font-family="Consolas, monospace">@ngrx/signals/resource</text>
+    <text x="1375" y="783" font-size="28" fill="#57606a" font-family="Consolas, monospace">extendResource</text>
+  </g>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Express 5 and AngularNodeAppEngine</title>
+  <desc>Requests go to express.static first, then to AngularNodeAppEngine.handle, streamed back with writeResponseToNodeResponse.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="60" y="380" width="300" height="180" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="210" y="481" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">request</text>
+  <line x1="360" y1="470" x2="460" y2="470" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="470" y="330" width="520" height="280" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="730" y="438" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#24292f">express.static</text>
+  <text x="730" y="480" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">browser dist/</text>
+  <text x="730" y="522" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="600" fill="#24292f">index: false</text>
+  <line x1="730" y1="330" x2="730" y2="230" stroke="#2f8f57" stroke-width="3" marker-end="url(#a-green)"/>
+  <rect x="470" y="70" width="520" height="150" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="730" y="153" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="600" fill="#24292f">files and prerendered pages</text>
+  <line x1="990" y1="470" x2="1090" y2="470" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <text x="1040" y="450" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#57606a">otherwise</text>
+  <rect x="1100" y="330" width="740" height="280" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1470" y="437" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">AngularNodeAppEngine</text>
+  <text x="1470" y="482" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">.handle(req)</text>
+  <text x="1470" y="524" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">matches serverRoutes, renders</text>
+  <line x1="1470" y1="330" x2="1470" y2="230" stroke="#2f8f57" stroke-width="3" marker-end="url(#a-green)"/>
+  <rect x="1100" y="70" width="740" height="150" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1470" y="134" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">writeResponseToNodeResponse</text>
+  <text x="1470" y="175" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">streams the Response back</text>
+  <line x1="1470" y1="610" x2="1470" y2="700" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <text x="1560" y="665" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#57606a">undefined</text>
+  <rect x="1270" y="710" width="400" height="110" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="1470" y="775" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#24292f">next()</text>
+  <rect x="60" y="760" width="1100" height="250" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="610" y="853" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">createNodeRequestHandler(app)</text>
+  <text x="610" y="895" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">for serverless hosts</text>
+  <text x="610" y="936" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="400" fill="#57606a">isMainModule guards app.listen</text>
+  <rect x="1270" y="860" width="570" height="150" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1555" y="923" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="600" fill="#24292f">Express 5: no get('*')</text>
+  <text x="1555" y="964" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#24292f">use app.use() with no path</text>
+</svg>

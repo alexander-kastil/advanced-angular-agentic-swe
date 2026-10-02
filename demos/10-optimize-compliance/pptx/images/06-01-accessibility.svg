@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Accessibility checks</title>
+  <desc>Template lint, axe on the rendered DOM and manual keyboard and screen reader checks, under the European Accessibility Act.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="80" y="60" width="1100" height="200" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="630" y="150" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Template lint</text>
+  <text x="630" y="193" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">@angular-eslint accessibility rules, before review</text>
+  <rect x="80" y="300" width="1100" height="200" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="630" y="390" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">axe-core on the rendered DOM</text>
+  <text x="630" y="433" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">finds about a third of WCAG failures</text>
+  <rect x="80" y="540" width="1100" height="200" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="630" y="630" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Keyboard and screen reader</text>
+  <text x="630" y="673" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">a person finds the rest</text>
+  <line x1="630" y1="260" x2="630" y2="296" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <line x1="630" y1="500" x2="630" y2="536" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="1260" y="60" width="580" height="440" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="1550" y="189" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">European</text>
+  <text x="1550" y="237" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">Accessibility Act</text>
+  <text x="1550" y="282" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">since 28 June 2025</text>
+  <text x="1550" y="308" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="8" font-weight="400" fill="#24292f"></text>
+  <text x="1550" y="348" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">EN 301 549</text>
+  <text x="1550" y="392" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">-&gt; WCAG 2.2 AA</text>
+  <text x="1550" y="590" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">new in WCAG 2.2</text>
+  <rect x="1300" y="620" width="500" height="80" rx="40" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1550" y="670" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">focus not obscured</text>
+  <rect x="1300" y="720" width="500" height="80" rx="40" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1550" y="770" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">dragging alternative</text>
+  <rect x="1300" y="820" width="500" height="80" rx="40" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1550" y="870" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">24 px targets</text>
+  <text x="630" y="830" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">@angular/aria: roles, keyboard model, typeahead</text>
+  <text x="630" y="880" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">behaviour only: contrast and text are still yours</text>
+</svg>

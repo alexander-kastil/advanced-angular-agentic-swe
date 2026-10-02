@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Incremental hydration triggers</title>
+  <desc>Server output and client behaviour for four hydrate triggers and a plain defer trigger.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <text x="930" y="80" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">server output</text>
+  <text x="1520" y="80" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">client</text>
+  <rect x="60" y="110" width="620" height="120" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="370" y="178" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#24292f">@defer (hydrate on immediate)</text>
+  <rect x="720" y="110" width="420" height="120" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="930" y="179" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">full content</text>
+  <rect x="1180" y="110" width="680" height="120" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1520" y="179" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">hydrates when idle</text>
+  <rect x="60" y="260" width="620" height="120" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="370" y="328" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#24292f">@defer (hydrate on viewport)</text>
+  <rect x="720" y="260" width="420" height="120" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="930" y="329" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">full content</text>
+  <rect x="1180" y="260" width="680" height="120" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1520" y="329" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">on scroll into view</text>
+  <rect x="60" y="410" width="620" height="120" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="370" y="478" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#24292f">@defer (hydrate on interaction)</text>
+  <rect x="720" y="410" width="420" height="120" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="930" y="479" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">full content</text>
+  <rect x="1180" y="410" width="680" height="120" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1520" y="479" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">on click, event replayed</text>
+  <rect x="60" y="560" width="620" height="120" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="370" y="628" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#24292f">@defer (hydrate never)</text>
+  <rect x="720" y="560" width="420" height="120" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="930" y="629" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">full content</text>
+  <rect x="1180" y="560" width="680" height="120" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1520" y="629" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">never: static HTML</text>
+  <rect x="60" y="710" width="620" height="120" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="370" y="778" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#24292f">@defer (on viewport)</text>
+  <rect x="720" y="710" width="420" height="120" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="930" y="779" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">placeholder only</text>
+  <rect x="1180" y="710" width="680" height="120" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1520" y="779" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">loads client-side</text>
+  <rect x="60" y="880" width="1800" height="140" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="960" y="959" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="600" fill="#24292f">on by default in Angular 22  ·  provideClientHydration(withEventReplay())</text>
+</svg>

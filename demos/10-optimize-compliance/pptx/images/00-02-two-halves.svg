@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Two halves, one gate</title>
+  <desc>Performance topics and compliance topics both feed one pull request gate.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <text x="470" y="90" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#24292f">Performance</text>
+  <text x="1450" y="90" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="700" fill="#24292f">Compliance</text>
+  <rect x="120" y="130" width="700" height="108" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="470" y="177" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Measure</text>
+  <text x="470" y="212" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">Web Vitals, DevTools</text>
+  <rect x="120" y="258" width="700" height="108" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="470" y="305" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Bundle</text>
+  <text x="470" y="340" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">Rolldown, budgets</text>
+  <rect x="120" y="386" width="700" height="108" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="470" y="433" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Load</text>
+  <text x="470" y="468" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">@defer triggers</text>
+  <rect x="120" y="514" width="700" height="108" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="470" y="561" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Runtime</text>
+  <text x="470" y="596" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">zoneless, virtual scroll</text>
+  <rect x="120" y="642" width="700" height="108" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="470" y="689" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Assets</text>
+  <text x="470" y="724" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">NgOptimizedImage</text>
+  <rect x="1100" y="130" width="700" height="128" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1450" y="187" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Accessibility</text>
+  <text x="1450" y="222" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">WCAG 2.2 AA</text>
+  <rect x="1100" y="290" width="700" height="128" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1450" y="347" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Security</text>
+  <text x="1450" y="382" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">strict CSP</text>
+  <rect x="1100" y="450" width="700" height="128" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1450" y="507" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Privacy</text>
+  <text x="1450" y="542" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">consent first</text>
+  <rect x="1100" y="610" width="700" height="128" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1450" y="667" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">Supply chain</text>
+  <text x="1450" y="702" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">licences, advisories</text>
+  <line x1="470" y1="780" x2="470" y2="860" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <line x1="1450" y1="780" x2="1450" y2="860" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="120" y="870" width="1680" height="160" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="960" y="940" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Pull request gate</text>
+  <text x="960" y="983" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">budgets  ·  template lint  ·  axe  ·  Lighthouse CI on dist/</text>
+</svg>

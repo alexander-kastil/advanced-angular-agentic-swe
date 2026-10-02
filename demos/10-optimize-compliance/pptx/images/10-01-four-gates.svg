@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Four pull request gates</title>
+  <desc>Lint, build budgets, axe through Playwright and Lighthouse CI run on dist and decide the merge.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="60" y="200" width="400" height="300" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="260" y="313" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">Gate 2</text>
+  <text x="260" y="360" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">ng lint</text>
+  <text x="260" y="403" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">template a11y rules</text>
+  <line x1="460" y1="350" x2="506" y2="350" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="510" y="200" width="400" height="300" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="710" y="313" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">Gate 1</text>
+  <text x="710" y="360" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">ng build</text>
+  <text x="710" y="403" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">budgets, exit 1</text>
+  <line x1="910" y1="350" x2="956" y2="350" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="960" y="200" width="400" height="300" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1160" y="313" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">Gate 3</text>
+  <text x="1160" y="360" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">Playwright + axe</text>
+  <text x="1160" y="403" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">on dist/</text>
+  <line x1="1360" y1="350" x2="1406" y2="350" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="1410" y="200" width="400" height="300" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="1610" y="313" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">Gate 4</text>
+  <text x="1610" y="360" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">Lighthouse CI</text>
+  <text x="1610" y="403" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">floors on dist/</text>
+  <text x="260" y="160" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#57606a">fastest, first</text>
+  <text x="710" y="160" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#57606a">produces dist/</text>
+  <path d="M1610,500 L1610,705 L1366,705" fill="none" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="560" y="630" width="800" height="150" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="960" y="715" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">merge allowed only when all four pass</text>
+  <rect x="60" y="840" width="860" height="150" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="490" y="902" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="600" fill="#24292f">accessibility &gt;= 0.95: error</text>
+  <text x="490" y="946" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="600" fill="#24292f">performance &gt;= 0.7: warn</text>
+  <rect x="1000" y="840" width="860" height="150" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="1430" y="903" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">no deployed URL in the loop</text>
+  <text x="1430" y="945" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">reports uploaded as artifacts</text>
+</svg>

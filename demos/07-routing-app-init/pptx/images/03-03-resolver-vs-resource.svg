@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Resolvers, titles and httpResource</title>
+  <desc>With a ResolveFn the navigation waits for the HTTP call, then the component activates with album as a required input and no loading state; a title ResolveFn resolves the tab title the same way. With httpResource the component renders its shell immediately and shows isLoading until value arrives.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="40" y="80" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">ResolveFn</text>
+    <text x="300" y="80" font-size="28" fill="#c24141">blocks navigation</text>
+    <rect x="40" y="110" width="400" height="150" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="240" y="195" font-size="30" fill="#24292f" text-anchor="middle">navigate</text>
+    <line x1="440" y1="185" x2="502" y2="185" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="510" y="110" width="640" height="150" rx="14" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="830" y="175" font-size="30" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">albumResolver</text>
+    <text x="830" y="225" font-size="26" fill="#57606a" text-anchor="middle">route waits for HTTP</text>
+    <line x1="1150" y1="185" x2="1212" y2="185" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1220" y="110" width="660" height="150" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1550" y="175" font-size="28" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">album = input.required()</text>
+    <text x="1550" y="225" font-size="26" fill="#57606a" text-anchor="middle">no loading state</text>
+    <rect x="510" y="300" width="1370" height="120" rx="14" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="545" y="373" font-size="28" fill="#24292f" font-family="Consolas, monospace">title: ResolveFn&lt;string&gt;  =&gt;  'Album 7'</text>
+    <text x="40" y="560" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">httpResource</text>
+    <text x="340" y="560" font-size="28" fill="#1a7f37">does not block</text>
+    <rect x="40" y="590" width="400" height="150" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="240" y="675" font-size="30" fill="#24292f" text-anchor="middle">navigate</text>
+    <line x1="440" y1="665" x2="502" y2="665" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="510" y="590" width="640" height="150" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="830" y="655" font-size="30" fill="#24292f" text-anchor="middle">shell renders</text>
+    <text x="830" y="705" font-size="26" fill="#57606a" text-anchor="middle" font-family="Consolas, monospace">isLoading()</text>
+    <line x1="1150" y1="665" x2="1212" y2="665" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1220" y="590" width="660" height="150" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1550" y="675" font-size="30" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">value()</text>
+    <rect x="40" y="820" width="1840" height="200" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="895" font-size="28" fill="#24292f">Resolver: data the route cannot render without</text>
+    <text x="80" y="960" font-size="28" fill="#24292f">httpResource: data the page can load progressively</text>
+  </g>
+</svg>

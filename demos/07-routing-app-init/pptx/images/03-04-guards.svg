@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>canMatch and stacked guards</title>
+  <desc>Left: during matching, canMatch featureAccessGuard refuses for a non-prime member, so the lazy prime-feature chunk is never requested; its third argument PartialMatchRouteSnapshot exposes params, queryParamMap and data. Right: the prime route runs canActivate onlyAuthenticatedGuard then onlyPrimeMembersGuard in order; the first failure stops; both read AuthFacade signals.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="40" width="900" height="1000" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="110" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">canMatch</text>
+    <rect x="80" y="150" width="820" height="110" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="110" y="220" font-size="30" fill="#24292f">match route</text>
+    <line x1="490" y1="260" x2="490" y2="322" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="80" y="330" width="820" height="130" rx="14" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="110" y="390" font-size="28" fill="#24292f" font-family="Consolas, monospace">featureAccessGuard</text>
+    <text x="110" y="435" font-size="26" fill="#57606a">not a prime member: false</text>
+    <line x1="490" y1="460" x2="490" y2="522" stroke="#8c959f" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#a)"/>
+    <rect x="80" y="530" width="820" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2" stroke-dasharray="10 8"/>
+    <text x="110" y="590" font-size="28" fill="#8c959f" font-family="Consolas, monospace">prime-feature chunk</text>
+    <text x="110" y="635" font-size="26" fill="#8c959f">never requested</text>
+    <rect x="80" y="720" width="820" height="280" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="110" y="780" font-size="26" fill="#24292f">third argument</text>
+    <text x="110" y="830" font-size="28" fill="#24292f" font-family="Consolas, monospace">PartialMatchRouteSnapshot</text>
+    <text x="110" y="890" font-size="26" fill="#57606a" font-family="Consolas, monospace">params, queryParamMap, data</text>
+    <text x="110" y="950" font-size="26" fill="#57606a">no component, no resolved data</text>
+    <rect x="980" y="40" width="900" height="1000" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1020" y="110" font-size="34" font-weight="700" fill="#24292f">Stacked guards</text>
+    <text x="1020" y="170" font-size="28" fill="#24292f" font-family="Consolas, monospace">path: 'prime', canActivate: [</text>
+    <rect x="1020" y="220" width="820" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="280" font-size="28" fill="#24292f" font-family="Consolas, monospace">onlyAuthenticatedGuard</text>
+    <text x="1050" y="325" font-size="26" fill="#57606a">1: signed in?</text>
+    <line x1="1430" y1="350" x2="1430" y2="412" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1020" y="420" width="820" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="480" font-size="28" fill="#24292f" font-family="Consolas, monospace">onlyPrimeMembersGuard</text>
+    <text x="1050" y="525" font-size="26" fill="#57606a">2: prime member?</text>
+    <text x="1020" y="610" font-size="28" fill="#24292f" font-family="Consolas, monospace">]</text>
+    <text x="1020" y="700" font-size="28" fill="#24292f">run in order, all must pass</text>
+    <text x="1020" y="750" font-size="28" fill="#24292f">the first failure stops</text>
+    <rect x="1020" y="800" width="820" height="200" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="870" font-size="28" fill="#24292f" font-family="Consolas, monospace">auth.isPrimeMember()</text>
+    <text x="1050" y="925" font-size="26" fill="#57606a">guards read AuthFacade signals:</text>
+    <text x="1050" y="965" font-size="26" fill="#57606a">a plain synchronous boolean</text>
+  </g>
+</svg>

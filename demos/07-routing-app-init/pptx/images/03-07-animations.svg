@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Animations without @angular/animations</title>
+  <desc>Element layer: animate.enter and animate.leave name CSS classes and Angular keeps a leaving element until its animation ends. Page layer: withViewTransitions wraps navigation in startViewTransition, styled with view-transition-old and view-transition-new, and an element with view-transition-name travels between routes. Migration: trigger becomes animate.enter, routeAnimation becomes withViewTransitions.</desc>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="40" width="900" height="620" rx="20" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="110" font-size="34" font-weight="700" fill="#24292f">Element layer</text>
+    <text x="80" y="155" font-size="26" fill="#57606a">Angular's work</text>
+    <rect x="80" y="200" width="820" height="100" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="110" y="262" font-size="28" fill="#24292f" font-family="Consolas, monospace">animate.enter="slide-in"</text>
+    <rect x="80" y="320" width="820" height="100" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="110" y="382" font-size="28" fill="#24292f" font-family="Consolas, monospace">animate.leave="slide-out"</text>
+    <text x="80" y="490" font-size="28" fill="#24292f">plain CSS classes and keyframes</text>
+    <text x="80" y="545" font-size="28" fill="#24292f">the leaving element stays until</text>
+    <text x="80" y="590" font-size="28" fill="#24292f">its animation ends</text>
+    <rect x="980" y="40" width="900" height="620" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1020" y="110" font-size="34" font-weight="700" fill="#24292f">Page layer</text>
+    <text x="1020" y="155" font-size="26" fill="#57606a">the browser's work</text>
+    <rect x="1020" y="200" width="820" height="100" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1050" y="262" font-size="28" fill="#24292f" font-family="Consolas, monospace">withViewTransitions()</text>
+    <rect x="1020" y="320" width="400" height="100" rx="12" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1220" y="382" font-size="26" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">old(root)</text>
+    <rect x="1440" y="320" width="400" height="100" rx="12" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1640" y="382" font-size="26" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">new(root)</text>
+    <text x="1020" y="490" font-size="28" fill="#24292f" font-family="Consolas, monospace">view-transition-name: demo-hero</text>
+    <text x="1020" y="545" font-size="28" fill="#24292f">one element travels between routes</text>
+    <text x="1020" y="590" font-size="28" fill="#57606a">no API: instant swap</text>
+    <rect x="40" y="720" width="1840" height="320" rx="20" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="80" y="790" font-size="32" font-weight="700" fill="#24292f">Migration</text>
+    <g font-family="Consolas, monospace" font-size="28" fill="#24292f">
+      <text x="80" y="860">animations: [trigger(...)]</text>
+      <text x="1000" y="860">animate.enter / animate.leave</text>
+      <text x="80" y="920">[@routeAnimation]</text>
+      <text x="1000" y="920">withViewTransitions()</text>
+      <text x="80" y="980">provideAnimations()</text>
+      <text x="1000" y="980">not needed</text>
+    </g>
+    <g font-size="30" fill="#57606a">
+      <text x="860" y="860">to</text>
+      <text x="860" y="920">to</text>
+      <text x="860" y="980">to</text>
+    </g>
+  </g>
+</svg>

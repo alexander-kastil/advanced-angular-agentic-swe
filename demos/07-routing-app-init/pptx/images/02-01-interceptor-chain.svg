@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>An interceptor chain for HTTP failures</title>
+  <desc>A request passes authInterceptor, retryInterceptor with count 3 and delay 1000, and httpErrorInterceptor before the Fetch backend and the API; the response returns through them in reverse. Array order is execution order.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="40" y="70" font-size="30" fill="#24292f" font-family="Consolas, monospace">provideHttpClient(withInterceptors([ ... ]))</text>
+    <rect x="40" y="150" width="240" height="560" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="160" y="440" font-size="30" font-weight="700" fill="#24292f" text-anchor="middle">HttpClient</text>
+    <rect x="340" y="150" width="360" height="560" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="520" y="230" font-size="40" font-weight="700" fill="#24292f" text-anchor="middle">1</text>
+    <text x="520" y="300" font-size="28" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">authInterceptor</text>
+    <text x="520" y="380" font-size="26" fill="#57606a" text-anchor="middle">Bearer when</text>
+    <text x="520" y="415" font-size="26" fill="#57606a" text-anchor="middle">authenticated</text>
+    <rect x="760" y="150" width="400" height="560" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="960" y="230" font-size="40" font-weight="700" fill="#24292f" text-anchor="middle">2</text>
+    <text x="960" y="300" font-size="28" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">retryInterceptor</text>
+    <text x="960" y="380" font-size="26" fill="#57606a" text-anchor="middle" font-family="Consolas, monospace">count: 3</text>
+    <text x="960" y="415" font-size="26" fill="#57606a" text-anchor="middle" font-family="Consolas, monospace">delay: 1000</text>
+    <rect x="1220" y="150" width="380" height="560" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="1410" y="230" font-size="40" font-weight="700" fill="#24292f" text-anchor="middle">3</text>
+    <text x="1410" y="300" font-size="26" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">httpErrorInterceptor</text>
+    <text x="1410" y="380" font-size="26" fill="#57606a" text-anchor="middle">catchError to</text>
+    <text x="1410" y="415" font-size="26" fill="#57606a" text-anchor="middle">a plain Error</text>
+    <rect x="1660" y="150" width="220" height="560" rx="16" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1770" y="420" font-size="28" font-weight="700" fill="#24292f" text-anchor="middle">Fetch</text>
+    <text x="1770" y="460" font-size="28" font-weight="700" fill="#24292f" text-anchor="middle">+ API</text>
+    <g stroke="#57606a" stroke-width="3">
+      <line x1="280" y1="540" x2="332" y2="540" marker-end="url(#a)"/>
+      <line x1="700" y1="540" x2="752" y2="540" marker-end="url(#a)"/>
+      <line x1="1160" y1="540" x2="1212" y2="540" marker-end="url(#a)"/>
+      <line x1="1600" y1="540" x2="1652" y2="540" marker-end="url(#a)"/>
+      <line x1="1660" y1="630" x2="1608" y2="630" stroke-dasharray="8 6" marker-end="url(#a)"/>
+      <line x1="1220" y1="630" x2="1168" y2="630" stroke-dasharray="8 6" marker-end="url(#a)"/>
+      <line x1="760" y1="630" x2="708" y2="630" stroke-dasharray="8 6" marker-end="url(#a)"/>
+      <line x1="340" y1="630" x2="288" y2="630" stroke-dasharray="8 6" marker-end="url(#a)"/>
+    </g>
+    <text x="520" y="530" font-size="24" fill="#57606a" text-anchor="middle">request</text>
+    <text x="520" y="680" font-size="24" fill="#57606a" text-anchor="middle">response</text>
+    <rect x="40" y="780" width="1840" height="240" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="850" font-size="30" font-weight="700" fill="#24292f">Array order is execution order</text>
+    <text x="80" y="910" font-size="28" fill="#24292f" font-family="Consolas, monospace">retryInterceptor = (config: RetryConfig): HttpInterceptorFn</text>
+    <text x="80" y="965" font-size="28" fill="#57606a">a factory, no class, no token; Fetch is the default backend</text>
+  </g>
+</svg>

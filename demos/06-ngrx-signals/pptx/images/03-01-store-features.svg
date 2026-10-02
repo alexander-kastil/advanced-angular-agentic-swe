@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Reusable store features</title>
+  <desc>withRequestStatus holds one requestStatus union and derives isPending, isFulfilled and error. withAttempts adds counters, successRate and methods. Both are mounted in SyncStore, whose sync rxMethod calls countAttempt and patchState with the pure updaters setPending, setFulfilled and setError.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="40" width="880" height="470" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="110" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">withRequestStatus()</text>
+    <text x="80" y="170" font-size="28" fill="#24292f" font-family="Consolas, monospace">requestStatus:</text>
+    <text x="110" y="215" font-size="28" fill="#24292f" font-family="Consolas, monospace">'idle' | 'pending' |</text>
+    <text x="110" y="260" font-size="28" fill="#24292f" font-family="Consolas, monospace">'fulfilled' | { error }</text>
+    <text x="80" y="330" font-size="28" fill="#57606a">computed:</text>
+    <text x="80" y="380" font-size="28" fill="#24292f" font-family="Consolas, monospace">isPending  isFulfilled  error</text>
+    <text x="80" y="450" font-size="28" fill="#57606a">one union, no impossible combination</text>
+    <rect x="1000" y="40" width="880" height="470" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1040" y="110" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">withAttempts()</text>
+    <text x="1040" y="170" font-size="28" fill="#24292f" font-family="Consolas, monospace">attempts, failures</text>
+    <text x="1040" y="230" font-size="28" fill="#24292f" font-family="Consolas, monospace">successRate (computed)</text>
+    <text x="1040" y="300" font-size="28" fill="#57606a">methods:</text>
+    <text x="1040" y="350" font-size="28" fill="#24292f" font-family="Consolas, monospace">countAttempt()</text>
+    <text x="1040" y="395" font-size="28" fill="#24292f" font-family="Consolas, monospace">countFailure()</text>
+    <text x="1040" y="440" font-size="28" fill="#24292f" font-family="Consolas, monospace">resetAttempts()</text>
+    <line x1="480" y1="510" x2="680" y2="592" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <line x1="1440" y1="510" x2="1240" y2="592" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="560" y="600" width="800" height="260" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="600" y="670" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">SyncStore</text>
+    <text x="600" y="730" font-size="28" fill="#24292f" font-family="Consolas, monospace">sync: rxMethod</text>
+    <text x="630" y="780" font-size="28" fill="#24292f" font-family="Consolas, monospace">countAttempt()</text>
+    <text x="630" y="825" font-size="28" fill="#24292f" font-family="Consolas, monospace">patchState(setPending())</text>
+    <rect x="40" y="900" width="1840" height="140" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="960" font-size="30" font-weight="700" fill="#24292f">Pure updaters</text>
+    <text x="80" y="1010" font-size="28" fill="#24292f" font-family="Consolas, monospace">setPending()   setFulfilled()   setError(msg)</text>
+    <text x="1300" y="1010" font-size="28" fill="#57606a">testable without a store</text>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Composing a store from parts</title>
+  <desc>The watchlist store in order: withState, withProps with an injected QuoteService and selected$, withFeature passing store.desk to withAudit, withMethods with refreshQuote as a signalMethod, and withHooks binding refreshQuote to store.selected. Each block reads only earlier blocks; props are not state.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <g font-family="Consolas, monospace">
+      <rect x="40" y="40" width="1120" height="150" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="80" y="105" font-size="34" font-weight="700" fill="#24292f">withState</text>
+      <text x="80" y="155" font-size="28" fill="#57606a">selected, desk, quote</text>
+      <rect x="40" y="240" width="1120" height="150" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <text x="80" y="305" font-size="34" font-weight="700" fill="#24292f">withProps</text>
+      <text x="80" y="355" font-size="28" fill="#57606a">quotes: inject(QuoteService), selected$</text>
+      <rect x="40" y="440" width="1120" height="150" rx="16" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+      <text x="80" y="505" font-size="34" font-weight="700" fill="#24292f">withFeature</text>
+      <text x="80" y="555" font-size="28" fill="#57606a">(store) =&gt; withAudit(store.desk)</text>
+      <rect x="40" y="640" width="1120" height="150" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+      <text x="80" y="705" font-size="34" font-weight="700" fill="#24292f">withMethods</text>
+      <text x="80" y="755" font-size="28" fill="#57606a">refreshQuote: signalMethod&lt;string&gt;</text>
+      <rect x="40" y="840" width="1120" height="150" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+      <text x="80" y="905" font-size="34" font-weight="700" fill="#24292f">withHooks onInit</text>
+      <text x="80" y="955" font-size="28" fill="#57606a">refreshQuote(store.selected)</text>
+    </g>
+    <g stroke="#57606a" stroke-width="3" fill="none">
+      <line x1="600" y1="190" x2="600" y2="232" marker-end="url(#a)"/>
+      <line x1="600" y1="390" x2="600" y2="432" marker-end="url(#a)"/>
+      <line x1="600" y1="590" x2="600" y2="632" marker-end="url(#a)"/>
+      <line x1="600" y1="790" x2="600" y2="832" marker-end="url(#a)"/>
+    </g>
+    <rect x="1240" y="240" width="640" height="190" rx="16" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1275" y="305" font-size="30" font-weight="700" fill="#24292f">Props are not state</text>
+    <text x="1275" y="355" font-size="28" fill="#57606a">not in getState()</text>
+    <text x="1275" y="400" font-size="28" fill="#57606a">not patchable</text>
+    <rect x="1240" y="480" width="640" height="190" rx="16" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1275" y="545" font-size="30" font-weight="700" fill="#24292f">Generic feature</text>
+    <text x="1275" y="595" font-size="28" fill="#57606a">withAudit takes any</text>
+    <text x="1275" y="640" font-size="28" fill="#57606a">function returning a string</text>
+    <rect x="1240" y="720" width="640" height="190" rx="16" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1275" y="785" font-size="30" font-weight="700" fill="#24292f">Bound to a signal</text>
+    <text x="1275" y="835" font-size="28" fill="#57606a">re-runs on every selection</text>
+    <text x="1275" y="880" font-size="28" fill="#57606a">no subscription anywhere</text>
+  </g>
+</svg>

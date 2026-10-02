@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>One defer block</title>
+  <desc>Placeholder, trigger, loading, main content from a separate chunk, error branch, and prefetch on idle.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="80" y="300" width="380" height="220" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="270" y="379" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">@placeholder</text>
+  <text x="270" y="422" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">in parent bundle</text>
+  <text x="270" y="463" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">keep it tiny</text>
+  <line x1="460" y1="410" x2="560" y2="410" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <text x="510" y="390" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">trigger</text>
+  <rect x="570" y="300" width="380" height="220" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="760" y="379" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">@loading</text>
+  <text x="760" y="422" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">minimum 200ms</text>
+  <text x="760" y="463" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">chunk downloading</text>
+  <line x1="950" y1="410" x2="1050" y2="410" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="1060" y="300" width="400" height="220" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1260" y="380" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">main block</text>
+  <text x="1260" y="422" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="400" fill="#24292f">&lt;app-revenue-chart /&gt;</text>
+  <text x="1260" y="462" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">from its own chunk</text>
+  <path d="M760,520 L760,640" fill="none" stroke="#c24141" stroke-width="3" marker-end="url(#a-red)"/>
+  <rect x="570" y="650" width="380" height="170" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="760" y="724" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">@error</text>
+  <text x="760" y="767" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">offer a retry path</text>
+  <rect x="1500" y="300" width="340" height="520" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="1670" y="455" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#24292f">prefetch on idle</text>
+  <text x="1670" y="497" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">download early</text>
+  <text x="1670" y="539" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">render on the</text>
+  <text x="1670" y="581" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">trigger</text>
+  <text x="1670" y="609" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="10" font-weight="400" fill="#24292f"></text>
+  <text x="1670" y="646" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">the user waits</text>
+  <text x="1670" y="686" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">for neither</text>
+  <text x="960" y="960" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#c24141">never defer the LCP element</text>
+</svg>

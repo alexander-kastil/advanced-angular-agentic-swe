@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>What schedules a refresh</title>
+  <desc>Zoneless Angular 22: sources that schedule change detection and sources that do not.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="80" y="50" width="1760" height="110" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="960" y="115" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="600" fill="#24292f">provideZonelessChangeDetection()  ·  the Angular 22 default</text>
+  <text x="500" y="230" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#2f8f57">schedules a refresh</text>
+  <text x="1420" y="230" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#c24141">does not</text>
+  <rect x="120" y="270" width="760" height="96" rx="48" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="500" y="328" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">signal.set() / update()</text>
+  <rect x="120" y="390" width="760" height="96" rx="48" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="500" y="448" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">computed() a template reads</text>
+  <rect x="120" y="510" width="760" height="96" rx="48" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="500" y="568" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">(click), (input) listeners</text>
+  <rect x="120" y="630" width="760" height="96" rx="48" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="500" y="688" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">resource() / httpResource()</text>
+  <rect x="120" y="750" width="760" height="96" rx="48" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="500" y="808" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">input() changes</text>
+  <rect x="120" y="870" width="760" height="96" rx="48" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="500" y="928" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">markForCheck()</text>
+  <rect x="1040" y="270" width="760" height="96" rx="48" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1420" y="328" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">bare setTimeout callback</text>
+  <rect x="1040" y="390" width="760" height="96" rx="48" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1420" y="448" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">resolved promise</text>
+  <rect x="1040" y="510" width="760" height="96" rx="48" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1420" y="568" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">hand-written addEventListener</text>
+  <rect x="1040" y="630" width="760" height="96" rx="48" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1420" y="688" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">mutated plain field</text>
+  <rect x="1040" y="770" width="760" height="200" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="1420" y="858" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">fix: make it a signal</text>
+  <text x="1420" y="900" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">or markForCheck()</text>
+</svg>

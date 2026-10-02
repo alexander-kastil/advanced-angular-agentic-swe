@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Consent before the request</title>
+  <desc>Correct order creates the vendor tag only after consent; a tag in index.html sends the request before the banner.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <text x="80" y="90" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#2f8f57">correct</text>
+  <rect x="80" y="120" width="380" height="130" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="270" y="194" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">banner shown</text>
+  <line x1="460" y1="185" x2="526" y2="185" stroke="#2f8f57" stroke-width="3" marker-end="url(#a-green)"/>
+  <rect x="530" y="120" width="380" height="130" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="720" y="194" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">user accepts</text>
+  <line x1="910" y1="185" x2="976" y2="185" stroke="#2f8f57" stroke-width="3" marker-end="url(#a-green)"/>
+  <rect x="980" y="120" width="380" height="130" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1170" y="194" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">service creates tag</text>
+  <line x1="1360" y1="185" x2="1426" y2="185" stroke="#2f8f57" stroke-width="3" marker-end="url(#a-green)"/>
+  <rect x="1430" y="120" width="380" height="130" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1620" y="194" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">request sent</text>
+  <text x="80" y="340" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#c24141">never</text>
+  <rect x="80" y="370" width="380" height="130" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="270" y="444" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">tag in index.html</text>
+  <line x1="460" y1="435" x2="526" y2="435" stroke="#c24141" stroke-width="3" marker-end="url(#a-red)"/>
+  <rect x="530" y="370" width="380" height="130" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="720" y="444" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">request sent</text>
+  <line x1="910" y1="435" x2="976" y2="435" stroke="#c24141" stroke-width="3" marker-end="url(#a-red)"/>
+  <rect x="980" y="370" width="380" height="130" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1170" y="444" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">banner shown</text>
+  <line x1="1360" y1="435" x2="1426" y2="435" stroke="#c24141" stroke-width="3" marker-end="url(#a-red)"/>
+  <rect x="1430" y="370" width="380" height="130" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1620" y="444" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">too late</text>
+  <text x="730" y="540" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#c24141">IP address, user agent, referrer already sent</text>
+  <text x="80" y="640" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="700" fill="#24292f">withdrawal: what can be undone</text>
+  <rect x="80" y="680" width="330" height="90" rx="45" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="245" y="735" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">script element: yes</text>
+  <rect x="440" y="680" width="330" height="90" rx="45" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="605" y="735" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">cookies: yes</text>
+  <rect x="800" y="680" width="330" height="90" rx="45" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="965" y="735" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">storage keys: yes</text>
+  <rect x="1160" y="680" width="330" height="90" rx="45" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1325" y="735" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">globals: no</text>
+  <rect x="1520" y="680" width="330" height="90" rx="45" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1685" y="735" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">listeners, timers: no</text>
+  <rect x="80" y="840" width="1760" height="140" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="960" y="920" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">a script cannot be un-executed: honest withdrawal ends in a reload</text>
+</svg>

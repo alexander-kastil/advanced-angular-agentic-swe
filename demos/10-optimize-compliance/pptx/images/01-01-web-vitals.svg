@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Core Web Vitals thresholds</title>
+  <desc>LCP, INP and CLS threshold bars, plus field data from PerformanceObserver and lab data from Lighthouse.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <text x="110" y="152" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#24292f">LCP</text>
+  <text x="110" y="192" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">largest paint</text>
+  <rect x="460" y="110" width="600" height="100" rx="10" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <rect x="1060" y="110" width="360" height="100" rx="10" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <rect x="1420" y="110" width="380" height="100" rx="10" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="760" y="172" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">good &lt;= 2.5 s</text>
+  <text x="1240" y="172" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">needs work</text>
+  <text x="1610" y="172" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">poor &gt; 4 s</text>
+  <text x="110" y="327" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#24292f">INP</text>
+  <text x="110" y="367" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">worst interaction</text>
+  <rect x="460" y="285" width="600" height="100" rx="10" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <rect x="1060" y="285" width="360" height="100" rx="10" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <rect x="1420" y="285" width="380" height="100" rx="10" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="760" y="347" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">good &lt;= 200 ms</text>
+  <text x="1240" y="347" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">needs work</text>
+  <text x="1610" y="347" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">poor &gt; 500 ms</text>
+  <text x="110" y="502" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#24292f">CLS</text>
+  <text x="110" y="542" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">layout shift</text>
+  <rect x="460" y="460" width="600" height="100" rx="10" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <rect x="1060" y="460" width="360" height="100" rx="10" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <rect x="1420" y="460" width="380" height="100" rx="10" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="760" y="522" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">good &lt;= 0.1</text>
+  <text x="1240" y="522" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">needs work</text>
+  <text x="1610" y="522" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" font-weight="600" fill="#24292f">poor &gt; 0.25</text>
+  <rect x="110" y="640" width="780" height="260" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="500" y="738" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Field</text>
+  <text x="500" y="783" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">PerformanceObserver</text>
+  <text x="500" y="825" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">buffered: true, in this browser</text>
+  <rect x="1030" y="640" width="780" height="260" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1420" y="738" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Lab</text>
+  <text x="1420" y="783" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#24292f">Lighthouse on a production build</text>
+  <text x="1420" y="825" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">throttled, reproducible in CI</text>
+  <text x="960" y="960" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#57606a">both needed: lab says a change helped, field says users notice</text>
+</svg>

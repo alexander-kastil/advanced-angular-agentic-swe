@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Strict CSP from the build</title>
+  <desc>security.autoCsp hashes emitted scripts into a strict policy; injected inline script is blocked.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <rect x="80" y="80" width="620" height="260" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="390" y="198" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#24292f">angular.json</text>
+  <text x="390" y="242" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">security.autoCsp: true</text>
+  <line x1="700" y1="210" x2="820" y2="210" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <text x="760" y="190" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">ng build</text>
+  <rect x="830" y="80" width="620" height="260" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1140" y="179" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">index.html</text>
+  <text x="1140" y="222" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">hash-based strict policy</text>
+  <text x="1140" y="263" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">every emitted script hashed</text>
+  <rect x="80" y="400" width="1370" height="112" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="106" y="449" text-anchor="start" font-family="Consolas, monospace" font-size="28" font-weight="600" fill="#24292f">script-src 'strict-dynamic' 'sha256-…'</text>
+  <text x="106" y="480" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#57606a">hashed scripts and what they load</text>
+  <rect x="80" y="530" width="1370" height="112" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="106" y="579" text-anchor="start" font-family="Consolas, monospace" font-size="28" font-weight="600" fill="#24292f">object-src 'none'</text>
+  <text x="106" y="610" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#57606a">no plugin bypass</text>
+  <rect x="80" y="660" width="1370" height="112" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="106" y="709" text-anchor="start" font-family="Consolas, monospace" font-size="28" font-weight="600" fill="#24292f">base-uri 'self'</text>
+  <text x="106" y="740" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#57606a">no injected &lt;base&gt;</text>
+  <rect x="80" y="790" width="1370" height="112" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="106" y="839" text-anchor="start" font-family="Consolas, monospace" font-size="28" font-weight="600" fill="#24292f">require-trusted-types-for 'script'</text>
+  <text x="106" y="870" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="24" font-weight="400" fill="#57606a">raw innerHTML throws</text>
+  <rect x="1530" y="80" width="310" height="420" rx="18" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+  <text x="1685" y="241" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">injected</text>
+  <text x="1685" y="285" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="400" fill="#24292f">&lt;script&gt;</text>
+  <text x="1685" y="313" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="10" font-weight="400" fill="#24292f"></text>
+  <text x="1685" y="356" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#c24141">blocked</text>
+  <rect x="1530" y="540" width="310" height="380" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="1685" y="675" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">Report-Only</text>
+  <text x="1685" y="717" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">first,</text>
+  <text x="1685" y="759" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">then</text>
+  <text x="1685" y="803" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">enforce</text>
+</svg>

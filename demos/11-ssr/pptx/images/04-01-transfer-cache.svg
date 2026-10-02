@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>State transfer cache</title>
+  <desc>httpResource rides the HTTP transfer cache keyed by method, URL and params; resource with an id is keyed into TransferState.</desc>
+  <defs><marker id="a-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker><marker id="a-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b7791f"/></marker></defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <text x="80" y="70" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">server render</text>
+  <text x="1300" y="70" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">browser</text>
+  <rect x="80" y="110" width="520" height="250" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+  <text x="340" y="224" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">httpResource</text>
+  <text x="340" y="267" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">GET during SSR</text>
+  <line x1="600" y1="235" x2="700" y2="235" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="710" y="110" width="520" height="250" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="970" y="204" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#24292f">HTTP transfer cache</text>
+  <text x="970" y="245" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#24292f">key: method, URL, params</text>
+  <text x="970" y="285" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#57606a">embedded in the document</text>
+  <line x1="1230" y1="235" x2="1290" y2="235" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="1300" y="110" width="540" height="250" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1570" y="223" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">first matching request</text>
+  <text x="1570" y="265" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">answered from cache</text>
+  <rect x="80" y="420" width="520" height="250" rx="18" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+  <text x="340" y="534" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">resource()</text>
+  <text x="340" y="577" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">id: 'food-summary'</text>
+  <line x1="600" y1="545" x2="700" y2="545" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="710" y="420" width="520" height="250" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+  <text x="970" y="534" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#24292f">TransferState</text>
+  <text x="970" y="576" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">keyed by your id</text>
+  <line x1="1230" y1="545" x2="1290" y2="545" stroke="#57606a" stroke-width="3" marker-end="url(#a-grey)"/>
+  <rect x="1300" y="420" width="540" height="250" rx="18" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+  <text x="1570" y="533" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">loader skipped</text>
+  <text x="1570" y="575" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#24292f">in the browser</text>
+  <rect x="1300" y="730" width="540" height="90" rx="45" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1570" y="785" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">requests to /food: 0</text>
+  <rect x="1300" y="850" width="540" height="90" rx="45" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+  <text x="1570" y="905" text-anchor="middle" font-family="Consolas, monospace" font-size="28" font-weight="400" fill="#24292f">loader runs: 0</text>
+  <rect x="80" y="730" width="1150" height="210" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+  <text x="655" y="823" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#24292f">single use, dropped once the app is stable</text>
+  <text x="655" y="865" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" font-weight="400" fill="#57606a">read the counters after a hard reload</text>
+</svg>

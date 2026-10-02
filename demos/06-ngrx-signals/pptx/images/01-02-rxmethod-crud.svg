@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>CRUD with rxMethod</title>
+  <desc>The component calls an rxMethod store method; switchMap calls the service; tapResponse splits next, error and finalize into patchState calls. withHooks onInit starts the first fetch; withComputed derives count, nextId and filtered.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="60" width="760" height="130" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="118" font-size="32" font-weight="700" fill="#24292f" font-family="Consolas, monospace">withHooks onInit</text>
+    <text x="80" y="164" font-size="28" fill="#57606a" font-family="Consolas, monospace">fetchCustomers()</text>
+    <rect x="40" y="300" width="360" height="200" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="220" y="380" font-size="34" font-weight="700" fill="#24292f" text-anchor="middle">Component</text>
+    <text x="220" y="440" font-size="26" fill="#57606a" text-anchor="middle" font-family="Consolas, monospace">addCustomer(c)</text>
+    <line x1="400" y1="400" x2="482" y2="400" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="490" y="260" width="620" height="280" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="530" y="325" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">rxMethod&lt;Customer&gt;</text>
+    <text x="530" y="390" font-size="30" fill="#24292f" font-family="Consolas, monospace">switchMap(customer =&gt;</text>
+    <text x="560" y="440" font-size="30" fill="#24292f" font-family="Consolas, monospace">service.addCustomer)</text>
+    <text x="530" y="500" font-size="26" fill="#57606a">value, signal or observable in</text>
+    <line x1="1110" y1="400" x2="1192" y2="400" stroke="#57606a" stroke-width="3" marker-end="url(#a)"/>
+    <rect x="1200" y="230" width="680" height="340" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1240" y="295" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">tapResponse</text>
+    <rect x="1240" y="325" width="600" height="66" rx="10" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1260" y="370" font-size="28" fill="#24292f" font-family="Consolas, monospace">next: patchState(customers)</text>
+    <rect x="1240" y="405" width="600" height="66" rx="10" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="1260" y="450" font-size="28" fill="#24292f" font-family="Consolas, monospace">error: logError</text>
+    <rect x="1240" y="485" width="600" height="66" rx="10" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1260" y="530" font-size="28" fill="#24292f" font-family="Consolas, monospace">finalize: loading false</text>
+    <rect x="40" y="650" width="1840" height="360" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="720" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">withComputed</text>
+    <text x="80" y="765" font-size="28" fill="#57606a">recalculates after every patch</text>
+    <g font-family="Consolas, monospace" font-size="32" fill="#24292f">
+      <rect x="80" y="820" width="520" height="120" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="340" y="893" text-anchor="middle">count()</text>
+      <rect x="700" y="820" width="520" height="120" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="893" text-anchor="middle">nextId()</text>
+      <rect x="1320" y="820" width="520" height="120" rx="12" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1580" y="893" text-anchor="middle">filtered()</text>
+    </g>
+  </g>
+</svg>
