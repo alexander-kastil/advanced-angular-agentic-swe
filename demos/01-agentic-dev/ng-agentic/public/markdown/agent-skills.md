@@ -78,3 +78,19 @@ reference to open, never invite it to read them all.
 - `~/.claude/skills/` global, available in every project.
 
 Keep the two reconciled in both directions so a fix made in one project reaches the others.
+
+## Skills in GitHub Copilot
+
+Agent Skills are an open format, so the same `SKILL.md` folder works in Copilot. VS Code agent mode,
+the Copilot CLI and the Copilot coding agent load skills from `.github/skills/` and also pick up
+`.claude/skills/`, so one committed folder serves both tools. Personal skills go in
+`~/.copilot/skills/`.
+
+| | Claude Code | GitHub Copilot |
+| --- | --- | --- |
+| Repository skills | `.claude/skills/<name>/SKILL.md` | `.github/skills/<name>/SKILL.md` or `.claude/skills/` |
+| Personal skills | `~/.claude/skills/` | `~/.copilot/skills/` |
+| Routing | `description` in the frontmatter | `description` in the frontmatter |
+| Invoke by hand | `/angular-conventions` | `/angular-conventions` in chat |
+
+The routing rule does not change with the tool: the description decides whether the skill fires.

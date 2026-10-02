@@ -18,7 +18,24 @@ the workspace facts it would otherwise guess at.
 }
 ```
 
-`.vscode/mcp.json` for VS Code and Copilot uses a `servers` key and an explicit `"type": "stdio"`.
+`.vscode/mcp.json` for VS Code and GitHub Copilot uses a `servers` key and an explicit `"type": "stdio"`:
+
+```json
+{
+  "servers": {
+    "angular-cli": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@angular/cli", "mcp"]
+    }
+  }
+}
+```
+
+The Copilot CLI reads the `mcpServers` shape from `~/.copilot/mcp-config.json`, or registers it
+interactively with `/mcp add`. In Copilot Chat, the server's tools appear in the tools picker of
+agent mode and can be switched off one by one.
+
 Running `npx ng mcp` in an interactive terminal prints the snippet instead of starting the server, so
 you never have to remember the shape.
 

@@ -1,0 +1,17 @@
+<div class="card w-full max-w-2xl">
+  <div class="card-header items-center gap-1 py-4" style="min-height: var(--toolbar-xl)">
+    <div class="card-title text-lg">{{ title() }}</div>
+    <div class="card-subtitle">{{ subtitle() }}</div>
+  </div>
+  <div class="card-content gap-6">
+    <div class="showcase">
+      <img src="images/{{ img() }}" alt="" />
+    </div>
+    <div class="instructions">
+      <ng-content select=".instructions" />
+    </div>
+  </div>
+  <div class="card-actions justify-center">
+    <button type="button" class="btn btn-primary px-6" routerLink="/demos">Proceed</button>
+  </div>
+</div>

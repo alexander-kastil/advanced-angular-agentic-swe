@@ -88,6 +88,38 @@ be forgotten.
 surfaced as an error **without blocking**, which is the usual cause of a hook that looks wired but
 never gates anything.
 
+## Hooks in GitHub Copilot
+
+The Copilot CLI and the Copilot coding agent read hooks from `.github/hooks/*.json`. The events are
+camelCase and a command gets a `bash` and a `powershell` variant:
+
+```json
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      { "type": "command", "bash": "node .github/hooks/block-banned-api.mjs", "timeoutSec": 10 }
+    ],
+    "postToolUse": [
+      { "type": "command", "bash": "npx prettier --write .", "timeoutSec": 30 }
+    ]
+  }
+}
+```
+
+A `preToolUse` hook refuses a call by printing
+`{"permissionDecision":"deny","permissionDecisionReason":"use input() / output()"}` on stdout, so the
+banned API script above needs only a different exit path. VS Code agent hooks use the Claude Code event
+names and also read `.claude/settings.json`, so the gates written above apply in Copilot Chat as well.
+
+| | Claude Code | GitHub Copilot CLI and coding agent |
+| --- | --- | --- |
+| File | `.claude/settings.json` | `.github/hooks/*.json` |
+| Before a tool | `PreToolUse` | `preToolUse` |
+| After a tool | `PostToolUse` | `postToolUse` |
+| Prompt submitted | `UserPromptSubmit` | `userPromptSubmitted` |
+| Block | exit `2`, reason on stderr | `permissionDecision: "deny"` on stdout |
+
 ## The rule of thumb
 
 If a rule matters enough that you would be upset to find it violated in a diff, it belongs in a hook.

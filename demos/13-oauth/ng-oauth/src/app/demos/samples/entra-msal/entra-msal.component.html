@@ -1,0 +1,51 @@
+<div class="sample">
+  <p>
+    MSAL Angular wraps <code>&#64;azure/msal-browser</code>, which runs the authorization code flow with
+    PKCE against Microsoft Entra ID. You need two app registrations: the API exposes a scope, the SPA
+    has a redirect URI of type <code>spa</code> and permission to request that scope. MSAL then supplies
+    the guard, the interceptor and the token cache you built by hand in the earlier demos.
+  </p>
+
+  <div class="row">
+    @for (snippet of snippets; track snippet.key) {
+      <button type="button" [class.active]="selectedKey() === snippet.key" (click)="select(snippet.key)">
+        {{ snippet.label }}
+      </button>
+    }
+  </div>
+  <app-code-block [label]="selected().label" [code]="selected().code" />
+
+  <h4>Which token does MsalInterceptor attach?</h4>
+  <p class="hint">
+    The <code>protectedResourceMap</code> is the allowlist from the interceptor demo, with scopes per
+    entry. A URL that matches no entry goes out without a token; <code>*</code> is a wildcard.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Pattern</th>
+        <th>Scopes</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (entry of resources; track entry[0]) {
+        <tr [class.hit]="match()?.[0] === entry[0]">
+          <td><code>{{ entry[0] }}</code></td>
+          <td>{{ entry[1].join(' ') }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+  <label>
+    Request URL
+    <input [value]="url()" (input)="setUrl($any($event.target).value)" />
+  </label>
+  <div class="status" [class.ok]="match()">
+    @if (match(); as hit) {
+      acquireTokenSilent for <code>{{ hit[1].join(' ') }}</code>, then
+      <code>Authorization: Bearer &lt;access token&gt;</code>.
+    } @else {
+      No entry matches: the request is sent without a token.
+    }
+  </div>
+</div>

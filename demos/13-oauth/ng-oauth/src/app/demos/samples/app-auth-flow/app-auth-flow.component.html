@@ -1,0 +1,48 @@
+<div class="sample">
+  <p>
+    The login page is where the guard sends users and where they come back from. Three details make
+    the flow feel native: the shell renders navigation only for a signed-in user, the user lands on
+    the page they asked for, and an expired session says so instead of failing on the next API call.
+    Tokens issued here live for 20 seconds so you can watch the expiry.
+  </p>
+
+  @if (auth.returnUrl(); as returnUrl) {
+    <div class="status">The guard sent you here from <code>{{ returnUrl }}</code>. Sign in to continue.</div>
+  }
+
+  @if (sessionExpired()) {
+    <div class="status">Your session expired. Sign in again; nothing on the page was lost.</div>
+  }
+
+  <div class="shell card">
+    <div class="bar">
+      <strong>Food Shop</strong>
+      @if (auth.isAuthenticated()) {
+        <nav class="row">
+          <span>Orders</span>
+          <span>Payments</span>
+        </nav>
+        <span class="user">
+          {{ auth.userName() }} ({{ auth.secondsLeft() }} s)
+          <button type="button" (click)="auth.logout()">Sign out</button>
+        </span>
+      }
+    </div>
+    @if (!auth.isAuthenticated()) {
+      <form class="row login" (submit)="$event.preventDefault(); login()">
+        <label>
+          User
+          <input [value]="name()" (input)="setName($any($event.target).value)" />
+        </label>
+        <button type="submit">Sign in</button>
+      </form>
+    } @else {
+      <p class="hint">Signed in. Open the guard demo's protected link to see the return URL at work.</p>
+    }
+  </div>
+
+  <div class="grid">
+    <app-code-block label="Return to the attempted page" [code]="loginSnippet" />
+    <app-code-block label="Shell template" [code]="shellSnippet" />
+  </div>
+</div>

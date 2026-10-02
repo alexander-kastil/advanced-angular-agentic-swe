@@ -1,0 +1,15 @@
+.hamburgerMenu {
+  display: none;
+
+  @media only screen and (max-width: 960px) {
+    display: inline-flex;
+  }
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  flex: 0 0 auto;
+}

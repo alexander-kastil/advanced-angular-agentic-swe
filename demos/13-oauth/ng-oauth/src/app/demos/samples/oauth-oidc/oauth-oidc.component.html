@@ -1,0 +1,48 @@
+<div class="sample">
+  <p>
+    A single-page app is a public client: it cannot keep a secret, so it proves it is the same app
+    that started the flow with PKCE. The values below are generated in this browser with
+    <code>crypto.getRandomValues()</code> and <code>crypto.subtle.digest('SHA-256')</code>, the same
+    primitives MSAL uses.
+  </p>
+
+  <div class="grid">
+    <label>
+      Tenant
+      <input [value]="tenant()" (input)="set('tenant', $any($event.target).value)" />
+    </label>
+    <label>
+      Client id
+      <input [value]="clientId()" (input)="set('clientId', $any($event.target).value)" />
+    </label>
+    <label>
+      Redirect URI (type spa)
+      <input [value]="redirectUri()" (input)="set('redirectUri', $any($event.target).value)" />
+    </label>
+    <label>
+      Scopes
+      <input [value]="scopes()" (input)="set('scopes', $any($event.target).value)" />
+    </label>
+  </div>
+
+  <div class="status ok">
+    <pre>code_verifier  {{ verifier() }}
+code_challenge {{ challenge() }}
+state          {{ state() }}
+nonce          {{ nonce() }}</pre>
+  </div>
+  <div class="row">
+    <button type="button" (click)="generate()">Generate a new PKCE pair</button>
+    <span class="hint">The verifier stays in the browser; only its hash travels in the redirect.</span>
+  </div>
+
+  <h4>1. Redirect the user to /authorize</h4>
+  <app-code-block label="GET /authorize" [code]="authorizeUrl()" />
+
+  <h4>2. Redeem the code at /token</h4>
+  <p class="hint">
+    No <code>client_secret</code>: Entra ID rejects client credentials on any request that carries an
+    <code>Origin</code> header. The verifier is what proves possession.
+  </p>
+  <app-code-block label="POST /token" [code]="tokenRequest()" />
+</div>

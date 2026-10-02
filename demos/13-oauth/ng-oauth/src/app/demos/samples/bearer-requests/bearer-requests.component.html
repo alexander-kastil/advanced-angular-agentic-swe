@@ -1,0 +1,47 @@
+<div class="sample">
+  <p>
+    Every protected call ends as one HTTP header: <code>Authorization: Bearer &lt;token&gt;</code>.
+    This route has its own <code>HttpClient</code> whose backend is an in-page echo server for
+    <code>https://api.ng-oauth.demo</code>. It answers 401 without the header and echoes back
+    everything it received with it.
+  </p>
+
+  <div class="grid">
+    <app-code-block label="Body only" [code]="bodySnippet" />
+    <app-code-block label="Full response" [code]="responseSnippet" />
+    <app-code-block label="Header by hand" [code]="headerSnippet" />
+  </div>
+
+  <label>
+    Token to send
+    <input [value]="token()" (input)="setToken($any($event.target).value)" />
+  </label>
+
+  <div class="row">
+    <button type="button" (click)="bodyOnly()">GET body only</button>
+    <button type="button" (click)="fullResponse()">GET observe: response</button>
+    <button type="button" (click)="withHeader()">GET with Authorization</button>
+  </div>
+
+  @if (result(); as call) {
+    <div class="status" [class.ok]="call.status === 200">
+      <strong>{{ call.title }}</strong>: HTTP {{ call.status }}
+    </div>
+    <div class="grid">
+      <div>
+        <h4>Response headers</h4>
+        <pre>{{ call.responseHeaders.join('\n') }}</pre>
+      </div>
+      <div>
+        <h4>What the server received</h4>
+        <pre>{{ call.body }}</pre>
+      </div>
+    </div>
+  }
+
+  <p class="hint">
+    Writing the header in every service call is the version that leaks: the first developer who
+    forgets it ships a 401, and the first who copies it to a third-party URL ships your token. The next
+    demo moves it into an interceptor.
+  </p>
+</div>

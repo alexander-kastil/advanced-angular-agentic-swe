@@ -1,0 +1,63 @@
+<div class="sample">
+  <p>
+    A JWT is three base64url segments: header, payload and signature. Anyone can decode the first two,
+    so a token is never a place for secrets and the browser never makes an authorization decision from
+    its claims. Paste any token below; nothing leaves the page.
+  </p>
+
+  <label>
+    Token
+    <textarea rows="5" [value]="token()" (input)="setToken($any($event.target).value)"></textarea>
+  </label>
+  <div class="row">
+    <button type="button" (click)="useSample()">Entra-shaped access token</button>
+    <button type="button" (click)="useExpired()">Expired token</button>
+  </div>
+
+  @if (decoded().error) {
+    <div class="status">{{ decoded().error }}</div>
+  } @else {
+    <div class="segments">
+      <span class="seg header">{{ segments()[0] }}</span>.<span class="seg payload">{{ segments()[1] }}</span>.<span class="seg signature">{{ segments()[2] || "(empty)" }}</span>
+    </div>
+
+    <div class="status" [class.ok]="valid()">{{ expiry() }}</div>
+    @if (algorithm() === 'none') {
+      <div class="status">
+        <code>alg: none</code> means unsigned. This page mints such tokens for teaching; an API must
+        reject them, and the JWT bearer handler in ASP.NET Core does by default.
+      </div>
+    }
+
+    <div class="grid">
+      <div>
+        <h4>Header</h4>
+        <pre class="card">{{ header() }}</pre>
+      </div>
+      <div>
+        <h4>Payload</h4>
+        <pre class="card">{{ payload() }}</pre>
+      </div>
+    </div>
+
+    <h4>Claims</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Claim</th>
+          <th>Value</th>
+          <th>Meaning</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (claim of claims(); track claim.name) {
+          <tr>
+            <td><code>{{ claim.name }}</code></td>
+            <td>{{ claim.value }}</td>
+            <td>{{ claim.meaning }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

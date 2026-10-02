@@ -1,0 +1,74 @@
+:host {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  padding: 0 1rem;
+}
+
+.gen-dots {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  width: 100%;
+  margin: 0;
+}
+
+.gen-dots span {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.08;
+  animation: gen-wave 3.6s ease-in-out infinite;
+}
+
+.gen-dots span:nth-child(1) { animation-delay: 0s; }
+.gen-dots span:nth-child(2) { animation-delay: 0.18s; }
+.gen-dots span:nth-child(3) { animation-delay: 0.36s; }
+.gen-dots span:nth-child(4) { animation-delay: 0.54s; }
+.gen-dots span:nth-child(5) { animation-delay: 0.72s; }
+.gen-dots span:nth-child(6) { animation-delay: 0.9s; }
+.gen-dots span:nth-child(7) { animation-delay: 1.08s; }
+.gen-dots span:nth-child(8) { animation-delay: 1.26s; }
+.gen-dots span:nth-child(9) { animation-delay: 1.44s; }
+.gen-dots span:nth-child(10) { animation-delay: 1.62s; }
+.gen-dots span:nth-child(11) { animation-delay: 1.8s; }
+.gen-dots span:nth-child(12) { animation-delay: 1.98s; }
+
+.gen-dots-end {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0.15;
+  margin-left: 4px;
+  animation: gen-endpoint 3.6s ease-in-out infinite;
+  animation-delay: 2.2s;
+}
+
+@keyframes gen-wave {
+  0%   { opacity: 0.08; transform: scale(0.65); }
+  3%   { opacity: 1;    transform: scale(1); }
+  11%  { opacity: 1;    transform: scale(1); }
+  19%  { opacity: 0.08; transform: scale(0.65); }
+  100% { opacity: 0.08; transform: scale(0.65); }
+}
+
+@keyframes gen-endpoint {
+  0%   { opacity: 0.15; transform: scale(0.75); }
+  3%   { opacity: 1;    transform: scale(1.2); }
+  16%  { opacity: 1;    transform: scale(1.1); }
+  26%  { opacity: 0.15; transform: scale(0.75); }
+  100% { opacity: 0.15; transform: scale(0.75); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gen-dots span,
+  .gen-dots-end {
+    animation: none;
+    opacity: 0.5;
+  }
+}

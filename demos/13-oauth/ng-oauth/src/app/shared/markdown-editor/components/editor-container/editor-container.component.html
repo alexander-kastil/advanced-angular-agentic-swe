@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Mock Markdown Editor</h2>
+  </div>
+  <div class="card-content">
+    @if (!editorEdit()) {
+      <app-markdown-list [items]="store.entities()"
+        (itemEdit)="editMarkdownItem($event)"
+        (itemDelete)="deleteMarkdownItem($event)"
+       />
+    }
+    @if (editorEdit() && current() != null) {
+      <app-markdown-edit [(markdownItem)]="currentItem" />
+    }
+  </div>
+  <div class="card-actions justify-end">
+    @if (editorEdit()) {
+      <button type="button" class="btn btn-primary" (click)="saveMarkdownItem()">Save</button>
+      <button type="button" class="btn btn-primary" (click)="editorEdit.set(false)">Cancel</button>
+    }
+    @if (!editorEdit()) {
+      <button type="button" class="btn btn-primary" (click)="addMarkdownItem()">Add</button>
+    }
+  </div>
+</div>

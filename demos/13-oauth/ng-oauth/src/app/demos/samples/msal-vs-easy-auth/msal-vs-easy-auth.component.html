@@ -1,0 +1,54 @@
+<div class="sample">
+  <p>
+    MSAL puts the OAuth client in the browser. Easy Auth, the built-in authentication of Azure App
+    Service and Azure Container Apps, puts it in a sidecar in front of your container: the sidecar runs
+    the flow, keeps the tokens server side, gives the browser a session cookie and forwards the
+    identity to your code as request headers.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>MSAL in the SPA</th>
+        <th>Easy Auth sidecar</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of approaches; track row.aspect) {
+        <tr>
+          <td><strong>{{ row.aspect }}</strong></td>
+          <td>{{ row.msal }}</td>
+          <td>{{ row.easyAuth }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <h4>Decode X-MS-CLIENT-PRINCIPAL</h4>
+  <p class="hint">
+    The sidecar adds this header to every authenticated request: base64 JSON with the claims and the
+    claim types that carry name and role. Clients cannot set it; the platform strips it from incoming
+    traffic.
+  </p>
+  <label>
+    Header value
+    <textarea rows="3" [value]="header()" (input)="setHeader($any($event.target).value)"></textarea>
+  </label>
+  @if (principal().error) {
+    <div class="status">{{ principal().error }}</div>
+  } @else {
+    <div class="status ok">
+      {{ userName() }} signed in with <code>{{ principal().value?.auth_typ }}</code>, roles:
+      {{ roles().join(', ') || 'none' }}
+    </div>
+  }
+
+  <div class="grid">
+    <app-code-block label="easy-auth.service.ts" [code]="meSnippet" />
+    <div class="column">
+      <app-code-block label="Sign in and out" [code]="linksSnippet" />
+      <app-code-block label="Enable on a container app" [code]="cliSnippet" />
+    </div>
+  </div>
+</div>

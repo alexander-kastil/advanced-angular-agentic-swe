@@ -1,0 +1,45 @@
+<div class="sample">
+  <p>
+    The token is the only state; everything else is derived. <code>isAuthenticated</code> is a
+    <code>computed()</code> over the <code>exp</code> claim and a clock signal, so it turns false on its
+    own the second the token expires, and every guard, interceptor and template reading it follows.
+    The demo identity provider mints an unsigned token in the browser.
+  </p>
+
+  <div class="row">
+    <label>
+      Name
+      <input [value]="name()" (input)="setName($any($event.target).value)" />
+    </label>
+    <label>
+      Lifetime (s)
+      <select [value]="lifetime()" (change)="setLifetime($any($event.target).value)">
+        @for (seconds of lifetimes; track seconds) {
+          <option [value]="seconds">{{ seconds }}</option>
+        }
+      </select>
+    </label>
+    <button type="button" (click)="login()">Sign in</button>
+    <button type="button" (click)="auth.logout()">Sign out</button>
+  </div>
+
+  <div class="status" [class.ok]="auth.isAuthenticated()">
+    isAuthenticated() = {{ auth.isAuthenticated() }}
+    @if (auth.token()) {
+      , secondsLeft() = {{ auth.secondsLeft() }}
+    }
+  </div>
+
+  <div class="grid">
+    <div>
+      <h4>State</h4>
+      <pre>{{ state() }}</pre>
+    </div>
+    <div>
+      <h4>claims()</h4>
+      <pre>{{ claims() }}</pre>
+    </div>
+  </div>
+
+  <app-code-block label="auth.store.ts" [code]="storeSnippet" />
+</div>

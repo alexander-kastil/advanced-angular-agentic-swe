@@ -1,0 +1,19 @@
+<figure class="code-block">
+  <figcaption>
+    <span>{{ label() }}</span>
+    <button type="button" (click)="copy()">
+      @switch (state()) {
+        @case ('copied') {
+          Copied
+        }
+        @case ('failed') {
+          Clipboard blocked
+        }
+        @default {
+          Copy
+        }
+      }
+    </button>
+  </figcaption>
+  <pre>{{ code() }}</pre>
+</figure>

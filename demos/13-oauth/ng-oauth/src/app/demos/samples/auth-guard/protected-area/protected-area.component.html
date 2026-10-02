@@ -1,0 +1,12 @@
+<div class="sample">
+  <div class="status ok">
+    You reached the protected area as {{ auth.userName() }}. This component lives in its own lazy chunk
+    behind <code>canMatch: [authGuard]</code>.
+  </div>
+  <p class="hint">
+    The guard runs on navigation, not continuously: when the token expires in
+    {{ auth.secondsLeft() }} s this page stays rendered until the next navigation. Data calls are
+    protected by the API, not by the guard.
+  </p>
+  <a routerLink="../auth-guard">Back to the guard demo</a>
+</div>

@@ -1,0 +1,133 @@
+{
+  "demos": [
+    {
+      "id": 1,
+      "url": "oauth-oidc",
+      "title": "OAuth 2.0 and OpenID Connect",
+      "teaches": "Separate authentication from authorization: OAuth 2.0 grants an access token, OpenID Connect adds the ID token. Generate a real PKCE verifier and S256 challenge in the browser and build the /authorize and /token requests an SPA sends to Microsoft Entra ID.",
+      "sortOrder": 1,
+      "topic": "Fundamentals",
+      "md": "oauth-oidc",
+      "visible": true
+    },
+    {
+      "id": 2,
+      "url": "jwt-anatomy",
+      "title": "Reading a JWT",
+      "teaches": "Decode the header, payload and signature segments of a JSON Web Token, read iss, aud, exp, scp and roles, and see why the browser may read claims but never trusts them for authorization.",
+      "sortOrder": 2,
+      "topic": "Fundamentals",
+      "md": "jwt-anatomy",
+      "visible": true
+    },
+    {
+      "id": 3,
+      "url": "bearer-requests",
+      "title": "Bearer Tokens on HttpClient",
+      "teaches": "Send a bearer token by hand with HttpHeaders, read the full HttpResponse with observe: 'response', and watch an echo API answer 401 without the header and 200 with it.",
+      "sortOrder": 3,
+      "topic": "Token Plumbing",
+      "md": "bearer-requests",
+      "visible": true
+    },
+    {
+      "id": 4,
+      "url": "auth-interceptor",
+      "title": "Functional Auth Interceptor",
+      "teaches": "Move the header into an HttpInterceptorFn backed by an allowlist of protected APIs, scoped to the route with provideHttpClient(withInterceptors()), and prove the token never reaches a third-party host.",
+      "sortOrder": 4,
+      "topic": "Token Plumbing",
+      "md": "auth-interceptor",
+      "visible": true
+    },
+    {
+      "id": 5,
+      "url": "auth-store",
+      "title": "Auth State in a SignalStore",
+      "teaches": "Hold the token in an NgRx SignalStore and derive claims, userName and isAuthenticated with withComputed(), so the session ends on its own the second exp passes.",
+      "sortOrder": 5,
+      "topic": "App Flow",
+      "md": "auth-store",
+      "visible": true
+    },
+    {
+      "id": 6,
+      "url": "auth-guard",
+      "title": "Guarding Routes with canMatch",
+      "teaches": "Protect a lazy route with a CanMatchFn that returns a UrlTree to the login page and remembers the attempted URL, so the protected chunk never downloads for a signed-out user.",
+      "sortOrder": 6,
+      "topic": "App Flow",
+      "md": "auth-guard",
+      "visible": true
+    },
+    {
+      "id": 7,
+      "url": "app-auth-flow",
+      "title": "The Sign-In Round Trip",
+      "teaches": "Build the login page the guard redirects to: navigation only for signed-in users, a return to the attempted URL after sign-in, and a clear message when the session expires.",
+      "sortOrder": 7,
+      "topic": "App Flow",
+      "md": "app-auth-flow",
+      "visible": true
+    },
+    {
+      "id": 8,
+      "url": "firebase-auth",
+      "title": "Firebase Authentication",
+      "teaches": "Sign users in with the modular firebase/auth SDK behind a signal-based service, attach the Firebase ID token in an interceptor, validate it in ASP.NET Core against securetoken.google.com, and publish with firebase deploy.",
+      "sortOrder": 8,
+      "topic": "Identity Providers",
+      "md": "firebase-auth",
+      "visible": true
+    },
+    {
+      "id": 9,
+      "url": "entra-msal",
+      "title": "Microsoft Entra ID with MSAL Angular",
+      "teaches": "Register an API and a SPA in Microsoft Entra ID, wire MSAL Angular 6 into a standalone app with provideAppInitializer, MsalGuard and MsalInterceptor, and test which scopes the protectedResourceMap attaches per URL.",
+      "sortOrder": 9,
+      "topic": "Identity Providers",
+      "md": "entra-msal",
+      "visible": true
+    },
+    {
+      "id": 10,
+      "url": "msal-vs-easy-auth",
+      "title": "MSAL vs Easy Auth",
+      "teaches": "Compare MSAL in the browser with the Easy Auth sidecar of Azure Container Apps: /.auth/login, /.auth/me, the session cookie, and decoding the X-MS-CLIENT-PRINCIPAL header your API receives.",
+      "sortOrder": 10,
+      "topic": "Identity Providers",
+      "md": "msal-vs-easy-auth",
+      "visible": true
+    }
+  ],
+  "top-links": [
+    {
+      "id": 1,
+      "label": "Home",
+      "url": ""
+    },
+    {
+      "id": 2,
+      "label": "Demos",
+      "url": "demos"
+    }
+  ],
+  "markdownItems": [
+    {
+      "id": "1",
+      "url": "",
+      "title": "Tokens are not secrets",
+      "comment": "Anyone holding a JWT can read its claims. Only the API that validates the signature may trust them.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    },
+    {
+      "id": "2",
+      "url": "",
+      "title": "Allowlist the bearer",
+      "comment": "Attach a token only to the APIs it was issued for.",
+      "saved": "2020-09-16T20:10:06.925Z"
+    }
+  ],
+  "comments": []
+}

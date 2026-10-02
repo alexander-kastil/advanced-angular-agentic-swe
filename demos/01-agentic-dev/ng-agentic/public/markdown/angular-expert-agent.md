@@ -56,6 +56,30 @@ it belongs in the agent file.
 | Rename this variable | main thread | Routing costs more than the edit. |
 | Deploy the built app to the server | main thread | A subagent cannot escalate, so live mutations stay here. |
 
+## The same agent in GitHub Copilot
+
+Copilot calls them custom agents. The file lives in `.github/agents/` and ends in `.agent.md`; the
+frontmatter carries the same ideas with a tool list instead of a comma string:
+
+```yaml
+---
+name: angular-expert
+description: Angular 22 work: components, signals, routing, forms, testing. Use for any Angular change before writing code.
+tools: ['read', 'edit', 'search', 'execute']
+model: Claude Opus 5.5
+---
+```
+
+| | Claude Code | GitHub Copilot |
+| --- | --- | --- |
+| File | `.claude/agents/angular-expert.md` | `.github/agents/angular-expert.agent.md` |
+| Select it | routed by description, or named in the prompt | agents dropdown in chat, `/agent` in the CLI, or as a subagent |
+| Tool grant | `tools: Read, Edit, Write` | `tools: ['read', 'edit']` |
+| Own context | yes, as a subagent | yes, when run as a subagent |
+
+The design rules carry over unchanged: a narrow tool list, a description that names the triggers, hard
+rules in the agent file and depth in a skill.
+
 ## When the work stays on the main thread
 
 Read the agent file anyway. The hard rules and prohibited commands live there, not in `CLAUDE.md`,

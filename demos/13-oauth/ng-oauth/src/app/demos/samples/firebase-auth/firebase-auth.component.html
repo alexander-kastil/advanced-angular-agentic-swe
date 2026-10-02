@@ -1,0 +1,25 @@
+<div class="sample">
+  <p>
+    Firebase Authentication is an identity provider you can stand up in five minutes: email and
+    password, Google, GitHub and others behind one SDK. The client signs in with the modular
+    <code>firebase/auth</code> API and gets a Firebase ID token, a JWT issued by
+    <code>https://securetoken.google.com/&lt;project-id&gt;</code> with the project id as audience.
+    The API validates exactly those two claims.
+  </p>
+
+  <div class="row">
+    @for (snippet of snippets; track snippet.key) {
+      <button type="button" [class.active]="selectedKey() === snippet.key" (click)="select(snippet.key)">
+        {{ snippet.label }}
+      </button>
+    }
+  </div>
+
+  <app-code-block [label]="selected().label" [code]="selected().code" />
+
+  <p class="hint">
+    <code>getIdToken()</code> returns the cached token and refreshes it when it is about to expire, so
+    the interceptor never handles refresh itself. The <code>apiKey</code> in the config identifies the
+    project and is not a secret; access is controlled by the token and by the API.
+  </p>
+</div>

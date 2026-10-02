@@ -178,3 +178,10 @@ the lab, so a day never ends mid-build and no lab is interrupted by a night.
 - Multi-Stage Container serving with Caddy
 - DNS before the First ACME Attempt
 - Core Web Vitals and SEO Loop
+
+### [Optional Module 13: OAuth for Angular](./13-oauth/)
+
+- OAuth 2.0 and OpenID Connect, Reading a JWT
+- Bearer Tokens on HttpClient, Functional Auth Interceptor
+- Auth State in a SignalStore, Guarding Routes with canMatch, The Sign-In Round Trip
+- Firebase Authentication, Microsoft Entra ID with MSAL Angular, MSAL vs Easy Auth

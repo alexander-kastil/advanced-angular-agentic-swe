@@ -49,6 +49,16 @@
       "topic": "Automation",
       "md": "hooks-and-gates",
       "visible": true
+    },
+    {
+      "id": 6,
+      "url": "webmcp-counterpart",
+      "title": "WebMCP Counterpart",
+      "teaches": "Expose the running app to a browser agent with declareExperimentalWebMcpTool() from @angular/core. Register two live tools, read the tools/list payload an agent would see, and watch registration no-op where no model context exists.",
+      "sortOrder": 6,
+      "topic": "Automation",
+      "md": "webmcp-counterpart",
+      "visible": true
     }
   ],
   "top-links": [

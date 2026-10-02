@@ -1,0 +1,88 @@
+.sample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-medium);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-small);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--gap-medium);
+  align-items: start;
+}
+
+.hint {
+  margin: 0;
+  color: var(--color-ink);
+  opacity: 0.75;
+  font-size: var(--font-small);
+}
+
+.status {
+  padding: var(--gap-small) var(--gap-medium);
+  border-left: 4px solid var(--color-warn);
+  background: var(--color-surface);
+
+  &.ok {
+    border-left-color: var(--color-primary);
+  }
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: var(--font-small);
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+button.active {
+  background: var(--color-primary);
+  color: var(--color-font);
+}
+
+.segments {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: var(--font-small);
+  word-break: break-all;
+}
+
+.seg.header {
+  color: var(--color-warn);
+}
+
+.seg.payload {
+  color: var(--color-primary);
+}
+
+.seg.signature {
+  color: var(--color-ink);
+  opacity: 0.6;
+}
+
+.card {
+  padding: var(--gap-small);
+}
+
+textarea {
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: var(--font-small);
+}

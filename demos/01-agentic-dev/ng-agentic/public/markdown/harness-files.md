@@ -49,8 +49,31 @@ pointer behind.
 Closest file wins. A rule in `demos/03-components/CLAUDE.md` overrides the repo root for work inside
 that folder, and the root still applies to everything it does not mention.
 
+## Claude Code specific
+
+`CLAUDE.md` can import other files with `@path/to/file.md`, so a root file can pull in `AGENTS.md`
+instead of duplicating it. `~/.claude/CLAUDE.md` holds personal rules for every project, and
+`/memory` opens whichever file is loaded.
+
 ## Copilot specific
 
-`.instructions.md` files take an `applyTo` glob in their frontmatter, so TypeScript rules can be
-scoped to `**/*.ts` and template rules to `**/*.html`. Reusable prompts live in `.prompt.md` files
-and are invoked by name.
+`.instructions.md` files live in `.github/instructions/` and take an `applyTo` glob in their
+frontmatter, so TypeScript rules can be scoped to `**/*.ts` and template rules to `**/*.html`:
+
+```markdown
+---
+applyTo: "**/*.html"
+---
+Use @if, @for and @switch. Never ngClass or ngStyle.
+```
+
+Reusable prompts live in `.github/prompts/*.prompt.md` and are invoked as `/name` in chat. Copilot
+also reads `AGENTS.md`, which makes it the natural single source when a team runs both tools.
+
+## One source for both tools
+
+| Content | Claude Code | GitHub Copilot |
+| --- | --- | --- |
+| Repository rules | `CLAUDE.md`, importing `@AGENTS.md` | `AGENTS.md` or `.github/copilot-instructions.md` |
+| Rules for one file type | nested `CLAUDE.md` per folder | `*.instructions.md` with `applyTo` |
+| Reusable prompt | `.claude/commands/*.md` | `.github/prompts/*.prompt.md` |

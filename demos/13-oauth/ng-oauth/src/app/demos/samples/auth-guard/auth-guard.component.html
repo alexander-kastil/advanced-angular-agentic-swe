@@ -1,0 +1,31 @@
+<div class="sample">
+  <p>
+    <code>canMatch</code> runs before the router picks a route, so a signed-out user never downloads
+    the protected chunk. Returning a <code>UrlTree</code> instead of <code>false</code> turns the refusal
+    into a redirect, and the guard stores the attempted URL so the login page can send the user back.
+  </p>
+
+  <div class="status" [class.ok]="auth.isAuthenticated()">
+    @if (auth.isAuthenticated()) {
+      Signed in as {{ auth.userName() }}: the guard returns true.
+    } @else {
+      Signed out: the guard returns a UrlTree to the login page.
+    }
+  </div>
+
+  <div class="row">
+    <a routerLink="../protected-area">Open /demos/protected-area</a>
+    @if (auth.isAuthenticated()) {
+      <button type="button" (click)="auth.logout()">Sign out</button>
+    } @else {
+      <button type="button" (click)="auth.login('Ada Lovelace', 60)">Sign in for 60 s</button>
+    }
+  </div>
+  <p class="hint">
+    Watch the Network tab: the <code>protected-area</code> chunk loads only after the guard lets a
+    navigation through.
+  </p>
+
+  <app-code-block label="auth.guard.ts" [code]="guardSnippet" />
+  <app-code-block label="demo.routes.ts" [code]="routeSnippet" />
+</div>

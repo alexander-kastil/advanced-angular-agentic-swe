@@ -1,0 +1,47 @@
+<div class="sample">
+  <p>
+    A functional interceptor adds the header in one place, and an allowlist decides where it may go.
+    Matching on <code>startsWith</code> of a full origin with a trailing slash is deliberate: an
+    <code>includes('api.ng-oauth.demo')</code> check would hand the token to the third target below.
+  </p>
+
+  <div class="status" [class.ok]="auth.isAuthenticated()">
+    @if (auth.isAuthenticated()) {
+      Signed in as {{ auth.userName() }}, token valid for {{ auth.secondsLeft() }} s.
+      <button type="button" (click)="auth.logout()">Sign out</button>
+    } @else {
+      Signed out: the interceptor passes every request through untouched.
+      <button type="button" (click)="auth.login('Ada Lovelace')">Sign in as Ada</button>
+    }
+  </div>
+
+  <div class="row">
+    @for (url of targets; track url) {
+      <button type="button" (click)="call(url)">GET {{ url }}</button>
+    }
+  </div>
+
+  @if (outcomes().length) {
+    <table>
+      <thead>
+        <tr>
+          <th>Url</th>
+          <th>Status</th>
+          <th>Authorization the server saw</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (outcome of outcomes(); track $index) {
+          <tr>
+            <td>{{ outcome.url }}</td>
+            <td>{{ outcome.status }}</td>
+            <td><code>{{ short(outcome.authorization) }}</code></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  <app-code-block label="auth.interceptor.ts" [code]="interceptorSnippet" />
+  <app-code-block label="demo.routes.ts" [code]="routeSnippet" />
+</div>
