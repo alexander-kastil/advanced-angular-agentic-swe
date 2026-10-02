@@ -380,6 +380,51 @@
       "catalogue": {
         "action": "none"
       }
+    },
+    {
+      "date": "2026-10-02",
+      "from": "12:21",
+      "to": "12:29",
+      "sessionId": "d71f05e6-8f87-4f4f-8581-b7b0a10ee0b8",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "demos/*/pptx",
+        "D:/git-classes/agentic-sw-engineering/demos/*/pptx"
+      ],
+      "files": [
+        "C:/Users/AlexanderKastil/.claude/skills/create-pptx/scripts/restyle_fonts.py",
+        "C:/Users/AlexanderKastil/.claude/skills/create-pptx/scripts/gamma_module.py"
+      ],
+      "mechanism": {
+        "takes": "finished slide decks whose generated cards use the layout service's theme fonts instead of the brand fonts of the fixed intro slides",
+        "does": "remaps heading and body fonts in every card, master and theme to the brand fonts, measures each heading against the space above the next shape and shrinks the ones that would collide, then re-exports and republishes",
+        "returns": "decks with one typography from the first to the last slide, with no regeneration cost"
+      },
+      "portsAsIs": [
+        "font remap with heading fit"
+      ],
+      "perCustomer": [
+        "the brand heading and body fonts"
+      ],
+      "evidence": [
+        "22 decks restyled, overlap check 0",
+        "second run heading=0 body=0",
+        "13 + 9 decks re-published"
+      ],
+      "toolchain": {
+        "skills": [
+          "create-pptx",
+          "claude-learn"
+        ],
+        "mcpServers": [],
+        "agents": []
+      },
+      "industry": "technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
     }
   ]
 }

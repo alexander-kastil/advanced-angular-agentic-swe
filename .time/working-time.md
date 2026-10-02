@@ -15,5 +15,6 @@
 | 2026-10-02 | 0.57 | 10:29 | 11:35 | Slide decks for the agentic tooling and OAuth modules, with diagrams, photos and speaker notes |
 | 2026-10-02 | 0.53 | 10:57 | 11:29 | Optional OAuth module with ten working demos and guides |
 | 2026-10-02 | 0.77 | 11:35 | 12:21 | Slide decks for the remaining eleven course modules, published with PDFs to the class folder |
+| 2026-10-02 | 0.13 | 12:21 | 12:29 | Consistent typography across all slide decks of both agentic classes, re-published |
 
-**Total: 11.57h**
+**Total: 11.70h**

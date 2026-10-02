@@ -318,3 +318,10 @@ agent that returns one line per id with the export URL and the remaining credits
 itself cropped to 1440x2160; the slide showed half a diagram.
 **Rule:** look at every assembled deck's contact sheet; repair such cards locally with `create-pptx`
 `scripts/fix_cropped_diagrams.py` instead of spending credits on a regeneration.
+
+## Gamma decks take the template theme's fonts
+
+**Pattern:** Every Gamma card came out in Source Serif 4 and Public Sans while the intro and module
+slides use Montserrat and Poppins; the user saw the typography change at slide 4.
+**Rule:** run `create-pptx` `scripts/restyle_fonts.py` on every merged deck (built into
+`gamma_module.py finish`); new decks pass the Gamma theme "Integrations House" (`themeId: idege54tfobdv2k`) so the cards come out in these fonts.
