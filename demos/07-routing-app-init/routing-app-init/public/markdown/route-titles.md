@@ -30,6 +30,20 @@ export const routes: Routes = [
 ];
 ```
 
+## Titles from a Resolver
+
+`title` also accepts a `ResolveFn<string>`, so a title can depend on route parameters or loaded data. The router resolves it like any other resolver before the route activates:
+
+```typescript
+export const albumTitle: ResolveFn<string> = (route) => `Album ${route.paramMap.get('id')}`;
+
+export const routes: Routes = [
+  { path: 'albums/:id', component: AlbumComponent, title: albumTitle },
+];
+```
+
+A static string covers fixed pages, a resolver covers detail pages, and a `TitleStrategy` decorates whatever either one returns.
+
 ## Reading the Current Title
 
 Use `Title` service to read the current page title:

@@ -9,7 +9,7 @@ cannot be merged.
 
 ## The scope boundary
 
-**Module 09 gates the local build.** Everything here runs on a CI runner against the source tree and
+**This module gates the local build.** Everything here runs on a CI runner against the source tree and
 against `dist/`. No DNS, no TLS, no deployment, no field data. The question is: *is this artifact allowed
 to ship?*
 

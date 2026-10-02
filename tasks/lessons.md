@@ -304,3 +304,17 @@ media-creator source and compose stack; the user said the sources are in
 `D:\git-projects\integrations.at\src\media-creator-mcp`, which has a Dockerfile but no compose service.
 **Rule:** for now the running stack is media-creation-team's `media-creator-mcp` on port 5210; ask
 which tree is authoritative before changing either skill.
+
+## Read Gamma status through a cheap agent
+
+**Pattern:** Every completed `get_generation_status` result carries the full Gamma theme JSON, about
+12K tokens. Polling 22 deck parts on the main thread would have flooded the context.
+**Rule:** generate on the main thread, then hand the generation ids to a `haiku` general-purpose
+agent that returns one line per id with the export URL and the remaining credits.
+
+## Gamma can crop a diagram despite the no-crop layout line
+
+**Pattern:** Five module 02 diagram cards came back as portrait side accents, with the image blob
+itself cropped to 1440x2160; the slide showed half a diagram.
+**Rule:** look at every assembled deck's contact sheet; repair such cards locally with `create-pptx`
+`scripts/fix_cropped_diagrams.py` instead of spending credits on a regeneration.

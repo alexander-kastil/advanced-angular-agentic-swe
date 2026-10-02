@@ -13,11 +13,12 @@ When testing services that fetch data from APIs, you need to:
 
 ## Setup
 
-Import testing utilities and configure TestBed with HTTP providers:
+Import testing utilities and configure TestBed with HTTP providers. `provideHttpClientTesting()` comes after `provideHttpClient()` and replaces only the backend; `HttpClientTestingModule` belongs to the NgModule era and is not used in this app.
 
 ```typescript
+import { provideHttpClient } from "@angular/common/http";
+import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { CustomersService } from "./customers.service";
 
 describe("CustomersService", () => {
@@ -26,8 +27,7 @@ describe("CustomersService", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [CustomersService],
+      providers: [CustomersService, provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(CustomersService);
     httpMock = TestBed.inject(HttpTestingController);

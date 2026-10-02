@@ -14,3 +14,21 @@ export class SkillRowComponent {
   }
 }
 ```
+
+- An input is a read-only signal, so anything derived from it is a `computed()`. There is no
+  `ngOnChanges` and no setter: the derived value follows the input on its own.
+
+```typescript
+skill = input.required<Skill>();
+label = computed(() => (this.skill().completed ? `${this.skill().name} (done)` : this.skill().name));
+```
+
+- `transform` converts the bound value before the component sees it. For boolean flags, the
+  built-in `booleanAttribute` from `@angular/core` replaces a hand-written transform, so
+  `<app-skill-row editEnabled />` and `[editEnabled]="true"` both read as `true`.
+
+| Declaration | Template binding | Read in the class |
+| --- | --- | --- |
+| `input.required<Skill>()` | `[skill]="s"` must be bound | `this.skill()` |
+| `input(false)` | optional, default `false` | `this.editEnabled()` |
+| `output<Skill>()` | `(itemDeleted)="remove($event)"` | `this.itemDeleted.emit(s)` |

@@ -305,6 +305,81 @@
       "catalogue": {
         "action": "none"
       }
+    },
+    {
+      "date": "2026-10-02",
+      "from": "11:35",
+      "to": "12:21",
+      "sessionId": "d71f05e6-8f87-4f4f-8581-b7b0a10ee0b8",
+      "branch": "master",
+      "commits": [
+        "f1fce4f",
+        "e833f35",
+        "cac4e5e"
+      ],
+      "surfaces": [
+        "demos/02-signals",
+        "demos/03-components",
+        "demos/04-signal-forms",
+        "demos/05-reactive",
+        "demos/06-ngrx-signals",
+        "demos/07-routing-app-init",
+        "demos/08-testing",
+        "demos/09-webmcp",
+        "demos/10-optimize-compliance",
+        "demos/11-ssr",
+        "demos/12-agentic-devops"
+      ],
+      "files": [
+        "demos/02-signals/ng-signals/public/markdown/signal-inputs.md",
+        "demos/04-signal-forms/ng-signal-forms/public/markdown/form-array.md",
+        "demos/07-routing-app-init/routing-app-init/public/markdown/route-titles.md",
+        "demos/08-testing/vitetest-testing/public/markdown/httptest.md",
+        "demos/10-optimize-compliance/readme.md"
+      ],
+      "mechanism": {
+        "takes": "eleven course modules, each a demo catalogue with its teaching markdown, plus a slide template and a per-run presentation-service credit budget",
+        "does": "splits the authoring across parallel agents that write card specs and draw diagrams per module within a card cap, renders the photographs in one batch, publishes the images, generates the layouts, then assembles, repairs and checks every deck locally before delivery",
+        "returns": "a full set of module slide decks with PDFs and trainer notes, delivered to the class folder, plus the total cost of images and layout credits"
+      },
+      "portsAsIs": [
+        "per-module prep and finish pipeline",
+        "spec-driven photo renderer with cost log",
+        "cropped-diagram repair",
+        "deck cost tally"
+      ],
+      "perCustomer": [
+        "the slide template and intro slides",
+        "card caps from the customer's presentation-service credits",
+        "the course content"
+      ],
+      "evidence": [
+        "11 decks 16 to 30 slides, notes unmatched=0 missing=0 on every deck",
+        "clean second run removed=0 bullets=0",
+        "13 PPTX and 13 PDF in the class folder"
+      ],
+      "toolchain": {
+        "skills": [
+          "create-pptx",
+          "create-class",
+          "brand-voice-code",
+          "claude-learn"
+        ],
+        "mcpServers": [
+          "claude_ai_Gamma",
+          "media-creator",
+          "angular-cli"
+        ],
+        "agents": [
+          "fork",
+          "general-purpose"
+        ]
+      },
+      "industry": "technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
     }
   ]
 }

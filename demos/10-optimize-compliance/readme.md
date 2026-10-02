@@ -9,7 +9,7 @@ Policy, consent before third-party content, and a dependency inventory you can d
 
 ## Scope: this module gates the local build
 
-**Module 09 gates the pull request against the local build.** Everything here runs on a CI runner
+**This module gates the pull request against the local build.** Everything here runs on a CI runner
 against the source tree and against `dist/`: size budgets, template accessibility lint, an axe scan of
 the built app, and a Lighthouse CI run over the output directory. No DNS, no TLS, no deployment, no field
 data. The question is whether the artifact is allowed to ship.
