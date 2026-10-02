@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Reading a JWT</title>
+  <desc>A JWT split into three base64url segments: header, payload and signature. The header decodes to alg and kid, the payload to the claims iss, aud, exp, scp, roles and name, and the signature is verified by the API against a key from the issuer's JWKS endpoint. The browser decodes header and payload for display; only the API verifies.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="680" y="80" text-anchor="middle" font-size="34" font-weight="700" fill="#24292f">browser: decode for display</text>
+    <path d="M60,130 L60,110 L1300,110 L1300,130" fill="none" stroke="#57606a" stroke-width="3"/>
+    <text x="1600" y="80" text-anchor="middle" font-size="34" font-weight="700" fill="#2f8f57">API: verify</text>
+    <path d="M1340,130 L1340,110 L1860,110 L1860,130" fill="none" stroke="#57606a" stroke-width="3"/>
+
+    <g font-family="Consolas, monospace" font-size="30" fill="#24292f" text-anchor="middle">
+      <rect x="60" y="150" width="460" height="110" rx="14" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <text x="290" y="216">eyJhbGciOiJSUzI1Ni</text>
+      <rect x="560" y="150" width="740" height="110" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="930" y="216">eyJpc3MiOiJodHRwczovL2xvZ2lu</text>
+      <rect x="1340" y="150" width="520" height="110" rx="14" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+      <text x="1600" y="216">SflKxwRJSMeKKF2QT4fw</text>
+      <text x="540" y="226" font-size="56" font-weight="700">.</text>
+      <text x="1320" y="226" font-size="56" font-weight="700">.</text>
+    </g>
+
+    <g stroke="#57606a" stroke-width="4">
+      <line x1="290" y1="264" x2="290" y2="346" marker-end="url(#arrow)"/>
+      <line x1="930" y1="264" x2="930" y2="346" marker-end="url(#arrow)"/>
+      <line x1="1600" y1="264" x2="1600" y2="346" marker-end="url(#arrow)"/>
+    </g>
+
+    <rect x="60" y="355" width="460" height="665" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="90" y="425" font-size="34" font-weight="700" fill="#24292f">header</text>
+    <g font-size="28" fill="#57606a">
+      <text x="90" y="510" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">alg</text>
+      <text x="190" y="510">algorithm</text>
+      <text x="90" y="580" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">kid</text>
+      <text x="190" y="580">signing key id</text>
+    </g>
+
+    <rect x="560" y="355" width="740" height="665" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="590" y="425" font-size="34" font-weight="700" fill="#24292f">payload: claims</text>
+    <g font-size="28" fill="#57606a">
+      <g font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">
+        <text x="590" y="510">iss</text>
+        <text x="590" y="590">aud</text>
+        <text x="590" y="670">exp</text>
+        <text x="590" y="750">scp</text>
+        <text x="590" y="830">roles</text>
+        <text x="590" y="910">name</text>
+      </g>
+      <text x="740" y="510">issuer</text>
+      <text x="740" y="590">your API</text>
+      <text x="740" y="670">expiry time</text>
+      <text x="740" y="750">delegated scope</text>
+      <text x="740" y="830">app roles</text>
+      <text x="740" y="910">signed-in user</text>
+    </g>
+
+    <rect x="1340" y="355" width="520" height="665" rx="20" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="1370" y="425" font-size="34" font-weight="700" fill="#24292f">signature</text>
+    <g font-size="30" fill="#57606a">
+      <text x="1370" y="510">verified by the API</text>
+      <text x="1370" y="555">against a key from</text>
+      <text x="1370" y="600">the issuer's JWKS</text>
+    </g>
+    <rect x="1370" y="820" width="460" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <g font-size="30" text-anchor="middle">
+      <text x="1600" y="883" fill="#57606a">decoding needs no key,</text>
+      <text x="1600" y="928" font-weight="700" fill="#24292f">verifying does</text>
+    </g>
+  </g>
+</svg>

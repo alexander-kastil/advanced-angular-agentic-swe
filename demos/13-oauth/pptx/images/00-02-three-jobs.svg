@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Three jobs, then identity providers</title>
+  <desc>Three hand-built jobs: get a token (OAuth 2.0, OpenID Connect, code flow with PKCE, JWT), attach it (HttpHeaders, HttpInterceptorFn, host allowlist), guard screens (SignalStore, CanMatchFn with UrlTree, sign-in round trip). Below, identity providers take over: Firebase Authentication, MSAL Angular with Entra ID, the Easy Auth sidecar of Container Apps.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="40" width="573" height="620" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="326" y="115" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">Get a token</text>
+    <rect x="673" y="40" width="573" height="620" rx="20" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="115" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">Attach it</text>
+    <rect x="1306" y="40" width="573" height="620" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1593" y="115" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">Guard screens</text>
+
+    <g font-size="32" fill="#24292f" text-anchor="middle">
+      <rect x="80" y="160" width="493" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="326" y="222">OAuth 2.0</text>
+      <rect x="80" y="280" width="493" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="326" y="342">OpenID Connect</text>
+      <rect x="80" y="400" width="493" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="326" y="462">code flow + PKCE</text>
+      <rect x="80" y="520" width="493" height="100" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="326" y="582">JWT</text>
+    </g>
+    <g font-size="32" fill="#24292f" text-anchor="middle" font-family="Consolas, monospace">
+      <rect x="713" y="160" width="493" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="237">HttpHeaders</text>
+      <rect x="713" y="325" width="493" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="402">HttpInterceptorFn</text>
+      <rect x="713" y="490" width="493" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="567" font-family="Segoe UI, Helvetica, Arial, sans-serif">host allowlist</text>
+
+      <rect x="1346" y="160" width="493" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1593" y="237">SignalStore</text>
+      <rect x="1346" y="325" width="493" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1593" y="402">CanMatchFn + UrlTree</text>
+      <rect x="1346" y="490" width="493" height="130" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1593" y="567" font-family="Segoe UI, Helvetica, Arial, sans-serif">sign-in round trip</text>
+    </g>
+
+    <line x1="326" y1="664" x2="326" y2="732" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="960" y1="664" x2="960" y2="732" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1593" y1="664" x2="1593" y2="732" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="40" y="740" width="1840" height="300" rx="20" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="960" y="810" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">Identity providers take over</text>
+    <g font-size="32" fill="#24292f" text-anchor="middle">
+      <rect x="80" y="850" width="493" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="326" y="915">Firebase</text>
+      <text x="326" y="960" font-size="28" fill="#57606a">Authentication</text>
+      <rect x="713" y="850" width="493" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="915">MSAL Angular</text>
+      <text x="960" y="960" font-size="28" fill="#57606a">with Entra ID</text>
+      <rect x="1346" y="850" width="493" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1593" y="915">Easy Auth</text>
+      <text x="1593" y="960" font-size="28" fill="#57606a">Container Apps sidecar</text>
+    </g>
+  </g>
+</svg>

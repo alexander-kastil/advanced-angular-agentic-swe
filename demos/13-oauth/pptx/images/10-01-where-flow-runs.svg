@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Where the flow runs: MSAL vs Easy Auth</title>
+  <desc>MSAL in the SPA: the browser with MSAL and a token cache sends a Bearer token to the API. Easy Auth sidecar: the browser with a session cookie talks to the auth sidecar at /.auth/*, with /.auth/login/aad and /.auth/me, and the sidecar passes X-MS-CLIENT-PRINCIPAL to the app container.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="20" y="30" width="1880" height="430" rx="24" fill="#ffffff" stroke="#8c959f" stroke-width="2" stroke-dasharray="14 10"/>
+    <text x="60" y="88" font-size="34" font-weight="700" fill="#57606a">MSAL in the SPA</text>
+
+    <rect x="60" y="130" width="620" height="290" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="370" y="235" text-anchor="middle" font-size="44" font-weight="700" fill="#24292f">Browser</text>
+    <rect x="110" y="285" width="520" height="80" rx="40" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="370" y="337" text-anchor="middle" font-size="32" fill="#24292f">MSAL + token cache</text>
+
+    <rect x="1440" y="130" width="420" height="290" rx="20" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="1650" y="290" text-anchor="middle" font-size="44" font-weight="700" fill="#24292f">API</text>
+
+    <line x1="682" y1="275" x2="1431" y2="275" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="1056" y="252" text-anchor="middle" font-size="34" fill="#57606a">Bearer token</text>
+
+    <rect x="20" y="500" width="1880" height="550" rx="24" fill="#ffffff" stroke="#8c959f" stroke-width="2" stroke-dasharray="14 10"/>
+    <text x="60" y="558" font-size="34" font-weight="700" fill="#57606a">Easy Auth sidecar</text>
+
+    <rect x="60" y="600" width="420" height="400" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="270" y="760" text-anchor="middle" font-size="44" font-weight="700" fill="#24292f">Browser</text>
+    <rect x="90" y="810" width="360" height="80" rx="40" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="270" y="862" text-anchor="middle" font-size="32" fill="#24292f">session cookie</text>
+
+    <rect x="620" y="600" width="460" height="400" rx="20" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+    <text x="850" y="672" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Auth sidecar</text>
+    <text x="850" y="728" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#57606a">/.auth/*</text>
+    <rect x="670" y="772" width="360" height="74" rx="37" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="850" y="820" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">/.auth/login/aad</text>
+    <rect x="670" y="874" width="360" height="74" rx="37" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="850" y="922" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">/.auth/me</text>
+
+    <rect x="1440" y="600" width="420" height="400" rx="20" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="1650" y="815" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">App container</text>
+
+    <line x1="482" y1="800" x2="611" y2="800" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1082" y1="800" x2="1431" y2="800" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="1260" y="772" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#57606a">X-MS-CLIENT-PRINCIPAL</text>
+  </g>
+</svg>

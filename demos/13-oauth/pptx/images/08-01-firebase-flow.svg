@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Firebase Authentication flow</title>
+  <desc>Firebase Authentication issues the ID token to the Angular app, where FirebaseAuthService writes the user signal from onAuthStateChanged. firebaseAuthInterceptor calls getIdToken and adds a Bearer header. The ASP.NET Core API validates it with JwtBearer against securetoken.google.com/project-id with the project id as audience. firebase deploy --only hosting publishes the build to Firebase Hosting.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="60" width="600" height="150" rx="20" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+    <text x="340" y="150" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">Firebase Authentication</text>
+
+    <line x1="340" y1="212" x2="340" y2="351" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="362" y="292" font-size="30" fill="#57606a">ID token</text>
+
+    <line x1="642" y1="135" x2="1580" y2="135" stroke="#57606a" stroke-width="3" stroke-dasharray="12 10"/>
+    <line x1="1580" y1="135" x2="1580" y2="351" stroke="#57606a" stroke-width="3" stroke-dasharray="12 10" marker-end="url(#arrow)"/>
+    <text x="1110" y="115" text-anchor="middle" font-size="30" fill="#57606a">signing keys</text>
+
+    <rect x="40" y="360" width="600" height="340" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="340" y="425" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Angular app</text>
+    <rect x="80" y="455" width="520" height="70" rx="35" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="340" y="501" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">FirebaseAuthService</text>
+    <text x="340" y="590" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#57606a">onAuthStateChanged</text>
+    <text x="340" y="645" text-anchor="middle" font-size="30" fill="#57606a">writes the user signal</text>
+
+    <rect x="760" y="360" width="440" height="340" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="980" y="440" text-anchor="middle" font-family="Consolas, monospace" font-size="26" font-weight="700" fill="#24292f">firebaseAuthInterceptor</text>
+    <rect x="800" y="480" width="360" height="70" rx="35" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="980" y="526" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">getIdToken()</text>
+    <text x="980" y="620" text-anchor="middle" font-size="30" fill="#57606a">refreshes itself</text>
+
+    <rect x="1320" y="360" width="560" height="340" rx="20" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="1600" y="425" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">ASP.NET Core API</text>
+    <text x="1600" y="480" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">JwtBearer</text>
+    <text x="1600" y="545" text-anchor="middle" font-size="28" fill="#57606a">Authority</text>
+    <text x="1600" y="590" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#24292f">securetoken.google.com/</text>
+    <text x="1600" y="625" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#24292f">&lt;project-id&gt;</text>
+    <text x="1600" y="675" text-anchor="middle" font-size="28" fill="#57606a">audience = project id</text>
+
+    <line x1="642" y1="530" x2="751" y2="530" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1202" y1="530" x2="1311" y2="530" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="1260" y="505" text-anchor="middle" font-size="28" fill="#57606a">Bearer</text>
+
+    <line x1="340" y1="702" x2="340" y2="831" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="40" y="840" width="600" height="120" rx="60" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="340" y="910" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">firebase deploy --only hosting</text>
+    <line x1="642" y1="900" x2="751" y2="900" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <rect x="760" y="840" width="440" height="120" rx="20" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+    <text x="980" y="912" text-anchor="middle" font-size="36" font-weight="700" fill="#24292f">Firebase Hosting</text>
+  </g>
+</svg>

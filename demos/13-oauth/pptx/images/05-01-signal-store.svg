@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Auth state in a SignalStore</title>
+  <desc>withState holds token, returnUrl and a now signal that ticks every second. withComputed derives claims, userName, secondsLeft and isAuthenticated as exp greater than now. The interceptor, the guard and the shell read isAuthenticated. No stored boolean, so it cannot drift.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="140" width="500" height="620" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="290" y="220" text-anchor="middle" font-family="Consolas, monospace" font-size="42" font-weight="700" fill="#24292f">withState</text>
+    <rect x="100" y="270" width="380" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="290" y="320" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">token</text>
+    <rect x="100" y="380" width="380" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="290" y="430" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">returnUrl</text>
+    <rect x="100" y="490" width="380" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="290" y="540" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">now</text>
+    <text x="290" y="630" text-anchor="middle" font-size="30" fill="#57606a">ticks every second</text>
+
+    <rect x="680" y="140" width="620" height="620" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="990" y="220" text-anchor="middle" font-family="Consolas, monospace" font-size="42" font-weight="700" fill="#24292f">withComputed</text>
+    <rect x="750" y="262" width="480" height="68" rx="34" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="990" y="307" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">claims</text>
+    <rect x="750" y="350" width="480" height="68" rx="34" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="990" y="395" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">userName</text>
+    <rect x="750" y="438" width="480" height="68" rx="34" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="990" y="483" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">secondsLeft</text>
+    <rect x="750" y="540" width="480" height="170" rx="24" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="990" y="608" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#24292f">isAuthenticated</text>
+    <text x="990" y="668" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#2f8f57">exp &gt; now</text>
+
+    <rect x="1460" y="200" width="420" height="130" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1670" y="279" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">interceptor</text>
+    <rect x="1460" y="400" width="420" height="130" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1670" y="479" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">guard</text>
+    <rect x="1460" y="600" width="420" height="130" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1670" y="679" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">shell</text>
+
+    <line x1="542" y1="450" x2="671" y2="450" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1302" y1="625" x2="1451" y2="268" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1302" y1="625" x2="1451" y2="468" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1302" y1="625" x2="1451" y2="665" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="460" y="860" width="1000" height="110" rx="55" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="960" y="929" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">no stored boolean: cannot drift</text>
+  </g>
+</svg>

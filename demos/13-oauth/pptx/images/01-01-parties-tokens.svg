@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Parties and tokens</title>
+  <desc>The user signs in at Entra ID or Firebase, the authorization server. The Angular app is a public client with no secret and keeps the ID token. It sends the refresh token to the authorization server and the access token to the ASP.NET Core API, the resource server. The ID token never goes to the API, because its aud names the client.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c24141"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="40" width="540" height="240" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="310" y="145" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">User</text>
+    <text x="310" y="200" text-anchor="middle" font-size="30" fill="#57606a">resource owner</text>
+
+    <rect x="40" y="340" width="540" height="700" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="310" y="530" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">Angular app</text>
+    <text x="310" y="585" text-anchor="middle" font-size="30" fill="#57606a">public client, no secret</text>
+    <rect x="110" y="640" width="400" height="140" rx="70" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="310" y="702" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">ID token</text>
+    <text x="310" y="748" text-anchor="middle" font-size="28" fill="#57606a">who the user is</text>
+
+    <rect x="1340" y="40" width="540" height="440" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1610" y="225" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">Entra ID / Firebase</text>
+    <text x="1610" y="280" text-anchor="middle" font-size="30" fill="#57606a">authorization server</text>
+
+    <rect x="1340" y="580" width="540" height="460" rx="20" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1610" y="660" text-anchor="middle" font-size="42" font-weight="700" fill="#24292f">ASP.NET Core API</text>
+    <text x="1610" y="715" text-anchor="middle" font-size="30" fill="#57606a">resource server</text>
+
+    <text x="960" y="140" text-anchor="middle" font-size="32" fill="#57606a">signs in</text>
+    <line x1="584" y1="170" x2="1330" y2="170" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <line x1="584" y1="420" x2="760" y2="420" stroke="#57606a" stroke-width="4"/>
+    <rect x="760" y="380" width="400" height="80" rx="40" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="431" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">refresh token</text>
+    <line x1="1160" y1="420" x2="1330" y2="420" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <line x1="584" y1="800" x2="760" y2="800" stroke="#57606a" stroke-width="4"/>
+    <rect x="760" y="760" width="400" height="80" rx="40" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="960" y="811" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">access token</text>
+    <line x1="1160" y1="800" x2="1330" y2="800" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <text x="960" y="900" text-anchor="middle" font-size="30" font-weight="700" fill="#c24141">never: its aud names the client</text>
+    <line x1="584" y1="970" x2="760" y2="970" stroke="#c24141" stroke-width="4" stroke-dasharray="14 10"/>
+    <rect x="760" y="930" width="400" height="80" rx="40" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+    <text x="960" y="981" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">ID token</text>
+    <line x1="1160" y1="970" x2="1330" y2="970" stroke="#c24141" stroke-width="4" stroke-dasharray="14 10" marker-end="url(#arrow-red)"/>
+    <g stroke="#c24141" stroke-width="7" stroke-linecap="round">
+      <line x1="1220" y1="935" x2="1280" y2="1005"/>
+      <line x1="1280" y1="935" x2="1220" y2="1005"/>
+    </g>
+  </g>
+</svg>

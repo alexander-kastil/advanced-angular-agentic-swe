@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Authorization code flow with PKCE</title>
+  <desc>Sequence between User, Entra ID, Angular app and Food API. The app creates a code_verifier and hashes it to a code_challenge with S256. It sends GET /authorize with code_challenge, state and nonce. The user signs in at Entra ID. Entra ID redirects back with code and state. The app sends POST /token with code and code_verifier and receives id_token, access_token and refresh_token. The app calls the API with Bearer access_token. Side list: code_verifier makes a stolen code useless, state stops CSRF on the redirect, nonce stops ID token replay, redirect_uri must match exactly.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <g stroke="#8c959f" stroke-width="2" stroke-dasharray="10 8">
+      <line x1="130" y1="130" x2="130" y2="1030"/>
+      <line x1="430" y1="130" x2="430" y2="1030"/>
+      <line x1="900" y1="130" x2="900" y2="1030"/>
+      <line x1="1250" y1="130" x2="1250" y2="1030"/>
+    </g>
+    <g font-size="32" font-weight="700" fill="#24292f" text-anchor="middle">
+      <rect x="40" y="40" width="180" height="90" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+      <text x="130" y="96">User</text>
+      <rect x="310" y="40" width="240" height="90" rx="14" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <text x="430" y="96">Entra ID</text>
+      <rect x="770" y="40" width="260" height="90" rx="14" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <text x="900" y="96">Angular app</text>
+      <rect x="1160" y="40" width="180" height="90" rx="14" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+      <text x="1250" y="96">Food API</text>
+    </g>
+
+    <rect x="700" y="170" width="400" height="110" rx="14" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <g font-family="Consolas, monospace" font-size="26" fill="#24292f" text-anchor="middle">
+      <text x="900" y="217">create code_verifier</text>
+      <text x="900" y="257">S256 to code_challenge</text>
+    </g>
+
+    <g font-family="Consolas, monospace" text-anchor="middle" fill="#24292f">
+      <text x="665" y="345" font-size="28" font-weight="700">GET /authorize</text>
+      <text x="665" y="382" font-size="26" fill="#57606a">code_challenge, state, nonce</text>
+      <text x="665" y="575" font-size="26" fill="#57606a">redirect: code, state</text>
+      <text x="665" y="665" font-size="28" font-weight="700">POST /token</text>
+      <text x="665" y="702" font-size="26" fill="#57606a">code + code_verifier</text>
+      <text x="665" y="790" font-size="26" fill="#57606a">id_token, access_token,</text>
+      <text x="665" y="827" font-size="26" fill="#57606a">refresh_token</text>
+      <text x="1075" y="935" font-size="26" font-weight="700">Bearer access_token</text>
+    </g>
+    <text x="280" y="475" text-anchor="middle" font-size="28" fill="#57606a">sign in</text>
+
+    <g stroke="#57606a" stroke-width="4">
+      <line x1="896" y1="405" x2="440" y2="405" marker-end="url(#arrow)"/>
+      <line x1="134" y1="500" x2="420" y2="500" marker-end="url(#arrow)"/>
+      <line x1="434" y1="600" x2="890" y2="600" marker-end="url(#arrow)"/>
+      <line x1="896" y1="725" x2="440" y2="725" marker-end="url(#arrow)"/>
+      <line x1="434" y1="850" x2="890" y2="850" marker-end="url(#arrow)"/>
+      <line x1="904" y1="960" x2="1240" y2="960" marker-end="url(#arrow)"/>
+    </g>
+
+    <g>
+      <rect x="1400" y="40" width="480" height="225" rx="14" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1430" y="120" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">code_verifier</text>
+      <text x="1430" y="175" font-size="28" fill="#57606a">a stolen code is</text>
+      <text x="1430" y="215" font-size="28" fill="#57606a">useless without it</text>
+
+      <rect x="1400" y="280" width="480" height="225" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+      <text x="1430" y="360" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">state</text>
+      <text x="1430" y="415" font-size="28" fill="#57606a">stops CSRF on</text>
+      <text x="1430" y="455" font-size="28" fill="#57606a">the redirect</text>
+
+      <rect x="1400" y="520" width="480" height="225" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+      <text x="1430" y="600" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">nonce</text>
+      <text x="1430" y="655" font-size="28" fill="#57606a">stops replay of an</text>
+      <text x="1430" y="695" font-size="28" fill="#57606a">old ID token</text>
+
+      <rect x="1400" y="760" width="480" height="225" rx="14" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+      <text x="1430" y="840" font-family="Consolas, monospace" font-size="30" font-weight="700" fill="#24292f">redirect_uri</text>
+      <text x="1430" y="895" font-size="28" fill="#57606a">exact match, so codes</text>
+      <text x="1430" y="935" font-size="28" fill="#57606a">reach only your page</text>
+    </g>
+  </g>
+</svg>

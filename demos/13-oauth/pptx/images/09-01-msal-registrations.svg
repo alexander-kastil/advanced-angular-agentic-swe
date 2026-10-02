@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Entra ID app registrations and protectedResourceMap</title>
+  <desc>Two app registrations: food-ui with a redirect URI of type spa requests the scope api://client-id/access_as_user from food-api, and user.read from Microsoft Graph. protectedResourceMap: https://localhost:5001/api/food/7 gets the API scope, https://graph.microsoft.com/v1.0/me gets user.read, https://cdn.example.com/app.js gets no token.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="50" width="520" height="350" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="300" y="185" text-anchor="middle" font-family="Consolas, monospace" font-size="44" font-weight="700" fill="#24292f">food-ui</text>
+    <rect x="70" y="230" width="460" height="76" rx="38" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="300" y="280" text-anchor="middle" font-size="30" fill="#24292f">redirect URI type <tspan font-family="Consolas, monospace" font-weight="700">spa</tspan></text>
+
+    <rect x="1220" y="50" width="660" height="170" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1550" y="120" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">food-api</text>
+    <text x="1550" y="178" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#57606a">api://client-id/access_as_user</text>
+
+    <rect x="1220" y="260" width="660" height="140" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1550" y="343" text-anchor="middle" font-size="38" font-weight="700" fill="#24292f">Microsoft Graph</text>
+
+    <line x1="562" y1="135" x2="1211" y2="135" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="886" y="115" text-anchor="middle" font-size="30" fill="#57606a">requests scope</text>
+    <line x1="562" y1="330" x2="1211" y2="330" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="886" y="310" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#57606a">user.read</text>
+
+    <text x="40" y="500" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">protectedResourceMap</text>
+    <rect x="40" y="530" width="1840" height="500" rx="20" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <path d="M60,530 H1860 A20,20 0 0 1 1880,550 V620 H40 V550 A20,20 0 0 1 60,530 Z" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="588" font-size="30" font-weight="700" fill="#57606a">request URL</text>
+    <text x="1270" y="588" font-size="30" font-weight="700" fill="#57606a">token attached</text>
+    <line x1="1240" y1="530" x2="1240" y2="1030" stroke="#8c959f" stroke-width="2"/>
+    <line x1="40" y1="757" x2="1880" y2="757" stroke="#8c959f" stroke-width="2"/>
+    <line x1="40" y1="894" x2="1880" y2="894" stroke="#8c959f" stroke-width="2"/>
+
+    <text x="80" y="700" font-family="Consolas, monospace" font-size="32" fill="#24292f">https://localhost:5001/api/food/7</text>
+    <rect x="1280" y="650" width="560" height="74" rx="37" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1560" y="699" text-anchor="middle" font-size="32" font-weight="700" fill="#24292f">API scope</text>
+
+    <text x="80" y="837" font-family="Consolas, monospace" font-size="32" fill="#24292f">https://graph.microsoft.com/v1.0/me</text>
+    <rect x="1280" y="787" width="560" height="74" rx="37" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1560" y="836" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#24292f">user.read</text>
+
+    <text x="80" y="974" font-family="Consolas, monospace" font-size="32" fill="#24292f">https://cdn.example.com/app.js</text>
+    <rect x="1280" y="924" width="560" height="74" rx="37" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1560" y="973" text-anchor="middle" font-size="32" font-weight="700" fill="#57606a">no token</text>
+  </g>
+</svg>
