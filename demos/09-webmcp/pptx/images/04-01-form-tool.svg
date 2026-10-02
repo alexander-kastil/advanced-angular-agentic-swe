@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>A Signal Form as an agent tool</title>
+<desc>provideExperimentalWebMcpForms plus experimentalWebMcpTool on form() derive a tool schema from the model; agent values pass the same validators.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="40" y="60" width="560" height="260" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="320.0" y="150.25" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">provideExperimental</text>
+<text x="320.0" y="193.75" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">WebMcpForms()</text>
+<text x="320.0" y="237.25" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">@angular/forms/signals</text>
+<rect x="700" y="60" width="1180" height="260" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="1290.0" y="150.25" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">form(model, rules, {</text>
+<text x="1290.0" y="193.75" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">  experimentalWebMcpTool:</text>
+<text x="1290.0" y="237.25" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">    { name: 'fill-booking-form' } })</text>
+<line x1="604" y1="190" x2="692" y2="190" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="700" y="420" width="560" height="260" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="980.0" y="495.9" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">tool schema</text>
+<text x="980.0" y="551.8" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">guest, guestEmail,</text>
+<text x="980.0" y="592.4" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">nights</text>
+<text x="980.0" y="633.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#57606a">derived from the model</text>
+<line x1="980" y1="324" x2="980" y2="412" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="1340" y="420" width="540" height="260" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="1610.0" y="516.2" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">same validators</text>
+<text x="1610.0" y="572.1" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">required, minLength</text>
+<text x="1610.0" y="612.7" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">email, min</text>
+<line x1="1264" y1="550" x2="1332" y2="550" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="40" y="420" width="560" height="260" rx="16" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="320.0" y="513.3" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">agent</text>
+<text x="320.0" y="572.0999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">fills the form</text>
+<text x="320.0" y="615.5999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">via the tool</text>
+<line x1="604" y1="550" x2="692" y2="550" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="40" y="780" width="1840" height="220" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="960.0" y="872.0" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">declareExperimentalWebMcpTool({ name: 'read-booking-form', ... })</text>
+<text x="960.0" y="915.5" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">explicit read tool: value and valid() back to the agent</text>
+</svg>

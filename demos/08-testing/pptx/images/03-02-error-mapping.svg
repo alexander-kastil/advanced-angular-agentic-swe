@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Testing the error path</title>
+<desc>404, 409, 500 and a status 0 transport error flow through errorMappingInterceptor into a readable Error and a log entry.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="60" y="80" width="480" height="150" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="300.0" y="158.75" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">404 Not Found</text>
+<line x1="544" y1="155" x2="692" y2="155" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="60" y="260" width="480" height="150" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="300.0" y="338.75" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">409 Conflict</text>
+<line x1="544" y1="335" x2="692" y2="335" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="60" y="440" width="480" height="150" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="300.0" y="518.75" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">500 Server Error</text>
+<line x1="544" y1="515" x2="692" y2="515" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="60" y="620" width="480" height="150" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="300.0" y="698.75" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">status 0: ProgressEvent</text>
+<line x1="544" y1="695" x2="692" y2="695" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="700" y="80" width="560" height="690" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="980.0" y="323.85" text-anchor="middle" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">errorMapping</text>
+<text x="980.0" y="384.45000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">Interceptor</text>
+<text x="980.0" y="427.95000000000005" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a"></text>
+<text x="980.0" y="471.45000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">catchError</text>
+<text x="980.0" y="514.95" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">describeHttpError</text>
+<text x="980.0" y="558.45" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">log.record()</text>
+<rect x="1380" y="80" width="480" height="300" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="1620.0" y="175.9" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">Caller gets</text>
+<text x="1620.0" y="231.8" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#57606a">a plain Error</text>
+<text x="1620.0" y="272.40000000000003" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#57606a">readable message</text>
+<text x="1620.0" y="313.00000000000006" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">vi.fn() error callback</text>
+<rect x="1380" y="470" width="480" height="300" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="1620.0" y="583.3" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">ErrorLogService</text>
+<text x="1620.0" y="642.0999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">url, status,</text>
+<text x="1620.0" y="685.5999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">message</text>
+<line x1="1264" y1="230" x2="1372" y2="230" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<line x1="1264" y1="620" x2="1372" y2="620" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="680.6" y="874" width="558.8" height="52" rx="26" fill="#e9f7ef" stroke="#2f8f57" stroke-width="2"/>
+<text x="960" y="909" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#24292f">a success leaves the log empty</text>
+</svg>

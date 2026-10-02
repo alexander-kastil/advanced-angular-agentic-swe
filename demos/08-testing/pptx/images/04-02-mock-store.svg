@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>A mock store you can steer</title>
+<desc>The test owns writable signals and vi.fn methods in a store spy provided in place of CustomersStore.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="60" y="100" width="540" height="640" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="330.0" y="325.70000000000005" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">The test owns</text>
+<text x="330.0" y="382.50000000000006" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">loading = signal(true)</text>
+<text x="330.0" y="423.1000000000001" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">customers = signal([])</text>
+<text x="330.0" y="463.7000000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#57606a"></text>
+<text x="330.0" y="504.3000000000001" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">loading.set(false)</text>
+<text x="330.0" y="544.9000000000001" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">customers.set(rows)</text>
+<rect x="700" y="100" width="560" height="640" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="980.0" y="305.4" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#24292f">storeSpy</text>
+<text x="980.0" y="362.2" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">{ provide: CustomersStore,</text>
+<text x="980.0" y="402.8" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">  useValue: storeSpy }</text>
+<text x="980.0" y="443.40000000000003" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#57606a"></text>
+<text x="980.0" y="484.00000000000006" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">load: vi.fn()</text>
+<text x="980.0" y="524.6" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">add: vi.fn()</text>
+<text x="980.0" y="565.2" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">delete: vi.fn()</text>
+<rect x="1360" y="100" width="500" height="640" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1610.0" y="340.20000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#24292f">Customers</text>
+<text x="1610.0" y="399.90000000000003" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">Component</text>
+<text x="1610.0" y="443.40000000000003" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a"></text>
+<text x="1610.0" y="486.90000000000003" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">progress bar</text>
+<text x="1610.0" y="530.4000000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">or rows</text>
+<line x1="604" y1="420" x2="692" y2="420" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<line x1="1264" y1="420" x2="1352" y2="420" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="60" y="830" width="880" height="170" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="500.0" y="919.0" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">toHaveBeenCalledWith(customer)</text>
+<rect x="980" y="830" width="880" height="170" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1420.0" y="919.0" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">queryAll('mat-row').length</text>
+</svg>

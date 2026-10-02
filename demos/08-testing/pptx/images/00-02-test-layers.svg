@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Where each test lives</title>
+<desc>A stack of test layers from plain classes to Playwright, with an agent writing specs beside it.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="60" y="60" width="1240" height="150" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="680.0" y="120.44999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Playwright</text>
+<text x="680.0" y="180.14999999999998" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">page objects, route mocks, served app</text>
+<rect x="60" y="222" width="1240" height="150" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="680.0" y="282.45" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Zoneless async</text>
+<text x="680.0" y="342.15" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">PendingTasks, whenStable(), TestBed.tick()</text>
+<rect x="60" y="384" width="1240" height="150" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="680.0" y="444.45000000000005" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">State</text>
+<text x="680.0" y="504.15000000000003" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">Signal Form FieldTree, SignalStore events</text>
+<rect x="60" y="546" width="1240" height="150" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="680.0" y="606.45" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">HTTP</text>
+<text x="680.0" y="666.1500000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">HttpTestingController, interceptor errors</text>
+<rect x="60" y="708" width="1240" height="150" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="680.0" y="768.45" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">TestBed</text>
+<text x="680.0" y="828.1500000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">directive host, component, setInput()</text>
+<rect x="60" y="870" width="1240" height="150" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="680.0" y="930.45" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">Plain class, pipe, service</text>
+<text x="680.0" y="990.1500000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">new, no TestBed</text>
+<rect x="1400" y="60" width="460" height="960" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="1630.0" y="431.6" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#24292f">Agent writes</text>
+<text x="1630.0" y="495.1" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">the spec</text>
+<text x="1630.0" y="541.5" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a"></text>
+<text x="1630.0" y="587.9" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">You state the</text>
+<text x="1630.0" y="634.3" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">behaviour and own</text>
+<text x="1630.0" y="680.6999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">the mutation round</text>
+<line x1="1308" y1="540" x2="1392" y2="540" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+</svg>

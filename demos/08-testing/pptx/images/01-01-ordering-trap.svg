@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>From Karma to Vitest</title>
+<desc>The unit-test builder replaces Karma; an httpResource spec must tick, flush, await whenStable, then render.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="60" y="80" width="760" height="380" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="440.0" y="211.55" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">angular.json test target</text>
+<text x="440.0" y="270.35" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">@angular/build:unit-test</text>
+<text x="440.0" y="313.85" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">buildTarget: app build</text>
+<text x="440.0" y="357.35" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">setupFiles: test-setup.ts</text>
+<rect x="60" y="540" width="760" height="300" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2" stroke-dasharray="12 8"/>
+<text x="440.0" y="653.3" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" fill="#24292f">Removed</text>
+<text x="440.0" y="712.0999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">karma.conf.js, browser launcher,</text>
+<text x="440.0" y="755.5999999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">jasmine, zone.js/testing</text>
+<text x="440" y="920" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">vitest + jsdom replace them</text>
+<rect x="940" y="80" width="920" height="170" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="968" y="145.79999999999998" text-anchor="start" font-family="Consolas, monospace" font-size="32" fill="#24292f">TestBed.tick()</text>
+<text x="968" y="192.2" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">flush the httpResource effect</text>
+<text x="905" y="180" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#2f8f57">1</text>
+<rect x="940" y="270" width="920" height="170" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="968" y="335.8" text-anchor="start" font-family="Consolas, monospace" font-size="32" fill="#24292f">expectOne(url).flush(body)</text>
+<text x="968" y="382.2" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">the request exists only now</text>
+<text x="905" y="370" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#2f8f57">2</text>
+<rect x="940" y="460" width="920" height="170" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="968" y="525.8000000000001" text-anchor="start" font-family="Consolas, monospace" font-size="32" fill="#24292f">await fixture.whenStable()</text>
+<text x="968" y="572.2" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">let the value publish</text>
+<text x="905" y="560" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#2f8f57">3</text>
+<rect x="940" y="650" width="920" height="170" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="968" y="715.8000000000001" text-anchor="start" font-family="Consolas, monospace" font-size="32" fill="#24292f">fixture.detectChanges()</text>
+<text x="968" y="762.2" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">render it</text>
+<text x="905" y="750" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#2f8f57">4</text>
+<rect x="940" y="850" width="920" height="150" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="1400.0" y="929.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">whenStable() before tick() deadlocks</text>
+</svg>

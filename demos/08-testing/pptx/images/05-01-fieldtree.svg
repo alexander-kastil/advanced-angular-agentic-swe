@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Testing a Signal Form</title>
+<desc>Write field values, read errors and touched state from the FieldTree, and submit with valid and invalid outcomes.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="60" y="80" width="520" height="200" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="320.0" y="160.79999999999998" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">email().value</text>
+<text x="320.0" y="207.2" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">.set('x')</text>
+<rect x="700" y="60" width="520" height="560" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="960.0" y="249.4" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">signupForm</text>
+<text x="960.0" y="316.7" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">email</text>
+<text x="960.0" y="366.0" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">password</text>
+<text x="960.0" y="415.3" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">confirm</text>
+<text x="960.0" y="464.6" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#24292f">age</text>
+<line x1="584" y1="180" x2="692" y2="180" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="1340" y="60" width="520" height="260" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="1600.0" y="172.0" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">email().errors()</text>
+<text x="1600.0" y="215.5" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">'Enter a valid email'</text>
+<rect x="1340" y="360" width="520" height="260" rx="16" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+<text x="1600.0" y="472.0" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">confirm().errors()</text>
+<text x="1600.0" y="515.5" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">'Passwords do not match'</text>
+<line x1="1224" y1="190" x2="1332" y2="190" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<line x1="1224" y1="490" x2="1332" y2="490" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="60" y="720" width="520" height="260" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="320.0" y="814.5" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">submit()</text>
+<text x="320.0" y="876.0" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">resolves a boolean,</text>
+<text x="320.0" y="919.5" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">marks the tree touched</text>
+<rect x="700" y="720" width="520" height="260" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="3"/>
+<text x="960.0" y="813.7" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">invalid</text>
+<text x="960.0" y="873.4000000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">onInvalid runs</text>
+<text x="960.0" y="916.9000000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">action does not</text>
+<rect x="1340" y="720" width="520" height="260" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1600.0" y="813.7" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="36" font-weight="700" fill="#24292f">valid: action</text>
+<text x="1600.0" y="873.4000000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">server error lands</text>
+<text x="1600.0" y="916.9000000000001" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">on the email field</text>
+<line x1="584" y1="850" x2="692" y2="850" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<path d="M 320 984 L 320 1040 L 1600 1040 L 1600 988" fill="none" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+</svg>

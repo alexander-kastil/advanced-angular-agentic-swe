@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Integration-testing container and presenters</title>
+<desc>The container passes customers down to the real table presenter; edit and delete outputs flow back up to the store spy.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="560" y="60" width="800" height="220" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="960.0" y="156.25" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">CustomersComponent</text>
+<text x="960.0" y="217.75" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">container</text>
+<rect x="1500" y="60" width="360" height="220" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="1680.0" y="155.45" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#24292f">storeSpy</text>
+<text x="1680.0" y="215.14999999999998" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">vi.fn()</text>
+<line x1="1364" y1="170" x2="1492" y2="170" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)" marker-start="url(#a-g)"/>
+<rect x="160" y="560" width="760" height="240" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="540.0" y="665.8499999999999" text-anchor="middle" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">CustomersTable</text>
+<text x="540.0" y="726.4499999999999" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">real presenter</text>
+<rect x="1100" y="560" width="760" height="240" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1480.0" y="647.0" text-anchor="middle" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">CustomerEdit</text>
+<text x="1480.0" y="704.7" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#57606a">rendered when</text>
+<text x="1480.0" y="745.3000000000001" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">selectedCustomer()</text>
+<line x1="700" y1="284" x2="600" y2="552" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<text x="470" y="410" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">customers() input</text>
+<line x1="820" y1="552" x2="900" y2="284" stroke="#2f8f57" stroke-width="4" marker-end="url(#a-gr)"/>
+<text x="1080" y="410" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#2f8f57">edit / delete .emit()</text>
+<line x1="1300" y1="284" x2="1400" y2="552" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)" stroke-dasharray="12 8"/>
+<rect x="182.0" y="914" width="716.0" height="52" rx="26" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+<text x="540" y="949" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">By.directive(CustomersTableComponent)</text>
+<rect x="1304.0" y="914" width="392.0" height="52" rx="26" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+<text x="1500" y="949" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">no NO_ERRORS_SCHEMA</text>
+</svg>

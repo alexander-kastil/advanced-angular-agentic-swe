@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Testing an attribute directive</title>
+<desc>A host component applies CapitalizeDirective; a click toggles textTransform, asserted in the DOM.</desc>
+<defs><marker id="a-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker><marker id="a-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c24141"/></marker><marker id="a-gr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2f8f57"/></marker></defs>
+<rect width="1920" height="1080" fill="#ffffff"/>
+<rect x="60" y="160" width="520" height="360" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+<text x="320.0" y="304.1" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#24292f">Test host</text>
+<text x="320.0" y="364.70000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">&lt;span appCapitalize&gt;</text>
+<text x="320.0" y="408.20000000000005" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#57606a">declared in the spec</text>
+<rect x="700" y="160" width="560" height="360" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+<text x="980.0" y="303.70000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="700" fill="#24292f">CapitalizeDirective</text>
+<text x="980.0" y="363.40000000000003" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">host: { '(click)':</text>
+<text x="980.0" y="406.90000000000003" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">  'onClick()' }</text>
+<rect x="1380" y="160" width="480" height="360" rx="16" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+<text x="1620.0" y="304.1" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#24292f">DOM element</text>
+<text x="1620.0" y="364.70000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">textTransform</text>
+<text x="1620.0" y="408.20000000000005" text-anchor="middle" font-family="Consolas, monospace" font-size="30" fill="#24292f">uppercase / lowercase</text>
+<line x1="584" y1="340" x2="692" y2="340" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<line x1="1264" y1="340" x2="1372" y2="340" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="60" y="680" width="400" height="160" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="260.0" y="764.0" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">querySelector()</text>
+<line x1="464" y1="760" x2="530" y2="760" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="535" y="680" width="400" height="160" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="735.0" y="764.0" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">click()</text>
+<line x1="939" y1="760" x2="1005" y2="760" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="1010" y="680" width="400" height="160" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1210.0" y="764.0" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">detectChanges()</text>
+<line x1="1414" y1="760" x2="1480" y2="760" stroke="#57606a" stroke-width="4" marker-end="url(#a-g)"/>
+<rect x="1485" y="680" width="400" height="160" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+<text x="1685.0" y="764.0" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">expect(style)</text>
+<text x="960" y="940" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="32" fill="#57606a">the assertion is about the DOM the user sees</text>
+</svg>
