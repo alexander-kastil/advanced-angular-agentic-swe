@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Skill loading layers</title>
+  <desc>A skill folder in three layers: the description is always in context, the SKILL.md body loads when the description matches, references are opened one at a time. .claude/skills and .github/skills both point to the same skill folder.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="60" width="1200" height="960" rx="24" fill="none" stroke="#8c959f" stroke-width="2" stroke-dasharray="14 10"/>
+
+    <rect x="110" y="110" width="1100" height="240" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="160" y="210" font-family="Consolas, monospace" font-size="54" font-weight="700" fill="#24292f">description</text>
+    <text x="160" y="290" font-size="38" fill="#57606a">always in context, every turn</text>
+
+    <line x1="660" y1="352" x2="660" y2="403" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="110" y="410" width="1100" height="240" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="160" y="510" font-family="Consolas, monospace" font-size="54" font-weight="700" fill="#24292f">SKILL.md body</text>
+    <text x="160" y="590" font-size="38" fill="#57606a">loaded when the description matches</text>
+
+    <line x1="660" y1="652" x2="660" y2="689" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="150" y="694" width="1060" height="240" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <rect x="130" y="702" width="1060" height="240" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <rect x="110" y="710" width="1100" height="240" rx="18" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="160" y="810" font-family="Consolas, monospace" font-size="54" font-weight="700" fill="#24292f">references/*.md</text>
+    <text x="160" y="890" font-size="38" fill="#57606a">opened one at a time</text>
+
+    <rect x="1420" y="200" width="440" height="220" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1640" y="300" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">.claude/skills/</text>
+    <text x="1640" y="365" text-anchor="middle" font-size="34" fill="#57606a">Claude Code</text>
+
+    <rect x="1420" y="660" width="440" height="220" rx="18" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1640" y="760" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">.github/skills/</text>
+    <text x="1640" y="825" text-anchor="middle" font-size="34" fill="#57606a">GitHub Copilot</text>
+
+    <line x1="1418" y1="310" x2="1270" y2="310" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1418" y1="770" x2="1270" y2="770" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+  </g>
+</svg>

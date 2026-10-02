@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Hook lifecycle</title>
+  <desc>Lifecycle of an agent turn: UserPromptSubmit, the model, the PreToolUse gate that can block a banned Angular API or a git commit, the Edit or Write tool call, PostToolUse that formats and lints, and the Stop gate that refuses to finish on a red build. Copilot names: userPromptSubmitted, preToolUse, postToolUse.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="40" y="90" width="533" height="320" rx="20" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="306" y="190" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">UserPromptSubmit</text>
+    <text x="306" y="255" text-anchor="middle" font-size="32" fill="#57606a">before the model reads</text>
+    <rect x="126" y="300" width="360" height="66" rx="33" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="306" y="344" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#57606a">userPromptSubmitted</text>
+
+    <rect x="693" y="90" width="533" height="320" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="230" text-anchor="middle" font-size="44" font-weight="700" fill="#24292f">model</text>
+    <text x="960" y="295" text-anchor="middle" font-size="32" fill="#57606a">picks the next tool</text>
+
+    <rect x="1346" y="90" width="533" height="320" rx="20" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+    <text x="1612" y="170" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">PreToolUse</text>
+    <text x="1612" y="228" text-anchor="middle" font-size="32" font-weight="700" fill="#c24141">can block</text>
+    <text x="1612" y="278" text-anchor="middle" font-size="30" fill="#57606a">banned Angular API, git commit</text>
+    <rect x="1472" y="310" width="280" height="66" rx="33" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1612" y="354" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#57606a">preToolUse</text>
+
+    <rect x="1346" y="640" width="533" height="320" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1612" y="780" text-anchor="middle" font-size="44" font-weight="700" fill="#24292f">tool call</text>
+    <text x="1612" y="850" text-anchor="middle" font-family="Consolas, monospace" font-size="34" fill="#57606a">Edit / Write</text>
+
+    <rect x="693" y="640" width="533" height="320" rx="20" fill="#e9f7ef" stroke="#2f8f57" stroke-width="3"/>
+    <text x="960" y="740" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">PostToolUse</text>
+    <text x="960" y="805" text-anchor="middle" font-size="32" fill="#57606a">format and lint</text>
+    <rect x="820" y="850" width="280" height="66" rx="33" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="960" y="894" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#57606a">postToolUse</text>
+
+    <rect x="40" y="640" width="533" height="320" rx="20" fill="#fdecec" stroke="#c24141" stroke-width="3"/>
+    <text x="306" y="740" text-anchor="middle" font-family="Consolas, monospace" font-size="40" font-weight="700" fill="#24292f">Stop</text>
+    <text x="306" y="798" text-anchor="middle" font-size="32" font-weight="700" fill="#c24141">can block</text>
+    <text x="306" y="850" text-anchor="middle" font-size="30" fill="#57606a">refuses on a red build</text>
+
+    <line x1="575" y1="250" x2="684" y2="250" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1228" y1="250" x2="1337" y2="250" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1612" y1="412" x2="1612" y2="631" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1344" y1="800" x2="1235" y2="800" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="691" y1="800" x2="582" y2="800" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+  </g>
+</svg>

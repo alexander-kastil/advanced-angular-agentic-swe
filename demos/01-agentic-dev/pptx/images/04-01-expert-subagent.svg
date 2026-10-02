@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Angular expert subagent</title>
+  <desc>The main thread delegates an Angular task to the angular-expert subagent, which has its own context window and the frontmatter fields name, description, tools and model, and returns only the result. The agent is defined in .claude/agents/angular-expert.md for Claude Code and .github/agents/angular-expert.agent.md for GitHub Copilot.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="160" width="420" height="420" rx="20" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="270" y="390" text-anchor="middle" font-size="46" font-weight="700" fill="#24292f">main thread</text>
+
+    <text x="680" y="240" text-anchor="middle" font-size="36" fill="#24292f">Angular task</text>
+    <line x1="482" y1="270" x2="872" y2="270" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="878" y1="470" x2="488" y2="470" stroke="#57606a" stroke-width="4" stroke-dasharray="14 10" marker-end="url(#arrow)"/>
+    <text x="680" y="530" text-anchor="middle" font-size="36" fill="#24292f">result only</text>
+
+    <rect x="880" y="60" width="980" height="620" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="930" y="140" font-family="Consolas, monospace" font-size="50" font-weight="700" fill="#24292f">angular-expert</text>
+    <text x="930" y="195" font-size="34" fill="#57606a">own context window</text>
+
+    <rect x="930" y="230" width="880" height="410" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <text x="970" y="310" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">name</text>
+    <text x="1300" y="310" font-size="36" fill="#57606a">the address</text>
+    <text x="970" y="400" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">description</text>
+    <text x="1300" y="400" font-size="36" fill="#57606a">routes the work</text>
+    <text x="970" y="490" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">tools</text>
+    <text x="1300" y="490" font-size="36" fill="#57606a">the allowlist</text>
+    <text x="970" y="580" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">model</text>
+    <text x="1300" y="580" font-size="36" fill="#57606a">picks the engine</text>
+
+    <rect x="60" y="770" width="880" height="230" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="500" y="870" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">.claude/agents/angular-expert.md</text>
+    <text x="500" y="940" text-anchor="middle" font-size="34" font-weight="600" fill="#57606a">Claude Code</text>
+
+    <rect x="980" y="770" width="880" height="230" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1420" y="870" text-anchor="middle" font-family="Consolas, monospace" font-size="32" fill="#24292f">.github/agents/angular-expert.agent.md</text>
+    <text x="1420" y="940" text-anchor="middle" font-size="34" font-weight="600" fill="#57606a">GitHub Copilot</text>
+  </g>
+</svg>

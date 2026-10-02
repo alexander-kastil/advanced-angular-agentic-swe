@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>A WebMCP tool and its scopes</title>
+  <desc>Tool card for add_backlog_item: name, description, inputSchema with a required string title, and execute(args, client) where client.signal is an AbortSignal. The agent sees only name, description and inputSchema. Component scope uses declareExperimentalWebMcpTool and is removed with the component; app scope uses provideExperimentalWebMcpTools in appConfig.</desc>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="50" width="1800" height="620" rx="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+    <rect x="80" y="70" width="1500" height="370" rx="14" fill="#eaf2ff"/>
+
+    <text x="120" y="155" font-size="32" fill="#57606a">name</text>
+    <text x="420" y="155" font-family="Consolas, monospace" font-size="38" font-weight="700" fill="#24292f">add_backlog_item</text>
+    <line x1="100" y1="195" x2="1560" y2="195" stroke="#c9d1d9" stroke-width="2"/>
+    <text x="120" y="275" font-size="32" fill="#57606a">description</text>
+    <text x="420" y="275" font-family="Consolas, monospace" font-size="32" fill="#24292f">Adds an item to the backlog shown on this page.</text>
+    <line x1="100" y1="315" x2="1560" y2="315" stroke="#c9d1d9" stroke-width="2"/>
+    <text x="120" y="395" font-size="32" fill="#57606a">inputSchema</text>
+    <text x="420" y="395" font-family="Consolas, monospace" font-size="34" fill="#24292f">title: string, required</text>
+
+    <path d="M1600,80 H1630 V430 H1600" fill="none" stroke="#57606a" stroke-width="4"/>
+    <text x="1660" y="240" font-size="32" font-weight="600" fill="#24292f">the agent</text>
+    <text x="1660" y="285" font-size="32" font-weight="600" fill="#24292f">sees this</text>
+
+    <text x="120" y="530" font-size="32" fill="#57606a">execute</text>
+    <text x="420" y="530" font-family="Consolas, monospace" font-size="34" fill="#24292f">execute(args, client)</text>
+    <text x="420" y="610" font-family="Consolas, monospace" font-size="30" fill="#57606a">client.signal</text>
+    <text x="680" y="610" font-size="30" fill="#57606a">is an AbortSignal</text>
+
+    <rect x="60" y="730" width="870" height="300" rx="20" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="110" y="810" font-size="40" font-weight="700" fill="#24292f">component scope</text>
+    <text x="110" y="885" font-family="Consolas, monospace" font-size="30" fill="#24292f">declareExperimentalWebMcpTool()</text>
+    <text x="110" y="960" font-size="32" fill="#57606a">removed with the component</text>
+
+    <rect x="990" y="730" width="870" height="300" rx="20" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1040" y="810" font-size="40" font-weight="700" fill="#24292f">app scope</text>
+    <text x="1040" y="885" font-family="Consolas, monospace" font-size="30" fill="#24292f">provideExperimentalWebMcpTools()</text>
+    <text x="1040" y="960" font-size="32" fill="#57606a">in appConfig, lives with the app</text>
+  </g>
+</svg>

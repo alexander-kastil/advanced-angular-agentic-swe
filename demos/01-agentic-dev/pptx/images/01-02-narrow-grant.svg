@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>Narrowing the MCP grant</title>
+  <desc>The nine Angular CLI MCP tools as tiles. With both flags, five tools remain to inspect and plan. --read-only drops run_target, devserver_start and devserver_stop. --local-only drops search_documentation, which needs the network.</desc>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" transform="translate(0 30)">
+    <rect x="40" y="40" width="1840" height="510" rx="20" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="80" y="108" font-size="36" font-weight="700" fill="#24292f">Both flags keep: inspect and plan</text>
+    <g font-family="Consolas, monospace" font-size="30" fill="#24292f" text-anchor="middle">
+      <rect x="70" y="150" width="580" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="360" y="236">list_projects</text>
+      <rect x="670" y="150" width="580" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="236">get_best_practices</text>
+      <rect x="1270" y="150" width="580" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1560" y="236">devserver_wait_for_build</text>
+      <rect x="70" y="370" width="580" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="360" y="456">onpush_zoneless_migration</text>
+      <rect x="670" y="370" width="580" height="150" rx="14" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="960" y="456">ai_tutor</text>
+    </g>
+
+    <rect x="40" y="590" width="1260" height="400" rx="20" fill="#fdecec" stroke="#c24141" stroke-width="2"/>
+    <text x="80" y="660" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">--read-only drops</text>
+    <text x="80" y="710" font-size="28" fill="#57606a">runs or stops a process</text>
+    <g font-family="Consolas, monospace" font-size="30" fill="#57606a" text-anchor="middle">
+      <rect x="70" y="770" width="380" height="150" rx="14" fill="#f6f8fa" stroke="#c24141" stroke-width="2"/>
+      <text x="260" y="856">run_target</text>
+      <rect x="480" y="770" width="380" height="150" rx="14" fill="#f6f8fa" stroke="#c24141" stroke-width="2"/>
+      <text x="670" y="856">devserver_start</text>
+      <rect x="890" y="770" width="380" height="150" rx="14" fill="#f6f8fa" stroke="#c24141" stroke-width="2"/>
+      <text x="1080" y="856">devserver_stop</text>
+    </g>
+
+    <rect x="1340" y="590" width="540" height="400" rx="20" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+    <text x="1370" y="660" font-size="34" font-weight="700" fill="#24292f" font-family="Consolas, monospace">--local-only drops</text>
+    <text x="1370" y="710" font-size="28" fill="#57606a">needs the network</text>
+    <rect x="1370" y="770" width="480" height="150" rx="14" fill="#f6f8fa" stroke="#e0a534" stroke-width="2"/>
+    <text x="1610" y="856" font-size="30" fill="#57606a" text-anchor="middle" font-family="Consolas, monospace">search_documentation</text>
+  </g>
+</svg>

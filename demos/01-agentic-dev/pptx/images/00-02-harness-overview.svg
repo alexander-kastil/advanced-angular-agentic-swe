@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>The agentic harness around an Angular app</title>
+  <desc>An agent (Claude Code, GitHub Copilot) works through six harness blocks around the Angular 22 workspace: MCP server, harness files, skills, expert agent, hooks and WebMCP. The running app exposes tools to a browser agent.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <rect x="390" y="30" width="1110" height="1020" rx="24" fill="none" stroke="#8c959f" stroke-width="2" stroke-dasharray="12 10"/>
+
+    <rect x="40" y="390" width="290" height="260" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="185" y="460" font-size="36" font-weight="700" fill="#24292f">Agent</text>
+    <text x="185" y="530" font-size="30" fill="#57606a">Claude Code</text>
+    <text x="185" y="585" font-size="30" fill="#57606a">GitHub Copilot</text>
+
+    <rect x="560" y="400" width="770" height="240" rx="20" fill="#ffffff" stroke="#8c959f" stroke-width="3"/>
+    <text x="945" y="508" font-size="44" font-weight="700" fill="#24292f">Angular 22 workspace</text>
+    <text x="945" y="565" font-size="30" fill="#57606a" font-family="Consolas, monospace">ng-agentic</text>
+
+    <g>
+      <rect x="410" y="60" width="330" height="200" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <circle cx="446" cy="96" r="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="446" y="105" font-size="26" font-weight="700" fill="#24292f">1</text>
+      <text x="575" y="165" font-size="34" font-weight="700" fill="#24292f">MCP server</text>
+      <text x="575" y="215" font-size="28" fill="#57606a">workspace facts</text>
+
+      <rect x="780" y="60" width="330" height="200" rx="16" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+      <circle cx="816" cy="96" r="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="816" y="105" font-size="26" font-weight="700" fill="#24292f">2</text>
+      <text x="945" y="165" font-size="34" font-weight="700" fill="#24292f">Harness files</text>
+      <text x="945" y="215" font-size="28" fill="#57606a">every turn</text>
+
+      <rect x="1150" y="60" width="330" height="200" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <circle cx="1186" cy="96" r="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1186" y="105" font-size="26" font-weight="700" fill="#24292f">3</text>
+      <text x="1315" y="165" font-size="34" font-weight="700" fill="#24292f">Skills</text>
+      <text x="1315" y="215" font-size="28" fill="#57606a">on demand</text>
+
+      <rect x="410" y="820" width="330" height="200" rx="16" fill="#f3edff" stroke="#8c959f" stroke-width="2"/>
+      <circle cx="446" cy="856" r="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="446" y="865" font-size="26" font-weight="700" fill="#24292f">4</text>
+      <text x="575" y="925" font-size="34" font-weight="700" fill="#24292f">Expert agent</text>
+      <text x="575" y="975" font-size="28" fill="#57606a">own context</text>
+
+      <rect x="780" y="820" width="330" height="200" rx="16" fill="#fff6e5" stroke="#e0a534" stroke-width="2"/>
+      <circle cx="816" cy="856" r="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="816" y="865" font-size="26" font-weight="700" fill="#24292f">5</text>
+      <text x="945" y="925" font-size="34" font-weight="700" fill="#24292f">Hooks</text>
+      <text x="945" y="975" font-size="28" fill="#57606a">enforced gates</text>
+
+      <rect x="1150" y="820" width="330" height="200" rx="16" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+      <circle cx="1186" cy="856" r="22" fill="#ffffff" stroke="#8c959f" stroke-width="2"/>
+      <text x="1186" y="865" font-size="26" font-weight="700" fill="#24292f">6</text>
+      <text x="1315" y="925" font-size="34" font-weight="700" fill="#24292f">WebMCP</text>
+      <text x="1315" y="975" font-size="28" fill="#57606a">app exposes tools</text>
+    </g>
+
+    <rect x="1560" y="420" width="320" height="200" rx="16" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1720" y="530" font-size="34" font-weight="700" fill="#24292f">Running app</text>
+
+    <rect x="1560" y="820" width="320" height="200" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2"/>
+    <text x="1720" y="930" font-size="34" font-weight="700" fill="#24292f">Browser agent</text>
+
+    <line x1="330" y1="520" x2="556" y2="520" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="1330" y1="520" x2="1556" y2="520" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <line x1="1720" y1="620" x2="1720" y2="816" stroke="#57606a" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="1740" y="730" font-size="28" fill="#57606a" text-anchor="start">tools</text>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <title>MCP in both directions</title>
+  <desc>Top lane: a coding agent drives the workspace through the Angular CLI MCP server. Bottom lane, reversed: the running Angular app registers tools with declareExperimentalWebMcpTool() into document.modelContext, and a browser agent reads them with tools/list. Without a modelContext the registration is a no-op.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#ffffff"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="20" y="30" width="1880" height="410" rx="24" fill="#f6f8fa"/>
+    <text x="60" y="90" font-size="32" font-weight="600" fill="#57606a">the agent drives the workspace</text>
+    <rect x="40" y="130" width="380" height="270" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="230" y="280" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">coding agent</text>
+    <rect x="600" y="130" width="500" height="270" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="850" y="255" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">Angular CLI</text>
+    <text x="850" y="310" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">MCP server</text>
+    <rect x="1280" y="130" width="600" height="270" rx="18" fill="#eaf2ff" stroke="#8c959f" stroke-width="2"/>
+    <text x="1580" y="280" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">workspace</text>
+    <line x1="422" y1="265" x2="591" y2="265" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <line x1="1102" y1="265" x2="1271" y2="265" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="20" y="480" width="1880" height="420" rx="24" fill="#f6f8fa"/>
+    <text x="60" y="540" font-size="32" font-weight="600" fill="#57606a">the app offers tools to an agent</text>
+    <rect x="40" y="580" width="380" height="280" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="230" y="735" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">browser agent</text>
+    <rect x="600" y="580" width="500" height="280" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="850" y="735" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="700" fill="#24292f">document.modelContext</text>
+    <rect x="1280" y="580" width="600" height="280" rx="18" fill="#e9f7ef" stroke="#8c959f" stroke-width="2"/>
+    <text x="1580" y="705" text-anchor="middle" font-size="40" font-weight="700" fill="#24292f">running Angular app</text>
+    <text x="1580" y="775" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">declareExperimentalWebMcpTool()</text>
+    <text x="510" y="700" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#24292f">tools/list</text>
+    <line x1="598" y1="725" x2="429" y2="725" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+    <text x="1190" y="700" text-anchor="middle" font-size="28" fill="#24292f">registers</text>
+    <line x1="1278" y1="725" x2="1109" y2="725" stroke="#57606a" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="600" y="935" width="720" height="105" rx="16" fill="#f6f8fa" stroke="#8c959f" stroke-width="2" stroke-dasharray="10 8"/>
+    <text x="960" y="999" text-anchor="middle" font-size="32" fill="#57606a">no modelContext: registration no-ops</text>
+  </g>
+</svg>
