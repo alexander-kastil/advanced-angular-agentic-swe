@@ -18,3 +18,28 @@ This leaf answers "how do I write a spec for this thing". Three siblings answer 
 | Test a computed signal or effect with no TestBed, or code with timers and observables (`fakeAsync`, `tick`, `done`). | [angular-testing-signals-async](angular-testing-signals-async.md) |
 
 Call `httpMock.verify()` in `afterEach` of **every** HTTP spec, not just the first one.
+
+## A spec can be pinned to a shape the app never produces
+
+Four specs in one repo had been red since before anyone looked, and every agent passing through
+reported them as "pre-existing failures" and moved on. They were two real defects.
+
+- Three pinned a tint that followed the row's BALANCE SIGN while the component coloured by ACCOUNT
+  TYPE. Both had existed side by side since the last commit; the spec's own title and comments were
+  the only written statement of intent, and nobody had implemented it.
+- One was a deliberate tripwire ("keeps the KPI row count and every Label string unchanged, so a
+  future rename fails here") pinned to 13 labels while the store emitted 16. The three extra rows are
+  behind feature flags, and the spec flushed `FeatureFlags: { Flags: {} }`, which fell through to
+  `FEATURE_FLAG_DEFAULTS` where both flags are `true`. The test was pinned to the flags-off shape
+  while running with them on.
+
+**Rules:**
+
+- "Pre-existing failure" says when, not whether it matters. Read the assertion once before carrying
+  it through a whole refactor as noise. A long-red spec is usually a defect nobody decoded.
+- **A test that pins a shape must pin the inputs that produce it.** Flush the feature flags, the
+  clock and the device tier explicitly; never inherit a default that can change under the test. The
+  failure mode is silent for months and then blamed on whoever is passing through.
+- When a spec and the code disagree and both predate the session, the spec's name and comments are
+  usually the intent. Decide which is right, state what changes on screen, and never delete the test
+  to get green.

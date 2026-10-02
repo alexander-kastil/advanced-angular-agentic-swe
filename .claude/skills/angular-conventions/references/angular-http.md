@@ -16,4 +16,5 @@ TypeScript HTTP types are wishes, not guarantees: guard array responses with `Ar
 | Page signals, or append pages behind a Load More button | [pagination](angular-http-pagination.md) |
 | Post FormData, HttpEventType progress, multiple files | [file-upload](angular-http-file-upload.md) |
 | Abort in-flight requests, takeUntilDestroyed, debounce | [cancellation](angular-http-cancellation.md) |
+| Read a text/event-stream behind MSAL; cached-then-fresh streams; why not EventSource | [sse](angular-http-sse.md) |
 | HttpTestingController, expectOne, flush, verify | [testing](angular-http-testing.md) |

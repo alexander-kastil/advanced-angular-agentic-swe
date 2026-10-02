@@ -96,3 +96,33 @@ When extracting a child component from a large one during optimization work, use
 selector** hosted on the existing element (`selector: '[appCreditsPanel]'`) — zero new DOM
 elements, so CSS child selectors, flex layouts, and E2E locators all keep working. Keep
 destroy-sensitive content (a modal that must survive a layout toggle) in the parent.
+
+## Where the latch is set, and the UI that makes the obvious answer wrong
+
+A load-once flag is set **only where the outcome is known**, and **only when the payload is the shape
+the slice expects**. Never before the request, never beside a fallback value. Three ways this went
+wrong in one run:
+
+- `profileLoaded: true` patched synchronously BEFORE the request and cleared only in the `error`
+  branch. An auth-gate interceptor returned `EMPTY` when no account was present, and **`EMPTY`
+  completes with neither `next` nor `error`**, so the latch stayed true and the profile never loaded
+  again for the whole session. Any latch or cleanup living in only one of the two branches is skipped
+  by a short-circuiting interceptor.
+- `balanceAccountTypesLoaded: true` set in the same `patchState` as an `Array.isArray(x) ? x : []`
+  fallback, so one malformed response cached an empty list for the session with no retry. Latch on the
+  shape, not on the arrival.
+- A whole-settings latch froze a single field (`aiCatalogueAvailable`) that the settings page was the
+  only thing re-reading, so an upstream outage at boot disabled that page for the tab's life. When one
+  field inside a latched payload has its own liveness, exempt it from the guard.
+
+**And the counterexample, because it makes the rule wrong exactly once.** "Set it only in the success
+path" is right for a flag that prevents a refetch and wrong for a flag that drives an error state. An
+`attempted` flag read by a template as `attempted() && !loaded()` to render a retry button must be set
+in the ERROR branch: latching it on success makes that branch unreachable and trades "reports an error
+forever" for "spins forever with no way to retry".
+
+So before writing the rule into a brief, **find the UI that reads the flag**. A flag that guards a
+fetch and a flag that renders a state are different objects with the same name.
+
+Every latch also needs an invalidation site. A mutation that changes the data must clear it, or the
+view serves cached figures for the rest of the session.

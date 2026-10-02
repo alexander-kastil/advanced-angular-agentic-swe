@@ -108,7 +108,7 @@ short-circuits on a defined value, an injected config always wins over the fallb
 
 The `config.template.js` + `envsubst` entrypoint, the unprivileged-nginx `chown` trap, the CRLF
 `.gitattributes` trap, the no-cache rules for `config.js`/`index.html`, and the one-image-two-slots
-acceptance test are deployment concerns. They are documented in the `deploy-init` skill's
+acceptance test are deployment concerns. They are documented in the `deploy-hetzner-box` skill's
 `references/slot-agnostic-images.md`. Read that before touching the Dockerfile.
 
 One rule belongs on both sides: **the entrypoint must refuse to start when a required variable is

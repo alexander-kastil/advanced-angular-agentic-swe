@@ -10,5 +10,5 @@ A reusable, standalone **file drop zone** for the maintenance-planner UI (`src/u
 | What does the FileDropzone component and its template actually look like: inputs, output, emit(), drag handlers? | [component](angular-file-dropzone-component.md) |
 | How do I style the zone with bico-brand tokens, or express the drag states inline in a Tailwind-utility app with no component CSS? | [styling](angular-file-dropzone-styling.md) |
 | How does the host feature consume filesSelected and push the file into the signal store? | [host-wiring](angular-file-dropzone-host-wiring.md) |
-| The drop zone lives in a shared shell and must route to whichever feature is active: how do I fire a store event instead of an output? | [global-drop-event](angular-file-dropzone-global-drop-event.md) |
+| The drop zone lives in a shared shell and must route to whichever feature is active: how do I dispatch an NgRx event instead of an output? | [global-drop-event](angular-file-dropzone-global-drop-event.md) |
 | Is my drop zone implementation complete and correct, and where do the related upload, store and brand skills live? | [checklist](angular-file-dropzone-checklist.md) |

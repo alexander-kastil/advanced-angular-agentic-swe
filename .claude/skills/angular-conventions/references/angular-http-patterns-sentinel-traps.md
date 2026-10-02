@@ -83,4 +83,13 @@ were not looking at.
 After adding any earlier entry point to a paged list, scroll the real page to the bottom three times
 and assert the row count grows. A green suite is not evidence here.
 
+**The same gate empties the list if the load runs under `switchMap`.** The prefetch starts the
+request and sets `initialLoadStarted`; the list's own `ngOnInit` call arrives while it is still in
+flight, `switchMap` unsubscribes the first request (the network panel shows it `ERR_ABORTED`), and
+the second projection returns `EMPTY` because the gate is already set. Nothing ever retries, so the
+view renders an empty table after every fresh login. A gated one-shot load must flatten with
+`exhaustMap`: the second call is ignored while the first is in flight, and the gate covers every
+call after it lands. Regression test: call the method twice before flushing and assert one request,
+`cancelled === false`, and populated rows after the flush.
+
 Back to the index: [angular-http-patterns](angular-http-patterns.md)

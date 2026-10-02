@@ -5,16 +5,19 @@ description: >-
   inject(), Signal Forms, httpResource(), routing and guards, NgRx Signal Store, directives, overlays
   and dialogs, MSAL auth, A2UI generative UI, Vitest testing, CSS that will not apply, data-table
   column geometry, bundle-size optimization, runtime config injection, drag-and-drop reordering,
-  migrating off Angular Material to Tailwind v4, and file downloads. Use when the task is Angular-
+  migrating off Angular Material to Tailwind v4, file downloads, and server-sent events read through
+  HttpClient. Use when the task is Angular-
   specific but not yet narrowed to one topic, or to route into a specific Angular concern. Triggers on
   remove angular material, material to tailwind, drop @angular/cdk, tailwind v4 angular, cannot apply
   unknown utility class, borders disappeared after tailwind, dialog not centered, dialog needs a URL, route-driven dialog, dialogOpen signal duplicated, overlay as a child route, migrate many apps to
   tailwind, roll out a shared app shell, uninstall @angular/cdk, @angular/aria peer dependency, cdk
   scrolling virtual scroll, infinite scroll stops loading, list frozen after the first page,
-  scrolling loads nothing, sentinel never fires, render only the first N rows,
+  scrolling loads nothing, sentinel never fires, render only the first N rows, EventSource cannot
+  send the bearer token, text/event-stream behind MSAL, stream cached then fresh values,
   TestBed.initTestEnvironment first, vitest reports mass failures, ng test
   vs vitest, fixed height overlaps content, Angular architecture, standalone component, inject(),
-  signal(), computed(), signal forms, httpResource(), route guard, MSAL login does nothing,
+  signal(), computed(), signal forms, httpResource(), route guard, router resources, resolvers run
+  sequentially, withRouterResources, nonBlocking route resource, MSAL login does nothing,
   interaction_in_progress, duplicate HTTP requests, initial budget exceeded, css change has no effect,
   container query not working, table shifts on sort, column picker, colgroup width has no effect, column percentages ignored, adjust the column widths so the value fits, value will not fit in the column, nested horizontal scrollbar inside a card, empty aria-live gap, runtime
   config injection, reorder cards, download a file, TestBed, vi.mock, ng test, environment.ts vs

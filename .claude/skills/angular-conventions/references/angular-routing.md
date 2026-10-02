@@ -11,6 +11,7 @@ Read the query param itself via `ActivatedRoute.queryParamMap` (a flat object fo
 | Child input is undefined | [angular-routing-param-inheritance](angular-routing-param-inheritance.md) |
 | Guard a route | [angular-routing-guards](angular-routing-guards.md) |
 | Resolve or attach data | [angular-routing-route-data](angular-routing-route-data.md) |
+| Load route data as Resources (experimental, 22.2+) | [angular-routing-router-resources](angular-routing-router-resources.md) |
 | Deep link picks wrong variant | [angular-routing-url-query-gotcha](angular-routing-url-query-gotcha.md) |
 | Nest routes, tabs, modals | [angular-routing-outlets-layouts](angular-routing-outlets-layouts.md) |
 | Navigate from code | [angular-routing-navigation](angular-routing-navigation.md) |

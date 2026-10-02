@@ -17,7 +17,7 @@ Cross-reference console warnings with the Angular breaking-changes log. Categori
 | `toSignal(http.get(...))` instead of `httpResource()` | High |
 | `subscribe()` in component body | High |
 | `BehaviorSubject` for local state instead of `signal()` | Medium |
-| Constructor injection instead of `inject()` | Medium |
+| Constructor injection instead of `inject()` (fix: `npx ng generate @angular/core:inject --defaults` from the app root) | Medium |
 | `ChangeDetectionStrategy.Default` on components | Medium |
 | `@HostBinding` / `@HostListener` instead of `host` object | Medium |
 | `ngClass` / `ngStyle` instead of `[class.x]` / `[style.x]` bindings | Medium |

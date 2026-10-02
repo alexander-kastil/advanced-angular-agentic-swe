@@ -33,7 +33,10 @@ function configure(activeAccount: unknown, accounts: unknown[]) {
   return { routerMock, urlTree };
 }
 
-const run = () => TestBed.runInInjectionContext(() => canMatchAuth({} as never, [] as never));
+const run = () =>
+  TestBed.runInInjectionContext(() =>
+    canMatchAuth({} as never, [] as never, {} as Parameters<CanMatchFn>[2]),
+  );
 
 describe('canMatchAuth', () => {
   afterEach(() => TestBed.resetTestingModule());
@@ -50,6 +53,13 @@ describe('canMatchAuth', () => {
   });
 });
 ```
+
+**Pass all three arguments to a `CanMatchFn`.** Since Angular 22 the signature is
+`(route, segments, currentSnapshot: PartialMatchRouteSnapshot)`, and a spec calling it with two
+arguments fails to compile with `TS2554: Expected 3 arguments, but got 2`, which takes the whole
+Vitest run down, not one spec. `PartialMatchRouteSnapshot` is not exported, so type the stub as
+`Parameters<CanMatchFn>[2]` (import `CanMatchFn` from `@angular/router`). The CLI's own
+`ng g guard --implements CanMatch` spec template already spreads `...guardParameters`.
 
 If the guard reads `isAuthEnabled()` (which checks `environment.authEnabled` and a `localStorage` flag), set/clear that `localStorage` key per-test in `afterEach` to exercise both the enabled and disabled branches.
 

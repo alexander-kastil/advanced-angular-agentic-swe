@@ -19,4 +19,17 @@ onChange = effect(() => {
 
 Symptom to recognize: an endless stream of identical requests in the network/API console after a component with an `effect()` mounts, where the effect's named dependencies never actually change value.
 
+### Variant: an `rxMethod` called with a plain value runs its pipe inside the effect
+
+`rxMethod<T>(pipe)` called with a non-signal argument does `source$.next(value)` synchronously, so every signal the pipe reads before its first async boundary (typically a `filter((v) => v !== store.requestedKey())` dedupe guard) is tracked by the calling effect. If the error branch resets that key (`patchState(store, { requestedKey: null })`), each failed request reschedules the effect, which calls the method again: a retry loop that only appears while the backend fails, and that pins a global loading bar on because start/finalize alternate with no idle frame.
+
+```typescript
+effect(() => {
+  const horizonTo = this.store.focusDateIso();
+  untracked(() => this.store.loadCashAccounts(horizonTo));
+});
+```
+
+Prove it: with the API stopped, chrome-devtools `list_network_requests` shows the method's endpoints repeating dozens of times per 10 s while every other endpoint fires once; a Vitest that flushes one failed request and asserts no second request fails without the `untracked()`. Search the store for siblings with the same shape (a dedupe key read in the pipe and reset on error) and fix them in the same pass.
+
 Back to the index: [angular-signals](angular-signals.md)

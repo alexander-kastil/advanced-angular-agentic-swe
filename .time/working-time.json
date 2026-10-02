@@ -186,8 +186,124 @@
       "industry": "developer education and technical training",
       "status": "Built and running in-house",
       "catalogue": {
-        "action": "extend",
+        "action": "extends",
         "item": "design-system migration across an application estate"
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "from": "10:57",
+      "to": "11:29",
+      "sessionId": "ec013598-3eaa-4a06-93c5-f6a54e16abba",
+      "branch": "master",
+      "commits": [],
+      "surfaces": [
+        "demos/13-oauth"
+      ],
+      "files": [
+        "demos/13-oauth/ng-oauth/src/app/auth/auth.store.ts",
+        "demos/13-oauth/ng-oauth/src/app/auth/auth.interceptor.ts",
+        "demos/13-oauth/ng-oauth/src/app/auth/echo-backend.interceptor.ts",
+        "demos/13-oauth/ng-oauth/src/app/auth/auth.guard.ts",
+        "demos/13-oauth/ng-oauth/src/app/demos/demo.routes.ts",
+        "demos/13-oauth/readme.md"
+      ],
+      "mechanism": {
+        "takes": "a topic list from an older course module pinned to a commit, and the current course's demo host application",
+        "does": "clones the host empty, rebuilds each legacy topic as an interactive page on current framework APIs, and answers every protected call from an in-page fake API so the sign-in, token, guard and interceptor demos run with no identity provider or server",
+        "returns": "a runnable teaching module with one guide per page, specs per page, and a crosswalk-backed topic list that matches the legacy module"
+      },
+      "portsAsIs": [
+        "in-page fake API that rejects calls without a bearer header",
+        "demo host clone script",
+        "token allowlist interceptor pattern"
+      ],
+      "perCustomer": [
+        "the identity provider snippets",
+        "the course's design tokens and host shell"
+      ],
+      "evidence": [
+        "demos/13-oauth/ng-oauth/src/app/auth/auth.interceptor.spec.ts",
+        "tests: 42 passing in 17 files",
+        "all 10 routes rendered in headless Chromium with no console errors"
+      ],
+      "toolchain": {
+        "skills": [
+          "create-class",
+          "claude-learn",
+          "angular-conventions",
+          "brand-voice-code"
+        ],
+        "mcpServers": [
+          "playwright"
+        ],
+        "agents": []
+      },
+      "industry": "technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
+      }
+    },
+    {
+      "date": "2026-10-02",
+      "from": "10:29",
+      "to": "11:35",
+      "sessionId": "d71f05e6-8f87-4f4f-8581-b7b0a10ee0b8",
+      "branch": "master",
+      "commits": [
+        "a88344b",
+        "614e32a"
+      ],
+      "surfaces": [
+        "demos/01-agentic-dev",
+        "demos/13-oauth"
+      ],
+      "files": [
+        "demos/01-agentic-dev/ng-agentic/public/markdown/harness-files.md",
+        "demos/01-agentic-dev/ng-agentic/src/app/demos/samples/webmcp-counterpart/webmcp-counterpart.component.ts",
+        "demos/01-agentic-dev/pptx/images",
+        "demos/13-oauth/pptx/images",
+        ".gitignore"
+      ],
+      "mechanism": {
+        "takes": "a course module's demo catalogue and its per-demo teaching markdown, plus a slide template with fixed intro slides",
+        "does": "writes one slide spec per card with speaker notes, has hand-drawn architecture diagrams and generated photographs made for each card, lays the cards out with a presentation service, then merges, cleans and prefixes the intro, module and topic-divider slides locally",
+        "returns": "a finished module slide deck and PDF with trainer notes on every content slide, delivered to the class folder"
+      },
+      "portsAsIs": [
+        "spec-to-prompt builder with image URL checks",
+        "deck merge, clean, topics and notes scripts",
+        "spec-driven photo renderer"
+      ],
+      "perCustomer": [
+        "the slide template and its intro slides",
+        "the class name in the footer",
+        "the module's teaching content"
+      ],
+      "evidence": [
+        "01-agentic-dev.pptx: 25 slides, notes=15 unmatched=0 missing=0",
+        "13-oauth.pptx: 31 slides, notes=17 unmatched=0 missing=0",
+        "clean second run removed=0 bullets=0 on both decks"
+      ],
+      "toolchain": {
+        "skills": [
+          "create-pptx",
+          "claude-learn"
+        ],
+        "mcpServers": [
+          "claude_ai_Gamma",
+          "media-creator"
+        ],
+        "agents": [
+          "angular-expert",
+          "image-producer"
+        ]
+      },
+      "industry": "technical training",
+      "status": "Built and running in-house",
+      "catalogue": {
+        "action": "none"
       }
     }
   ]

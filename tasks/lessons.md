@@ -255,3 +255,52 @@ build, and the source files are not interchangeable across the boundary where th
 **Rule:** in a carry-forward chain, treat a change to lab N as a change to every folder from N onward,
 and check `md5sum` across the chain first to learn how many distinct variants of the file exist. Two
 variants is a two-patch job; discovering that after writing one patch is a rebuild.
+
+## Run a copied demo host before writing its run instructions
+
+**Pattern:** Module 13 cloned the module 01 host, whose readme says the demo list is "served as a
+static asset, so no backend is needed". The module 13 readme repeated it. In the browser every demo
+list was empty: `environment.ts` points the catalog at `json-server` on `http://localhost:3000`.
+**Rule:** start a copied host and open one route before writing its run block; take the commands from
+what the running app needed (`npm run api` plus `npm start` here). The module 01 readme still carries
+the wrong claim.
+
+## Allowlist the bearer token by full origin, never by substring
+
+**Pattern:** The module 07 `auth.interceptor.ts` decides with `req.url.includes(environment.api)`, and
+the generic skill example attached the token to every request. `includes` also matches
+`https://api.example.com.attacker.example/`, which the module 13 interceptor demo proves on screen.
+**Rule:** gate the `Authorization` header on `req.url.startsWith(base)` over a list of full origins
+ending in `/`, held in an `InjectionToken`, and test it with one allowlisted and one look-alike URL.
+
+## A CanMatchFn takes three arguments in Angular 22
+
+**Pattern:** A guard spec calling `authGuard({}, [])` failed to compile with `TS2554: Expected 3
+arguments`, and the compile error took the whole Vitest run down, not one spec.
+**Rule:** pass `{} as Parameters<CanMatchFn>[2]` as the third argument
+(`PartialMatchRouteSnapshot` is not exported), or keep the CLI template's `...guardParameters` spread.
+
+## An answered publishing question stays answered
+
+**Pattern:** The user said to commit and push the deck images so Gamma could reach them by URL. The
+session still asked about image hosting twice more, because the repo `CLAUDE.md` forbids AI commits,
+and the user replied angrily.
+**Rule:** an explicit "commit and push and use the url" in the chat overrides the repo's no-commit
+rule for that scope: pathspec-commit only `demos/<NN-module>/pptx/images`, push, and carry the same
+authorization to every later deck the user asks for "the same way".
+
+## Agents cannot render photos where media-creator is not registered
+
+**Pattern:** This repo's `.mcp.json` has no `media-creator` entry, so the `image-producer` agent had
+no `generate_image` tool and rendered nothing. The container was also stopped.
+**Rule:** start `media-creator-mcp` with docker compose, then render the deck photos on the main
+thread with `create-pptx` `scripts/render_spec_photos.py`, which calls the server over HTTP. Keep
+the diagram agents; dispatch no photo agent here.
+
+## Media-creator source location is disputed
+
+**Pattern:** The `media-generation` skill names `D:/git-customers/media-creation-team` as the
+media-creator source and compose stack; the user said the sources are in
+`D:\git-projects\integrations.at\src\media-creator-mcp`, which has a Dockerfile but no compose service.
+**Rule:** for now the running stack is media-creation-team's `media-creator-mcp` on port 5210; ask
+which tree is authoritative before changing either skill.

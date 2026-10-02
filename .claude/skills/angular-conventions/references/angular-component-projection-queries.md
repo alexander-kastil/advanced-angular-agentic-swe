@@ -121,4 +121,33 @@ export class Tab {
 }
 ```
 
+## Where queries and DI stop (shared wrappers around templated content)
+
+A wrapper (accordion, section, panel) that must react to the card it wraps meets three boundaries.
+Each fails silently: no error, the wrapper just never sees the child.
+
+1. **Queries never pierce a component or an outlet.** `contentChildren(Card, { descendants: true })`
+   finds only cards written inline between the wrapper's tags in the same template. A card inside a
+   child component's template, or inside an `ngTemplateOutlet` of an `<ng-template>` declared
+   elsewhere, is invisible. Do not count rendered children to choose a mode; let the template author
+   declare it (`<app-group single>`).
+2. **`ngTemplateOutlet` content injects from where the template was declared**, not where it is
+   rendered. To let content find the wrapper with `inject(Wrapper, { optional: true })`, render it
+   with `ngTemplateOutletInjector="outlet"`:
+
+   ```html
+   <app-group single ...>
+     <ng-container [ngTemplateOutlet]="tplForm" ngTemplateOutletInjector="outlet" />
+   </app-group>
+   ```
+
+   Only the outermost matching child should react: provide a token on the child and read it with
+   `inject(TOKEN, { optional: true, skipSelf: true })` to detect a nested instance.
+3. **Two default `<ng-content />` in `@if`/`@else` branches**: content goes to the last one, so the
+   other branch renders empty. Wrap it once, `<ng-template #content><ng-content /></ng-template>`, and
+   render `<ng-container [ngTemplateOutlet]="content" />` in each branch.
+
+Prove it in the browser, not in a spec: count the wrapper's rendered mode per instance on the real
+page (a spec usually writes the child inline, the one case where queries do work).
+
 Back to the index: [angular-component](angular-component.md)

@@ -15,4 +15,15 @@ Confirms the `CanMatchFn` third-argument break above (one guard spec, fixed with
 
 MSAL moved 5 → 6 in the same pass (v6 is the only major supporting Angular 22, see `msal-angular.md`). Where the wiring already matches the v5+ shape — `navigateToLoginRequestUrl` on the `handleRedirectObservable()` call, `logoutRedirect()`, `/*`-suffixed `protectedResourceMap` keys, auth state written into signals — the bump is `npm install --legacy-peer-deps @azure/msal-angular@^6.0.3 @azure/msal-browser@^5.18.0` and **no code change at all**. Verify each of those four before assuming work is needed.
 
+## Third run: 22.1.2 → 22.1.6, NgRx 21.1 → 22.0.1 (2026-09-10)
+
+A patch inside the major plus the NgRx major that tracks it. Still no `.npmrc`, so
+`ng update @angular/core @angular/cli --force` again, then `ng update @ngrx/signals`
+(`@ngrx/operators` follows). The first forced run did not crash this time. Zero source edits;
+build clean; the unit baseline unchanged.
+
+`npm outdated` listed TypeScript 7.0.2 as latest. It is not a target: `@angular/compiler-cli@22.1.6`
+peers `typescript >=6.0 <6.1`, so TypeScript stays on 6.0.x until a compiler-cli release widens the
+range. Read the peer (`npm view @angular/compiler-cli@<v> peerDependencies`) before bumping it.
+
 Back to the index: [angular-update](angular-update.md)

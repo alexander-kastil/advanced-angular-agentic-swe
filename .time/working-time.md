@@ -12,5 +12,7 @@
 | 2026-09-02 | 3.35 | 07:58 | 11:19 | Design library replaced across the SignalStore demo, redesigned shell and accessibility pass |
 | 2026-09-02 | 0.40 | 11:31 | 12:41 | Design library replaced across the remaining ten demo applications and course overview updated |
 | 2026-09-02 | 0.77 | 11:50 | 12:36 | Browser-driven end-to-end tests extended with network mocking, keyboard input and server-side checks |
+| 2026-10-02 | 0.57 | 10:29 | 11:35 | Slide decks for the agentic tooling and OAuth modules, with diagrams, photos and speaker notes |
+| 2026-10-02 | 0.53 | 10:57 | 11:29 | Optional OAuth module with ten working demos and guides |
 
-**Total: 9.70h**
+**Total: 10.80h**

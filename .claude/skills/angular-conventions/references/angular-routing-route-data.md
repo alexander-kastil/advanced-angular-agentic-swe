@@ -2,7 +2,7 @@
 
 ## Resolvers
 
-Pre-fetch data before route activation:
+Pre-fetch data before route activation. On Angular 22.2+ consider Router Resources instead (parallel, reloadable, optionally non-blocking): [angular-routing-router-resources](angular-routing-router-resources.md).
 
 ```typescript
 // resolvers/user.resolver.ts
